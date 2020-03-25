@@ -30,7 +30,7 @@ if __name__ == '__main__':
     for i in range(n_alunos):
         projs = [int(c) for c in input().split(' ')]
         for j, p in enumerate(projs):
-            prefs[i, p] = n_choices - j
+            prefs[i, p] = pow(n_choices - j, 2)
     
     vagas = np.ones(n_projetos, np.uint) * 3 # 3 vagas por projeto
     aluno_projeto = np.ones(n_alunos, np.uint) * -1 # não escolheu projeto ainda
