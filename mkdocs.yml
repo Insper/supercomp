@@ -44,6 +44,8 @@ nav:
         - "11 - Introdução a paralelismo": aulas/11-introducao-paralelismo/index.ipynb
         - aulas/12-introducao-omp/index.md
         - aulas/13-paralelismo-dados/index.md
+        - aulas/14-efeitos-colaterais/index.md
+        - aulas/15-exercicio/index.md
 
 
     - Projeto:
