@@ -8,21 +8,21 @@
       
       
       
-        <link rel="canonical" href="https://insper.github.io/supercomp/projetos/2021-2/heuristico/">
+        <link rel="canonical" href="https://insper.github.io/supercomp/projetos/gpu/">
       
-      <link rel="icon" href="../../../assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.11">
     
     
       
-        <title>Solução heurística - SuperComputação - 2022/1</title>
+        <title>Paralelismo com GPU - SuperComputação - 2022/1</title>
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.50e68009.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.50e68009.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.e6a45f82.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.e6a45f82.min.css">
         
           
           
@@ -40,17 +40,17 @@
       
     
     
-      <link rel="stylesheet" href="../../../css/printing.css">
+      <link rel="stylesheet" href="../../css/printing.css">
     
-      <link rel="stylesheet" href="../../../css/extra.css">
+      <link rel="stylesheet" href="../../css/extra.css">
     
-      <link rel="stylesheet" href="../../../css/ansi-colours.css">
+      <link rel="stylesheet" href="../../css/ansi-colours.css">
     
-      <link rel="stylesheet" href="../../../css/jupyter-cells.css">
+      <link rel="stylesheet" href="../../css/jupyter-cells.css">
     
-      <link rel="stylesheet" href="../../../css/pandas-dataframe.css">
+      <link rel="stylesheet" href="../../css/pandas-dataframe.css">
     
-    <script>__md_scope=new URL("../../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#solucao-heuristica" class="md-skip">
+        <a href="#paralelismo-com-gpu" class="md-skip">
           Skip to content
         </a>
       
@@ -88,7 +88,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../.." title="SuperComputação - 2022/1" class="md-header__button md-logo" aria-label="SuperComputação - 2022/1" data-md-component="logo">
+    <a href="../.." title="SuperComputação - 2022/1" class="md-header__button md-logo" aria-label="SuperComputação - 2022/1" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
@@ -107,7 +107,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Solução heurística
+              Paralelismo com GPU
             
           </span>
         </div>
@@ -186,7 +186,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../.." title="SuperComputação - 2022/1" class="md-nav__button md-logo" aria-label="SuperComputação - 2022/1" data-md-component="logo">
+    <a href="../.." title="SuperComputação - 2022/1" class="md-nav__button md-logo" aria-label="SuperComputação - 2022/1" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
@@ -217,7 +217,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../.." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         Home
       </a>
     </li>
@@ -232,7 +232,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../sobre/" class="md-nav__link">
+      <a href="../../sobre/" class="md-nav__link">
         Burocracias
       </a>
     </li>
@@ -273,7 +273,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aulas/01-introducao/" class="md-nav__link">
+      <a href="../../aulas/01-introducao/" class="md-nav__link">
         01 - Introdução
       </a>
     </li>
@@ -287,7 +287,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aulas/02-03-implementacao-c%2B%2B/" class="md-nav__link">
+      <a href="../../aulas/02-03-implementacao-c%2B%2B/" class="md-nav__link">
         02 e 03 - C++
       </a>
     </li>
@@ -301,7 +301,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aulas/04-profiling/" class="md-nav__link">
+      <a href="../../aulas/04-profiling/" class="md-nav__link">
         04 - Profiling
       </a>
     </li>
@@ -315,7 +315,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aulas/05-heuristicas/" class="md-nav__link">
+      <a href="../../aulas/05-heuristicas/" class="md-nav__link">
         05 - Heurísticas
       </a>
     </li>
@@ -329,7 +329,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aulas/06-aleatorizacao/" class="md-nav__link">
+      <a href="../../aulas/06-aleatorizacao/" class="md-nav__link">
         06 - Aleatorização
       </a>
     </li>
@@ -343,7 +343,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aulas/07-busca-local/" class="md-nav__link">
+      <a href="../../aulas/07-busca-local/" class="md-nav__link">
         07 - Busca Local
       </a>
     </li>
@@ -357,7 +357,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aulas/08-busca-global/" class="md-nav__link">
+      <a href="../../aulas/08-busca-global/" class="md-nav__link">
         08 - Busca Exaustiva
       </a>
     </li>
@@ -371,7 +371,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aulas/09-busca-global-II/" class="md-nav__link">
+      <a href="../../aulas/09-busca-global-II/" class="md-nav__link">
         09 - Comparação de desempenho
       </a>
     </li>
@@ -385,7 +385,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aulas/10-branch-and-bound/" class="md-nav__link">
+      <a href="../../aulas/10-branch-and-bound/" class="md-nav__link">
         10 - Branch and Bound
       </a>
     </li>
@@ -399,7 +399,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aulas/10-branch-and-bound/revisao/" class="md-nav__link">
+      <a href="../../aulas/10-branch-and-bound/revisao/" class="md-nav__link">
         Revisão para P1
       </a>
     </li>
@@ -413,7 +413,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aulas/11-paralelismo/" class="md-nav__link">
+      <a href="../../aulas/11-paralelismo/" class="md-nav__link">
         11 - Paralelismo
       </a>
     </li>
@@ -427,7 +427,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aulas/12-efeitos-colaterais/" class="md-nav__link">
+      <a href="../../aulas/12-efeitos-colaterais/" class="md-nav__link">
         12 - Paralelismo - Exercício / Efeitos Colaterais
       </a>
     </li>
@@ -441,7 +441,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aulas/13-efeitos-colaterais-II/" class="md-nav__link">
+      <a href="../../aulas/13-efeitos-colaterais-II/" class="md-nav__link">
         13 - Paralelismo - Efeitos Colaterais II
       </a>
     </li>
@@ -455,7 +455,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aulas/14-intro-gpu/" class="md-nav__link">
+      <a href="../../aulas/14-intro-gpu/" class="md-nav__link">
         14 - GPU - Introdução
       </a>
     </li>
@@ -469,7 +469,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aulas/15-gpu-iteradores/" class="md-nav__link">
+      <a href="../../aulas/15-gpu-iteradores/" class="md-nav__link">
         15 - GPU - Iteradores
       </a>
     </li>
@@ -483,7 +483,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aulas/16-gpu-customizacao/" class="md-nav__link">
+      <a href="../../aulas/16-gpu-customizacao/" class="md-nav__link">
         16 - GPU - Customização
       </a>
     </li>
@@ -503,12 +503,14 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
       
       
       
@@ -531,7 +533,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../" class="md-nav__link">
+      <a href="../" class="md-nav__link">
         Alinhamento de Sequencias de DNA
       </a>
     </li>
@@ -545,7 +547,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../heuristico/" class="md-nav__link">
+      <a href="../heuristico/" class="md-nav__link">
         Heurística de Alinhamento Local de Smith-Waterman
       </a>
     </li>
@@ -559,7 +561,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../local/" class="md-nav__link">
+      <a href="../local/" class="md-nav__link">
         Um algoritmo Local para Alinhamento
       </a>
     </li>
@@ -573,7 +575,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../exaustiva/" class="md-nav__link">
+      <a href="../exaustiva/" class="md-nav__link">
         Busca Exaustiva para Alinhamento de Sequencias
       </a>
     </li>
@@ -587,7 +589,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../openmp/" class="md-nav__link">
+      <a href="../openmp/" class="md-nav__link">
         Paralelismo com OpenMP
       </a>
     </li>
@@ -599,11 +601,21 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../../gpu/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Paralelismo com GPU
       </a>
+      
     </li>
   
 
@@ -645,19 +657,93 @@
             <article class="md-content__inner md-typeset">
               
                 
-<a href="https://github.com/insper/supercomp/edit/master/docs/projetos/2021-2/heuristico.md" title="Edit this page" class="md-content__button md-icon">
+<a href="https://github.com/insper/supercomp/edit/master/docs/projetos/gpu.md" title="Edit this page" class="md-content__button md-icon">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
 </a>
 
 
-<h1 id="solucao-heuristica">Solução heurística<a class="headerlink" href="#solucao-heuristica" title="Permanent link">&para;</a></h1>
-<p>Um dos melhores estratégias para resolução do problema min-set-cover é a estratégia gulosa. O algoritmo guloso encontra uma solução para o problema de cobertura de conjunto escolhendo iterativamente um conjunto que cobre o maior número possível de variáveis descobertas restantes.</p>
-<p>Sua tarefa: implemente a estratégia gulosa para o problema do min-set-cover. A cada iteração, <strong>o algoritmo deve selecionar o subconjunto de F que irá cobrir o maior número de elementos de U que estavam descobertos</strong>.</p>
-<p>Veja abaixo um pseudo-código da estratégia gulosa que você deve implementar.</p>
-<p><img alt="greedy" src="https://i.stack.imgur.com/v55Gn.png" /></p>
-<p>Faça testes para diversos tipos de entradas, e foque principalmente em uma grande quantidade de elementos e subconjuntos (n &gt; 250).</p>
-<p>Você deve entregar, além de código-fonte e todas as entradas e saídas geradas para o seu programa, um arquivo contendo o resultado do programa <code>verify</code> ( que você implementou ) e comentar sobre o número de vezes em que você conseguiu encontrar uma solução para o problema. Comente também sobre o tempo de execução de sua implementação. </p>
-<p>Para a entrega, usaremos o site <strong>codePost</strong>, você recebeu na sala de aula o link para criar sua conta. A submissão será feita unicamente por ele. Caso tenha alguma dúvida, entre em contato.</p>
+<h1 id="paralelismo-com-gpu">Paralelismo com GPU<a class="headerlink" href="#paralelismo-com-gpu" title="Permanent link">&para;</a></h1>
+<p>Neste último projeto, vamos explorar os mecanismos de paralelismo multicore com GPU. Para tanto, vamos considerar a implemen`tação da busca exaustiva que vimos, na análise realizada 
+no relatório parcial, ter o desempenho bastante comprometido quando trabalhamos com tamanhos de sequencias de DNA muito grandes.</p>
+<p>Na busca exaustiva, existe um procedimento básico que é realizado para cada par de subsequencias que estão sendo analisadas: cálculo do score. Relembrando o algoritmo de Smith-Waterman, nós temos que o score de alinhamento entre duas sequências S1 e S2 é dado por:</p>
+<div class="arithmatex">
+<div class="MathJax_Preview"> 
+S_{i,j} = max\begin{Bmatrix}
+S_{i-1, j-1} + 2, &amp; a_i = b_j \\ 
+S_{i-1, j-1} - 1,  &amp; a_i \neq b_j\\ 
+S_{i-1, j} - 1 &amp;  b_j = -\\
+S_{i, j-1} - 1 &amp;  a_i = -\\ 
+0 &amp; 
+\end{Bmatrix}
+</div>
+<script type="math/tex; mode=display"> 
+S_{i,j} = max\begin{Bmatrix}
+S_{i-1, j-1} + 2, & a_i = b_j \\ 
+S_{i-1, j-1} - 1,  & a_i \neq b_j\\ 
+S_{i-1, j} - 1 &  b_j = -\\
+S_{i, j-1} - 1 &  a_i = -\\ 
+0 & 
+\end{Bmatrix}
+</script>
+</div>
+<p>A operação <code>max</code> é associativa e comutativa, o que indica que nós podemos calcula de maneira paralelizada. Na prática, observe que o cálculo do score só depende da linha anterior, de modo que não é preciso ter toda a matriz carregada na memória, quando nosso objetivo é obter o melhor score. </p>
+<p>Podemos dividir esse cálculo de score em duas fases, a partir da linha anterior. Para isso, precisamos de duas estrututas de armazenamento, uma estrutura para armazenar o resultado do cálculo da linha anterior, e uma estrutura para receber temporariamente o resultado (primeira fase), e posteriormente ser atualizada (segunda fase).</p>
+<p>A primeira fase poderia ser chamada de <span class="arithmatex"><span class="MathJax_Preview">S_{temp}</span><script type="math/tex">S_{temp}</script></span> e poderia ser calculada da seguinte maneira:</p>
+<div class="arithmatex">
+<div class="MathJax_Preview"> 
+S_{temp}(i,j) = max\begin{Bmatrix}
+S_{i-1, j-1} + 2, &amp; a_i = b_j \\ 
+S_{i-1, j-1} - 1,  &amp; a_i \neq b_j\\ 
+S_{i, j-1} - 1 &amp;  b_j = -\\
+0 &amp; 
+\end{Bmatrix}
+</div>
+<script type="math/tex; mode=display"> 
+S_{temp}(i,j) = max\begin{Bmatrix}
+S_{i-1, j-1} + 2, & a_i = b_j \\ 
+S_{i-1, j-1} - 1,  & a_i \neq b_j\\ 
+S_{i, j-1} - 1 &  b_j = -\\
+0 & 
+\end{Bmatrix}
+</script>
+</div>
+<p>Você pode implementar essa primeira fase como uma transformação. A segunda fase seria então fazer calcular o máximo entre <span class="arithmatex"><span class="MathJax_Preview">S_{temp}</span><script type="math/tex">S_{temp}</script></span> e a lateral direita:</p>
+<div class="arithmatex">
+<div class="MathJax_Preview"> 
+S_{i,j} = max\begin{Bmatrix}
+S_{temp}(i,j) &amp; \\ 
+S_{temp}(i-1, j) - 1 &amp;  \\
+0 &amp; 
+\end{Bmatrix}
+</div>
+<script type="math/tex; mode=display"> 
+S_{i,j} = max\begin{Bmatrix}
+S_{temp}(i,j) & \\ 
+S_{temp}(i-1, j) - 1 &  \\
+0 & 
+\end{Bmatrix}
+</script>
+</div>
+<p>Dessa forma, podemos:</p>
+<ul>
+  <li>  usar thrust::transform para calcular a primeira fase e armazenar em uma estrutura temporaria o seu resultado
+  <li> podemos usar thrust::inclusive_scan para atualizar o resultado temporário obtido na fase anterior
+</ul>
+
+<p>O procedimento acima calcula, de maneira paralela, o score entre duas sequencias S1 e S2. Porém, quantos pares de sequencias podemos ocupar simultaneamente a GPU ? Este é o
+ desafio que deverá ser resolvido neste projeto. Lembre-se que você não precisa armazenar a matriz inteira na GPU. Como mostramos no algoritmo acima, a última linha da matriz é necessária. Você também deve buscar formas de realizar o cálculo entre múltiplos pares. Assim, seu código não deve apenas ser otimizado para obter o score, mas calcular o score entre diversos pares simultaneamente. </p>
+<p>O que entregar:</p>
+<ul>
+  <li> código-fonte da implementação exaustiva e da implementação paralela de GPU. A implementação paralela deverá seguir o cálculo do score descrito acima e, adicionalmente, 
+    conter a implementação da estratégia de ocupação da GPU pelas sequencias. 
+  <li> arquivos de testes utilizados
+  <li> pequeno relatório descrevendo a estratégia usada para ocupação da GPU
+  <li> resultados dos testes
+</ul>
+
+<p>Um detalhe importante é que, como agora estamos trabalhando com paralelismo em GPU, os tamanhos dos arquivos de testes precisam ser bem maiores como em OpenMP. Muitas vezes, os resultados de speedup 
+aparecem a partir de grandes instâncias do problema.</p>
+<p>Caso você considere necessário, pode refatorar a sua implementação da busca exaustiva para poder explorar mais mecanismos da biblioteca TRUST em GPU.</p>
 
               
             </article>
@@ -667,6 +753,26 @@
       </main>
       
         <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../openmp/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Paralelismo com OpenMP" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Paralelismo com OpenMP
+            </div>
+          </div>
+        </a>
+      
+      
+    </nav>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -688,18 +794,18 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../../assets/javascripts/workers/search.092fa1f6.min.js"}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.092fa1f6.min.js"}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.5a9542cf.min.js"></script>
+      <script src="../../assets/javascripts/bundle.5a9542cf.min.js"></script>
       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.0.0/js-yaml.min.js"></script>
       
-        <script src="../../../js/markdown-enhancer.js"></script>
+        <script src="../../js/markdown-enhancer.js"></script>
       
-        <script src="../../../js/slides.js"></script>
+        <script src="../../js/slides.js"></script>
       
     
   </body>
