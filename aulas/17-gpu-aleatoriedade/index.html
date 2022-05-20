@@ -798,7 +798,7 @@ for (int i = 0; i &lt; 10; i++) {
 <p>Note que em ambos os casos os resultados dependem do número de threads usadas! Como vimos em aulas anteriores, um <em>RNG</em> tem estado interno e não pode ser facilmente compartilhado entre várias threads.</p>
 <div class="admonition example">
 <p class="admonition-title">Example</p>
-<p>Implemente a abordagem 1 no exercício da parte anterior. Para isto você pode usar a estratégia de acesso direto aos dados (como foi feito no exercício da imagem) e usar o índice recebido como <em>seed</em>. Lembre-se que a seed é definida ao criar o <code>default_random_engine</code>. No exemplo abaixo, você pode ver que ela é definida com o valor <code>10</code>. </p>
+<p>Implemente a abordagem 1 no exercício da parte anterior. Para isto você pode usar a estratégia de acesso direto aos dados e usar o índice recebido como <em>seed</em>. Lembre-se que a seed é definida ao criar o <code>default_random_engine</code>. No exemplo abaixo, você pode ver que ela é definida com o valor <code>10</code>. </p>
 </div>
 <p><div class="highlight"><pre><span></span><code><span class="w">    </span><span class="n">thrust</span><span class="o">::</span><span class="n">default_random_engine</span><span class="w"> </span><span class="nf">eng</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span><span class="w"></span>
 </code></pre></div>
