@@ -11,14 +11,7 @@ extra:
 theme:
   feature:
     tabs: true
-  name: 'material'
-  palette:
-      primary: 'grey'
-      accent: 'red'
-  font:
-    text: Roboto
-    code: Roboto Mono
-#  custom_dir: 'custom_theme'
+  name: active-handout-theme
 
 docs_dir: material
 site_dir: docs
@@ -70,47 +63,38 @@ nav:
 extra_javascript:
     - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML
     - https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.0.0/js-yaml.min.js
-    - js/markdown-enhancer.js
-    - js/slides.js
 
 extra_css:
     - css/printing.css
     - css/extra.css
 
 markdown_extensions:
-  - markdown.extensions.tables
-  - tables
+  - active-handout-plugins
   - markdown.extensions.admonition
-  - markdown.extensions.codehilite:
-      guess_lang: false
-  - markdown.extensions.def_list
-  - markdown.extensions.footnotes
-  - markdown.extensions.meta
-  - markdown.extensions.toc:
-      permalink: true
-  - pymdownx.arithmatex
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.details
+  - pymdownx.tabbed:
+      alternate_style: true 
+  - pymdownx.superfences
+  - pymdownx.magiclink
+  - pymdownx.critic:
+      mode: view
   - pymdownx.betterem:
       smart_enable: all
   - pymdownx.caret
-  - pymdownx.critic
-  - pymdownx.details
+  - pymdownx.mark
+  - pymdownx.tilde
+  - pymdownx.smartsymbols
   - pymdownx.emoji:
       emoji_generator: !!python/name:pymdownx.emoji.to_svg
-  - pymdownx.inlinehilite
-  - pymdownx.keys
-  - pymdownx.magiclink:
-      repo_url_shorthand: true
-      user: squidfunk
-      repo: mkdocs-material
-  - pymdownx.mark
-  - pymdownx.smartsymbols
-  - pymdownx.superfences
-  - pymdownx.tasklist:
-      custom_checkbox: true
+  - attr_list
   - pymdownx.tilde
   - pymdownx.snippets:
       base_path: code
       check_paths: true
+
+
 plugins:
     - search
     - mknotebooks
