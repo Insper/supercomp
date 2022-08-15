@@ -11,24 +11,19 @@
         <link rel="canonical" href="https://insper.github.io/supercomp/aulas/15-gpu-iteradores/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.3.9">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.2.7">
     
     
       
-        <title>15 - GPU - Iteradores - SuperComputação - 2022/2</title>
+        <title>18 - Iteradores em Thrust - SuperComputação - 2022/2</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.1d29e8d0.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.9d5733d3.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.e6a45f82.min.css">
         
-          
-          
-          <meta name="theme-color" content="#757575">
-        
-      
       
     
     
@@ -58,6 +53,80 @@
 
     
     
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:700|Oxygen+Mono|Source+Sans+Pro:700|Source+Serif+Pro&amp;display=swap">
+<link rel="stylesheet" href="../../assets/css/devlife.css">
+<script src="https://unpkg.com/hyperscript.org"></script>
+<script src="https://unpkg.com/htmx.org@1.8.0"></script>
+
+<script>
+    function keyFromElement(el) {
+        const docAddr = document.location.pathname;
+        return `${docAddr}/${el.id}`;
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll("a.progress").forEach((e) => {
+            const k = keyFromElement(e);
+            if (localStorage.getItem(k) !== null) {
+                e.click();
+            }
+        });
+
+        document.querySelectorAll("div.admonition.question.short, " +
+                                  "div.admonition.question.medium, " +
+                                  "div.admonition.question.long").forEach((e) => {
+            const k = keyFromElement(e);
+            const itemValue = localStorage.getItem(k);
+            if (itemValue !== null) {
+                e.querySelector("input[name='data'], textarea[name='data']").value = itemValue;
+                e.querySelector("input[type='submit']").click();
+            }
+        });
+
+        document.querySelectorAll("div.admonition.question.choice").forEach((e) => {
+            const k = keyFromElement(e);
+            const itemValue = localStorage.getItem(k);
+            if (itemValue !== null) {
+                e.querySelector(`input[name='data'][value='${itemValue}'`).checked = true;
+                e.querySelector("input[type='submit']").click();
+            }
+        });
+
+        document.querySelectorAll("div.admonition.exercise").forEach(e => {
+            const k = keyFromElement(e);
+            const itemValue = localStorage.getItem(k);
+            if (itemValue !== null) {
+                e.querySelector("input[type='submit']").click();
+            }
+        });
+
+        window.addEventListener("remember", function (e) {
+            const element = e.detail.element;
+            if (element.classList.contains("progress")) {
+                localStorage[keyFromElement(e.detail.element)] = true;
+            } else if (element.tagName === "FORM") {
+                const parentElement = element.parentElement;
+                if (parentElement.classList.contains("choice")) {
+                    const choices = element.querySelectorAll("input[name='data'][type='radio']");
+                    for (let choice of choices) {
+                        if (choice.checked) {
+                            localStorage[keyFromElement(element.parentElement)] = choice.value;
+                        }
+                    }
+                } else if (parentElement.classList.contains("short") ||
+                           parentElement.classList.contains("medium") ||
+                           parentElement.classList.contains("long")) {
+                    const textElement = element.querySelector("input[name='data'], textarea[name='data']");
+                    localStorage[keyFromElement(element.parentElement)] = textElement.value;
+                } else if (parentElement.classList.contains("exercise")) {
+                    localStorage[keyFromElement(parentElement)] = true;
+                }
+            }
+        });
+    });
+</script>
+
+
   </head>
   
   
@@ -66,7 +135,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="grey" data-md-color-accent="red">
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
   
     
     
@@ -93,11 +162,11 @@
     <a href="../.." title="SuperComputação - 2022/2" class="md-header__button md-logo" aria-label="SuperComputação - 2022/2" data-md-component="logo">
       
   
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
     </label>
     <div class="md-header__title" data-md-component="header-title">
       <div class="md-header__ellipsis">
@@ -109,7 +178,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              15 - GPU - Iteradores
+              18 - Iteradores em Thrust
             
           </span>
         </div>
@@ -119,7 +188,7 @@
     
     
       <label class="md-header__button md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
       </label>
       <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
@@ -127,13 +196,13 @@
     <form class="md-search__form" name="search">
       <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
       <label class="md-search__icon md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
       </label>
       <nav class="md-search__options" aria-label="Search">
         
         <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
         </button>
       </nav>
       
@@ -153,7 +222,7 @@
     
     
       <div class="md-header__source">
-        <a href="https://github.com/insper/supercomp" title="Go to repository" class="md-source" data-md-component="source">
+        <a href="https://github.com/insper/supercomp/" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
@@ -191,14 +260,14 @@
     <a href="../.." title="SuperComputação - 2022/2" class="md-nav__button md-logo" aria-label="SuperComputação - 2022/2" data-md-component="logo">
       
   
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
 
     </a>
     SuperComputação - 2022/2
   </label>
   
     <div class="md-nav__source">
-      <a href="https://github.com/insper/supercomp" title="Go to repository" class="md-source" data-md-component="source">
+      <a href="https://github.com/insper/supercomp/" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
@@ -247,14 +316,12 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
       
       
       
@@ -293,264 +360,6 @@
     <li class="md-nav__item">
       <a href="../02-03-implementacao-c%2B%2B/" class="md-nav__link">
         02 e 03 - C++
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../04-profiling/" class="md-nav__link">
-        04 - Profiling
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../05-heuristicas/" class="md-nav__link">
-        05 - Heurísticas
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../06-aleatorizacao/" class="md-nav__link">
-        06 - Aleatorização
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../07-busca-local/" class="md-nav__link">
-        07 - Busca Local
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../08-busca-global/" class="md-nav__link">
-        08 - Busca Exaustiva
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../09-busca-global-II/" class="md-nav__link">
-        09 - Comparação de desempenho
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../10-branch-and-bound/" class="md-nav__link">
-        10 - Branch and Bound
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../10-branch-and-bound/revisao/" class="md-nav__link">
-        Revisão para P1
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../11-paralelismo/" class="md-nav__link">
-        11 - Paralelismo
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../12-efeitos-colaterais/" class="md-nav__link">
-        12 - Paralelismo - Exercício / Efeitos Colaterais
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../13-efeitos-colaterais-II/" class="md-nav__link">
-        13 - Paralelismo - Efeitos Colaterais II
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../14-intro-gpu/" class="md-nav__link">
-        14 - GPU - Introdução
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-    
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          15 - GPU - Iteradores
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
-        15 - GPU - Iteradores
-      </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#iteradores" class="md-nav__link">
-    Iteradores
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#operacoes-customizaveis" class="md-nav__link">
-    Operações customizáveis
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../16-gpu-customizacao/" class="md-nav__link">
-        16 - GPU - Customização
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../17-gpu-aleatoriedade/" class="md-nav__link">
-        17 - GPU - Aleatoriedade
       </a>
     </li>
   
@@ -598,77 +407,7 @@
   
     <li class="md-nav__item">
       <a href="../../projetos/" class="md-nav__link">
-        Alinhamento de Sequencias de DNA
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../projetos/heuristico/" class="md-nav__link">
-        Heurística de Alinhamento Local de Smith-Waterman
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../projetos/local/" class="md-nav__link">
-        Um algoritmo Local para Alinhamento
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../projetos/exaustiva/" class="md-nav__link">
-        Busca Exaustiva para Alinhamento de Sequencias
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../projetos/openmp/" class="md-nav__link">
-        Paralelismo com OpenMP
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../projetos/gpu/" class="md-nav__link">
-        Paralelismo com GPU
+        A definir
       </a>
     </li>
   
@@ -733,24 +472,22 @@
             <article class="md-content__inner md-typeset">
               
                 
-  <a href="https://github.com/insper/supercomp/edit/master/docs/aulas/15-gpu-iteradores/index.md" title="Edit this page" class="md-content__button md-icon">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
-  </a>
+<a href="https://github.com/insper/supercomp/edit/master/docs/aulas/15-gpu-iteradores/index.md" title="Edit this page" class="md-content__button md-icon">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+</a>
 
 
 
-<h1 id="18-iteradores-em-thrust">18 - Iteradores em Thrust<a class="headerlink" href="#18-iteradores-em-thrust" title="Permanent link">&para;</a></h1>
+<section class="progress-section show">
+<h1 id="18-iteradores-em-thrust">18 - Iteradores em Thrust</h1>
 <p>Na última aula conseguimos rodar algumas funções em GPU e medir o custo de transferência de dados. Chegamos a conclusão de que, para valer a pena usar a GPU, ou precisamos tratar muitos dados ou precisamos fazer tratamentos pesados.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Nesta aula trabalharemos extensivamente com a API da <code>thrust</code> e pediremos para que vocês consultem a <a href="https://thrust.github.io/doc/modules.html">documentação oficial</a> da biblioteca. Também pode ser útil ver a <a href="https://github.com/NVIDIA/thrust/tree/master/examples">seção de exemplos</a> do repositório.</p>
 </div>
-<h2 id="iteradores">Iteradores<a class="headerlink" href="#iteradores" title="Permanent link">&para;</a></h2>
+<h2 id="iteradores">Iteradores</h2>
 <p>Continuando a partir do último item da aula anterior, suponha que você deseja calcular a variância das diferenças. Agora que já temos a média, a fórmula da variância é dada por</p>
-<div class="arithmatex">
-<div class="MathJax_Preview">\frac{1}{n}\sum_{i=0}^n (x_i - \mu)^2</div>
-<script type="math/tex; mode=display">\frac{1}{n}\sum_{i=0}^n (x_i - \mu)^2</script>
-</div>
+<p>$$\frac{1}{n}\sum_{i=0}^n (x_i - \mu)^2$$</p>
 <div class="admonition example">
 <p class="admonition-title">Example</p>
 <p>Já sabemos tudo o que precisamos para fazer este cálculo. Crie um vetor em que todas as componentes sejam iguais a média (usando <code>thrust::fill</code>) e compute a variância usando a fórmula acima.</p>
@@ -767,7 +504,7 @@
 <p><code>ganho_diario[i] = stocks[i+1] - stocks[i]</code></p>
 <p>Claramente <code>ganho_diario.size() == stocks.size() - 1</code>. Leve isto em conta ao utilizar a operação <code>transform</code> para criar o vetor <code>ganho_diario</code>.</p>
 </div>
-<h2 id="operacoes-customizaveis">Operações customizáveis<a class="headerlink" href="#operacoes-customizaveis" title="Permanent link">&para;</a></h2>
+<h2 id="operacoes-customizaveis">Operações customizáveis</h2>
 <p>Com o vetor <code>ganho_diario</code> acima conseguimos saber se o valor da ação subiu ou caiu de um dia para o outro! Duas perguntas se seguem:</p>
 <ol>
 <li>quantas vezes o valor subiu?</li>
@@ -778,9 +515,27 @@
 <p class="admonition-title">Warning</p>
 <p>É sempre importante consultar a documentação para entender como essa função será aplicada. Em alguns casos é necessário que a função passada obedeça algumas restrições para que os resultados obtidos façam sentido.</p>
 </div>
-<div class="admonition question short">
-<p class="admonition-title">Question</p>
+<div class="admonition question short" id="short-1">
+<p class="admonition-title">Question 1</p>
+<form _="
+on submit
+    halt the event
+    if &lt;.answer/&gt; 
+        show the &lt;.answer/&gt; in me
+    end
+    add @disabled to &lt;input/&gt; in me
+    add .done to me
+    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
+    send remember(element: me) to window
+end
+        ">
 <p>A <code>thrust</code> já tem suporte a operações de redução que são contagens. Veja sua documentação oficial <a href="https://thrust.github.io/doc/group__counting.html">neste link</a>. Qual função dessa página você usaria para contar somente os elementos positivos de <code>ganhos_diarios</code>?</p>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input type="submit" value="Enviar"/>
+</div>
+</form>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -795,13 +550,31 @@
 </details>
 </div>
 <p>Vamos agora para o segundo item: "Calcular o aumento médio, considerando somente as vezes em que o valor aumentou de fato". Uma estratégia possível é <strong>zerar</strong> todos os elementos negativos do vetor e depois calcular sua soma.</p>
-<div class="admonition question short">
-<p class="admonition-title">Question</p>
+<div class="admonition question short" id="short-2">
+<p class="admonition-title">Question 2</p>
+<form _="
+on submit
+    halt the event
+    if &lt;.answer/&gt; 
+        show the &lt;.answer/&gt; in me
+    end
+    add @disabled to &lt;input/&gt; in me
+    add .done to me
+    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
+    send remember(element: me) to window
+end
+        ">
 <p>A <a href="https://thrust.github.io/doc/group__transformations.html">documentação sobre transformações</a> é bastante vasta. Você consegue encontrar alguma função que possa <strong>substituir</strong> elementos de um vetor baseado em uma condição booleana?</p>
 <div class="admonition details">
 <p class="admonition-title">Details</p>
 <p><code>replace_if</code></p>
 </div>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input type="submit" value="Enviar"/>
+</div>
+</form>
 </div>
 <div class="admonition example">
 <p class="admonition-title">Example</p>
@@ -816,10 +589,10 @@
 <p><code>5,25179</code></p>
 </details>
 </div>
+</section>
 
               
             </article>
-            
           </div>
         </div>
         
@@ -827,45 +600,10 @@
       
         <footer class="md-footer">
   
-    
-    <nav class="md-footer__inner md-grid" aria-label="Footer" >
-      
-        
-        <a href="../14-intro-gpu/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 14 - GPU - Introdução" rel="prev">
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
-          </div>
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Previous
-              </span>
-              14 - GPU - Introdução
-            </div>
-          </div>
-        </a>
-      
-      
-        
-        <a href="../16-gpu-customizacao/" class="md-footer__link md-footer__link--next" aria-label="Next: 16 - GPU - Customização" rel="next">
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              16 - GPU - Customização
-            </div>
-          </div>
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
-          </div>
-        </a>
-      
-    </nav>
-  
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
       <div class="md-copyright">
+  
   
   
     Made with
@@ -883,18 +621,14 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.5e67fbfe.min.js"}</script>
     
     
-      <script src="../../assets/javascripts/bundle.6c7ad80a.min.js"></script>
+      <script src="../../assets/javascripts/bundle.e87a5f81.min.js"></script>
       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.0.0/js-yaml.min.js"></script>
-      
-        <script src="../../js/markdown-enhancer.js"></script>
-      
-        <script src="../../js/slides.js"></script>
       
     
   </body>

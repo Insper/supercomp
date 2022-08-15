@@ -11,24 +11,19 @@
         <link rel="canonical" href="https://insper.github.io/supercomp/aulas/13-efeitos-colaterais-II/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.3.9">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.2.7">
     
     
       
-        <title>13 - Paralelismo - Efeitos Colaterais II - SuperComputação - 2022/2</title>
+        <title>16 - efeitos colaterais II - SuperComputação - 2022/2</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.1d29e8d0.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.9d5733d3.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.e6a45f82.min.css">
         
-          
-          
-          <meta name="theme-color" content="#757575">
-        
-      
       
     
     
@@ -58,6 +53,80 @@
 
     
     
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:700|Oxygen+Mono|Source+Sans+Pro:700|Source+Serif+Pro&amp;display=swap">
+<link rel="stylesheet" href="../../assets/css/devlife.css">
+<script src="https://unpkg.com/hyperscript.org"></script>
+<script src="https://unpkg.com/htmx.org@1.8.0"></script>
+
+<script>
+    function keyFromElement(el) {
+        const docAddr = document.location.pathname;
+        return `${docAddr}/${el.id}`;
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll("a.progress").forEach((e) => {
+            const k = keyFromElement(e);
+            if (localStorage.getItem(k) !== null) {
+                e.click();
+            }
+        });
+
+        document.querySelectorAll("div.admonition.question.short, " +
+                                  "div.admonition.question.medium, " +
+                                  "div.admonition.question.long").forEach((e) => {
+            const k = keyFromElement(e);
+            const itemValue = localStorage.getItem(k);
+            if (itemValue !== null) {
+                e.querySelector("input[name='data'], textarea[name='data']").value = itemValue;
+                e.querySelector("input[type='submit']").click();
+            }
+        });
+
+        document.querySelectorAll("div.admonition.question.choice").forEach((e) => {
+            const k = keyFromElement(e);
+            const itemValue = localStorage.getItem(k);
+            if (itemValue !== null) {
+                e.querySelector(`input[name='data'][value='${itemValue}'`).checked = true;
+                e.querySelector("input[type='submit']").click();
+            }
+        });
+
+        document.querySelectorAll("div.admonition.exercise").forEach(e => {
+            const k = keyFromElement(e);
+            const itemValue = localStorage.getItem(k);
+            if (itemValue !== null) {
+                e.querySelector("input[type='submit']").click();
+            }
+        });
+
+        window.addEventListener("remember", function (e) {
+            const element = e.detail.element;
+            if (element.classList.contains("progress")) {
+                localStorage[keyFromElement(e.detail.element)] = true;
+            } else if (element.tagName === "FORM") {
+                const parentElement = element.parentElement;
+                if (parentElement.classList.contains("choice")) {
+                    const choices = element.querySelectorAll("input[name='data'][type='radio']");
+                    for (let choice of choices) {
+                        if (choice.checked) {
+                            localStorage[keyFromElement(element.parentElement)] = choice.value;
+                        }
+                    }
+                } else if (parentElement.classList.contains("short") ||
+                           parentElement.classList.contains("medium") ||
+                           parentElement.classList.contains("long")) {
+                    const textElement = element.querySelector("input[name='data'], textarea[name='data']");
+                    localStorage[keyFromElement(element.parentElement)] = textElement.value;
+                } else if (parentElement.classList.contains("exercise")) {
+                    localStorage[keyFromElement(parentElement)] = true;
+                }
+            }
+        });
+    });
+</script>
+
+
   </head>
   
   
@@ -66,7 +135,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="grey" data-md-color-accent="red">
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
   
     
     
@@ -93,11 +162,11 @@
     <a href="../.." title="SuperComputação - 2022/2" class="md-header__button md-logo" aria-label="SuperComputação - 2022/2" data-md-component="logo">
       
   
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
     </label>
     <div class="md-header__title" data-md-component="header-title">
       <div class="md-header__ellipsis">
@@ -109,7 +178,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              13 - Paralelismo - Efeitos Colaterais II
+              16 - efeitos colaterais II
             
           </span>
         </div>
@@ -119,7 +188,7 @@
     
     
       <label class="md-header__button md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
       </label>
       <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
@@ -127,13 +196,13 @@
     <form class="md-search__form" name="search">
       <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
       <label class="md-search__icon md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
       </label>
       <nav class="md-search__options" aria-label="Search">
         
         <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
         </button>
       </nav>
       
@@ -153,7 +222,7 @@
     
     
       <div class="md-header__source">
-        <a href="https://github.com/insper/supercomp" title="Go to repository" class="md-source" data-md-component="source">
+        <a href="https://github.com/insper/supercomp/" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
@@ -191,14 +260,14 @@
     <a href="../.." title="SuperComputação - 2022/2" class="md-nav__button md-logo" aria-label="SuperComputação - 2022/2" data-md-component="logo">
       
   
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
 
     </a>
     SuperComputação - 2022/2
   </label>
   
     <div class="md-nav__source">
-      <a href="https://github.com/insper/supercomp" title="Go to repository" class="md-source" data-md-component="source">
+      <a href="https://github.com/insper/supercomp/" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
@@ -247,14 +316,12 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
       
       
       
@@ -293,284 +360,6 @@
     <li class="md-nav__item">
       <a href="../02-03-implementacao-c%2B%2B/" class="md-nav__link">
         02 e 03 - C++
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../04-profiling/" class="md-nav__link">
-        04 - Profiling
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../05-heuristicas/" class="md-nav__link">
-        05 - Heurísticas
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../06-aleatorizacao/" class="md-nav__link">
-        06 - Aleatorização
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../07-busca-local/" class="md-nav__link">
-        07 - Busca Local
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../08-busca-global/" class="md-nav__link">
-        08 - Busca Exaustiva
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../09-busca-global-II/" class="md-nav__link">
-        09 - Comparação de desempenho
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../10-branch-and-bound/" class="md-nav__link">
-        10 - Branch and Bound
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../10-branch-and-bound/revisao/" class="md-nav__link">
-        Revisão para P1
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../11-paralelismo/" class="md-nav__link">
-        11 - Paralelismo
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../12-efeitos-colaterais/" class="md-nav__link">
-        12 - Paralelismo - Exercício / Efeitos Colaterais
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-    
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          13 - Paralelismo - Efeitos Colaterais II
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
-        13 - Paralelismo - Efeitos Colaterais II
-      </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#e-possivel-paralelizar-o-problema" class="md-nav__link">
-    É possível paralelizar o problema?
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#paralelizando-processos-inerentemente-sequenciais" class="md-nav__link">
-    Paralelizando processos inerentemente sequenciais
-  </a>
-  
-    <nav class="md-nav" aria-label="Paralelizando processos inerentemente sequenciais">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#primeira-tentativa" class="md-nav__link">
-    Primeira tentativa
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#segunda-tentativa" class="md-nav__link">
-    Segunda tentativa
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../14-intro-gpu/" class="md-nav__link">
-        14 - GPU - Introdução
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../15-gpu-iteradores/" class="md-nav__link">
-        15 - GPU - Iteradores
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../16-gpu-customizacao/" class="md-nav__link">
-        16 - GPU - Customização
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../17-gpu-aleatoriedade/" class="md-nav__link">
-        17 - GPU - Aleatoriedade
       </a>
     </li>
   
@@ -618,77 +407,7 @@
   
     <li class="md-nav__item">
       <a href="../../projetos/" class="md-nav__link">
-        Alinhamento de Sequencias de DNA
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../projetos/heuristico/" class="md-nav__link">
-        Heurística de Alinhamento Local de Smith-Waterman
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../projetos/local/" class="md-nav__link">
-        Um algoritmo Local para Alinhamento
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../projetos/exaustiva/" class="md-nav__link">
-        Busca Exaustiva para Alinhamento de Sequencias
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../projetos/openmp/" class="md-nav__link">
-        Paralelismo com OpenMP
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../projetos/gpu/" class="md-nav__link">
-        Paralelismo com GPU
+        A definir
       </a>
     </li>
   
@@ -773,21 +492,22 @@
             <article class="md-content__inner md-typeset">
               
                 
-  <a href="https://github.com/insper/supercomp/edit/master/docs/aulas/13-efeitos-colaterais-II/index.md" title="Edit this page" class="md-content__button md-icon">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
-  </a>
+<a href="https://github.com/insper/supercomp/edit/master/docs/aulas/13-efeitos-colaterais-II/index.md" title="Edit this page" class="md-content__button md-icon">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+</a>
 
 
 
-<h1 id="16-efeitos-colaterais-ii">16 - efeitos colaterais II<a class="headerlink" href="#16-efeitos-colaterais-ii" title="Permanent link">&para;</a></h1>
+<section class="progress-section show">
+<h1 id="16-efeitos-colaterais-ii">16 - efeitos colaterais II</h1>
 <p>Na aula de hoje iremos trabalhar com um algoritmo de sorteios aleatórios para calcular o <code>pi</code>. Ele é baseado em uma técnica de Otimização, Simulação e Estimação Paramétrica chamada <a href="https://en.wikipedia.org/wiki/Monte_Carlo_method">Monte Carlo</a>.</p>
-<p>O algoritmo sequencial se baseia em sorteios de pontos dentro de um quadrado de lado <code>2</code>. Se a distância entre o ponto e o centro do quadrado for menor que 1 então o ponto cai dentro do círculo inscrito no quadrado. A quantidade de pontos que caem dentro do quadrado é proporcional a <span class="arithmatex"><span class="MathJax_Preview">\pi</span><script type="math/tex">\pi</script></span>. Veja abaixo um resumo do algoritmo.</p>
+<p>O algoritmo sequencial se baseia em sorteios de pontos dentro de um quadrado de lado <code>2</code>. Se a distância entre o ponto e o centro do quadrado for menor que 1 então o ponto cai dentro do círculo inscrito no quadrado. A quantidade de pontos que caem dentro do quadrado é proporcional a $\pi$. Veja abaixo um resumo do algoritmo.</p>
 <p><img alt="https://upload.wikimedia.org/wikipedia/commons/8/84/Pi_30K.gif" src="https://upload.wikimedia.org/wikipedia/commons/8/84/Pi_30K.gif" /></p>
 <ol>
 <li><code>sum = 0</code></li>
 <li>De <code>i=0</code> até <code>N</code>:<ol>
-<li>sorteie pontos <span class="arithmatex"><span class="MathJax_Preview">x,y \in [0,1]</span><script type="math/tex">x,y \in [0,1]</script></span></li>
-<li>se <span class="arithmatex"><span class="MathJax_Preview">x^2 + y^2 \leq 1</span><script type="math/tex">x^2 + y^2 \leq 1</script></span>, <code>sum += 1</code></li>
+<li>sorteie pontos $x,y \in [0,1]$</li>
+<li>se $x^2 + y^2 \leq 1$, <code>sum += 1</code></li>
 </ol>
 </li>
 <li>devolva <code>4 * sum / N</code></li>
@@ -796,89 +516,230 @@
 <p class="admonition-title">Example</p>
 <p>Faça uma implementação sequencial desse algoritmo. Chama seu programa de <code>pi_montecarlo.cpp</code>. Para fins de <em>debug</em> das próximas versões, mostre o valor de <code>sum</code> na saída de erros. Adote <code>N=100 000</code>.</p>
 </div>
-<h2 id="e-possivel-paralelizar-o-problema">É possível paralelizar o problema?<a class="headerlink" href="#e-possivel-paralelizar-o-problema" title="Permanent link">&para;</a></h2>
+<h2 id="e-possivel-paralelizar-o-problema">É possível paralelizar o problema?</h2>
 <p>Vamos iniciar pensando um pouco sobre o problema acima.</p>
-<div class="admonition question short">
-<p class="admonition-title">Question</p>
+<div class="admonition question short" id="short-1">
+<p class="admonition-title">Question 1</p>
+<form _="
+on submit
+    halt the event
+    if &lt;.answer/&gt; 
+        show the &lt;.answer/&gt; in me
+    end
+    add @disabled to &lt;input/&gt; in me
+    add .done to me
+    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
+    send remember(element: me) to window
+end
+        ">
 <p>O algoritmo acima é paralelizável? Qual técnica você utilizaria para paralelizá-lo?</p>
 <div class="admonition details">
 <p class="admonition-title">Resposta</p>
 <p>O <code>for</code> paralelo parece encaixar muito bem neste problema, com a variável <code>sum</code> sendo usada na opção <code>reduction</code></p>
 </div>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input type="submit" value="Enviar"/>
 </div>
-<div class="admonition question short">
-<p class="admonition-title">Question</p>
+</form>
+</div>
+<div class="admonition question short" id="short-2">
+<p class="admonition-title">Question 2</p>
+<form _="
+on submit
+    halt the event
+    if &lt;.answer/&gt; 
+        show the &lt;.answer/&gt; in me
+    end
+    add @disabled to &lt;input/&gt; in me
+    add .done to me
+    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
+    send remember(element: me) to window
+end
+        ">
 <p>Além da variável <code>sum</code>, existe outra operação que gera efeitos colaterais no código acima? Qual?</p>
 <div class="admonition details">
 <p class="admonition-title">Resposta</p>
 <p>O sorteio de pontos! Lembramos da aula 06 que a geração de números aleatórios é um processo sequencial que depende dos números anteriormente sorteados.</p>
 </div>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input type="submit" value="Enviar"/>
 </div>
-<div class="admonition progress">
-<p class="admonition-title">Progress</p>
-<p>Continuar</p>
+</form>
 </div>
+<div><a _=" on click      add .show to the next &lt;section/&gt;      hide me     send remember(element: me) to window     halt  end" class="md-button md-button--primary progress" href="" id="prog-0"> Progress </a></div>
+</section>
+<section class="progress-section">
 <p>Agora que sabemos que gerar números aleatórios é um processo sequencial, vamos considerar o quanto isso atrapalha nosso programa. Nas próximas questões leve em conta que o gerador de números aleatórios é uma variável compartilhada.</p>
-<div class="admonition question short">
-<p class="admonition-title">Question</p>
+<div class="admonition question short" id="short-3">
+<p class="admonition-title">Question 3</p>
+<form _="
+on submit
+    halt the event
+    if &lt;.answer/&gt; 
+        show the &lt;.answer/&gt; in me
+    end
+    add @disabled to &lt;input/&gt; in me
+    add .done to me
+    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
+    send remember(element: me) to window
+end
+        ">
 <p>Como evitaríamos problemas ao compartilhar o gerador de números aleatórios?</p>
 <div class="admonition details">
 <p class="admonition-title">Resposta</p>
 <p>Podemos envolver o passo <em>2a</em> do algoritmo em uma seção crítica usando <code>omp critical</code></p>
 </div>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input type="submit" value="Enviar"/>
 </div>
-<div class="admonition question short">
-<p class="admonition-title">Question</p>
+</form>
+</div>
+<div class="admonition question short" id="short-4">
+<p class="admonition-title">Question 4</p>
+<form _="
+on submit
+    halt the event
+    if &lt;.answer/&gt; 
+        show the &lt;.answer/&gt; in me
+    end
+    add @disabled to &lt;input/&gt; in me
+    add .done to me
+    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
+    send remember(element: me) to window
+end
+        ">
 <p>Se o <code>for</code> acima rodar em uma ordem completamente diferente os resultados se alterarão?</p>
 <div class="admonition details">
 <p class="admonition-title">Resposta</p>
 <p>Desde de que os pares <code>x,y</code> sorteados sejam os mesmos então não haverá problema.</p>
 </div>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input type="submit" value="Enviar"/>
+</div>
+</form>
 </div>
 <div class="admonition example">
 <p class="admonition-title">Example</p>
 <p>Com base em todas as suas respostas dos exercícios anteriores, faça uma implementação paralela do <code>pi_montecarlo.cpp</code>. Verifique que o valor de <code>sum</code> é igual ao sequencial. Por enquanto, <strong>não se preocupe com o tempo de execução</strong>.</p>
 </div>
-<div class="admonition question short">
-<p class="admonition-title">Question</p>
+<div class="admonition question short" id="short-5">
+<p class="admonition-title">Question 5</p>
+<form _="
+on submit
+    halt the event
+    if &lt;.answer/&gt; 
+        show the &lt;.answer/&gt; in me
+    end
+    add @disabled to &lt;input/&gt; in me
+    add .done to me
+    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
+    send remember(element: me) to window
+end
+        ">
 <p>Anote o tempo de execução sequencial e paralelo para o programa acima.</p>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input type="submit" value="Enviar"/>
 </div>
-<div class="admonition progress">
-<p class="admonition-title">Progress</p>
-<p>Vamos discutir esse resultado juntos!</p>
+</form>
 </div>
-<h2 id="paralelizando-processos-inerentemente-sequenciais">Paralelizando processos inerentemente sequenciais<a class="headerlink" href="#paralelizando-processos-inerentemente-sequenciais" title="Permanent link">&para;</a></h2>
+<div><a _=" on click      add .show to the next &lt;section/&gt;      hide me     send remember(element: me) to window     halt  end" class="md-button md-button--primary progress" href="" id="prog-1"> Progress </a></div>
+</section>
+<section class="progress-section">
+<h2 id="paralelizando-processos-inerentemente-sequenciais">Paralelizando processos inerentemente sequenciais</h2>
 <p>Como discutimos agora há pouco, a geração de números aleatórios é um processo inerentemente sequencial. Não é que seja impossível paralelizá-lo eficientemente, é que é impossível paralelizá-lo <em>at all</em>. Vamos tentar contornar isso então usando a resposta da <em>Questão 4</em>:</p>
 <div class="admonition quote">
 <p class="admonition-title">O <code>for</code> do algoritmo depende dos pontos gerados, não da ordem que eles foram gerados.</p>
 </div>
 <p>Vamos então adotar uma solução simples: a cada iteração do <code>for</code> criamos um novo gerador de números aleatórios e sorteamos um par de pontos dele.</p>
-<h3 id="primeira-tentativa">Primeira tentativa<a class="headerlink" href="#primeira-tentativa" title="Permanent link">&para;</a></h3>
-<div class="admonition question short">
-<p class="admonition-title">Question</p>
+<h3 id="primeira-tentativa">Primeira tentativa</h3>
+<div class="admonition question short" id="short-6">
+<p class="admonition-title">Question 6</p>
+<form _="
+on submit
+    halt the event
+    if &lt;.answer/&gt; 
+        show the &lt;.answer/&gt; in me
+    end
+    add @disabled to &lt;input/&gt; in me
+    add .done to me
+    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
+    send remember(element: me) to window
+end
+        ">
 <p>Sabemos que um gerador de números aleatórios gera sempre a mesma sequência de números, dado um parâmetro <code>seed</code> fixo. O quê acontece se usarmos o mesmo <code>seed</code> em todas as iterações? Como consertar isso?</p>
 <div class="admonition details">
 <p class="admonition-title">Resposta</p>
 <p>Sortearemos o mesmo ponto em todas as iterações. Para consertar isso podemos fazer o <code>seed</code> ser baseado no <code>i</code> da iteração atual.</p>
 </div>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input type="submit" value="Enviar"/>
+</div>
+</form>
 </div>
 <div class="admonition example">
 <p class="admonition-title">Example</p>
 <p>Crie uma implementação baseada na ideia acima.</p>
 </div>
-<div class="admonition question short">
-<p class="admonition-title">Question</p>
+<div class="admonition question short" id="short-7">
+<p class="admonition-title">Question 7</p>
+<form _="
+on submit
+    halt the event
+    if &lt;.answer/&gt; 
+        show the &lt;.answer/&gt; in me
+    end
+    add @disabled to &lt;input/&gt; in me
+    add .done to me
+    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
+    send remember(element: me) to window
+end
+        ">
 <p>Anote abaixo o valor do pi encontrado e o tempo de execução.</p>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input type="submit" value="Enviar"/>
 </div>
-<div class="admonition question short">
-<p class="admonition-title">Question</p>
+</form>
+</div>
+<div class="admonition question short" id="short-8">
+<p class="admonition-title">Question 8</p>
+<form _="
+on submit
+    halt the event
+    if &lt;.answer/&gt; 
+        show the &lt;.answer/&gt; in me
+    end
+    add @disabled to &lt;input/&gt; in me
+    add .done to me
+    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
+    send remember(element: me) to window
+end
+        ">
 <p>Os resultados obtidos são idênticos aos do programa original? São próximos?</p>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input type="submit" value="Enviar"/>
 </div>
-<div class="admonition progress">
-<p class="admonition-title">Progress</p>
-<p>Vamos discutir esse resultado.</p>
+</form>
 </div>
-<h3 id="segunda-tentativa">Segunda tentativa<a class="headerlink" href="#segunda-tentativa" title="Permanent link">&para;</a></h3>
+<div><a _=" on click      add .show to the next &lt;section/&gt;      hide me     send remember(element: me) to window     halt  end" class="md-button md-button--primary progress" href="" id="prog-2"> Progress </a></div>
+</section>
+<section class="progress-section">
+<h3 id="segunda-tentativa">Segunda tentativa</h3>
 <p>O problema da nossa tentativa anterior é que não temos <em>de verdade</em> sequências de pontos aleatórias. Bom, na verdade nunca temos, mas o problema é que violamos a promessa que o <code>RNG</code> faz. Ele promete que</p>
 <div class="admonition quote">
 <p class="admonition-title">dado um seed fixo, a sequência de números geradas é indistinguível de uma sequência aleatória de verdade</p>
@@ -888,26 +749,62 @@
 <div class="admonition quote">
 <p class="admonition-title">Cada thread irá gerar <code>N/NUM_THREADS</code> números aleatórios, atualizando <code>sum</code> com os pontos dentro do semi-círculo.</p>
 </div>
-<div class="admonition question short">
-<p class="admonition-title">Question</p>
+<div class="admonition question short" id="short-9">
+<p class="admonition-title">Question 9</p>
+<form _="
+on submit
+    halt the event
+    if &lt;.answer/&gt; 
+        show the &lt;.answer/&gt; in me
+    end
+    add @disabled to &lt;input/&gt; in me
+    add .done to me
+    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
+    send remember(element: me) to window
+end
+        ">
 <p>Como esta ideia melhora o algoritmo acima?</p>
 <div class="admonition details">
 <p class="admonition-title">Resposta</p>
 <p>Agora teremos <code>NUM_THREADS</code> sequências pseudo-aleatórias "válidas" e juntá-las passa a ser um problema menor. Continuamos precisando usar uma <code>seed</code> para cada, mas ao menos agora temos um número pequeno de <code>RNG</code>s.</p>
 </div>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input type="submit" value="Enviar"/>
+</div>
+</form>
 </div>
 <div class="admonition example">
 <p class="admonition-title">Example</p>
 <p>Faça uma implementação da ideia acima. Você pode usar os comandos do OpenMP que quiser. </p>
 </div>
-<div class="admonition question short">
-<p class="admonition-title">Question</p>
+<div class="admonition question short" id="short-10">
+<p class="admonition-title">Question 10</p>
+<form _="
+on submit
+    halt the event
+    if &lt;.answer/&gt; 
+        show the &lt;.answer/&gt; in me
+    end
+    add @disabled to &lt;input/&gt; in me
+    add .done to me
+    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
+    send remember(element: me) to window
+end
+        ">
 <p>Anote o tempo de execução e o pi encontrado.</p>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input type="submit" value="Enviar"/>
 </div>
+</form>
+</div>
+</section>
 
               
             </article>
-            
           </div>
         </div>
         
@@ -915,45 +812,10 @@
       
         <footer class="md-footer">
   
-    
-    <nav class="md-footer__inner md-grid" aria-label="Footer" >
-      
-        
-        <a href="../12-efeitos-colaterais/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 12 - Paralelismo - Exercício / Efeitos Colaterais" rel="prev">
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
-          </div>
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Previous
-              </span>
-              12 - Paralelismo - Exercício / Efeitos Colaterais
-            </div>
-          </div>
-        </a>
-      
-      
-        
-        <a href="../14-intro-gpu/" class="md-footer__link md-footer__link--next" aria-label="Next: 14 - GPU - Introdução" rel="next">
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              14 - GPU - Introdução
-            </div>
-          </div>
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
-          </div>
-        </a>
-      
-    </nav>
-  
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
       <div class="md-copyright">
+  
   
   
     Made with
@@ -971,18 +833,14 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.5e67fbfe.min.js"}</script>
     
     
-      <script src="../../assets/javascripts/bundle.6c7ad80a.min.js"></script>
+      <script src="../../assets/javascripts/bundle.e87a5f81.min.js"></script>
       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.0.0/js-yaml.min.js"></script>
-      
-        <script src="../../js/markdown-enhancer.js"></script>
-      
-        <script src="../../js/slides.js"></script>
       
     
   </body>

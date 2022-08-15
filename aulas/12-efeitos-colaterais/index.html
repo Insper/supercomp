@@ -11,24 +11,19 @@
         <link rel="canonical" href="https://insper.github.io/supercomp/aulas/12-efeitos-colaterais/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.3.9">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.2.7">
     
     
       
-        <title>12 - Paralelismo - Exercício / Efeitos Colaterais - SuperComputação - 2022/2</title>
+        <title>15 - Scheduling e Efeitos Colaterais - SuperComputação - 2022/2</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.1d29e8d0.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.9d5733d3.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.e6a45f82.min.css">
         
-          
-          
-          <meta name="theme-color" content="#757575">
-        
-      
       
     
     
@@ -58,6 +53,80 @@
 
     
     
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:700|Oxygen+Mono|Source+Sans+Pro:700|Source+Serif+Pro&amp;display=swap">
+<link rel="stylesheet" href="../../assets/css/devlife.css">
+<script src="https://unpkg.com/hyperscript.org"></script>
+<script src="https://unpkg.com/htmx.org@1.8.0"></script>
+
+<script>
+    function keyFromElement(el) {
+        const docAddr = document.location.pathname;
+        return `${docAddr}/${el.id}`;
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll("a.progress").forEach((e) => {
+            const k = keyFromElement(e);
+            if (localStorage.getItem(k) !== null) {
+                e.click();
+            }
+        });
+
+        document.querySelectorAll("div.admonition.question.short, " +
+                                  "div.admonition.question.medium, " +
+                                  "div.admonition.question.long").forEach((e) => {
+            const k = keyFromElement(e);
+            const itemValue = localStorage.getItem(k);
+            if (itemValue !== null) {
+                e.querySelector("input[name='data'], textarea[name='data']").value = itemValue;
+                e.querySelector("input[type='submit']").click();
+            }
+        });
+
+        document.querySelectorAll("div.admonition.question.choice").forEach((e) => {
+            const k = keyFromElement(e);
+            const itemValue = localStorage.getItem(k);
+            if (itemValue !== null) {
+                e.querySelector(`input[name='data'][value='${itemValue}'`).checked = true;
+                e.querySelector("input[type='submit']").click();
+            }
+        });
+
+        document.querySelectorAll("div.admonition.exercise").forEach(e => {
+            const k = keyFromElement(e);
+            const itemValue = localStorage.getItem(k);
+            if (itemValue !== null) {
+                e.querySelector("input[type='submit']").click();
+            }
+        });
+
+        window.addEventListener("remember", function (e) {
+            const element = e.detail.element;
+            if (element.classList.contains("progress")) {
+                localStorage[keyFromElement(e.detail.element)] = true;
+            } else if (element.tagName === "FORM") {
+                const parentElement = element.parentElement;
+                if (parentElement.classList.contains("choice")) {
+                    const choices = element.querySelectorAll("input[name='data'][type='radio']");
+                    for (let choice of choices) {
+                        if (choice.checked) {
+                            localStorage[keyFromElement(element.parentElement)] = choice.value;
+                        }
+                    }
+                } else if (parentElement.classList.contains("short") ||
+                           parentElement.classList.contains("medium") ||
+                           parentElement.classList.contains("long")) {
+                    const textElement = element.querySelector("input[name='data'], textarea[name='data']");
+                    localStorage[keyFromElement(element.parentElement)] = textElement.value;
+                } else if (parentElement.classList.contains("exercise")) {
+                    localStorage[keyFromElement(parentElement)] = true;
+                }
+            }
+        });
+    });
+</script>
+
+
   </head>
   
   
@@ -66,7 +135,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="grey" data-md-color-accent="red">
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
   
     
     
@@ -93,11 +162,11 @@
     <a href="../.." title="SuperComputação - 2022/2" class="md-header__button md-logo" aria-label="SuperComputação - 2022/2" data-md-component="logo">
       
   
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
     </label>
     <div class="md-header__title" data-md-component="header-title">
       <div class="md-header__ellipsis">
@@ -109,7 +178,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              12 - Paralelismo - Exercício / Efeitos Colaterais
+              15 - Scheduling e  Efeitos Colaterais
             
           </span>
         </div>
@@ -119,7 +188,7 @@
     
     
       <label class="md-header__button md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
       </label>
       <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
@@ -127,13 +196,13 @@
     <form class="md-search__form" name="search">
       <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
       <label class="md-search__icon md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
       </label>
       <nav class="md-search__options" aria-label="Search">
         
         <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
         </button>
       </nav>
       
@@ -153,7 +222,7 @@
     
     
       <div class="md-header__source">
-        <a href="https://github.com/insper/supercomp" title="Go to repository" class="md-source" data-md-component="source">
+        <a href="https://github.com/insper/supercomp/" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
@@ -191,14 +260,14 @@
     <a href="../.." title="SuperComputação - 2022/2" class="md-nav__button md-logo" aria-label="SuperComputação - 2022/2" data-md-component="logo">
       
   
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
 
     </a>
     SuperComputação - 2022/2
   </label>
   
     <div class="md-nav__source">
-      <a href="https://github.com/insper/supercomp" title="Go to repository" class="md-source" data-md-component="source">
+      <a href="https://github.com/insper/supercomp/" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
@@ -247,14 +316,12 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
       
       
       
@@ -293,226 +360,6 @@
     <li class="md-nav__item">
       <a href="../02-03-implementacao-c%2B%2B/" class="md-nav__link">
         02 e 03 - C++
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../04-profiling/" class="md-nav__link">
-        04 - Profiling
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../05-heuristicas/" class="md-nav__link">
-        05 - Heurísticas
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../06-aleatorizacao/" class="md-nav__link">
-        06 - Aleatorização
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../07-busca-local/" class="md-nav__link">
-        07 - Busca Local
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../08-busca-global/" class="md-nav__link">
-        08 - Busca Exaustiva
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../09-busca-global-II/" class="md-nav__link">
-        09 - Comparação de desempenho
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../10-branch-and-bound/" class="md-nav__link">
-        10 - Branch and Bound
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../10-branch-and-bound/revisao/" class="md-nav__link">
-        Revisão para P1
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../11-paralelismo/" class="md-nav__link">
-        11 - Paralelismo
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-    
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
-        12 - Paralelismo - Exercício / Efeitos Colaterais
-      </a>
-      
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../13-efeitos-colaterais-II/" class="md-nav__link">
-        13 - Paralelismo - Efeitos Colaterais II
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../14-intro-gpu/" class="md-nav__link">
-        14 - GPU - Introdução
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../15-gpu-iteradores/" class="md-nav__link">
-        15 - GPU - Iteradores
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../16-gpu-customizacao/" class="md-nav__link">
-        16 - GPU - Customização
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../17-gpu-aleatoriedade/" class="md-nav__link">
-        17 - GPU - Aleatoriedade
       </a>
     </li>
   
@@ -560,77 +407,7 @@
   
     <li class="md-nav__item">
       <a href="../../projetos/" class="md-nav__link">
-        Alinhamento de Sequencias de DNA
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../projetos/heuristico/" class="md-nav__link">
-        Heurística de Alinhamento Local de Smith-Waterman
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../projetos/local/" class="md-nav__link">
-        Um algoritmo Local para Alinhamento
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../projetos/exaustiva/" class="md-nav__link">
-        Busca Exaustiva para Alinhamento de Sequencias
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../projetos/openmp/" class="md-nav__link">
-        Paralelismo com OpenMP
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../projetos/gpu/" class="md-nav__link">
-        Paralelismo com GPU
+        A definir
       </a>
     </li>
   
@@ -673,14 +450,15 @@
             <article class="md-content__inner md-typeset">
               
                 
-  <a href="https://github.com/insper/supercomp/edit/master/docs/aulas/12-efeitos-colaterais/index.md" title="Edit this page" class="md-content__button md-icon">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
-  </a>
+<a href="https://github.com/insper/supercomp/edit/master/docs/aulas/12-efeitos-colaterais/index.md" title="Edit this page" class="md-content__button md-icon">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+</a>
 
 
 
-<h1 id="15-scheduling-e-efeitos-colaterais">15 - Scheduling e  Efeitos Colaterais<a class="headerlink" href="#15-scheduling-e-efeitos-colaterais" title="Permanent link">&para;</a></h1>
-<h1 id="scheduling">Scheduling<a class="headerlink" href="#scheduling" title="Permanent link">&para;</a></h1>
+<section class="progress-section show">
+<h1 id="15-scheduling-e-efeitos-colaterais">15 - Scheduling e  Efeitos Colaterais</h1>
+<h1 id="scheduling">Scheduling</h1>
 <p>Vamos começar compreendendo melhor os <code>schedulers</code> que existem no openmp.
 No github, obtenha o arquivo <code>omp_schedulers.cpp</code>, compile e execute-o. Você deverá obter um output similar ao abaixo. Verifique na documentação do OpenMP (<a href="https://www.intel.com/content/www/us/en/develop/documentation/oneapi-dpcpp-cpp-compiler-dev-guide-and-reference/top/optimization-and-programming-guide/openmp-support/worksharing-using-openmp.html">link</a>) e busque compreender melhor como funciona cada scheduler. </p>
 <div class="highlight"><pre><span></span><code><span class="k">default</span><span class="o">:</span><span class="w">               </span>
@@ -767,7 +545,7 @@ No github, obtenha o arquivo <code>omp_schedulers.cpp</code>, compile e execute-
 <span class="w">                                </span><span class="o">****************</span><span class="w">                </span>
 <span class="w">                                                </span><span class="o">****************</span><span class="w"></span>
 </code></pre></div>
-<h1 id="revisitando-parallel-for-tasks-e-sections">Revisitando <code>Parallel for</code>, <code>tasks</code> e <code>sections</code><a class="headerlink" href="#revisitando-parallel-for-tasks-e-sections" title="Permanent link">&para;</a></h1>
+<h1 id="revisitando-parallel-for-tasks-e-sections">Revisitando <code>Parallel for</code>, <code>tasks</code> e <code>sections</code></h1>
 <p>Agora que já conseguimos resolver problemas simples usando três abordagens diferentes, vamos aumentar a complexidade dos problemas tratados. Vimos três abordagens</p>
 <ul>
 <li><code>parallel for</code> - útil para quando precisamos executar a mesma operação em um conjunto grande de dados.</li>
@@ -775,29 +553,101 @@ No github, obtenha o arquivo <code>omp_schedulers.cpp</code>, compile e execute-
 <li><code>sections</code> - permite paralelizar tarefas heterogênas, com o controle adicional que uma <code>section</code> é executada apenas por uma thread.</li>
 </ul>
 <p>Teremos então dois desafios relacionados a paralelizar programas que não são obviamente paralelizáveis.</p>
-<h2 id="calculo-do-pi-recursivo">Cálculo do <code>pi</code> recursivo<a class="headerlink" href="#calculo-do-pi-recursivo" title="Permanent link">&para;</a></h2>
+<h2 id="calculo-do-pi-recursivo">Cálculo do <code>pi</code> recursivo</h2>
 <p>Vamos iniciar com um código recursivo para cálculo do pi.</p>
 <div class="admonition example">
 <p class="admonition-title">Example</p>
 <p>Examine o código em <em>pi_recursivo.cpp</em>. Procure entender bem o que está acontecendo antes de prosseguir.</p>
 </div>
-<div class="admonition question short">
-<p class="admonition-title">Question</p>
+<div class="admonition question short" id="short-1">
+<p class="admonition-title">Question 1</p>
+<form _="
+on submit
+    halt the event
+    if &lt;.answer/&gt; 
+        show the &lt;.answer/&gt; in me
+    end
+    add @disabled to &lt;input/&gt; in me
+    add .done to me
+    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
+    send remember(element: me) to window
+end
+        ">
 <p>Onde estão as oportunidades de paralelismo? O código tem dependências?</p>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input type="submit" value="Enviar"/>
 </div>
-<div class="admonition question medium">
-<p class="admonition-title">Question</p>
+</form>
+</div>
+<div class="admonition question medium" id="medium-2">
+<p class="admonition-title">Question 2</p>
+<form _="
+on submit
+    halt the event
+    if &lt;.answer/&gt; 
+        show the &lt;.answer/&gt; in me
+    end
+    add @disabled to &lt;input/&gt; in me
+    add .done to me
+    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
+    send remember(element: me) to window
+end
+        ">
 <p>Se o código tiver dependências, é possível refatorá-lo para eliminá-las?</p>
+<div class="form-elements">
+<textarea name="data"></textarea>
+
+<input type="submit" value="Enviar"/>
 </div>
-<div class="admonition question medium">
-<p class="admonition-title">Question</p>
+</form>
+</div>
+<div class="admonition question medium" id="medium-3">
+<p class="admonition-title">Question 3</p>
+<form _="
+on submit
+    halt the event
+    if &lt;.answer/&gt; 
+        show the &lt;.answer/&gt; in me
+    end
+    add @disabled to &lt;input/&gt; in me
+    add .done to me
+    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
+    send remember(element: me) to window
+end
+        ">
 <p>Quantas níveis de chamadas recursivas são feitas? Quando o programa para de chamar recursivamente e faz sequencial?</p>
+<div class="form-elements">
+<textarea name="data"></textarea>
+
+<input type="submit" value="Enviar"/>
+</div>
+</form>
 </div>
 <p>Vamos agora tentar paralelizar o programa usando as duas técnicas.</p>
-<h3 id="usando-for-paralelo">Usando <code>for</code> paralelo<a class="headerlink" href="#usando-for-paralelo" title="Permanent link">&para;</a></h3>
-<div class="admonition question short">
-<p class="admonition-title">Question</p>
+<h3 id="usando-for-paralelo">Usando <code>for</code> paralelo</h3>
+<div class="admonition question short" id="short-4">
+<p class="admonition-title">Question 4</p>
+<form _="
+on submit
+    halt the event
+    if &lt;.answer/&gt; 
+        show the &lt;.answer/&gt; in me
+    end
+    add @disabled to &lt;input/&gt; in me
+    add .done to me
+    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
+    send remember(element: me) to window
+end
+        ">
 <p>Em quais linhas pode haver oportunidade para usar <code>parallel for</code>?</p>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input type="submit" value="Enviar"/>
+</div>
+</form>
 </div>
 <div class="admonition example">
 <p class="admonition-title">Example</p>
@@ -807,46 +657,136 @@ No github, obtenha o arquivo <code>omp_schedulers.cpp</code>, compile e execute-
 <p class="admonition-title">Example</p>
 <p>O número <code>MIN_BLK</code> afeta seu algoritmo? É melhor aumentá-lo ou diminuí-lo? </p>
 </div>
-<div class="admonition question short">
-<p class="admonition-title">Question</p>
+<div class="admonition question short" id="short-5">
+<p class="admonition-title">Question 5</p>
+<form _="
+on submit
+    halt the event
+    if &lt;.answer/&gt; 
+        show the &lt;.answer/&gt; in me
+    end
+    add @disabled to &lt;input/&gt; in me
+    add .done to me
+    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
+    send remember(element: me) to window
+end
+        ">
 <p>Os ganhos de desempenho foram significativos?</p>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input type="submit" value="Enviar"/>
 </div>
-<div class="admonition question short">
-<p class="admonition-title">Question</p>
+</form>
+</div>
+<div class="admonition question short" id="short-6">
+<p class="admonition-title">Question 6</p>
+<form _="
+on submit
+    halt the event
+    if &lt;.answer/&gt; 
+        show the &lt;.answer/&gt; in me
+    end
+    add @disabled to &lt;input/&gt; in me
+    add .done to me
+    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
+    send remember(element: me) to window
+end
+        ">
 <p>Como você fez o paralelismo? Precisou definir o número do <code>for</code> manualmente ou conseguiu realizar a divisão automaticamente? Comente abaixo sua implementação.</p>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input type="submit" value="Enviar"/>
 </div>
-<h3 id="usando-task">Usando <code>task</code><a class="headerlink" href="#usando-task" title="Permanent link">&para;</a></h3>
+</form>
+</div>
+<h3 id="usando-task">Usando <code>task</code></h3>
 <p>Agora vamos usar <code>task</code>. Neste caso é vamos adotar a seguinte estratégia: usaremos tarefas para paralelizar as chamadas recursivas feitas em <em>pi_recursivo.cpp</em>. </p>
 <div class="admonition example">
 <p class="admonition-title">Example</p>
 <p>Crie uma implementação do <em>pi_recursivo</em> usando tarefas. Meça seu tempo e anote.</p>
 <p><strong>Dica</strong>: se você precisar esperar tarefas pode usar a diretiva <code>#pragma omp taskwait</code>. Ela espera por todas as tarefas criadas pela thread atual.</p>
 </div>
-<div class="admonition question short">
-<p class="admonition-title">Question</p>
+<div class="admonition question short" id="short-7">
+<p class="admonition-title">Question 7</p>
+<form _="
+on submit
+    halt the event
+    if &lt;.answer/&gt; 
+        show the &lt;.answer/&gt; in me
+    end
+    add @disabled to &lt;input/&gt; in me
+    add .done to me
+    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
+    send remember(element: me) to window
+end
+        ">
 <p>Os ganhos de desempenho foram significativos?</p>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input type="submit" value="Enviar"/>
 </div>
-<div class="admonition question short">
-<p class="admonition-title">Question</p>
+</form>
+</div>
+<div class="admonition question short" id="short-8">
+<p class="admonition-title">Question 8</p>
+<form _="
+on submit
+    halt the event
+    if &lt;.answer/&gt; 
+        show the &lt;.answer/&gt; in me
+    end
+    add @disabled to &lt;input/&gt; in me
+    add .done to me
+    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
+    send remember(element: me) to window
+end
+        ">
 <p>Quantas tarefas foram criadas? Você escolheu essa valor como?</p>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input type="submit" value="Enviar"/>
+</div>
+</form>
 </div>
 <div class="admonition example">
 <p class="admonition-title">Example</p>
 <p>Tente números diferentes de tarefas e verifique se o desempenho melhora ou piora. Anote suas conclusões abaixo. </p>
 </div>
-<h3 id="comparacao">Comparação<a class="headerlink" href="#comparacao" title="Permanent link">&para;</a></h3>
-<div class="admonition question short">
-<p class="admonition-title">Question</p>
+<h3 id="comparacao">Comparação</h3>
+<div class="admonition question short" id="short-9">
+<p class="admonition-title">Question 9</p>
+<form _="
+on submit
+    halt the event
+    if &lt;.answer/&gt; 
+        show the &lt;.answer/&gt; in me
+    end
+    add @disabled to &lt;input/&gt; in me
+    add .done to me
+    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
+    send remember(element: me) to window
+end
+        ">
 <p>Compare seus resultados das duas abordagens. Anote abaixo seus resultados.</p>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input type="submit" value="Enviar"/>
+</div>
+</form>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>É possível conseguir tempos muito parecidos com ambas, então se uma delas ficou muito mais lenta é hora de rever o que foi feito.</p>
 </div>
-<h1 id="efeitos-colaterais">Efeitos Colaterais<a class="headerlink" href="#efeitos-colaterais" title="Permanent link">&para;</a></h1>
+<h1 id="efeitos-colaterais">Efeitos Colaterais</h1>
 <p>Agora que já conseguimos resolver um problema um pouco mais complexo usando abordagens diferentes, vamos aumentar um pouco mais a complexidade dos problemas tratados.</p>
 <p>No código <code>pi_recursivo.cpp</code> tínhamos uma variável global que podia ser eliminada do código mudando a função recursiva. Isso, porém, nem sempre é possível e precisamos lidar com estas situações.</p>
-<h2 id="um-primeiro-teste">Um primeiro teste<a class="headerlink" href="#um-primeiro-teste" title="Permanent link">&para;</a></h2>
+<h2 id="um-primeiro-teste">Um primeiro teste</h2>
 <p>Vamos iniciar trabalhando com o seguinte trecho de código (arquivo <code>vetor_insert.cpp</code>):</p>
 <div class="highlight"><pre><span></span><code><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">vec</span><span class="p">;</span><span class="w"></span>
 <span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
@@ -856,48 +796,83 @@ No github, obtenha o arquivo <code>omp_schedulers.cpp</code>, compile e execute-
 <p>Vamos supor agora que usaremos o seguinte comando para paralelizar o código acima usando OpenMP:</p>
 <div class="highlight"><pre><span></span><code>#pragma omp parallel for
 </code></pre></div>
-<div class="admonition question choice">
-<p class="admonition-title">Question</p>
+<div class="admonition question choice" id="choice-1">
+<p class="admonition-title">Question 10</p>
+<form _="
+on submit
+    halt the event
+    if &lt;.answer/&gt; 
+        show the &lt;.answer/&gt; in me
+    end
+    add @disabled to &lt;input/&gt; in me
+    add .done to me
+    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
+    send remember(element: me) to window
+end
+        ">
 <p>A variável <code>i</code> é</p>
-<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> shared</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> private</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> firstprivate</li>
-</ul>
+<div class="form-elements"><label><input type="radio" name="data" value="0"> shared  </label>
+<label><input type="radio" name="data" value="1"> private  </label>
+<label><input type="radio" name="data" value="2"> firstprivate  </label>
+<input type="submit" name="sendButton" value="Enviar"/></div>
+</form>
 </div>
-<div class="admonition question choice">
-<p class="admonition-title">Question</p>
+<div class="admonition question choice" id="choice-2">
+<p class="admonition-title">Question 11</p>
+<form _="
+on submit
+    halt the event
+    if &lt;.answer/&gt; 
+        show the &lt;.answer/&gt; in me
+    end
+    add @disabled to &lt;input/&gt; in me
+    add .done to me
+    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
+    send remember(element: me) to window
+end
+        ">
 <p>A variável <code>vec</code> é</p>
-<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> shared</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> private</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> firstprivate</li>
-</ul>
+<div class="form-elements"><label><input type="radio" name="data" value="0"> shared  </label>
+<label><input type="radio" name="data" value="1"> private  </label>
+<label><input type="radio" name="data" value="2"> firstprivate  </label>
+<input type="submit" name="sendButton" value="Enviar"/></div>
+</form>
 </div>
-<div class="admonition question choice">
-<p class="admonition-title">Question</p>
+<div class="admonition question choice" id="choice-3">
+<p class="admonition-title">Question 12</p>
+<form _="
+on submit
+    halt the event
+    if &lt;.answer/&gt; 
+        show the &lt;.answer/&gt; in me
+    end
+    add @disabled to &lt;input/&gt; in me
+    add .done to me
+    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
+    send remember(element: me) to window
+end
+        ">
 <p>O código paralelizado rodaria sem dar erros? Os resultados seriam os esperados?</p>
-<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Sim, o <code>vector</code> é capaz de gerenciar os acessos simultâneos</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> O código acima roda sem erros, mas o conteúdo do vetor pode não estar correto ao fim do programa</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Não, o código acima dá erro ao executar.</li>
-</ul>
 <div class="admonition details">
 <p class="admonition-title">Resposta</p>
 <p>Rode e veja o que acontece ;)</p>
 </div>
+<div class="form-elements"><label><input type="radio" name="data" value="0"> Sim, o   </label>
+<label><input type="radio" name="data" value="1"> O código acima roda sem erros, mas o conteúdo do vetor pode não estar correto ao fim do programa  </label>
+<label><input type="radio" name="data" value="2"> Não, o código acima dá erro ao executar.  </label>
+<input type="submit" name="sendButton" value="Enviar"/></div>
+</form>
 </div>
-<div class="admonition progress">
-<p class="admonition-title">Progress</p>
-<p>Clique após rodar o programa</p>
-</div>
+<div><a _=" on click      add .show to the next &lt;section/&gt;      hide me     send remember(element: me) to window     halt  end" class="md-button md-button--primary progress" href="" id="prog-0"> Progress </a></div>
+</section>
+<section class="progress-section">
 <p>Agora que vimos o que acontece, vamos consertar isso!</p>
 <div class="admonition danger">
 <p class="admonition-title">Danger</p>
 <p>Nosso código dá erro pois a operação <code>push_back</code> <strong>modifica o vetor</strong>!</p>
 </div>
 <p>Vamos ver então duas abordagens importantes para contornar esse problema.</p>
-<h2 id="secoes-criticas">Seções críticas<a class="headerlink" href="#secoes-criticas" title="Permanent link">&para;</a></h2>
+<h2 id="secoes-criticas">Seções críticas</h2>
 <p>Antes de começar, vamos aprender mais um aspecto de OpenMP: diretivas para compartilhamento de dados. Já vimos as 3 principais opções:</p>
 <ul>
 <li><code>shared</code> - compartilhado entre threads</li>
@@ -906,7 +881,7 @@ No github, obtenha o arquivo <code>omp_schedulers.cpp</code>, compile e execute-
 </ul>
 <p>Podemos forçar a especificação de diretivas de compartilhamento para <strong>todas</strong> as variáveis usadas nas construções <code>omp parallel</code>, <code>omp task</code> e <code>omp parallel for</code>.</p>
 <div class="admonition tip">
-<p class="admonition-title">Tip</p>
+<p class="admonition-title">Tip 1</p>
 <p>Ao adicionarmos <code>default(none)</code> logo após as diretivas acima precisaremos especificar, para cada variável usada, sua diretiva de compartilhamento. Isso torna muito mais fácil identificar casos de compartilhamento indevido de dados.</p>
 <p>A partir desse ponto estaremos supondo que todo código criado usará <code>default(none)</code>.</p>
 </div>
@@ -922,14 +897,31 @@ No github, obtenha o arquivo <code>omp_schedulers.cpp</code>, compile e execute-
 <p class="admonition-title">Example</p>
 <p>Use <code>omp critical</code> para solucionar os problemas de concorrência do código acima.</p>
 </div>
-<div class="admonition question short">
-<p class="admonition-title">Question</p>
+<div class="admonition question short" id="short-10">
+<p class="admonition-title">Question 13</p>
+<form _="
+on submit
+    halt the event
+    if &lt;.answer/&gt; 
+        show the &lt;.answer/&gt; in me
+    end
+    add @disabled to &lt;input/&gt; in me
+    add .done to me
+    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
+    send remember(element: me) to window
+end
+        ">
 <p>Escreva abaixo o tempo que seu código levou para rodar.</p>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input type="submit" value="Enviar"/>
 </div>
-<div class="admonition progress">
-<p class="admonition-title">Progress</p>
-<p>Clique após rodar seu código</p>
+</form>
 </div>
+<div><a _=" on click      add .show to the next &lt;section/&gt;      hide me     send remember(element: me) to window     halt  end" class="md-button md-button--primary progress" href="" id="prog-1"> Progress </a></div>
+</section>
+<section class="progress-section">
 <p>Se sua implementação se parecer com o código abaixo, então é bem provável que a versão paralela na verdade tenha demorado o mesmo tempo ou mais que o original.</p>
 <div class="highlight"><pre><span></span><code><span class="p">....</span><span class="w"></span>
 <span class="cp">#pragma omp parallel for default(none) shared(vec)</span>
@@ -941,39 +933,93 @@ No github, obtenha o arquivo <code>omp_schedulers.cpp</code>, compile e execute-
 <span class="p">}</span><span class="w"></span>
 <span class="p">....</span><span class="w"></span>
 </code></pre></div>
-<div class="admonition question short">
-<p class="admonition-title">Question</p>
+<div class="admonition question short" id="short-11">
+<p class="admonition-title">Question 14</p>
+<form _="
+on submit
+    halt the event
+    if &lt;.answer/&gt; 
+        show the &lt;.answer/&gt; in me
+    end
+    add @disabled to &lt;input/&gt; in me
+    add .done to me
+    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
+    send remember(element: me) to window
+end
+        ">
 <p>Analise o código novamente e tente explicar por que o programa não ganhou velocidade.</p>
 <div class="admonition details">
 <p class="admonition-title">Resposta</p>
 <p>A operação que produz efeitos colaterais é <code>vec.push_back</code>, mas nossa seção crítica envolve também a chamada <code>conta_complexa(i)</code>.</p>
 </div>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input type="submit" value="Enviar"/>
+</div>
+</form>
 </div>
 <div class="admonition example">
 <p class="admonition-title">Example</p>
 <p>Modifique seu código de acordo com a resposta acima. Meça o desempenho e veja que agora há melhora.</p>
 </div>
 <p>Vamos analisar agora a ordem dos dados em <code>vec</code>.</p>
-<div class="admonition question short">
-<p class="admonition-title">Question</p>
+<div class="admonition question short" id="short-12">
+<p class="admonition-title">Question 15</p>
+<form _="
+on submit
+    halt the event
+    if &lt;.answer/&gt; 
+        show the &lt;.answer/&gt; in me
+    end
+    add @disabled to &lt;input/&gt; in me
+    add .done to me
+    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
+    send remember(element: me) to window
+end
+        ">
 <p>A ordem se mantém igual ao programa sequencial? Você consegue explicar por que?</p>
 <div class="admonition details">
 <p class="admonition-title">Resposta</p>
 <p>Não se mantém. Cada thread chega ao <code>push_back</code> em um momento diferente, logo a ordem em que os dados são adicionados no vetor muda.</p>
 </div>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input type="submit" value="Enviar"/>
 </div>
-<h2 id="manejo-de-conflitos-usando-pre-alocacao-de-memoria">Manejo de conflitos usando pré-alocação de memória<a class="headerlink" href="#manejo-de-conflitos-usando-pre-alocacao-de-memoria" title="Permanent link">&para;</a></h2>
+</form>
+</div>
+<h2 id="manejo-de-conflitos-usando-pre-alocacao-de-memoria">Manejo de conflitos usando pré-alocação de memória</h2>
 <p>Seções críticas são muito úteis quando não conseguimos evitar o compartilhamento de dados. Porém, elas são caras e e feitas especialmente para situações em que região crítica é pequena e chamada um número relativamente pequeno de vezes. </p>
 <div class="admonition danger">
 <p class="admonition-title">Como regra, desejamos entrar na região crítica o menor número possível de vezes.</p>
 </div>
-<div class="admonition question short">
-<p class="admonition-title">Question</p>
+<div class="admonition question short" id="short-13">
+<p class="admonition-title">Question 16</p>
+<form _="
+on submit
+    halt the event
+    if &lt;.answer/&gt; 
+        show the &lt;.answer/&gt; in me
+    end
+    add @disabled to &lt;input/&gt; in me
+    add .done to me
+    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
+    send remember(element: me) to window
+end
+        ">
 <p>Reveja o código do inicial da seção de efeitos colaterais. Seria possível reescrevê-lo para não usar <code>push_back</code>?</p>
 <div class="admonition details">
 <p class="admonition-title">Resposta</p>
 <p>Sim, bastaria alocar o vetor com tamanho <code>N</code> ao criá-lo. Assim poderíamos atribuir <code>conta_complexa</code> direto para a posição de memória desejada.</p>
 </div>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input type="submit" value="Enviar"/>
+</div>
+</form>
 </div>
 <p>A estratégia acima é muito importante em alto desempenho e representa uma maneira de evitar seções críticas e sincronização.</p>
 <div class="admonition done">
@@ -984,12 +1030,12 @@ No github, obtenha o arquivo <code>omp_schedulers.cpp</code>, compile e execute-
 <p class="admonition-title">Example</p>
 <p>Modifique o programa para usar a ideia da questão anterior. Meça o desempenho e verifique que tudo funciona normalmente e mais rápido que o original.</p>
 </div>
-<h1 id="dica">Dica<a class="headerlink" href="#dica" title="Permanent link">&para;</a></h1>
+<h1 id="dica">Dica</h1>
 <p>A Microsoft possui uma página bem completa sobre o <code>OpenMP</code>. Vale a pena conferir neste <a href="https://docs.microsoft.com/pt-br/cpp/parallel/openmp/reference/openmp-library-reference?view=msvc-160">link</a>.</p>
+</section>
 
               
             </article>
-            
           </div>
         </div>
         
@@ -997,45 +1043,10 @@ No github, obtenha o arquivo <code>omp_schedulers.cpp</code>, compile e execute-
       
         <footer class="md-footer">
   
-    
-    <nav class="md-footer__inner md-grid" aria-label="Footer" >
-      
-        
-        <a href="../11-paralelismo/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 11 - Paralelismo" rel="prev">
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
-          </div>
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Previous
-              </span>
-              11 - Paralelismo
-            </div>
-          </div>
-        </a>
-      
-      
-        
-        <a href="../13-efeitos-colaterais-II/" class="md-footer__link md-footer__link--next" aria-label="Next: 13 - Paralelismo - Efeitos Colaterais II" rel="next">
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              13 - Paralelismo - Efeitos Colaterais II
-            </div>
-          </div>
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
-          </div>
-        </a>
-      
-    </nav>
-  
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
       <div class="md-copyright">
+  
   
   
     Made with
@@ -1053,18 +1064,14 @@ No github, obtenha o arquivo <code>omp_schedulers.cpp</code>, compile e execute-
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.5e67fbfe.min.js"}</script>
     
     
-      <script src="../../assets/javascripts/bundle.6c7ad80a.min.js"></script>
+      <script src="../../assets/javascripts/bundle.e87a5f81.min.js"></script>
       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.0.0/js-yaml.min.js"></script>
-      
-        <script src="../../js/markdown-enhancer.js"></script>
-      
-        <script src="../../js/slides.js"></script>
       
     
   </body>
