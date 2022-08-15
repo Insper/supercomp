@@ -1,5 +1,8 @@
 # 02/03 - Implementação em C++
 
+!!! pdf
+    ![](slides.pdf)
+
 A disciplina utilizará a linguagem C++ para implementação dos programas. Ela é muito usada em implementações de alto desempenho e possui recursos muito úteis e que simplificam a programação se comparada com C puro. Nas aulas 02 e 03 aprenderemos alguns desses recursos e os utilizaremos para implementação de algoritmos simples. 
 
 !!! failure "Gabaritos e respostas"
@@ -35,7 +38,7 @@ std::cout << "Saída: " << a << ";" << b << "\n";
 
 A implementação de algoritmos definidos usando expressões matemáticas é uma habilidade importante neste curso.
 
-!!! example
+!!! exercise
     Escreva um programa que receba um inteiro `n` e calcule a seguinte série.
 
     $$
@@ -44,7 +47,7 @@ A implementação de algoritmos definidos usando expressões matemáticas é uma
 
     Mostre as primeiras 15 casas decimais de `S`. Veja a documentação de [`std::setprecision` aqui](http://cplusplus.com/reference/iomanip/setprecision/). 
 
-    ??? details "Resposta"
+    !!! answer
         Essa série converge para o número 2, mas sua resposta deverá ser sempre menor que este número. Logo, quanto maior `n` mais próxima sua resposta será. Seu programa deverá implementar algo como o algoritmo abaixo.
 
         ```
@@ -84,7 +87,7 @@ Alguns pontos interessantes deste exemplo:
 
     Note que, portanto, um vetor `vector<int>` e um vetor `vector<double>` são considerados de tipos diferentes e não posso passar o primeiro para uma função esperando o segundo. 
 
-!!! example 
+!!! exercise 
     Crie um programa que lê um número inteiro `n` e depois lê `n` números fracionários $x_i$. Faça os seguintes cálculos e motre-os no terminal com 10 casas decimais. 
 
     $$\mu = \frac{1}{n} \sum_{i=1}^n x_i$$
@@ -92,14 +95,14 @@ Alguns pontos interessantes deste exemplo:
 
     $$\sigma^2 = \frac{1}{n} \sum_{i=1}^n (x_i - \mu)^2$$
 
-    !!! details "Resposta" 
+    !!! answer
          Use o programa `t4.py` para gerar entradas e saídas de teste para seu programa. 
 
 
 !!! question short
     Você reconhece as fórmulas acima? Elas calculam quais medidas estatísticas?
 
-    ??? details "Resposta"
+    !!! answer
         Média e variância.
 
 ## Matrizes (versão 1)
@@ -113,7 +116,7 @@ $$
 !!! tip
     Use `t6.py` para gerar os arquivos de entrada/saída da tarefa abaixo. 
 
-!!! example
+!!! exercise
     Implemente um programa que calcule a matriz `D` acima. Sua entrada deverá estar no formato dos arquivos `t6-in-*.txt` e sua saída no formato dos arquivos `t6-out-*.txt`. Mostre as distâncias com 2 casas decimais.  
 
     **Dicas**:
@@ -121,7 +124,7 @@ $$
     1. a maneira mais fácil (não necessariamente a melhor) de alocar uma matriz é usando um vetor em que cada elemento é outro vetor. 
     2. faça uma implementação o mais simples possível. Vamos melhorá-la nas próximas tarefas.
 
-    ??? details "Resposta"
+    !!! answer
         ```
         leia inteiro N
         leia vetores X e Y 
@@ -139,19 +142,19 @@ $$
 !!! question medium
     Anote abaixo o tempo de execução para os arquivos `t6-in-*.txt` e `t6-out-*.txt`
 
-!!! question 
+!!! question short
     Qual é a complexidade computacional de sua implementação? 
 
 ## Referências e passagem de dados
 
 Na parte anterior fizemos nosso programa inteiro no `main`. Vamos agora organizá-lo melhor. 
 
-!!! example
+!!! exercise
     Crie uma função `calcula_distancias` que recebe a matriz e os dados recebidos na entrada e a preenche. Sua função não deverá retornar nenhum valor. 
 
     Ao terminar, meça o tempo de execução para o arquivo `t6-out-4.txt`.
 
-    ??? details "Resposta"
+    !!! answer
         Aqui podem ocorrer dois problemas:
 
         1. Seu programa deu "Segmentation Fault". 
@@ -185,10 +188,10 @@ cout << x << "\n"; // 15
 !!! tip "Dicas"
     Note que uma referência tem que ser inicializada com a variável a que ela se refere. Ou seja, ao declarar tenho que já indicar a variável destino e esse destino não pode ser modificado. 
 
-!!! example
+!!! exercise
     Modifique sua função para usar referências. Verifique que ele volta a funcionar e que seu tempo de execução continua parecido com a versão que rodava no `main`.
 
-    ??? details "Resposta"
+    !!! answer
         Basta adicionar `&` na frente dos nomes dos argumentos (vetores x, y e matriz). A chamada da função não muda. 
 
 !!! tip "Dica"
@@ -202,7 +205,7 @@ Nossa primeira implementação é bastante direta da definição e não tenta se
 !!! question short
     Analisando a definiçao da Tarefa 1, como seria possível economizar trabalho?
 
-    ??? details "Resposta"
+    !!! answer
         Podemos ver que a matriz `D` é simétrica. Ou seja, `D[i,j] == D[j,i]`. Isso significa que poderíamos calcular só um deles e copiar o valor para a outra posição.
 
 !!! question short
@@ -212,7 +215,7 @@ Nossa primeira implementação é bastante direta da definição e não tenta se
     Seu programa criado na tarefa 1 consegue ser adaptado para implementar sua ideia da questão 
     anterior? O que precisaria ser modificado?
 
-    ??? note "Resposta"
+    !!! answer
         Duas respostas são possíveis e corretas aqui:
 
         1. Preciso checar se o `i > j` e usar o valor já calculado de `D[j,i]`.
@@ -221,10 +224,10 @@ Nossa primeira implementação é bastante direta da definição e não tenta se
 
 Baseado na resposta acima vamos tentar nossa primeira otimização: só vamos calcular `D[i,j]` para `i <= j` (ou seja, só a metade "de cima" de `D`).
 
-!!! example
+!!! exercise
     Use a estratégia acima para evitar calcular a matriz inteira. Verifique se houve melhora no tempo do teste `t6-in-3.txt`.
 
     **Dica**: tente de novo usar a ideia mais simples possível e implemente adicionando um so `if` no seu programa.
 
-    ??? details "Resposta"
+    !!! answer
         Não deverá haver ganho de desempenho significativo. Veremos exatamente o por que na próxima aula. 

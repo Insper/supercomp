@@ -28,21 +28,21 @@ nav:
     - Aulas:
         - "01 - Introdução": aulas/01-introducao/index.ipynb
         - "02 e 03 - C++": aulas/02-03-implementacao-c++/index.md
-        - "04 - Profiling": aulas/04-profiling/index.md
-        - "05 - Heurísticas": aulas/05-heuristicas/index.md
-        - "06 - Aleatorização": aulas/06-aleatorizacao/index.md
-        - "07 - Busca Local": aulas/07-busca-local/index.md
-        - "08 - Busca Exaustiva": aulas/08-busca-global/index.md
-        - "09 - Comparação de desempenho": aulas/09-busca-global-II/index.md
-        - "10 - Branch and Bound": aulas/10-branch-and-bound/index.md
-        - "Revisão para P1": aulas/10-branch-and-bound/revisao.md
-        - "11 - Paralelismo": aulas/11-paralelismo/index.md
-        - "12 - Paralelismo - Exercício / Efeitos Colaterais" : aulas/12-efeitos-colaterais/index.md
-        - "13 - Paralelismo - Efeitos Colaterais II":  aulas/13-efeitos-colaterais-II/index.md
-        - "14 - GPU - Introdução":  aulas/14-intro-gpu/index.md
-        - "15 - GPU - Iteradores": aulas/15-gpu-iteradores/index.md
-        - "16 - GPU - Customização": aulas/16-gpu-customizacao/index.md
-        - "17 - GPU - Aleatoriedade": aulas/17-gpu-aleatoriedade/index.md
+        # - "04 - Profiling": aulas/04-profiling/index.md
+        # - "05 - Heurísticas": aulas/05-heuristicas/index.md
+        # - "06 - Aleatorização": aulas/06-aleatorizacao/index.md
+        # - "07 - Busca Local": aulas/07-busca-local/index.md
+        # - "08 - Busca Exaustiva": aulas/08-busca-global/index.md
+        # - "09 - Comparação de desempenho": aulas/09-busca-global-II/index.md
+        # - "10 - Branch and Bound": aulas/10-branch-and-bound/index.md
+        # - "Revisão para P1": aulas/10-branch-and-bound/revisao.md
+        # - "11 - Paralelismo": aulas/11-paralelismo/index.md
+        # - "12 - Paralelismo - Exercício / Efeitos Colaterais" : aulas/12-efeitos-colaterais/index.md
+        # - "13 - Paralelismo - Efeitos Colaterais II":  aulas/13-efeitos-colaterais-II/index.md
+        # - "14 - GPU - Introdução":  aulas/14-intro-gpu/index.md
+        # - "15 - GPU - Iteradores": aulas/15-gpu-iteradores/index.md
+        # - "16 - GPU - Customização": aulas/16-gpu-customizacao/index.md
+        # - "17 - GPU - Aleatoriedade": aulas/17-gpu-aleatoriedade/index.md
         # - aulas/13-paralelismo-tarefas-dados/index.md
         # - aulas/14-exercicios/index.md
         # - aulas/15-efeitos-colaterais/index.md
@@ -50,11 +50,11 @@ nav:
 
     - Projeto:
         - projetos/index.md
-        - projetos/heuristico.md
-        - projetos/local.md
-        - projetos/exaustiva.md
-        - projetos/openmp.md
-        - projetos/gpu.md
+        #- projetos/heuristico.md
+        #- projetos/local.md
+        #- projetos/exaustiva.md
+        #- projetos/openmp.md
+        #- projetos/gpu.md
         # - projetos/relatorio-1.md        
         # - projetos/paralelismo-multicore.md
         # - projetos/paralelismo-gpu.md
