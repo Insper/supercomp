@@ -23,7 +23,7 @@ site_url: https://insper.github.io/supercomp/
 
 nav:
     - Home: index.md
-    - Burocracias: sobre.md
+    - Agenda: sobre.md
 
     - Aulas:
         - "01 - Introdução": aulas/01-introducao/index.ipynb
