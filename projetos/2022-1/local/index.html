@@ -8,21 +8,21 @@
       
       
       
-        <link rel="canonical" href="https://insper.github.io/supercomp/aulas/11-paralelismo/">
+        <link rel="canonical" href="https://insper.github.io/supercomp/projetos/2022-1/local/">
       
-      <link rel="icon" href="../../assets/images/favicon.png">
+      <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.2.7">
     
     
       
-        <title>12 - Introdução a paralelismo - SuperComputação - 2022/2</title>
+        <title>Um algoritmo Local para Alinhamento - SuperComputação - 2022/2</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.9d5733d3.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.9d5733d3.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.e6a45f82.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.e6a45f82.min.css">
         
       
     
@@ -37,24 +37,24 @@
       
     
     
-      <link rel="stylesheet" href="../../css/printing.css">
+      <link rel="stylesheet" href="../../../css/printing.css">
     
-      <link rel="stylesheet" href="../../css/extra.css">
+      <link rel="stylesheet" href="../../../css/extra.css">
     
-      <link rel="stylesheet" href="../../css/ansi-colours.css">
+      <link rel="stylesheet" href="../../../css/ansi-colours.css">
     
-      <link rel="stylesheet" href="../../css/jupyter-cells.css">
+      <link rel="stylesheet" href="../../../css/jupyter-cells.css">
     
-      <link rel="stylesheet" href="../../css/pandas-dataframe.css">
+      <link rel="stylesheet" href="../../../css/pandas-dataframe.css">
     
-    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
     
     
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:700|Oxygen+Mono|Source+Sans+Pro:700|Source+Serif+Pro&amp;display=swap">
-<link rel="stylesheet" href="../../assets/css/devlife.css">
+<link rel="stylesheet" href="../../../assets/css/devlife.css">
 <script src="https://unpkg.com/hyperscript.org"></script>
 <script src="https://unpkg.com/htmx.org@1.8.0"></script>
 
@@ -145,7 +145,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#12-introducao-a-paralelismo" class="md-skip">
+        <a href="#um-algoritmo-local-para-alinhamento" class="md-skip">
           Skip to content
         </a>
       
@@ -159,7 +159,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="SuperComputação - 2022/2" class="md-header__button md-logo" aria-label="SuperComputação - 2022/2" data-md-component="logo">
+    <a href="../../.." title="SuperComputação - 2022/2" class="md-header__button md-logo" aria-label="SuperComputação - 2022/2" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
@@ -178,7 +178,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              12 - Introdução a paralelismo
+              Um algoritmo Local para Alinhamento
             
           </span>
         </div>
@@ -257,7 +257,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="SuperComputação - 2022/2" class="md-nav__button md-logo" aria-label="SuperComputação - 2022/2" data-md-component="logo">
+    <a href="../../.." title="SuperComputação - 2022/2" class="md-nav__button md-logo" aria-label="SuperComputação - 2022/2" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
@@ -288,7 +288,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         Home
       </a>
     </li>
@@ -303,7 +303,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../sobre/" class="md-nav__link">
+      <a href="../../../sobre/" class="md-nav__link">
         Burocracias
       </a>
     </li>
@@ -344,7 +344,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../01-introducao/" class="md-nav__link">
+      <a href="../../../aulas/01-introducao/" class="md-nav__link">
         01 - Introdução
       </a>
     </li>
@@ -358,7 +358,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../02-03-implementacao-c%2B%2B/" class="md-nav__link">
+      <a href="../../../aulas/02-03-implementacao-c%2B%2B/" class="md-nav__link">
         02 e 03 - C++
       </a>
     </li>
@@ -372,7 +372,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../04-profiling/" class="md-nav__link">
+      <a href="../../../aulas/04-profiling/" class="md-nav__link">
         04 - Profiling
       </a>
     </li>
@@ -420,7 +420,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../projetos/" class="md-nav__link">
+      <a href="../../" class="md-nav__link">
         Travelling Sales Person (TSP)
       </a>
     </li>
@@ -454,41 +454,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#calculo-do-pi-por-meio-de-uma-serie-infinita-de-leibniz" class="md-nav__link">
-    Cálculo do PI por meio de uma série infinita de Leibniz
-  </a>
-  
-    <nav class="md-nav" aria-label="Cálculo do PI por meio de uma série infinita de Leibniz">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#sua-tarefa" class="md-nav__link">
-    Sua tarefa
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#tasks-tarefas-em-openmp" class="md-nav__link">
-    Tasks (tarefas) em OpenMP
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -499,156 +464,35 @@
             <article class="md-content__inner md-typeset">
               
                 
-<a href="https://github.com/insper/supercomp/edit/master/docs/aulas/11-paralelismo/index.md" title="Edit this page" class="md-content__button md-icon">
+<a href="https://github.com/insper/supercomp/edit/master/docs/projetos/2022-1/local.md" title="Edit this page" class="md-content__button md-icon">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
 </a>
 
 
 
 <section class="progress-section show">
-<h1 id="12-introducao-a-paralelismo">12 - Introdução a paralelismo</h1>
-<p>OpenMP é uma tecnologia de computação multi-core usada para paralelizar programas. Sua principal vantagem é oferecer uma transição suave entre código sequencial e código paralelo.</p>
-<p>Fizemos em sala de aula uma série de programas básicos no OpenMP e agora é a hora de praticar.</p>
-<h2 id="calculo-do-pi-por-meio-de-uma-serie-infinita-de-leibniz">Cálculo do PI por meio de uma série infinita de Leibniz</h2>
-<p>Você sabia que é possível calcular o valor do PI por meio de uma série infinita de Leibniz? Veja abaixo:</p>
-<p>$$ 1 - \frac{1}{3} + \frac{1}{5} - \frac{1}{7} + \frac{1}{9} - \dots  = \frac{\pi}{4} $$</p>
-<p>$$  \sum_{0}^{\infty} = \frac{(-1)^n}{2n + 1} = \frac{\pi}{4} $$</p>
-<p>Essa série converge muito lentamente, o que é bom para nós. </p>
-<h3 id="sua-tarefa">Sua tarefa</h3>
-<p>Implemente a versão serial do cálculo do PI a partir da série infinita de Leibniz. Faça <code>n = 1000000000</code>. </p>
-<p>Após implementar a versão serial e calcular o tempo de sua execução, implemente a versão em <code>openmp</code>. Você deve fazer sua implementação de duas formas:</p>
-<p>a) A primeira implementação você deve trabalhar com <code>2</code> threads e a partir do <code>id</code> da thread, você deve dividir a soma em duas partes, cada thread executando a sua porção.</p>
-<p>b) A segunda implementação você deve trabalhar com <code>for</code> do openmp e tratar como uma <code>redução</code> do valor de PI. Calcule o tempo de execução.  </p>
-<p>O speedup é uma métrica que representa a razão entre o tempo de execução de um programa sequencial e o tempo de execução de sua versão paralela. Por isso, trata-se de uma boa medida para avaliarmos quantitativamente a melhoria trazida pela versão paralela de um programa paralelo em relação à sua versão sequencial. Calcule também o speed up de cada uma das soluções.</p>
-<h2 id="tasks-tarefas-em-openmp">Tasks (tarefas) em OpenMP</h2>
-<p>Vamos agora criar <em>tarefas</em> que podem ser executadas em paralelo.</p>
-<div class="admonition tip">
-<p class="admonition-title">Definição 1</p>
-<p>Uma <strong>tarefa</strong> é um bloco de código que é rodado de maneira paralela usando OpenMP. <em>Tarefas</em> são agendadas para cada uma das <em>threads</em> criadas em um região paralela. Não existe uma associação <strong>1-1</strong> entre <em>threads</em> e <em>tarefas</em>. Posso ter mais <em>tarefas</em> que <em>threads</em> e mais <em>threads</em> que <em>tarefas</em>.</p>
-</div>
-<p>Veja abaixo um exemplo de criação de tarefas.</p>
-<p>```cpp</p>
-<h1 id="pragma-omp-parallel">pragma omp parallel</h1>
-<p>{
-    #pragma omp task
-    {
-        std::cout &lt;&lt; "Estou rodando na tarefa " &lt;&lt; omp_get_thread_num() &lt;&lt; "\n";
-    }
-}
-std::cout &lt;&lt; "eu só rodo quanto TODAS tarefas acabarem.\n";
-```</p>
-<div class="admonition question choice" id="choice-1">
-<p class="admonition-title">Question 1</p>
-<form _="
-on submit
-    halt the event
-    if &lt;.answer/&gt; 
-        show the &lt;.answer/&gt; in me
-    end
-    add @disabled to &lt;input/&gt; in me
-    add .done to me
-    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
-    send remember(element: me) to window
-end
-        ">
-<p>O exemplo acima cria quantas tarefas, supondo que <code>OMP_NUM_THREADS=4</code>?</p>
-<div class="admonition details">
-<p class="admonition-title">Details</p>
-<p>Como cada thread roda o código da região paralela, cada uma cria exatamente um tarefa.</p>
-</div>
-<div class="form-elements"><label><input type="radio" name="data" value="0"> 1  </label>
-<label><input type="radio" name="data" value="1"> 4, uma para cada thread  </label>
-<label><input type="radio" name="data" value="2"> Nenhuma das anteriores  </label>
-<input type="submit" name="sendButton" value="Enviar"/></div>
-</form>
-</div>
-<p>Para controlar a criação de tarefas em geral usamos a diretiva <code>master</code>, que executa somente na thread de índice <code>0</code>. Assim conseguimos criar código legível e que deixa bem claro quantas e quais tarefas são criadas.</p>
-<p>```cpp</p>
-<h1 id="pragma-omp-parallel_1">pragma omp parallel</h1>
-<p>{
-    #pragma omp master
-    {
-        std::cout &lt;&lt; "só roda uma vez na thread:" &lt;&lt; omp_get_thread_num() &lt;&lt; "\n";
-        #pragma omp task
-        {
-            std::cout &lt;&lt; "Estou rodando na thread:" &lt;&lt; omp_get_thread_num() &lt;&lt; "\n";
-        }
-    }
-}
-```</p>
-<p>Somente lendo o código acima, responda as questões abaixo.</p>
-<div class="admonition question choice" id="choice-2">
-<p class="admonition-title">Question 2</p>
-<form _="
-on submit
-    halt the event
-    if &lt;.answer/&gt; 
-        show the &lt;.answer/&gt; in me
-    end
-    add @disabled to &lt;input/&gt; in me
-    add .done to me
-    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
-    send remember(element: me) to window
-end
-        ">
-<p>Quantas tarefas são criadas no exemplo acima?</p>
-<div class="form-elements"><label><input type="radio" name="data" value="0"> 1  </label>
-<label><input type="radio" name="data" value="1"> N, uma para cada thread  </label>
-<label><input type="radio" name="data" value="2"> Nenhuma das anteriores  </label>
-<input type="submit" name="sendButton" value="Enviar"/></div>
-</form>
-</div>
-<div class="admonition question choice" id="choice-3">
-<p class="admonition-title">Question 3</p>
-<form _="
-on submit
-    halt the event
-    if &lt;.answer/&gt; 
-        show the &lt;.answer/&gt; in me
-    end
-    add @disabled to &lt;input/&gt; in me
-    add .done to me
-    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
-    send remember(element: me) to window
-end
-        ">
-<p>A(s) tarefa(s) criada(s) roda(m) em qual thread?</p>
-<div class="form-elements"><label><input type="radio" name="data" value="0"> 0  </label>
-<label><input type="radio" name="data" value="1"> 1  </label>
-<label><input type="radio" name="data" value="2"> Impossível dizer. Em cada execução rodará em uma thread diferente.  </label>
-<input type="submit" name="sendButton" value="Enviar"/></div>
-</form>
-</div>
-<div class="admonition example">
-<p class="admonition-title">Example</p>
-<p>Complete <em>exercicio1.cpp</em> criando duas tarefas. A primeira deverá rodar <code>funcao1</code> e a segunda <code>funcao2</code>. Salve seus resultados nas variáveis indicadas no código.</p>
-</div>
-<div class="admonition question short" id="short-1">
-<p class="admonition-title">Question 4</p>
-<form _="
-on submit
-    halt the event
-    if &lt;.answer/&gt; 
-        show the &lt;.answer/&gt; in me
-    end
-    add @disabled to &lt;input/&gt; in me
-    add .done to me
-    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
-    send remember(element: me) to window
-end
-        ">
-<p>Leia o código e responda. Quanto tempo o código sequencial demora? E o paralelo? Verifique que sua implementação está de acordo com suas expectativas.</p>
-<div class="admonition details">
-<p class="admonition-title">Details</p>
-<p>Sequencial demora a soma dos tempos das duas funções. Paralelo demora o tempo da maior delas.</p>
-</div>
-<div class="form-elements">
-<input type="text" value="" name="data"/>
+<h1 id="um-algoritmo-local-para-alinhamento">Um algoritmo Local para Alinhamento</h1>
+<p>Como vimos em aula, aleatoriedade é uma estratégia bastante comum para construção de algoritmos de busca local, podendo ser usada
+de forma isolada ou de forma complementar a outra estratégia de varredura de um espaço de soluções. Em problemas de alinhamento,
+varreduras suportadas por aleatoriedade tem produzido algoritmos bastante efetivos.</p>
+<p>Dentro deste contexto, vamos considerar o algoritmo proposto abaixo:</p>
+<p>ALGORITMO BUSCA LOCAL COM ALEATORIEDADE</p>
+<p>Entrada: Duas sequencias de DNA a[i] e b[j], de tamanhos n e m respectivamente,pesos wmat, wmis e wgap para match, mismatch e gap respectivamente</p>
+<p>Saída: Score de um alinhamento das sequencias
+       Subsequencias alinhadas</p>
+<pre><code>1. Gerar uma subsequencia sb=b[j,j+1,...,j+k] de b, de tamanho aleatório k, 1&lt;=k&lt;=m, e 0&lt;=j&lt;=m 
+2. Gerar um número aleatório inteiro positivo p
+3. Gerar p subsequencias sa=a[i,i+1,...,i+k] de a, com tamanho k calculado no passo (1), 0&lt;=i&lt;=n
+4. Calcular os scores de cada par (sa,sb) com os pesos wmat, wmis e wgap
+5. Devolver o score máximo m entre os scores do passo (4) e as subsequencias associadas a ele
+</code></pre>
+<p>A partir desta descrição, nosso primeiro projeto terá duas tarefas:</p>
+<ul>
+  <li> Implementar um programa C++ para ler um arquivo contendo os tamanhos de duas sequencias de DNA, seguidos das duas sequencias, uma por linha. Calcular o score máximo utilizando o algoritmo acima, assim como as subsequencias associadas a ele. 
+  <li> Testar o algoritmo diversas vezes e comparar seus resultados com a heurística do primeiro projeto observando, principalmente, o seu comportamento em relação aos valores aleatórios k e p. Estes resultados e sua comparação deverão estar presentes no relatório a ser entregue posteriormente.
+</ul>
 
-<input type="submit" value="Enviar"/>
-</div>
-</form>
-</div>
+<p>No diretório do projeto, há um gerador de entradas disponibilizado como um notebook Python.</p>
 </section>
 
               
@@ -681,10 +525,10 @@ end
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.5e67fbfe.min.js"}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../../assets/javascripts/workers/search.5e67fbfe.min.js"}</script>
     
     
-      <script src="../../assets/javascripts/bundle.e87a5f81.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.e87a5f81.min.js"></script>
       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
       
