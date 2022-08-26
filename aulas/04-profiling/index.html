@@ -414,6 +414,27 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#distancia-euclides-ingenuo" class="md-nav__link">
+    Distância: Euclides ingênuo
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#medindo-os-tempos-no-seu-proprio-programa" class="md-nav__link">
+    Medindo os tempos no seu próprio programa
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#matrizes-versao-2" class="md-nav__link">
+    Matrizes (versão 2)
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -510,6 +531,27 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#distancia-euclides-ingenuo" class="md-nav__link">
+    Distância: Euclides ingênuo
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#medindo-os-tempos-no-seu-proprio-programa" class="md-nav__link">
+    Medindo os tempos no seu próprio programa
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#matrizes-versao-2" class="md-nav__link">
+    Matrizes (versão 2)
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -530,57 +572,64 @@
 
 <section class="progress-section show">
 <h1 id="04-medicao-de-desempenho">04 - Medição de desempenho</h1>
+<div><center><embed height="300" src="slides.pdf" type="application/pdf" width="80%"></embed></center></div>
 <p>Apesar de podermos medir o tempo que nosso programa demora usando o comando <code>time</code>, não conseguimos nenhuma informação importante de qual parte do programa está consumindo mais tempo. Este processo de dissecar um programa e entender exatamente qual parte demora quanto é chamada de <strong>Profiling</strong>. </p>
 <div class="admonition warning">
 <p class="admonition-title">Software</p>
 <p>Para esta aula precisaremos dos seguintes pacotes instalados. </p>
 <ul>
 <li><code>valgrind</code> - ferramenta de análise de código executável</li>
-<li><code>kcachegrind</code> - visualizador de resultados do <code>valgrind</code></li>
+<li><code>kcachegrind</code> ou <code>qcachegrind</code> - visualizador de resultados do <code>valgrind</code></li>
 </ul>
 </div>
 <h2 id="warm-up-o-problema-da-soma-de-uma-matriz">Warm-up: O problema da soma de uma matriz</h2>
 <p>O código abaixo apresenta duas formas de realizar a soma de todos os elementos de uma matriz. </p>
 <p>Compile o código e execute.</p>
 <p>Você sabe dizer qual a diferença de <code>naive_sum</code> e <code>improved_sum</code>?</p>
-<p>```cpp</p>
-<h1 id="include">include<iostream></h1>
-<h1 id="include_1">include<algorithm></h1>
-<p>using namespace std;</p>
-<p>constexpr int M = 2048;
-constexpr int N = 2048;</p>
-<p>double naive_sum(const double a[][N]){
+<pre style="background-color: #eeeeee; font-size: 12px;">
+#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+
+constexpr int M = 2048;
+constexpr int N = 2048;
+
+double naive_sum(const double a[][N]){
     double sum = 0.0;
-    for(int j = 0; j &lt; N; ++j) {
-        for(int i = 0; i &lt; M; ++i)
+    for(int j = 0; j < N; ++j) {
+        for(int i = 0; i < M; ++i)
             sum += a[i][j];
     }
     return sum;
-}</p>
-<p>double improved_sum(const double a[][N]) {
+}
+
+double improved_sum(const double a[][N]) {
     double sum = 0.0;
-    for(int i = 0; i &lt; M; ++i)
-        for(int j = 0; j &lt; N; ++j)
+    for(int i = 0; i < M; ++i)
+        for(int j = 0; j < N; ++j)
             sum +=a[i][j];
     return sum;
-}</p>
-<p>int main() {
+}
+
+int main() {
     static double a[M][N];
-    fill_n(&amp;a[0][0], M*N, 1.0 / (M*N));
-    cout &lt;&lt; naive_sum(a) &lt;&lt; endl;
+    fill_n(&a[0][0], M*N, 1.0 / (M*N));
+    cout << naive_sum(a) << endl;
     static double b[M][N];
-    fill_n(&amp;b[0][0], M*N, 1.0 / (M*N));
-    cout &lt;&lt; improved_sum(b) &lt;&lt; endl;
+    fill_n(&b[0][0], M*N, 1.0 / (M*N));
+    cout << improved_sum(b) << endl;
     return 0;
 }
-```</p>
+</pre>
+
 <p>Vamos usar o <code>Valgrind</code> para verificar se há diferenças entre <code>naive_sum</code> e <code>improved_sum</code>. </p>
 <p>Supondo que o seu arquivo se chama <code>sum.cpp</code> execute:</p>
-<p><code>g++ -Wall -O3 -g sum.cpp -o sum</code></p>
+<p><code>g++ -Wall -std=c++11 -O3 -g sum.cpp -o sum</code></p>
 <p>E execute então programa via <code>valgrind</code>:</p>
 <p><code>valgrind --tool=callgrind ./sum</code></p>
 <p>O <code>valgrind</code> irá retornar algo como:</p>
-<p><code>==3079146== Callgrind, a call-graph generating cache profiler
+<pre style="background-color: #eeeeee; font-size: 12px;">
+==3079146== Callgrind, a call-graph generating cache profiler
 ==3079146== Copyright (C) 2002-2017, and GNU GPL'd, by Josef Weidendorfer et al.
 ==3079146== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
 ==3079146== Command: ./sum
@@ -592,14 +641,18 @@ constexpr int N = 2048;</p>
 ==3079146== Events    : Ir
 ==3079146== Collected : 50553796
 ==3079146== 
-==3079146== I   refs:      50,553,796</code></p>
+==3079146== I   refs:      50,553,796
+</pre>
+
 <p>Onde <code>3079146</code> é o PID da execução. Na sua máquina será um outro valor. Ele também gerou um arquivo <code>callgrind.out.{PID}</code>. </p>
 <p>Execute a ferramenta <code>callgrind_annotate</code> para verificar o resultado do profiling.</p>
 <p><code>callgrind_annotate callgrind.out.3079146 sum.cpp</code></p>
 <p>E seu output será como segue:</p>
-<h2 id="_1">```</h2>
-<h2 id="profile-data-file-callgrindout3079146-creator-callgrind-3150">Profile data file 'callgrind.out.3079146' (creator: callgrind-3.15.0)</h2>
-<p>I1 cache: 
+<pre style="background-color: #eeeeee; font-size: 12px;">
+--------------------------------------------------------------------------------
+Profile data file 'callgrind.out.3079146' (creator: callgrind-3.15.0)
+--------------------------------------------------------------------------------
+I1 cache: 
 D1 cache: 
 LL cache: 
 Timerange: Basic block 0 - 10863316
@@ -609,61 +662,71 @@ Events recorded:  Ir
 Events shown:     Ir
 Event sort order: Ir
 Thresholds:       99
-Include dirs:   <br />
+Include dirs:     
 User annotated:   sum.cpp
-Auto-annotation:  off</p>
-<hr />
-<h2 id="ir">Ir</h2>
-<p>50,553,796  PROGRAM TOTALS</p>
-<hr />
-<h2 id="ir-filefunction">Ir          file:function</h2>
-<p>31,479,818  sum.cpp:main [/home/user/andre/profile/sum]
+Auto-annotation:  off
+
+--------------------------------------------------------------------------------
+Ir         
+--------------------------------------------------------------------------------
+50,553,796  PROGRAM TOTALS
+
+--------------------------------------------------------------------------------
+Ir          file:function
+--------------------------------------------------------------------------------
+31,479,818  sum.cpp:main [/home/user/andre/profile/sum]
 16,777,221  /usr/include/c++/9/bits/stl_algobase.h:main
    948,840  /build/glibc-eX1tMB/glibc-2.31/elf/dl-lookup.c:_dl_lookup_symbol_x [/usr/lib/x86_64-linux-gnu/ld-2.31.so]
    554,233  /build/glibc-eX1tMB/glibc-2.31/elf/dl-lookup.c:do_lookup_x [/usr/lib/x86_64-linux-gnu/ld-2.31.so]
    273,488  /build/glibc-eX1tMB/glibc-2.31/elf/../sysdeps/x86_64/dl-machine.h:_dl_relocate_object
-   117,179  /build/glibc-eX1tMB/glibc-2.31/elf/dl-lookup.c:check_match [/usr/lib/x86_64-linux-gnu/ld-2.31.so]</p>
-<hr />
-<h2 id="-user-annotated-source-sumcpp">-- User-annotated source: sum.cpp</h2>
-<p>Ir         </p>
-<pre><code>     .  #include&lt;iostream&gt;
-     .  #include&lt;algorithm&gt;
-     .  using namespace std;
-     .  
-     .  constexpr int M = 2048;
-     .  constexpr int N = 2048;
-     .  
-     .  double naive_sum(const double a[][N]){
-     1      double sum = 0.0;
- 6,144      for(int j = 0; j &lt; N; ++j) {
-</code></pre>
-<p>12,587,008          for(int i = 0; i &lt; M; ++i)
+   117,179  /build/glibc-eX1tMB/glibc-2.31/elf/dl-lookup.c:check_match [/usr/lib/x86_64-linux-gnu/ld-2.31.so]
+
+--------------------------------------------------------------------------------
+-- User-annotated source: sum.cpp
+--------------------------------------------------------------------------------
+Ir         
+
+         .  #include<iostream>
+         .  #include<algorithm>
+         .  using namespace std;
+         .  
+         .  constexpr int M = 2048;
+         .  constexpr int N = 2048;
+         .  
+         .  double naive_sum(const double a[][N]){
+         1      double sum = 0.0;
+     6,144      for(int j = 0; j < N; ++j) {
+12,587,008          for(int i = 0; i < M; ++i)
  4,194,304              sum += a[i][j];
          .      }
          .      return sum;
          .  }
-         .<br />
+         .  
          .  double improved_sum(const double a[][N]) {
      4,097      double sum = 0.0;
-     8,192      for(int i = 0; i &lt; M; ++i)
- 4,194,304          for(int j = 0; j &lt; N; ++j)
+     8,192      for(int i = 0; i < M; ++i)
+ 4,194,304          for(int j = 0; j < N; ++j)
 10,485,760              sum +=a[i][j];
          .      return sum;
          .  }
-         .<br />
+         .  
          5  int main() {
          .      static double a[M][N];
-         .      fill_n(&amp;a[0][0], M*N, 1.0 / (M*N));
-         .      cout &lt;&lt; naive_sum(a) &lt;&lt; endl;
+         .      fill_n(&a[0][0], M*N, 1.0 / (M*N));
+         .      cout << naive_sum(a) << endl;
          .      static double b[M][N];
-         .      fill_n(&amp;b[0][0], M*N, 1.0 / (M*N));
-         .      cout &lt;&lt; improved_sum(b) &lt;&lt; endl;
+         .      fill_n(&b[0][0], M*N, 1.0 / (M*N));
+         .      cout << improved_sum(b) << endl;
          .      return 0;
-         6  }</p>
-<hr />
-<h2 id="ir_1">Ir</h2>
-<p>31,479,821  events annotated</p>
-<p>```</p>
+         6  }
+
+--------------------------------------------------------------------------------
+Ir         
+--------------------------------------------------------------------------------
+31,479,821  events annotated
+
+</pre>
+
 <p>O que você pode dizer sobre o desempenho do programa? Por que há diferença de <code>instruction fetch</code> (IR) entre <code>naive_sum</code> e <code>improved_sum</code>?</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip 1</p>
@@ -671,11 +734,13 @@ Auto-annotation:  off</p>
 </div>
 <h2 id="distancia-euclides-ingenuo">Distância: Euclides ingênuo</h2>
 <p>Compile o código-fonte da implementação ingênua que fizemos na aula passada, com profiling habilitado para medir os tempos de execução. </p>
-<p><code>g++ -g euclides-ingenuo.cpp -o euclides-ingenuo</code></p>
+<p><code>g++ -g -std=c++11 euclides-ingenuo.cpp -o euclides-ingenuo</code></p>
 <p>Após este passo, execute o programa usando o <code>valgrind</code> com as opções abaixo.</p>
 <p><code>valgrind --tool=callgrind ./seu_exec &lt; entrada &gt; saida</code></p>
 <p>Para mostrar os resultados usando o <code>kcachegrind</code> usamos o seguinte comando. </p>
 <p><code>kcachegrind callgrind.out.(pid aqui)</code></p>
+<p>ou</p>
+<p><code>qcachegrind callgrind.out.(pid aqui)</code></p>
 <p>O que tomou mais tempo de execução da versão ingênua?</p>
 <h2 id="medindo-os-tempos-no-seu-proprio-programa">Medindo os tempos no seu próprio programa</h2>
 <p>Você vai perceber, ao executar a atividade anterior, que boa parte do tempo é gasto mostrando a saída no terminal. Isto nos leva à primeira conclusão da atividade de hoje:</p>
@@ -763,13 +828,15 @@ end
 </div>
 <div class="admonition answer" style="display: none;">
 <p class="admonition-title">Answer</p>
-<p><code>para i=1..N:
+<p><pre style="background-color: #eeeeee; font-size: 12px;">
+para i=1..N:
     para j=i..N:
         DX = X[i] - X[j]
         DY = Y[i] - Y[j]
         DIST = sqrt(DX*DX + DY*DY)
         D[i,j] = DIST
-        D[j,i] = DIST</code></p>
+        D[j,i] = DIST
+</pre></p>
 </div>
 </form>
 </div>

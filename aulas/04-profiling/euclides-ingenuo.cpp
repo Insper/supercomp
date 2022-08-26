@@ -11,7 +11,7 @@ void calcula_distancias(matriz &mat, std::vector<double> &x, std::vector<double>
         for (int j = 0; j < n; j++) {
             double dx = x[i] - x[j];
             double dy = y[i] - y[j];
-            linha.push_back((dx*dx + dy*dy));    
+            linha.push_back(sqrt(dx*dx + dy*dy));    
         }
         mat.push_back(linha);
     }

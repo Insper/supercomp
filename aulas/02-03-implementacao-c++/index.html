@@ -609,14 +609,16 @@
 </div>
 <h2 id="compilacao">Compilação</h2>
 <p>Programas em C++ são compilados com o comando <code>g++</code>. Ele funciona igual ao <code>gcc</code> que vocês já usaram em Desafios e Sistemas Hardware-Software.</p>
-<p><code>$&gt; g++ -Wall -O3 arquivo.cpp -o executavel</code></p>
+<p><code>$&gt; g++ -Wall -O3 -std=c++11 arquivo.cpp -o executavel</code></p>
 <h2 id="entrada-e-saida-em-c">Entrada e saída em C++</h2>
 <p>Em C usamos as funções <code>printf</code> para mostrar dados no terminal e <code>scanf</code> para ler dados. Em C++ essas funções também podem ser usadas, mas em geral são substituídas pelos objetos <code>std::cin</code> e <code>std::cout</code> (disponíveis no cabeçalho iostream). </p>
 <p>A maior vantagem de usar <code>cin</code> e <code>cout</code> é que não precisamos mais daquelas strings de formatação estranhas com <code>%d</code>, <code>%s</code> e afins. Podemos passar variáveis diretamente para a saída do terminal usando o operador <code>&lt;&lt;</code>. Veja um exemplo abaixo. </p>
-<p><code>cpp
+<pre style="background-color: #eeeeee; font-size: 12px;">
 int a = 10;
 double b = 3.2;
-std::cout &lt;&lt; "Saída: " &lt;&lt; a &lt;&lt; ";" &lt;&lt; b &lt;&lt; "\n";</code></p>
+std::cout << "Saída: " << a << ";" << b << "\n";
+</pre>
+
 <div class="admonition hint">
 <p class="admonition-title">E esse <code>std::</code>?</p>
 <p>Em <code>C++</code> podemos ter várias funções, variáveis e objetos em geral com o mesmo nome. Para evitar que eles colidam e não se saiba a qual estamos nos referindo cada nome deve ser definido um <code>namespace</code> (literalmente <em>espaco de nomes</em>). Podemos ter <code>namespace</code>s aninhados.Por exemplo, <code>std::chrono</code> contém as funções relacionadas contagem de tempo durante a execução de um programa. </p>
@@ -661,17 +663,19 @@ para i=0 até n
 </div>
 <h2 id="vetores-em-c-com-vector">Vetores em C++ com Vector</h2>
 <p>A estrutura <code>std::vector</code> é um vetor dinâmico que tem funcionalidades parecidas com a lista de Python ou o <code>ArrayList</code> de Java. O código abaixo exemplifica seu uso e mostra algumas de suas funções. Note que omitimos o uso de <code>std</code> no código abaixo.</p>
-<p><code>cpp
+<pre style="background-color: #eeeeee; font-size: 12px;">
 int n;
-cin &gt;&gt; n;
-vector&lt;double&gt; vec;
-for (int i = 0; i &lt; n; i++) {
+cin >> n;
+vector<double> vec;
+for (int i = 0; i < n; i++) {
     vec.push_back(i * i)
 }
-cout &lt;&lt; "Tamanho do vetor: " &lt;&lt; vec.size() &lt;&lt; "\n";
-cout &lt;&lt; "Primeiro elemento: " &lt;&lt; vec.front() &lt;&lt; "\n";
-cout &lt;&lt; "Último elemento: " &lt;&lt; vec.back() &lt;&lt; "\n";
-cout &lt;&lt; "Elemento 3: " &lt;&lt; vec[2] &lt;&lt; "\n";</code></p>
+cout << "Tamanho do vetor: " << vec.size() << "\n";
+cout << "Primeiro elemento: " << vec.front() << "\n";
+cout << "Último elemento: " << vec.back() << "\n";
+cout << "Elemento 3: " << vec[2] << "\n";
+</pre>
+
 <p>Alguns pontos interessantes deste exemplo:</p>
 <ol>
 <li>Não sabemos o tamanho de <code>vec</code> ao criá-lo. O método <code>push_back</code> aumenta ele quando necessário e não precisamos nos preocupar com isso. </li>
@@ -771,7 +775,7 @@ end
 </div>
 <div class="admonition answer" style="display: none;">
 <p class="admonition-title">Answer</p>
-<p>```
+<p><pre style="background-color: #eeeeee; font-size: 12px;">
 leia inteiro N
 leia vetores X e Y </p>
 <p>seja D uma matriz NxN</p>
@@ -780,7 +784,7 @@ leia vetores X e Y </p>
         DX = X[i] - X[j]
         DY = Y[i] - Y[j]
         D[i,j] = sqrt(DX*DX + DY*DY)
-```</p>
+</pre></p>
 </div>
 </form>
 </div>
@@ -864,18 +868,22 @@ end
 <p>Ambos problemas descritos na solução são previsíveis e ocorrem pela mesma razão: <strong>ao passar um <code>vector</code> para uma função é feita uma cópia de seu conteúdo</strong>. Ou seja, a matriz usada dentro de <code>calcula_distancias</code> não é a mesma do <code>main</code>! </p>
 <p>Isto é considerado uma <em>feature</em> em <code>C++</code>: por padrão toda variável é passada <strong>por cópia</strong>. Isto evita que uma função modifique um valor sem que o código chamador fique sabendo. </p>
 <p>Em <em>C</em> podemos passar variáveis <strong>por referência</strong> passando um ponteiro para elas. Apesar de funcional, isso não é muito prático pois temos que acessar a variável sempre usando <code>*</code>.  Em <em>C++</em> temos um novo recurso: referências. Ao declarar uma variável como uma referência crio uma espécie de <em>ponteiro constante</em> que sempre acessa a variável apontada. Veja o exemplo abaixo.</p>
-<p><code>cpp
+<pre style="background-color: #eeeeee; font-size: 12px;">
 int x = 10;
-int &amp;ref = x; // referências são declaradas colocando &amp; na frente do nome da variável
+int &ref = x; // referências são declaradas com & na frente da variável
 // a partir daqui ref e x representam a mesma variável
 ref = 15;
-cout &lt;&lt; x &lt;&lt; "\n"; // 15</code></p>
+cout << x << "\n"; // 15
+</pre>
+
 <p>O mesmo poderia ser feito com ponteiros (como mostrado abaixo). A grande vantagem da referência é que não precisamos usar <code>*ref</code> para nos referirmos à variável <code>x</code>! Na atribuição também podemos usar direto <code>int &amp;ref = x</code>, o que torna o código mais limpo e fácil de entender.  </p>
-<p><code>cpp
+<pre style="background-color: #eeeeee; font-size: 12px;">
 int x = 10;
-int *ref = &amp;x; // precisamos de &amp;x para apontar ref para a variável x
+int *ref = &x; // precisamos de &x para apontar ref para a variável x
 *ref = 15; // precisamos indicar *ref para atribuir a variável x
-cout &lt;&lt; x &lt;&lt; "\n"; // 15</code></p>
+cout << x << "\n"; // 15
+</pre>
+
 <div class="admonition tip">
 <p class="admonition-title">Dicas 3</p>
 <p>Note que uma referência tem que ser inicializada com a variável a que ela se refere. Ou seja, ao declarar tenho que já indicar a variável destino e esse destino não pode ser modificado. </p>
