@@ -8,14 +8,14 @@
       
       
       
-        <link rel="canonical" href="https://insper.github.io/supercomp/aulas/15-gpu-iteradores/">
+        <link rel="canonical" href="https://insper.github.io/supercomp/aulas/a-reforco-c%2B%2B/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.4.0">
     
     
       
-        <title>18 - Iteradores em Thrust - SuperComputação - 2022/2</title>
+        <title>A - Reforço C++ - SuperComputação - 2022/2</title>
       
     
     
@@ -146,7 +146,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#18-iteradores-em-thrust" class="md-skip">
+        <a href="#a-reforco-c" class="md-skip">
           Skip to content
         </a>
       
@@ -179,7 +179,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              18 - Iteradores em Thrust
+              A - Reforço C++
             
           </span>
         </div>
@@ -317,12 +317,14 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
       
       
       
@@ -385,11 +387,80 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../a-reforco-c%2B%2B/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          A - Reforço C++
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         A - Reforço C++
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#programa-nao-funciona" class="md-nav__link">
+    Programa não funciona
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#melhorar-a-formatacao-da-saida" class="md-nav__link">
+    Melhorar a formatação da saída
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#separando-codigo-em-arquivos" class="md-nav__link">
+    Separando código em arquivos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#makefile" class="md-nav__link">
+    Makefile
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#google-for-education-c" class="md-nav__link">
+    Google for Education C++
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -476,15 +547,36 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#iteradores" class="md-nav__link">
-    Iteradores
+  <a href="#programa-nao-funciona" class="md-nav__link">
+    Programa não funciona
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#operacoes-customizaveis" class="md-nav__link">
-    Operações customizáveis
+  <a href="#melhorar-a-formatacao-da-saida" class="md-nav__link">
+    Melhorar a formatação da saída
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#separando-codigo-em-arquivos" class="md-nav__link">
+    Separando código em arquivos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#makefile" class="md-nav__link">
+    Makefile
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#google-for-education-c" class="md-nav__link">
+    Google for Education C++
   </a>
   
 </li>
@@ -501,48 +593,94 @@
             <article class="md-content__inner md-typeset">
               
                 
-  <a href="https://github.com/insper/supercomp/edit/master/docs/aulas/15-gpu-iteradores/index.md" title="Edit this page" class="md-content__button md-icon">
+  <a href="https://github.com/insper/supercomp/edit/master/docs/aulas/a-reforco-c++/index.md" title="Edit this page" class="md-content__button md-icon">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
 
 <section class="progress-section show">
-<h1 id="18-iteradores-em-thrust">18 - Iteradores em Thrust</h1>
-<p>Na última aula conseguimos rodar algumas funções em GPU e medir o custo de transferência de dados. Chegamos a conclusão de que, para valer a pena usar a GPU, ou precisamos tratar muitos dados ou precisamos fazer tratamentos pesados.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Nesta aula trabalharemos extensivamente com a API da <code>thrust</code> e pediremos para que vocês consultem a <a href="https://thrust.github.io/doc/modules.html">documentação oficial</a> da biblioteca. Também pode ser útil ver a <a href="https://github.com/NVIDIA/thrust/tree/master/examples">seção de exemplos</a> do repositório.</p>
+<h1 id="a-reforco-c">A - Reforço C++</h1>
+<p>O objetivo desse documento é reforçar (ou apresentar) habilidades de programação em C++. A atividade deve ser realizada na sequência apresentada para que você consiga fazer.</p>
+<h2 id="programa-nao-funciona">Programa não funciona</h2>
+<p>Começamos a criar um programa para exibir dados textuais. A proposta seria simular a impressão de dados no monitor ou numa impressora, porém cismei que o nome da função deveria ser o mesmo para os dois tipos de impressão. Porém não estou conseguindo nem compilar o código.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span><span class="cp"></span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1">// Código para imprimir pela impressora</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="kt">void</span><span class="w"> </span><span class="nf">print</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">texto</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;|&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">texto</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;|&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="p">}</span><span class="w"></span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="c1">// Código para imprimir pelo monitor</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="kt">void</span><span class="w"> </span><span class="nf">print</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">texto</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;[&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">texto</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;]&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="p">}</span><span class="w"></span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Vou imprimir meu texto na impressora.&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="w">    </span><span class="n">print</span><span class="p">(</span><span class="s">&quot;As maravilhas do C++&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// Vai para impressora (simulado)</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Pensando bem vou mostrar só no monitor.&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="w">    </span><span class="n">print</span><span class="p">(</span><span class="s">&quot;As maravilhas do C++&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// Vai para monitor</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<p>Experimente compilar e rodar esse programa, crie um arquivo print.cpp e roda a seguinte instrução:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>$&gt; g++ -Wall -std=c++11 print.cpp -o print
+</code></pre></div>
+<div class="admonition exercise" id="exercise-1">
+<p class="admonition-title">Exercise 1</p>
+<form _="
+on submit
+    halt the event
+    if &lt;.answer/&gt; 
+        show the &lt;.answer/&gt; in me
+    end
+    add @disabled to &lt;input/&gt; in me
+    add .done to me
+    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
+    send remember(element: me) to window
+end
+        ">
+<p>Faça os devidos ajustes (mas sem mudar o nome das funções) para que esse programa funcione como esperado.</p>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input type="submit" name="enviar" value="Marcar como feito" />
 </div>
-<h2 id="iteradores">Iteradores</h2>
-<p>Continuando a partir do último item da aula anterior, suponha que você deseja calcular a variância das diferenças. Agora que já temos a média, a fórmula da variância é dada por</p>
-<p>$$\frac{1}{n}\sum_{i=0}^n (x_i - \mu)^2$$</p>
-<div class="admonition example">
-<p class="admonition-title">Example</p>
-<p>Já sabemos tudo o que precisamos para fazer este cálculo. Crie um vetor em que todas as componentes sejam iguais a média (usando <code>thrust::fill</code>) e compute a variância usando a fórmula acima.</p>
+</form>
 </div>
-<p>Apesar do código acima funcionar, ele tem um problema grave: é preciso alocar um vetor inteiro somente para preenchê-lo com valores iguais! Se estivermos trabalhando com muitos dados isto significa diminuir bastante a quantidade de dados que conseguimos tratar antes de acabar com a memória da GPU. Podemos contornar isso usando iteradores, que são vetores gerados dinamicamente pela thrust a partir de um valor único ou a partir de outros vetores.</p>
-<div class="admonition example">
-<p class="admonition-title">Example</p>
-<p>Pesquise a documentação de <a href="https://thrust.github.io/doc/classthrust_1_1constant__iterator.html">thrust::constant_iterator</a> e use-o para substituir a alocação de memória extra no exercício acima.</p>
+<div class="admonition dica">
+<p class="admonition-title">Será que <code>namespace</code> resolve?</p>
+<p>Colisão de nomes podem aparecer cedo ou tarde, assim o <code>C++</code> possui o recurso de <code>namespace</code> que pode ser bem útil para evitar esse problema. Procure um pouco na internet para saber mais como isso funciona, ou senão veja esse (<a href="https://www.geeksforgeeks.org/namespace-in-c/">link</a>).</p>
 </div>
-<p>Vamos agora nos preparar para a parte 2 criando um programa novamente em cima do arquivo <code>stocks.txt</code>.</p>
-<div class="admonition example">
-<p class="admonition-title">Example</p>
-<p>Leia o arquivo <code>stocks.txt</code> e crie um vetor contendo a diferença entre o dia atual e o anterior. Ou seja, dado que o vetor de saída tenha nome <code>ganho_diario</code> e o de entrada <code>stocks</code>, temos que</p>
-<p><code>ganho_diario[i] = stocks[i+1] - stocks[i]</code></p>
-<p>Claramente <code>ganho_diario.size() == stocks.size() - 1</code>. Leve isto em conta ao utilizar a operação <code>transform</code> para criar o vetor <code>ganho_diario</code>.</p>
+<h2 id="melhorar-a-formatacao-da-saida">Melhorar a formatação da saída</h2>
+<p>Queremos que as barras verticais simulem melhor uma folha de papel quando chamamos a rotina de <code>print</code> na impressora. Por exemplo, queremos que a saída fosse:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>------------------------------------------
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>|As maravilhas do C++                    |
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>------------------------------------------
+</code></pre></div>
+<div class="admonition exercise" id="exercise-2">
+<p class="admonition-title">Exercise 2</p>
+<form _="
+on submit
+    halt the event
+    if &lt;.answer/&gt; 
+        show the &lt;.answer/&gt; in me
+    end
+    add @disabled to &lt;input/&gt; in me
+    add .done to me
+    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
+    send remember(element: me) to window
+end
+        ">
+<p>Atualize a função <code>print</code> da impressora para que seja criada a moldura apresentada e que essa tenha sempre 40 colunas de texto.</p>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input type="submit" name="enviar" value="Marcar como feito" />
 </div>
-<h2 id="operacoes-customizaveis">Operações customizáveis</h2>
-<p>Com o vetor <code>ganho_diario</code> acima conseguimos saber se o valor da ação subiu ou caiu de um dia para o outro! Duas perguntas se seguem:</p>
-<ol>
-<li>quantas vezes o valor subiu?</li>
-<li>qual é o aumento médio, considerando só as vezes em que o valor aumentou de fato?</li>
-</ol>
-<p>Podemos implementar essas lógicas usando operações customizadas. Apesar de ser possível escrever essas funções do zero, a <code>thrust</code> já possui diversas funções de reduções customizáveis.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>É sempre importante consultar a documentação para entender como essa função será aplicada. Em alguns casos é necessário que a função passada obedeça algumas restrições para que os resultados obtidos façam sentido.</p>
+</form>
 </div>
 <div class="admonition question short" id="short-1">
 <p class="admonition-title">Question 1</p>
@@ -558,7 +696,7 @@ on submit
     send remember(element: me) to window
 end
         ">
-<p>A <code>thrust</code> já tem suporte a operações de redução que são contagens. Veja sua documentação oficial <a href="https://thrust.github.io/doc/group__counting.html">neste link</a>. Qual função dessa página você usaria para contar somente os elementos positivos de <code>ganhos_diarios</code>?</p>
+<p>Explique como conseguiu deixar tudo alinhado.</p>
 <div class="form-elements">
 <input type="text" value="" name="data"/>
 
@@ -566,19 +704,29 @@ end
 </div>
 </form>
 </div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>A função <code>count_if</code> está atualmente com um erro em sua documentação (<a href="https://github.com/thrust/thrust/issues/1148">link da issue</a>). Não se esqueça de colocar <code>const</code> no parâmetro de <code>operator()</code>.</p>
+<h2 id="separando-codigo-em-arquivos">Separando código em arquivos</h2>
+<p>Precisamos começar a organizar nosso código. Uma estratégia é separar em arquivos, que é algo que cedo ou tarde iremos fazer, assim vamos praticar com esse exemplo super curto.</p>
+<div class="admonition exercise" id="exercise-3">
+<p class="admonition-title">Exercise 3</p>
+<form _="
+on submit
+    halt the event
+    if &lt;.answer/&gt; 
+        show the &lt;.answer/&gt; in me
+    end
+    add @disabled to &lt;input/&gt; in me
+    add .done to me
+    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
+    send remember(element: me) to window
+end
+        ">
+<p>Vamos criar dois arquivos, um para cada codigo de <code>print</code>. Chame os arquivos de <code>impressora.cpp</code> e <code>monitor.cpp</code>. Coloque cada código e mantenha o arquivo <code>print.cpp</code> com a rotina <code>main()</code> para executar o programa. Crie estruturas adicionais conforme necessário.</p>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input type="submit" name="enviar" value="Marcar como feito" />
 </div>
-<div class="admonition example">
-<p class="admonition-title">Example</p>
-<p>Use a função acima para calcular quantas vezes o valor da ação subiu.</p>
-<details class="details">
-<summary>Resposta</summary>
-<p><code>1309</code></p>
-</details>
+</form>
 </div>
-<p>Vamos agora para o segundo item: "Calcular o aumento médio, considerando somente as vezes em que o valor aumentou de fato". Uma estratégia possível é <strong>zerar</strong> todos os elementos negativos do vetor e depois calcular sua soma.</p>
 <div class="admonition question short" id="short-2">
 <p class="admonition-title">Question 2</p>
 <form _="
@@ -593,31 +741,52 @@ on submit
     send remember(element: me) to window
 end
         ">
-<p>A <a href="https://thrust.github.io/doc/group__transformations.html">documentação sobre transformações</a> é bastante vasta. Você consegue encontrar alguma função que possa <strong>substituir</strong> elementos de um vetor baseado em uma condição booleana?</p>
-<div class="admonition details">
-<p class="admonition-title">Details</p>
-<p><code>replace_if</code></p>
-</div>
+<p>Qual foi sua estratégia para acertar a formatação?</p>
 <div class="form-elements">
 <input type="text" value="" name="data"/>
 
 <input type="submit" value="Enviar"/>
 </div>
+<div class="admonition answer" style="display: none;">
+<p class="admonition-title">Answer</p>
+<p>Usar arquivos de include (.h).</p>
+</div>
 </form>
 </div>
-<div class="admonition example">
-<p class="admonition-title">Example</p>
-<p>Use a função acima para substituir todos os valores negativos por <code>0</code> em <code>ganhos_diarios</code>.</p>
+<h2 id="makefile">Makefile</h2>
+<p>As linhas de compilação podem começar a ficar muito grandes, assim o ideal é usar alguma forma prática de compilar todo o seu programa. Embora você possa usar estratégias mais elaboradas como o CMake, queremos aqui que você faça um Makefile tradicional.</p>
+<div class="admonition exercise" id="exercise-4">
+<p class="admonition-title">Exercise 4</p>
+<form _="
+on submit
+    halt the event
+    if &lt;.answer/&gt; 
+        show the &lt;.answer/&gt; in me
+    end
+    add @disabled to &lt;input/&gt; in me
+    add .done to me
+    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
+    send remember(element: me) to window
+end
+        ">
+<p>Crie um Makefile para o seu projeto, comece com estratégias simples e depois vá deixando elas mais elaboradas. Um exemplo de tutorial pode ser encontrado aqui (<a href="https://www.gnu.org/software/make/manual/html_node/Introduction.html">link</a>), porém se você for na internet vai encontrar muitos outros.</p>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input type="submit" name="enviar" value="Marcar como feito" />
 </div>
-<p>ß</p>
-<div class="admonition example">
-<p class="admonition-title">Example</p>
-<p>Calcule agora e média dos valores positivos do vetor. Você já tem todos os que são positivos no exercício acima e a quantidade de valores positivos.</p>
-<details class="details">
-<summary>Resposta</summary>
-<p><code>5,25179</code></p>
-</details>
+</form>
 </div>
+<div class="admonition dica">
+<p class="admonition-title">Separe a compilação da linkedição</p>
+<p>Você não precisa, compilar tudo em uma linha só, separe os arquivos e os passos de compilação.</p>
+</div>
+<div class="admonition dica">
+<p class="admonition-title">Automatic Variables</p>
+<p>As variáveis automáticas do Makefile podem ser bem úteis, principalmente conforme o número de arquivos for crescendo.</p>
+</div>
+<h2 id="google-for-education-c">Google for Education C++</h2>
+<p>Vamos agora resolver uma série de exercícios produzidos pelo Google. Acessa a seguinte página e faça todos so exercícios apresentados.</p>
+<p><a href="https://developers.google.com/edu/c++/getting-started">https://developers.google.com/edu/c++/getting-started</a></p>
 </section>
 
 
@@ -632,6 +801,42 @@ end
       </main>
       
         <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../04-profiling/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 04 - Profiling" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              04 - Profiling
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../../projetos/" class="md-footer__link md-footer__link--next" aria-label="Next: Travelling Sales Person (TSP)" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Travelling Sales Person (TSP)
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
