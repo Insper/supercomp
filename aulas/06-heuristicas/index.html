@@ -56,6 +56,21 @@
     
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:700|Oxygen+Mono|Source+Sans+Pro:700|Source+Serif+Pro&amp;display=swap">
 <link rel="stylesheet" href="../../assets/css/devlife.css">
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        processEscapes: true
+      }
+    });
+  </script>
+      
+  <script type="text/javascript"
+          src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+  
+
 <script src="https://unpkg.com/hyperscript.org"></script>
 <script src="https://unpkg.com/htmx.org@1.8.0"></script>
 
@@ -631,11 +646,28 @@
 </div>
 <h2 id="mais-caro-primeiro">Mais caro primeiro</h2>
 <p>A ideia desta heurística é não deixar nenhum objeto valioso para trás! Por isso vamos ser ganaciosos e pegar <strong>primeiro os objetos mais caros</strong>! Se um objeto valioso não couber passamos para os mais baratos e prosseguimos até examinar todos objetos.</p>
-<div class="admonition question">
+<div class="admonition question long" id="long-1">
 <p class="admonition-title">Question 1</p>
+<form _="
+on submit
+    halt the event
+    if &lt;.answer/&gt; 
+        show the &lt;.answer/&gt; in me
+    end
+    add @disabled to &lt;input/&gt; in me
+    add .done to me
+    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
+    send remember(element: me) to window
+end
+        ">
 <p>Escreva abaixo um algoritmo em pseudo-código para implementar a heurística descrita acima.</p>
-<details class="details">
-<summary>Resposta</summary>
+<div class="form-elements">
+<textarea name="data"></textarea>
+
+<input type="submit" value="Enviar"/>
+</div>
+<div class="admonition answer" style="display: none;">
+<p class="admonition-title">Answer</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>ids = // vetor inicializado com ids[i] = i
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>ordene os vetores ids, v e w de acordo com o vetor de valores v
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>peso = 0
@@ -652,18 +684,49 @@
 <a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>print peso, valor, 0
 <a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>print resposta[0 .. T]
 </code></pre></div>
-</details>
 </div>
-<div class="admonition question">
+</form>
+</div>
+<div class="admonition question medium" id="medium-2">
 <p class="admonition-title">Question 2</p>
+<form _="
+on submit
+    halt the event
+    if &lt;.answer/&gt; 
+        show the &lt;.answer/&gt; in me
+    end
+    add @disabled to &lt;input/&gt; in me
+    add .done to me
+    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
+    send remember(element: me) to window
+end
+        ">
 <p>Qual é a complexidade computacional deste algoritmo? Ele é a melhor implementação possível?</p>
-<details class="details">
-<summary>Resposta</summary>
-<p>Se o algoritmo descrito em sua resposta anterior envolver ordenação, então ele tem complexidade $\mathcal{O}(n\log n)$ e é o melhor possível sim (você consegue explicar por que?). Se você fez um loop duplo que procura pelo maior a cada iteração então seu algoritmo é $\mathcal{O}(n^2)$.</p>
-</details>
+<div class="form-elements">
+<textarea name="data"></textarea>
+
+<input type="submit" value="Enviar"/>
 </div>
-<div class="admonition example">
-<p class="admonition-title">Example</p>
+<div class="admonition answer" style="display: none;">
+<p class="admonition-title">Resposta</p>
+<p>Se o algoritmo descrito em sua resposta anterior envolver ordenação, então ele tem complexidade $\mathcal{O}(n\log n)$ e é o melhor possível sim (você consegue explicar por que?). Se você fez um loop duplo que procura pelo maior a cada iteração então seu algoritmo é $\mathcal{O}(n^2)$.</p>
+</div>
+</form>
+</div>
+<div class="admonition exercise" id="exercise-1">
+<p class="admonition-title">Exercise 1</p>
+<form _="
+on submit
+    halt the event
+    if &lt;.answer/&gt; 
+        show the &lt;.answer/&gt; in me
+    end
+    add @disabled to &lt;input/&gt; in me
+    add .done to me
+    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
+    send remember(element: me) to window
+end
+        ">
 <p>Agora que temos um algoritmo, crie uma implementação do programa acima.</p>
 <p><strong>Dicas</strong>:</p>
 <ul>
@@ -671,37 +734,167 @@
 <li>Busque por ordenação indireta para entender como ordenar os três vetores ao mesmo tempo.</li>
 <li>Pode ser conveniente organizar os dados usando <code>struct</code>.</li>
 </ul>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input type="submit" name="enviar" value="Marcar como feito" />
+</div>
+</form>
 </div>
 <h2 id="mais-leve-primeiro">Mais leve primeiro</h2>
 <p>Vamos testar uma abordagem oposta: <strong>quantidade agora é o foco</strong>. Por isso vamos ser práticos e pegar <strong>o maior número de objetos possível</strong>! Começaremos agora pelos objetos mais leves e vamos torcer para que a quantidade grande de objetos selecionados resulte em uma mochila com alto valor.</p>
-<div class="admonition question">
+<div class="admonition question medium" id="medium-3">
 <p class="admonition-title">Question 3</p>
+<form _="
+on submit
+    halt the event
+    if &lt;.answer/&gt; 
+        show the &lt;.answer/&gt; in me
+    end
+    add @disabled to &lt;input/&gt; in me
+    add .done to me
+    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
+    send remember(element: me) to window
+end
+        ">
 <p>Compare esta heurística com a da seção anterior levando em conta o algoritmo em pseudo-código e sua complexidade computacional.</p>
+<div class="form-elements">
+<textarea name="data"></textarea>
+
+<input type="submit" value="Enviar"/>
 </div>
-<div class="admonition question">
+</form>
+</div>
+<div class="admonition question short" id="short-4">
 <p class="admonition-title">Question 4</p>
+<form _="
+on submit
+    halt the event
+    if &lt;.answer/&gt; 
+        show the &lt;.answer/&gt; in me
+    end
+    add @disabled to &lt;input/&gt; in me
+    add .done to me
+    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
+    send remember(element: me) to window
+end
+        ">
 <p>Quais partes do programa da heurística anterior podem ser aproveitadas para implementar a descrita acima?</p>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input type="submit" value="Enviar"/>
 </div>
-<div class="admonition example">
-<p class="admonition-title">Example</p>
+</form>
+</div>
+<div class="admonition exercise" id="exercise-2">
+<p class="admonition-title">Exercise 2</p>
+<form _="
+on submit
+    halt the event
+    if &lt;.answer/&gt; 
+        show the &lt;.answer/&gt; in me
+    end
+    add @disabled to &lt;input/&gt; in me
+    add .done to me
+    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
+    send remember(element: me) to window
+end
+        ">
 <p>Implemente agora a heurística do mais leve. Chame seu programa de <code>mais_leve</code>, mantendo também o código do anterior.</p>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input type="submit" name="enviar" value="Marcar como feito" />
+</div>
+</form>
 </div>
 <h2 id="analisando-nossas-heuristicas">Analisando nossas heurísticas</h2>
-<div class="admonition question">
+<div class="admonition question medium" id="medium-5">
 <p class="admonition-title">Question 5</p>
+<form _="
+on submit
+    halt the event
+    if &lt;.answer/&gt; 
+        show the &lt;.answer/&gt; in me
+    end
+    add @disabled to &lt;input/&gt; in me
+    add .done to me
+    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
+    send remember(element: me) to window
+end
+        ">
 <p>Crie uma entrada em que a heurística do mais valioso seja muito melhor que a do mais leve. Escreva abaixo as saídas de cada programa.</p>
+<div class="form-elements">
+<textarea name="data"></textarea>
+
+<input type="submit" value="Enviar"/>
 </div>
-<div class="admonition question">
+</form>
+</div>
+<div class="admonition question medium" id="medium-6">
 <p class="admonition-title">Question 6</p>
+<form _="
+on submit
+    halt the event
+    if &lt;.answer/&gt; 
+        show the &lt;.answer/&gt; in me
+    end
+    add @disabled to &lt;input/&gt; in me
+    add .done to me
+    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
+    send remember(element: me) to window
+end
+        ">
 <p>Crie uma entrada em que a heurística do mais leve seja muito melhor que a do mais valioso. Escreva abaixo as saídas de cada programa.</p>
+<div class="form-elements">
+<textarea name="data"></textarea>
+
+<input type="submit" value="Enviar"/>
 </div>
-<div class="admonition question">
+</form>
+</div>
+<div class="admonition question medium" id="medium-7">
 <p class="admonition-title">Question 7</p>
+<form _="
+on submit
+    halt the event
+    if &lt;.answer/&gt; 
+        show the &lt;.answer/&gt; in me
+    end
+    add @disabled to &lt;input/&gt; in me
+    add .done to me
+    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
+    send remember(element: me) to window
+end
+        ">
 <p>Com base nas suas respostas acima, em quais situações a heurística do mais valioso é melhor?</p>
+<div class="form-elements">
+<textarea name="data"></textarea>
+
+<input type="submit" value="Enviar"/>
 </div>
-<div class="admonition question">
+</form>
+</div>
+<div class="admonition question medium" id="medium-8">
 <p class="admonition-title">Question 8</p>
+<form _="
+on submit
+    halt the event
+    if &lt;.answer/&gt; 
+        show the &lt;.answer/&gt; in me
+    end
+    add @disabled to &lt;input/&gt; in me
+    add .done to me
+    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
+    send remember(element: me) to window
+end
+        ">
 <p>Com base nas suas respostas acima, em quais situações a heurística do mais leve é melhor?</p>
+<div class="form-elements">
+<textarea name="data"></textarea>
+
+<input type="submit" value="Enviar"/>
+</div>
+</form>
 </div>
 </section>
 
@@ -780,10 +973,6 @@
     
     
       <script src="../../assets/javascripts/bundle.9c69f0bc.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.0.0/js-yaml.min.js"></script>
       
     
   </body>
