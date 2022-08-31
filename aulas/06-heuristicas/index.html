@@ -8,14 +8,14 @@
       
       
       
-        <link rel="canonical" href="https://insper.github.io/supercomp/aulas/05-heuristicas/">
+        <link rel="canonical" href="https://insper.github.io/supercomp/aulas/06-heuristicas/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.4.0">
     
     
       
-        <title>05 - Heurísticas - SuperComputação - 2022/2</title>
+        <title>06 - Heurísticas - SuperComputação - 2022/2</title>
       
     
     
@@ -146,7 +146,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#05-heuristicas" class="md-skip">
+        <a href="#06-heuristicas" class="md-skip">
           Skip to content
         </a>
       
@@ -179,7 +179,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              05 - Heurísticas
+              06 - Heurísticas
             
           </span>
         </div>
@@ -317,12 +317,14 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
       
       
       
@@ -376,6 +378,96 @@
       <a href="../04-profiling/" class="md-nav__link">
         04 - Profiling
       </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-reforco-c%2B%2B/" class="md-nav__link">
+        05 - Reforço C++
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          06 - Heurísticas
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        06 - Heurísticas
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#resumo-do-problema" class="md-nav__link">
+    Resumo do problema
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mais-caro-primeiro" class="md-nav__link">
+    Mais caro primeiro
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mais-leve-primeiro" class="md-nav__link">
+    Mais leve primeiro
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#analisando-nossas-heuristicas" class="md-nav__link">
+    Analisando nossas heurísticas
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -501,14 +593,15 @@
             <article class="md-content__inner md-typeset">
               
                 
-  <a href="https://github.com/insper/supercomp/edit/master/docs/aulas/05-heuristicas/index.md" title="Edit this page" class="md-content__button md-icon">
+  <a href="https://github.com/insper/supercomp/edit/master/docs/aulas/06-heuristicas/index.md" title="Edit this page" class="md-content__button md-icon">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
 
 <section class="progress-section show">
-<h1 id="05-heuristicas">05 - Heurísticas</h1>
+<h1 id="06-heuristicas">06 - Heurísticas</h1>
+<div><center><embed height="300" src="slides.pdf" type="application/pdf" width="80%"></embed></center></div>
 <p>A atividade prática de hoje consiste em implementar heurísticas para a solução do problema da <strong>Mochila binária</strong>.</p>
 <h2 id="resumo-do-problema">Resumo do problema</h2>
 <p>Dados <code>N</code> objetos e uma mochila que comporta até <code>W</code> quilos, cada um com peso $w_i$ e valor $v_i$, selecionar objetos com o maior valor possível que caibam dentro da mochila.</p>
@@ -625,6 +718,42 @@
       
         <footer class="md-footer">
   
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../05-reforco-c%2B%2B/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 05 - Reforço C++" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              05 - Reforço C++
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../../projetos/" class="md-footer__link md-footer__link--next" aria-label="Next: Travelling Sales Person (TSP)" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Travelling Sales Person (TSP)
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
       <div class="md-copyright">
@@ -652,7 +781,7 @@
     
       <script src="../../assets/javascripts/bundle.9c69f0bc.min.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.0.0/js-yaml.min.js"></script>
       

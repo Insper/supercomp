@@ -26,12 +26,22 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://insper.github.io/supercomp/aulas/05-heuristicas/</loc>
+         <loc>https://insper.github.io/supercomp/aulas/05-reforco-c%2B%2B/</loc>
          <lastmod>2022-08-31</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://insper.github.io/supercomp/aulas/06-aleatorizacao/</loc>
+         <loc>https://insper.github.io/supercomp/aulas/05-reforco-c%2B%2B/teste/</loc>
+         <lastmod>2022-08-31</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://insper.github.io/supercomp/aulas/06-heuristicas/</loc>
+         <lastmod>2022-08-31</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://insper.github.io/supercomp/aulas/07-aleatorizacao/</loc>
          <lastmod>2022-08-31</lastmod>
          <changefreq>daily</changefreq>
     </url>

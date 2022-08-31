@@ -8,21 +8,21 @@
       
       
       
-        <link rel="canonical" href="https://insper.github.io/supercomp/projetos/2022-1/SequenceGenerator/">
+        <link rel="canonical" href="https://insper.github.io/supercomp/aulas/07-aleatorizacao/">
       
-      <link rel="icon" href="../../../assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.4.0">
     
     
       
-        <title>SequenceGenerator - SuperComputação - 2022/2</title>
+        <title>06 - Algoritmos Aleatorizados - SuperComputação - 2022/2</title>
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.69437709.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.69437709.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.cbb835fc.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
         
       
       
@@ -38,24 +38,24 @@
       
     
     
-      <link rel="stylesheet" href="../../../css/printing.css">
+      <link rel="stylesheet" href="../../css/printing.css">
     
-      <link rel="stylesheet" href="../../../css/extra.css">
+      <link rel="stylesheet" href="../../css/extra.css">
     
-      <link rel="stylesheet" href="../../../css/ansi-colours.css">
+      <link rel="stylesheet" href="../../css/ansi-colours.css">
     
-      <link rel="stylesheet" href="../../../css/jupyter-cells.css">
+      <link rel="stylesheet" href="../../css/jupyter-cells.css">
     
-      <link rel="stylesheet" href="../../../css/pandas-dataframe.css">
+      <link rel="stylesheet" href="../../css/pandas-dataframe.css">
     
-    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
     
     
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:700|Oxygen+Mono|Source+Sans+Pro:700|Source+Serif+Pro&amp;display=swap">
-<link rel="stylesheet" href="../../../assets/css/devlife.css">
+<link rel="stylesheet" href="../../assets/css/devlife.css">
 <script src="https://unpkg.com/hyperscript.org"></script>
 <script src="https://unpkg.com/htmx.org@1.8.0"></script>
 
@@ -145,6 +145,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#06-algoritmos-aleatorizados" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -155,7 +160,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../.." title="SuperComputação - 2022/2" class="md-header__button md-logo" aria-label="SuperComputação - 2022/2" data-md-component="logo">
+    <a href="../.." title="SuperComputação - 2022/2" class="md-header__button md-logo" aria-label="SuperComputação - 2022/2" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -174,7 +179,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              SequenceGenerator
+              06 - Algoritmos Aleatorizados
             
           </span>
         </div>
@@ -253,7 +258,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../.." title="SuperComputação - 2022/2" class="md-nav__button md-logo" aria-label="SuperComputação - 2022/2" data-md-component="logo">
+    <a href="../.." title="SuperComputação - 2022/2" class="md-nav__button md-logo" aria-label="SuperComputação - 2022/2" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -284,7 +289,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../.." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         Home
       </a>
     </li>
@@ -299,7 +304,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../sobre/" class="md-nav__link">
+      <a href="../../sobre/" class="md-nav__link">
         Burocracias
       </a>
     </li>
@@ -340,7 +345,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aulas/01-introducao/" class="md-nav__link">
+      <a href="../01-introducao/" class="md-nav__link">
         01 - Introdução
       </a>
     </li>
@@ -354,7 +359,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aulas/02-03-implementacao-c%2B%2B/" class="md-nav__link">
+      <a href="../02-03-implementacao-c%2B%2B/" class="md-nav__link">
         02 e 03 - C++
       </a>
     </li>
@@ -368,7 +373,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aulas/04-profiling/" class="md-nav__link">
+      <a href="../04-profiling/" class="md-nav__link">
         04 - Profiling
       </a>
     </li>
@@ -382,7 +387,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aulas/05-reforco-c%2B%2B/" class="md-nav__link">
+      <a href="../05-reforco-c%2B%2B/" class="md-nav__link">
         05 - Reforço C++
       </a>
     </li>
@@ -396,7 +401,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aulas/06-heuristicas/" class="md-nav__link">
+      <a href="../06-heuristicas/" class="md-nav__link">
         06 - Heurísticas
       </a>
     </li>
@@ -444,7 +449,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../" class="md-nav__link">
+      <a href="../../projetos/" class="md-nav__link">
         Travelling Sales Person (TSP)
       </a>
     </li>
@@ -475,6 +480,37 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#iniciando-com-rngs" class="md-nav__link">
+    Iniciando com RNGs
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#construindo-uma-solucao-inteira-aleatoria" class="md-nav__link">
+    Construindo uma solução inteira aleatória
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#algoritmos-geneticos" class="md-nav__link">
+    Algoritmos Genéticos
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -486,90 +522,177 @@
             <article class="md-content__inner md-typeset">
               
                 
-  <a href="https://github.com/insper/supercomp/edit/master/docs/projetos/2022-1/SequenceGenerator.ipynb" title="Edit this page" class="md-content__button md-icon">
+  <a href="https://github.com/insper/supercomp/edit/master/docs/aulas/07-aleatorizacao/index.md" title="Edit this page" class="md-content__button md-icon">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
 
-  <h1>SequenceGenerator</h1>
-
 <section class="progress-section show">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-<script>
-(function() {
-  function addWidgetsRenderer() {
-    var requireJsScript = document.createElement('script');
-    requireJsScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js';
+<h1 id="06-algoritmos-aleatorizados">06 - Algoritmos Aleatorizados</h1>
+<p>Um gerador de números pseudo-aleatórios (RNG) é um algoritmo <strong>determinístico</strong> que gera uma sequência de números que <strong>parece</strong> aleatória. Essa frase possui dois termos importantes que precisamos destrinchar:</p>
+<ul>
+<li><strong>determinístico</strong>: Um <em>RNG</em> tipicamente recebe como entrada um inteiro <em>seed</em> (que representa uma sequência de bits "aleatória") e gera uma sequência de números baseada no <em>seed</em>. Ou seja, o algoritmo é <strong>determinístico</strong> pois gera sempre a mesma sequência para uma determinada entrada (<em>seed</em>).</li>
+<li><strong>parece aleatória</strong>: Se compararmos duas sequências de números, uma gerada por um <em>RNG</em> e outra por uma distribuição uniforme de verdade, não conseguimos dizer qual sequência foi gerada pelo <em>RNG</em>.</li>
+</ul>
+<p>Ou seja, ao escolhermos um <em>seed</em> a sequência gerada será sempre a mesma, mesmo se executarmos o programa em outras máquinas. Isso torna a utilização de <em>RNGs</em> para experimentos bastante interessante: é possível <strong>reproduzir</strong> os resultados feitos por outros desenvolvedores/cientistas. Para isto é necessário</p>
+<ol>
+<li>que o programa permita escolher o <em>seed</em> da simulação;</li>
+<li>que o <em>seed</em> usado seja publicado junto com os resultados.</li>
+</ol>
+<div class="admonition question short" id="short-1">
+<p class="admonition-title">Question 1</p>
+<form _="
+on submit
+    halt the event
+    if &lt;.answer/&gt; 
+        show the &lt;.answer/&gt; in me
+    end
+    add @disabled to &lt;input/&gt; in me
+    add .done to me
+    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
+    send remember(element: me) to window
+end
+        ">
+<p>E se quisermos gerar uma sequência diferente a cada execução do programa? Como poderíamos configurar o <em>seed</em> para que isto aconteça?</p>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
 
-    var mimeElement = document.querySelector('script[type="application/vnd.jupyter.widget-view+json"]');
-    var jupyterWidgetsScript = document.createElement('script');
-    var widgetRendererSrc = 'https://unpkg.com/@jupyter-widgets/html-manager@*/dist/embed-amd.js';
-    var widgetState;
-
-    // Fallback for older version:
-    try {
-      widgetState = mimeElement && JSON.parse(mimeElement.innerHTML);
-
-      if (widgetState && (widgetState.version_major < 2 || !widgetState.version_major)) {
-        widgetRendererSrc = 'jupyter-js-widgets@*/dist/embed.js';
-      }
-    } catch(e) {}
-
-    jupyterWidgetsScript.src = widgetRendererSrc;
-
-    document.body.appendChild(requireJsScript);
-    document.body.appendChild(jupyterWidgetsScript);
-  }
-
-  document.addEventListener('DOMContentLoaded', addWidgetsRenderer);
-}());
-</script>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>GERADOR DE INSTÂNCIAS PARA COMPARAÇÃO DE SEQUENCIAS DE DNA</strong></p>
-<p>Para usar este gerador, você deve fornecer três parâmetros:</p>
-<p>n = tamanho da primeira sequencia </p>
-<p>m = tamanho da segunda instância </p>
-<p>file = nome do arquivo da instância a ser gerada</p>
+<input type="submit" value="Enviar"/>
 </div>
+</form>
 </div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span> <span class="nn">random</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">m</span> <span class="o">=</span> <span class="mi">40</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">file</span> <span class="o">=</span> <span class="s1">&#39;dna.seq&#39;</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="n">seq</span><span class="o">=</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>     <span class="nb">str</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>     <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">choices</span><span class="p">([</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="s1">&#39;T&#39;</span><span class="p">,</span><span class="s1">&#39;C&#39;</span><span class="p">,</span><span class="s1">&#39;G&#39;</span><span class="p">,</span><span class="s1">&#39;-&#39;</span><span class="p">],</span><span class="n">k</span><span class="o">=</span><span class="n">n</span><span class="p">))</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>     <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">choices</span><span class="p">([</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="s1">&#39;T&#39;</span><span class="p">,</span><span class="s1">&#39;C&#39;</span><span class="p">,</span><span class="s1">&#39;G&#39;</span><span class="p">,</span><span class="s1">&#39;-&#39;</span><span class="p">],</span><span class="n">k</span><span class="o">=</span><span class="n">m</span><span class="p">))]</span>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="n">f</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span>
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">seq</span><span class="p">))</span>
+<h2 id="iniciando-com-rngs">Iniciando com RNGs</h2>
+<p>Muitas implementações de <em>RNGs</em>  são divididas em duas partes:</p>
+<ol>
+<li><strong>engine</strong>/<strong>random state</strong>: algoritmo que gera um inteiro cujos bits formam uma sequência pseudo-aleatória.</li>
+<li><strong>distribution</strong>: utiliza os bits acima para retornar números que sigam alguma distribuição estatística (como normal ou uniforme).</li>
+</ol>
+<div class="admonition question">
+<p class="admonition-title">Question 2</p>
+<p>A biblioteca padrão de <em>C++</em> disponibiliza diversas funções para utilização de *RNG*s (cabeçalho <code>&lt;random&gt;</code> - documentação <a href="http://cplusplus.com/reference/random/">neste link</a>). Se você quisesse sortear números aleatórios inteiros entre <code>-2</code> e <code>5</code> quais funções usaria?</p>
+<details class="details">
+<summary>Resposta</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>#include &lt;random&gt;
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>...
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>std::default_random_engine generator;
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>std::uniform_int_distribution&lt;int&gt; distribution(-2,5);
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>distribution(generator); // gera número
 </code></pre></div>
+</details>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Question 3</p>
+<p>E se você quisesse sortear um número real entre <code>0</code> e <code>1</code>?</p>
+<details class="details">
+<summary>Resposta</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>#include &lt;random&gt;
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>...
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>std::default_random_engine generator;
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>std::uniform_real_distribution&lt;double&gt; distribution(0.0, 1.0);
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>distribution(generator); // gera número
+</code></pre></div>
+</details>
+</div>
+<p>Agora que você já consegue gerar números aleatórios, vamos implementar nossa primeira versão de uma heurística aleatorizada.</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Adicionaremos a seguinte variação na nossa heurística: a cada passo de seleção temos <code>25%</code> de chance de selecionar um objeto aleatório que ainda não foi utilizado. Ou seja, cada passo do algoritmo segue a seguinte regra</p>
+<ol>
+<li>Faça um sorteio aleatório</li>
+<li>Com probabilidade <code>75%</code> pegue o próximo objeto não selecionado de acordo com a heurística (mais leve ou mais caro)</li>
+<li>Com probabilidade <code>25%</code> selecione um objeto qualquer dos que não foram analisados ainda.</li>
+</ol>
+<p>Note que não mudamos o próximo elemento ao fazer a seleção aleatória. Adote <code>seed=10</code> nesta tarefa.</p>
+<p><strong>Dica</strong>: agora é possível que eu olhe um produto mais de uma vez. Você precisará checar isso no seu programa!</p>
+<details class="details">
+<summary>Resposta</summary>
+<p>Os arquivos <code>in-*.txt</code> contém entradas para teste. Os arquivos <code>out-caro-(rand-?)*.txt</code> contém as saídas esperadas para as heurísticas do mais caro. Note que como estamos falando de uma probabilidade, o sorteio deverá ser feito no intervalo <code>[0, 1]</code>.</p>
+</details>
+</div>
+<div class="admonition question short" id="short-2">
+<p class="admonition-title">Question 4</p>
+<form _="
+on submit
+    halt the event
+    if &lt;.answer/&gt; 
+        show the &lt;.answer/&gt; in me
+    end
+    add @disabled to &lt;input/&gt; in me
+    add .done to me
+    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
+    send remember(element: me) to window
+end
+        ">
+<p>Rode a heurística aleatorizada 10 vezes (como fazer isso?) e anote os valores das mochilas obtidas. Em média, é melhor ou pior que a heuristca sem aleatorização?</p>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
 
+<input type="submit" value="Enviar"/>
 </div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>
-<code>10
-40
-TGGCGAT--C
-AGC-TCTCTTC--ATT--CAC-TACACCGACA-CGC-G-A
-</code>
-</pre>
+</form>
 </div>
+<h2 id="construindo-uma-solucao-inteira-aleatoria">Construindo uma solução inteira aleatória</h2>
+<p>Vamos agora fazer algo mais absurdo: e se criarmos uma solução toda aleatória?</p>
+<div class="admonition question">
+<p class="admonition-title">Question 5</p>
+<p>Como você criaria uma solução aleatoriamente?</p>
+<details class="details">
+<summary>Resposta</summary>
+<p>Não existe uma resposta certa aqui. Duas soluções são mais comuns:</p>
+<ol>
+<li>passando por cada objeto, pegue-o com probabilidade <code>50%</code>.</li>
+<li>percorra a lista em ordem aleatória, fazendo o mesmo algoritmo do mais caro/leve.</li>
+</ol>
+</details>
 </div>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Tente implementar a abordagem 1 da resposta acima.</p>
 </div>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Tente implementar a abordagem 2 da resposta acima.</p>
 </div>
+<div class="admonition question">
+<p class="admonition-title">Question 6</p>
+<p>Rode ambos programas acima com vários seeds diferentes e anote abaixo os resultados.</p>
+</div>
+<div class="admonition question medium" id="medium-3">
+<p class="admonition-title">Question 7</p>
+<form _="
+on submit
+    halt the event
+    if &lt;.answer/&gt; 
+        show the &lt;.answer/&gt; in me
+    end
+    add @disabled to &lt;input/&gt; in me
+    add .done to me
+    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
+    send remember(element: me) to window
+end
+        ">
+<p>Anote aqui comentários sobre a qualidade das soluções aleatórias. Considere tanto o valor dos objetos selecionados quanto o peso.</p>
+<div class="form-elements">
+<textarea name="data"></textarea>
+
+<input type="submit" value="Enviar"/>
+</div>
+</form>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Iremos discutir esses resultados na próxima aula.</p>
+</div>
+<h2 id="algoritmos-geneticos">Algoritmos Genéticos</h2>
+<p>Nesta aula também abordamos o trade-off entre exploration e exploitation. Para isso, foi possível conhecer uma implementação por algoritmos genéticos para o problema da Mochila Binária em Python. Caso queira executar essa solução, acesse esse <a href="https://colab.research.google.com/drive/1MTY0mbwvULHcHUMMi-5FunB0R9jHj9QP?usp=sharing">link</a>. </p>
+<div class="admonition question">
+<p class="admonition-title">Question 8</p>
+<p>Implemente essa solução em C++. Explore as taxas de seleção, cross-over e mutação. Escreva um pequeno relatório (de até 1 página) e comente os principais pontos observados. A entrega desse exercício pode lhe render 0,5 ponto extra, a ser computado ao final da disciplina. </p>
 </div>
 </section>
 
@@ -608,10 +731,10 @@ AGC-TCTCTTC--ATT--CAC-TACACCGACA-CGC-G-A
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.ecf98df9.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.ecf98df9.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.9c69f0bc.min.js"></script>
+      <script src="../../assets/javascripts/bundle.9c69f0bc.min.js"></script>
       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
       
