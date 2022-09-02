@@ -8,14 +8,14 @@
       
       
       
-        <link rel="canonical" href="https://insper.github.io/supercomp/projetos/2021-2/busca-local/">
+        <link rel="canonical" href="https://insper.github.io/supercomp/aulas/05-reforco-c%2B%2B/teste/">
       
       <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.4.0">
     
     
       
-        <title>Solução Busca local - SuperComputação - 2022/2</title>
+        <title>Estudando se vou colocar na aula - SuperComputação - 2022/2</title>
       
     
     
@@ -161,7 +161,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#solucao-busca-local" class="md-skip">
+        <a href="#estudando-se-vou-colocar-na-aula" class="md-skip">
           Skip to content
         </a>
       
@@ -194,7 +194,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Solução Busca local
+              Estudando se vou colocar na aula
             
           </span>
         </div>
@@ -360,7 +360,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aulas/01-introducao/" class="md-nav__link">
+      <a href="../../01-introducao/" class="md-nav__link">
         01 - Introdução
       </a>
     </li>
@@ -374,7 +374,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aulas/02-03-implementacao-c%2B%2B/" class="md-nav__link">
+      <a href="../../02-03-implementacao-c%2B%2B/" class="md-nav__link">
         02 e 03 - C++
       </a>
     </li>
@@ -388,7 +388,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aulas/04-profiling/" class="md-nav__link">
+      <a href="../../04-profiling/" class="md-nav__link">
         04 - Profiling
       </a>
     </li>
@@ -402,7 +402,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aulas/05-reforco-c%2B%2B/" class="md-nav__link">
+      <a href="../" class="md-nav__link">
         05 - Reforço C++
       </a>
     </li>
@@ -416,7 +416,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aulas/06-heuristicas/" class="md-nav__link">
+      <a href="../../06-heuristicas/" class="md-nav__link">
         06 - Heurísticas
       </a>
     </li>
@@ -464,7 +464,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../" class="md-nav__link">
+      <a href="../../../projetos/" class="md-nav__link">
         Travelling Sales Person (TSP)
       </a>
     </li>
@@ -498,6 +498,21 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#programa-nao-funciona" class="md-nav__link">
+    Programa não funciona
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -508,80 +523,45 @@
             <article class="md-content__inner md-typeset">
               
                 
-  <a href="https://github.com/insper/supercomp/edit/master/docs/projetos/2021-2/busca-local.md" title="Edit this page" class="md-content__button md-icon">
+  <a href="https://github.com/insper/supercomp/edit/master/docs/aulas/05-reforco-c++/teste.md" title="Edit this page" class="md-content__button md-icon">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
 
 <section class="progress-section show">
-<h1 id="solucao-busca-local">Solução Busca local</h1>
-<!-- Vamos agora implementar uma estratégia de **Busca local** como fizemos na [aula 07](/aulas/07-busca-local). Nossa estratégia de busca local será composta por três passos:
-
-!!! quote "Passo 1"
-    Cada objeto é atribuído para uma pessoa aleatória.
-
-!!! quote "Passo 2"
-    1. Selecione a pessoa `P` com o menor valor.
-    2. Passe por todos os outros objetos e verifique se esse objeto poderia ser doado para `P`.
-        * **Um objeto pode ser doado se o valor total do doador tirando o objeto doado é maior que o valor total da pessoa `P`.**
-        * Se for possível, faça a doação, calcule o novo *MMS*.
-
-!!! quote "Passo 3"
-    Repita o *Passo 2* até que não seja mais possível.
-
-Para auxiliar o entendimento desta busca local, responda as seguintes perguntas.
-
-!!! question short
-    O *Passo 2* da nossa estratégia nunca diminui o *MMS*. Por que?
-
-!!! question short
-    Conseguimos saber de antemão quantas vezes repetiremos *Passo 2*?
-
-## Variáveis de ambiente
-
-Nosso programa será controlado por três variáveis de ambiente:
-
-* `SEED` controla o seed usado em nosso gerador de números aleatórios. Se não for passado, assuma `SEED = 0`;
-* `ITER` controla o número de vezes que repetimos a estratégia delineada acima. Se não for passado, assuma `ITER = 100000`;
-* `DEBUG`: mostra informações auxiliares para ajudar a correção automática. Se não for passado, assuma `DEBUG = 0`;
-
-Ao rodar com `DEBUG=1` seu programa deverá mostrar na saída de erros `cerr` uma linha para cada resultado final do processo de busca local. Ou seja, deverá mostrar `ITER` linhas no formato abaixo:
-
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>valor a1 ... aN
+<h1 id="estudando-se-vou-colocar-na-aula">Estudando se vou colocar na aula</h1>
+<p>O objetivo dessquência apresentada para que você consiga fazer.</p>
+<h2 id="programa-nao-funciona">Programa não funciona</h2>
+<p>Começamoo. Porém não estou conseguindo nem compilar o código.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="cp">#include</span><span class="cpf">&lt;pthread.h&gt;</span><span class="cp"></span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="cp">#include</span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="c1">// a simple pthread example </span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1">// compile with -lpthreads</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="c1">// create the function to be executed as a thread</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="nf">thread</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">ptr</span><span class="p">)</span><span class="w"></span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="p">{</span><span class="w"></span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="n">ptr</span><span class="p">;</span><span class="w"></span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">    </span><span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span><span class="s">&quot;Thread - %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">type</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">    </span><span class="k">return</span><span class="w">  </span><span class="n">ptr</span><span class="p">;</span><span class="w"></span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="p">}</span><span class="w"></span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span><span class="w"></span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="p">{</span><span class="w"></span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="w">    </span><span class="c1">// create the thread objs</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">    </span><span class="n">pthread_t</span><span class="w"> </span><span class="n">thread1</span><span class="p">,</span><span class="w"> </span><span class="n">thread2</span><span class="p">;</span><span class="w"></span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">thr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">thr2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"></span>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="w">    </span><span class="c1">// start the threads</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="w">    </span><span class="n">pthread_create</span><span class="p">(</span><span class="o">&amp;</span><span class="n">thread1</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="kr">thread</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="n">thr</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="w">    </span><span class="n">pthread_create</span><span class="p">(</span><span class="o">&amp;</span><span class="n">thread2</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="kr">thread</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="n">thr2</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="w">    </span><span class="c1">// wait for threads to finish</span>
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="w">    </span><span class="n">pthread_join</span><span class="p">(</span><span class="n">thread1</span><span class="p">,</span><span class="nb">NULL</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="w">    </span><span class="n">pthread_join</span><span class="p">(</span><span class="n">thread2</span><span class="p">,</span><span class="nb">NULL</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="p">}</span><span class="w"></span>
 </code></pre></div>
-
-* `valor` contém o valor do *MMS* da solução
-* `aI` contém a pessoa que possui o objeto `I`
-
-Note que o formato dessa saída é diferente da saída final do programa, porém a informação representada é a mesma.
-
-## Validação de resultados
-
-A pasta `heuristica` do repositório de entregas contém arquivos de exemplo `in*.txt/out*.txt` com as entradas e saídas possíveis para esta parte do projeto. Use-os para validar seu programa junto com `corretor.py`.
-
-!!! warning
-    Esta validação não espera resultados idênticos aos das saídas de exemplo.
-
-A validação testará se seu programa tem as seguintes propriedades:
-
-* a solução final é ótima local. Ou seja, não é possível repetir o *Passo 2* e conseguir uma solução melhor
-* a solução final é valida.
-* as soluções de cada busca local mostradas quando `DEBUG=1` também são ótimos locais
-* a solução final é a melhor entre todas as soluções calculadas
-* soluções diferentes são geradas quando valores de `SEED` diferentes são passados
-* são mostradas `ITER` linhas na saída de erros e cada linha corresponde a uma solução válida -->
-
-<p>A busca local consiste em uma metaheurística usada para resolver problemas de otimização computacionalmente difíceis. Esse tipo de algoritmo percorre o espaço de busca movendo-se iterativamente de uma solução candidata para outra, seguindo um caminho através da relação de vizinhança, até que uma solução considerada boa o suficiente seja encontrada ou um limite de tempo decorrido. Normalmente todo candidato possui mais de uma solução de vizinho e a escolha entre elas é feita com o auxílio de informações locais e experiência anterior.</p>
-<p>A solução por busca local  tenta maximizar o número de elementos com o mínimo de subconjuntos possível. Precisamos capturar esse critério por meio de uma função de <em>fitness</em>. Uma maneira possível de fazer isso é construir uma função de <em>fitness</em> calculando o número de elementos capturados pelos subconjuntos de uma solução candidata e, em seguida, dividindo-o pelo número de subconjuntos que contém. Essa função de pontuação favorecerá as soluções que acumulam a maioria dos elementos do universo U com o mínimo de subconjuntos.</p>
-<p>Para isso, implemente as seguintes alterações em seu projeto:</p>
-<ol>
-<li>Gerar uma solução aleatória para o problema do min-set-cover;</li>
-<li>Percorra novamente os conjuntos os elementos da sua solução e, de maneira randômica, troque até r (r entre 1 e 3) elementos da sua solução por subconjuntos que ficaram de fora da solução. </li>
-<li>Se a solução tiver melhor escore, mantenha ela. </li>
-</ol>
-<p>Para verificar o desempenho, construa um cenário com ao menos 200 elementos e 80 subconjuntos, de até 40 elementos cada.  Faça três variações desse cenário (elementos, subconjuntos, número de elementos em subconjuntos) e avalie o desempenho e a efetividade em encontrar uma solução ótima.</p>
-<p>Para a entrega, usaremos o site <strong>codePost</strong>, você recebeu na sala de aula o link para criar sua conta. A submissão será feita unicamente por ele. Caso tenha alguma dúvida, entre em contato.</p>
 </section>
 
 
