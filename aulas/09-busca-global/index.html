@@ -8,14 +8,14 @@
       
       
       
-        <link rel="canonical" href="https://insper.github.io/supercomp/aulas/13-efeitos-colaterais-II/">
+        <link rel="canonical" href="https://insper.github.io/supercomp/aulas/09-busca-global/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.4.0">
     
     
       
-        <title>16 - efeitos colaterais II - SuperComputação - 2022/2</title>
+        <title>08 - Busca exaustiva - SuperComputação - 2022/2</title>
       
     
     
@@ -161,7 +161,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#16-efeitos-colaterais-ii" class="md-skip">
+        <a href="#08-busca-exaustiva" class="md-skip">
           Skip to content
         </a>
       
@@ -194,7 +194,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              16 - efeitos colaterais II
+              08 - Busca exaustiva
             
           </span>
         </div>
@@ -424,6 +424,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-aleatorizacao/" class="md-nav__link">
+        07 - Aleatorização
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -505,36 +519,23 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#e-possivel-paralelizar-o-problema" class="md-nav__link">
-    É possível paralelizar o problema?
+  <a href="#pseudo-codigo" class="md-nav__link">
+    Pseudo-código
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#paralelizando-processos-inerentemente-sequenciais" class="md-nav__link">
-    Paralelizando processos inerentemente sequenciais
-  </a>
-  
-    <nav class="md-nav" aria-label="Paralelizando processos inerentemente sequenciais">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#primeira-tentativa" class="md-nav__link">
-    Primeira tentativa
+  <a href="#implementacao" class="md-nav__link">
+    Implementação
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#segunda-tentativa" class="md-nav__link">
-    Segunda tentativa
+      
+        <li class="md-nav__item">
+  <a href="#fechamento" class="md-nav__link">
+    Fechamento
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -550,33 +551,29 @@
             <article class="md-content__inner md-typeset">
               
                 
-  <a href="https://github.com/insper/supercomp/edit/master/docs/aulas/13-efeitos-colaterais-II/index.md" title="Edit this page" class="md-content__button md-icon">
+  <a href="https://github.com/insper/supercomp/edit/master/docs/aulas/09-busca-global/index.md" title="Edit this page" class="md-content__button md-icon">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
 
 <section class="progress-section show">
-<h1 id="16-efeitos-colaterais-ii">16 - efeitos colaterais II</h1>
-<p>Na aula de hoje iremos trabalhar com um algoritmo de sorteios aleatórios para calcular o <code>pi</code>. Ele é baseado em uma técnica de Otimização, Simulação e Estimação Paramétrica chamada <a href="https://en.wikipedia.org/wiki/Monte_Carlo_method">Monte Carlo</a>.</p>
-<p>O algoritmo sequencial se baseia em sorteios de pontos dentro de um quadrado de lado <code>2</code>. Se a distância entre o ponto e o centro do quadrado for menor que 1 então o ponto cai dentro do círculo inscrito no quadrado. A quantidade de pontos que caem dentro do quadrado é proporcional a $\pi$. Veja abaixo um resumo do algoritmo.</p>
-<p><img alt="https://upload.wikimedia.org/wikipedia/commons/8/84/Pi_30K.gif" src="https://upload.wikimedia.org/wikipedia/commons/8/84/Pi_30K.gif" /></p>
-<ol>
-<li><code>sum = 0</code></li>
-<li>De <code>i=0</code> até <code>N</code>:<ol>
-<li>sorteie pontos $x,y \in [0,1]$</li>
-<li>se $x^2 + y^2 \leq 1$, <code>sum += 1</code></li>
-</ol>
+<h1 id="08-busca-exaustiva">08 - Busca exaustiva</h1>
+<h2 id="pseudo-codigo">Pseudo-código</h2>
+<p>Vamos iniciar tentando escrever um algoritmo em pseudo-código para a seguinte ideia:</p>
+<ul>
+<li>Iniciando com o objeto 0:<ul>
+<li>Não inclua ele na mochila: resolva o problema com o restante dos objetos e retorne esse resultado</li>
+<li>Inclua ele na mochila: resolva o problema com o restante dos objetos e uma mochila de capacidade <code>C - p[0]</code>. Retorne o resultado <code>+ v[0]</code>.</li>
+<li>Escolhe a melhor das duas opções acima e retorne.</li>
+</ul>
 </li>
-<li>devolva <code>4 * sum / N</code></li>
-</ol>
-<div class="admonition example">
-<p class="admonition-title">Example</p>
-<p>Faça uma implementação sequencial desse algoritmo. Chama seu programa de <code>pi_montecarlo.cpp</code>. Para fins de <em>debug</em> das próximas versões, mostre o valor de <code>sum</code> na saída de erros. Adote <code>N=100 000</code>.</p>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip 1</p>
+<p>Note que pedimos para resolver o problema de novo, mas com menos objetos. Parece que esse é um algoritmo recursivo!</p>
 </div>
-<h2 id="e-possivel-paralelizar-o-problema">É possível paralelizar o problema?</h2>
-<p>Vamos iniciar pensando um pouco sobre o problema acima.</p>
-<div class="admonition question short" id="short-1">
+<div class="admonition question long" id="long-1">
 <p class="admonition-title">Question 1</p>
 <form _="
 on submit
@@ -590,19 +587,15 @@ on submit
     send remember(element: me) to window
 end
         ">
-<p>O algoritmo acima é paralelizável? Qual técnica você utilizaria para paralelizá-lo?</p>
-<div class="admonition details">
-<p class="admonition-title">Resposta</p>
-<p>O <code>for</code> paralelo parece encaixar muito bem neste problema, com a variável <code>sum</code> sendo usada na opção <code>reduction</code></p>
-</div>
+<p>Escreva um algoritmo recursivo em pseudo-código para resolver o problema da mochila. Seu algoritmo deverá retornar o valor da mochila ótima, mas <strong>NÃO</strong> precisa ainda retornar a mochila que tem esse valor.</p>
 <div class="form-elements">
-<input type="text" value="" name="data"/>
+<textarea name="data"></textarea>
 
 <input type="submit" value="Enviar"/>
 </div>
 </form>
 </div>
-<div class="admonition question short" id="short-2">
+<div class="admonition question long" id="long-2">
 <p class="admonition-title">Question 2</p>
 <form _="
 on submit
@@ -616,248 +609,29 @@ on submit
     send remember(element: me) to window
 end
         ">
-<p>Além da variável <code>sum</code>, existe outra operação que gera efeitos colaterais no código acima? Qual?</p>
-<div class="admonition details">
-<p class="admonition-title">Resposta</p>
-<p>O sorteio de pontos! Lembramos da aula 06 que a geração de números aleatórios é um processo sequencial que depende dos números anteriormente sorteados.</p>
-</div>
+<p>Adapte seu algoritmo acima para, além de retornar a melhor solução, também retornar a mochila que tem esse valor.</p>
+<p><strong>Dica</strong>: pode ser útil passar um vetor para guardar a melhor solução encontrada.</p>
 <div class="form-elements">
-<input type="text" value="" name="data"/>
+<textarea name="data"></textarea>
 
 <input type="submit" value="Enviar"/>
 </div>
 </form>
 </div>
-<div><a _=" on click      add .show to the next &lt;section/&gt;      hide me     send remember(element: me) to window     halt  end" class="md-button md-button--primary progress" href="" id="prog-0"> Progress </a></div>
-</section>
-<section class="progress-section">
-<p>Agora que sabemos que gerar números aleatórios é um processo sequencial, vamos considerar o quanto isso atrapalha nosso programa. Nas próximas questões leve em conta que o gerador de números aleatórios é uma variável compartilhada.</p>
-<div class="admonition question short" id="short-3">
+<h2 id="implementacao">Implementação</h2>
+<p>Vamos agora tentar implementar o algoritmo de busca global que fizemos.</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Implemente em C++ seu algoritmo acima.</p>
+</div>
+<div class="admonition question">
 <p class="admonition-title">Question 3</p>
-<form _="
-on submit
-    halt the event
-    if &lt;.answer/&gt; 
-        show the &lt;.answer/&gt; in me
-    end
-    add @disabled to &lt;input/&gt; in me
-    add .done to me
-    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
-    send remember(element: me) to window
-end
-        ">
-<p>Como evitaríamos problemas ao compartilhar o gerador de números aleatórios?</p>
-<div class="admonition details">
-<p class="admonition-title">Resposta</p>
-<p>Podemos envolver o passo <em>2a</em> do algoritmo em uma seção crítica usando <code>omp critical</code></p>
+<p>Teste o seu programa com a entrada <code>in-aula.txt</code> (que é a entrada dos slides). Você consegue agora responder à pergunta <strong>Existe mochila com valor maior que 13</strong>?</p>
 </div>
-<div class="form-elements">
-<input type="text" value="" name="data"/>
-
-<input type="submit" value="Enviar"/>
-</div>
-</form>
-</div>
-<div class="admonition question short" id="short-4">
+<h2 id="fechamento">Fechamento</h2>
+<div class="admonition question">
 <p class="admonition-title">Question 4</p>
-<form _="
-on submit
-    halt the event
-    if &lt;.answer/&gt; 
-        show the &lt;.answer/&gt; in me
-    end
-    add @disabled to &lt;input/&gt; in me
-    add .done to me
-    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
-    send remember(element: me) to window
-end
-        ">
-<p>Se o <code>for</code> acima rodar em uma ordem completamente diferente os resultados se alterarão?</p>
-<div class="admonition details">
-<p class="admonition-title">Resposta</p>
-<p>Desde de que os pares <code>x,y</code> sorteados sejam os mesmos então não haverá problema.</p>
-</div>
-<div class="form-elements">
-<input type="text" value="" name="data"/>
-
-<input type="submit" value="Enviar"/>
-</div>
-</form>
-</div>
-<div class="admonition example">
-<p class="admonition-title">Example</p>
-<p>Com base em todas as suas respostas dos exercícios anteriores, faça uma implementação paralela do <code>pi_montecarlo.cpp</code>. Verifique que o valor de <code>sum</code> é igual ao sequencial. Por enquanto, <strong>não se preocupe com o tempo de execução</strong>.</p>
-</div>
-<div class="admonition question short" id="short-5">
-<p class="admonition-title">Question 5</p>
-<form _="
-on submit
-    halt the event
-    if &lt;.answer/&gt; 
-        show the &lt;.answer/&gt; in me
-    end
-    add @disabled to &lt;input/&gt; in me
-    add .done to me
-    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
-    send remember(element: me) to window
-end
-        ">
-<p>Anote o tempo de execução sequencial e paralelo para o programa acima.</p>
-<div class="form-elements">
-<input type="text" value="" name="data"/>
-
-<input type="submit" value="Enviar"/>
-</div>
-</form>
-</div>
-<div><a _=" on click      add .show to the next &lt;section/&gt;      hide me     send remember(element: me) to window     halt  end" class="md-button md-button--primary progress" href="" id="prog-1"> Progress </a></div>
-</section>
-<section class="progress-section">
-<h2 id="paralelizando-processos-inerentemente-sequenciais">Paralelizando processos inerentemente sequenciais</h2>
-<p>Como discutimos agora há pouco, a geração de números aleatórios é um processo inerentemente sequencial. Não é que seja impossível paralelizá-lo eficientemente, é que é impossível paralelizá-lo <em>at all</em>. Vamos tentar contornar isso então usando a resposta da <em>Questão 4</em>:</p>
-<div class="admonition quote">
-<p class="admonition-title">O <code>for</code> do algoritmo depende dos pontos gerados, não da ordem que eles foram gerados.</p>
-</div>
-<p>Vamos então adotar uma solução simples: a cada iteração do <code>for</code> criamos um novo gerador de números aleatórios e sorteamos um par de pontos dele.</p>
-<h3 id="primeira-tentativa">Primeira tentativa</h3>
-<div class="admonition question short" id="short-6">
-<p class="admonition-title">Question 6</p>
-<form _="
-on submit
-    halt the event
-    if &lt;.answer/&gt; 
-        show the &lt;.answer/&gt; in me
-    end
-    add @disabled to &lt;input/&gt; in me
-    add .done to me
-    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
-    send remember(element: me) to window
-end
-        ">
-<p>Sabemos que um gerador de números aleatórios gera sempre a mesma sequência de números, dado um parâmetro <code>seed</code> fixo. O quê acontece se usarmos o mesmo <code>seed</code> em todas as iterações? Como consertar isso?</p>
-<div class="admonition details">
-<p class="admonition-title">Resposta</p>
-<p>Sortearemos o mesmo ponto em todas as iterações. Para consertar isso podemos fazer o <code>seed</code> ser baseado no <code>i</code> da iteração atual.</p>
-</div>
-<div class="form-elements">
-<input type="text" value="" name="data"/>
-
-<input type="submit" value="Enviar"/>
-</div>
-</form>
-</div>
-<div class="admonition example">
-<p class="admonition-title">Example</p>
-<p>Crie uma implementação baseada na ideia acima.</p>
-</div>
-<div class="admonition question short" id="short-7">
-<p class="admonition-title">Question 7</p>
-<form _="
-on submit
-    halt the event
-    if &lt;.answer/&gt; 
-        show the &lt;.answer/&gt; in me
-    end
-    add @disabled to &lt;input/&gt; in me
-    add .done to me
-    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
-    send remember(element: me) to window
-end
-        ">
-<p>Anote abaixo o valor do pi encontrado e o tempo de execução.</p>
-<div class="form-elements">
-<input type="text" value="" name="data"/>
-
-<input type="submit" value="Enviar"/>
-</div>
-</form>
-</div>
-<div class="admonition question short" id="short-8">
-<p class="admonition-title">Question 8</p>
-<form _="
-on submit
-    halt the event
-    if &lt;.answer/&gt; 
-        show the &lt;.answer/&gt; in me
-    end
-    add @disabled to &lt;input/&gt; in me
-    add .done to me
-    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
-    send remember(element: me) to window
-end
-        ">
-<p>Os resultados obtidos são idênticos aos do programa original? São próximos?</p>
-<div class="form-elements">
-<input type="text" value="" name="data"/>
-
-<input type="submit" value="Enviar"/>
-</div>
-</form>
-</div>
-<div><a _=" on click      add .show to the next &lt;section/&gt;      hide me     send remember(element: me) to window     halt  end" class="md-button md-button--primary progress" href="" id="prog-2"> Progress </a></div>
-</section>
-<section class="progress-section">
-<h3 id="segunda-tentativa">Segunda tentativa</h3>
-<p>O problema da nossa tentativa anterior é que não temos <em>de verdade</em> sequências de pontos aleatórias. Bom, na verdade nunca temos, mas o problema é que violamos a promessa que o <code>RNG</code> faz. Ele promete que</p>
-<div class="admonition quote">
-<p class="admonition-title">dado um seed fixo, a sequência de números geradas é indistinguível de uma sequência aleatória de verdade</p>
-</div>
-<p>Ele não promete que, se criarmos vários <code>RNG</code>s, <strong>a sequência formada pelo primeiro par de números gerados por cada um será aleatória.</strong></p>
-<p>Vamos agora tentar uma nova ideia:</p>
-<div class="admonition quote">
-<p class="admonition-title">Cada thread irá gerar <code>N/NUM_THREADS</code> números aleatórios, atualizando <code>sum</code> com os pontos dentro do semi-círculo.</p>
-</div>
-<div class="admonition question short" id="short-9">
-<p class="admonition-title">Question 9</p>
-<form _="
-on submit
-    halt the event
-    if &lt;.answer/&gt; 
-        show the &lt;.answer/&gt; in me
-    end
-    add @disabled to &lt;input/&gt; in me
-    add .done to me
-    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
-    send remember(element: me) to window
-end
-        ">
-<p>Como esta ideia melhora o algoritmo acima?</p>
-<div class="admonition details">
-<p class="admonition-title">Resposta</p>
-<p>Agora teremos <code>NUM_THREADS</code> sequências pseudo-aleatórias "válidas" e juntá-las passa a ser um problema menor. Continuamos precisando usar uma <code>seed</code> para cada, mas ao menos agora temos um número pequeno de <code>RNG</code>s.</p>
-</div>
-<div class="form-elements">
-<input type="text" value="" name="data"/>
-
-<input type="submit" value="Enviar"/>
-</div>
-</form>
-</div>
-<div class="admonition example">
-<p class="admonition-title">Example</p>
-<p>Faça uma implementação da ideia acima. Você pode usar os comandos do OpenMP que quiser. </p>
-</div>
-<div class="admonition question short" id="short-10">
-<p class="admonition-title">Question 10</p>
-<form _="
-on submit
-    halt the event
-    if &lt;.answer/&gt; 
-        show the &lt;.answer/&gt; in me
-    end
-    add @disabled to &lt;input/&gt; in me
-    add .done to me
-    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
-    send remember(element: me) to window
-end
-        ">
-<p>Anote o tempo de execução e o pi encontrado.</p>
-<div class="form-elements">
-<input type="text" value="" name="data"/>
-
-<input type="submit" value="Enviar"/>
-</div>
-</form>
+<p>Como você avalia os ganhos obtidos pela busca global em relação à busca local?</p>
 </div>
 </section>
 
