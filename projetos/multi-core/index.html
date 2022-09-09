@@ -8,21 +8,21 @@
       
       
       
-        <link rel="canonical" href="https://insper.github.io/supercomp/projetos/">
+        <link rel="canonical" href="https://insper.github.io/supercomp/projetos/multi-core/">
       
-      <link rel="icon" href="../assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.4.0">
     
     
       
-        <title>Travelling Sales Person (TSP) - SuperComputação - 2022/2</title>
+        <title>Paralelismo multi-core - SuperComputação - 2022/2</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.69437709.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.69437709.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.cbb835fc.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
         
       
       
@@ -38,24 +38,24 @@
       
     
     
-      <link rel="stylesheet" href="../css/printing.css">
+      <link rel="stylesheet" href="../../css/printing.css">
     
-      <link rel="stylesheet" href="../css/extra.css">
+      <link rel="stylesheet" href="../../css/extra.css">
     
-      <link rel="stylesheet" href="../css/ansi-colours.css">
+      <link rel="stylesheet" href="../../css/ansi-colours.css">
     
-      <link rel="stylesheet" href="../css/jupyter-cells.css">
+      <link rel="stylesheet" href="../../css/jupyter-cells.css">
     
-      <link rel="stylesheet" href="../css/pandas-dataframe.css">
+      <link rel="stylesheet" href="../../css/pandas-dataframe.css">
     
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
     
     
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:700|Oxygen+Mono|Source+Sans+Pro:700|Source+Serif+Pro&amp;display=swap">
-<link rel="stylesheet" href="../assets/css/devlife.css">
+<link rel="stylesheet" href="../../assets/css/devlife.css">
 
 <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
@@ -161,7 +161,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#travelling-sales-person-tsp" class="md-skip">
+        <a href="#paralelismo-multi-core" class="md-skip">
           Skip to content
         </a>
       
@@ -175,7 +175,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="SuperComputação - 2022/2" class="md-header__button md-logo" aria-label="SuperComputação - 2022/2" data-md-component="logo">
+    <a href="../.." title="SuperComputação - 2022/2" class="md-header__button md-logo" aria-label="SuperComputação - 2022/2" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -194,7 +194,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Travelling Sales Person (TSP)
+              Paralelismo multi-core
             
           </span>
         </div>
@@ -273,7 +273,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="SuperComputação - 2022/2" class="md-nav__button md-logo" aria-label="SuperComputação - 2022/2" data-md-component="logo">
+    <a href="../.." title="SuperComputação - 2022/2" class="md-nav__button md-logo" aria-label="SuperComputação - 2022/2" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -304,7 +304,7 @@
   
   
     <li class="md-nav__item">
-      <a href=".." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         Home
       </a>
     </li>
@@ -319,7 +319,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../sobre/" class="md-nav__link">
+      <a href="../../sobre/" class="md-nav__link">
         Burocracias
       </a>
     </li>
@@ -360,7 +360,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../aulas/01-introducao/" class="md-nav__link">
+      <a href="../../aulas/01-introducao/" class="md-nav__link">
         01 - Introdução
       </a>
     </li>
@@ -374,7 +374,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../aulas/02-03-implementacao-c%2B%2B/" class="md-nav__link">
+      <a href="../../aulas/02-03-implementacao-c%2B%2B/" class="md-nav__link">
         02 e 03 - C++
       </a>
     </li>
@@ -388,7 +388,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../aulas/04-profiling/" class="md-nav__link">
+      <a href="../../aulas/04-profiling/" class="md-nav__link">
         04 - Profiling
       </a>
     </li>
@@ -402,7 +402,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../aulas/05-reforco-c%2B%2B/" class="md-nav__link">
+      <a href="../../aulas/05-reforco-c%2B%2B/" class="md-nav__link">
         05 - Reforço C++
       </a>
     </li>
@@ -416,7 +416,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../aulas/06-heuristicas/" class="md-nav__link">
+      <a href="../../aulas/06-heuristicas/" class="md-nav__link">
         06 - Heurísticas
       </a>
     </li>
@@ -430,7 +430,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../aulas/07-aleatorizacao/" class="md-nav__link">
+      <a href="../../aulas/07-aleatorizacao/" class="md-nav__link">
         07 - Aleatorização
       </a>
     </li>
@@ -444,7 +444,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../aulas/08-busca-local/" class="md-nav__link">
+      <a href="../../aulas/08-busca-local/" class="md-nav__link">
         08 - Busca Local
       </a>
     </li>
@@ -464,14 +464,12 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
       
       
       
@@ -492,73 +490,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Travelling Sales Person (TSP)
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
         Travelling Sales Person (TSP)
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#por-que-escolhemos-esse-problema" class="md-nav__link">
-    Por que escolhemos esse problema?
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#avaliacao-e-formatos-de-entrada-e-saida" class="md-nav__link">
-    Avaliação e formatos de entrada e saída
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#entregas-e-datas-importantes" class="md-nav__link">
-    Entregas e Datas importantes
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#verificacao-de-resultados" class="md-nav__link">
-    Verificação de resultados
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -597,29 +533,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#por-que-escolhemos-esse-problema" class="md-nav__link">
-    Por que escolhemos esse problema?
+  <a href="#compilacao-do-programa" class="md-nav__link">
+    Compilação do programa
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#avaliacao-e-formatos-de-entrada-e-saida" class="md-nav__link">
-    Avaliação e formatos de entrada e saída
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#entregas-e-datas-importantes" class="md-nav__link">
-    Entregas e Datas importantes
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#verificacao-de-resultados" class="md-nav__link">
-    Verificação de resultados
+  <a href="#correcao-automatica" class="md-nav__link">
+    Correção automática
   </a>
   
 </li>
@@ -636,92 +558,31 @@
             <article class="md-content__inner md-typeset">
               
                 
-  <a href="https://github.com/insper/supercomp/edit/master/docs/projetos/index.md" title="Edit this page" class="md-content__button md-icon">
+  <a href="https://github.com/insper/supercomp/edit/master/docs/projetos/multi-core.md" title="Edit this page" class="md-content__button md-icon">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
 
 <section class="progress-section show">
-<h1 id="travelling-sales-person-tsp">Travelling Sales Person (TSP)</h1>
-<p>Nosso projeto do semestre será o <a href="https://en.wikipedia.org/wiki/Travelling_salesman_problem"><strong>Caixeiro Viajante</strong></a>. Neste problema recebemos uma lista de cidades representadas por suas coordenadas  $(x_i, y_i)_{i=0}^N$  e temos como objetivo encontrar o o caminho fechado que</p>
-<ol>
-<li>visite todas as cidades</li>
-<li>tenha o menor comprimento possível</li>
-</ol>
-<p><a href="https://www.youtube.com/watch?v=_vKMyRj855A">Vídeo em Português</a></p>
-<p>Note que podemos começar de qualquer cidade, já que nosso caminho é fechado. Ou seja, ele começa e termina no mesmo lugar.</p>
-<p>Este é um problema <strong>muito</strong> estudado em otimização e existem vários métodos que proporcionam soluções muito boas em pouquíssimo tempo. Por exemplo, o Gif abaixo usa uma técnica de otimização chamada <a href="https://en.wikipedia.org/wiki/Simulated_annealing">Simulated annealing</a>.</p>
-<p><img alt="Exemplo de solução do TSP" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Travelling_salesman_problem_solved_with_simulated_annealing.gif/220px-Travelling_salesman_problem_solved_with_simulated_annealing.gif" /></p>
-<p>É fácil de perceber que este problema ocorre frequentemente em logísitca, seja na forma que apresentamos ou em sua generalização, o <a href="https://en.wikipedia.org/wiki/Vehicle_routing_problem">Roteamento de Veículos</a>.</p>
-<h2 id="por-que-escolhemos-esse-problema">Por que escolhemos esse problema?</h2>
-<p>O <em>TSP</em> é um problema de otimização dos mais difíceis (<a href="https://en.wikipedia.org/wiki/NP-hardness">NP-hard</a>). Não existe algoritmo polinomial que encontre a melhor solução <strong>nem</strong> algoritmo polinomial que cheque se uma solução é a melhor.</p>
-<p>Entramos então em duas áreas:</p>
-<ol>
-<li>encontrar a melhor solução o mais rápido possível</li>
-<li>usar heurísticas para encontrar uma solução boa o mais rápido possível</li>
-</ol>
-<p>Trabalharemos com ambas as ideias durante a disciplina, focando tanto em implementações sequenciais como paralelas.</p>
-<h2 id="avaliacao-e-formatos-de-entrada-e-saida">Avaliação e formatos de entrada e saída</h2>
-<p>O projeto é individual e será corrigido usando uma série de scripts de correção automatizada.</p>
-<p><strong>Entrada</strong>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>N
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>x1 y1
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>....
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>xN yN
-</code></pre></div></p>
-<ul>
-<li><code>N</code> é o número de cidades</li>
-<li><code>xi yi</code> são as coordenadas de cada cidade</li>
-</ul>
-<p><strong>Saída</strong>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>L O
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>c1 .... cN
-</code></pre></div></p>
-<ul>
-<li><code>L</code> é o comprimento do <em>tour</em></li>
-<li><code>O</code> indica se o tour é ótimo (1) ou não (0)</li>
-<li><code>c1 ... cN</code> é a sequência de cidades visitadas para chegar no tour de comprimento <code>L</code></li>
-</ul>
-<div class="admonition warning">
-<p class="admonition-title">Importante</p>
-<ol>
-<li>Os formatos de entrada e saída deverão ser respeitados de maneira estrita</li>
-<li>Algumas entregas pedirão também informações mostradas na saída de erros <code>std:cerr</code></li>
-<li>Os scripts de correção serão atualizados durante o semestre.</li>
-</ol>
-</div>
-<h2 id="entregas-e-datas-importantes">Entregas e Datas importantes</h2>
-<p>O projeto de vocês deverá ser entregue via um repositório Git privado criado especialmente para este fim.</p>
-<p>Cada aluno irá adicionar sua solução ao seu repositório, que já irá conter os arquivos de correção automática. A entrega deverá cumprir todos os itens do <a href="checklist/">Checklist de projeto</a>.</p>
-<p>As etapas do projeto serão disponibilizadas depois de discussões em sala de aula e estarão conectadas com uma aula específica.</p>
-<ul>
-<li>Atividade 1 - <a href="heuristica">heurística da cidade mais próxima</a> [<strong>Entrega</strong>: <em>Sugerida 9/09</em>; <em>Máxima 30/09</em>]</li>
-<li>Atividade 2 - <a href="busca-local">busca local - troca de ordem</a>: [<strong>Entrega</strong>: <em>Sugerida 16/09</em>; <em>Máxima 30/09</em>]</li>
-</ul>
-<h2 id="verificacao-de-resultados">Verificação de resultados</h2>
-<ol>
-<li>Você receberá um convite para repositório. Todas as atividades serão disponibilizadas neste repositório e suas soluções devem ser adicionadas nos arquivos correspondentes.</li>
-<li>O corretor automático depende do pacote <code>grading-tools</code>, que deverá ser instalado como abaixo.</li>
-</ol>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>$&gt; python3 -m pip install --user git+https://github.com/lpsoares/grading-tools
+<h1 id="paralelismo-multi-core">Paralelismo multi-core</h1>
+<p>Seu trabalho nesta atividade será criar uma implementação paralela do algoritmo de busca local. </p>
+<h2 id="compilacao-do-programa">Compilação do programa</h2>
+<p>Seu programa multi-core deverá ser gerado a partir do mesmo código fonte do sequencial. Ou seja, compilar com <code>-fopenmp</code> habilita o programa paralelo. Compilar sem obtem os resultados sequenciais. Caso seu programa use as chamadas do OpenMP para códigos auxiliares (alocação de memória, etc), você pode checar se seu programa foi compilado com esta flag seguindo o exemplo abaixo. </p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="cp">#ifdef _OPENMP</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="c1">// código específico para multi-core aqui</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="cp">#else</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="c1">// código específico para sequencia aqui</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="cp">#endif </span>
 </code></pre></div>
-<details class="tip">
-<summary>Python 3.8 no Ubuntu</summary>
-<p>Se seu <code>python3</code> é uma versão inferior ao 3.8, você pode instalá-lo com os pacotes abaixo:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>python3.8 python3.8-dev
-</code></pre></div>
-<p>A partir daí poderá seguir normalmente as instruções desta página.</p>
-</details>
+<h2 id="correcao-automatica">Correção automática</h2>
+<p>Se seu programa for compilado com <code>-fopenmp</code> ele deverá rodar usando todas as CPUs pelo máximo de tempo possível. O corretor automático checará as seguintes condições:</p>
 <ol>
-<li>Com isso configurado, é só compilar seu programa e rodar <code>python3 corretor.py algoritmo</code>.</li>
-<li>Para baixar os novos exercícios é só rodar <code>git pull</code>.</li>
-<li>Os exercícios serão entregues criando um commit com sua resposta e dando <code>git push</code>.</li>
+<li>o tempo de execução cai ao menos pela metade ao rodar a versão paralela. Cheque as instruções de contagem de tempo na parte de <a href="desempenho sequencial">/projetos/desempenho-sequencial</a>.</li>
+<li>o consumo médio de CPU durante a execução do programa é maior que <code>75%</code> para cada core.</li>
+<li>as mesmas checagens do algoritmo sequencial serão feitas. Ou seja, seu programa deverá funcionar de maneira idêntica ao algoritmo sequencial. <strong>Os resultados não precisam ser exatamente os mesmos, mas o programa deverá gerar soluções com as mesmas propriedades.</strong></li>
 </ol>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Fique atento a atualizações no seu repositório de projeto. Atualizações no corretor serão feitas ao longo do semestre, assim como serão disponibilizados novos arquivos de entrada/saída para cada parte a ser implementada.</p>
-</div>
+<p>Execute o corretor de dentro da pasta <code>busca-local</code> para ver os resultados do teste multi-core.</p>
 </section>
 
 
@@ -736,27 +597,6 @@
       </main>
       
         <footer class="md-footer">
-  
-    
-    <nav class="md-footer__inner md-grid" aria-label="Footer" >
-      
-        
-        <a href="../aulas/08-busca-local/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 08 - Busca Local" rel="prev">
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
-          </div>
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Previous
-              </span>
-              08 - Busca Local
-            </div>
-          </div>
-        </a>
-      
-      
-    </nav>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -780,10 +620,10 @@
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.ecf98df9.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.ecf98df9.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.9c69f0bc.min.js"></script>
+      <script src="../../assets/javascripts/bundle.9c69f0bc.min.js"></script>
       
     
   </body>
