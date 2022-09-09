@@ -8,14 +8,14 @@
       
       
       
-        <link rel="canonical" href="https://insper.github.io/supercomp/projetos/busca-local/">
+        <link rel="canonical" href="https://insper.github.io/supercomp/projetos/seed/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.4.0">
     
     
       
-        <title>Busca local - SuperComputação - 2022/2</title>
+        <title>Seed - SuperComputação - 2022/2</title>
       
     
     
@@ -160,11 +160,6 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
-        
-        <a href="#busca-local" class="md-skip">
-          Skip to content
-        </a>
-      
     </div>
     <div data-md-component="announce">
       
@@ -194,7 +189,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Busca local
+              Seed
             
           </span>
         </div>
@@ -523,30 +518,6 @@
   
   
   
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#geracao-de-numeros-aleatorios" class="md-nav__link">
-    Geração de números aleatórios
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#correcao-automatica" class="md-nav__link">
-    Correção automática
-  </a>
-  
-</li>
-      
-    </ul>
   
 </nav>
                   </div>
@@ -558,47 +529,24 @@
             <article class="md-content__inner md-typeset">
               
                 
-  <a href="https://github.com/insper/supercomp/edit/master/docs/projetos/busca-local.md" title="Edit this page" class="md-content__button md-icon">
+  <a href="https://github.com/insper/supercomp/edit/master/docs/projetos/seed.md" title="Edit this page" class="md-content__button md-icon">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
 
-<section class="progress-section show">
-<h1 id="busca-local">Busca local</h1>
-<style>
-.admonition p:nth-child(2) {
-    font-size: 18pt;
-}
-</style>
+  <h1>Seed</h1>
 
-<p>Nossa busca local consistirá na seguinte estratégia:</p>
-<div class="admonition quote">
-<p class="admonition-title">Quote</p>
-<p>Trocar a ordem de visita de duas cidades</p>
-</div>
-<p>Ou seja, se for possível inverter a ordem de visitação de duas cidades e isso melhorar a solução então faça a troca. Só pare quando isso não for mais possível.</p>
-<p>Para uniformizar nossas soluções vamos adotar a seguinte estratégia de desempates:</p>
-<h2 id="geracao-de-numeros-aleatorios">Geração de números aleatórios</h2>
+<section class="progress-section show">
 <ul>
-<li>Seu programa deverá retornar o mesmo resultado em todas execuções.</li>
-<li>O algoritmo deverá gerar <code>10N</code> soluções e retornar a melhor delas. (N = número de cidades)</li>
+<li>Deverá ser possível configurar a <em>seed</em> usada no programa usando a <a href="https://en.wikipedia.org/wiki/Environment_variable">variável de ambiente</a> <code>SEED</code>.  </li>
 </ul>
-<h2 id="correcao-automatica">Correção automática</h2>
-<p>Além da resposta correta, seu algortimo deverá também mostrar informações na saída de erros (<code>std::cerr</code>). Estas informações serão usadas para checar corretude de sua implementação.</p>
-<div class="admonition quote">
-<p class="admonition-title">Quote</p>
-<p>A cada sorteio e busca pelo mínimo local (após o todo o processo de trocas para aquele sorteio), seu programa deverá mostra em uma linha da saída de erros a seguinte linha:</p>
 <blockquote>
-<p><code>local: size c1 c2 ... cN</code></p>
+<p>`$&gt; SEED=20 ./busca-local &lt; in.txt</p>
 </blockquote>
 <ul>
-<li><code>size</code> é o tamanho do tour encontrado (distância percorrida)</li>
-<li><code>c1 .... cN</code> é o tour que tem tamanho <code>size</code></li>
+<li>Se não for passada via variável de ambiente, assuma <code>SEED=10</code>.</li>
 </ul>
-<p>Logo deverão haver exatamente <code>10N</code> linhas.</p>
-</div>
-<p>Será verificado na correção automática se as soluções locais produzidas obedecem à regra do início da seção. </p>
 </section>
 
 

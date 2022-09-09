@@ -151,6 +151,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://insper.github.io/supercomp/projetos/seed/</loc>
+         <lastmod>2022-09-09</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://insper.github.io/supercomp/projetos/2021-2/</loc>
          <lastmod>2022-09-09</lastmod>
          <changefreq>daily</changefreq>
