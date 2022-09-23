@@ -332,12 +332,14 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
       
       
       
@@ -480,6 +482,61 @@
 
             
           
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          11 - Branch and Bound
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        11 - Branch and Bound
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#analisando-nosso-bound" class="md-nav__link">
+    Analisando nosso bound
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -561,29 +618,8 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#um-bound-simples-ignorar-peso" class="md-nav__link">
-    Um bound simples: ignorar peso
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#analisando-nosso-bound" class="md-nav__link">
     Analisando nosso bound
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#implementacao-eficiente-do-bound" class="md-nav__link">
-    Implementação eficiente do bound
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#avancado-o-quao-justo-e-um-bound" class="md-nav__link">
-    Avançado: o quão justo é um bound?
   </a>
   
 </li>
@@ -609,12 +645,20 @@
 <section class="progress-section show">
 <h1 id="11-branch-and-bound">11 - Branch and Bound</h1>
 <p>Vamos começar nossa atividade instrumentando nossa busca exaustiva. Dado que a promessa do nosso algoritmo <em>Branch and Bound</em> é evitar chegar até o fim de uma solução parcial que não tem chance de ser ótima, faz todo sentido então contarmos quantas vezes chegamos até o fim.</p>
+<p>Nesta seção implementaremos um <em>Branch and Bound</em> simples com a seguinte ideia:</p>
+<p>Implemente no seu código o <em>Branch and Bound</em>. Ou seja, você deverá, ao chegar em um objeto</p>
+<ol>
+<li>Checar se a soma da solução atual mais o bound é melhor que o melhor possível.</li>
+<li>Se não for retorna</li>
+<li>Se for, prossegue fazendo a escolha para o objeto atual.</li>
+</ol>
 <div class="admonition example">
 <p class="admonition-title">Example</p>
 <p>Vamos adicionar dois contadores ao nosso programa</p>
 <ol>
 <li><code>num_leaf</code> conta quantas vezes uma solução completa foi comparada com a melhor possível</li>
 <li><code>num_copy</code> conta quantas vezes foi encontrada uma solução melhor que a atual.</li>
+<li><code>num_bounds</code> conta o número de vezes em que evitamos de testar uma solução parcial até o fim.</li>
 </ol>
 </div>
 <div class="admonition question short" id="short-1">
@@ -631,7 +675,7 @@ on submit
     send remember(element: me) to window
 end
         ">
-<p>Rode para o exemplo <code>in150.txt</code> e anote os valores obtidos abaixo.</p>
+<p>Teste seu programa com a entrada <code>in150.txt</code>. Anote abaixo os contadores e interprete seu resultado.</p>
 <div class="form-elements">
 <input type="text" value="" name="data"/>
 
@@ -639,12 +683,8 @@ end
 </div>
 </form>
 </div>
-<h2 id="um-bound-simples-ignorar-peso">Um bound simples: ignorar peso</h2>
-<p>Nesta seção implementaremos um <em>Branch and Bound</em> simples com a seguinte ideia:</p>
-<div class="admonition quote">
-<p class="admonition-title">BOUND</p>
-<p>Complete uma solução parcial incluindo na mochila todos os objetos não selecionados. Isto é equivalente a <strong>relaxar a restrição do peso</strong>.</p>
-</div>
+<h2 id="analisando-nosso-bound">Analisando nosso bound</h2>
+<p>Conseguimos algum ganho de desempenho? Vamos agora descobrir se ele é bom mesmo.</p>
 <div class="admonition question short" id="short-2">
 <p class="admonition-title">Question 2</p>
 <form _="
@@ -659,11 +699,7 @@ on submit
     send remember(element: me) to window
 end
         ">
-<p>Os contadores <code>num_leaf</code> e <code>num_copy</code> se modificariam ao implementar o <em>Branch and Bound</em>? Se sim, quais deles?</p>
-<details class="tip">
-<summary>Resposta</summary>
-<p>Somente <code>num_leaf</code>, já que deixamos de chegar em folhas que não tem chance de serem ótimos globais. <code>num_copy</code> continua igual, já que conta o número de vezes que o melhor foi atualizado.</p>
-</details>
+<p>Como você mediria a altura em que o bound agiu? Seria melhor cortar mais para cima ou mais para baixo?</p>
 <div class="form-elements">
 <input type="text" value="" name="data"/>
 
@@ -671,18 +707,10 @@ end
 </div>
 </form>
 </div>
+<p>O valor <code>num_bound</code> não ajuda muito a entender se o bound é bom, já que cortar muito pode significar fazê-lo próximo das folhas (e isto gera ganho pequeno de desempenho).</p>
 <div class="admonition example">
 <p class="admonition-title">Example</p>
-<p>Implemente no seu código o <em>Branch and Bound</em> usando o <em>Bound</em> acima. Ou seja, você deverá, ao chegar em um objeto</p>
-<ol>
-<li>Checar se a soma da solução atual mais o bound é melhor que o melhor possível.</li>
-<li>Se não for retorna</li>
-<li>Se for prossegue fazendo a escolha para o objeto atual.</li>
-</ol>
-</div>
-<div class="admonition example">
-<p class="admonition-title">Example</p>
-<p>Adicione ao seu programa um contador <code>num_bounds</code> que conta o número de vezes em que evitamos de testar uma solução parcial até o fim.</p>
+<p>Faça seu programa contar o número de vezes em que o bound é ativado em cada nível da recursão. Mostre esses valores no terminal.</p>
 </div>
 <div class="admonition question short" id="short-3">
 <p class="admonition-title">Question 3</p>
@@ -698,146 +726,13 @@ on submit
     send remember(element: me) to window
 end
         ">
-<p>Teste seu programa novamente com a entrada <code>in150.txt</code>. Anote abaixo os contadores e interprete seu resultado.</p>
-<div class="form-elements">
-<input type="text" value="" name="data"/>
-
-<input type="submit" value="Enviar"/>
-</div>
-</form>
-</div>
-<h2 id="analisando-nosso-bound">Analisando nosso bound</h2>
-<p>Conseguimos algum ganho de desempenho ao criar o último bound. Vamos agora descobrir se ele é bom mesmo.</p>
-<div class="admonition question short" id="short-4">
-<p class="admonition-title">Question 4</p>
-<form _="
-on submit
-    halt the event
-    if &lt;.answer/&gt; 
-        show the &lt;.answer/&gt; in me
-    end
-    add @disabled to &lt;input/&gt; in me
-    add .done to me
-    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
-    send remember(element: me) to window
-end
-        ">
-<div class="form-elements">
-<input type="text" value="" name="data"/>
-
-<input type="submit" value="Enviar"/>
-</div>
-</form>
-</div>
-<p>Como você mediria a altura em que o bound agiu? Seria melhor cortar mais para cima ou mais para baixo?</p>
-<p>O valor <code>num_bound</code> não ajuda muito a entender se o bound é bom, já que cortar muito pode significar fazê-lo próximo das folhas (e isto gera ganho pequeno de desempenho).</p>
-<div class="admonition example">
-<p class="admonition-title">Example</p>
-</div>
-<p>Faça seu programa contar o número de vezes em que o bound é ativado em cada nível da recursão. Mostre esses valores no terminal.</p>
-<div class="admonition question short" id="short-5">
-<p class="admonition-title">Question 5</p>
-<form _="
-on submit
-    halt the event
-    if &lt;.answer/&gt; 
-        show the &lt;.answer/&gt; in me
-    end
-    add @disabled to &lt;input/&gt; in me
-    add .done to me
-    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
-    send remember(element: me) to window
-end
-        ">
-<div class="form-elements">
-<input type="text" value="" name="data"/>
-
-<input type="submit" value="Enviar"/>
-</div>
-</form>
-</div>
 <p>Interprete os resultados acima.</p>
-<h2 id="implementacao-eficiente-do-bound">Implementação eficiente do bound</h2>
-<div class="admonition question short" id="short-6">
-<p class="admonition-title">Question 6</p>
-<form _="
-on submit
-    halt the event
-    if &lt;.answer/&gt; 
-        show the &lt;.answer/&gt; in me
-    end
-    add @disabled to &lt;input/&gt; in me
-    add .done to me
-    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
-    send remember(element: me) to window
-end
-        ">
-<p>O bound <em>Ignorar peso</em> depende das escolhas feitas até o momento? Ou seja, se tenho 4 objetos, o bound da solução parcial <code>(1, 0, -, -)</code> é igual ou diferente do bound da solução parcial <code>(1, 1, -, -)</code>?</p>
 <div class="form-elements">
 <input type="text" value="" name="data"/>
 
 <input type="submit" value="Enviar"/>
 </div>
 </form>
-</div>
-<div class="admonition question short" id="short-7">
-<p class="admonition-title">Question 7</p>
-<form _="
-on submit
-    halt the event
-    if &lt;.answer/&gt; 
-        show the &lt;.answer/&gt; in me
-    end
-    add @disabled to &lt;input/&gt; in me
-    add .done to me
-    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
-    send remember(element: me) to window
-end
-        ">
-<p>Como você poderia economizar trabalho ao calcular o bound? É possível pré-calcular algo?</p>
-<div class="form-elements">
-<input type="text" value="" name="data"/>
-
-<input type="submit" value="Enviar"/>
-</div>
-</form>
-</div>
-<div class="admonition example">
-<p class="admonition-title">Example</p>
-<p>Reimplemente seu bound, desta vez pré-calculando tudo antes de iniciar a busca_exaustiva.</p>
-</div>
-<div class="admonition question short" id="short-8">
-<p class="admonition-title">Question 8</p>
-<form _="
-on submit
-    halt the event
-    if &lt;.answer/&gt; 
-        show the &lt;.answer/&gt; in me
-    end
-    add @disabled to &lt;input/&gt; in me
-    add .done to me
-    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
-    send remember(element: me) to window
-end
-        ">
-<p>Rode novamente com a entrada <code>in150.txt</code> e verifique se houve ganho de tempo de execução.</p>
-<div class="form-elements">
-<input type="text" value="" name="data"/>
-
-<input type="submit" value="Enviar"/>
-</div>
-</form>
-</div>
-<h2 id="avancado-o-quao-justo-e-um-bound">Avançado: o quão justo é um bound?</h2>
-<p>Podemos medir quão justo é um bound verificando a diferença entre seu valor e o valor <em>real</em> da melhor solução da subárvore de recursão atual. Ou seja, comparamos nossa estimativa otimista com o que aconteceu de verdade ao examinar todas essas soluções.</p>
-<div class="admonition example">
-<p class="admonition-title">Example</p>
-<p>Faça seu programa guardar a diferença média entre o valor do bound (que é uma estimativa da qualidade final de uma solução) e o melhor valor encontrado para aquele ramo da recursão.</p>
-<p><strong>Dica</strong>: você vai precisar retornar o valor da melhor mochila encontrada em cada parte.</p>
-</div>
-<div class="admonition question">
-<p class="admonition-title">Question 9</p>
-<p>Interprete os resultados acima.</p>
 </div>
 </section>
 
@@ -853,6 +748,42 @@ end
       </main>
       
         <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../10-busca-global-II/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 10 - Comparação de desempenho" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              10 - Comparação de desempenho
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../../projetos/" class="md-footer__link md-footer__link--next" aria-label="Next: Travelling Sales Person (TSP)" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Travelling Sales Person (TSP)
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">

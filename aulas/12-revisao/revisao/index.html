@@ -8,19 +8,21 @@
       
       
       
-      <link rel="icon" href="/supercomp/assets/images/favicon.png">
+        <link rel="canonical" href="https://insper.github.io/supercomp/aulas/12-revisao/revisao/">
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.4.0">
     
     
       
-        <title>SuperComputação - 2022/2</title>
+        <title>Revisão para P1 - SuperComputação - 2022/2</title>
       
     
     
-      <link rel="stylesheet" href="/supercomp/assets/stylesheets/main.69437709.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.69437709.min.css">
       
         
-        <link rel="stylesheet" href="/supercomp/assets/stylesheets/palette.cbb835fc.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.cbb835fc.min.css">
         
       
       
@@ -36,24 +38,24 @@
       
     
     
-      <link rel="stylesheet" href="/supercomp/css/printing.css">
+      <link rel="stylesheet" href="../../../css/printing.css">
     
-      <link rel="stylesheet" href="/supercomp/css/extra.css">
+      <link rel="stylesheet" href="../../../css/extra.css">
     
-      <link rel="stylesheet" href="/supercomp/css/ansi-colours.css">
+      <link rel="stylesheet" href="../../../css/ansi-colours.css">
     
-      <link rel="stylesheet" href="/supercomp/css/jupyter-cells.css">
+      <link rel="stylesheet" href="../../../css/jupyter-cells.css">
     
-      <link rel="stylesheet" href="/supercomp/css/pandas-dataframe.css">
+      <link rel="stylesheet" href="../../../css/pandas-dataframe.css">
     
-    <script>__md_scope=new URL("/supercomp/",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
     
     
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:700|Oxygen+Mono|Source+Sans+Pro:700|Source+Serif+Pro&amp;display=swap">
-<link rel="stylesheet" href="/supercomp/assets/css/devlife.css">
+<link rel="stylesheet" href="../../../assets/css/devlife.css">
 
 <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
@@ -158,6 +160,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#revisao-para-p1" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -168,7 +175,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="/supercomp/." title="SuperComputação - 2022/2" class="md-header__button md-logo" aria-label="SuperComputação - 2022/2" data-md-component="logo">
+    <a href="../../.." title="SuperComputação - 2022/2" class="md-header__button md-logo" aria-label="SuperComputação - 2022/2" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -187,7 +194,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              
+              Revisão para P1
             
           </span>
         </div>
@@ -266,7 +273,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="/supercomp/." title="SuperComputação - 2022/2" class="md-nav__button md-logo" aria-label="SuperComputação - 2022/2" data-md-component="logo">
+    <a href="../../.." title="SuperComputação - 2022/2" class="md-nav__button md-logo" aria-label="SuperComputação - 2022/2" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -297,7 +304,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/supercomp/." class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         Home
       </a>
     </li>
@@ -312,7 +319,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/supercomp/sobre/" class="md-nav__link">
+      <a href="../../../sobre/" class="md-nav__link">
         Burocracias
       </a>
     </li>
@@ -353,7 +360,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/supercomp/aulas/01-introducao/" class="md-nav__link">
+      <a href="../../01-introducao/" class="md-nav__link">
         01 - Introdução
       </a>
     </li>
@@ -367,7 +374,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/supercomp/aulas/02-03-implementacao-c%2B%2B/" class="md-nav__link">
+      <a href="../../02-03-implementacao-c%2B%2B/" class="md-nav__link">
         02 e 03 - C++
       </a>
     </li>
@@ -381,7 +388,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/supercomp/aulas/04-profiling/" class="md-nav__link">
+      <a href="../../04-profiling/" class="md-nav__link">
         04 - Profiling
       </a>
     </li>
@@ -395,7 +402,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/supercomp/aulas/05-reforco-c%2B%2B/" class="md-nav__link">
+      <a href="../../05-reforco-c%2B%2B/" class="md-nav__link">
         05 - Reforço C++
       </a>
     </li>
@@ -409,7 +416,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/supercomp/aulas/06-heuristicas/" class="md-nav__link">
+      <a href="../../06-heuristicas/" class="md-nav__link">
         06 - Heurísticas
       </a>
     </li>
@@ -423,7 +430,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/supercomp/aulas/07-aleatorizacao/" class="md-nav__link">
+      <a href="../../07-aleatorizacao/" class="md-nav__link">
         07 - Aleatorização
       </a>
     </li>
@@ -437,7 +444,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/supercomp/aulas/08-busca-local/" class="md-nav__link">
+      <a href="../../08-busca-local/" class="md-nav__link">
         08 - Busca Local
       </a>
     </li>
@@ -451,7 +458,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/supercomp/aulas/09-busca-global/" class="md-nav__link">
+      <a href="../../09-busca-global/" class="md-nav__link">
         09 - Busca Exaustiva
       </a>
     </li>
@@ -465,7 +472,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/supercomp/aulas/10-busca-global-II/" class="md-nav__link">
+      <a href="../../10-busca-global-II/" class="md-nav__link">
         10 - Comparação de desempenho
       </a>
     </li>
@@ -479,7 +486,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/supercomp/aulas/11-branch-and-bound/" class="md-nav__link">
+      <a href="../../11-branch-and-bound/" class="md-nav__link">
         11 - Branch and Bound
       </a>
     </li>
@@ -527,7 +534,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/supercomp/projetos/" class="md-nav__link">
+      <a href="../../../projetos/" class="md-nav__link">
         Travelling Sales Person (TSP)
       </a>
     </li>
@@ -558,6 +565,8 @@
   
   
   
+    
+  
   
 </nav>
                   </div>
@@ -568,24 +577,67 @@
           <div class="md-content" data-md-component="content">
             <article class="md-content__inner md-typeset">
               
-<h1>Página não encontrada</h1>
+                
+  <a href="https://github.com/insper/supercomp/edit/master/docs/aulas/12-revisao/revisao.md" title="Edit this page" class="md-content__button md-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
 
-<p>A página que você tentou acessar não existe.</p>
 
-<figure>
-  <img src="/supercomp/assets/images/meme.gif" />
-</figure>
 
-<p>
-  Se você digitou esse endereço, verifique se não cometeu algum erro de
-  digitação.
-</p>
-<p>
-  Se você copiou esse endereço ou clicou em um link, por favor mande pelo
-  Blackboard um email relatando o problema. Não esqueça de dizer qual é o
-  endereço!
-</p>
+<section class="progress-section show">
+<h1 id="revisao-para-p1">Revisão para P1</h1>
+<p>Um investidor possui um orçamento de R$ 100.000,00 para aplicar no mercado de ações. Uma instituição financeira lhe dá as seguintes opções para construir o seu portifólio de investimentos, a ser composto por lotes de ações:</p>
+<table>
+<thead>
+<tr>
+<th align="center"><strong>AÇÃO</strong></th>
+<th align="center"><strong>VALOR DO LOTE</strong></th>
+<th align="center"><strong>RETORNO DO LOTE</strong></th>
+<th align="center"><strong>IMPOSTO A PAGAR</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">PETR4</td>
+<td align="center">R$ 30.000,00</td>
+<td align="center">R$ 2.700,00</td>
+<td align="center">R$ 640,00</td>
+</tr>
+<tr>
+<td align="center">DELL6</td>
+<td align="center">R$ 60.000,00</td>
+<td align="center">R$ 4.500,00</td>
+<td align="center">R$ 900,00</td>
+</tr>
+<tr>
+<td align="center">MICR7</td>
+<td align="center">R$ 30.000,00</td>
+<td align="center">R$ 6.400,00</td>
+<td align="center">R$ 1.200,00</td>
+</tr>
+<tr>
+<td align="center">IBMC3</td>
+<td align="center">R$ 40.000,00</td>
+<td align="center">R$ 4.600,00</td>
+<td align="center">R$ 940,00</td>
+</tr>
+</tbody>
+</table>
+<p>Não é possível comprar ações fracionadas, somente o lote inteiro. Com base neste cenário:</p>
+<ol>
+<li>Modele este problema como um problema de otimização.</li>
+<li>Crie uma entrada de dados para a instância do problema como mostrado acima.</li>
+<li>Implemente em C++ uma busca exaustiva para montar uma proposta de portifólio para o cliente.</li>
+<li>Implemente uma estratégia do tipo branch-and-bound em C++ para a busca exaustiva da questão 3.</li>
+<li>Implemente em C++ uma heurística para acelerar a busca exaustiva da questão 3.</li>
+<li>Obtenha e compare os tempos de execução das três implementações anteriores.</li>
+</ol>
+</section>
 
+
+
+
+              
             </article>
             
           </div>
@@ -617,10 +669,10 @@
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "/supercomp/", "features": [], "search": "/supercomp/assets/javascripts/workers/search.ecf98df9.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.ecf98df9.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="/supercomp/assets/javascripts/bundle.9c69f0bc.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.9c69f0bc.min.js"></script>
       
     
   </body>
