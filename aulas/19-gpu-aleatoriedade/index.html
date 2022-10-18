@@ -8,14 +8,14 @@
       
       
       
-        <link rel="canonical" href="https://insper.github.io/supercomp/aulas/16-gpu-iteradores/">
+        <link rel="canonical" href="https://insper.github.io/supercomp/aulas/19-gpu-aleatoriedade/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.0, mkdocs-material-8.4.0">
     
     
       
-        <title>18 - Iteradores em Thrust - SuperComputação - 2022/2</title>
+        <title>17 - GPU e números aleatórios - SuperComputação - 2022/2</title>
       
     
     
@@ -161,7 +161,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#18-iteradores-em-thrust" class="md-skip">
+        <a href="#17-gpu-e-numeros-aleatorios" class="md-skip">
           Skip to content
         </a>
       
@@ -194,7 +194,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              18 - Iteradores em Thrust
+              17 - GPU e números aleatórios
             
           </span>
         </div>
@@ -500,7 +500,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../12-paralelismo/" class="md-nav__link">
+      <a href="../12-13-paralelismo/index.md" class="md-nav__link">
         12 - Paralelismo
       </a>
     </li>
@@ -589,15 +589,29 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#iteradores" class="md-nav__link">
-    Iteradores
+  <a href="#revisao-de-numeros-aleatorios" class="md-nav__link">
+    Revisão de números aleatórios
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#operacoes-customizaveis" class="md-nav__link">
-    Operações customizáveis
+  <a href="#gerando-numeros-pseudo-aleatorios-em-gpu" class="md-nav__link">
+    Gerando números pseudo-aleatórios em GPU
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#seeds-em-programas-massivamente-paralelos" class="md-nav__link">
+    Seeds em programas massivamente paralelos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercicio-pratico" class="md-nav__link">
+    Exercício prático
   </a>
   
 </li>
@@ -614,49 +628,31 @@
             <article class="md-content__inner md-typeset">
               
                 
-  <a href="https://github.com/insper/supercomp/edit/master/docs/aulas/16-gpu-iteradores/index.md" title="Edit this page" class="md-content__button md-icon">
+  <a href="https://github.com/insper/supercomp/edit/master/docs/aulas/19-gpu-aleatoriedade/index.md" title="Edit this page" class="md-content__button md-icon">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
 
 <section class="progress-section show">
-<h1 id="18-iteradores-em-thrust">18 - Iteradores em Thrust</h1>
-<p>Na última aula conseguimos rodar algumas funções em GPU e medir o custo de transferência de dados. Chegamos a conclusão de que, para valer a pena usar a GPU, ou precisamos tratar muitos dados ou precisamos fazer tratamentos pesados.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Nesta aula trabalharemos extensivamente com a API da <code>thrust</code> e pediremos para que vocês consultem a <a href="https://thrust.github.io/doc/modules.html">documentação oficial</a> da biblioteca. Também pode ser útil ver a <a href="https://github.com/NVIDIA/thrust/tree/master/examples">seção de exemplos</a> do repositório.</p>
-</div>
-<h2 id="iteradores">Iteradores</h2>
-<p>Continuando a partir do último item da aula anterior, suponha que você deseja calcular a variância das diferenças. Agora que já temos a média, a fórmula da variância é dada por</p>
-<p>$$\frac{1}{n}\sum_{i=0}^n (x_i - \mu)^2$$</p>
-<div class="admonition example">
-<p class="admonition-title">Example</p>
-<p>Já sabemos tudo o que precisamos para fazer este cálculo. Crie um vetor em que todas as componentes sejam iguais a média (usando <code>thrust::fill</code>) e compute a variância usando a fórmula acima.</p>
-</div>
-<p>Apesar do código acima funcionar, ele tem um problema grave: é preciso alocar um vetor inteiro somente para preenchê-lo com valores iguais! Se estivermos trabalhando com muitos dados isto significa diminuir bastante a quantidade de dados que conseguimos tratar antes de acabar com a memória da GPU. Podemos contornar isso usando iteradores, que são vetores gerados dinamicamente pela thrust a partir de um valor único ou a partir de outros vetores.</p>
-<div class="admonition example">
-<p class="admonition-title">Example</p>
-<p>Pesquise a documentação de <a href="https://thrust.github.io/doc/classthrust_1_1constant__iterator.html">thrust::constant_iterator</a> e use-o para substituir a alocação de memória extra no exercício acima.</p>
-</div>
-<p>Vamos agora nos preparar para a parte 2 criando um programa novamente em cima do arquivo <code>stocks.txt</code>.</p>
-<div class="admonition example">
-<p class="admonition-title">Example</p>
-<p>Leia o arquivo <code>stocks.txt</code> e crie um vetor contendo a diferença entre o dia atual e o anterior. Ou seja, dado que o vetor de saída tenha nome <code>ganho_diario</code> e o de entrada <code>stocks</code>, temos que</p>
-<p><code>ganho_diario[i] = stocks[i+1] - stocks[i]</code></p>
-<p>Claramente <code>ganho_diario.size() == stocks.size() - 1</code>. Leve isto em conta ao utilizar a operação <code>transform</code> para criar o vetor <code>ganho_diario</code>.</p>
-</div>
-<h2 id="operacoes-customizaveis">Operações customizáveis</h2>
-<p>Com o vetor <code>ganho_diario</code> acima conseguimos saber se o valor da ação subiu ou caiu de um dia para o outro! Duas perguntas se seguem:</p>
+<h1 id="17-gpu-e-numeros-aleatorios">17 - GPU e números aleatórios</h1>
+<h2 id="revisao-de-numeros-aleatorios">Revisão de números aleatórios</h2>
+<p>Um gerador de números pseudo-aleatórios (RNG) é um algoritmo <strong>determinístico</strong> que gera uma sequência de números que <strong>parece</strong> aleatória. Essa frase possui dois termos importantes que precisamos destrinchar:</p>
+<ul>
+<li><strong>determinístico</strong>: Um <em>RNG</em> tipicamente recebe como entrada um inteiro <em>seed</em> (que representa uma sequência de bits "aleatória") e gera uma sequência de números baseada no <em>seed</em>. Ou seja, o algoritmo é <strong>determinístico</strong> pois gera sempre a mesma sequência para uma determinada entrada (<em>seed</em>).</li>
+<li><strong>parece aleatória</strong>: Se compararmos duas sequências de números, uma gerada por um <em>RNG</em> e outra por uma distribuição uniforme de verdade, não conseguimos dizer qual distribuição foi gerada pelo <em>RNG</em>.</li>
+</ul>
+<p>Ou seja, ao escolhermos um <em>seed</em> a sequência gerada será sempre a mesma, mesmo se executarmos o programa em outras máquinas. Isso torna a utilização de <em>RNGs</em> para experimentos bastante interessante: é possível <strong>reproduzir</strong> os resultados feitos por outros desenvolvedores/cientistas. Para isto é necessário</p>
 <ol>
-<li>quantas vezes o valor subiu?</li>
-<li>qual é o aumento médio, considerando só as vezes em que o valor aumentou de fato?</li>
+<li>que o programa permita escolher o <em>seed</em> da simulação;</li>
+<li>que o <em>seed</em> usado seja publicado junto com os resultados.</li>
 </ol>
-<p>Podemos implementar essas lógicas usando operações customizadas. Apesar de ser possível escrever essas funções do zero, a <code>thrust</code> já possui diversas funções de reduções customizáveis.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>É sempre importante consultar a documentação para entender como essa função será aplicada. Em alguns casos é necessário que a função passada obedeça algumas restrições para que os resultados obtidos façam sentido.</p>
-</div>
+<p>Muitas implementações de <em>RNGs</em>  são divididas em duas partes:</p>
+<ol>
+<li><strong>engine</strong>: algoritmo que gera um inteiro cujos bits formam uma sequência pseudo-aleatória.</li>
+<li><strong>distribution</strong>: utiliza os bits acima para retornar números que sigam alguma distribuição estatística (como normal ou uniforme).</li>
+</ol>
+<p>A <code>thrust</code> contém uma API de geração de números aleatórios muito parecida com a API da biblioteca padrão de C++.</p>
 <div class="admonition question short" id="short-1">
 <p class="admonition-title">Question 1</p>
 <form _="
@@ -671,7 +667,11 @@ on submit
     send remember(element: me) to window
 end
         ">
-<p>A <code>thrust</code> já tem suporte a operações de redução que são contagens. Veja sua documentação oficial <a href="https://thrust.github.io/doc/group__counting.html">neste link</a>. Qual função dessa página você usaria para contar somente os elementos positivos de <code>ganhos_diarios</code>?</p>
+<p>Consulte a <a href="https://thrust.github.io/doc/modules.html">documentação oficial</a> da <code>thrust</code> e encontre as páginas que descrevem os <strong>engines</strong> e <strong>distributions</strong> implementados.</p>
+<div class="admonition details">
+<p class="admonition-title">Resposta<p>Abaixo temos um trecho de um código-fonte que nos mostra como gerar números aleatórios com thrust.</p>
+</p>
+</div>
 <div class="form-elements">
 <input type="text" value="" name="data"/>
 
@@ -679,19 +679,47 @@ end
 </div>
 </form>
 </div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>A função <code>count_if</code> está atualmente com um erro em sua documentação (<a href="https://github.com/thrust/thrust/issues/1148">link da issue</a>). Não se esqueça de colocar <code>const</code> no parâmetro de <code>operator()</code>.</p>
-</div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>#include &lt;thrust/random.h&gt;
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>#include &lt;thrust/device_vector.h&gt;
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>#include &lt;thrust/transform.h&gt;
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>#include &lt;thrust/iterator/counting_iterator.h&gt;
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>#include &lt;vector&gt;
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>int main() {
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>thrust::default_random_engine eng(10);
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>thrust::uniform_real_distribution&lt;double&gt; d(20, 30);
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>for (int i = 0; i &lt; 10; i++) {
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    std::cout &lt;&lt; d(eng) &lt;&lt; &quot;\n&quot;;
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>}
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>}
+</code></pre></div>
+<p>Vamos agora fazer um uso básico dessas funções.</p>
 <div class="admonition example">
 <p class="admonition-title">Example</p>
-<p>Use a função acima para calcular quantas vezes o valor da ação subiu.</p>
-<details class="details">
-<summary>Resposta</summary>
-<p><code>1309</code></p>
-</details>
+<p>Crie um programa que leia um inteiro <em>seed</em> do terminal e:</p>
+<ol>
+<li>crie um objeto <code>default_random_engine</code> que o utilize como seed.</li>
+<li>mostre no terminal uma sequência de 10 números fracionários tirados de uma distribuição uniforme <code>[25, 40]</code>.</li>
+</ol>
+<p>Seu programa deverá estar implementado usando os tipos definidos em <code>thrust::random</code>.</p>
 </div>
-<p>Vamos agora para o segundo item: "Calcular o aumento médio, considerando somente as vezes em que o valor aumentou de fato". Uma estratégia possível é <strong>zerar</strong> todos os elementos negativos do vetor e depois calcular sua soma.</p>
+<p>Um ponto importante da API <code>thrust</code> para geração de números aleatórios é que essas funções podem ser chamadas dentro de operações customizadas! Nosso próximo exercício trata justamente deste uso.</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Faça um programa que cria um vetor com 10 elementos e aplica uma operação customizada que seta cada elemento com um valor aleatório. Use as mesmas configurações do exercício anterior. </p>
+<div class="admonition details">
+<p class="admonition-title">Resposta</p>
+<p>Use o trecho de código disponibilizado neste <a href="https://gist.github.com/andrefmb/df1f7d24077fb1a510c680cfffcdee75">gist</a> para ver a estrutura da sua função customizada e como você pode criar uma transformação que a invoca para cada elemento de um vetor. </p>
+</div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Você pode prosseguir mesmo se seu vetor tem 10 números iguais.</p>
+</div>
+<h2 id="gerando-numeros-pseudo-aleatorios-em-gpu">Gerando números pseudo-aleatórios em GPU</h2>
+<p>Um desafio em programas paralelos é gerar sequências pseudo-aleatórias de qualidade. Se não tormarmos cuidado acabamos gerando os mesmos números em threads diferentes e desperdiçamos grande quantidade de trabalho!</p>
 <div class="admonition question short" id="short-2">
 <p class="admonition-title">Question 2</p>
 <form _="
@@ -706,10 +734,10 @@ on submit
     send remember(element: me) to window
 end
         ">
-<p>A <a href="https://thrust.github.io/doc/group__transformations.html">documentação sobre transformações</a> é bastante vasta. Você consegue encontrar alguma função que possa <strong>substituir</strong> elementos de um vetor baseado em uma condição booleana?</p>
+<p>Que abordagem você usou para gerar números aleatórios em paralelo com OpenMP?</p>
 <div class="admonition details">
-<p class="admonition-title">Details</p>
-<p><code>replace_if</code></p>
+<p class="admonition-title">Resposta</p>
+<p>Se você realizou todas as tarefas, deve ter criado um gerador de números pseudo-aleatórios para cada thread para calcular o valor de $\pi$ usando Monte Carlo.</p>
 </div>
 <div class="form-elements">
 <input type="text" value="" name="data"/>
@@ -718,18 +746,66 @@ end
 </div>
 </form>
 </div>
-<div class="admonition example">
-<p class="admonition-title">Example</p>
-<p>Use a função acima para substituir todos os valores negativos por <code>0</code> em <code>ganhos_diarios</code>.</p>
+<div class="admonition question short" id="short-3">
+<p class="admonition-title">Question 3</p>
+<form _="
+on submit
+    halt the event
+    if &lt;.answer/&gt; 
+        show the &lt;.answer/&gt; in me
+    end
+    add @disabled to &lt;input/&gt; in me
+    add .done to me
+    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
+    send remember(element: me) to window
+end
+        ">
+<p>Você acha que poderíamos aplicar a mesma abordagem para geração de números aleatórios em GPU? Por quê?</p>
+<div class="admonition details">
+<p class="admonition-title">Resposta</p>
+<p>Sem cuidados adicionais, não obteríamos bons resultados. A abordagem usada na aula de openMP pressupõe um número relativamente pequeno de threads, de forma que a sequência criada por cada gerador é menor, porém grande o suficiente para ter qualidade. No caso de usarmos uma GPU, o número de threads pode ser muito grande, de forma que cada gerador geraria sequências muito curtas, e por isso perderíamos em qualidade da sequência. </p>
 </div>
-<p>ß</p>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input type="submit" value="Enviar"/>
+</div>
+</form>
+</div>
+<h2 id="seeds-em-programas-massivamente-paralelos">Seeds em programas massivamente paralelos</h2>
+<p>Em computação massivamente paralela, em geral, existem duas abordagens.</p>
+<p><strong>Abordagem 1</strong>: usar <em>seeds</em> diferentes em cada thread.</p>
+<p><strong>Abordagem 2</strong>: usar a mesma <em>seed</em> em todas as threads, mas cada uma começa em um ponto diferente da sequência daquela seed.</p>
+<p>Note que em ambos os casos os resultados dependem do número de threads usadas! Como vimos em aulas anteriores, um <em>RNG</em> tem estado interno e não pode ser facilmente compartilhado entre várias threads.</p>
 <div class="admonition example">
 <p class="admonition-title">Example</p>
-<p>Calcule agora e média dos valores positivos do vetor. Você já tem todos os que são positivos no exercício acima e a quantidade de valores positivos.</p>
-<details class="details">
-<summary>Resposta</summary>
-<p><code>5,25179</code></p>
-</details>
+<p>Implemente a abordagem 1 no exercício da parte anterior. Para isto você pode usar a estratégia de acesso direto aos dados e usar o índice recebido como <em>seed</em>. Lembre-se que a seed é definida ao criar o <code>default_random_engine</code>. No exemplo abaixo, você pode ver que ela é definida com o valor <code>10</code>. </p>
+</div>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="w">    </span><span class="n">thrust</span><span class="o">::</span><span class="n">default_random_engine</span><span class="w"> </span><span class="nf">eng</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+Você deve ter percebido que todos os números gerados são parecidos, mas não idênticos. Isso ocorre pois geradores com *seed*s próximos geram sequências que são inicialmente parecidas (e depois diferem). Podemos consertar isto usando seeds mais distantes.</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Multiplique <code>i</code> por um valor grande e tente de novo. Verifique que agora os números são diferentes</p>
+</div>
+<h2 id="exercicio-pratico">Exercício prático</h2>
+<p>Vamos trabalhar com um método probabilístico de estimação do <code>pi</code> neste último exercício. O algoritmo sequencial se baseia em sorteios de pontos dentro de um quadrado de lado <code>2</code>. Se a distância entre o ponto e o centro do quadrado for menor que 1 então o ponto cai dentro do círculo inscrito no quadrado. A quantidade de pontos que caem dentro do quadrado é proporcional a $\pi$. </p>
+<ol>
+<li><code>sum = 0</code></li>
+<li>De <code>i=0</code> até <code>N</code>:<ol>
+<li>sorteie pontos $x,y \in [0,1]$</li>
+<li>se $x^2 + y^2 \leq 1$, <code>sum += 1</code></li>
+</ol>
+</li>
+<li>devolva <code>4 * sum / N</code></li>
+</ol>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Resgate a implementação sequencial deste algoritmo realizada na aula (disponível neste <a href="https://gist.github.com/andrefmb/ce5e282c6b9cdf80b5fcbbd71642d497">gist</a>) e rode-a para <code>N=100000000</code></p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Paralelize o código acima em GPU. Use ambas as abordagens acima em programas distintos para lidar com os geradores de números aleatórios.</p>
 </div>
 </section>
 

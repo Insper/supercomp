@@ -9,7 +9,7 @@ int main() {
     omp_set_num_threads(4);
 
     // Executa código em paralelo
-    #pragma omp parallel
+    #pragma omp parallel schedulle(static)
     {
         #pragma omp for
         for(int i = 0; i < 30; i++) {

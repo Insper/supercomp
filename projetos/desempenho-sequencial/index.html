@@ -500,7 +500,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../aulas/12-paralelismo/" class="md-nav__link">
+      <a href="../../aulas/12-13-paralelismo/index.md" class="md-nav__link">
         12 - Paralelismo
       </a>
     </li>
@@ -616,13 +616,13 @@
 <section class="progress-section show">
 <h1 id="desempenho-sequencial">Desempenho sequencial</h1>
 <p>Até o momento não nos preocupamos com a eficiência de nossos programas. Checamos sua corretude em termos dos resultados obtidos, mas não da eficiência de sua implementação. Agora vamos focar nisso.</p>
-<p>Como visto na <a href="/aulas/11-introducao-paralelismo/">aula 11</a>, paralelizar um algoritmo ruim traz ganhos de desempenho muito limitados. É só quando aliamos algoritmo, implementação eficiente e paralelismo que desenvolvemos uma solução de alto desempenho. </p>
+<p>Como visto em aula, paralelizar um algoritmo ruim traz ganhos de desempenho muito limitados. É só quando aliamos algoritmo, implementação eficiente e paralelismo que desenvolvemos uma solução de alto desempenho. </p>
 <h2 id="checagem-automatica">Checagem automática</h2>
 <p>Continuaremos usando o <code>corretor.pyc</code>, que agora irá testar a eficiência dos algoritmos de busca local e exaustiva. No primeiro caso, vocês irão precisar implementar corretamente um algoritmo que avalie somente a diferença causada pela troca sem reavaliar o tour inteiro. No segundo caso, é impossível passar em todos os testes sem implementar algum tipo de branch-and-bound/best-first search.</p>
 <p>Os testes de desempenho não irão considerar a saída de erros, verificando somente o tempo de execução e a validade da saída final. Para desabilitar isso vocês devem modificar o programa de vocês para ler o estado de uma variável de ambiente chamada <code>DEBUG</code>. </p>
 <ul>
 <li>Se <code>DEBUG=1</code> seu programa deverá mostrar as mensagens na saída de erros. </li>
-<li>Caso <code>DEBUG</code> não esteja definido ou seu valor não seja <code>1</code>, seu programa não deverá mostrar as mensagens na saída de erros. Note que o resultado final continuará o mesmo, estamos desligando apenas as </li>
+<li>Caso <code>DEBUG</code> não esteja definido ou seu valor não seja <code>1</code>, seu programa não deverá mostrar as mensagens na saída de erros. Note que o resultado final continuará o mesmo, estamos desligando apenas as mensagens de erro.</li>
 </ul>
 <div class="admonition danger">
 <p class="admonition-title">Danger</p>
