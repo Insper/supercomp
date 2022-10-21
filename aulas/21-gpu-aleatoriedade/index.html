@@ -8,21 +8,21 @@
       
       
       
-        <link rel="canonical" href="https://insper.github.io/supercomp/projetos/2022-1/local/">
+        <link rel="canonical" href="https://insper.github.io/supercomp/aulas/21-gpu-aleatoriedade/">
       
-      <link rel="icon" href="../../../assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.0, mkdocs-material-8.4.0">
     
     
       
-        <title>Um algoritmo Local para Alinhamento - SuperComputação - 2022/2</title>
+        <title>17 - GPU e números aleatórios - SuperComputação - 2022/2</title>
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.69437709.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.69437709.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.cbb835fc.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
         
       
       
@@ -38,24 +38,24 @@
       
     
     
-      <link rel="stylesheet" href="../../../css/printing.css">
+      <link rel="stylesheet" href="../../css/printing.css">
     
-      <link rel="stylesheet" href="../../../css/extra.css">
+      <link rel="stylesheet" href="../../css/extra.css">
     
-      <link rel="stylesheet" href="../../../css/ansi-colours.css">
+      <link rel="stylesheet" href="../../css/ansi-colours.css">
     
-      <link rel="stylesheet" href="../../../css/jupyter-cells.css">
+      <link rel="stylesheet" href="../../css/jupyter-cells.css">
     
-      <link rel="stylesheet" href="../../../css/pandas-dataframe.css">
+      <link rel="stylesheet" href="../../css/pandas-dataframe.css">
     
-    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
     
     
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:700|Oxygen+Mono|Source+Sans+Pro:700|Source+Serif+Pro&amp;display=swap">
-<link rel="stylesheet" href="../../../assets/css/devlife.css">
+<link rel="stylesheet" href="../../assets/css/devlife.css">
 
 <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
@@ -161,7 +161,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#um-algoritmo-local-para-alinhamento" class="md-skip">
+        <a href="#17-gpu-e-numeros-aleatorios" class="md-skip">
           Skip to content
         </a>
       
@@ -175,7 +175,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../.." title="SuperComputação - 2022/2" class="md-header__button md-logo" aria-label="SuperComputação - 2022/2" data-md-component="logo">
+    <a href="../.." title="SuperComputação - 2022/2" class="md-header__button md-logo" aria-label="SuperComputação - 2022/2" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -194,7 +194,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Um algoritmo Local para Alinhamento
+              17 - GPU e números aleatórios
             
           </span>
         </div>
@@ -273,7 +273,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../.." title="SuperComputação - 2022/2" class="md-nav__button md-logo" aria-label="SuperComputação - 2022/2" data-md-component="logo">
+    <a href="../.." title="SuperComputação - 2022/2" class="md-nav__button md-logo" aria-label="SuperComputação - 2022/2" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -304,7 +304,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../.." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         Home
       </a>
     </li>
@@ -319,7 +319,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../sobre/" class="md-nav__link">
+      <a href="../../sobre/" class="md-nav__link">
         Burocracias
       </a>
     </li>
@@ -360,7 +360,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aulas/01-introducao/" class="md-nav__link">
+      <a href="../01-introducao/" class="md-nav__link">
         01 - Introdução
       </a>
     </li>
@@ -374,7 +374,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aulas/02-03-implementacao-c%2B%2B/" class="md-nav__link">
+      <a href="../02-03-implementacao-c%2B%2B/" class="md-nav__link">
         02 e 03 - C++
       </a>
     </li>
@@ -388,7 +388,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aulas/04-profiling/" class="md-nav__link">
+      <a href="../04-profiling/" class="md-nav__link">
         04 - Profiling
       </a>
     </li>
@@ -402,7 +402,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aulas/05-reforco-c%2B%2B/" class="md-nav__link">
+      <a href="../05-reforco-c%2B%2B/" class="md-nav__link">
         05 - Reforço C++
       </a>
     </li>
@@ -416,7 +416,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aulas/06-heuristicas/" class="md-nav__link">
+      <a href="../06-heuristicas/" class="md-nav__link">
         06 - Heurísticas
       </a>
     </li>
@@ -430,7 +430,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aulas/07-aleatorizacao/" class="md-nav__link">
+      <a href="../07-aleatorizacao/" class="md-nav__link">
         07 - Aleatorização
       </a>
     </li>
@@ -444,7 +444,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aulas/08-busca-local/" class="md-nav__link">
+      <a href="../08-busca-local/" class="md-nav__link">
         08 - Busca Local
       </a>
     </li>
@@ -458,7 +458,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aulas/09-busca-global/" class="md-nav__link">
+      <a href="../09-busca-global/" class="md-nav__link">
         09 - Busca Exaustiva
       </a>
     </li>
@@ -472,7 +472,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aulas/10-busca-global-II/" class="md-nav__link">
+      <a href="../10-busca-global-II/" class="md-nav__link">
         10 - Comparação de desempenho
       </a>
     </li>
@@ -486,7 +486,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aulas/11-branch-and-bound/" class="md-nav__link">
+      <a href="../11-branch-and-bound/" class="md-nav__link">
         11 - Branch and Bound
       </a>
     </li>
@@ -500,7 +500,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aulas/12-13-14-paralelismo/" class="md-nav__link">
+      <a href="../12-13-14-paralelismo/" class="md-nav__link">
         12, 13 e 14 - Paralelismo
       </a>
     </li>
@@ -514,7 +514,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aulas/15-efeitos-colaterais/" class="md-nav__link">
+      <a href="../15-efeitos-colaterais/" class="md-nav__link">
         15 - Paralelismo - Exercício / Efeitos Colaterais
       </a>
     </li>
@@ -528,7 +528,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aulas/16-efeitos-colaterais-II/" class="md-nav__link">
+      <a href="../16-efeitos-colaterais-II/" class="md-nav__link">
         16 - Paralelismo - Efeitos Colaterais II
       </a>
     </li>
@@ -576,7 +576,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../" class="md-nav__link">
+      <a href="../../projetos/" class="md-nav__link">
         Travelling Sales Person (TSP)
       </a>
     </li>
@@ -610,6 +610,42 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#revisao-de-numeros-aleatorios" class="md-nav__link">
+    Revisão de números aleatórios
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gerando-numeros-pseudo-aleatorios-em-gpu" class="md-nav__link">
+    Gerando números pseudo-aleatórios em GPU
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#seeds-em-programas-massivamente-paralelos" class="md-nav__link">
+    Seeds em programas massivamente paralelos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercicio-pratico" class="md-nav__link">
+    Exercício prático
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -620,35 +656,185 @@
             <article class="md-content__inner md-typeset">
               
                 
-  <a href="https://github.com/insper/supercomp/edit/master/docs/projetos/2022-1/local.md" title="Edit this page" class="md-content__button md-icon">
+  <a href="https://github.com/insper/supercomp/edit/master/docs/aulas/21-gpu-aleatoriedade/index.md" title="Edit this page" class="md-content__button md-icon">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
 
 <section class="progress-section show">
-<h1 id="um-algoritmo-local-para-alinhamento">Um algoritmo Local para Alinhamento</h1>
-<p>Como vimos em aula, aleatoriedade é uma estratégia bastante comum para construção de algoritmos de busca local, podendo ser usada
-de forma isolada ou de forma complementar a outra estratégia de varredura de um espaço de soluções. Em problemas de alinhamento,
-varreduras suportadas por aleatoriedade tem produzido algoritmos bastante efetivos.</p>
-<p>Dentro deste contexto, vamos considerar o algoritmo proposto abaixo:</p>
-<p>ALGORITMO BUSCA LOCAL COM ALEATORIEDADE</p>
-<p>Entrada: Duas sequencias de DNA a[i] e b[j], de tamanhos n e m respectivamente,pesos wmat, wmis e wgap para match, mismatch e gap respectivamente</p>
-<p>Saída: Score de um alinhamento das sequencias
-       Subsequencias alinhadas</p>
-<div class="highlight"><pre><span></span><code>1. Gerar uma subsequencia sb=b[j,j+1,...,j+k] de b, de tamanho aleatório k, 1&lt;=k&lt;=m, e 0&lt;=j&lt;=m 
-2. Gerar um número aleatório inteiro positivo p
-3. Gerar p subsequencias sa=a[i,i+1,...,i+k] de a, com tamanho k calculado no passo (1), 0&lt;=i&lt;=n
-4. Calcular os scores de cada par (sa,sb) com os pesos wmat, wmis e wgap
-5. Devolver o score máximo m entre os scores do passo (4) e as subsequencias associadas a ele
-</code></pre></div>
-<p>A partir desta descrição, nosso primeiro projeto terá duas tarefas:</p>
+<h1 id="17-gpu-e-numeros-aleatorios">17 - GPU e números aleatórios</h1>
+<h2 id="revisao-de-numeros-aleatorios">Revisão de números aleatórios</h2>
+<p>Um gerador de números pseudo-aleatórios (RNG) é um algoritmo <strong>determinístico</strong> que gera uma sequência de números que <strong>parece</strong> aleatória. Essa frase possui dois termos importantes que precisamos destrinchar:</p>
 <ul>
-  <li> Implementar um programa C++ para ler um arquivo contendo os tamanhos de duas sequencias de DNA, seguidos das duas sequencias, uma por linha. Calcular o score máximo utilizando o algoritmo acima, assim como as subsequencias associadas a ele. 
-  <li> Testar o algoritmo diversas vezes e comparar seus resultados com a heurística do primeiro projeto observando, principalmente, o seu comportamento em relação aos valores aleatórios k e p. Estes resultados e sua comparação deverão estar presentes no relatório a ser entregue posteriormente.
+<li><strong>determinístico</strong>: Um <em>RNG</em> tipicamente recebe como entrada um inteiro <em>seed</em> (que representa uma sequência de bits "aleatória") e gera uma sequência de números baseada no <em>seed</em>. Ou seja, o algoritmo é <strong>determinístico</strong> pois gera sempre a mesma sequência para uma determinada entrada (<em>seed</em>).</li>
+<li><strong>parece aleatória</strong>: Se compararmos duas sequências de números, uma gerada por um <em>RNG</em> e outra por uma distribuição uniforme de verdade, não conseguimos dizer qual distribuição foi gerada pelo <em>RNG</em>.</li>
 </ul>
+<p>Ou seja, ao escolhermos um <em>seed</em> a sequência gerada será sempre a mesma, mesmo se executarmos o programa em outras máquinas. Isso torna a utilização de <em>RNGs</em> para experimentos bastante interessante: é possível <strong>reproduzir</strong> os resultados feitos por outros desenvolvedores/cientistas. Para isto é necessário</p>
+<ol>
+<li>que o programa permita escolher o <em>seed</em> da simulação;</li>
+<li>que o <em>seed</em> usado seja publicado junto com os resultados.</li>
+</ol>
+<p>Muitas implementações de <em>RNGs</em>  são divididas em duas partes:</p>
+<ol>
+<li><strong>engine</strong>: algoritmo que gera um inteiro cujos bits formam uma sequência pseudo-aleatória.</li>
+<li><strong>distribution</strong>: utiliza os bits acima para retornar números que sigam alguma distribuição estatística (como normal ou uniforme).</li>
+</ol>
+<p>A <code>thrust</code> contém uma API de geração de números aleatórios muito parecida com a API da biblioteca padrão de C++.</p>
+<div class="admonition question short" id="short-1">
+<p class="admonition-title">Question 1</p>
+<form _="
+on submit
+    halt the event
+    if &lt;.answer/&gt; 
+        show the &lt;.answer/&gt; in me
+    end
+    add @disabled to &lt;input/&gt; in me
+    add .done to me
+    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
+    send remember(element: me) to window
+end
+        ">
+<p>Consulte a <a href="https://thrust.github.io/doc/modules.html">documentação oficial</a> da <code>thrust</code> e encontre as páginas que descrevem os <strong>engines</strong> e <strong>distributions</strong> implementados.</p>
+<div class="admonition details">
+<p class="admonition-title">Resposta<p>Abaixo temos um trecho de um código-fonte que nos mostra como gerar números aleatórios com thrust.</p>
+</p>
+</div>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
 
-<p>No diretório do projeto, há um gerador de entradas disponibilizado como um notebook Python.</p>
+<input type="submit" value="Enviar"/>
+</div>
+</form>
+</div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>#include &lt;thrust/random.h&gt;
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>#include &lt;thrust/device_vector.h&gt;
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>#include &lt;thrust/transform.h&gt;
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>#include &lt;thrust/iterator/counting_iterator.h&gt;
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>#include &lt;vector&gt;
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>int main() {
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>thrust::default_random_engine eng(10);
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>thrust::uniform_real_distribution&lt;double&gt; d(20, 30);
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>for (int i = 0; i &lt; 10; i++) {
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    std::cout &lt;&lt; d(eng) &lt;&lt; &quot;\n&quot;;
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>}
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>}
+</code></pre></div>
+<p>Vamos agora fazer um uso básico dessas funções.</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Crie um programa que leia um inteiro <em>seed</em> do terminal e:</p>
+<ol>
+<li>crie um objeto <code>default_random_engine</code> que o utilize como seed.</li>
+<li>mostre no terminal uma sequência de 10 números fracionários tirados de uma distribuição uniforme <code>[25, 40]</code>.</li>
+</ol>
+<p>Seu programa deverá estar implementado usando os tipos definidos em <code>thrust::random</code>.</p>
+</div>
+<p>Um ponto importante da API <code>thrust</code> para geração de números aleatórios é que essas funções podem ser chamadas dentro de operações customizadas! Nosso próximo exercício trata justamente deste uso.</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Faça um programa que cria um vetor com 10 elementos e aplica uma operação customizada que seta cada elemento com um valor aleatório. Use as mesmas configurações do exercício anterior. </p>
+<div class="admonition details">
+<p class="admonition-title">Resposta</p>
+<p>Use o trecho de código disponibilizado neste <a href="https://gist.github.com/andrefmb/df1f7d24077fb1a510c680cfffcdee75">gist</a> para ver a estrutura da sua função customizada e como você pode criar uma transformação que a invoca para cada elemento de um vetor. </p>
+</div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Você pode prosseguir mesmo se seu vetor tem 10 números iguais.</p>
+</div>
+<h2 id="gerando-numeros-pseudo-aleatorios-em-gpu">Gerando números pseudo-aleatórios em GPU</h2>
+<p>Um desafio em programas paralelos é gerar sequências pseudo-aleatórias de qualidade. Se não tormarmos cuidado acabamos gerando os mesmos números em threads diferentes e desperdiçamos grande quantidade de trabalho!</p>
+<div class="admonition question short" id="short-2">
+<p class="admonition-title">Question 2</p>
+<form _="
+on submit
+    halt the event
+    if &lt;.answer/&gt; 
+        show the &lt;.answer/&gt; in me
+    end
+    add @disabled to &lt;input/&gt; in me
+    add .done to me
+    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
+    send remember(element: me) to window
+end
+        ">
+<p>Que abordagem você usou para gerar números aleatórios em paralelo com OpenMP?</p>
+<div class="admonition details">
+<p class="admonition-title">Resposta</p>
+<p>Se você realizou todas as tarefas, deve ter criado um gerador de números pseudo-aleatórios para cada thread para calcular o valor de $\pi$ usando Monte Carlo.</p>
+</div>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input type="submit" value="Enviar"/>
+</div>
+</form>
+</div>
+<div class="admonition question short" id="short-3">
+<p class="admonition-title">Question 3</p>
+<form _="
+on submit
+    halt the event
+    if &lt;.answer/&gt; 
+        show the &lt;.answer/&gt; in me
+    end
+    add @disabled to &lt;input/&gt; in me
+    add .done to me
+    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
+    send remember(element: me) to window
+end
+        ">
+<p>Você acha que poderíamos aplicar a mesma abordagem para geração de números aleatórios em GPU? Por quê?</p>
+<div class="admonition details">
+<p class="admonition-title">Resposta</p>
+<p>Sem cuidados adicionais, não obteríamos bons resultados. A abordagem usada na aula de openMP pressupõe um número relativamente pequeno de threads, de forma que a sequência criada por cada gerador é menor, porém grande o suficiente para ter qualidade. No caso de usarmos uma GPU, o número de threads pode ser muito grande, de forma que cada gerador geraria sequências muito curtas, e por isso perderíamos em qualidade da sequência. </p>
+</div>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input type="submit" value="Enviar"/>
+</div>
+</form>
+</div>
+<h2 id="seeds-em-programas-massivamente-paralelos">Seeds em programas massivamente paralelos</h2>
+<p>Em computação massivamente paralela, em geral, existem duas abordagens.</p>
+<p><strong>Abordagem 1</strong>: usar <em>seeds</em> diferentes em cada thread.</p>
+<p><strong>Abordagem 2</strong>: usar a mesma <em>seed</em> em todas as threads, mas cada uma começa em um ponto diferente da sequência daquela seed.</p>
+<p>Note que em ambos os casos os resultados dependem do número de threads usadas! Como vimos em aulas anteriores, um <em>RNG</em> tem estado interno e não pode ser facilmente compartilhado entre várias threads.</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Implemente a abordagem 1 no exercício da parte anterior. Para isto você pode usar a estratégia de acesso direto aos dados e usar o índice recebido como <em>seed</em>. Lembre-se que a seed é definida ao criar o <code>default_random_engine</code>. No exemplo abaixo, você pode ver que ela é definida com o valor <code>10</code>. </p>
+</div>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="w">    </span><span class="n">thrust</span><span class="o">::</span><span class="n">default_random_engine</span><span class="w"> </span><span class="nf">eng</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+Você deve ter percebido que todos os números gerados são parecidos, mas não idênticos. Isso ocorre pois geradores com *seed*s próximos geram sequências que são inicialmente parecidas (e depois diferem). Podemos consertar isto usando seeds mais distantes.</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Multiplique <code>i</code> por um valor grande e tente de novo. Verifique que agora os números são diferentes</p>
+</div>
+<h2 id="exercicio-pratico">Exercício prático</h2>
+<p>Vamos trabalhar com um método probabilístico de estimação do <code>pi</code> neste último exercício. O algoritmo sequencial se baseia em sorteios de pontos dentro de um quadrado de lado <code>2</code>. Se a distância entre o ponto e o centro do quadrado for menor que 1 então o ponto cai dentro do círculo inscrito no quadrado. A quantidade de pontos que caem dentro do quadrado é proporcional a $\pi$. </p>
+<ol>
+<li><code>sum = 0</code></li>
+<li>De <code>i=0</code> até <code>N</code>:<ol>
+<li>sorteie pontos $x,y \in [0,1]$</li>
+<li>se $x^2 + y^2 \leq 1$, <code>sum += 1</code></li>
+</ol>
+</li>
+<li>devolva <code>4 * sum / N</code></li>
+</ol>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Resgate a implementação sequencial deste algoritmo realizada na aula (disponível neste <a href="https://gist.github.com/andrefmb/ce5e282c6b9cdf80b5fcbbd71642d497">gist</a>) e rode-a para <code>N=100000000</code></p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Paralelize o código acima em GPU. Use ambas as abordagens acima em programas distintos para lidar com os geradores de números aleatórios.</p>
+</div>
 </section>
 
 
@@ -686,10 +872,10 @@ varreduras suportadas por aleatoriedade tem produzido algoritmos bastante efetiv
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.ecf98df9.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.ecf98df9.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.9c69f0bc.min.js"></script>
+      <script src="../../assets/javascripts/bundle.9c69f0bc.min.js"></script>
       
     
   </body>

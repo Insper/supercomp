@@ -8,14 +8,14 @@
       
       
       
-        <link rel="canonical" href="https://insper.github.io/supercomp/aulas/17-gpu-iteradores/">
+        <link rel="canonical" href="https://insper.github.io/supercomp/aulas/16-efeitos-colaterais-II/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.0, mkdocs-material-8.4.0">
     
     
       
-        <title>18 - Iteradores em Thrust - SuperComputação - 2022/2</title>
+        <title>16 - Paralelismo - Efeitos Colaterais II - SuperComputação - 2022/2</title>
       
     
     
@@ -161,7 +161,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#18-iteradores-em-thrust" class="md-skip">
+        <a href="#16-efeitos-colaterais-ii" class="md-skip">
           Skip to content
         </a>
       
@@ -194,7 +194,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              18 - Iteradores em Thrust
+              16 - Paralelismo - Efeitos Colaterais II
             
           </span>
         </div>
@@ -332,12 +332,14 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
       
       
       
@@ -501,8 +503,104 @@
   
     <li class="md-nav__item">
       <a href="../12-13-14-paralelismo/" class="md-nav__link">
-        12 - Paralelismo
+        12, 13 e 14 - Paralelismo
       </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../15-efeitos-colaterais/" class="md-nav__link">
+        15 - Paralelismo - Exercício / Efeitos Colaterais
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          16 - Paralelismo - Efeitos Colaterais II
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        16 - Paralelismo - Efeitos Colaterais II
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#e-possivel-paralelizar-o-problema" class="md-nav__link">
+    É possível paralelizar o problema?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paralelizando-processos-inerentemente-sequenciais" class="md-nav__link">
+    Paralelizando processos inerentemente sequenciais
+  </a>
+  
+    <nav class="md-nav" aria-label="Paralelizando processos inerentemente sequenciais">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#primeira-tentativa" class="md-nav__link">
+    Primeira tentativa
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#segunda-tentativa" class="md-nav__link">
+    Segunda tentativa
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -589,16 +687,36 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#iteradores" class="md-nav__link">
-    Iteradores
+  <a href="#e-possivel-paralelizar-o-problema" class="md-nav__link">
+    É possível paralelizar o problema?
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#operacoes-customizaveis" class="md-nav__link">
-    Operações customizáveis
+  <a href="#paralelizando-processos-inerentemente-sequenciais" class="md-nav__link">
+    Paralelizando processos inerentemente sequenciais
   </a>
+  
+    <nav class="md-nav" aria-label="Paralelizando processos inerentemente sequenciais">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#primeira-tentativa" class="md-nav__link">
+    Primeira tentativa
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#segunda-tentativa" class="md-nav__link">
+    Segunda tentativa
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -614,49 +732,32 @@
             <article class="md-content__inner md-typeset">
               
                 
-  <a href="https://github.com/insper/supercomp/edit/master/docs/aulas/17-gpu-iteradores/index.md" title="Edit this page" class="md-content__button md-icon">
+  <a href="https://github.com/insper/supercomp/edit/master/docs/aulas/16-efeitos-colaterais-II/index.md" title="Edit this page" class="md-content__button md-icon">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
 
 <section class="progress-section show">
-<h1 id="18-iteradores-em-thrust">18 - Iteradores em Thrust</h1>
-<p>Na última aula conseguimos rodar algumas funções em GPU e medir o custo de transferência de dados. Chegamos a conclusão de que, para valer a pena usar a GPU, ou precisamos tratar muitos dados ou precisamos fazer tratamentos pesados.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Nesta aula trabalharemos extensivamente com a API da <code>thrust</code> e pediremos para que vocês consultem a <a href="https://thrust.github.io/doc/modules.html">documentação oficial</a> da biblioteca. Também pode ser útil ver a <a href="https://github.com/NVIDIA/thrust/tree/master/examples">seção de exemplos</a> do repositório.</p>
-</div>
-<h2 id="iteradores">Iteradores</h2>
-<p>Continuando a partir do último item da aula anterior, suponha que você deseja calcular a variância das diferenças. Agora que já temos a média, a fórmula da variância é dada por</p>
-<p>$$\frac{1}{n}\sum_{i=0}^n (x_i - \mu)^2$$</p>
-<div class="admonition example">
-<p class="admonition-title">Example</p>
-<p>Já sabemos tudo o que precisamos para fazer este cálculo. Crie um vetor em que todas as componentes sejam iguais a média (usando <code>thrust::fill</code>) e compute a variância usando a fórmula acima.</p>
-</div>
-<p>Apesar do código acima funcionar, ele tem um problema grave: é preciso alocar um vetor inteiro somente para preenchê-lo com valores iguais! Se estivermos trabalhando com muitos dados isto significa diminuir bastante a quantidade de dados que conseguimos tratar antes de acabar com a memória da GPU. Podemos contornar isso usando iteradores, que são vetores gerados dinamicamente pela thrust a partir de um valor único ou a partir de outros vetores.</p>
-<div class="admonition example">
-<p class="admonition-title">Example</p>
-<p>Pesquise a documentação de <a href="https://thrust.github.io/doc/classthrust_1_1constant__iterator.html">thrust::constant_iterator</a> e use-o para substituir a alocação de memória extra no exercício acima.</p>
-</div>
-<p>Vamos agora nos preparar para a parte 2 criando um programa novamente em cima do arquivo <code>stocks.txt</code>.</p>
-<div class="admonition example">
-<p class="admonition-title">Example</p>
-<p>Leia o arquivo <code>stocks.txt</code> e crie um vetor contendo a diferença entre o dia atual e o anterior. Ou seja, dado que o vetor de saída tenha nome <code>ganho_diario</code> e o de entrada <code>stocks</code>, temos que</p>
-<p><code>ganho_diario[i] = stocks[i+1] - stocks[i]</code></p>
-<p>Claramente <code>ganho_diario.size() == stocks.size() - 1</code>. Leve isto em conta ao utilizar a operação <code>transform</code> para criar o vetor <code>ganho_diario</code>.</p>
-</div>
-<h2 id="operacoes-customizaveis">Operações customizáveis</h2>
-<p>Com o vetor <code>ganho_diario</code> acima conseguimos saber se o valor da ação subiu ou caiu de um dia para o outro! Duas perguntas se seguem:</p>
+<h1 id="16-efeitos-colaterais-ii">16 - efeitos colaterais II</h1>
+<p>Na aula de hoje iremos trabalhar com um algoritmo de sorteios aleatórios para calcular o <code>pi</code>. Ele é baseado em uma técnica de Otimização, Simulação e Estimação Paramétrica chamada <a href="https://en.wikipedia.org/wiki/Monte_Carlo_method">Monte Carlo</a>.</p>
+<p>O algoritmo sequencial se baseia em sorteios de pontos dentro de um quadrado de lado <code>2</code>. Se a distância entre o ponto e o centro do quadrado for menor que 1 então o ponto cai dentro do círculo inscrito no quadrado. A quantidade de pontos que caem dentro do quadrado é proporcional a $\pi$. Veja abaixo um resumo do algoritmo.</p>
+<p><img alt="https://upload.wikimedia.org/wikipedia/commons/8/84/Pi_30K.gif" src="https://upload.wikimedia.org/wikipedia/commons/8/84/Pi_30K.gif" /></p>
 <ol>
-<li>quantas vezes o valor subiu?</li>
-<li>qual é o aumento médio, considerando só as vezes em que o valor aumentou de fato?</li>
+<li><code>sum = 0</code></li>
+<li>De <code>i=0</code> até <code>N</code>:<ol>
+<li>sorteie pontos $x,y \in [0,1]$</li>
+<li>se $x^2 + y^2 \leq 1$, <code>sum += 1</code></li>
 </ol>
-<p>Podemos implementar essas lógicas usando operações customizadas. Apesar de ser possível escrever essas funções do zero, a <code>thrust</code> já possui diversas funções de reduções customizáveis.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>É sempre importante consultar a documentação para entender como essa função será aplicada. Em alguns casos é necessário que a função passada obedeça algumas restrições para que os resultados obtidos façam sentido.</p>
+</li>
+<li>devolva <code>4 * sum / N</code></li>
+</ol>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Faça uma implementação sequencial desse algoritmo. Chama seu programa de <code>pi_montecarlo.cpp</code>. Para fins de <em>debug</em> das próximas versões, mostre o valor de <code>sum</code> na saída de erros. Adote <code>N=100 000</code>.</p>
 </div>
+<h2 id="e-possivel-paralelizar-o-problema">É possível paralelizar o problema?</h2>
+<p>Vamos iniciar pensando um pouco sobre o problema acima.</p>
 <div class="admonition question short" id="short-1">
 <p class="admonition-title">Question 1</p>
 <form _="
@@ -671,7 +772,11 @@ on submit
     send remember(element: me) to window
 end
         ">
-<p>A <code>thrust</code> já tem suporte a operações de redução que são contagens. Veja sua documentação oficial <a href="https://thrust.github.io/doc/group__counting.html">neste link</a>. Qual função dessa página você usaria para contar somente os elementos positivos de <code>ganhos_diarios</code>?</p>
+<p>O algoritmo acima é paralelizável? Qual técnica você utilizaria para paralelizá-lo?</p>
+<div class="admonition details">
+<p class="admonition-title">Resposta</p>
+<p>O <code>for</code> paralelo parece encaixar muito bem neste problema, com a variável <code>sum</code> sendo usada na opção <code>reduction</code></p>
+</div>
 <div class="form-elements">
 <input type="text" value="" name="data"/>
 
@@ -679,19 +784,6 @@ end
 </div>
 </form>
 </div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>A função <code>count_if</code> está atualmente com um erro em sua documentação (<a href="https://github.com/thrust/thrust/issues/1148">link da issue</a>). Não se esqueça de colocar <code>const</code> no parâmetro de <code>operator()</code>.</p>
-</div>
-<div class="admonition example">
-<p class="admonition-title">Example</p>
-<p>Use a função acima para calcular quantas vezes o valor da ação subiu.</p>
-<details class="details">
-<summary>Resposta</summary>
-<p><code>1309</code></p>
-</details>
-</div>
-<p>Vamos agora para o segundo item: "Calcular o aumento médio, considerando somente as vezes em que o valor aumentou de fato". Uma estratégia possível é <strong>zerar</strong> todos os elementos negativos do vetor e depois calcular sua soma.</p>
 <div class="admonition question short" id="short-2">
 <p class="admonition-title">Question 2</p>
 <form _="
@@ -706,10 +798,66 @@ on submit
     send remember(element: me) to window
 end
         ">
-<p>A <a href="https://thrust.github.io/doc/group__transformations.html">documentação sobre transformações</a> é bastante vasta. Você consegue encontrar alguma função que possa <strong>substituir</strong> elementos de um vetor baseado em uma condição booleana?</p>
+<p>Além da variável <code>sum</code>, existe outra operação que gera efeitos colaterais no código acima? Qual?</p>
 <div class="admonition details">
-<p class="admonition-title">Details</p>
-<p><code>replace_if</code></p>
+<p class="admonition-title">Resposta</p>
+<p>O sorteio de pontos! Lembramos da aula 06 que a geração de números aleatórios é um processo sequencial que depende dos números anteriormente sorteados.</p>
+</div>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input type="submit" value="Enviar"/>
+</div>
+</form>
+</div>
+<div><a _=" on click      add .show to the next &lt;section/&gt;      hide me     send remember(element: me) to window     halt  end" class="md-button md-button--primary progress" href="" id="prog-0"> Progress </a></div>
+</section>
+<section class="progress-section">
+<p>Agora que sabemos que gerar números aleatórios é um processo sequencial, vamos considerar o quanto isso atrapalha nosso programa. Nas próximas questões leve em conta que o gerador de números aleatórios é uma variável compartilhada.</p>
+<div class="admonition question short" id="short-3">
+<p class="admonition-title">Question 3</p>
+<form _="
+on submit
+    halt the event
+    if &lt;.answer/&gt; 
+        show the &lt;.answer/&gt; in me
+    end
+    add @disabled to &lt;input/&gt; in me
+    add .done to me
+    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
+    send remember(element: me) to window
+end
+        ">
+<p>Como evitaríamos problemas ao compartilhar o gerador de números aleatórios?</p>
+<div class="admonition details">
+<p class="admonition-title">Resposta</p>
+<p>Podemos envolver o passo <em>2a</em> do algoritmo em uma seção crítica usando <code>omp critical</code></p>
+</div>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input type="submit" value="Enviar"/>
+</div>
+</form>
+</div>
+<div class="admonition question short" id="short-4">
+<p class="admonition-title">Question 4</p>
+<form _="
+on submit
+    halt the event
+    if &lt;.answer/&gt; 
+        show the &lt;.answer/&gt; in me
+    end
+    add @disabled to &lt;input/&gt; in me
+    add .done to me
+    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
+    send remember(element: me) to window
+end
+        ">
+<p>Se o <code>for</code> acima rodar em uma ordem completamente diferente os resultados se alterarão?</p>
+<div class="admonition details">
+<p class="admonition-title">Resposta</p>
+<p>Desde de que os pares <code>x,y</code> sorteados sejam os mesmos então não haverá problema.</p>
 </div>
 <div class="form-elements">
 <input type="text" value="" name="data"/>
@@ -720,16 +868,178 @@ end
 </div>
 <div class="admonition example">
 <p class="admonition-title">Example</p>
-<p>Use a função acima para substituir todos os valores negativos por <code>0</code> em <code>ganhos_diarios</code>.</p>
+<p>Com base em todas as suas respostas dos exercícios anteriores, faça uma implementação paralela do <code>pi_montecarlo.cpp</code>. Verifique que o valor de <code>sum</code> é igual ao sequencial. Por enquanto, <strong>não se preocupe com o tempo de execução</strong>.</p>
 </div>
-<p>ß</p>
+<div class="admonition question short" id="short-5">
+<p class="admonition-title">Question 5</p>
+<form _="
+on submit
+    halt the event
+    if &lt;.answer/&gt; 
+        show the &lt;.answer/&gt; in me
+    end
+    add @disabled to &lt;input/&gt; in me
+    add .done to me
+    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
+    send remember(element: me) to window
+end
+        ">
+<p>Anote o tempo de execução sequencial e paralelo para o programa acima.</p>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input type="submit" value="Enviar"/>
+</div>
+</form>
+</div>
+<div><a _=" on click      add .show to the next &lt;section/&gt;      hide me     send remember(element: me) to window     halt  end" class="md-button md-button--primary progress" href="" id="prog-1"> Progress </a></div>
+</section>
+<section class="progress-section">
+<h2 id="paralelizando-processos-inerentemente-sequenciais">Paralelizando processos inerentemente sequenciais</h2>
+<p>Como discutimos agora há pouco, a geração de números aleatórios é um processo inerentemente sequencial. Não é que seja impossível paralelizá-lo eficientemente, é que é impossível paralelizá-lo <em>at all</em>. Vamos tentar contornar isso então usando a resposta da <em>Questão 4</em>:</p>
+<div class="admonition quote">
+<p class="admonition-title">O <code>for</code> do algoritmo depende dos pontos gerados, não da ordem que eles foram gerados.</p>
+</div>
+<p>Vamos então adotar uma solução simples: a cada iteração do <code>for</code> criamos um novo gerador de números aleatórios e sorteamos um par de pontos dele.</p>
+<h3 id="primeira-tentativa">Primeira tentativa</h3>
+<div class="admonition question short" id="short-6">
+<p class="admonition-title">Question 6</p>
+<form _="
+on submit
+    halt the event
+    if &lt;.answer/&gt; 
+        show the &lt;.answer/&gt; in me
+    end
+    add @disabled to &lt;input/&gt; in me
+    add .done to me
+    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
+    send remember(element: me) to window
+end
+        ">
+<p>Sabemos que um gerador de números aleatórios gera sempre a mesma sequência de números, dado um parâmetro <code>seed</code> fixo. O quê acontece se usarmos o mesmo <code>seed</code> em todas as iterações? Como consertar isso?</p>
+<div class="admonition details">
+<p class="admonition-title">Resposta</p>
+<p>Sortearemos o mesmo ponto em todas as iterações. Para consertar isso podemos fazer o <code>seed</code> ser baseado no <code>i</code> da iteração atual.</p>
+</div>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input type="submit" value="Enviar"/>
+</div>
+</form>
+</div>
 <div class="admonition example">
 <p class="admonition-title">Example</p>
-<p>Calcule agora e média dos valores positivos do vetor. Você já tem todos os que são positivos no exercício acima e a quantidade de valores positivos.</p>
-<details class="details">
-<summary>Resposta</summary>
-<p><code>5,25179</code></p>
-</details>
+<p>Crie uma implementação baseada na ideia acima.</p>
+</div>
+<div class="admonition question short" id="short-7">
+<p class="admonition-title">Question 7</p>
+<form _="
+on submit
+    halt the event
+    if &lt;.answer/&gt; 
+        show the &lt;.answer/&gt; in me
+    end
+    add @disabled to &lt;input/&gt; in me
+    add .done to me
+    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
+    send remember(element: me) to window
+end
+        ">
+<p>Anote abaixo o valor do pi encontrado e o tempo de execução.</p>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input type="submit" value="Enviar"/>
+</div>
+</form>
+</div>
+<div class="admonition question short" id="short-8">
+<p class="admonition-title">Question 8</p>
+<form _="
+on submit
+    halt the event
+    if &lt;.answer/&gt; 
+        show the &lt;.answer/&gt; in me
+    end
+    add @disabled to &lt;input/&gt; in me
+    add .done to me
+    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
+    send remember(element: me) to window
+end
+        ">
+<p>Os resultados obtidos são idênticos aos do programa original? São próximos?</p>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input type="submit" value="Enviar"/>
+</div>
+</form>
+</div>
+<div><a _=" on click      add .show to the next &lt;section/&gt;      hide me     send remember(element: me) to window     halt  end" class="md-button md-button--primary progress" href="" id="prog-2"> Progress </a></div>
+</section>
+<section class="progress-section">
+<h3 id="segunda-tentativa">Segunda tentativa</h3>
+<p>O problema da nossa tentativa anterior é que não temos <em>de verdade</em> sequências de pontos aleatórias. Bom, na verdade nunca temos, mas o problema é que violamos a promessa que o <code>RNG</code> faz. Ele promete que</p>
+<div class="admonition quote">
+<p class="admonition-title">dado um seed fixo, a sequência de números geradas é indistinguível de uma sequência aleatória de verdade</p>
+</div>
+<p>Ele não promete que, se criarmos vários <code>RNG</code>s, <strong>a sequência formada pelo primeiro par de números gerados por cada um será aleatória.</strong></p>
+<p>Vamos agora tentar uma nova ideia:</p>
+<div class="admonition quote">
+<p class="admonition-title">Cada thread irá gerar <code>N/NUM_THREADS</code> números aleatórios, atualizando <code>sum</code> com os pontos dentro do semi-círculo.</p>
+</div>
+<div class="admonition question short" id="short-9">
+<p class="admonition-title">Question 9</p>
+<form _="
+on submit
+    halt the event
+    if &lt;.answer/&gt; 
+        show the &lt;.answer/&gt; in me
+    end
+    add @disabled to &lt;input/&gt; in me
+    add .done to me
+    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
+    send remember(element: me) to window
+end
+        ">
+<p>Como esta ideia melhora o algoritmo acima?</p>
+<div class="admonition details">
+<p class="admonition-title">Resposta</p>
+<p>Agora teremos <code>NUM_THREADS</code> sequências pseudo-aleatórias "válidas" e juntá-las passa a ser um problema menor. Continuamos precisando usar uma <code>seed</code> para cada, mas ao menos agora temos um número pequeno de <code>RNG</code>s.</p>
+</div>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input type="submit" value="Enviar"/>
+</div>
+</form>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Faça uma implementação da ideia acima. Você pode usar os comandos do OpenMP que quiser. </p>
+</div>
+<div class="admonition question short" id="short-10">
+<p class="admonition-title">Question 10</p>
+<form _="
+on submit
+    halt the event
+    if &lt;.answer/&gt; 
+        show the &lt;.answer/&gt; in me
+    end
+    add @disabled to &lt;input/&gt; in me
+    add .done to me
+    hide the &lt;input[type=&quot;submit&quot;]/&gt; in me
+    send remember(element: me) to window
+end
+        ">
+<p>Anote o tempo de execução e o pi encontrado.</p>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input type="submit" value="Enviar"/>
+</div>
+</form>
 </div>
 </section>
 
@@ -745,6 +1055,42 @@ end
       </main>
       
         <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../15-efeitos-colaterais/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 15 - Paralelismo - Exercício / Efeitos Colaterais" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              15 - Paralelismo - Exercício / Efeitos Colaterais
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../../projetos/" class="md-footer__link md-footer__link--next" aria-label="Next: Travelling Sales Person (TSP)" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Travelling Sales Person (TSP)
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
