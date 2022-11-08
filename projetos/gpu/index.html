@@ -542,8 +542,22 @@
   
   
     <li class="md-nav__item">
-      <a href="../../aulas/17-intro-gpu/" class="md-nav__link">
-        17 - GPU - Introdução
+      <a href="../../aulas/17-18-intro-gpu/" class="md-nav__link">
+        17 e 18 - GPU - Introdução
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/19-gpu-iteradores/" class="md-nav__link">
+        19 - GPU - Iteradores
       </a>
     </li>
   
@@ -624,21 +638,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#correcao-automatica" class="md-nav__link">
-    Correção automática
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -657,14 +656,8 @@
 
 <section class="progress-section show">
 <h1 id="paralelismo-em-gpu">Paralelismo em GPU</h1>
-<p>A parte obrigatória final do projeto consiste em implementar a busca local em GPU. Os requisitos básicos serão os mesmos da <a href="busca-local">busca local</a> e da parte de <a href="desempenho-sequencial">desempenho sequencial</a></p>
-<ul>
-<li>O programa retorna sempre os mesmos resultados.</li>
-<li>É possível configurar o <em>seed</em> do programa usando a variável de ambiente <code>SEED</code></li>
-</ul>
-<h2 id="correcao-automatica">Correção automática</h2>
-<p>O corretor compilará todos os arquivos <em>.cu</em> na pasta busca local em um executável <code>gpu</code>. Esse executável deverá produzir as mesmas informações de debug que a busca local sequencial se a variável de ambiente <code>DEBUG</code> tiver valor <code>1</code>. Se ela não existir assuma <code>DEBUG=0</code>.</p>
-<p>O requisito básico para a implementação em GPU é sua velocidade. Por isso, serão aplicadas as mesmas checagens da implementação sequencial, mas agora com um tempo limite agressivo. A princípio, não seria possível passar nos testes usando somente a CPU.</p>
+<p>A parte obrigatória final do projeto consiste em implementar a busca local em GPU. Os requisitos básicos serão os mesmos da <a href="busca-local">busca local</a>.</p>
+<p>Deixe seu código bem documentado pois você terá de entregar um relatório completo sobre os ganhos de desempenho da sua implementação.</p>
 </section>
 
 
