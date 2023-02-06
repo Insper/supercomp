@@ -10,22 +10,24 @@
       
         <link rel="canonical" href="https://insper.github.io/supercomp/projetos/2021-2/relatorio-1/">
       
+      
+      
       <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.0, mkdocs-material-8.4.0">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.11">
     
     
       
-        <title>Relatório - v1 - SuperComputação - 2022/2</title>
+        <title>Relatório - v1 - SuperComputação - 2023/1</title>
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.69437709.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.0d440cfe.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.cbb835fc.min.css">
-        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.2505c338.min.css">
       
       
+
     
     
     
@@ -54,95 +56,7 @@
 
     
     
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:700|Oxygen+Mono|Source+Sans+Pro:700|Source+Serif+Pro&amp;display=swap">
-<link rel="stylesheet" href="../../../assets/css/devlife.css">
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-        processEscapes: true
-      }
-    });
-  </script>
-      
-  <script type="text/javascript"
-          src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-  </script>
-  
-
-<script src="https://unpkg.com/hyperscript.org"></script>
-<script src="https://unpkg.com/htmx.org@1.8.0"></script>
-
-<script>
-    function keyFromElement(el) {
-        const docAddr = document.location.pathname;
-        return `${docAddr}/${el.id}`;
-    }
-
-    document.addEventListener("DOMContentLoaded", function () {
-        document.querySelectorAll("a.progress").forEach((e) => {
-            const k = keyFromElement(e);
-            if (localStorage.getItem(k) !== null) {
-                e.click();
-            }
-        });
-
-        document.querySelectorAll("div.admonition.question.short, " +
-                                  "div.admonition.question.medium, " +
-                                  "div.admonition.question.long").forEach((e) => {
-            const k = keyFromElement(e);
-            const itemValue = localStorage.getItem(k);
-            if (itemValue !== null) {
-                e.querySelector("input[name='data'], textarea[name='data']").value = itemValue;
-                e.querySelector("input[type='submit']").click();
-            }
-        });
-
-        document.querySelectorAll("div.admonition.question.choice").forEach((e) => {
-            const k = keyFromElement(e);
-            const itemValue = localStorage.getItem(k);
-            if (itemValue !== null) {
-                e.querySelector(`input[name='data'][value='${itemValue}'`).checked = true;
-                e.querySelector("input[type='submit']").click();
-            }
-        });
-
-        document.querySelectorAll("div.admonition.exercise").forEach(e => {
-            const k = keyFromElement(e);
-            const itemValue = localStorage.getItem(k);
-            if (itemValue !== null) {
-                e.querySelector("input[type='submit']").click();
-            }
-        });
-
-        window.addEventListener("remember", function (e) {
-            const element = e.detail.element;
-            if (element.classList.contains("progress")) {
-                localStorage[keyFromElement(e.detail.element)] = true;
-            } else if (element.tagName === "FORM") {
-                const parentElement = element.parentElement;
-                if (parentElement.classList.contains("choice")) {
-                    const choices = element.querySelectorAll("input[name='data'][type='radio']");
-                    for (let choice of choices) {
-                        if (choice.checked) {
-                            localStorage[keyFromElement(element.parentElement)] = choice.value;
-                        }
-                    }
-                } else if (parentElement.classList.contains("short") ||
-                           parentElement.classList.contains("medium") ||
-                           parentElement.classList.contains("long")) {
-                    const textElement = element.querySelector("input[name='data'], textarea[name='data']");
-                    localStorage[keyFromElement(element.parentElement)] = textElement.value;
-                } else if (parentElement.classList.contains("exercise")) {
-                    localStorage[keyFromElement(parentElement)] = true;
-                }
-            }
-        });
-    });
-</script>
-
-
+    
   </head>
   
   
@@ -151,7 +65,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="grey" data-md-color-accent="red">
   
     
     
@@ -175,7 +89,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../.." title="SuperComputação - 2022/2" class="md-header__button md-logo" aria-label="SuperComputação - 2022/2" data-md-component="logo">
+    <a href="../../.." title="SuperComputação - 2023/1" class="md-header__button md-logo" aria-label="SuperComputação - 2023/1" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -188,7 +102,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            SuperComputação - 2022/2
+            SuperComputação - 2023/1
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -217,7 +131,7 @@
       </label>
       <nav class="md-search__options" aria-label="Search">
         
-        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
         </button>
       </nav>
@@ -229,7 +143,7 @@
           <div class="md-search-result__meta">
             Initializing search
           </div>
-          <ol class="md-search-result__list"></ol>
+          <ol class="md-search-result__list" role="presentation"></ol>
         </div>
       </div>
     </div>
@@ -241,7 +155,7 @@
         <a href="https://github.com/insper/supercomp" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
   </div>
   <div class="md-source__repository">
     SuperComp
@@ -273,20 +187,20 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../.." title="SuperComputação - 2022/2" class="md-nav__button md-logo" aria-label="SuperComputação - 2022/2" data-md-component="logo">
+    <a href="../../.." title="SuperComputação - 2023/1" class="md-nav__button md-logo" aria-label="SuperComputação - 2023/1" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
 
     </a>
-    SuperComputação - 2022/2
+    SuperComputação - 2023/1
   </label>
   
     <div class="md-nav__source">
       <a href="https://github.com/insper/supercomp" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
   </div>
   <div class="md-source__repository">
     SuperComp
@@ -337,17 +251,18 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
       
       
       
-      
-        <label class="md-nav__link" for="__nav_3">
+        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
           Aulas
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" aria-label="Aulas" data-md-level="1">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_3">
           <span class="md-nav__icon md-icon"></span>
           Aulas
@@ -362,230 +277,6 @@
     <li class="md-nav__item">
       <a href="../../../aulas/01-introducao/" class="md-nav__link">
         01 - Introdução
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../aulas/02-03-implementacao-c%2B%2B/" class="md-nav__link">
-        02 e 03 - C++
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../aulas/04-profiling/" class="md-nav__link">
-        04 - Profiling
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../aulas/05-reforco-c%2B%2B/" class="md-nav__link">
-        05 - Reforço C++
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../aulas/06-heuristicas/" class="md-nav__link">
-        06 - Heurísticas
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../aulas/07-aleatorizacao/" class="md-nav__link">
-        07 - Aleatorização
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../aulas/08-busca-local/" class="md-nav__link">
-        08 - Busca Local
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../aulas/09-busca-global/" class="md-nav__link">
-        09 - Busca Exaustiva
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../aulas/10-busca-global-II/" class="md-nav__link">
-        10 - Comparação de desempenho
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../aulas/11-branch-and-bound/" class="md-nav__link">
-        11 - Branch and Bound
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../aulas/12-13-14-paralelismo/" class="md-nav__link">
-        12, 13 e 14 - Paralelismo
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../aulas/15-efeitos-colaterais/" class="md-nav__link">
-        15 - Paralelismo - Exercício / Efeitos Colaterais
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../aulas/16-efeitos-colaterais-II/" class="md-nav__link">
-        16 - Paralelismo - Efeitos Colaterais II
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../aulas/17-18-intro-gpu/" class="md-nav__link">
-        17 e 18 - GPU - Introdução
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../aulas/19-gpu-iteradores/" class="md-nav__link">
-        19 - GPU - Iteradores
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../aulas/20-gpu-customizacao/" class="md-nav__link">
-        20 - GPU - Customização
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../aulas/21-gpu-aleatoriedade/" class="md-nav__link">
-        21 - GPU - Aleatoriedade
       </a>
     </li>
   
@@ -609,17 +300,18 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
       
       
       
-      
-        <label class="md-nav__link" for="__nav_4">
+        <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
           Projeto
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" aria-label="Projeto" data-md-level="1">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_4">
           <span class="md-nav__icon md-icon"></span>
           Projeto
@@ -633,7 +325,7 @@
   
     <li class="md-nav__item">
       <a href="../../" class="md-nav__link">
-        Travelling Sales Person (TSP)
+        Maratona de Filmes
       </a>
     </li>
   
@@ -672,18 +364,18 @@
               </div>
             
           
-          <div class="md-content" data-md-component="content">
-            <article class="md-content__inner md-typeset">
-              
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
                 
-  <a href="https://github.com/insper/supercomp/edit/master/docs/projetos/2021-2/relatorio-1.md" title="Edit this page" class="md-content__button md-icon">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
-  </a>
+                  
+
+  
+  
 
 
 
-<section class="progress-section show">
-<h1 id="relatorio-v1">Relatório - v1</h1>
+<h1 id="relatorio-v1">Relatório - v1<a class="headerlink" href="#relatorio-v1" title="Permanent link">&para;</a></h1>
 <p>Nesta primeira parte do relatório iremos analisar as implementações já criadas com relação a sua velocidade e qualidade da solução. Os objetivos deste relatório são </p>
 <ul>
 <li>criar entradas de tamanho adequado para os propósitos dos testes</li>
@@ -693,15 +385,16 @@
 <p>Seu trabalhou deverá ser entregue como um arquivo <em>PDF</em> chamado <em>relatorio-intermediario.pdf</em> na pasta <em>relatorios</em> do repositório. Ele poderá ser gerado a partir de um Jupyter notebook (como feito na <a href="/aulas/01-introducao">aula 01</a>) ou usando a ferramenta <a href="https://mpastell.com/pweave/">pweave</a> (<strong>recomendado</strong>). A rubrica de avaliação está disponível abaixo e <a href="../rubrica-relatorio.pdf">também neste link</a>.</p>
 <p>Data de entrega: 31/10/2021, pelo blackboard.</p>
 <p><embed src="../rubrica-relatorio.pdf" width="100%" height="400px"></embed></p>
-</section>
 
 
 
 
-              
-            </article>
-            
-          </div>
+
+                
+              </article>
+            </div>
+          
+          
         </div>
         
       </main>
@@ -711,7 +404,6 @@
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
       <div class="md-copyright">
-  
   
   
     Made with
@@ -730,10 +422,18 @@
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.ecf98df9.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.db81ec45.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.9c69f0bc.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.6df46069.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.0.0/js-yaml.min.js"></script>
+      
+        <script src="../../../js/markdown-enhancer.js"></script>
+      
+        <script src="../../../js/slides.js"></script>
       
     
   </body>
