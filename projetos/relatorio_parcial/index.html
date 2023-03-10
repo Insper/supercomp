@@ -8,23 +8,25 @@
       
       
       
-        <link rel="canonical" href="https://insper.github.io/supercomp/projetos/2022-1/SequenceGenerator/">
+        <link rel="canonical" href="https://insper.github.io/supercomp/projetos/relatorio_parcial/">
       
       
+        <link rel="prev" href="../local/">
       
-      <link rel="icon" href="../../../assets/images/favicon.png">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.11">
     
     
       
-        <title>SequenceGenerator - SuperComputação - 2023/1</title>
+        <title>Relatório Parcial - SuperComputação - 2023/1</title>
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.0d440cfe.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.0d440cfe.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.2505c338.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.2505c338.min.css">
       
       
 
@@ -40,17 +42,17 @@
       
     
     
-      <link rel="stylesheet" href="../../../css/printing.css">
+      <link rel="stylesheet" href="../../css/printing.css">
     
-      <link rel="stylesheet" href="../../../css/extra.css">
+      <link rel="stylesheet" href="../../css/extra.css">
     
-      <link rel="stylesheet" href="../../../css/ansi-colours.css">
+      <link rel="stylesheet" href="../../css/ansi-colours.css">
     
-      <link rel="stylesheet" href="../../../css/jupyter-cells.css">
+      <link rel="stylesheet" href="../../css/jupyter-cells.css">
     
-      <link rel="stylesheet" href="../../../css/pandas-dataframe.css">
+      <link rel="stylesheet" href="../../css/pandas-dataframe.css">
     
-    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -74,6 +76,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#relatorio-parcial" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -84,7 +91,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../.." title="SuperComputação - 2023/1" class="md-header__button md-logo" aria-label="SuperComputação - 2023/1" data-md-component="logo">
+    <a href="../.." title="SuperComputação - 2023/1" class="md-header__button md-logo" aria-label="SuperComputação - 2023/1" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -103,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              SequenceGenerator
+              Relatório Parcial
             
           </span>
         </div>
@@ -182,7 +189,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../.." title="SuperComputação - 2023/1" class="md-nav__button md-logo" aria-label="SuperComputação - 2023/1" data-md-component="logo">
+    <a href="../.." title="SuperComputação - 2023/1" class="md-nav__button md-logo" aria-label="SuperComputação - 2023/1" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -213,7 +220,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../.." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         Home
       </a>
     </li>
@@ -228,7 +235,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../sobre/" class="md-nav__link">
+      <a href="../../sobre/" class="md-nav__link">
         Burocracias
       </a>
     </li>
@@ -270,7 +277,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aulas/01-introducao/" class="md-nav__link">
+      <a href="../../aulas/01-introducao/" class="md-nav__link">
         01 - Introdução
       </a>
     </li>
@@ -284,7 +291,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aulas/02-03-implementacao-c%2B%2B/" class="md-nav__link">
+      <a href="../../aulas/02-03-implementacao-c%2B%2B/" class="md-nav__link">
         02 e 03 - C++
       </a>
     </li>
@@ -298,7 +305,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aulas/04-profiling/" class="md-nav__link">
+      <a href="../../aulas/04-profiling/" class="md-nav__link">
         04 - Profiling
       </a>
     </li>
@@ -312,7 +319,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aulas/05-heuristicas/" class="md-nav__link">
+      <a href="../../aulas/05-heuristicas/" class="md-nav__link">
         05 - Heurísticas
       </a>
     </li>
@@ -326,7 +333,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aulas/06-aleatorizacao/" class="md-nav__link">
+      <a href="../../aulas/06-aleatorizacao/" class="md-nav__link">
         06 - Aleatorização
       </a>
     </li>
@@ -340,7 +347,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aulas/07-busca-local/" class="md-nav__link">
+      <a href="../../aulas/07-busca-local/" class="md-nav__link">
         07 - Busca Local
       </a>
     </li>
@@ -354,7 +361,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aulas/08-busca-global/" class="md-nav__link">
+      <a href="../../aulas/08-busca-global/" class="md-nav__link">
         08 - Busca Exaustiva
       </a>
     </li>
@@ -374,14 +381,16 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
       
       
       
@@ -390,7 +399,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_4">
           <span class="md-nav__icon md-icon"></span>
           Projeto
@@ -403,7 +412,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../" class="md-nav__link">
+      <a href="../" class="md-nav__link">
         Maratona de Filmes
       </a>
     </li>
@@ -417,7 +426,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../heuristico/" class="md-nav__link">
+      <a href="../heuristico/" class="md-nav__link">
         Heurística Gulosa
       </a>
     </li>
@@ -431,7 +440,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../local/" class="md-nav__link">
+      <a href="../local/" class="md-nav__link">
         Aleatoriedade
       </a>
     </li>
@@ -443,11 +452,21 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../../relatorio_parcial/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Relatório Parcial
       </a>
+      
     </li>
   
 
@@ -476,6 +495,8 @@
   
   
   
+    
+  
   
 </nav>
                   </div>
@@ -494,82 +515,30 @@
 
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-<script>
-(function() {
-  function addWidgetsRenderer() {
-    var requireJsScript = document.createElement('script');
-    requireJsScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js';
-
-    var mimeElement = document.querySelector('script[type="application/vnd.jupyter.widget-view+json"]');
-    var jupyterWidgetsScript = document.createElement('script');
-    var widgetRendererSrc = 'https://unpkg.com/@jupyter-widgets/html-manager@*/dist/embed-amd.js';
-    var widgetState;
-
-    // Fallback for older version:
-    try {
-      widgetState = mimeElement && JSON.parse(mimeElement.innerHTML);
-
-      if (widgetState && (widgetState.version_major < 2 || !widgetState.version_major)) {
-        widgetRendererSrc = 'jupyter-js-widgets@*/dist/embed.js';
-      }
-    } catch(e) {}
-
-    jupyterWidgetsScript.src = widgetRendererSrc;
-
-    document.body.appendChild(requireJsScript);
-    document.body.appendChild(jupyterWidgetsScript);
-  }
-
-  document.addEventListener('DOMContentLoaded', addWidgetsRenderer);
-}());
-</script>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>GERADOR DE INSTÂNCIAS PARA COMPARAÇÃO DE SEQUENCIAS DE DNA</strong></p>
-<p>Para usar este gerador, você deve fornecer três parâmetros:</p>
-<p>n = tamanho da primeira sequencia </p>
-<p>m = tamanho da segunda instância </p>
-<p>file = nome do arquivo da instância a ser gerada</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">random</span>
-<span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="n">m</span> <span class="o">=</span> <span class="mi">40</span>
-<span class="n">file</span> <span class="o">=</span> <span class="s1">&#39;dna.seq&#39;</span>
-<span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
-<span class="n">seq</span><span class="o">=</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span>
-     <span class="nb">str</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span>
-     <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">choices</span><span class="p">([</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="s1">&#39;T&#39;</span><span class="p">,</span><span class="s1">&#39;C&#39;</span><span class="p">,</span><span class="s1">&#39;G&#39;</span><span class="p">,</span><span class="s1">&#39;-&#39;</span><span class="p">],</span><span class="n">k</span><span class="o">=</span><span class="n">n</span><span class="p">))</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span>
-     <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">choices</span><span class="p">([</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="s1">&#39;T&#39;</span><span class="p">,</span><span class="s1">&#39;C&#39;</span><span class="p">,</span><span class="s1">&#39;G&#39;</span><span class="p">,</span><span class="s1">&#39;-&#39;</span><span class="p">],</span><span class="n">k</span><span class="o">=</span><span class="n">m</span><span class="p">))]</span>
-<span class="n">f</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span>
-<span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">seq</span><span class="p">))</span>
-</code></pre></div>
-
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>
-<code>10
-40
-TGGCGAT--C
-AGC-TCTCTTC--ATT--CAC-TACACCGACA-CGC-G-A
-</code>
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
+<h1 id="relatorio-parcial">Relatório Parcial<a class="headerlink" href="#relatorio-parcial" title="Permanent link">&para;</a></h1>
+<p>O relatório parcial é a entrega intermediária do projeto, a qual deve ser feita pelo <strong>blackboard</strong> até a data da <strong>prova intermediária</strong>.</p>
+<p><strong>Seu relatório deverá conter as implementações gulosa e aleatória</strong>. </p>
+<p>O que você deverá fazer:</p>
+<ul>
+<li>
+<p>No blackboard, você deve fazer upload de todos os <em>códigos-fonte</em>, <em>arquivos de input</em>, <em>arquivos de output</em> para cada heurítica. Caso opte por enviar um link do github com o repositório completo, também poderá faze-lo, desde que garanta que teremos acesso aos arquivos no seu repositório;</p>
+</li>
+<li>
+<p>Você deve elaborar um relatório parcial contendo as seguintes seções:</p>
+<ul>
+<li>
+<p>Para cada heurística você deve explicar como implementou a heurística (detalhe como você tratou o input, qual a lógica do seu output, quais invariantes existem em suas heurísticas), apresentar (i) o código-fonte comentado, (ii) fazer considerações sobre o profiling (valgrind) do código-fonte (use apenas 1 arquivo de input para isso, não há necessidade de fazer esse profiling para vários inputs), (iii) o resultado compartivo entre as heurísticas quando você varia o input (o input deve variar na quantidade de filmes e de categorias).</p>
+</li>
+<li>
+<p>Seu relatório deve ser gráficos e tabelas que subsidem as suas considerações</p>
+</li>
+<li>
+<p>É permitido criar um programa em python ou outra linguagem que automatize a geração de seus resultados, isto é, que execute seus códigos C++ em função dos diferentes inputs.</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>Preferencialmente o relatório deve ser apresentado em formato <em>html</em>. </p>
 
 
 
@@ -607,18 +576,18 @@ AGC-TCTCTTC--ATT--CAC-TACACCGACA-CGC-G-A
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.db81ec45.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.db81ec45.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.6df46069.min.js"></script>
+      <script src="../../assets/javascripts/bundle.6df46069.min.js"></script>
       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.0.0/js-yaml.min.js"></script>
       
-        <script src="../../../js/markdown-enhancer.js"></script>
+        <script src="../../js/markdown-enhancer.js"></script>
       
-        <script src="../../../js/slides.js"></script>
+        <script src="../../js/slides.js"></script>
       
     
   </body>

@@ -11,13 +11,17 @@
         <link rel="canonical" href="https://insper.github.io/supercomp/projetos/local/">
       
       
+        <link rel="prev" href="../heuristico/">
+      
+      
+        <link rel="next" href="../relatorio_parcial/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.11">
     
     
       
-        <title>Um algoritmo Local para Alinhamento - SuperComputação - 2023/1</title>
+        <title>Aleatoriedade - SuperComputação - 2023/1</title>
       
     
     
@@ -75,7 +79,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#um-algoritmo-local-para-alinhamento" class="md-skip">
+        <a href="#aleatoriedade" class="md-skip">
           Skip to content
         </a>
       
@@ -108,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Um algoritmo Local para Alinhamento
+              Aleatoriedade
             
           </span>
         </div>
@@ -379,14 +383,16 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
       
       
       
@@ -395,7 +401,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_4">
           <span class="md-nav__icon md-icon"></span>
           Projeto
@@ -424,6 +430,44 @@
     <li class="md-nav__item">
       <a href="../heuristico/" class="md-nav__link">
         Heurística Gulosa
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Aleatoriedade
+      </a>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../relatorio_parcial/" class="md-nav__link">
+        Relatório Parcial
       </a>
     </li>
   
@@ -473,29 +517,11 @@
 
 
 
-<h1 id="um-algoritmo-local-para-alinhamento">Um algoritmo Local para Alinhamento<a class="headerlink" href="#um-algoritmo-local-para-alinhamento" title="Permanent link">&para;</a></h1>
+<h1 id="aleatoriedade">Aleatoriedade<a class="headerlink" href="#aleatoriedade" title="Permanent link">&para;</a></h1>
 <p>Como vimos em aula, aleatoriedade é uma estratégia bastante comum para construção de algoritmos de busca local, podendo ser usada
-de forma isolada ou de forma complementar a outra estratégia de varredura de um espaço de soluções. Em problemas de alinhamento,
-varreduras suportadas por aleatoriedade tem produzido algoritmos bastante efetivos.</p>
-<p>Dentro deste contexto, vamos considerar o algoritmo proposto abaixo:</p>
-<p>ALGORITMO BUSCA LOCAL COM ALEATORIEDADE</p>
-<p>Entrada: Duas sequencias de DNA a[i] e b[j], de tamanhos n e m respectivamente,pesos wmat, wmis e wgap para match, mismatch e gap respectivamente</p>
-<p>Saída: Score de um alinhamento das sequencias
-       Subsequencias alinhadas</p>
-<div class="codehilite"><pre><span></span><code>1. Gerar uma subsequencia sb=b[j,j+1,...,j+k] de b, de tamanho aleatório k, 1&lt;=k&lt;=m, e 0&lt;=j&lt;=m 
-2. Gerar um número aleatório inteiro positivo p
-3. Gerar p subsequencias sa=a[i,i+1,...,i+k] de a, com tamanho k calculado no passo (1), 0&lt;=i&lt;=n
-4. Calcular os scores de cada par (sa,sb) com os pesos wmat, wmis e wgap
-5. Devolver o score máximo m entre os scores do passo (4) e as subsequencias associadas a ele
-</code></pre></div>
-
-<p>A partir desta descrição, nosso primeiro projeto terá duas tarefas:</p>
-<ul>
-  <li> Implementar um programa C++ para ler um arquivo contendo os tamanhos de duas sequencias de DNA, seguidos das duas sequencias, uma por linha. Calcular o score máximo utilizando o algoritmo acima, assim como as subsequencias associadas a ele. 
-  <li> Testar o algoritmo diversas vezes e comparar seus resultados com a heurística do primeiro projeto observando, principalmente, o seu comportamento em relação aos valores aleatórios k e p. Estes resultados e sua comparação deverão estar presentes no relatório a ser entregue posteriormente.
-</ul>
-
-<p>No diretório do projeto, há um gerador de entradas disponibilizado como um notebook Python.</p>
+de forma isolada ou de forma complementar a outra estratégia de varredura de um espaço de soluções. </p>
+<p>Essa implementação consiste na adaptação da heurística gulosa de nosso projeto. A proposta é que você modifique a sua heurística gulosa de modo que ao longo da seleção de um filme você tenha 25% de chance de pegar outro filme qualquer que respeite o horário. Isso fará com que sua heurística tenha um pouco mais de exploration e possamos ter alguns resultados melhores. </p>
+<p><em>Importante</em>: é essencial que você guarde todos os inputs usados ao longo do projeto, para que possa comparar o desempenho de seus algoritmos conforme mudamos a heurística. Ou seja, todas as heurísticas devem ser submetidas aos mesmos arquivos de input. O seu resultado deve ser comparado sob duas perspectivas, no mínimo: (i) tempo de execução em função do aumento de filmes e de categorias e (ii) tempo de tela (isto é, será que estamos conseguindo ocupar bem as 24h do dia assitindo filmes?).</p>
 
 
 
