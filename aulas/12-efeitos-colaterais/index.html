@@ -11,13 +11,17 @@
         <link rel="canonical" href="https://insper.github.io/supercomp/aulas/12-efeitos-colaterais/">
       
       
+        <link rel="prev" href="../11-paralelismo/">
+      
+      
+        <link rel="next" href="../../projetos/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.11">
     
     
       
-        <title>15 - Scheduling e Efeitos Colaterais - SuperComputação - 2023/1</title>
+        <title>11 - Paralelismo - Exercício / Efeitos Colaterais - SuperComputação - 2023/1</title>
       
     
     
@@ -75,7 +79,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#15-scheduling-e-efeitos-colaterais" class="md-skip">
+        <a href="#11-scheduling-e-efeitos-colaterais" class="md-skip">
           Skip to content
         </a>
       
@@ -108,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              15 - Scheduling e  Efeitos Colaterais
+              11 - Paralelismo - Exercício / Efeitos Colaterais
             
           </span>
         </div>
@@ -246,14 +250,16 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
       
       
       
@@ -262,7 +268,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_3">
           <span class="md-nav__icon md-icon"></span>
           Aulas
@@ -390,6 +396,30 @@
       <a href="../11-paralelismo/" class="md-nav__link">
         10 - Paralelismo
       </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        11 - Paralelismo - Exercício / Efeitos Colaterais
+      </a>
+      
     </li>
   
 
@@ -529,7 +559,7 @@
 
 
 
-<h1 id="15-scheduling-e-efeitos-colaterais">15 - Scheduling e  Efeitos Colaterais<a class="headerlink" href="#15-scheduling-e-efeitos-colaterais" title="Permanent link">&para;</a></h1>
+<h1 id="11-scheduling-e-efeitos-colaterais">11 - Scheduling e  Efeitos Colaterais<a class="headerlink" href="#11-scheduling-e-efeitos-colaterais" title="Permanent link">&para;</a></h1>
 <h1 id="scheduling">Scheduling<a class="headerlink" href="#scheduling" title="Permanent link">&para;</a></h1>
 <p>Vamos começar compreendendo melhor os <code>schedulers</code> que existem no openmp.
 No github, obtenha o arquivo <code>omp_schedulers.cpp</code>, compile e execute-o. Você deverá obter um output similar ao abaixo. Verifique na documentação do OpenMP (<a href="https://www.intel.com/content/www/us/en/develop/documentation/oneapi-dpcpp-cpp-compiler-dev-guide-and-reference/top/optimization-and-programming-guide/openmp-support/worksharing-using-openmp.html">link</a>) e busque compreender melhor como funciona cada scheduler. </p>
