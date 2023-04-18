@@ -11,6 +11,8 @@
         <link rel="canonical" href="https://insper.github.io/supercomp/projetos/openmp/">
       
       
+        <link rel="prev" href="../relatorio_parcial/">
+      
       
       <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.11">
@@ -435,14 +437,16 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
       
       
       
@@ -451,7 +455,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_4">
           <span class="md-nav__icon md-icon"></span>
           Projeto
@@ -514,6 +518,30 @@
 
             
           
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Paralelismo com OpenMP
+      </a>
+      
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -558,27 +586,9 @@
 
 
 <h1 id="paralelismo-com-openmp">Paralelismo com OpenMP<a class="headerlink" href="#paralelismo-com-openmp" title="Permanent link">&para;</a></h1>
-<p>Experimentamos, até agora, três estratégias sequenciais para o problema de alinhamento de sequencias de DNA: busca heurística, busca local e busca exaustiva.
-Com os experimentos do primeiro relatório, pudemos comparar o desempenho sequencial de cada um deles. Agora vamos começar a explorar estratégias de paralelismo nos dois projetos finais.
-Faremos isto com dois modelos paralelos: multicore(CPU) e manycore(GPU).</p>
-<p>No presente projeto, exploraremos estratégias de programação multicore com OpenMP. Para tanto, você terá as seguintes tarefas:</p>
-<ul>
-  <li> analisar as suas três implementações de estratégias sequenciais para identificar pontos passíveis de paralelização com OpenMP
-  <li> escolher, dentre uma das três estratégias que você implementou, aquela que poderia produzir o melhor speedup com OpenMP
-  <li> implementar a paralelização com OpenMP, explorando mecanismos como parallel for, parallel task, scheduling ou outro mecanismo que você tenha estudado em OpenMP
-</ul>
-
-<p>O que entregar:</p>
-<ul>
-  <li> código-fonte da implementação sequencial e da implementação paralela
-  <li> arquivos de testes utilizados
-  <li> pequeno relatório justificando a escolha da implementação sequencial que foi paralelizada
-  <li> resultados dos testes
-</ul>
-
-<p>Um detalhe importante é que, como agora estamos trabalhando com paralelismo, os tamanhos dos arquivos de testes precisam ser bem maiores. Muitas vezes, os resultados de speedup 
-aparecem a partir de grandes instâncias do problema.</p>
-<p>Caso você considere necessário, pode refatorar a sua implementação sequencial para poder explorar mais mecanismos de OpenMP.</p>
+<p>Até agora experimentamos heurísticas que buscaram resolver o nosso problema em um tempo razoável, sem garantias de otimalidade. É chegado o momento de incorporar o paralelismo de tarefas em nossas alternativas de resolução.</p>
+<p>Para isso, você deve modificar a versão <strong>exaustiva</strong> de sua implementação. Você pode fazer uso da diretiva <code>#pragma omp parallel for</code> para distribuir as iterações de um loop entre as threads disponíveis. Dentro do loop, você pode fazer a verificação de cada filme e, caso ele esteja dentro das restrições de horário e categoria, incrementar uma variável compartilhada <code>count</code>. Observe que por ser uma variável compartilhada, você precisa preservar essa região crítica entre as threads. </p>
+<p>Vale ressaltar que o uso do OpenMP não necessariamente irá garantir um desempenho melhor, pois a paralelização tem um overhead que pode acabar diminuindo a performance do programa em alguns casos. É importante fazer testes para verificar se a utilização do OpenMP é realmente benéfica para o problema em questão.</p>
 
 
 
