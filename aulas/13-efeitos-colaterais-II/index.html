@@ -11,13 +11,17 @@
         <link rel="canonical" href="https://insper.github.io/supercomp/aulas/13-efeitos-colaterais-II/">
       
       
+        <link rel="prev" href="../12-efeitos-colaterais/">
+      
+      
+        <link rel="next" href="../../projetos/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.11">
     
     
       
-        <title>16 - efeitos colaterais II - SuperComputação - 2023/1</title>
+        <title>12 - Paralelismo - Efeitos Colaterais II - SuperComputação - 2023/1</title>
       
     
     
@@ -75,7 +79,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#16-efeitos-colaterais-ii" class="md-skip">
+        <a href="#efeitos-colaterais-ii" class="md-skip">
           Skip to content
         </a>
       
@@ -108,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              16 - efeitos colaterais II
+              12 - Paralelismo - Efeitos Colaterais II
             
           </span>
         </div>
@@ -246,14 +250,16 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
       
       
       
@@ -262,7 +268,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_3">
           <span class="md-nav__icon md-icon"></span>
           Aulas
@@ -404,6 +410,88 @@
       <a href="../12-efeitos-colaterais/" class="md-nav__link">
         11 - Paralelismo - Exercício / Efeitos Colaterais
       </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          12 - Paralelismo - Efeitos Colaterais II
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        12 - Paralelismo - Efeitos Colaterais II
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#e-possivel-paralelizar-o-problema" class="md-nav__link">
+    É possível paralelizar o problema?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paralelizando-processos-inerentemente-sequenciais" class="md-nav__link">
+    Paralelizando processos inerentemente sequenciais
+  </a>
+  
+    <nav class="md-nav" aria-label="Paralelizando processos inerentemente sequenciais">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#primeira-tentativa" class="md-nav__link">
+    Primeira tentativa
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#segunda-tentativa" class="md-nav__link">
+    Segunda tentativa
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -585,7 +673,7 @@
 
 
 
-<h1 id="16-efeitos-colaterais-ii">16 - efeitos colaterais II<a class="headerlink" href="#16-efeitos-colaterais-ii" title="Permanent link">&para;</a></h1>
+<h1 id="efeitos-colaterais-ii">Efeitos colaterais II<a class="headerlink" href="#efeitos-colaterais-ii" title="Permanent link">&para;</a></h1>
 <p>Na aula de hoje iremos trabalhar com um algoritmo de sorteios aleatórios para calcular o <code>pi</code>. Ele é baseado em uma técnica de Otimização, Simulação e Estimação Paramétrica chamada <a href="https://en.wikipedia.org/wiki/Monte_Carlo_method">Monte Carlo</a>.</p>
 <p>O algoritmo sequencial se baseia em sorteios de pontos dentro de um quadrado de lado <code>2</code>. Se a distância entre o ponto e o centro do quadrado for menor que 1 então o ponto cai dentro do círculo inscrito no quadrado. A quantidade de pontos que caem dentro do quadrado é proporcional a <span class="arithmatex"><span class="MathJax_Preview">\pi</span><script type="math/tex">\pi</script></span>. Veja abaixo um resumo do algoritmo.</p>
 <p><img alt="https://upload.wikimedia.org/wikipedia/commons/8/84/Pi_30K.gif" src="https://upload.wikimedia.org/wikipedia/commons/8/84/Pi_30K.gif" /></p>
