@@ -11,6 +11,8 @@
         <link rel="canonical" href="https://insper.github.io/supercomp/projetos/gpu/">
       
       
+        <link rel="prev" href="../openmp/">
+      
       
       <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.11">
@@ -477,14 +479,16 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
       
       
       
@@ -493,7 +497,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_4">
           <span class="md-nav__icon md-icon"></span>
           Projeto
@@ -570,6 +574,30 @@
 
             
           
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Paralelismo com GPU
+      </a>
+      
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -614,87 +642,58 @@
 
 
 <h1 id="paralelismo-com-gpu">Paralelismo com GPU<a class="headerlink" href="#paralelismo-com-gpu" title="Permanent link">&para;</a></h1>
-<p>Neste último projeto, vamos explorar os mecanismos de paralelismo multicore com GPU. Para tanto, vamos considerar a implementação da busca exaustiva que vimos, na análise realizada 
-no relatório parcial, ter o desempenho bastante comprometido quando trabalhamos com tamanhos de sequencias de DNA muito grandes.</p>
-<p>Na busca exaustiva, existe um procedimento básico que é realizado para cada par de subsequencias que estão sendo analisadas: cálculo do score. Relembrando o algoritmo de Smith-Waterman, nós temos que o score de alinhamento entre duas sequências S1 e S2 é dado por:</p>
-<div class="arithmatex">
-<div class="MathJax_Preview"> 
-S_{i,j} = max\begin{Bmatrix}
-S_{i-1, j-1} + 2, &amp; a_i = b_j \\ 
-S_{i-1, j-1} - 1,  &amp; a_i \neq b_j\\ 
-S_{i-1, j} - 1 &amp;  b_j = -\\
-S_{i, j-1} - 1 &amp;  a_i = -\\ 
-0 &amp; 
-\end{Bmatrix}
-</div>
-<script type="math/tex; mode=display"> 
-S_{i,j} = max\begin{Bmatrix}
-S_{i-1, j-1} + 2, & a_i = b_j \\ 
-S_{i-1, j-1} - 1,  & a_i \neq b_j\\ 
-S_{i-1, j} - 1 &  b_j = -\\
-S_{i, j-1} - 1 &  a_i = -\\ 
-0 & 
-\end{Bmatrix}
-</script>
-</div>
-<p>A operação <code>max</code> é associativa e comutativa, o que indica que nós podemos calcula de maneira paralelizada. Na prática, observe que o cálculo do score só depende da linha anterior, de modo que não é preciso ter toda a matriz carregada na memória, quando nosso objetivo é obter o melhor score. </p>
-<p>Podemos dividir esse cálculo de score em duas fases, a partir da linha anterior. Para isso, precisamos de duas estrututas de armazenamento, uma estrutura para armazenar o resultado do cálculo da linha anterior, e uma estrutura para receber temporariamente o resultado (primeira fase), e posteriormente ser atualizada (segunda fase).</p>
-<p>A primeira fase poderia ser chamada de <span class="arithmatex"><span class="MathJax_Preview">S_{temp}</span><script type="math/tex">S_{temp}</script></span> e poderia ser calculada da seguinte maneira:</p>
-<div class="arithmatex">
-<div class="MathJax_Preview"> 
-S_{temp}(i,j) = max\begin{Bmatrix}
-S_{i-1, j-1} + 2, &amp; a_i = b_j \\ 
-S_{i-1, j-1} - 1,  &amp; a_i \neq b_j\\ 
-S_{i, j-1} - 1 &amp;  b_j = -\\
-0 &amp; 
-\end{Bmatrix}
-</div>
-<script type="math/tex; mode=display"> 
-S_{temp}(i,j) = max\begin{Bmatrix}
-S_{i-1, j-1} + 2, & a_i = b_j \\ 
-S_{i-1, j-1} - 1,  & a_i \neq b_j\\ 
-S_{i, j-1} - 1 &  b_j = -\\
-0 & 
-\end{Bmatrix}
-</script>
-</div>
-<p>Você pode implementar essa primeira fase como uma transformação. A segunda fase seria então fazer calcular o máximo entre <span class="arithmatex"><span class="MathJax_Preview">S_{temp}</span><script type="math/tex">S_{temp}</script></span> e a lateral direita:</p>
-<div class="arithmatex">
-<div class="MathJax_Preview"> 
-S_{i,j} = max\begin{Bmatrix}
-S_{temp}(i,j) &amp; \\ 
-S_{temp}(i-1, j) - 1 &amp;  \\
-0 &amp; 
-\end{Bmatrix}
-</div>
-<script type="math/tex; mode=display"> 
-S_{i,j} = max\begin{Bmatrix}
-S_{temp}(i,j) & \\ 
-S_{temp}(i-1, j) - 1 &  \\
-0 & 
-\end{Bmatrix}
-</script>
-</div>
-<p>Dessa forma, podemos:</p>
-<ul>
-  <li>  usar thrust::transform para calcular a primeira fase e armazenar em uma estrutura temporaria o seu resultado
-  <li> podemos usar thrust::inclusive_scan para atualizar o resultado temporário obtido na fase anterior
-</ul>
+<p>Esta etapa do projeto consiste em resolver nosso problema por meio da biblioteca Thrust. Vamos começar revendo a formalização de nosso problema:</p>
+<p>Entrada:</p>
+<p>Um inteiro N representando o número de filmes disponíveis para assistir.
+Três vetores H, F e C de tamanho N, onde H[i] é a hora de início, F[i] é a hora de término e C[i] é a categoria do i-ésimo filme.
+Um inteiro M representando o número de categorias.
+Um vetor L de tamanho M, onde L[j] é o número máximo de filmes que podem ser assistidos na categoria j.</p>
+<p>Saída:</p>
+<p>Um inteiro representando o número máximo de filmes que podem ser assistidos de acordo com as restrições de horários e número máximo por categoria.</p>
+<p>Para resolver esse problema utilizando a biblioteca thrust, podemos utilizar um algoritmo de programação dinâmica para construir a solução de forma eficiente. O algoritmo consiste em criar uma matriz dp de tamanho (N+1) x (M+1) para armazenar o número máximo de filmes que podem ser assistidos até o filme i e a categoria j.</p>
+<p>Segue abaixo um pseudo-código (incompleto) para resolver o problema</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Carregar os dados do arquivo de entrada na memória da GPU</span>
+<span class="n">thrust</span><span class="o">::</span><span class="n">device_vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">start_times</span><span class="p">(</span><span class="n">N</span><span class="p">);</span>
+<span class="n">thrust</span><span class="o">::</span><span class="n">device_vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">end_times</span><span class="p">(</span><span class="n">N</span><span class="p">);</span>
+<span class="n">thrust</span><span class="o">::</span><span class="n">device_vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">categories</span><span class="p">(</span><span class="n">N</span><span class="p">);</span>
 
-<p>O procedimento acima calcula, de maneira paralela, o score entre duas sequencias S1 e S2. Porém, quantos pares de sequencias podemos ocupar simultaneamente a GPU ? Este é o
- desafio que deverá ser resolvido neste projeto. Lembre-se que você não precisa armazenar a matriz inteira na GPU. Como mostramos no algoritmo acima, a última linha da matriz é necessária. Você também deve buscar formas de realizar o cálculo entre múltiplos pares. Assim, seu código não deve apenas ser otimizado para obter o score, mas calcular o score entre diversos pares simultaneamente. </p>
-<p>O que entregar:</p>
-<ul>
-  <li> código-fonte da implementação exaustiva e da implementação paralela de GPU. A implementação paralela deverá seguir o cálculo do score descrito acima e, adicionalmente, 
-    conter a implementação da estratégia de ocupação da GPU pelas sequencias. 
-  <li> arquivos de testes utilizados
-  <li> pequeno relatório descrevendo a estratégia usada para ocupação da GPU
-  <li> resultados dos testes
-</ul>
+<span class="c1">// Ler os dados do arquivo de entrada</span>
+<span class="c1">// ...</span>
 
-<p>Um detalhe importante é que, como agora estamos trabalhando com paralelismo em GPU, os tamanhos dos arquivos de testes precisam ser bem maiores como em OpenMP. Muitas vezes, os resultados de speedup 
-aparecem a partir de grandes instâncias do problema.</p>
-<p>Caso você considere necessário, pode refatorar a sua implementação da busca exaustiva para poder explorar mais mecanismos da biblioteca TRUST em GPU.</p>
+<span class="c1">// Criar a matriz de programação dinâmica</span>
+<span class="n">thrust</span><span class="o">::</span><span class="n">device_vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dp</span><span class="p">((</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">M</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+
+<span class="c1">// Inicializar a primeira linha da matriz com zeros</span>
+<span class="n">thrust</span><span class="o">::</span><span class="n">fill</span><span class="p">(</span><span class="n">dp</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">dp</span><span class="p">.</span><span class="n">begin</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">M</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+
+<span class="c1">// Preencher a matriz com as soluções para subproblemas menores</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">M</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Encontrar o número máximo de filmes que podem ser assistidos até o filme i e categoria j</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">max_count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">categories</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">end_times</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">start_times</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">dp</span><span class="p">[(</span><span class="n">k</span><span class="o">*</span><span class="p">(</span><span class="n">M</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">j</span><span class="mi">-1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">L</span><span class="p">[</span><span class="n">j</span><span class="mi">-1</span><span class="p">])</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">max_count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">max</span><span class="p">(</span><span class="n">max_count</span><span class="p">,</span><span class="w"> </span><span class="n">dp</span><span class="p">[(</span><span class="n">k</span><span class="o">*</span><span class="p">(</span><span class="n">M</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">j</span><span class="mi">-1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="w">      </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">max_count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">max</span><span class="p">(</span><span class="n">max_count</span><span class="p">,</span><span class="w"> </span><span class="n">dp</span><span class="p">[(</span><span class="n">k</span><span class="o">*</span><span class="p">(</span><span class="n">M</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">j</span><span class="p">]);</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">dp</span><span class="p">[(</span><span class="n">i</span><span class="o">*</span><span class="p">(</span><span class="n">M</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">max_count</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Encontrar o número máximo de filmes que podem ser assistidos</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">max_count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">M</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">max_count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">max</span><span class="p">(</span><span class="n">max_count</span><span class="p">,</span><span class="w"> </span><span class="n">dp</span><span class="p">[(</span><span class="n">N</span><span class="o">*</span><span class="p">(</span><span class="n">M</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">j</span><span class="p">]);</span>
+<span class="p">}</span>
+
+<span class="c1">// Escrever o resultado no arquivo de saída</span>
+<span class="c1">// ...</span>
+</code></pre></div>
+<p>A ideia do algoritmo é criar uma matriz dp de tamanho (N+1) x (M+1) para armazenar o número máximo de filmes que podem ser assistidos até o filme i e a categoria j. O algoritmo preenche a matriz com as soluções para subproblemas menores, até chegar na solução do problema original.</p>
+<p>Para cada célula (i,j) da matriz dp, o algoritmo verifica se é possível adicionar o filme i à categoria j, respeitando as restrições de horário e limite máximo de filmes por categoria. Em seguida, o algoritmo verifica se é melhor adicionar o filme i à categoria j ou manter a solução anterior sem o filme i. O número máximo de filmes que podem ser assistidos é o valor da célula (N, j) da matriz dp, onde j é a categoria que maximiza o número de filmes assistidos.</p>
+<p>Sua tarefa é realizar essa implantação em C++ com a Thrust e comparar o desempenho frente as demais implementações. </p>
 
 
 
