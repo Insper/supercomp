@@ -693,7 +693,7 @@ Um vetor L de tamanho M, onde L[j] é o número máximo de filmes que podem ser 
 </code></pre></div>
 <p>A ideia do algoritmo é criar uma matriz dp de tamanho (N+1) x (M+1) para armazenar o número máximo de filmes que podem ser assistidos até o filme i e a categoria j. O algoritmo preenche a matriz com as soluções para subproblemas menores, até chegar na solução do problema original.</p>
 <p>Para cada célula (i,j) da matriz dp, o algoritmo verifica se é possível adicionar o filme i à categoria j, respeitando as restrições de horário e limite máximo de filmes por categoria. Em seguida, o algoritmo verifica se é melhor adicionar o filme i à categoria j ou manter a solução anterior sem o filme i. O número máximo de filmes que podem ser assistidos é o valor da célula (N, j) da matriz dp, onde j é a categoria que maximiza o número de filmes assistidos.</p>
-<p>Sua tarefa é realizar essa implantação em C++ com a Thrust e comparar o desempenho frente as demais implementações. </p>
+<p>Sua tarefa é realizar essa implementação em C++ com a Thrust e comparar o desempenho frente as demais implementações. </p>
 
 
 
