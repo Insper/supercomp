@@ -8,20 +8,20 @@
       
       
       
-        <link rel="canonical" href="https://insper.github.io/supercomp/aulas/09-busca-global-II/">
+        <link rel="canonical" href="https://insper.github.io/supercomp/aulas/18-Introducao-mpi/">
       
       
-        <link rel="prev" href="../08-busca-global/">
+        <link rel="prev" href="../16-gpu-customizacao/">
       
       
-        <link rel="next" href="../11-paralelismo/">
+        <link rel="next" href="../../projetos/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.11">
     
     
       
-        <title>09 - Comparação de desempenho - SuperComputação - 2023/1</title>
+        <title>16 - MPI - Introdução - SuperComputação - 2023/1</title>
       
     
     
@@ -79,7 +79,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#09-comparacao-de-resultados" class="md-skip">
+        <a href="#18-introducao-a-mpi" class="md-skip">
           Skip to content
         </a>
       
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              09 - Comparação de desempenho
+              16 - MPI - Introdução
             
           </span>
         </div>
@@ -377,80 +377,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          09 - Comparação de desempenho
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../09-busca-global-II/" class="md-nav__link">
         09 - Comparação de desempenho
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#ate-qual-tamanho-de-mochila-a-busca-global-resolve-rapido" class="md-nav__link">
-    Até qual tamanho de mochila a busca global resolve rápido?
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#o-algoritmo-de-busca-local-e-melhor-que-as-heuristicas" class="md-nav__link">
-    O algoritmo de busca local é melhor que as heurísticas?
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#vale-a-pena-esperar-pela-busca-global-ate-que-ponto" class="md-nav__link">
-    Vale a pena esperar pela busca global? Até que ponto?
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#formulando-a-pergunta-com-precisao" class="md-nav__link">
-    Formulando a pergunta com precisão
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#implementando-de-maneira-reprodutivel" class="md-nav__link">
-    Implementando de maneira reprodutível
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -544,11 +475,21 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../18-Introducao-mpi/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         16 - MPI - Introdução
       </a>
+      
     </li>
   
 
@@ -699,49 +640,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#ate-qual-tamanho-de-mochila-a-busca-global-resolve-rapido" class="md-nav__link">
-    Até qual tamanho de mochila a busca global resolve rápido?
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#o-algoritmo-de-busca-local-e-melhor-que-as-heuristicas" class="md-nav__link">
-    O algoritmo de busca local é melhor que as heurísticas?
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#vale-a-pena-esperar-pela-busca-global-ate-que-ponto" class="md-nav__link">
-    Vale a pena esperar pela busca global? Até que ponto?
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#formulando-a-pergunta-com-precisao" class="md-nav__link">
-    Formulando a pergunta com precisão
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#implementando-de-maneira-reprodutivel" class="md-nav__link">
-    Implementando de maneira reprodutível
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -759,76 +657,10 @@
 
 
 
-<h1 id="09-comparacao-de-resultados">09 - Comparação de resultados<a class="headerlink" href="#09-comparacao-de-resultados" title="Permanent link">&para;</a></h1>
-<p>Já implementamos diversos algoritmos para o problema da mochila binária e chegou a hora de compararmos os resultados por eles obtidos. Nossa ideia aqui é exercitar nossa capacidade de responder perguntas abertas com base em dados.</p>
-<h4 id="ate-qual-tamanho-de-mochila-a-busca-global-resolve-rapido">Até qual tamanho de mochila a busca global resolve rápido?<a class="headerlink" href="#ate-qual-tamanho-de-mochila-a-busca-global-resolve-rapido" title="Permanent link">&para;</a></h4>
-<h4 id="o-algoritmo-de-busca-local-e-melhor-que-as-heuristicas">O algoritmo de busca local é melhor que as heurísticas?<a class="headerlink" href="#o-algoritmo-de-busca-local-e-melhor-que-as-heuristicas" title="Permanent link">&para;</a></h4>
-<h4 id="vale-a-pena-esperar-pela-busca-global-ate-que-ponto">Vale a pena esperar pela busca global? Até que ponto?<a class="headerlink" href="#vale-a-pena-esperar-pela-busca-global-ate-que-ponto" title="Permanent link">&para;</a></h4>
-<h2 id="formulando-a-pergunta-com-precisao">Formulando a pergunta com precisão<a class="headerlink" href="#formulando-a-pergunta-com-precisao" title="Permanent link">&para;</a></h2>
-<p>Todas as perguntas acima são abertas. Elas admitem diferentes respostas dependendo de nossa interpretação. Nesta seção iremos aprender a reformulá-las de maneira (mais) precisa e a planejar uma série de experimentos que possam apoiar nossa resposta.</p>
-<div class="admonition question short">
-<p class="admonition-title">Question</p>
-<p>Escolha uma das questões acima para trabalhar nesta questão.</p>
-</div>
-<div class="admonition question medium">
-<p class="admonition-title">Question</p>
-<p>Alguns qualificadores comumente usados em discursos informais são considerados "vazios" quanto usados em um contexto mais científico, onde é importante ser preciso nas mensagens. Expressões como</p>
-<ul>
-<li>"A melhor que B"</li>
-<li>"rápido, devagar, significativo"</li>
-<li>"vale a pena"</li>
-</ul>
-<p>são ruins pois não deixam explícito as expectativas de quem as escreveu. Por exemplo, poderíamos ainda perguntar:</p>
-<ul>
-<li>"A é melhor que B"** sob qual métrica**?</li>
-<li><strong>O que é considerado</strong> "rápido, devagar ou significativo"? <strong>1 minuto é rápido ou devagar</strong> (depende da aplicação)</li>
-<li><strong>Qual é o critério usado para</strong> "valer a pena"? Tempo? Valor da mochila? O quão próximo do ótimo vale a pena?</li>
-</ul>
-<p>Reescreva a pergunta escolhida agora especificando exatamente o que você gostaria de responder.</p>
-</div>
-<div class="admonition warning">
-<p class="admonition-title">Importante</p>
-<p>Não existe resposta certa para a pergunta acima. Desde que você seja preciso em sua formulação a resposta está correta. Ou seja, <strong>neste momento não estamos questionando se a pergunta faz sentido</strong>, somente <strong>se ela está bem formulada</strong>.</p>
-</div>
-<p>Agora que temos uma pergunta mais precisamente formulada, vamos planejar</p>
-<div class="admonition question medium">
-<p class="admonition-title">Question</p>
-<p>Como você usaria um gerador para gerar dados que te ajudem a responder a pergunta escolhida? Especifique tamanhos de entrada e comente por que você faria estes testes.</p>
-</div>
-<div class="admonition question medium">
-<p class="admonition-title">Question</p>
-<p>Com os dados da questão acima em mãos, que ferramentas visuais você usaria para facilitar a comunicação dos resultados?</p>
-<ul>
-<li>Se sua resposta incluir tabelas, diga o que será mostrado em cada eixo e qual sua interpretação dos dados.</li>
-<li>Se sua resposta incluir gráficos, explique qual tipo e qual informação você estaria colocando em evidência.</li>
-</ul>
-</div>
-<h2 id="implementando-de-maneira-reprodutivel">Implementando de maneira reprodutível<a class="headerlink" href="#implementando-de-maneira-reprodutivel" title="Permanent link">&para;</a></h2>
-<p>Vamos agora tentar implementar seu plano acima de maneira reprodutível. Ou seja, qualquer pessoa com a infra necessária poderia reexecutar seus experimentos e obter os mesmos dados que você.</p>
-<div class="admonition example">
-<p class="admonition-title">Example</p>
-<p>Reúna todos os arquivos de entrada usados em uma pasta <em>in</em>.</p>
-</div>
-<div class="admonition example">
-<p class="admonition-title">Example</p>
-<p>Crie um script python que executa seu programa para todas as entradas acima.</p>
-<p><strong>Dicas</strong>:</p>
-<ul>
-<li>reveja a nossa <a href="https://insper.github.io/supercomp/aulas/01-introducao/">aula 01</a> e relembre como criar testes reprodutíveis.</li>
-</ul>
-</div>
-<div class="admonition example">
-<p class="admonition-title">Example</p>
-<p>Salve os resultados acima em um dataframe do <em>Pandas</em>. Se quiser, salve seus resultados correntes para um arquivo <em>CSV</em>.</p>
-</div>
-<div class="admonition example">
-<p class="admonition-title">Example</p>
-<p>Crie tabelas ou gráficos a partir do dataframe criado.</p>
-</div>
-<div class="admonition question medium">
-<p class="admonition-title">Question</p>
-<p>Usando as tabelas e gráficos criados, responda à pergunta escolhida no início do handout.</p>
-</div>
+<h1 id="18-introducao-a-mpi">18 - Introdução a MPI<a class="headerlink" href="#18-introducao-a-mpi" title="Permanent link">&para;</a></h1>
+<p>Message Passing Interface (MPI) é um padrão para comunicação de dados em computação paralela. Existem várias modalidades de computação paralela, e dependendo do problema que se está tentando resolver, pode ser necessário passar informações entre os vários processadores ou nodos de um cluster, e o MPI oferece uma infraestrutura para essa tarefa.</p>
+<p>Para iniciarmos o nosso estudo de MPI, abra o seguinte notebook no Google Colab e siga as instruções contidas:</p>
+<p><a href="https://colab.research.google.com/drive/1s2WGeigQqRZpZ42AlKmWjRRM8637QKwk?usp=sharing">Notebook de Introdução a MPI</a> Dica: Faça uma cópia do notebook para a sua conta do Colab, no menu File (ou Arquivo), opção Save a Copy in Drive (Salvar uma cópia no Drive). </p>
 
 
 
