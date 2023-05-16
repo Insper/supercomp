@@ -8,20 +8,20 @@
       
       
       
-        <link rel="canonical" href="https://insper.github.io/supercomp/projetos/relatorio_parcial/">
+        <link rel="canonical" href="https://insper.github.io/supercomp/aulas/19-MPI_REDUCE-mpi/">
       
       
-        <link rel="prev" href="../local/">
+        <link rel="prev" href="../18-Introducao-mpi/">
       
       
-        <link rel="next" href="../openmp/">
+        <link rel="next" href="../../projetos/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.11">
     
     
       
-        <title>Relatório Parcial - SuperComputação - 2023/1</title>
+        <title>17 - MPI - Reduções - SuperComputação - 2023/1</title>
       
     
     
@@ -79,7 +79,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#relatorio-parcial" class="md-skip">
+        <a href="#19-operacoes-de-reducao-em-mpi" class="md-skip">
           Skip to content
         </a>
       
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Relatório Parcial
+              17 - MPI - Reduções
             
           </span>
         </div>
@@ -250,14 +250,16 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
       
       
       
@@ -266,7 +268,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_3">
           <span class="md-nav__icon md-icon"></span>
           Aulas
@@ -279,7 +281,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../aulas/01-introducao/" class="md-nav__link">
+      <a href="../01-introducao/" class="md-nav__link">
         01 - Introdução
       </a>
     </li>
@@ -293,7 +295,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../aulas/02-03-implementacao-c%2B%2B/" class="md-nav__link">
+      <a href="../02-03-implementacao-c%2B%2B/" class="md-nav__link">
         02 e 03 - C++
       </a>
     </li>
@@ -307,7 +309,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../aulas/04-profiling/" class="md-nav__link">
+      <a href="../04-profiling/" class="md-nav__link">
         04 - Profiling
       </a>
     </li>
@@ -321,7 +323,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../aulas/05-heuristicas/" class="md-nav__link">
+      <a href="../05-heuristicas/" class="md-nav__link">
         05 - Heurísticas
       </a>
     </li>
@@ -335,7 +337,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../aulas/06-aleatorizacao/" class="md-nav__link">
+      <a href="../06-aleatorizacao/" class="md-nav__link">
         06 - Aleatorização
       </a>
     </li>
@@ -349,7 +351,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../aulas/07-busca-local/" class="md-nav__link">
+      <a href="../07-busca-local/" class="md-nav__link">
         07 - Busca Local
       </a>
     </li>
@@ -363,7 +365,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../aulas/08-busca-global/" class="md-nav__link">
+      <a href="../08-busca-global/" class="md-nav__link">
         08 - Busca Exaustiva
       </a>
     </li>
@@ -377,7 +379,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../aulas/09-busca-global-II/" class="md-nav__link">
+      <a href="../09-busca-global-II/" class="md-nav__link">
         09 - Comparação de desempenho
       </a>
     </li>
@@ -391,7 +393,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../aulas/11-paralelismo/" class="md-nav__link">
+      <a href="../11-paralelismo/" class="md-nav__link">
         10 - Paralelismo
       </a>
     </li>
@@ -405,7 +407,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../aulas/12-efeitos-colaterais/" class="md-nav__link">
+      <a href="../12-efeitos-colaterais/" class="md-nav__link">
         11 - Paralelismo - Exercício / Efeitos Colaterais
       </a>
     </li>
@@ -419,7 +421,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../aulas/13-efeitos-colaterais-II/" class="md-nav__link">
+      <a href="../13-efeitos-colaterais-II/" class="md-nav__link">
         12 - Paralelismo - Efeitos Colaterais II
       </a>
     </li>
@@ -433,7 +435,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../aulas/14-intro-gpu/" class="md-nav__link">
+      <a href="../14-intro-gpu/" class="md-nav__link">
         13 - GPU - Introdução
       </a>
     </li>
@@ -447,7 +449,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../aulas/15-gpu-iteradores/" class="md-nav__link">
+      <a href="../15-gpu-iteradores/" class="md-nav__link">
         14 - GPU - Iteradores
       </a>
     </li>
@@ -461,7 +463,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../aulas/16-gpu-customizacao/" class="md-nav__link">
+      <a href="../16-gpu-customizacao/" class="md-nav__link">
         15 - GPU - Customização
       </a>
     </li>
@@ -475,101 +477,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../aulas/18-Introducao-mpi/" class="md-nav__link">
+      <a href="../18-Introducao-mpi/" class="md-nav__link">
         16 - MPI - Introdução
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../aulas/19-MPI_REDUCE-mpi/" class="md-nav__link">
-        17 - MPI - Reduções
-      </a>
-    </li>
-  
-
-            
-          
-        </ul>
-      </nav>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-    
-  
-  
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-      
-      
-      
-      
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
-      
-      
-      
-        <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
-          Projeto
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
-        <label class="md-nav__title" for="__nav_4">
-          <span class="md-nav__icon md-icon"></span>
-          Projeto
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
-        Maratona de Filmes
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../heuristico/" class="md-nav__link">
-        Heurística Gulosa
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../local/" class="md-nav__link">
-        Aleatoriedade
       </a>
     </li>
   
@@ -592,9 +501,58 @@
       
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        Relatório Parcial
+        17 - MPI - Reduções
       </a>
       
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          Projeto
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Projeto
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../projetos/" class="md-nav__link">
+        Maratona de Filmes
+      </a>
     </li>
   
 
@@ -606,7 +564,49 @@
   
   
     <li class="md-nav__item">
-      <a href="../openmp/" class="md-nav__link">
+      <a href="../../projetos/heuristico/" class="md-nav__link">
+        Heurística Gulosa
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../projetos/local/" class="md-nav__link">
+        Aleatoriedade
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../projetos/relatorio_parcial/" class="md-nav__link">
+        Relatório Parcial
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../projetos/openmp/" class="md-nav__link">
         Paralelismo com OpenMP
       </a>
     </li>
@@ -620,7 +620,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../gpu/" class="md-nav__link">
+      <a href="../../projetos/gpu/" class="md-nav__link">
         Paralelismo com GPU
       </a>
     </li>
@@ -671,30 +671,11 @@
 
 
 
-<h1 id="relatorio-parcial">Relatório Parcial<a class="headerlink" href="#relatorio-parcial" title="Permanent link">&para;</a></h1>
-<p>O relatório parcial é a entrega intermediária do projeto, a qual deve ser feita pelo <strong>blackboard</strong> até a data da <strong>prova intermediária</strong>.</p>
-<p><strong>Seu relatório deverá conter as implementações gulosa e aleatória</strong>. </p>
-<p>O que você deverá fazer:</p>
-<ul>
-<li>
-<p>No blackboard, você deve fazer upload de todos os <em>códigos-fonte</em>, <em>arquivos de input</em>, <em>arquivos de output</em> para cada heurítica. Caso opte por enviar um link do github com o repositório completo, também poderá faze-lo, desde que garanta que teremos acesso aos arquivos no seu repositório;</p>
-</li>
-<li>
-<p>Você deve elaborar um relatório parcial contendo as seguintes seções:</p>
-<ul>
-<li>
-<p>Para cada heurística você deve explicar como implementou a heurística (detalhe como você tratou o input, qual a lógica do seu output, quais invariantes existem em suas heurísticas), apresentar (i) o código-fonte comentado, (ii) fazer considerações sobre o profiling (valgrind) do código-fonte (use apenas 1 arquivo de input para isso, não há necessidade de fazer esse profiling para vários inputs), (iii) o resultado compartivo entre as heurísticas quando você varia o input (o input deve variar na quantidade de filmes e de categorias).</p>
-</li>
-<li>
-<p>Seu relatório deve ser gráficos e tabelas que subsidem as suas considerações</p>
-</li>
-<li>
-<p>É permitido criar um programa em python ou outra linguagem que automatize a geração de seus resultados, isto é, que execute seus códigos C++ em função dos diferentes inputs.</p>
-</li>
-</ul>
-</li>
-</ul>
-<p>Preferencialmente o relatório deve ser apresentado em formato <em>html</em>. </p>
+<h1 id="19-operacoes-de-reducao-em-mpi">19 - Operações de Redução em MPI<a class="headerlink" href="#19-operacoes-de-reducao-em-mpi" title="Permanent link">&para;</a></h1>
+<p>Reduzir é um conceito clássico da programação funcional. A redução de dados envolve a redução de um conjunto de números em um conjunto menor de números por meio de uma função. Por exemplo, digamos que temos uma lista de números [1, 2, 3, 4, 5]. Reduzir esta lista de números com a função sum produziria sum([1, 2, 3, 4, 5]) = 15. Da mesma forma, a redução da multiplicação resultaria em multiplicar([1, 2, 3, 4, 5]) = 120.</p>
+<p>Como você deve ter imaginado, pode ser muito complicado aplicar funções de redução em um conjunto de números distribuídos. Junto com isso, é difícil programar de forma eficiente reduções não comutativas, ou seja, reduções que devem ocorrer em uma ordem definida. Felizmente, o MPI tem uma função útil chamada MPI_Reduce que irá lidar com quase todas as reduções comuns que um programador precisa fazer em um aplicativo paralelo.</p>
+<p>Para iniciarmos o nosso estudo de reduções em MPI, abra o seguinte notebook no Google Colab e siga as instruções contidas:</p>
+<p><a href="https://colab.research.google.com/drive/17PYAsKifOgbFmnRnboaZ3WV2hI6bv8pD?usp=sharing">Reduções em MPI</a> Dica: Faça uma cópia do notebook para a sua conta do Colab, no menu File (ou Arquivo), opção Save a Copy in Drive (Salvar uma cópia no Drive). </p>
 
 
 
