@@ -11,13 +11,15 @@
         <link rel="canonical" href="https://insper.github.io/supercomp/aulas/02-03-implementacao-c%2B%2B/">
       
       
+        <link rel="prev" href="../01-introducao/">
+      
       
       <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.11">
     
     
       
-        <title>02/03 - Implementação em C++ - SuperComputação - 2023/1</title>
+        <title>02 e 03 - C++ - SuperComputação - 2023/2</title>
       
     
     
@@ -89,7 +91,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="SuperComputação - 2023/1" class="md-header__button md-logo" aria-label="SuperComputação - 2023/1" data-md-component="logo">
+    <a href="../.." title="SuperComputação - 2023/2" class="md-header__button md-logo" aria-label="SuperComputação - 2023/2" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -102,13 +104,13 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            SuperComputação - 2023/1
+            SuperComputação - 2023/2
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              02/03 - Implementação em C++
+              02 e 03 - C++
             
           </span>
         </div>
@@ -187,13 +189,13 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="SuperComputação - 2023/1" class="md-nav__button md-logo" aria-label="SuperComputação - 2023/1" data-md-component="logo">
+    <a href="../.." title="SuperComputação - 2023/2" class="md-nav__button md-logo" aria-label="SuperComputação - 2023/2" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
 
     </a>
-    SuperComputação - 2023/1
+    SuperComputação - 2023/2
   </label>
   
     <div class="md-nav__source">
@@ -231,14 +233,16 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
       
       
       
@@ -247,7 +251,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_2">
           <span class="md-nav__icon md-icon"></span>
           Aulas
@@ -263,6 +267,96 @@
       <a href="../01-introducao/" class="md-nav__link">
         01 - Introdução
       </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          02 e 03 - C++
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        02 e 03 - C++
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#compilacao" class="md-nav__link">
+    Compilação
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#entrada-e-saida-em-c" class="md-nav__link">
+    Entrada e saída em C++
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vetores-em-c-com-vector" class="md-nav__link">
+    Vetores em C++ com Vector
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#matrizes-versao-1" class="md-nav__link">
+    Matrizes (versão 1)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias-e-passagem-de-dados" class="md-nav__link">
+    Referências e passagem de dados
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#uma-primeira-otimizacao" class="md-nav__link">
+    Uma primeira otimização
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
