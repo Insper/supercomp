@@ -333,6 +333,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#visualizacao-grafica" class="md-nav__link">
+    Visualização gráfica
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#distancia-euclides-ingenuo" class="md-nav__link">
     Distância: Euclides ingênuo
   </a>
@@ -397,6 +404,13 @@
         <li class="md-nav__item">
   <a href="#warm-up-o-problema-da-soma-de-uma-matriz" class="md-nav__link">
     Warm-up: O problema da soma de uma matriz
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visualizacao-grafica" class="md-nav__link">
+    Visualização gráfica
   </a>
   
 </li>
@@ -597,6 +611,84 @@ Ir
 <p class="admonition-title">Tip</p>
 <p>Dica: Verifique a discussão no StackOverflow sobre isso. Neste link <a href="https://stackoverflow.com/questions/9936132/why-does-the-order-of-the-loops-affect-performance-when-iterating-over-a-2d-arra">https://stackoverflow.com/questions/9936132/why-does-the-order-of-the-loops-affect-performance-when-iterating-over-a-2d-arra</a></p>
 </div>
+<h2 id="visualizacao-grafica">Visualização gráfica<a class="headerlink" href="#visualizacao-grafica" title="Permanent link">&para;</a></h2>
+<p>Muitas vezes o output do valgrind é suficiente para a nossa análise. Todavia, é possível também obter visualizações gráficas do número de chamadas das funções. Há uma ferramenta bem interessante, desenvolvida em Python, denominada <code>gprof2dot</code>. Essa ferramenta converte dados de perfil de desempenho, gerados por ferramentas como o Callgrind do Valgrind, em gráficos de chamadas visualmente compreensíveis. Ao processar os resultados de profiling, ele cria um gráfico que representa as interações entre funções, evidenciando as chamadas mais onerosas e ajudando a identificar gargalos de desempenho em um programa. Isso permite uma análise mais intuitiva e abrangente das relações entre as funções e a alocação de recursos computacionais, auxiliando na otimização de códigos e no aprimoramento da eficiência do software.</p>
+<p>Vamos fazer um teste nessa ferramenta? Para isso, você vai precisar instalar a bibliteca <code>graphviz</code> (com <code>apt-get install graphviz</code>, por exemplo) e também a biblioteca <code>gprof2dot</code> do Python (com <code>pip install gprof2dot</code>).</p>
+<p>Considere o seguinte código em C++ para analisarmos com essa ferramenta:</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cmath&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;chrono&gt;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">heavyCalculation</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">100000</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">sqrt</span><span class="p">(</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">i</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">intermediateFunction</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">1000</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">heavyCalculation</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">mainFunction</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">intermediateFunction</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+
+<span class="w">    </span><span class="n">mainFunction</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">duration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">duration_cast</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">milliseconds</span><span class="o">&gt;</span><span class="p">(</span><span class="n">end</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Time taken: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">duration</span><span class="p">.</span><span class="n">count</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; milliseconds&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Nesse código, temos três funções:</p>
+<ul>
+<li>
+<p>heavyCalculation: Uma função que realiza um grande número de operações matemáticas (cálculos de raiz quadrada) em um loop.</p>
+</li>
+<li>
+<p>intermediateFunction: Chama a função heavyCalculation repetidamente para criar um cenário onde a função intermediária é onerosa.</p>
+</li>
+<li>
+<p>mainFunction: Chama a função intermediária várias vezes.</p>
+</li>
+</ul>
+<p>Ao executar esse código, você deve obter um tempo de execução considerável, já que o loop dentro de heavyCalculation é repetido muitas vezes. Isso deve gerar um perfil de desempenho interessante quando analisado com o gprof2dot.py.</p>
+<p>Ao compilar, use a opção <code>-O0</code>, para que o compilador não otimize as chamadas recorrentes e possamos visualizar melhor nosso grafo.</p>
+<p>Supondo que seu código foi salvo com o nome <code>profile.cpp</code>, execute os seguintes comandos:</p>
+<div class="highlight"><pre><span></span><code>g++ -Wall -O0 -g profile.cpp -o profile
+</code></pre></div>
+<p>Na sequencia, execute o valgrind:</p>
+<div class="highlight"><pre><span></span><code>valgrind --tool=callgrind ./profile
+</code></pre></div>
+<p>Neste caso, um possível output seria:</p>
+<div class="highlight"><pre><span></span><code>==9228== Callgrind, a call-graph generating cache profiler
+==9228== Copyright (C) 2002-2017, and GNU GPL&#39;d, by Josef Weidendorfer et al.
+==9228== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==9228== Command: ./profile
+==9228== 
+==9228== For interactive control, run &#39;callgrind_control -h&#39;.
+Time taken: 243965 milliseconds
+==9228== 
+==9228== Events    : Ir
+==9228== Collected : 10002410933
+==9228== 
+==9228== I   refs:      10,002,410,933
+</code></pre></div>
+<p>Por fim, execute a gprof2dot:</p>
+<div class="highlight"><pre><span></span><code>!gprof2dot  -n0.1 -f callgrind callgrind.out.9228 | dot -Tsvg -o output.svg
+</code></pre></div>
+<p>Você deve obter um grafo similar ao abaixo:</p>
+<p><img alt="grafo" src="resultado_profile.svg" /></p>
 <h2 id="distancia-euclides-ingenuo">Distância: Euclides ingênuo<a class="headerlink" href="#distancia-euclides-ingenuo" title="Permanent link">&para;</a></h2>
 <p>Compile o código-fonte da implementação ingênua que fizemos na aula passada, com profiling habilitado para medir os tempos de execução. </p>
 <div class="highlight"><pre><span></span><code>g++ -g euclides-ingenuo.cpp -o euclides-ingenuo
