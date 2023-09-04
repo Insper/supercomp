@@ -11,13 +11,15 @@
         <link rel="canonical" href="https://insper.github.io/supercomp/projetos/">
       
       
+        <link rel="prev" href="../aulas/06-aleatorizacao/">
+      
       
       <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.11">
     
     
       
-        <title>Maratona de Filmes - SuperComputação - 2023/2</title>
+        <title>Projeto da disciplina - SuperComputação - 2023/2</title>
       
     
     
@@ -75,7 +77,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#maratona-de-filmes" class="md-skip">
+        <a href="#projeto-da-disciplina" class="md-skip">
           Skip to content
         </a>
       
@@ -108,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Maratona de Filmes
+              Projeto da disciplina
             
           </span>
         </div>
@@ -310,6 +312,81 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aulas/06-aleatorizacao/" class="md-nav__link">
+        06 - Aleatorização
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          Projeto
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Projeto
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Projeto da disciplina
+      </a>
+      
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -353,93 +430,8 @@
 
 
 
-<h1 id="maratona-de-filmes">Maratona de Filmes<a class="headerlink" href="#maratona-de-filmes" title="Permanent link">&para;</a></h1>
-<p>Você quer passar um final de semana assistindo ao máximo de filmes possível, mas há restrições quanto aos horários disponíveis e ao número de títulos que podem ser vistos em cada categoria (comédia, drama, ação, etc).</p>
-<p><strong>Entrada</strong>: Um inteiro N representando o número de filmes disponíveis para assistir e N trios de inteiros (H[i], F[i], C[i]), representando a hora de início, a hora de fim e a categoria do i-ésimo filme. Além disso, um inteiro M representando o número de categorias e uma lista de M inteiros representando o número máximo de filmes que podem ser assistidos em cada categoria.</p>
-<p><strong>Saída</strong>: Um inteiro representando o número máximo de filmes que podem ser assistidos de acordo com as restrições de horários e número máximo por categoria.</p>
-<h1 id="gerador-de-input-para-o-projeto">Gerador de input para o projeto<a class="headerlink" href="#gerador-de-input-para-o-projeto" title="Permanent link">&para;</a></h1>
-<p>O código abaixo gera um arquivo <code>input.txt</code> que deve ser usado como entrada para seu programa.</p>
-<p>Como exemplo, considere o seguinte arquivo <code>input.txt</code> gerado:</p>
-<div class="highlight"><pre><span></span><code>10 4
-1 3 1 2 
-11 13 3
-14 15 3
-10 16 2
-10 14 1
-11 17 2
-11 14 3
-13 15 3
-14 15 1
-12 16 4
-12 13 4
-</code></pre></div>
-<p>Como ler esse arquivo?</p>
-<ul>
-<li>a primeira linha indica que há 10 filmes a serem considerados e 4 categorias;</li>
-<li>a segunda linha indica qual o máximo de filmes que cada categoria pode ter;</li>
-<li>da terceira linha em diante você vai encontrar os <code>n</code> filmes, suas respectivas hora de início, hora de término e categoria pertencente. </li>
-</ul>
-<p>O código-fonte abaixo é apenas uma recomendação. Fique livre para adaptá-lo. De modo que os filmes tenham uma duração média de 3 horas (isso você pode variar e ver como fica a complexidade do problema), nós usamos a biblioteca Boost (<a href="https://www.boost.org">https://www.boost.org</a>) para gerar números aleatórios.</p>
-<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;chrono&gt;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;random&gt;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;fstream&gt;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;boost/random.hpp&gt;</span>
-
-<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
-
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
-
-<span class="w">    </span><span class="n">ofstream</span><span class="w"> </span><span class="n">inputFile</span><span class="p">;</span>
-<span class="w">    </span><span class="n">inputFile</span><span class="p">.</span><span class="n">open</span><span class="p">(</span><span class="s">&quot;input.txt&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="n">inputFile</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
-
-<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="n">seed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">chrono</span><span class="o">::</span><span class="n">system_clock</span><span class="o">::</span><span class="n">now</span><span class="p">().</span><span class="n">time_since_epoch</span><span class="p">().</span><span class="n">count</span><span class="p">();</span>
-<span class="w">    </span><span class="n">default_random_engine</span><span class="w"> </span><span class="n">generator</span><span class="w"> </span><span class="p">(</span><span class="n">seed</span><span class="p">);</span>
-
-<span class="w">    </span><span class="c1">// Definindo distribuição normal com média de 3 e desvio padrão de 1</span>
-<span class="w">    </span><span class="n">normal_distribution</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">distribution_dif</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">);</span>
-
-<span class="w">    </span><span class="n">uniform_int_distribution</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">distribution_hr</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">23</span><span class="p">);</span>
-<span class="w">    </span><span class="n">uniform_int_distribution</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">distribution_cat</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="p">);</span>
-
-<span class="w">    </span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">maxFilmes</span><span class="p">(</span><span class="n">m</span><span class="p">);</span><span class="w"> </span><span class="c1">// Vetor para armazenar o máximo de filmes por categoria</span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">m</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">maxFilmes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">distribution_cat</span><span class="p">(</span><span class="n">generator</span><span class="p">);</span><span class="w"> </span><span class="c1">// Gerando o máximo de filmes para cada categoria</span>
-<span class="w">        </span><span class="n">inputFile</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">maxFilmes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">;</span><span class="w"> </span><span class="c1">// Escrevendo o valor no arquivo de entrada</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="n">inputFile</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
-
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">hora_inicio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">distribution_hr</span><span class="p">(</span><span class="n">generator</span><span class="p">);</span>
-<span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">dif_media</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">distribution_dif</span><span class="p">(</span><span class="n">generator</span><span class="p">);</span>
-<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">hora_fim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">((</span><span class="kt">int</span><span class="p">)</span><span class="n">hora_inicio</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">round</span><span class="p">(</span><span class="n">dif_media</span><span class="p">))</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">24</span><span class="p">;</span>
-<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">categoria</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">distribution_cat</span><span class="p">(</span><span class="n">generator</span><span class="p">);</span>
-
-<span class="w">        </span><span class="n">inputFile</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">hora_inicio</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">hora_fim</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">categoria</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-
-
-<span class="w">    </span><span class="n">inputFile</span><span class="p">.</span><span class="n">close</span><span class="p">();</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div>
-<p>Para compilar um programa C++ que usa a biblioteca Boost no g++, você precisará seguir os seguintes passos:</p>
-<ol>
-<li>
-<p>Inclua os arquivos de cabeçalho da biblioteca Boost em seu código fonte. Por exemplo, se você quiser usar a biblioteca Boost.Random, inclua o arquivo de cabeçalho <code>&lt;boost/random.hpp&gt;</code> em seu código.</p>
-</li>
-<li>
-<p>Compile seu código-fonte usando o g++ e informe ao compilador que você está usando a biblioteca Boost, usando a opção <code>-lboost_</code> seguida do nome da biblioteca. Por exemplo, se você estiver usando a biblioteca <code>Boost.Random</code>, use a opção <code>-lboost_random</code> ao compilar o seu código.</p>
-</li>
-<li>
-<p>Certifique-se de que o compilador possa encontrar os arquivos de cabeçalho e bibliotecas da biblioteca Boost. Você pode fazer isso usando a opção <code>-I</code> para especificar o diretório de inclusão e a opção <code>-L</code> para especificar o diretório de linkagem. Por exemplo, se a biblioteca Boost estiver instalada em <code>/usr/local/Cellar/boost/1.75.0</code>, use as opções <code>-I/usr/local/Cellar/boost/1.75.0/include</code> e <code>-L/usr/local/Cellar/boost/1.75.0/lib</code> ao compilar o seu código.</p>
-</li>
-</ol>
-<p>Assim, um exemplo de comando para compilar um programa C++ que usa a biblioteca Boost seria:</p>
-<div class="highlight"><pre><span></span><code>g++ -I/usr/local/Cellar/boost/1.75.0/include -L/usr/local/Cellar/boost/1.75.0/lib -lboost_random meu_programa.cpp -o meu_programa
-</code></pre></div>
+<h1 id="projeto-da-disciplina">Projeto da disciplina<a class="headerlink" href="#projeto-da-disciplina" title="Permanent link">&para;</a></h1>
+<p>O projeto da nossa disciplina está disponível nesse <img alt="link" src="https://colab.research.google.com/drive/1p599BsjQGwdQB0dEXxw4aN_RFeBV4Otv?usp=sharing" /></p>
 
 
 
