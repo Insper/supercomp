@@ -43,7 +43,7 @@ nav:
         # - "09 - Comparação de desempenho": aulas/09-busca-global-II/index.md
         # # - "10 - Branch and Bound": aulas/10-branch-and-bound/index.md
         # # - "Revisão para P1": aulas/10-branch-and-bound/revisao.md
-        # - "10 - Paralelismo": aulas/11-paralelismo/index.md
+        - "09 - Paralelismo": aulas/11-paralelismo/index.md
         # - "11 - Paralelismo - Exercício / Efeitos Colaterais" : aulas/12-efeitos-colaterais/index.md
         # - "12 - Paralelismo - Efeitos Colaterais II":  aulas/13-efeitos-colaterais-II/index.md
         # - "13 - GPU - Introdução":  aulas/14-intro-gpu/index.md
