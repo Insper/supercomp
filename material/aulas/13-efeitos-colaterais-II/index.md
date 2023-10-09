@@ -1,6 +1,6 @@
 # Efeitos colaterais II
 
-Na aula de hoje iremos trabalhar com um algoritmo de sorteios aleatórios para calcular o `pi`. Ele é baseado em uma técnica de Otimização, Simulação e Estimação Paramétrica chamada [Monte Carlo](https://en.wikipedia.org/wiki/Monte_Carlo_method).
+Na aula de hoje iremos trabalhar com um algoritmo de sorteios aleatórios para calcular o `pi`. Ele é baseado em uma técnica de Otimização, Simulação e Estimação Paramétrica chamada [Monte Carlo](https://en.wikipedia.org/wiki/Monte_Carlo_method). Um bom vídeo para compreender essa técnica, está disponível [aqui](https://www.youtube.com/watch?v=7ESK5SaP-bc).
 
 O algoritmo sequencial se baseia em sorteios de pontos dentro de um quadrado de lado `2`. Se a distância entre o ponto e o centro do quadrado for menor que 1 então o ponto cai dentro do círculo inscrito no quadrado. A quantidade de pontos que caem dentro do quadrado é proporcional a $\pi$. Veja abaixo um resumo do algoritmo.
 

@@ -3,7 +3,7 @@
 # Scheduling
 
 Vamos começar compreendendo melhor os `schedulers` que existem no openmp.
-No github, obtenha o arquivo `omp_schedulers.cpp`, compile e execute-o. Você deverá obter um output similar ao abaixo. Verifique na documentação do OpenMP ([link](https://www.intel.com/content/www/us/en/develop/documentation/oneapi-dpcpp-cpp-compiler-dev-guide-and-reference/top/optimization-and-programming-guide/openmp-support/worksharing-using-openmp.html)) e busque compreender melhor como funciona cada scheduler. 
+No github, obtenha o arquivo `omp_schedulers.cpp`, compile e execute-o. Você deverá obter um output similar ao abaixo. Verifique na documentação do OpenMP ([link](https://www.intel.com/content/www/us/en/docs/cpp-compiler/developer-guide-reference/2021-8/use-the-openmp-libraries.html)) e busque compreender melhor como funciona cada scheduler. 
 
 ```C++
 
