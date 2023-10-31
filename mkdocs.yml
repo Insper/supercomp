@@ -46,9 +46,9 @@ nav:
         - "09 - Paralelismo": aulas/11-paralelismo/index.md
         - "10 - Paralelismo - Exercício / Efeitos Colaterais" : aulas/12-efeitos-colaterais/index.md
         - "12 - Paralelismo - Efeitos Colaterais II":  aulas/13-efeitos-colaterais-II/index.md
-        # - "13 - GPU - Introdução":  aulas/14-intro-gpu/index.md
-        # - "14 - GPU - Iteradores": aulas/15-gpu-iteradores/index.md
-        # - "15 - GPU - Customização": aulas/16-gpu-customizacao/index.md
+        - "13 - GPU - Introdução":  aulas/14-intro-gpu/index.md
+        - "14 - GPU - Iteradores": aulas/15-gpu-iteradores/index.md
+        - "15 - GPU - Customização": aulas/16-gpu-customizacao/index.md
         # - "16 - MPI - Introdução": aulas/18-Introducao-mpi/index.md
         # - "17 - MPI - Reduções": aulas/19-MPI_REDUCE-mpi/index.md
         # - "18 - MPI - Broadcasting": aulas/20 - Broadcasting-mpi/index.md
