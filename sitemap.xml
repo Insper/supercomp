@@ -131,6 +131,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://insper.github.io/supercomp/aulas/MPI-OpenMP/</loc>
+         <lastmod>2023-11-27</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://insper.github.io/supercomp/projetos/</loc>
          <lastmod>2023-11-27</lastmod>
          <changefreq>daily</changefreq>
