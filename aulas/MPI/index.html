@@ -8,23 +8,27 @@
       
       
       
-        <link rel="canonical" href="https://insper.github.io/supercomp/projetos/2022-1/SequenceGenerator/">
+        <link rel="canonical" href="https://insper.github.io/supercomp/aulas/MPI/">
       
       
+        <link rel="prev" href="../21-SLURM/">
       
-      <link rel="icon" href="../../../assets/images/favicon.png">
+      
+        <link rel="next" href="../../projetos/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.11">
     
     
       
-        <title>SequenceGenerator - SuperComputação - 2023/2</title>
+        <title>17 - MPI - SuperComputação - 2023/2</title>
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.0d440cfe.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.0d440cfe.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.2505c338.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.2505c338.min.css">
       
       
 
@@ -40,17 +44,17 @@
       
     
     
-      <link rel="stylesheet" href="../../../css/printing.css">
+      <link rel="stylesheet" href="../../css/printing.css">
     
-      <link rel="stylesheet" href="../../../css/extra.css">
+      <link rel="stylesheet" href="../../css/extra.css">
     
-      <link rel="stylesheet" href="../../../css/ansi-colours.css">
+      <link rel="stylesheet" href="../../css/ansi-colours.css">
     
-      <link rel="stylesheet" href="../../../css/jupyter-cells.css">
+      <link rel="stylesheet" href="../../css/jupyter-cells.css">
     
-      <link rel="stylesheet" href="../../../css/pandas-dataframe.css">
+      <link rel="stylesheet" href="../../css/pandas-dataframe.css">
     
-    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -74,6 +78,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#mpi" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -84,7 +93,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../.." title="SuperComputação - 2023/2" class="md-header__button md-logo" aria-label="SuperComputação - 2023/2" data-md-component="logo">
+    <a href="../.." title="SuperComputação - 2023/2" class="md-header__button md-logo" aria-label="SuperComputação - 2023/2" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -103,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              SequenceGenerator
+              17 - MPI
             
           </span>
         </div>
@@ -182,7 +191,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../.." title="SuperComputação - 2023/2" class="md-nav__button md-logo" aria-label="SuperComputação - 2023/2" data-md-component="logo">
+    <a href="../.." title="SuperComputação - 2023/2" class="md-nav__button md-logo" aria-label="SuperComputação - 2023/2" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -213,7 +222,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../.." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         Home
       </a>
     </li>
@@ -226,14 +235,16 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
       
       
       
@@ -242,7 +253,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_2">
           <span class="md-nav__icon md-icon"></span>
           Aulas
@@ -255,7 +266,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aulas/01-introducao/" class="md-nav__link">
+      <a href="../01-introducao/" class="md-nav__link">
         01 - Introdução
       </a>
     </li>
@@ -269,7 +280,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aulas/02-03-implementacao-c%2B%2B/" class="md-nav__link">
+      <a href="../02-03-implementacao-c%2B%2B/" class="md-nav__link">
         02 e 03 - C++
       </a>
     </li>
@@ -283,7 +294,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aulas/04-profiling/" class="md-nav__link">
+      <a href="../04-profiling/" class="md-nav__link">
         04 - Profiling
       </a>
     </li>
@@ -297,7 +308,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aulas/05-heuristicas/" class="md-nav__link">
+      <a href="../05-heuristicas/" class="md-nav__link">
         05 - Heurísticas
       </a>
     </li>
@@ -311,7 +322,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aulas/06-aleatorizacao/" class="md-nav__link">
+      <a href="../06-aleatorizacao/" class="md-nav__link">
         06 - Aleatorização
       </a>
     </li>
@@ -325,7 +336,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aulas/07-busca-local/" class="md-nav__link">
+      <a href="../07-busca-local/" class="md-nav__link">
         07 - Busca Local
       </a>
     </li>
@@ -339,7 +350,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aulas/08-busca-global/" class="md-nav__link">
+      <a href="../08-busca-global/" class="md-nav__link">
         08 - Busca Exaustiva
       </a>
     </li>
@@ -353,7 +364,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aulas/11-paralelismo/" class="md-nav__link">
+      <a href="../11-paralelismo/" class="md-nav__link">
         09 - Paralelismo
       </a>
     </li>
@@ -367,7 +378,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aulas/12-efeitos-colaterais/" class="md-nav__link">
+      <a href="../12-efeitos-colaterais/" class="md-nav__link">
         10 - Paralelismo - Exercício / Efeitos Colaterais
       </a>
     </li>
@@ -381,7 +392,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aulas/13-efeitos-colaterais-II/" class="md-nav__link">
+      <a href="../13-efeitos-colaterais-II/" class="md-nav__link">
         12 - Paralelismo - Efeitos Colaterais II
       </a>
     </li>
@@ -395,7 +406,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aulas/14-intro-gpu/" class="md-nav__link">
+      <a href="../14-intro-gpu/" class="md-nav__link">
         13 - GPU - Introdução
       </a>
     </li>
@@ -409,7 +420,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aulas/15-gpu-iteradores/" class="md-nav__link">
+      <a href="../15-gpu-iteradores/" class="md-nav__link">
         14 - GPU - Iteradores
       </a>
     </li>
@@ -423,7 +434,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aulas/16-gpu-customizacao/" class="md-nav__link">
+      <a href="../16-gpu-customizacao/" class="md-nav__link">
         15 - GPU - Customização
       </a>
     </li>
@@ -437,7 +448,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aulas/21-SLURM/" class="md-nav__link">
+      <a href="../21-SLURM/" class="md-nav__link">
         16 - Clusters - Slurm
       </a>
     </li>
@@ -449,11 +460,21 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../../../aulas/MPI/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         17 - MPI
       </a>
+      
     </li>
   
 
@@ -500,7 +521,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../" class="md-nav__link">
+      <a href="../../projetos/" class="md-nav__link">
         Projeto da disciplina
       </a>
     </li>
@@ -531,6 +552,8 @@
   
   
   
+    
+  
   
 </nav>
                   </div>
@@ -549,82 +572,7 @@
 
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-<script>
-(function() {
-  function addWidgetsRenderer() {
-    var requireJsScript = document.createElement('script');
-    requireJsScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js';
-
-    var mimeElement = document.querySelector('script[type="application/vnd.jupyter.widget-view+json"]');
-    var jupyterWidgetsScript = document.createElement('script');
-    var widgetRendererSrc = 'https://unpkg.com/@jupyter-widgets/html-manager@*/dist/embed-amd.js';
-    var widgetState;
-
-    // Fallback for older version:
-    try {
-      widgetState = mimeElement && JSON.parse(mimeElement.innerHTML);
-
-      if (widgetState && (widgetState.version_major < 2 || !widgetState.version_major)) {
-        widgetRendererSrc = 'jupyter-js-widgets@*/dist/embed.js';
-      }
-    } catch(e) {}
-
-    jupyterWidgetsScript.src = widgetRendererSrc;
-
-    document.body.appendChild(requireJsScript);
-    document.body.appendChild(jupyterWidgetsScript);
-  }
-
-  document.addEventListener('DOMContentLoaded', addWidgetsRenderer);
-}());
-</script>
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>GERADOR DE INSTÂNCIAS PARA COMPARAÇÃO DE SEQUENCIAS DE DNA</strong></p>
-<p>Para usar este gerador, você deve fornecer três parâmetros:</p>
-<p>n = tamanho da primeira sequencia </p>
-<p>m = tamanho da segunda instância </p>
-<p>file = nome do arquivo da instância a ser gerada</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">random</span>
-<span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="n">m</span> <span class="o">=</span> <span class="mi">40</span>
-<span class="n">file</span> <span class="o">=</span> <span class="s1">&#39;dna.seq&#39;</span>
-<span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
-<span class="n">seq</span><span class="o">=</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span>
-     <span class="nb">str</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span>
-     <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">choices</span><span class="p">([</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="s1">&#39;T&#39;</span><span class="p">,</span><span class="s1">&#39;C&#39;</span><span class="p">,</span><span class="s1">&#39;G&#39;</span><span class="p">,</span><span class="s1">&#39;-&#39;</span><span class="p">],</span><span class="n">k</span><span class="o">=</span><span class="n">n</span><span class="p">))</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span>
-     <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">choices</span><span class="p">([</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="s1">&#39;T&#39;</span><span class="p">,</span><span class="s1">&#39;C&#39;</span><span class="p">,</span><span class="s1">&#39;G&#39;</span><span class="p">,</span><span class="s1">&#39;-&#39;</span><span class="p">],</span><span class="n">k</span><span class="o">=</span><span class="n">m</span><span class="p">))]</span>
-<span class="n">f</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span>
-<span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">seq</span><span class="p">))</span>
-</code></pre></div>
-
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>
-<code>10
-40
-TGGCGAT--C
-AGC-TCTCTTC--ATT--CAC-TACACCGACA-CGC-G-A
-</code>
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
+<h1 id="mpi">MPI<a class="headerlink" href="#mpi" title="Permanent link">&para;</a></h1>
 
 
 
@@ -662,18 +610,18 @@ AGC-TCTCTTC--ATT--CAC-TACACCGACA-CGC-G-A
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.db81ec45.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.db81ec45.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.6df46069.min.js"></script>
+      <script src="../../assets/javascripts/bundle.6df46069.min.js"></script>
       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.0.0/js-yaml.min.js"></script>
       
-        <script src="../../../js/markdown-enhancer.js"></script>
+        <script src="../../js/markdown-enhancer.js"></script>
       
-        <script src="../../../js/slides.js"></script>
+        <script src="../../js/slides.js"></script>
       
     
   </body>
