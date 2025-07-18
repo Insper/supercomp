@@ -1,0 +1,909 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://insper.github.io/supercomp/teoria/slurm/">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.15">
+    
+    
+      
+        <title>SLURM - SuperComputação - 2025/2</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/printing.css">
+    
+      <link rel="stylesheet" href="../../css/extra.css">
+    
+      <link rel="stylesheet" href="../../css/equipe.css">
+    
+      <link rel="stylesheet" href="../../css/ansi-colours.css">
+    
+      <link rel="stylesheet" href="../../css/jupyter-cells.css">
+    
+      <link rel="stylesheet" href="../../css/pandas-dataframe.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="grey" data-md-color-accent="red">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#slurm" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="SuperComputação - 2025/2" class="md-header__button md-logo" aria-label="SuperComputação - 2025/2" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SuperComputação - 2025/2
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              SLURM
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/insper/supercomp" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    SuperComp
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="SuperComputação - 2025/2" class="md-nav__button md-logo" aria-label="SuperComputação - 2025/2" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    SuperComputação - 2025/2
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/insper/supercomp" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    SuperComp
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sobre/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Burocracias
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Aulas
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Aulas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/aula01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    01 - Problemas de HPC
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/aula02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    02 - Sistemas de HPC
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/aula03/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    03 - Análise de desempenho
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/aula04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    04 - Heurísticas e alocação eficiente de memória
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/aula05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    05 - Programação paralela em CPU
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/aula06/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    06 - Efeitos colaterais do paralelismo
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/aula07/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    07 - Programação distribuída com MPI
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/aula08/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    08 - Programação paralela e distribuída
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/aula09/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    09 - Programação paralela em GPU
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-e-slurm" class="md-nav__link">
+    <span class="md-ellipsis">
+      O que é SLURM?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#principais-funcionalidades-do-slurm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Principais Funcionalidades do SLURM
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comandos-principais-do-slurm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comandos Principais do SLURM
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplos-de-uso-para-cada-comando-slurm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemplos de Uso para Cada Comando SLURM
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-sbatch" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. sbatch
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-scancel" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. scancel
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-scontrol" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. scontrol
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-sinfo" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. sinfo
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-sprio" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. sprio
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-squeue" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. squeue
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-srun" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. srun
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-strigger" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. strigger
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#explicacao-do-comando" class="md-nav__link">
+    <span class="md-ellipsis">
+      Explicação do Comando:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tipos-comuns-de-eventos-monitoraveis-pelo-strigger" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tipos Comuns de Eventos Monitoráveis pelo strigger:
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="slurm">SLURM<a class="headerlink" href="#slurm" title="Permanent link">&para;</a></h1>
+<h3 id="o-que-e-slurm">O que é SLURM?<a class="headerlink" href="#o-que-e-slurm" title="Permanent link">&para;</a></h3>
+<p>SLURM (Simple Linux Utility for Resource Management) é um gerenciador de workload open-source amplamente utilizado em clusters de computação de alto desempenho (HPC). Ele é responsável por alocar recursos de computação (como CPUs, memória e GPUs) aos usuários e suas tarefas, gerenciar filas de jobs, monitorar o uso de recursos e agendar a execução de tarefas de forma eficiente.</p>
+<h3 id="principais-funcionalidades-do-slurm">Principais Funcionalidades do SLURM<a class="headerlink" href="#principais-funcionalidades-do-slurm" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Alocação de Recursos: SLURM distribui recursos de computação, como nós e processadores, conforme solicitado pelos usuários. Ele assegura que os recursos são utilizados de maneira eficiente e equitativa.</li>
+<li>Submissão de Jobs: Usuários podem submeter jobs (tarefas de computação) ao SLURM, que coloca esses jobs em uma fila e os executa quando os recursos necessários estão disponíveis.</li>
+<li>Monitoramento e Gerenciamento: SLURM monitoriza o estado dos jobs, nós e partições do cluster, fornecendo ferramentas para verificar o status e a utilização de recursos.</li>
+<li>Políticas de Priorização: Implementa políticas para priorizar jobs com base em vários fatores, como tempo de espera, utilização de recursos e prioridades definidas pelo administrador do cluster.</li>
+</ol>
+<h3 id="comandos-principais-do-slurm">Comandos Principais do SLURM<a class="headerlink" href="#comandos-principais-do-slurm" title="Permanent link">&para;</a></h3>
+<p>Alguns dos comandos principais usados no SLURM:</p>
+<ol>
+<li>sbatch: É um comando do SLURM usado para submeter scripts de jobs para execução em um cluster. Esses scripts contêm instruções sobre como os recursos devem ser alocados e quais comandos devem ser executados</li>
+<li>scancel: Cancela um job pendente ou em execução.</li>
+<li>scontrol: Ferramenta administrativa usada para visualizar e/ou modificar o estado do SLURM. Muitos comandos <code>scontrol</code> só podem ser executados pelo adminstrador do sistema.</li>
+<li>sinfo: Relata o estado das filas e nós gerenciados pelo SLURM, com várias opções de filtragem, ordenação e formatação.</li>
+<li>sprio: Exibe uma visão detalhada dos componentes que afetam a prioridade de um job.</li>
+<li>squeue: Relata o estado dos jobs em execução em ordem de prioridade e depois os jobs pendentes em ordem de prioridade.</li>
+<li>srun: Submete um job para execução e faz o pedido de alocação dos recursos da maquina.</li>
+<li>strigger: Define, obtém ou visualiza gatilhos de eventos, como nós caindo ou jobs se aproximando do limite de tempo.</li>
+</ol>
+<h3 id="exemplos-de-uso-para-cada-comando-slurm">Exemplos de Uso para Cada Comando SLURM<a class="headerlink" href="#exemplos-de-uso-para-cada-comando-slurm" title="Permanent link">&para;</a></h3>
+<h3 id="1-sbatch">1. sbatch<a class="headerlink" href="#1-sbatch" title="Permanent link">&para;</a></h3>
+<p>Submete scripts de jobs para execução em um cluster. Esses scripts contêm instruções sobre como os recursos devem ser alocados e quais comandos devem ser executados.</p>
+<p>Exemplo de Script:</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="c1">#SBATCH --job-name=meu_job        # Nome do job</span>
+<span class="c1">#SBATCH --output=meu_job.out      # Arquivo de saída</span>
+<span class="c1">#SBATCH --error=meu_job.err       # Arquivo de erro</span>
+<span class="c1">#SBATCH --ntasks=1                # Número de tarefas</span>
+<span class="c1">#SBATCH --cpus-per-task=4         # Número de CPUs por tarefa</span>
+<span class="c1">#SBATCH --mem=4G                  # Memória total alocada para o job</span>
+<span class="c1">#SBATCH --time=00:02:00           # Tempo máximo de execução (hh:mm:ss)</span>
+<span class="c1">#SBATCH --partition=normal        # Fila do cluster</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Iniciando o job&quot;</span>
+sleep<span class="w"> </span><span class="m">60</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Job finalizado&quot;</span>
+</code></pre></div>
+<p>Explicação das Flags:</p>
+<p><code>-job-name=meu_job</code>: Define o nome do job como <code>meu_job</code>.</p>
+<p><code>-output=meu_job.out</code>: Especifica o arquivo onde a saída padrão do job será registrada.</p>
+<p><code>-error=meu_job.err</code>: Especifica o arquivo onde os erros serão registrados.</p>
+<p><code>-ntasks=1</code>: Define o número de tarefas (processos) a serem utilizados pelo job.</p>
+<p><code>-cpus-per-task=4</code>: Aloca 4 CPUs para cada tarefa.</p>
+<p><code>-mem=4G</code>: Especifica que 4 GB de memória serão alocados para o job.</p>
+<p><code>-time=00:02:00</code>: Define o tempo máximo de execução do job como 2 minutos.</p>
+<p><code>-partition=normal</code>: Especifica a fila do cluster onde o job será executado.</p>
+<h3 id="2-scancel">2. scancel<a class="headerlink" href="#2-scancel" title="Permanent link">&para;</a></h3>
+<p>Cancela um job pendente ou em execução.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code>scancel<span class="w"> </span><span class="m">12345</span>
+</code></pre></div>
+<p>Explicação das Flags:</p>
+<ul>
+<li><code>12345</code>: Especifica o ID do job que deve ser cancelado.</li>
+</ul>
+<h3 id="3-scontrol">3. scontrol<a class="headerlink" href="#3-scontrol" title="Permanent link">&para;</a></h3>
+<p>Ferramenta administrativa usada para visualizar e/ou modificar o estado do SLURM. Muitos comandos <code>scontrol</code> só podem ser executados pelo administrador do sistema.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code>scontrol<span class="w"> </span>show<span class="w"> </span>job<span class="w"> </span><span class="m">12345</span>
+</code></pre></div>
+<p>Explicação das Flags:</p>
+<p><code>show job 12345</code>: Exibe informações detalhadas sobre o job com ID <code>12345</code>.</p>
+<h3 id="4-sinfo">4. sinfo<a class="headerlink" href="#4-sinfo" title="Permanent link">&para;</a></h3>
+<p>Relata o estado das filas e nós gerenciados pelo SLURM.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code>sinfo
+</code></pre></div>
+<h3 id="5-sprio">5. sprio<a class="headerlink" href="#5-sprio" title="Permanent link">&para;</a></h3>
+<p>Exibe uma visão detalhada dos componentes que afetam a prioridade de um job.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code>sprio
+</code></pre></div>
+<h3 id="6-squeue">6. squeue<a class="headerlink" href="#6-squeue" title="Permanent link">&para;</a></h3>
+<p>Relata o estado dos jobs em execução em ordem de prioridade e depois os jobs pendentes em ordem de prioridade.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code>squeue<span class="w"> </span>-u<span class="w"> </span>username
+</code></pre></div>
+<p>Explicação das Flags:</p>
+<p><code>u username</code>: Filtra a saída para mostrar apenas os jobs do usuário <code>username</code>.</p>
+<h3 id="7-srun">7. srun<a class="headerlink" href="#7-srun" title="Permanent link">&para;</a></h3>
+<p>Submete um job para execução e faz o pedido de alocação dos recursos da máquina.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code>srun<span class="w"> </span>-N<span class="w"> </span><span class="m">1</span><span class="w"> </span>-n<span class="w"> </span><span class="m">1</span><span class="w"> </span>--time<span class="o">=</span><span class="m">00</span>:01:00<span class="w"> </span>./meu_programa
+</code></pre></div>
+<p>Explicação das Flags:</p>
+<p><code>N 1</code>: Especifica que 1 nó deve ser alocado.</p>
+<p><code>n 1</code>: Define que 1 tarefa deve ser executadas.</p>
+<p><code>-time=00:01:00</code>: Define o tempo máximo de execução do job como 1 minuto.</p>
+<p><code>./meu_programa</code>: Especifica o programa a ser executado.</p>
+<h3 id="9-strigger">9. strigger<a class="headerlink" href="#9-strigger" title="Permanent link">&para;</a></h3>
+<p>Define, obtém ou visualiza gatilhos de eventos, como nós caindo ou jobs se aproximando do limite de tempo.</p>
+<p>Exemplo:
+Vamos supor que você queira configurar um gatilho (<code>strigger</code>) para monitorar o uso de memória de um job específico e enviar um alerta quando o uso de memória ultrapassar um certo limite. Aqui está um exemplo completo:</p>
+<div class="highlight"><pre><span></span><code>strigger<span class="w"> </span>--set<span class="w"> </span>--jobid<span class="o">=</span>&lt;JOB_ID&gt;<span class="w"> </span>--threshold<span class="o">=</span><span class="m">500</span><span class="w"> </span>--action<span class="o">=</span><span class="s2">&quot;echo &#39;Atenção: O uso de memória ultrapassou 500 MB!&#39;&quot;</span>
+</code></pre></div>
+<h3 id="explicacao-do-comando">Explicação do Comando:<a class="headerlink" href="#explicacao-do-comando" title="Permanent link">&para;</a></h3>
+<p><code>strigger</code>: Comando para configurar um gatilho no SLURM.</p>
+<p><code>--set</code>: Indica que estamos criando um novo gatilho.</p>
+<p><code>--jobid=&lt;JOB_ID&gt;</code>: Especifica o ID do job que queremos monitorar. Substitua <code>&lt;JOB_ID&gt;</code> pelo ID real do job.</p>
+<p><code>--threshold=500</code>: Define o limiar de 500 MB de uso de memória. Quando o job usar mais de 500 MB, o gatilho será ativado.</p>
+<p><code>--action="echo 'Atenção: O uso de memória ultrapassou 500 MB!'"</code>: Define a ação que será executada quando o gatilho for ativado. Neste caso, a ação é um simples comando <code>echo</code> que imprime uma mensagem de alerta.</p>
+<p>Este gatilho será acionado quando o job especificado pelo <code>&lt;JOB_ID&gt;</code> ultrapassar 500 MB de uso de memória. A ação definida (<code>echo</code>) será executada, e você verá a mensagem "Atenção: O uso de memória ultrapassou 500 MB!" no terminal ou no arquivo de saída do job.</p>
+<p>Você pode personalizar o comando <code>strigger</code> para outras situações, como monitorar o tempo restante de um job, detectar falhas de nós, ou monitorar o uso de CPU, simplesmente ajustando os parâmetros e as ações conforme necessário.</p>
+<h3 id="tipos-comuns-de-eventos-monitoraveis-pelo-strigger">Tipos Comuns de Eventos Monitoráveis pelo <code>strigger</code>:<a class="headerlink" href="#tipos-comuns-de-eventos-monitoraveis-pelo-strigger" title="Permanent link">&para;</a></h3>
+<p>Tempo Restante (<code>TIME_LIMIT</code>):</p>
+<p>Aciona o gatilho quando um job se aproxima de seu limite de tempo de execução.</p>
+<p>Uso do <code>--threshold</code>: Especifica o tempo restante em segundos.</p>
+<p>Exemplo: <code>strigger --set --jobid=&lt;JOB_ID&gt; --threshold=60 --action="echo 'Job está a 60 segundos do limite de tempo!'"</code></p>
+<p>Uso de Memória (<code>MEMORY</code>):</p>
+<p>Aciona o gatilho quando o uso de memória de um job ultrapassa um certo limite.</p>
+<p>Uso do <code>--threshold</code>: Especifica a quantidade de memória usada, geralmente em megabytes (MB).</p>
+<p>Exemplo: <code>strigger --set --jobid=&lt;JOB_ID&gt; --threshold=1024 --action="echo 'Job ultrapassou 1GB de memória!'"</code></p>
+<p>Falha de Nó (<code>NODE_FAIL</code>):</p>
+<p>Aciona o gatilho quando um nó falha ou fica indisponível.</p>
+<p>Uso do <code>--threshold</code>: Não aplicável diretamente. O gatilho é acionado quando o evento de falha ocorre.</p>
+<p>Exemplo: <code>strigger --set --node=&lt;NODE_NAME&gt; --event=NODE_FAIL --action="echo 'Nó falhou!'"</code></p>
+<p>Falha de Job (<code>JOB_FAIL</code>):</p>
+<p>Aciona o gatilho quando um job falha por qualquer motivo.</p>
+<p>Uso do <code>--threshold</code>: Não aplicável diretamente. O gatilho é acionado quando o evento de falha ocorre.</p>
+<p>Exemplo: <code>strigger --set --jobid=&lt;JOB_ID&gt; --event=JOB_FAIL --action="echo 'Job falhou!'"</code></p>
+<p>Início de Job (<code>JOB_START</code>):</p>
+<p>Aciona o gatilho quando um job começa a ser executado.</p>
+<p>Uso do <code>--threshold</code>: Não aplicável diretamente. O gatilho é acionado quando o evento de início ocorre.</p>
+<p>Exemplo: <code>strigger --set --jobid=&lt;JOB_ID&gt; --event=JOB_START --action="echo 'Job iniciou!'"</code></p>
+<p>Finalização de Job (<code>JOB_END</code>):</p>
+<p>Aciona o gatilho quando um job termina sua execução, independentemente de ter sido concluído com sucesso ou não.</p>
+<p>Uso do <code>--threshold</code>: Não aplicável diretamente. O gatilho é acionado quando o evento de finalização ocorre.</p>
+<p>Exemplo: <code>strigger --set --jobid=&lt;JOB_ID&gt; --event=JOB_END --action="echo 'Job terminou!'"</code></p>
+<p>Limite de CPU (<code>CPU_LIMIT</code>):</p>
+<p>Aciona o gatilho quando o uso de CPU de um job ultrapassa um certo limite.</p>
+<p>Uso do <code>--threshold</code>: Especifica o uso de CPU em segundos de CPU ou em porcentagem.</p>
+<p>Exemplo: <code>strigger --set --jobid=&lt;JOB_ID&gt; --threshold=80 --action="echo 'Job ultrapassou 80% do uso de CPU!'"</code></p>
+<p>Submissão de Job (<code>JOB_SUBMIT</code>):</p>
+<p>Aciona o gatilho quando um job é submetido para execução.</p>
+<p>Uso do <code>--threshold</code>: Não aplicável diretamente. O gatilho é acionado quando o evento de submissão ocorre.</p>
+<p>Exemplo: <code>strigger --set --user=&lt;USER_NAME&gt; --event=JOB_SUBMIT --action="echo 'Um job foi submetido!'"</code></p>
+<p>Queda de Partição (<code>PARTITION_DOWN</code>):</p>
+<p>Aciona o gatilho quando uma partição inteira do cluster cai ou fica indisponível.</p>
+<p>Uso do <code>--threshold</code>: Não aplicável diretamente. O gatilho é acionado quando o evento de queda da partição ocorre.</p>
+<p>Exemplo: <code>strigger --set --partition=&lt;PARTITION_NAME&gt; --event=PARTITION_DOWN --action="echo 'Partição caiu!'"</code></p>
+<p>Chegada de Job ao Limiar de Tempo (<code>TIME_LIM_REACHED</code>):</p>
+<p>Similar ao <code>TIME_LIMIT</code>, mas pode ser mais específico para quando o tempo limite é alcançado, não apenas quando está próximo.</p>
+<p>Uso do <code>--threshold</code>: Especifica o tempo restante ou o evento do tempo limite.</p>
+<p>Exemplo: <code>strigger --set --jobid=&lt;JOB_ID&gt; --event=TIME_LIM_REACHED --action="echo 'Tempo limite alcançado!'"</code></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.56ea9cef.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.0.0/js-yaml.min.js"></script>
+      
+        <script src="../../js/markdown-enhancer.js"></script>
+      
+        <script src="../../js/slides.js"></script>
+      
+    
+  </body>
+</html>

@@ -11,24 +11,32 @@
         <link rel="canonical" href="https://insper.github.io/supercomp/sobre/">
       
       
+        <link rel="prev" href="..">
+      
+      
+        <link rel="next" href="../aulas/aula01/">
+      
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.11">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.15">
     
     
       
-        <title>Burocracias - SuperComputação - 2023/2</title>
+        <title>Burocracias - SuperComputação - 2025/2</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.0d440cfe.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.2505c338.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
       
       
 
+
     
+    
+      
     
     
       
@@ -44,13 +52,15 @@
     
       <link rel="stylesheet" href="../css/extra.css">
     
+      <link rel="stylesheet" href="../css/equipe.css">
+    
       <link rel="stylesheet" href="../css/ansi-colours.css">
     
       <link rel="stylesheet" href="../css/jupyter-cells.css">
     
       <link rel="stylesheet" href="../css/pandas-dataframe.css">
     
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -67,7 +77,6 @@
     
     <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="grey" data-md-color-accent="red">
   
-    
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
@@ -87,22 +96,25 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="SuperComputação - 2023/2" class="md-header__button md-logo" aria-label="SuperComputação - 2023/2" data-md-component="logo">
+    <a href=".." title="SuperComputação - 2025/2" class="md-header__button md-logo" aria-label="SuperComputação - 2025/2" data-md-component="logo">
       
   
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
     </label>
     <div class="md-header__title" data-md-component="header-title">
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            SuperComputação - 2023/2
+            SuperComputação - 2025/2
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -115,30 +127,39 @@
       </div>
     </div>
     
+      
     
     
-      <label class="md-header__button md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
-      </label>
-      <div class="md-search" data-md-component="search" role="dialog">
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
       <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
       <label class="md-search__icon md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
       </label>
       <nav class="md-search__options" aria-label="Search">
         
         <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
         </button>
       </nav>
       
     </form>
     <div class="md-search__output">
-      <div class="md-search__scrollwrap" data-md-scrollfix>
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
         <div class="md-search-result" data-md-component="search-result">
           <div class="md-search-result__meta">
             Initializing search
@@ -149,13 +170,14 @@
     </div>
   </div>
 </div>
+      
     
     
       <div class="md-header__source">
         <a href="https://github.com/insper/supercomp" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
   </div>
   <div class="md-source__repository">
     SuperComp
@@ -185,22 +207,23 @@
                     
 
 
+
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="SuperComputação - 2023/2" class="md-nav__button md-logo" aria-label="SuperComputação - 2023/2" data-md-component="logo">
+    <a href=".." title="SuperComputação - 2025/2" class="md-nav__button md-logo" aria-label="SuperComputação - 2025/2" data-md-component="logo">
       
   
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
 
     </a>
-    SuperComputação - 2023/2
+    SuperComputação - 2025/2
   </label>
   
     <div class="md-nav__source">
       <a href="https://github.com/insper/supercomp" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
   </div>
   <div class="md-source__repository">
     SuperComp
@@ -212,14 +235,21 @@
     
       
       
-      
-
+  
   
   
   
     <li class="md-nav__item">
       <a href=".." class="md-nav__link">
-        Home
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
       </a>
     </li>
   
@@ -227,308 +257,358 @@
     
       
       
-      
-
-  
   
   
     
-    <li class="md-nav__item md-nav__item--nested">
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
-      
-      
-      
-        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
-          Aulas
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Burocracias
+    
+  </span>
+  
+
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
-        <label class="md-nav__title" for="__nav_2">
-          <span class="md-nav__icon md-icon"></span>
-          Aulas
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-              
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
   
   
-  
-    <li class="md-nav__item">
-      <a href="../aulas/01-introducao/" class="md-nav__link">
-        01 - Introdução
-      </a>
-    </li>
+  <span class="md-ellipsis">
+    Burocracias
+    
+  </span>
   
 
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../aulas/02-03-implementacao-c%2B%2B/" class="md-nav__link">
-        02 e 03 - C++
       </a>
-    </li>
-  
+      
+        
 
-            
-          
-            
-              
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
   
-    <li class="md-nav__item">
-      <a href="../aulas/04-profiling/" class="md-nav__link">
-        04 - Profiling
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
+    
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#mineracao-de-criptomoedas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mineração de criptomoedas
+    </span>
+  </a>
   
-    <li class="md-nav__item">
-      <a href="../aulas/05-heuristicas/" class="md-nav__link">
-        05 - Heurísticas
-      </a>
-    </li>
+    <nav class="md-nav" aria-label="Mineração de criptomoedas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#criterios-de-avaliacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Critérios de Avaliação
+    </span>
+  </a>
   
-
-            
-          
-            
-              
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#objetivos-de-aprendizagem-relacionados" class="md-nav__link">
+    <span class="md-ellipsis">
+      Objetivos de Aprendizagem Relacionados
+    </span>
+  </a>
   
+</li>
+        
+      </ul>
+    </nav>
   
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#projeto-extra-extensao-do-projeto-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Projeto Extra - Extensão do Projeto 1
+    </span>
+  </a>
   
-    <li class="md-nav__item">
-      <a href="../aulas/06-aleatorizacao/" class="md-nav__link">
-        06 - Aleatorização
-      </a>
-    </li>
+</li>
+      
+    </ul>
   
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../aulas/07-busca-local/" class="md-nav__link">
-        07 - Busca Local
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../aulas/08-busca-global/" class="md-nav__link">
-        08 - Busca Exaustiva
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../aulas/11-paralelismo/" class="md-nav__link">
-        09 - Paralelismo
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../aulas/12-efeitos-colaterais/" class="md-nav__link">
-        10 - Paralelismo - Exercício / Efeitos Colaterais
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../aulas/13-efeitos-colaterais-II/" class="md-nav__link">
-        12 - Paralelismo - Efeitos Colaterais II
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../aulas/14-intro-gpu/" class="md-nav__link">
-        13 - GPU - Introdução
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../aulas/15-gpu-iteradores/" class="md-nav__link">
-        14 - GPU - Iteradores
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../aulas/16-gpu-customizacao/" class="md-nav__link">
-        15 - GPU - Customização
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../aulas/21-SLURM/" class="md-nav__link">
-        16 - Clusters - Slurm
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../aulas/MPI/" class="md-nav__link">
-        17 - MPI
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../aulas/MPI-OpenMP/" class="md-nav__link">
-        18 - MPI e OpenMP
-      </a>
-    </li>
-  
-
-            
-          
-        </ul>
-      </nav>
+</nav>
+      
     </li>
   
 
     
       
       
-      
-
   
   
   
+  
+    
+    
+    
+    
     
     <li class="md-nav__item md-nav__item--nested">
       
-      
-      
-      
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
-      
-      
-      
-        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
-          Projeto
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
-        <label class="md-nav__title" for="__nav_3">
-          <span class="md-nav__icon md-icon"></span>
-          Projeto
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
           
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Aulas
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Aulas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
             
               
+                
+  
   
   
   
     <li class="md-nav__item">
-      <a href="../projetos/" class="md-nav__link">
-        Projeto da disciplina
+      <a href="../aulas/aula01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    01 - Problemas de HPC
+    
+  </span>
+  
+
       </a>
     </li>
   
 
+              
             
-          
-        </ul>
-      </nav>
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aulas/aula02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    02 - Sistemas de HPC
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aulas/aula03/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    03 - Análise de desempenho
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aulas/aula04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    04 - Heurísticas e alocação eficiente de memória
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aulas/aula05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    05 - Programação paralela em CPU
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aulas/aula06/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    06 - Efeitos colaterais do paralelismo
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aulas/aula07/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    07 - Programação distribuída com MPI
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aulas/aula08/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    08 - Programação paralela e distribuída
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aulas/aula09/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    09 - Programação paralela em GPU
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -553,6 +633,56 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#mineracao-de-criptomoedas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mineração de criptomoedas
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mineração de criptomoedas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#criterios-de-avaliacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Critérios de Avaliação
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#objetivos-de-aprendizagem-relacionados" class="md-nav__link">
+    <span class="md-ellipsis">
+      Objetivos de Aprendizagem Relacionados
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#projeto-extra-extensao-do-projeto-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Projeto Extra - Extensão do Projeto 1
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -565,332 +695,418 @@
                 
                   
 
-  
-  
 
+  
+  
 
 
 <h1 id="burocracias">Burocracias<a class="headerlink" href="#burocracias" title="Permanent link">&para;</a></h1>
+<div class="admonition info">
+<p class="admonition-title">Horários</p>
+<p><strong>Aulas:</strong></p>
+<p>Segunda -&gt; 16h30 -- 18h30</p>
+<p>Sexta -&gt; 14h15 -- 16h15</p>
+<p><strong>Atendimento:</strong></p>
+<p>Segunda -&gt; 18h30 -- 20h00</p>
+</div>
+<details class="info">
+<summary>Objetivos de Aprendizagem</summary>
+<p>Ao final da disciplina, o estudante será capaz de:</p>
+<p><strong>Obj 1.</strong> Desenvolver algoritmos usando recursos de computação paralela e distribuída para obter ganhos de desempenho na aplicação final.</p>
+<p><strong>Obj 2.</strong> Aplicar estruturas lógicas de computação distribuída no desenvolvimento de algoritmos multitarefa.</p>
+<p><strong>Obj 3.</strong> Usar GPGPU (General-Purpose computing on Graphics Processing Units) para computação numérica e comparar seu desempenho com soluções baseadas em CPU.</p>
+<p><strong>Obj 4.</strong> Planejar e projetar sistemas de computação de alto desempenho, considerando aspectos de hardware, escalabilidade, e alocação de recursos.</p>
+<p><strong>Obj 5.</strong> Analisar a complexidade de algoritmos paralelos e a eficiência de implementações específicas, identificando as métricas de desempenho mais adequadas para essa análise.</p>
+<p><strong>Obj 6.</strong> Aplicar recursos específicos de sistemas operacionais (como escalonadores, controle de threads e gerenciamento de memória) para melhorar o desempenho de algoritmos.</p>
+<p><strong>Obj 7.</strong> Desenvolver aplicações que utilizam protocolos otimizados para paralelização, como MPI, OpenMP e CUDA.</p>
+</details>
+<details class="tip">
+<summary>Plano de aulas</summary>
+<table>
+<thead>
+<tr>
+<th>Data</th>
+<th>Tópico</th>
+<th>Conteúdo/Atividade</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>11/08 (seg)</td>
+<td>O que são problemas de HPC</td>
+<td>Relembrando mapa de memória; O que importa de C++ para nós; Python x C++; Objetivos de aprendizagem; Transcrever códigos Python para C++; Comparar desempenho de linguagens. Primeira atividade</td>
+</tr>
+<tr>
+<td>15/08 (sex)</td>
+<td>O que é e como funciona um sistema de HPC</td>
+<td>Retomando problemas de HPC; Rede, hardware, Slurm, filas, jobs; Sistemas de HPC no Brasil e no mundo; Cluster Franky; Primeiros pedidos de submissão com Slurm; Testes em diferentes filas. Segunda atividade</td>
+</tr>
+<tr>
+<td>18/08 (seg)</td>
+<td>Análise de desempenho e projeto</td>
+<td>Discussão das entregas anteriores; Introdução ao profiling; Apresentação do projeto do semestre passado e de soluções anteriores; Aplicação de profiling; Lançamento do projeto; Relatório com diagnóstico, hipótese e comparação de desempenho. Terceira Atividade</td>
+</tr>
+<tr>
+<td>22/08 (sex)</td>
+<td>Heurísticas e alocação eficiente de memória</td>
+<td>Aleatoriedade, seeds, nounce; Busca exaustiva, local e com poda; Manipulação de matrizes; Alocação de memória com base no mapa de memória em CPU; Otimização de heurística e estratégia de nounce. Suporte para o projeto 1</td>
+</tr>
+<tr>
+<td>25/08 (seg)</td>
+<td>Paralelismo em CPU com OpenMP</td>
+<td>Threads, cores, CPU; Conceitos de região paralela, tasks, sections, parallel for, fork/join; Variáveis privadas e compartilhadas; Scheduling. Suporte para o projeto 1</td>
+</tr>
+<tr>
+<td>29/08 (sex)</td>
+<td>Efeitos colaterais do paralelismo</td>
+<td>Racing conditions, variáveis compartilhadas, dependências, recursão; Aplicação no projeto, mapeamento de problemas, hipóteses de otimização, comparação de desempenho. Suporte para o projeto 1</td>
+</tr>
+<tr>
+<td>02/09 (seg)</td>
+<td>Memória distribuída e comunicação com MPI</td>
+<td>Recapitulação: linguagem, hardware, paralelismo local; Memória distribuída; Comunicação ponto a ponto, coletiva, grupos e comunicadores; Exemplos práticos. Suporte para o projeto 1</td>
+</tr>
+<tr>
+<td>05/09 (sex)</td>
+<td>Integração de MPI com OpenMP</td>
+<td>Estratégias de implementação híbrida no projeto; Apresentação de exemplos paralelos; Discussões orientadas. Suporte para o projeto 1</td>
+</tr>
+<tr>
+<td>08/09 (seg)</td>
+<td>Aula estúdio</td>
+<td>Suporte ao projeto 1</td>
+</tr>
+<tr>
+<td>12/09 (sex)</td>
+<td>Palestra NVIDIA</td>
+<td>Evento externo com especialistas NVIDIA</td>
+</tr>
+<tr>
+<td>15/09 (seg)</td>
+<td>Aula estúdio</td>
+<td>Último suporte para finalização do projeto. Deadline do projeto às 23h59</td>
+</tr>
+<tr>
+<td>19/09 (sex)</td>
+<td>Devolutiva do Projeto 1</td>
+<td>Feedback e discussão das soluções apresentadas</td>
+</tr>
+<tr>
+<td>22/09 (seg)</td>
+<td>Aula estúdio</td>
+<td>Últimos ajustes para o segundo projeto. Deadline às 23h59</td>
+</tr>
+<tr>
+<td>25/09–03/10</td>
+<td>Provas Intermediárias</td>
+<td>Provas intermediárias com foco nos conteúdos até MPI</td>
+</tr>
+<tr>
+<td>06/10 (seg)</td>
+<td>Profiling em GPU e apresentação do Projeto 2</td>
+<td>Alocação de memória na GPU; Warps e SIMD; Controlando divergência; Diagnóstico de desempenho; Lançamento do Projeto 2</td>
+</tr>
+<tr>
+<td>10/10 (sex)</td>
+<td>Otimização de Throughput em GPU</td>
+<td>Histogramming, data race, uso de atomic; Estratégias para melhorar throughput</td>
+</tr>
+<tr>
+<td>13/10 (seg)</td>
+<td>Técnicas de otimização em GPU (Stencil)</td>
+<td>Convolução, reuse, tile boundaries, agendamento de threads</td>
+</tr>
+<tr>
+<td>15/10 (sex)</td>
+<td>Estabilidade numérica</td>
+<td>Ponto flutuante; Erros de arredondamento; Técnicas de controle de erro</td>
+</tr>
+<tr>
+<td>24/10 (seg)</td>
+<td>MPI + CUDA</td>
+<td>Estratégias híbridas; Gerenciamento de dados; Planejamento e estruturação de comunicação</td>
+</tr>
+<tr>
+<td>27/10 (sex)</td>
+<td>Aula estúdio Projeto 2</td>
+<td>Suporte final para implementação do Projeto 2</td>
+</tr>
+<tr>
+<td>31/10 (seg)</td>
+<td>Palestra NVIDIA – OpenACC</td>
+<td>Introdução a técnicas com OpenACC</td>
+</tr>
+<tr>
+<td>03/11 (sex)</td>
+<td>Aula estúdio Projeto 2</td>
+<td>Últimos ajustes; Deadline do Projeto 2</td>
+</tr>
+<tr>
+<td>07/11 (seg)</td>
+<td>Devolutiva do Projeto 2</td>
+<td>Feedback e discussão dos resultados</td>
+</tr>
+<tr>
+<td>10/11 (sex)</td>
+<td>Simulado da prova final</td>
+<td>Revisão prática para avaliação</td>
+</tr>
+<tr>
+<td>14/11 (seg)</td>
+<td>Aula estúdio final</td>
+<td>Encerramento das atividades; Suporte final</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="note">
+<summary>Atividades (Individual) 5%</summary>
+<table>
+<thead>
+<tr>
+<th><strong>Atividade</strong></th>
+<th><strong>Objetivos Atendidos</strong></th>
+<th><strong>Descrição</strong></th>
+<th><strong>Pontos</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Transcrever códigos Python para C++ e comparar desempenho</td>
+<td>Obj 1, Obj 3, Obj 5</td>
+<td>Desenvolvem algoritmos em diferentes linguagens e analisam desempenho, reforçando noções de eficiência e impacto da linguagem.</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Primeiros pedidos de submissão com SLURM + testes em diferentes filas/hardwares</td>
+<td>Obj 4, Obj 6</td>
+<td>Planejamento da execução em HPC, usando recursos do SO e observando como configurações de hardware influenciam o desempenho.</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Profiling + relatório com diagnóstico, hipótese, implementação e análise de desempenho</td>
+<td>Obj 1, Obj 4, Obj 5</td>
+<td>Envolve identificar gargalos, propor e testar melhorias, com análise do desempenho final</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="note">
+<summary>Projeto 1 (Individual) 15%</summary>
+<h3 id="mineracao-de-criptomoedas"><strong>Mineração de criptomoedas</strong><a class="headerlink" href="#mineracao-de-criptomoedas" title="Permanent link">&para;</a></h3>
+<h4 id="criterios-de-avaliacao">Critérios de Avaliação<a class="headerlink" href="#criterios-de-avaliacao" title="Permanent link">&para;</a></h4>
+<p><strong>Rubrica D</strong></p>
 <ul>
-<li>Horários: <ul>
-<li>Turma A - Prof. André Filipe:  Quarta - 13h30, Sexta - 07h30</li>
-<li>Turma B - Prof. Luciano Silva:  Terça - 09h45, Sexta - 13h30</li>
-</ul>
+<li>
+<p>Executa o código minerador <strong>síncrono</strong>, no cluster <strong>Franky</strong></p>
+</li>
+<li>
+<p>Com dificuldade <strong>5 zeros</strong>, com pelo menos <strong>5 gerações diferentes de <code>sync_gen</code></strong></p>
+</li>
+<li>
+<p>Gera <strong>relatório com explicação, tempo de execução e recursos SLURM utilizados</strong></p>
 </li>
 </ul>
-<details class="note">
-<summary>Plano de aulas - Turma A</summary>
+<p><strong>Rubrica D+</strong></p>
+<ul>
+<li>Mesmos critérios da D, mas com dificuldade <strong>7 zeros</strong></li>
+</ul>
+<p><strong>Rubrica C</strong></p>
+<ul>
+<li>
+<p>Executa o código minerador <strong>assíncrono</strong>, no cluster <strong>SDumont</strong></p>
+</li>
+<li>
+<p>Com dificuldade <strong>5 zeros</strong>, com pelo menos <strong>5 gerações diferentes de <code>async_gen</code></strong></p>
+</li>
+<li>
+<p>Gera <strong>relatório com explicação, tempos de execução e recursos SLURM utilizados</strong></p>
+</li>
+</ul>
+<p><strong>Rubrica B</strong></p>
+<ul>
+<li>
+<p>Executa o código minerador <strong>assíncrono</strong>, no cluster <strong>SDumont</strong></p>
+</li>
+<li>
+<p>Com dificuldade <strong>6 zeros</strong>, com pelo menos <strong>5 gerações diferentes de <code>async_gen</code></strong></p>
+</li>
+<li>
+<p>Usa pelo menos <strong>uma estratégia de otimização em CPU</strong> (MPI ou OpenMP)</p>
+</li>
+<li>
+<p>Relatório completo com análise de desempenho, explicação das diferenças entre ambientes</p>
+</li>
+</ul>
+<p><strong>Rubrica B+</strong></p>
+<ul>
+<li>Mesmos critérios da B, mas usando <strong>as duas estratégias de otimização</strong>: MPI e OpenMP</li>
+</ul>
+<p><strong>Rubrica A</strong></p>
+<ul>
+<li>
+<p>Executa o código minerador <strong>assíncrono</strong>, no cluster <strong>SDumont</strong></p>
+</li>
+<li>
+<p>Com dificuldade <strong>7 zeros</strong>, com pelo menos <strong>5 gerações diferentes de <code>async_gen</code></strong></p>
+</li>
+<li>
+<p>Realiza <strong>mineração em GPU</strong></p>
+</li>
+<li>
+<p>Relatório com análise detalhada dos ambientes, desempenho e configuração</p>
+</li>
+</ul>
+<p><strong>Rubrica A+</strong></p>
+<ul>
+<li>
+<p>Como a A, mas com <strong>estratégia híbrida</strong>: partes do código em CPU, partes em GPU</p>
+</li>
+<li>
+<p>Apresenta <strong>análise comparativa entre as estratégias, ambientes e arquiteturas</strong></p>
+</li>
+</ul>
+<h4 id="objetivos-de-aprendizagem-relacionados">Objetivos de Aprendizagem Relacionados<a class="headerlink" href="#objetivos-de-aprendizagem-relacionados" title="Permanent link">&para;</a></h4>
 <table>
 <thead>
 <tr>
-<th>Data</th>
-<th>Questão/Problema</th>
-<th>Conteúdo/Atividade</th>
+<th><strong>Objetivo</strong></th>
+<th><strong>Descrição</strong></th>
+<th><strong>Relação com o Objetivo de Aprendizagem</strong></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>08/02/23</td>
-<td>Introdução ao curso e a tecnologias de alto desempenho</td>
-<td>Introdução ao curso; Princípios de C++</td>
+<td>Obj 1</td>
+<td>Desenvolver algoritmos usando computação paralela/distribuída para ganhos de desempenho</td>
+<td>Rúbrica B e B+</td>
 </tr>
 <tr>
-<td>10/02/23</td>
-<td>Introdução ao curso e a tecnologias de alto desempenho</td>
-<td>Implementação de algoritmos simples; Passagem de argumentos por referência e valor; Recursos de C++</td>
+<td>Obj 2</td>
+<td>Aplicar estrutura lógica de computação distribuída para desenvolvimento de algoritmos multitarefas</td>
+<td>Rúbrica B+ e A+</td>
 </tr>
 <tr>
-<td>15/02/23</td>
-<td>Considerações na implementação de programas de alto desempenho</td>
-<td>C++, Vectors</td>
+<td>Obj 3</td>
+<td>Usar GPGPU para computação numérica e comparar com soluções baseadas em CPU</td>
+<td>Rúbrica A e A+.</td>
 </tr>
 <tr>
-<td>17/02/23</td>
-<td>Considerações na implementação de programas de alto desempenho</td>
-<td>Utilização de ferramentas de profiling para identificar pontos quentes em um programa</td>
+<td>Obj 4</td>
+<td>Planejar e projetar sistemas de computação de alto desempenho</td>
+<td>Rúbricas D, C, B e A</td>
 </tr>
 <tr>
-<td>24/02/23</td>
-<td>Estratégias para solução de problemas difíceis</td>
-<td>Apresentação do projeto da disciplina; Heurística, busca local e global</td>
+<td>Obj 5</td>
+<td>Analisar a complexidade de algoritmos paralelos e a eficiência de uma implementação</td>
+<td>Rúbricas B e A</td>
 </tr>
 <tr>
-<td>01/03/23</td>
-<td>Soluções sub-ótimas usando a busca local</td>
-<td>Propriedades da solução ótima; vizinhança de soluções</td>
+<td>Obj 6</td>
+<td>Aplicar recursos específicos de sistemas operacionais para otimizar desempenho</td>
+<td>Rúbricas C, B e A</td>
 </tr>
 <tr>
-<td>03/03/23</td>
-<td>Soluções sub-ótimas usando a busca local</td>
-<td>Propriedades de geradores de números pseudo-aleatórios; Algoritmos baseados em sorteios aleatórios; Exploration vs Exploitation</td>
-</tr>
-<tr>
-<td>08/03/23</td>
-<td>Aula estúdio para projeto</td>
-<td>Aula estúdio para projeto</td>
-</tr>
-<tr>
-<td>10/03/23</td>
-<td>Aula estúdio para projeto</td>
-<td>Aula estúdio para projeto</td>
-</tr>
-<tr>
-<td>15/03/23</td>
-<td>Buscando uma solução globalmente ótima</td>
-<td>Busca global vs Busca local; Enumeração exaustiva e sua classe de problemas computacionais; Backtracking</td>
-</tr>
-<tr>
-<td>17/03/23</td>
-<td>Buscando uma solução globalmente ótima</td>
-<td>gap de otimalidade; Simetrias; Comunicação de resultados de desempenho</td>
-</tr>
-<tr>
-<td>22/03/23</td>
-<td>Aula estúdio para projeto</td>
-<td>Aula estúdio para projeto</td>
-</tr>
-<tr>
-<td>29/03/23</td>
-<td>Prova intermediária</td>
-<td>Prova intermediária</td>
-</tr>
-<tr>
-<td>31/03/23</td>
-<td>Prova intermediária</td>
-<td>Prova intermediária</td>
-</tr>
-<tr>
-<td>05/04/23</td>
-<td>Programação multi-core: como dividir tarefas e ganhar tempo</td>
-<td>Introdução a OpenMP</td>
-</tr>
-<tr>
-<td>12/04/23</td>
-<td>Programação multi-core: como dividir tarefas e ganhar tempo</td>
-<td>Código thread-safe e reentrância</td>
-</tr>
-<tr>
-<td>14/04/23</td>
-<td>Programação multi-core: como dividir tarefas e ganhar tempo</td>
-<td>Introdução a problemas IO bound; Construções de alto nível do OpenMP; Sincronização usando mutex e semáforos</td>
-</tr>
-<tr>
-<td>19/04/23</td>
-<td>Programação multi-core: como dividir tarefas e ganhar tempo</td>
-<td>Introdução a problemas IO bound; Construções de alto nível do OpenMP; Sincronização usando mutex e semáforos</td>
-</tr>
-<tr>
-<td>26/04/23</td>
-<td>Programação multi-core: como dividir tarefas e ganhar tempo</td>
-<td>Aula estúdio para projeto</td>
-</tr>
-<tr>
-<td>28/04/23</td>
-<td>Programação em GPU e quais problemas são massivamente paralelizáveis</td>
-<td>Introdução a GPGPU</td>
-</tr>
-<tr>
-<td>03/05/23</td>
-<td>Programação em GPU e quais problemas são massivamente paralelizáveis</td>
-<td>Introdução a GPGPU</td>
-</tr>
-<tr>
-<td>05/05/23</td>
-<td>Programação em GPU e quais problemas são massivamente paralelizáveis</td>
-<td>Programando para GPU, Nvidia Thrust</td>
-</tr>
-<tr>
-<td>10/05/23</td>
-<td>Programação em GPU e quais problemas são massivamente paralelizáveis</td>
-<td>Programando para GPU, Nvidia Thrust</td>
-</tr>
-<tr>
-<td>12/05/23</td>
-<td>Programação Distribuída com MPI</td>
-<td>Exercícios de programação em MPI</td>
-</tr>
-<tr>
-<td>17/05/23</td>
-<td>Programação Distribuída com MPI</td>
-<td>Exercícios de programação em MPI</td>
-</tr>
-<tr>
-<td>19/05/23</td>
-<td>Programação Distribuída com MPI</td>
-<td>Exercícios de programação em MPI</td>
-</tr>
-<tr>
-<td>24/05/23</td>
-<td>Aula estúdio para projeto</td>
-<td>Aula estúdio para projeto</td>
-</tr>
-<tr>
-<td>02/06/23</td>
-<td>Prova Final</td>
-<td>Prova Final</td>
-</tr>
-<tr>
-<td>07/06/23</td>
-<td>Prova Final</td>
-<td>Prova Final</td>
+<td>Obj 7</td>
+<td>Desenvolver aplicações com protocolos otimizados para paralelização</td>
+<td>Rúbricas B e A</td>
 </tr>
 </tbody>
 </table>
 </details>
 <details class="note">
-<summary>Plano de aulas - Turma B</summary>
+<summary>Projeto 2 (dupla) 25%</summary>
+<p>Em construção</p>
+</details>
+<details class="note">
+<summary>Projeto Extra (Individual) 5%</summary>
+<h3 id="projeto-extra-extensao-do-projeto-1">Projeto Extra - <strong>Extensão do Projeto 1</strong><a class="headerlink" href="#projeto-extra-extensao-do-projeto-1" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>Somente para quem entregou até a Rúbrica B do Projeto 1 dentro do prazo.</strong></p>
+</blockquote>
+<p>Passar o Projeto 1 para GPU e relatar diferenças de desempenho e otimização.</p>
+<p><strong>Rubrica A</strong></p>
+<ul>
+<li>
+<p>Código minerador <strong>assíncrono</strong>, cluster <strong>SDumont</strong></p>
+</li>
+<li>
+<p>Dificuldade <strong>8 zeros</strong>, com pelo menos <strong>5 gerações <code>async_gen</code></strong></p>
+</li>
+<li>
+<p>Estratégia <strong>híbrida CPU + GPU</strong></p>
+</li>
+<li>
+<p><strong>Relatório completo comparando entre Projeto 1 e Projeto Extra</strong></p>
+</li>
+</ul>
+<p><strong>Rubrica A+</strong></p>
+<ul>
+<li>
+<p>Mesmos critérios da A</p>
+</li>
+<li>
+<p>Estratégia <strong>distribuída com múltiplas GPUs</strong></p>
+</li>
+<li>
+<p><strong>Relatório completo comparando entre Projeto 1 e Projeto Extra</strong></p>
+</li>
+</ul>
 <table>
 <thead>
 <tr>
-<th>Data</th>
-<th>Questão/Problema</th>
-<th>Conteúdo/Atividade</th>
+<th><strong>Objetivo</strong></th>
+<th><strong>Descrição</strong></th>
+<th><strong>Relação com o Objetivo de Aprendizagem</strong></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>07/02/23</td>
-<td>Introdução ao curso e a tecnologias de alto desempenho</td>
-<td>Introdução ao curso; Princípios de C++</td>
+<td>Obj 1</td>
+<td>Desenvolver algoritmos usando computação paralela/distribuída</td>
+<td>Projeto deve ser resolvido em GPU, podendo ser híbrido CPU-GPU ou Multi GPU</td>
 </tr>
 <tr>
-<td>10/02/23</td>
-<td>Introdução ao curso e a tecnologias de alto desempenho</td>
-<td>Implementação de algoritmos simples; Passagem de argumentos por referência e valor; Recursos de C++</td>
+<td>Obj 2</td>
+<td>Aplicar lógica de computação distribuída</td>
+<td>Rúbrica A+</td>
 </tr>
 <tr>
-<td>14/02/23</td>
-<td>Considerações na implementação de programas de alto desempenho</td>
-<td>C++, Vectors</td>
+<td>Obj 3</td>
+<td>Usar GPGPU e comparar com CPU</td>
+<td>Comparação entre o projeto 1 desenvolvido em CPU e a implementação em GPU</td>
 </tr>
 <tr>
-<td>17/02/23</td>
-<td>Considerações na implementação de programas de alto desempenho</td>
-<td>Utilização de ferramentas de profiling para identificar pontos quentes em um programa</td>
+<td>Obj 4</td>
+<td>Planejar execução em ambiente HPC</td>
+<td>Alocação via SLURM, flags de compilação, estratégias para GPU</td>
 </tr>
 <tr>
-<td>24/02/23</td>
-<td>Estratégias para solução de problemas difíceis</td>
-<td>Apresentação do projeto da disciplina; Heurística, busca local e global</td>
+<td>Obj 5</td>
+<td>Analisar a eficiência de uma implementação paralela</td>
+<td>Diagnóstico, otimizações e comparação de desempenho no relatório</td>
 </tr>
 <tr>
-<td>28/02/23</td>
-<td>Soluções sub-ótimas usando a busca local</td>
-<td>Propriedades da solução ótima; vizinhança de soluções</td>
+<td>Obj 6</td>
+<td>Usar recursos do sistema operacional para desempenho</td>
+<td>Uso de SLURM, memória GPU, controle de blocos e threads</td>
 </tr>
 <tr>
-<td>03/03/23</td>
-<td>Soluções sub-ótimas usando a busca local</td>
-<td>Propriedades de geradores de números pseudo-aleatórios; Algoritmos baseados em sorteios aleatórios; Exploration vs Exploitation</td>
-</tr>
-<tr>
-<td>07/03/23</td>
-<td>Aula estúdio para projeto</td>
-<td>Aula estúdio para projeto</td>
-</tr>
-<tr>
-<td>10/03/23</td>
-<td>Aula estúdio para projeto</td>
-<td>Aula estúdio para projeto</td>
-</tr>
-<tr>
-<td>14/03/23</td>
-<td>Buscando uma solução globalmente ótima</td>
-<td>Busca global vs Busca local; Enumeração exaustiva e sua classe de problemas computacionais; Backtracking</td>
-</tr>
-<tr>
-<td>17/03/23</td>
-<td>Buscando uma solução globalmente ótima</td>
-<td>gap de otimalidade; Simetrias; Comunicação de resultados de desempenho</td>
-</tr>
-<tr>
-<td>21/03/23</td>
-<td>Aula estúdio para projeto</td>
-<td>Aula estúdio para projeto</td>
-</tr>
-<tr>
-<td>31/03/23</td>
-<td>Prova intermediária</td>
-<td>Prova intermediária</td>
-</tr>
-<tr>
-<td>04/04/23</td>
-<td>Prova intermediária</td>
-<td>Prova intermediária</td>
-</tr>
-<tr>
-<td>11/04/23</td>
-<td>Programação multi-core: como dividir tarefas e ganhar tempo</td>
-<td>Introdução a OpenMP</td>
-</tr>
-<tr>
-<td>14/04/23</td>
-<td>Programação multi-core: como dividir tarefas e ganhar tempo</td>
-<td>Código thread-safe e reentrância</td>
-</tr>
-<tr>
-<td>18/04/23</td>
-<td>Programação multi-core: como dividir tarefas e ganhar tempo</td>
-<td>Introdução a problemas IO bound; Construções de alto nível do OpenMP; Sincronização usando mutex e semáforos</td>
-</tr>
-<tr>
-<td>25/04/23</td>
-<td>Programação multi-core: como dividir tarefas e ganhar tempo</td>
-<td>Introdução a problemas IO bound; Construções de alto nível do OpenMP; Sincronização usando mutex e semáforos</td>
-</tr>
-<tr>
-<td>28/04/23</td>
-<td>Programação multi-core: como dividir tarefas e ganhar tempo</td>
-<td>Aula estúdio para projeto</td>
-</tr>
-<tr>
-<td>02/05/23</td>
-<td>Programação em GPU e quais problemas são massivamente paralelizáveis</td>
-<td>Introdução a GPGPU</td>
-</tr>
-<tr>
-<td>05/05/23</td>
-<td>Programação em GPU e quais problemas são massivamente paralelizáveis</td>
-<td>Introdução a GPGPU</td>
-</tr>
-<tr>
-<td>10/05/23</td>
-<td>Programação em GPU e quais problemas são massivamente paralelizáveis</td>
-<td>Programando para GPU, Nvidia Thrust</td>
-</tr>
-<tr>
-<td>12/05/23</td>
-<td>Programação em GPU e quais problemas são massivamente paralelizáveis</td>
-<td>Programando para GPU, Nvidia Thrust</td>
-</tr>
-<tr>
-<td>17/05/23</td>
-<td>Programação Distribuída com MPI</td>
-<td>Exercícios de programação em MPI</td>
-</tr>
-<tr>
-<td>19/05/23</td>
-<td>Programação Distribuída com MPI</td>
-<td>Exercícios de programação em MPI</td>
-</tr>
-<tr>
-<td>23/05/23</td>
-<td>Aula estúdio para projeto</td>
-<td>Aula estúdio para projeto</td>
-</tr>
-<tr>
-<td>02/06/23</td>
-<td>Prova Final</td>
-<td>Prova Final</td>
-</tr>
-<tr>
-<td>07/06/23</td>
-<td>Prova Final</td>
-<td>Prova Final</td>
+<td>Obj 7</td>
+<td>Desenvolver aplicações com protocolos otimizados para paralelização</td>
+<td>Implementação de otimizações em GPU ou MultiGPU</td>
 </tr>
 </tbody>
 </table>
 </details>
+
+
+
+
+
+
+
 
 
 
@@ -901,6 +1117,7 @@
             </div>
           
           
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
         
       </main>
@@ -928,10 +1145,13 @@
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.db81ec45.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.6df46069.min.js"></script>
+      
+      <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.56ea9cef.min.js"></script>
       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
       
