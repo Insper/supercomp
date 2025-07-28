@@ -11,6 +11,8 @@
         <link rel="canonical" href="https://insper.github.io/supercomp/teoria/comandos/">
       
       
+        <link rel="prev" href="../aula01/">
+      
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -18,7 +20,7 @@
     
     
       
-        <title>Comandos - SuperComputação - 2025/2</title>
+        <title>Lista de Comandos - SuperComputação - 2025/2</title>
       
     
     
@@ -79,6 +81,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#comandos-slurm" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -111,7 +118,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Comandos
+              Lista de Comandos
             
           </span>
         </div>
@@ -329,6 +336,53 @@
 
               
             
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Teoria
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Teoria
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
               
                 
   
@@ -336,12 +390,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../../aulas/aula02/" class="md-nav__link">
+      <a href="../aula01/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    02 - Sistemas de HPC
+    Aula 01
     
   </span>
   
@@ -356,158 +410,178 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../aulas/aula03/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Lista de Comandos
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
   <span class="md-ellipsis">
-    03 - Análise de desempenho
+    Lista de Comandos
     
   </span>
   
 
       </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../aulas/aula04/" class="md-nav__link">
+      
         
-  
-  
-  <span class="md-ellipsis">
-    04 - Heurísticas e alocação eficiente de memória
-    
-  </span>
-  
 
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
   
   
-    <li class="md-nav__item">
-      <a href="../../aulas/aula05/" class="md-nav__link">
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#comandos-slurm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comandos SLURM
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Comandos SLURM">
+      <ul class="md-nav__list">
         
+          <li class="md-nav__item">
+  <a href="#principais-recursos-que-voce-pode-pedir-com-srun" class="md-nav__link">
+    <span class="md-ellipsis">
+      Principais recursos que você pode pedir com srun
+    </span>
+  </a>
   
-  
-  <span class="md-ellipsis">
-    05 - Programação paralela em CPU
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../aulas/aula06/" class="md-nav__link">
+</li>
         
+          <li class="md-nav__item">
+  <a href="#principais-recursos-que-voce-pode-pedir-com-sbatch" class="md-nav__link">
+    <span class="md-ellipsis">
+      Principais recursos que você pode pedir com sbatch
+    </span>
+  </a>
   
-  
-  <span class="md-ellipsis">
-    06 - Efeitos colaterais do paralelismo
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../aulas/aula07/" class="md-nav__link">
+</li>
         
+      </ul>
+    </nav>
   
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comandos-gerais-do-slurm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comandos gerais do SLURM
+    </span>
+  </a>
   
-  <span class="md-ellipsis">
-    07 - Programação distribuída com MPI
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../aulas/aula08/" class="md-nav__link">
+    <nav class="md-nav" aria-label="Comandos gerais do SLURM">
+      <ul class="md-nav__list">
         
+          <li class="md-nav__item">
+  <a href="#ver-todos-os-nos-com-status-detalhado" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ver todos os nós com status detalhado
+    </span>
+  </a>
   
-  
-  <span class="md-ellipsis">
-    08 - Programação paralela e distribuída
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../aulas/aula09/" class="md-nav__link">
+</li>
         
+          <li class="md-nav__item">
+  <a href="#ver-informacoes-completas-do-no-compute24" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ver informações completas do nó compute24
+    </span>
+  </a>
   
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ver-configuracoes-de-uma-particao-especifica" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ver configurações de uma partição especifica
+    </span>
+  </a>
   
-  <span class="md-ellipsis">
-    09 - Programação paralela em GPU
-    
-  </span>
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ver-jobs-no-sistema" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ver jobs no sistema
+    </span>
+  </a>
   
-
-      </a>
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ver-so-os-jobs-da-usuaria-liciascl" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ver só os jobs da usuária liciascl
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ver-informacoes-completas-de-um-job-especifico" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ver informações completas de um job específico
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cancelar-job-com-id-12345" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cancelar job com ID 12345
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cancelar-todos-os-seus-jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cancelar todos os seus jobs
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -538,6 +612,134 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#comandos-slurm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comandos SLURM
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Comandos SLURM">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#principais-recursos-que-voce-pode-pedir-com-srun" class="md-nav__link">
+    <span class="md-ellipsis">
+      Principais recursos que você pode pedir com srun
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#principais-recursos-que-voce-pode-pedir-com-sbatch" class="md-nav__link">
+    <span class="md-ellipsis">
+      Principais recursos que você pode pedir com sbatch
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comandos-gerais-do-slurm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comandos gerais do SLURM
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Comandos gerais do SLURM">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ver-todos-os-nos-com-status-detalhado" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ver todos os nós com status detalhado
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ver-informacoes-completas-do-no-compute24" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ver informações completas do nó compute24
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ver-configuracoes-de-uma-particao-especifica" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ver configurações de uma partição especifica
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ver-jobs-no-sistema" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ver jobs no sistema
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ver-so-os-jobs-da-usuaria-liciascl" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ver só os jobs da usuária liciascl
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ver-informacoes-completas-de-um-job-especifico" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ver informações completas de um job específico
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cancelar-job-com-id-12345" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cancelar job com ID 12345
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cancelar-todos-os-seus-jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cancelar todos os seus jobs
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -555,9 +757,262 @@
   
 
 
-  <h1>Comandos</h1>
+  <h1>Lista de Comandos</h1>
 
+<h2 id="comandos-slurm">Comandos SLURM<a class="headerlink" href="#comandos-slurm" title="Permanent link">&para;</a></h2>
+<h3 id="principais-recursos-que-voce-pode-pedir-com-srun">Principais recursos que você pode pedir com <code>srun</code><a class="headerlink" href="#principais-recursos-que-voce-pode-pedir-com-srun" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>O que pedir</th>
+<th>Opção do <code>srun</code></th>
+<th>Exemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Número de tarefas (processos)</td>
+<td><code>--ntasks</code> ou <code>-n</code></td>
+<td><code>--ntasks=2</code></td>
+</tr>
+<tr>
+<td>CPUs por tarefa</td>
+<td><code>--cpus-per-task</code></td>
+<td><code>--cpus-per-task=2</code></td>
+</tr>
+<tr>
+<td>Memória total ou por CPU</td>
+<td><code>--mem</code>, <code>--mem-per-cpu</code></td>
+<td><code>--mem=4G</code> ou <code>--mem-per-cpu=2G</code></td>
+</tr>
+<tr>
+<td>Tempo de execução</td>
+<td><code>--time=DD-HH:MM:SS</code></td>
+<td><code>--time=01:12:49</code></td>
+</tr>
+<tr>
+<td>Número de nós</td>
+<td><code>--nodes</code></td>
+<td><code>--nodes=2</code></td>
+</tr>
+<tr>
+<td>Nó específico</td>
+<td><code>--nodelist</code></td>
+<td><code>--nodelist=compute13</code></td>
+</tr>
+<tr>
+<td>GPUs</td>
+<td><code>--gpus</code> ou <code>--gres=gpu:&lt;num&gt;</code></td>
+<td><code>--gpus=1</code> ou <code>--gres=gpu:2</code></td>
+</tr>
+<tr>
+<td>Partição (fila)</td>
+<td><code>--partition</code> ou <code>-p</code></td>
+<td><code>--partition=gpu</code></td>
+</tr>
+<tr>
+<td>Sessão interativa</td>
+<td><code>--pty bash</code></td>
+<td><code>--pty bash</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Exemplos</strong></p>
+<p>Pedido simples de execução de tarefa para o SLURM
+<code>srun --nodelist=compute10 --partition=normal --ntasks=1 --pty bash</code>
+--srun: Comando SLURM para executar tarefas 
+--nodelist=compute10: força o SLURM a alocar exatamente esse nó.
+--partition=normal: indica a partição à qual o nó pertence.
+--ntasks=1: pede uma tarefa.
+--pty bash: pede um terminal dentro do nó.</p>
+<p>Pedido sem especificar o nó exato:
+<code>srun --partition=normal --ntasks=1 --pty bash</code></p>
+<p>Pedido com varias tasks para executar seu programa direto:
+<code>srun --partition=normal --ntasks=4 ./meu_programa_paralelo</code></p>
+<p>Ótima pergunta! Com o comando <code>srun</code>, você pode <strong>pedir ao SLURM recursos de computação específicos</strong> — como número de tarefas, CPUs, memória, tempo de execução, GPUs, nós específicos e muito mais.</p>
+<p>Claro! Aqui está o <strong>resumo equivalente para o <code>sbatch</code></strong>, seguindo o mesmo formato que você usou para o <code>srun</code>:</p>
+<h3 id="principais-recursos-que-voce-pode-pedir-com-sbatch">Principais recursos que você pode pedir com <code>sbatch</code><a class="headerlink" href="#principais-recursos-que-voce-pode-pedir-com-sbatch" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>O que pedir</th>
+<th>Opção do <code>sbatch</code> (no script)</th>
+<th>Exemplo dentro do script</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Nome do job</td>
+<td><code>--job-name</code></td>
+<td><code>#SBATCH --job-name=teste%j</code></td>
+</tr>
+<tr>
+<td>Número de tarefas (processos)</td>
+<td><code>--ntasks</code> ou <code>-n</code></td>
+<td><code>#SBATCH --ntasks=2</code></td>
+</tr>
+<tr>
+<td>CPUs por tarefa</td>
+<td><code>--cpus-per-task</code></td>
+<td><code>#SBATCH --cpus-per-task=2</code></td>
+</tr>
+<tr>
+<td>Memória total ou por CPU</td>
+<td><code>--mem</code>, <code>--mem-per-cpu</code></td>
+<td><code>#SBATCH --mem=4G</code> ou <code>--mem-per-cpu=2G</code></td>
+</tr>
+<tr>
+<td>Tempo de execução</td>
+<td><code>--time=DD-HH:MM:SS</code></td>
+<td><code>#SBATCH --time=01:12:49</code></td>
+</tr>
+<tr>
+<td>Número de nós</td>
+<td><code>--nodes</code></td>
+<td><code>#SBATCH --nodes=2</code></td>
+</tr>
+<tr>
+<td>Nó específico</td>
+<td><code>--nodelist</code></td>
+<td><code>#SBATCH --nodelist=compute13</code></td>
+</tr>
+<tr>
+<td>GPUs</td>
+<td><code>--gpus</code> ou <code>--gres=gpu:&lt;num&gt;</code></td>
+<td><code>#SBATCH --gpus=1</code> ou <code>#SBATCH --gres=gpu:2</code></td>
+</tr>
+<tr>
+<td>Partição (fila)</td>
+<td><code>--partition</code> ou <code>-p</code></td>
+<td><code>#SBATCH --partition=gpu</code></td>
+</tr>
+<tr>
+<td>Saída padrão (log)</td>
+<td><code>--output</code></td>
+<td><code>#SBATCH --output=saida%j.txt</code></td>
+</tr>
+<tr>
+<td>Log de Erro do sistema</td>
+<td><code>--error</code></td>
+<td><code>#SBATCH --error=erro%j.txt</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Exemplos</strong></p>
+<p><strong>Arquivo:</strong> <code>job1.slurm</code></p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="c1">#SBATCH --job-name=teste%j</span>
+<span class="c1">#SBATCH --partition=normal</span>
+<span class="c1">#SBATCH --ntasks=1</span>
+<span class="c1">#SBATCH --time=00:10:00</span>
+<span class="c1">#SBATCH --output=saida%j.txt</span>
 
+./meu_programa
+</code></pre></div>
+<p>Submeter com:</p>
+<div class="highlight"><pre><span></span><code>sbatch<span class="w"> </span>job1.slurm
+</code></pre></div>
+<h2 id="comandos-gerais-do-slurm">Comandos gerais do SLURM<a class="headerlink" href="#comandos-gerais-do-slurm" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Finalidade</th>
+<th>Comando</th>
+<th>Exemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ver status das partições e nós</td>
+<td><code>sinfo</code></td>
+<td><code>sinfo -N -l</code></td>
+</tr>
+<tr>
+<td>Ver detalhes de um nó específico</td>
+<td><code>scontrol show node</code></td>
+<td><code>scontrol show node compute24</code></td>
+</tr>
+<tr>
+<td>Ver detalhes de uma partição</td>
+<td><code>scontrol show partition</code></td>
+<td><code>scontrol show partition normal</code></td>
+</tr>
+<tr>
+<td>Ver todos os jobs ativos</td>
+<td><code>squeue</code></td>
+<td><code>squeue</code></td>
+</tr>
+<tr>
+<td>Ver seus próprios jobs</td>
+<td><code>squeue -u &lt;usuário&gt;</code></td>
+<td><code>squeue -u liciascl</code></td>
+</tr>
+<tr>
+<td>Ver detalhes de um job</td>
+<td><code>scontrol show job</code></td>
+<td><code>scontrol show job 12345</code></td>
+</tr>
+<tr>
+<td>Cancelar job em execução ou na fila</td>
+<td><code>scancel</code></td>
+<td><code>scancel 12345</code></td>
+</tr>
+<tr>
+<td>Cancelar todos os seus jobs</td>
+<td><code>scancel -u &lt;usuário&gt;</code></td>
+<td><code>scancel -u liciascl</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="ver-todos-os-nos-com-status-detalhado">Ver todos os nós com status detalhado<a class="headerlink" href="#ver-todos-os-nos-com-status-detalhado" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>sinfo<span class="w"> </span>-N<span class="w"> </span>-l
+</code></pre></div>
+<blockquote>
+<p>Útil para ver quais nós estão <strong>idle, alocados, down ou drain</strong>.</p>
+</blockquote>
+<h3 id="ver-informacoes-completas-do-no-compute24">Ver informações completas do nó <code>compute24</code><a class="headerlink" href="#ver-informacoes-completas-do-no-compute24" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>scontrol<span class="w"> </span>show<span class="w"> </span>node<span class="w"> </span>compute24
+</code></pre></div>
+<blockquote>
+<p>Mostra: memória total e usada, CPUs alocadas, jobs em execução, estado (<code>IDLE</code>, <code>ALLOCATED</code>, etc.).</p>
+</blockquote>
+<h3 id="ver-configuracoes-de-uma-particao-especifica">Ver configurações de uma partição especifica<a class="headerlink" href="#ver-configuracoes-de-uma-particao-especifica" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>scontrol<span class="w"> </span>show<span class="w"> </span>partition<span class="w"> </span>normal
+</code></pre></div>
+<blockquote>
+<p>Mostra: tempo máximo de job, número de nós, limites de memória/CPU, GPUs, estado da fila.</p>
+</blockquote>
+<h3 id="ver-jobs-no-sistema">Ver jobs no sistema<a class="headerlink" href="#ver-jobs-no-sistema" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>squeue
+</code></pre></div>
+<blockquote>
+<p>Mostra todos os jobs na fila e em execução com status <code>R</code> (running), <code>PD</code> (pending), etc.</p>
+</blockquote>
+<h3 id="ver-so-os-jobs-da-usuaria-liciascl">Ver só os jobs da usuária <code>liciascl</code><a class="headerlink" href="#ver-so-os-jobs-da-usuaria-liciascl" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>squeue<span class="w"> </span>-u<span class="w"> </span>liciascl
+</code></pre></div>
+<blockquote>
+<p>Útil para depurar seus próprios jobs (ID, partição, status, tempo, nó, etc.)</p>
+</blockquote>
+<h3 id="ver-informacoes-completas-de-um-job-especifico">Ver informações completas de um job específico<a class="headerlink" href="#ver-informacoes-completas-de-um-job-especifico" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>scontrol<span class="w"> </span>show<span class="w"> </span>job<span class="w"> </span><span class="m">12345</span>
+</code></pre></div>
+<blockquote>
+<p>Mostra: usuário, partição, CPUs/nós alocados, prioridade, estado, tempo usado, comando enviado.</p>
+</blockquote>
+<h3 id="cancelar-job-com-id-12345">Cancelar job com ID <code>12345</code><a class="headerlink" href="#cancelar-job-com-id-12345" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>scancel<span class="w"> </span><span class="m">12345</span>
+</code></pre></div>
+<blockquote>
+<p>Útil se o job travou ou está consumindo recursos indevidamente.</p>
+</blockquote>
+<h3 id="cancelar-todos-os-seus-jobs">Cancelar <strong>todos os seus jobs</strong><a class="headerlink" href="#cancelar-todos-os-seus-jobs" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>scancel<span class="w"> </span>-u<span class="w"> </span><span class="nv">$USER</span>
+</code></pre></div>
+<blockquote>
+<p>Cancela em lote — ótimo em caso de erro em scripts ou submissões mal feitas.</p>
+</blockquote>
+<p>Para mais consulte a documentação oficial em <a href="https://slurm.schedmd.com/documentation.html">https://slurm.schedmd.com/documentation.html</a></p>
 
 
 
