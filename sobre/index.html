@@ -75,7 +75,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="red">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue-gray" data-md-color-accent="red">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -526,52 +526,6 @@
 
               
             
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../aulas/aula02/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Aula 02 - Sistemas de HPC
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../aulas/aula03/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Aula 03 - Otimização e Profiling
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
           </ul>
         </nav>
       
@@ -656,6 +610,29 @@
   
   <span class="md-ellipsis">
     Lista de Comandos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../teoria/aula01/compilar-executar-C%2B%2B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Compilar C++
     
   </span>
   
@@ -819,8 +796,8 @@
 <tr>
 <td>18/ago (seg)</td>
 <td>Aula 03</td>
-<td>Diagnóstico de código; profiling; discussão de soluções anteriores; introdução ao Projeto 1</td>
-<td>Aplicar profiling; relatório com gargalos, hipóteses de melhoria e comparação de desempenho.</td>
+<td>Otimização e desempenho; discussão de soluções anteriores;</td>
+<td>Otimização e desempenho.</td>
 </tr>
 <tr>
 <td>22/ago (sex)</td>
@@ -844,13 +821,13 @@
 <td>02/set (seg)</td>
 <td>Aula 07</td>
 <td>Memória distribuída; comunicação com MPI; ponto-a-ponto e coletiva; grupos e comunicadores</td>
-<td>Comentários e direcionamentos sobre entrega parcial do projeto</td>
+<td>Lançamento do projeto</td>
 </tr>
 <tr>
 <td>05/set (sex)</td>
 <td>Aula 08</td>
 <td>Estratégias híbridas MPI + OpenMP</td>
-<td>Discussão de implementações no projeto</td>
+<td></td>
 </tr>
 <tr>
 <td>08/set (seg)</td>
@@ -868,7 +845,7 @@
 <td>15/set (seg)</td>
 <td>Aula 11</td>
 <td>Aula estúdio</td>
-<td>Finalização do Projeto 1</td>
+<td>Suporte ao Projeto</td>
 </tr>
 <tr>
 <td>19/set (sex)</td>
@@ -962,62 +939,32 @@
 <table>
 <thead>
 <tr>
-<th><strong>Atividade</strong></th>
-<th><strong>Entrega</strong></th>
-<th><strong>Peso (pontos)</strong></th>
+<th>Percentual de Atividades</th>
+<th>Conceito</th>
+<th>Com Participação Voluntária</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Responder ao questionário de pesquisa</td>
-<td>A definir</td>
-<td>0,95</td>
+<td>50%</td>
+<td>C</td>
+<td>C+</td>
 </tr>
 <tr>
-<td>Participar da entrevista voluntária sobre a disciplina</td>
-<td>A definir</td>
-<td>1,90</td>
+<td>70%</td>
+<td>B</td>
+<td>B+</td>
 </tr>
 <tr>
-<td>Transcrever códigos Python para C++ e comparar desempenho (CPU)</td>
-<td>14/08</td>
-<td>1,20</td>
-</tr>
-<tr>
-<td>Primeiros pedidos de submissão com SLURM + testes em filas (CPU)</td>
-<td>15/08</td>
-<td>1,20</td>
-</tr>
-<tr>
-<td>Paralelismo em CPU</td>
-<td>25/08</td>
-<td>1,20</td>
-</tr>
-<tr>
-<td>Paralelismo Distribuído em múltiplos nós (CPU)</td>
-<td>02/09</td>
-<td>1,20</td>
-</tr>
-<tr>
-<td>Data race em GPU</td>
-<td>10/10</td>
-<td>2,45</td>
-</tr>
-<tr>
-<td>Convolução em GPU</td>
-<td>13/10</td>
-<td>2,45</td>
-</tr>
-<tr>
-<td>Gerenciamento de dados em computação paralela e distribuída em GPU</td>
-<td>24/10</td>
-<td>2,45</td>
+<td>90%</td>
+<td>A</td>
+<td>A+</td>
 </tr>
 </tbody>
 </table>
 </details>
 <details class="note">
-<summary>Projeto 1 (Grupo) 15%</summary>
+<summary>Projeto 1 (Grupo) 10%</summary>
 <h3 id="mineracao-de-criptomoedas-em-cpu"><strong>Mineração de criptomoedas em CPU</strong><a class="headerlink" href="#mineracao-de-criptomoedas-em-cpu" title="Permanent link">&para;</a></h3>
 <p>Este projeto consiste na implementação e otimização de um minerador de criptomoedas que roda em CPU. Aplicando técnicas de paralelismo para melhorar desempenho no cluster Franky. A dificuldade da mineração é ajustada pela quantidade de zeros no hash, aumentando o desafio computacional conforme otimizimos a aplicação.</p>
 <table>
@@ -1077,7 +1024,7 @@
 </table>
 </details>
 <details class="note">
-<summary>Projeto 2 (Grupo) 15%</summary>
+<summary>Projeto 2 Individual 25%</summary>
 <p>Projeto Minerador em GPU 
 Neste projeto, o foco é explorar o uso de paralelismo e estratégias de otimização em GPU para maximizar o desempenho computacional.</p>
 <p>Objetivos principais:</p>

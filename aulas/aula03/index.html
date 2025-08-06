@@ -11,10 +11,6 @@
         <link rel="canonical" href="https://insper.github.io/supercomp/aulas/aula03/">
       
       
-        <link rel="prev" href="../aula02/">
-      
-      
-        <link rel="next" href="../../teoria/aula01/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -22,7 +18,7 @@
     
     
       
-        <title>Aula 03 - Otimização e Profiling - SuperComputação - 2025/2</title>
+        <title>Index - SuperComputação - 2025/2</title>
       
     
     
@@ -75,7 +71,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="red">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue-gray" data-md-color-accent="red">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -118,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Aula 03 - Otimização e Profiling
+              Index
             
           </span>
         </div>
@@ -239,12 +235,10 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
+      <li class="md-tabs__item">
         <a href="../aula01/" class="md-tabs__link">
           
   
@@ -370,29 +364,24 @@
       
   
   
-    
   
   
-  
     
     
     
     
       
-        
-        
-      
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
             
   
   
@@ -405,7 +394,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             Aulas
@@ -430,210 +419,6 @@
   
 
       </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../aula02/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Aula 02 - Sistemas de HPC
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-    
-  
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    Aula 03 - Otimização e Profiling
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
-        
-  
-  
-  <span class="md-ellipsis">
-    Aula 03 - Otimização e Profiling
-    
-  </span>
-  
-
-      </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#objetivo" class="md-nav__link">
-    <span class="md-ellipsis">
-      Objetivo
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#contexto" class="md-nav__link">
-    <span class="md-ellipsis">
-      Contexto
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#missoes" class="md-nav__link">
-    <span class="md-ellipsis">
-      Missões:
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Missões:">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-compilacao" class="md-nav__link">
-    <span class="md-ellipsis">
-      1. Compilação
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-execucao" class="md-nav__link">
-    <span class="md-ellipsis">
-      2. Execução
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-profiling-com-nsight-systems-e-perf" class="md-nav__link">
-    <span class="md-ellipsis">
-      3. Profiling com Nsight Systems e perf
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#explorando-ordenacao-de-loops-e-flags-de-otimizacao-em-diferentes-filas" class="md-nav__link">
-    <span class="md-ellipsis">
-      Explorando Ordenação de Loops e Flags de Otimização em Diferentes Filas**
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Explorando Ordenação de Loops e Flags de Otimização em Diferentes Filas**">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-alterando-a-ordem-dos-loops" class="md-nav__link">
-    <span class="md-ellipsis">
-      1. Alterando a Ordem dos Loops
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-testar-diferentes-flags-de-otimizacao" class="md-nav__link">
-    <span class="md-ellipsis">
-      2. Testar Diferentes Flags de Otimização
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-rodar-em-diferentes-filas-do-cluster" class="md-nav__link">
-    <span class="md-ellipsis">
-      3. Rodar em Diferentes Filas do Cluster
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#perguntas-para-responder-no-relatorio" class="md-nav__link">
-    <span class="md-ellipsis">
-      Perguntas para responder no relatório:
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#entregaveis" class="md-nav__link">
-    <span class="md-ellipsis">
-      Entregáveis:
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -733,6 +518,29 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../teoria/aula01/compilar-executar-C%2B%2B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Compilar C++
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -805,15 +613,6 @@
   <a href="#2-execucao" class="md-nav__link">
     <span class="md-ellipsis">
       2. Execução
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-profiling-com-nsight-systems-e-perf" class="md-nav__link">
-    <span class="md-ellipsis">
-      3. Profiling com Nsight Systems e perf
     </span>
   </a>
   
@@ -903,7 +702,7 @@
   
 
 
-  <h1>Aula 03 - Otimização e Profiling</h1>
+  <h1>Index</h1>
 
 <h2 id="objetivo">Objetivo<a class="headerlink" href="#objetivo" title="Permanent link">&para;</a></h2>
 <p>Explorar técnicas de otimização de código sequencial em C++ a partir da análise de desempenho.
@@ -1058,81 +857,19 @@ B \leq \sqrt{\frac{\text{Capacidade da Cache}}{24}}
 </ol>
 <div class="highlight"><pre><span></span><code>srun<span class="w"> </span>--partition<span class="o">=</span>monstrao<span class="w"> </span>--ntasks<span class="o">=</span><span class="m">1</span><span class="w"> </span>./matmul_seq<span class="w"> </span><span class="m">768</span>
 </code></pre></div>
-<h3 id="3-profiling-com-nsight-systems-e-perf">3. Profiling com Nsight Systems e perf<a class="headerlink" href="#3-profiling-com-nsight-systems-e-perf" title="Permanent link">&para;</a></h3>
-<p>Sugestão de <strong>script SLURM</strong> para fazer profiling no monstrão:</p>
-<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
-<span class="c1">#SBATCH --job-name=prof_monstrao</span>
-<span class="c1">#SBATCH --partition=monstrao</span>
-<span class="c1">#SBATCH --ntasks=1</span>
-<span class="c1">#SBATCH --mem=4G</span>
-<span class="c1">#SBATCH --time=00:05:00</span>
-<span class="c1">#SBATCH --output=prof_monstrao_%j.out</span>
-<span class="c1">#SBATCH --error=prof_monstrao_%j.err</span>
-
-
-<span class="c1"># Lista de blocos para testar: ingênuo, L1, L2, L3</span>
-<span class="nv">BLOCKS</span><span class="o">=(</span><span class="m">0</span><span class="w"> </span><span class="m">36</span><span class="w"> </span><span class="m">200</span><span class="w"> </span><span class="m">768</span><span class="o">)</span>
-
-<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;=== Início da execução em </span><span class="k">$(</span>date<span class="k">)</span><span class="s2"> ===&quot;</span>
-<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Rodando nos blocos: </span><span class="si">${</span><span class="nv">BLOCKS</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&quot;</span>
-
-<span class="k">for</span><span class="w"> </span>B<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">BLOCKS</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
-<span class="w">    </span><span class="nb">echo</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;&gt;&gt;&gt; Rodando bloco B=</span><span class="si">${</span><span class="nv">B</span><span class="si">}</span><span class="s2">...&quot;</span>
-
-<span class="w">    </span><span class="c1"># Nome base para relatórios</span>
-<span class="w">    </span><span class="nv">REPORT_NAME</span><span class="o">=</span><span class="s2">&quot;report_B</span><span class="si">${</span><span class="nv">B</span><span class="si">}</span><span class="s2">&quot;</span>
-
-<span class="w">    </span><span class="c1"># Executar com Nsight Systems e perf juntos</span>
-<span class="w">    </span>nsys<span class="w"> </span>profile<span class="w"> </span>-o<span class="w"> </span><span class="si">${</span><span class="nv">REPORT_NAME</span><span class="si">}</span><span class="w"> </span>--force-overwrite<span class="w"> </span><span class="nb">true</span><span class="w"> </span><span class="se">\</span>
-<span class="w">        </span>perf<span class="w"> </span>stat<span class="w"> </span>-e<span class="w"> </span>cache-references,cache-misses,cycles,instructions<span class="w"> </span><span class="se">\</span>
-<span class="w">        </span>./matmul_seq<span class="w"> </span><span class="nv">$B</span>
-
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;&gt;&gt;&gt; Concluído B=</span><span class="si">${</span><span class="nv">B</span><span class="si">}</span><span class="s2">, relatório salvo em </span><span class="si">${</span><span class="nv">REPORT_NAME</span><span class="si">}</span><span class="s2">.qdrep&quot;</span>
-<span class="k">done</span>
-
-<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;=== Fim da execução em </span><span class="k">$(</span>date<span class="k">)</span><span class="s2"> ===&quot;</span>
-</code></pre></div>
-<p>Submeta para o monstrão:</p>
-<div class="highlight"><pre><span></span><code>sbatch<span class="w"> </span>profiling_all.slurm
-</code></pre></div>
-<ol>
-<li>
-<p>Resultado:</p>
-</li>
-<li>
-<p>Arquivos <code>.qdrep</code> para cada configuração:</p>
-</li>
-<li>
-<p><code>report_B0.qdrep</code> (ingênuo)</p>
-</li>
-<li><code>report_B36.qdrep</code> (L1)</li>
-<li><code>report_B200.qdrep</code> (L2)</li>
-<li><code>report_B768.qdrep</code> (L3)</li>
-<li>
-<p>Arquivo <code>profiling_all_&lt;jobid&gt;.out</code> com métricas do <strong>perf</strong>.</p>
-</li>
-<li>
-<p>Abra os relatórios no Nsight Systems:</p>
-</li>
-</ol>
-<div class="highlight"><pre><span></span><code>nsight-sys<span class="w"> </span>report_B200.qdrep
-</code></pre></div>
 <h2 id="explorando-ordenacao-de-loops-e-flags-de-otimizacao-em-diferentes-filas">Explorando Ordenação de Loops e Flags de Otimização em Diferentes Filas**<a class="headerlink" href="#explorando-ordenacao-de-loops-e-flags-de-otimizacao-em-diferentes-filas" title="Permanent link">&para;</a></h2>
-<p>Na parte 1, você explorou o efeito do <strong>tiling</strong> e do tamanho do bloco na redução de <em>cache misses</em>.
-Agora, o objetivo é entender como <strong>a organização dos loops</strong> e <strong>as otimizações do compilador</strong> influenciam o desempenho do mesmo código.</p>
+<p>Você já explorou o efeito do <strong>tiling</strong>. Agora, o objetivo é entender como <strong>a organização dos loops</strong> e <strong>as otimizações do compilador</strong> influenciam o desempenho do mesmo código.</p>
 <h3 id="1-alterando-a-ordem-dos-loops">1. Alterando a Ordem dos Loops<a class="headerlink" href="#1-alterando-a-ordem-dos-loops" title="Permanent link">&para;</a></h3>
 <p>Modifique o código <code>matmul_seq.cpp</code> para usar a ordem <strong>i → k → j</strong> no lugar da ordem original <strong>i → j → k</strong>. Essa mudança afeta a <strong>localidade espacial</strong> dos acessos à matriz B.</p>
 <h3 id="2-testar-diferentes-flags-de-otimizacao">2. Testar Diferentes Flags de Otimização<a class="headerlink" href="#2-testar-diferentes-flags-de-otimizacao" title="Permanent link">&para;</a></h3>
 <p>Compile o programa com cada conjunto de flags e execute usando diferentes blocos</p>
 <h3 id="3-rodar-em-diferentes-filas-do-cluster">3. Rodar em Diferentes Filas do Cluster<a class="headerlink" href="#3-rodar-em-diferentes-filas-do-cluster" title="Permanent link">&para;</a></h3>
-<p>Após identificar as melhores combinações de loop e flags no <strong>monstrao</strong>, identifique quais são os tamanhos das memórias L1, L2 e L3 na fila CPU e na fila GPU e repita os testes para esses hardwares.</p>
+<p>Após identificar as melhores combinações de loop e flags no <strong>monstrao</strong>, identifique quais são os tamanhos das memórias L1, L2 e L3 na fila GPU e repita os testes.</p>
 <h3 id="perguntas-para-responder-no-relatorio">Perguntas para responder no relatório:<a class="headerlink" href="#perguntas-para-responder-no-relatorio" title="Permanent link">&para;</a></h3>
 <ol>
-<li>A troca de ordem dos loops aumentou ou reduziu <em>cache misses</em>? Por quê?</li>
-<li>Houveram diferenças entre os nós <strong>monstrao</strong>, <strong>cpu</strong> e <strong>gpu</strong>? Quais?</li>
-<li>O que o profiling mostrou sobre o uso de CPU em cada versão?</li>
-<li>Qual o <strong>tamanho de bloco</strong> que apresentou o melhor equilíbrio entre tempo de execução e aproveitamento de cache?</li>
+<li>A troca de ordem dos loops melhorou ou piorou o tempo de execução? Por quê?</li>
+<li>Houveram diferenças entre os nós <strong>monstrao</strong> e <strong>gpu</strong>? Quais?</li>
+<li>Qual o <strong>tamanho de bloco</strong> que apresentou o melhor equilíbrio entre tempo de execução e aproveitamento de cache em cada fila?</li>
 </ol>
 <h2 id="entregaveis">Entregáveis:<a class="headerlink" href="#entregaveis" title="Permanent link">&para;</a></h2>
 <p>No arquivo README.md do Classroom, inclua obrigatoriamente:</p>
@@ -1141,7 +878,7 @@ Agora, o objetivo é entender como <strong>a organização dos loops</strong> e 
 <p>Identificação: seu nome completo</p>
 </li>
 <li>
-<p>Tabelas comparativas: contendo os resultados obtidos (tempo, cache misses, flags de compilação etc.)</p>
+<p>Tabelas comparativas: contendo os resultados obtidos (tempo, flags de compilação etc.)</p>
 </li>
 <li>
 <p>Gráficos comparativos: que ilustrem as diferenças de desempenho entre as versões testadas</p>

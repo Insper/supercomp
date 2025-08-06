@@ -11,10 +11,6 @@
         <link rel="canonical" href="https://insper.github.io/supercomp/aulas/aula02/">
       
       
-        <link rel="prev" href="../aula01/">
-      
-      
-        <link rel="next" href="../aula03/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -22,7 +18,7 @@
     
     
       
-        <title>Aula 02 - Sistemas de HPC - SuperComputação - 2025/2</title>
+        <title>Aula 02: Acessando o Cluster Franky - SuperComputação - 2025/2</title>
       
     
     
@@ -75,7 +71,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="red">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue-gray" data-md-color-accent="red">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -118,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Aula 02 - Sistemas de HPC
+              Aula 02: Acessando o Cluster Franky
             
           </span>
         </div>
@@ -239,12 +235,10 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
+      <li class="md-tabs__item">
         <a href="../aula01/" class="md-tabs__link">
           
   
@@ -370,29 +364,24 @@
       
   
   
-    
   
   
-  
     
     
     
     
       
-        
-        
-      
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
             
   
   
@@ -405,7 +394,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             Aulas
@@ -425,172 +414,6 @@
   
   <span class="md-ellipsis">
     Aula 01 - Problemas de HPC
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-    
-  
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    Aula 02 - Sistemas de HPC
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
-        
-  
-  
-  <span class="md-ellipsis">
-    Aula 02 - Sistemas de HPC
-    
-  </span>
-  
-
-      </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#parte-0-configurando-seu-acesso-ao-cluster-franky" class="md-nav__link">
-    <span class="md-ellipsis">
-      Parte 0: Configurando seu acesso ao Cluster Franky
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Parte 0: Configurando seu acesso ao Cluster Franky">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#para-macbook-ou-linux" class="md-nav__link">
-    <span class="md-ellipsis">
-      Para Macbook ou Linux:
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#para-windows" class="md-nav__link">
-    <span class="md-ellipsis">
-      Para Windows:
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#configurar-o-vs-code-para-acesso-remoto-ao-cluster" class="md-nav__link">
-    <span class="md-ellipsis">
-      Configurar o VS Code para Acesso Remoto ao Cluster
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#executando-a-atividade-no-cluster-franky-usando-slurm" class="md-nav__link">
-    <span class="md-ellipsis">
-      Executando a Atividade no Cluster Franky usando SLURM
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#conhecendo-o-sistema" class="md-nav__link">
-    <span class="md-ellipsis">
-      Conhecendo o Sistema
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#comandos-utilizados" class="md-nav__link">
-    <span class="md-ellipsis">
-      Comandos utilizados
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#comando-srun" class="md-nav__link">
-    <span class="md-ellipsis">
-      Comando SRUN
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../aula03/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Aula 03 - Otimização e Profiling
     
   </span>
   
@@ -685,6 +508,29 @@
   
   <span class="md-ellipsis">
     Lista de Comandos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../teoria/aula01/compilar-executar-C%2B%2B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Compilar C++
     
   </span>
   
