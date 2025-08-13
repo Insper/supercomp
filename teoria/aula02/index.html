@@ -8,9 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://insper.github.io/supercomp/aulas/aula16/">
+        <link rel="canonical" href="https://insper.github.io/supercomp/teoria/aula02/">
       
       
+        <link rel="prev" href="../aula01/compilar-executar-C%2B%2B/">
+      
+      
+        <link rel="next" href="../comandos/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -18,7 +22,7 @@
     
     
       
-        <title>Index - SuperComputação - 2025/2</title>
+        <title>Aula 02 - SuperComputação - 2025/2</title>
       
     
     
@@ -79,6 +83,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#contextos-e-curiosidades" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -109,7 +118,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Index
+              Aula 02
             
           </span>
         </div>
@@ -234,7 +243,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../aula01/" class="md-tabs__link">
+        <a href="../../aulas/aula01/" class="md-tabs__link">
           
   
   
@@ -250,11 +259,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../teoria/aula01/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../aula01/" class="md-tabs__link">
           
   
   
@@ -403,7 +414,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../aula01/" class="md-nav__link">
+      <a href="../../aulas/aula01/" class="md-nav__link">
         
   
   
@@ -426,7 +437,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../aula02/" class="md-nav__link">
+      <a href="../../aulas/aula02/" class="md-nav__link">
         
   
   
@@ -453,24 +464,29 @@
       
   
   
+    
   
   
+  
     
     
     
     
-      
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
             
   
   
@@ -483,7 +499,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             Suporte
@@ -497,7 +513,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../teoria/aula01/" class="md-nav__link">
+      <a href="../aula01/" class="md-nav__link">
         
   
   
@@ -520,7 +536,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../teoria/aula01/compilar-executar-C%2B%2B/" class="md-nav__link">
+      <a href="../aula01/compilar-executar-C%2B%2B/" class="md-nav__link">
         
   
   
@@ -540,10 +556,32 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../teoria/aula02/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Aula 02
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -554,6 +592,80 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-e-hpc" class="md-nav__link">
+    <span class="md-ellipsis">
+      O que é HPC?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#top-500" class="md-nav__link">
+    <span class="md-ellipsis">
+      TOP 500
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-tipo-de-problema-e-computacionalmente-complexo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Que tipo de problema é computacionalmente complexo?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-e-um-supercomputador" class="md-nav__link">
+    <span class="md-ellipsis">
+      O que é um supercomputador?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-e-um-cluster" class="md-nav__link">
+    <span class="md-ellipsis">
+      O que é um Cluster?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#qual-a-diferenca-de-um-supercomputador-para-um-cluster" class="md-nav__link">
+    <span class="md-ellipsis">
+      Qual a diferença de um supercomputador para um cluster?
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -566,7 +678,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../teoria/comandos/" class="md-nav__link">
+      <a href="../comandos/" class="md-nav__link">
         
   
   
@@ -606,6 +718,70 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-e-hpc" class="md-nav__link">
+    <span class="md-ellipsis">
+      O que é HPC?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#top-500" class="md-nav__link">
+    <span class="md-ellipsis">
+      TOP 500
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-tipo-de-problema-e-computacionalmente-complexo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Que tipo de problema é computacionalmente complexo?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-e-um-supercomputador" class="md-nav__link">
+    <span class="md-ellipsis">
+      O que é um supercomputador?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-e-um-cluster" class="md-nav__link">
+    <span class="md-ellipsis">
+      O que é um Cluster?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#qual-a-diferenca-de-um-supercomputador-para-um-cluster" class="md-nav__link">
+    <span class="md-ellipsis">
+      Qual a diferença de um supercomputador para um cluster?
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -624,9 +800,79 @@
   
 
 
-  <h1>Index</h1>
-
-
+<h1 id="contextos-e-curiosidades">Contextos e Curiosidades<a class="headerlink" href="#contextos-e-curiosidades" title="Permanent link">&para;</a></h1>
+<p><a href="https://www.youtube.com/watch?v=kfs7I_sT5YA">O que é um Supercomputador?</a></p>
+<p><a href="https://www.youtube.com/watch?v=MPRjIlgVwlg">El Capitan atualmente, o Supercomputador mais rápido do mundo!</a></p>
+<p><a href="https://www.youtube.com/watch?v=nN6v0ExmQD4">Santos Dumont o Supercomputador BR que vamos usar no projeto 2!</a></p>
+<p><a href="https://www.gov.br/lncc/pt-br">LNCC - Laboratório Nacional de Computação Ciêntifica</a></p>
+<p><a href="https://www.lncc.br/sinapad/">SINAPAD -  Sistema Nacional de Processamento de Alto Desempenho </a></p>
+<h3 id="o-que-e-hpc">O que é HPC?<a class="headerlink" href="#o-que-e-hpc" title="Permanent link">&para;</a></h3>
+<p><strong>High-Performance Computing (HPC)</strong> refere-se ao uso de supercomputadores e clusters de computadores para resolver problemas computacionalmente complexos. HPC é essencial em campos como ciência, engenharia e finanças, onde grandes volumes de dados precisam ser processados rapidamente.</p>
+<h3 id="top-500">TOP 500<a class="headerlink" href="#top-500" title="Permanent link">&para;</a></h3>
+<p>Supercomputador <strong>Fugaku</strong>
+<img alt="ttps://spectrum.ieee.org/japans-fugaku-supercomputer-is-first-in-the-world-to-simultaneously-top-all-high-performance-benchmarks" src="https://spectrum.ieee.org/media-library/photograph-of-japanese-supercomputer-fugaku.jpg?id=25591963&amp;width=2400&amp;height=998" />
+ <a href="https://spectrum.ieee.org/japans-fugaku-supercomputer-is-first-in-the-world-to-simultaneously-top-all-high-performance-benchmarks">https://spectrum.ieee.org/japans-fugaku-supercomputer-is-first-in-the-world-to-simultaneously-top-all-high-performance-benchmarks</a></p>
+<p>O <a href="https://top500.org/"><strong>TOP 500</strong></a> é uma lista semestral que classifica os 500 supercomputadores mais poderosos do mundo com base no benchmark LINPACK, que mede a capacidade de resolver sistemas de equações lineares. A lista é um indicador importante do progresso em tecnologia de supercomputação. Variações da lista incluem:</p>
+<ul>
+<li><a href="https://top500.org/lists/green500/"><strong>Green500</strong></a>: Classifica supercomputadores pela eficiência energética.</li>
+<li><a href="https://graph500.org/"><strong>Graph500</strong></a>: Mede o desempenho em tarefas de análise de gráficos.</li>
+<li><a href="https://top500.org/lists/hpcg/"><strong>HPCG</strong></a>: Avalia supercomputadores usando um benchmark alternativo ao LINPACK, mais representativo de cargas de trabalho reais em HPC.</li>
+</ul>
+<h3 id="que-tipo-de-problema-e-computacionalmente-complexo">Que tipo de problema é computacionalmente complexo?<a class="headerlink" href="#que-tipo-de-problema-e-computacionalmente-complexo" title="Permanent link">&para;</a></h3>
+<p>Problemas computacionalmente complexos exigem grande capacidade de processamento e memória para serem resolvidos eficientemente. Exemplos incluem:</p>
+<ul>
+<li>Simulações climáticas</li>
+<li>Modelagem molecular</li>
+<li>Processamento de grandes conjuntos de dados (Big Data)</li>
+<li>Análise genômica</li>
+<li>Renderização de gráficos em alta resolução</li>
+<li>Aprendizado de máquina e inteligência artificial</li>
+</ul>
+<h3 id="o-que-e-um-supercomputador">O que é um supercomputador?<a class="headerlink" href="#o-que-e-um-supercomputador" title="Permanent link">&para;</a></h3>
+<p>Um <strong>supercomputador</strong> é um sistema computacional de alto desempenho projetado para processar grandes volumes de dados e realizar cálculos complexos muito rapidamente. Ele consiste em milhares de nós de computação interconectados, cada um contendo múltiplos processadores, grande quantidade de memória e armazenamento rápido.</p>
+<h3 id="o-que-e-um-cluster">O que é um Cluster?<a class="headerlink" href="#o-que-e-um-cluster" title="Permanent link">&para;</a></h3>
+<p>Um <strong>cluster</strong> é um conjunto de computadores (nós) conectados que trabalham juntos como se fossem um único sistema. Cada nó em um cluster é um computador independente, mas o sistema inteiro é gerenciado para atuar em conjunto, distribuindo tarefas e compartilhando recursos.</p>
+<h3 id="qual-a-diferenca-de-um-supercomputador-para-um-cluster">Qual a diferença de um supercomputador para um cluster?<a class="headerlink" href="#qual-a-diferenca-de-um-supercomputador-para-um-cluster" title="Permanent link">&para;</a></h3>
+<p>A principal diferença entre um <strong>supercomputador</strong> e um <strong>cluster</strong> está na integração e desempenho:</p>
+<ul>
+<li><strong>Supercomputador</strong>: Um sistema integrado de alto desempenho projetado especificamente para computação intensa. Possui uma arquitetura otimizada e interconexões de alta velocidade.</li>
+<li><strong>Cluster</strong>: São computadores independentes conectados para trabalhar juntos. Pode ser composto por hardware de mercado e geralmente é mais flexível e expansível.</li>
+</ul>
+<p>OBS: Muitos supercomputadores modernos são de fato clusters, utilizando milhares de nós interconectados para alcançar um desempenho extremamente alto.</p>
+<h1 id="cluster-franky">Cluster Franky<a class="headerlink" href="#cluster-franky" title="Permanent link">&para;</a></h1>
+<p>Cluster Franky - Laboratório de Redes e Supercomputação do Insper
+<img alt="Cluster Franky - Laboratório de Redes e Supercomputação do Insper" src="imgs/franky.jpg" /></p>
+<p>Nosso objetivo é preparar você com as habilidades necessárias para utilizar sistemas de HPC em situações reais. Inspirado no supercomputador Santos Dumont, o Cluster Franky oferece um ambiente robusto e seguro para realizar simulações complexas e análises de grandes volumes de dados.</p>
+<h3 id="como-o-sistema-funciona">Como o Sistema Funciona<a class="headerlink" href="#como-o-sistema-funciona" title="Permanent link">&para;</a></h3>
+<p>Para que você compreenda melhor como o Cluster Franky opera, veja a figura abaixo que detalha a arquitetura do sistema:</p>
+<p><img alt="Arquitetura do Cluster Franky" src="imgs/ClusterHPC.png" /></p>
+<h4 id="1-conexao-e-autenticacao">1. <strong>Conexão e Autenticação</strong><a class="headerlink" href="#1-conexao-e-autenticacao" title="Permanent link">&para;</a></h4>
+<p>O processo de interação com o Cluster Franky começa quando você se conecta ao Cluster via SSH através da rede do Insper, em seguida, você será direcionado ao <strong>Login Node</strong>, que serve como o ponto de entrada para o cluster. Para acessar o sistema, é necessário passar por um processo de autenticação usando pares de chaves públicas e privadas, configurados previamente por nossa equipe técnica.</p>
+<h4 id="2-envio-e-gerenciamento-de-tarefas-jobs">2. <strong>Envio e Gerenciamento de Tarefas (Jobs)</strong><a class="headerlink" href="#2-envio-e-gerenciamento-de-tarefas-jobs" title="Permanent link">&para;</a></h4>
+<p>Uma vez autenticado, você interage com o cluster através do <strong>Slurm</strong>. O Slurm é responsável por gerenciar a execução das tarefas que você submete, distribuindo-as eficientemente pelos recursos de computação disponíveis, que são divididos em:</p>
+<ul>
+<li><strong>Nó de Computação CPU:</strong> Composto por cinco nós, cada um com 24 threads e 64 GB de RAM.</li>
+<li><strong>Nó de Computação GPU:</strong> Composto por quatro nós, cada um equipado com uma GPU NVIDIA A1000 com 8GB de VRAM, uma CPU com 64 GB de RAM e 32 threads.</li>
+<li><strong>Nó de Computação Monstrão:</strong> Composto por um nó equipado com 4 GPU NVIDIA V100 com 32GB de VRAM, uma CPU com 1TB de RAM e 20 threads</li>
+</ul>
+<p>Os <strong>daemons de controle</strong> cada nó de computação gerencia a execução das tarefas, garantindo que os recursos sejam alocados de forma otimizada. Isso significa que, independentemente de você estar executando simulações simples ou tarefas intensivas de processamento de dados, o sistema está configurado para maximizar a eficiência e minimizar o tempo de execução.</p>
+<h4 id="3-armazenamento-e-gestao-de-dados">3. <strong>Armazenamento e Gestão de Dados</strong><a class="headerlink" href="#3-armazenamento-e-gestao-de-dados" title="Permanent link">&para;</a></h4>
+<p>Durante suas atividades, você deve utilizar a pasta <strong>SCRATCH</strong> para armazenar temporariamente os arquivos e dados necessários para suas tarefas. É importante lembrar que essa pasta é destinada ao armazenamento temporário, portanto, certifique-se de salvar seus dados em um local seguro após concluir suas atividades.</p>
+<p>O sistema de arquivos atual do Cluster Franky utiliza o <strong>NFS (Network File System)</strong>, que facilita o acesso aos dados entre os nós de computação. No futuro, planejamos migrar para o sistema de arquivos <strong>Lustre</strong>, que oferecerá maior eficiência e melhor desempenho no manuseio de grandes volumes de dados.</p>
+<h3 id="porque-usar-o-cluster-franky">Porque usar o Cluster Franky?<a class="headerlink" href="#porque-usar-o-cluster-franky" title="Permanent link">&para;</a></h3>
+<p>Utilizar o Cluster Franky oferece vários benefícios que vão prepará-lo para desafios reais em HPC:</p>
+<ul>
+<li>
+<p><strong>Experiência Prática em HPC:</strong> Ao trabalhar com o Cluster Franky, você terá a oportunidade de realizar tarefas que simulam cenários reais encontrados em supercomputadores como o Santos Dumont. Isso inclui a execução de simulações complexas, a otimização de recursos e o uso inteligente das ferramentas disponíveis.</p>
+</li>
+<li>
+<p><strong>Desenvolvimento de Habilidades Técnicas:</strong> Aprender a utilizar ferramentas avançadas como o Slurm e a interagir com ambientes de computação distribuída irá equipá-lo com habilidades técnicas valiosas, amplamente aplicáveis em diversas áreas de pesquisa e indústria.</p>
+</li>
+<li>
+<p><strong>Preparação para o Mundo Real:</strong> A experiência adquirida com o Cluster Franky será um diferencial no mercado de trabalho, pois você estará familiarizado com práticas e tecnologias utilizadas em sistemas de HPC de ponta.</p>
+</li>
+</ul>
+<p>O Cluster Franky não é apenas uma ferramenta de aprendizado; é uma porta de entrada para o mundo da computação de alto desempenho. Aproveite essa oportunidade para expandir seus conhecimentos, experimentar e se preparar para enfrentar desafios de HPC. Se precisar de ajuda ou tiver dúvidas, procure um de nós!</p>
 
 
 
