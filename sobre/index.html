@@ -549,6 +549,29 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aulas/aula03/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Aula 03 - Otimização e Tiling
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -830,7 +853,7 @@
 <tr>
 <td>11/ago (seg)</td>
 <td>Aula 01</td>
-<td>Problemas de HPC; mapa de memória; Python × C++; desempenho; objetivos da disciplina</td>
+<td>Problemas de HPC; mapa de memória; Python × C++; desempenho; objetivos da disciplina; passagem de argumentos; recursos de C++</td>
 <td>Transcrição de códigos Python para C++; comparação de desempenho entre linguagens.</td>
 </tr>
 <tr>
@@ -842,8 +865,8 @@
 <tr>
 <td>18/ago (seg)</td>
 <td>Aula 03</td>
-<td>Otimização e desempenho; discussão de soluções anteriores;</td>
-<td>Otimização e desempenho.</td>
+<td>Hierarquia de memória (L1, L2, L3); técnica de Tiling (fateamento em blocos); princípios de localidade espacial e temporal</td>
+<td>Aplicar tiling para melhorar o uso de cache; reorganizar estruturas de dados para melhor localidade.</td>
 </tr>
 <tr>
 <td>22/ago (sex)</td>
@@ -861,25 +884,25 @@
 <td>29/ago (sex)</td>
 <td>Aula 06</td>
 <td>Efeitos colaterais do paralelismo; racing conditions; dependências; recursão</td>
-<td>Aplicação no projeto: mapear problemas, levantar hipóteses de otimização e comparar desempenho.</td>
+<td>Estudo de caso: mapear problemas, levantar hipóteses de otimização e comparar desempenho.</td>
 </tr>
 <tr>
-<td>02/set (seg)</td>
+<td>01/set (seg)</td>
 <td>Aula 07</td>
 <td>Memória distribuída; comunicação com MPI; ponto-a-ponto e coletiva; grupos e comunicadores</td>
-<td>Lançamento do projeto</td>
+<td>Paralelismo com MPI; comunicação entre nós.</td>
 </tr>
 <tr>
 <td>05/set (sex)</td>
 <td>Aula 08</td>
 <td>Estratégias híbridas MPI + OpenMP</td>
-<td></td>
+<td>Estudo de caso com MPI + OpenMP, levantamento de gargalos e possíveis otimizações.</td>
 </tr>
 <tr>
 <td>08/set (seg)</td>
 <td>Aula 09</td>
 <td>Aula estúdio</td>
-<td>Suporte ao Projeto</td>
+<td>Suporte ao Projeto 1 – Mineração de criptomoedas em CPU</td>
 </tr>
 <tr>
 <td>12/set (sex)</td>
@@ -891,91 +914,115 @@
 <td>15/set (seg)</td>
 <td>Aula 11</td>
 <td>Aula estúdio</td>
-<td>Suporte ao Projeto</td>
+<td>Suporte ao Projeto 1 – Mineração de criptomoedas em CPU</td>
 </tr>
 <tr>
 <td>19/set (sex)</td>
 <td>Aula 12</td>
-<td>Devolutiva do Projeto</td>
+<td>Devolutiva do Projeto 1</td>
 <td>Discussão das soluções apresentadas e feedback.</td>
 </tr>
 <tr>
 <td>22/set (seg)</td>
 <td>Aula 13</td>
 <td>Aula estúdio</td>
-<td>Últimos ajustes no Projeto 1. Entrega final até 23h59.</td>
+<td>Ajustes finais no Projeto 1 – Mineração de criptomoedas em CPU</td>
 </tr>
 <tr>
-<td>25/set–03/out</td>
-<td>—</td>
-<td>Provas intermediárias</td>
-<td>Avaliação dos conteúdos até MPI.</td>
+<td>26/set (sex)</td>
+<td>Aula 14</td>
+<td>Prova Intermediária</td>
+<td>Avaliação dos conteúdos até Estratégias híbridas MPI + OpenMP.</td>
+</tr>
+<tr>
+<td>29/set (seg)</td>
+<td>Aula 15</td>
+<td>Profiling em GPU; warps e SIMD; divergência; alocação de memória</td>
+<td>Atividade prática de Profiling em GPU, análise de divergências e uso de memória.</td>
 </tr>
 <tr>
 <td>06/out (seg)</td>
-<td>Aula 14</td>
-<td>Profiling em GPU; warps e SIMD; divergência; alocação de memória</td>
-<td>Estudo de caso aplicado</td>
-</tr>
-<tr>
-<td>10/out (sex)</td>
-<td>Aula 15</td>
+<td>Aula 16</td>
 <td>Histogramming; data race em GPU; atomic; throughput</td>
 <td>Estudo de caso aplicado.</td>
 </tr>
 <tr>
-<td>13/out (seg)</td>
-<td>Aula 16</td>
+<td>10/out (sex)</td>
+<td>Aula 17</td>
 <td>Técnicas stencil; convolução; tile boundaries; agendamento de threads</td>
 <td>Estudo de caso aplicado.</td>
 </tr>
 <tr>
-<td>15/out (sex)</td>
-<td>Aula 17</td>
+<td>13/out (seg)</td>
+<td>Aula 18</td>
 <td>Estabilidade numérica; ponto flutuante; controle de erro</td>
 <td>Estudo de caso aplicado.</td>
 </tr>
 <tr>
-<td>24/out (seg)</td>
-<td>Aula 18</td>
-<td>Estratégias híbridas com MPI + CUDA; gerenciamento de dados</td>
-<td>Estudo de caso aplicado.</td>
-</tr>
-<tr>
-<td>27/out (sex)</td>
+<td>17/out (sex)</td>
 <td>Aula 19</td>
-<td>Apresentação do Projeto 2</td>
-<td>Conversa sobre estratégias de otimização</td>
+<td>Estratégias híbridas com MPI + CUDA; gerenciamento de dados</td>
+<td>Atividade prática com múltiplas GPUs.</td>
 </tr>
 <tr>
-<td>31/out (seg)</td>
+<td>20/out (seg)</td>
 <td>Aula 20</td>
-<td>Aula estúdio</td>
-<td>Aula estúdio</td>
+<td>Resumo das estratégias de otimização; discussão sobre aplicação em projeto</td>
+<td>Discussão coletiva de estratégias de otimização.</td>
 </tr>
 <tr>
-<td>03/nov (sex)</td>
+<td>24/out (sex)</td>
 <td>Aula 21</td>
-<td>Palestra NVIDIA – OpenACC</td>
-<td>Introdução ao OpenACC.</td>
+<td>Apresentação do Projeto 2</td>
+<td>Discussão sobre estratégias de otimização para aplicação no projeto.</td>
 </tr>
 <tr>
-<td>07/nov (seg)</td>
+<td>27/out (seg)</td>
 <td>Aula 22</td>
 <td>Aula estúdio</td>
-<td>Aula estúdio</td>
+<td>Suporte ao Projeto 2 – Mineração de criptomoedas em GPU</td>
 </tr>
 <tr>
-<td>10/nov (sex)</td>
+<td>31/out (sex)</td>
 <td>Aula 23</td>
-<td>Simulado da prova final</td>
+<td>Palestra NVIDIA – OpenACC</td>
+<td>Introdução ao OpenACC</td>
+</tr>
+<tr>
+<td>03/nov (seg)</td>
+<td>Aula 24</td>
+<td>Aula estúdio</td>
+<td>Suporte ao Projeto 2 – Mineração de criptomoedas em GPU</td>
+</tr>
+<tr>
+<td>07/nov (sex)</td>
+<td>Aula 25</td>
+<td>Aula estúdio</td>
+<td>Suporte ao Projeto 2 – Mineração de criptomoedas em GPU</td>
+</tr>
+<tr>
+<td>10/nov (seg)</td>
+<td>Aula 26</td>
+<td>Devolutiva do Projeto 2</td>
+<td>Ajustes finais após feedback ao Projeto 2</td>
+</tr>
+<tr>
+<td>14/nov (sex)</td>
+<td>Aula 27</td>
+<td>Simulado da Avaliação Final</td>
 <td>Revisão prática.</td>
 </tr>
 <tr>
-<td>14/nov (seg)</td>
-<td>Aula 24</td>
-<td>Encerramento da disciplina.</td>
-<td><strong>Entrega final do Projeto até 23h59.</strong></td>
+<td>17/nov (seg)</td>
+<td>Aula 28</td>
+<td>Avaliação Final</td>
+<td>Avaliação Final</td>
+</tr>
+<tr>
+<td>24/nov (seg)</td>
+<td>Aula 29</td>
+<td>Avaliação Final</td>
+<td>Encerramento e avaliação final</td>
 </tr>
 </tbody>
 </table>

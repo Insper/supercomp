@@ -11,6 +11,10 @@
         <link rel="canonical" href="https://insper.github.io/supercomp/aulas/aula03/">
       
       
+        <link rel="prev" href="../aula02/">
+      
+      
+        <link rel="next" href="../../teoria/aula01/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -18,7 +22,7 @@
     
     
       
-        <title>Index - SuperComputação - 2025/2</title>
+        <title>Aula 03 - Otimização e Tiling - SuperComputação - 2025/2</title>
       
     
     
@@ -114,7 +118,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Index
+              Aula 03 - Otimização e Tiling
             
           </span>
         </div>
@@ -235,10 +239,12 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
+      <li class="md-tabs__item md-tabs__item--active">
         <a href="../aula01/" class="md-tabs__link">
           
   
@@ -364,24 +370,29 @@
       
   
   
+    
   
   
+  
     
     
     
     
-      
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
             
   
   
@@ -394,7 +405,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             Aulas
@@ -442,6 +453,178 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Aula 03 - Otimização e Tiling
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Aula 03 - Otimização e Tiling
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objetivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Objetivo
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contexto" class="md-nav__link">
+    <span class="md-ellipsis">
+      Contexto
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#missoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Missões:
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Missões:">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-compilacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Compilação
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-execucao" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Execução
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#explorando-ordenacao-de-loops-e-flags-de-otimizacao-em-diferentes-filas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Explorando Ordenação de Loops e Flags de Otimização em Diferentes Filas
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Explorando Ordenação de Loops e Flags de Otimização em Diferentes Filas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-alterando-a-ordem-dos-loops" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Alterando a Ordem dos Loops
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-testar-diferentes-flags-de-otimizacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Testar Diferentes Flags de Otimização
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-rodar-em-diferentes-filas-do-cluster" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Rodar em Diferentes Filas do Cluster
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#perguntas-para-responder-no-relatorio" class="md-nav__link">
+    <span class="md-ellipsis">
+      Perguntas para responder no relatório:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#entregaveis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Entregáveis:
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -672,11 +855,11 @@
         <li class="md-nav__item">
   <a href="#explorando-ordenacao-de-loops-e-flags-de-otimizacao-em-diferentes-filas" class="md-nav__link">
     <span class="md-ellipsis">
-      Explorando Ordenação de Loops e Flags de Otimização em Diferentes Filas**
+      Explorando Ordenação de Loops e Flags de Otimização em Diferentes Filas
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Explorando Ordenação de Loops e Flags de Otimização em Diferentes Filas**">
+    <nav class="md-nav" aria-label="Explorando Ordenação de Loops e Flags de Otimização em Diferentes Filas">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -748,7 +931,7 @@
   
 
 
-  <h1>Index</h1>
+  <h1>Aula 03 - Otimização e Tiling</h1>
 
 <h2 id="objetivo">Objetivo<a class="headerlink" href="#objetivo" title="Permanent link">&para;</a></h2>
 <p>Explorar técnicas de otimização de código sequencial em C++ a partir da análise de desempenho.
@@ -786,7 +969,7 @@ B \leq \sqrt{\frac{\text{Capacidade da Cache}}{24}}
 <span class="cm"> ============================================================</span>
 <span class="cm">   OBJETIVO</span>
 <span class="cm">   -----------------------------------------------------------</span>
-<span class="cm">   Este programa faz a multiplicação de duas matrizes N×N</span>
+<span class="cm">   Este programa faz a multiplicação de matrizes aninhadas</span>
 <span class="cm">   de forma SEQUENCIAL e mede o tempo de execução.</span>
 
 <span class="cm">   Ele pode rodar em dois modos:</span>
@@ -794,19 +977,20 @@ B \leq \sqrt{\frac{\text{Capacidade da Cache}}{24}}
 <span class="cm">   - Versão com TILING (fateamento em blocos), onde o tamanho</span>
 <span class="cm">     do bloco B é passado como parâmetro na linha de comando.</span>
 
-<span class="cm">   O foco é observar como o tamanho do bloco B influencia:</span>
-<span class="cm">   - O tempo de execução </span>
+<span class="cm">   O objetivo é observar como o tamanho do bloco B influencia:</span>
+<span class="cm">   - O tempo de execução</span>
 <span class="cm">   - O uso de cache</span>
 
 <span class="cm"> ============================================================</span>
 <span class="cm">*/</span>
 <span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2000</span><span class="p">;</span><span class="w"> </span><span class="c1">// Dimensão da matriz quadrada (2000x2000)</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2000</span><span class="p">;</span><span class="w"> </span><span class="c1">// Tamanho da matriz</span>
 <span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">          </span><span class="c1">// Tamanho do bloco. Se for 0 → versão ingênua.</span>
 
 <span class="w">    </span><span class="c1">// Lê o tamanho do bloco da linha de comando</span>
 <span class="w">    </span><span class="c1">// Exemplo: ./matmul_seq 200  → roda com blocos 200×200</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">argc</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Atualiza o valor de B de acordo com o parâmetro de entrada</span>
 <span class="w">        </span><span class="n">B</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
 <span class="w">    </span><span class="p">}</span>
 
@@ -826,9 +1010,7 @@ B \leq \sqrt{\frac{\text{Capacidade da Cache}}{24}}
 <span class="w">        </span><span class="c1">// VERSÃO INGENUA</span>
 <span class="w">        </span><span class="c1">// --------------------------------------------------------</span>
 <span class="w">        </span><span class="c1">// Três loops aninhados (i, j, k)</span>
-<span class="w">        </span><span class="c1">// Acesso direto às matrizes sem blocagem</span>
-<span class="w">        </span><span class="c1">// Tem muitos cache misses porque percorre grandes áreas</span>
-<span class="w">        </span><span class="c1">// da memória sem reaproveitar os dados que já estão na cache.</span>
+<span class="w">        </span><span class="c1">// Acesso às matrizes sem tiling</span>
 <span class="w">        </span><span class="c1">// ========================================================</span>
 <span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -840,18 +1022,15 @@ B \leq \sqrt{\frac{\text{Capacidade da Cache}}{24}}
 <span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="c1">// ========================================================</span>
 <span class="w">        </span><span class="c1">// VERSÃO COM TILING</span>
-<span class="w">        </span><span class="c1">// --------------------------------------------------------</span>
-<span class="w">        </span><span class="c1">// Divide a matriz em blocos B×B.</span>
-<span class="w">        </span><span class="c1">// Cada bloco é pequeno o bastante para caber na cache,</span>
-<span class="w">        </span><span class="c1">// reduzindo cache misses e acelerando a execução.</span>
 <span class="w">        </span><span class="c1">// ========================================================</span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">B</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">             </span><span class="c1">// percorre blocos de linhas</span>
-<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">jj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">jj</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">jj</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">B</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">         </span><span class="c1">// percorre blocos de colunas</span>
-<span class="w">                </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">kk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">kk</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">kk</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">B</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">     </span><span class="c1">// percorre blocos intermediários</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">B</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">             </span><span class="c1">// blocos de linhas</span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">jj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">jj</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">jj</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">B</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">         </span><span class="c1">// blocos de colunas</span>
+<span class="w">                </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">kk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">kk</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">kk</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">B</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">     </span><span class="c1">// blocos intermediários</span>
 <span class="w">                    </span><span class="c1">// Multiplicação de submatrizes B×B</span>
-<span class="w">                    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ii</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">min</span><span class="p">(</span><span class="n">ii</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">B</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="p">);</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jj</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">min</span><span class="p">(</span><span class="n">jj</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">B</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="p">);</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                            </span><span class="kt">double</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">C</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">];</span><span class="w"> </span><span class="c1">// acumula resultado local</span>
+<span class="w">                    </span><span class="c1">// Ordem j -&gt; i -&gt; k</span>
+<span class="w">                    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jj</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">min</span><span class="p">(</span><span class="n">jj</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">B</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="p">);</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ii</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">min</span><span class="p">(</span><span class="n">ii</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">B</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="p">);</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                            </span><span class="kt">double</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">C</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">];</span>
 <span class="w">                            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kk</span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">min</span><span class="p">(</span><span class="n">kk</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">B</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="p">);</span><span class="w"> </span><span class="n">k</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                                </span><span class="n">sum</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">k</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Bmat</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">j</span><span class="p">];</span>
 <span class="w">                            </span><span class="p">}</span>
@@ -867,8 +1046,8 @@ B \leq \sqrt{\frac{\text{Capacidade da Cache}}{24}}
 <span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
 
 <span class="w">    </span><span class="c1">// Calcula e imprime o tempo total em milissegundos</span>
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Execução (&quot;</span><span class="w"> </span>
-<span class="w">              </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="p">(</span><span class="n">B</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s">&quot;ingênua&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s">&quot;tiling B=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">B</span><span class="p">))</span><span class="w"> </span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Execução (&quot;</span>
+<span class="w">              </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="p">(</span><span class="n">B</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s">&quot;ingênua&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s">&quot;tiling B=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">B</span><span class="p">))</span>
 <span class="w">              </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;): &quot;</span>
 <span class="w">              </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">duration_cast</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">milliseconds</span><span class="o">&gt;</span><span class="p">(</span><span class="n">end</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start</span><span class="p">).</span><span class="n">count</span><span class="p">()</span>
 <span class="w">              </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; ms&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
@@ -882,35 +1061,42 @@ B \leq \sqrt{\frac{\text{Capacidade da Cache}}{24}}
 <div class="highlight"><pre><span></span><code>g++<span class="w"> </span>-O2<span class="w">  </span>matmul_seq.cpp<span class="w"> </span>-o<span class="w"> </span>matmul_seq
 </code></pre></div>
 <h3 id="2-execucao">2. Execução<a class="headerlink" href="#2-execucao" title="Permanent link">&para;</a></h3>
-<p>Execute o programa em 4 modos:</p>
-<ol>
-<li><strong>Ingênuo (sem tiling):</strong></li>
-</ol>
-<div class="highlight"><pre><span></span><code>srun<span class="w"> </span>--partition<span class="o">=</span>monstrao<span class="w"> </span>--ntasks<span class="o">=</span><span class="m">1</span><span class="w"> </span>./matmul_seq<span class="w"> </span><span class="m">0</span>
+<p>Crie o lançador do SLURM como em <code>tiling.slurm</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="c1">#SBATCH --job-name=monstrao_tiling</span>
+<span class="c1">#SBATCH --output=monstrao_tiling%j.out</span>
+<span class="c1">#SBATCH --error=monstrao_tiling%j.err</span>
+<span class="c1">#SBATCH --partition=monstrao</span>
+<span class="c1">#SBATCH --ntasks=1</span>
+<span class="c1">#SBATCH --time=00:05:00</span>
+<span class="c1">#SBATCH --mem=2G</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;=============== FILA MONSTRAO==============&quot;</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;=== Execução versão ingênua ===&quot;</span>
+<span class="nb">time</span><span class="w"> </span>./matmul_seq<span class="w"> </span><span class="m">0</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;=== Execução com blocos L1 (~36x36) ===&quot;</span>
+<span class="nb">time</span><span class="w"> </span>./matmul_seq<span class="w"> </span><span class="m">36</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;=== Execução com blocos L2 (~200x200) ===&quot;</span>
+<span class="nb">time</span><span class="w"> </span>./matmul_seq<span class="w"> </span><span class="m">200</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;=== Execução com blocos L3 (~768x768) ===&quot;</span>
+<span class="nb">time</span><span class="w"> </span>./matmul_seq<span class="w"> </span><span class="m">768</span>
 </code></pre></div>
-<ol>
-<li><strong>Bloco para L1 (~36×36):</strong></li>
-</ol>
-<div class="highlight"><pre><span></span><code>srun<span class="w"> </span>--partition<span class="o">=</span>monstrao<span class="w"> </span>--ntasks<span class="o">=</span><span class="m">1</span><span class="w"> </span>./matmul_seq<span class="w"> </span><span class="m">36</span>
+<p>Execute com:</p>
+<div class="highlight"><pre><span></span><code>sbatch tiling.slurm
 </code></pre></div>
-<ol>
-<li><strong>Bloco para L2 (~200×200):</strong></li>
-</ol>
-<div class="highlight"><pre><span></span><code>srun<span class="w"> </span>--partition<span class="o">=</span>monstrao<span class="w"> </span>--ntasks<span class="o">=</span><span class="m">1</span><span class="w"> </span>./matmul_seq<span class="w"> </span><span class="m">200</span>
-</code></pre></div>
-<ol>
-<li><strong>Bloco para L3 (~768×768):</strong></li>
-</ol>
-<div class="highlight"><pre><span></span><code>srun<span class="w"> </span>--partition<span class="o">=</span>monstrao<span class="w"> </span>--ntasks<span class="o">=</span><span class="m">1</span><span class="w"> </span>./matmul_seq<span class="w"> </span><span class="m">768</span>
-</code></pre></div>
-<h2 id="explorando-ordenacao-de-loops-e-flags-de-otimizacao-em-diferentes-filas">Explorando Ordenação de Loops e Flags de Otimização em Diferentes Filas**<a class="headerlink" href="#explorando-ordenacao-de-loops-e-flags-de-otimizacao-em-diferentes-filas" title="Permanent link">&para;</a></h2>
-<p>Você já explorou o efeito do <strong>tiling</strong>. Agora, o objetivo é entender como <strong>a organização dos loops</strong> e <strong>as otimizações do compilador</strong> influenciam o desempenho do mesmo código.</p>
+<h2 id="explorando-ordenacao-de-loops-e-flags-de-otimizacao-em-diferentes-filas">Explorando Ordenação de Loops e Flags de Otimização em Diferentes Filas<a class="headerlink" href="#explorando-ordenacao-de-loops-e-flags-de-otimizacao-em-diferentes-filas" title="Permanent link">&para;</a></h2>
+<p>Você já visualizou o efeito do <strong>tiling</strong>. Agora, o objetivo é entender como <strong>a organização dos loops</strong> e <strong>as otimizações do compilador</strong> influenciam o desempenho do mesmo código.</p>
 <h3 id="1-alterando-a-ordem-dos-loops">1. Alterando a Ordem dos Loops<a class="headerlink" href="#1-alterando-a-ordem-dos-loops" title="Permanent link">&para;</a></h3>
-<p>Modifique o código <code>matmul_seq.cpp</code> para usar a ordem <strong>i → k → j</strong> no lugar da ordem original <strong>i → j → k</strong>. Essa mudança afeta a <strong>localidade espacial</strong> dos acessos à matriz B.</p>
+<p>Modifique o código <code>matmul_seq.cpp</code> para usar a ordem <strong>i → k → j</strong> no lugar da ordem original <strong>j → i → k</strong>.
+Essa mudança melhora a localidade espacial dos acessos à matriz B, e também beneficia os acessos às matrizes A e C.</p>
 <h3 id="2-testar-diferentes-flags-de-otimizacao">2. Testar Diferentes Flags de Otimização<a class="headerlink" href="#2-testar-diferentes-flags-de-otimizacao" title="Permanent link">&para;</a></h3>
-<p>Compile o programa com cada conjunto de flags e execute usando diferentes blocos</p>
+<p>Encontre a flag de Otimização com o melhor resultado para esse algoritmo (O2, O3, Ofast)</p>
 <h3 id="3-rodar-em-diferentes-filas-do-cluster">3. Rodar em Diferentes Filas do Cluster<a class="headerlink" href="#3-rodar-em-diferentes-filas-do-cluster" title="Permanent link">&para;</a></h3>
-<p>Após identificar as melhores combinações de loop e flags no <strong>monstrao</strong>, identifique quais são os tamanhos das memórias L1, L2 e L3 na fila GPU e repita os testes.</p>
+<p>Após identificar as melhores combinações de loop e flags de otimização no <strong>monstrao</strong>, identifique quais são os tamanhos das memórias L1, L2 e L3 na fila GPU e repita os testes.</p>
 <h3 id="perguntas-para-responder-no-relatorio">Perguntas para responder no relatório:<a class="headerlink" href="#perguntas-para-responder-no-relatorio" title="Permanent link">&para;</a></h3>
 <ol>
 <li>A troca de ordem dos loops melhorou ou piorou o tempo de execução? Por quê?</li>
@@ -918,7 +1104,7 @@ B \leq \sqrt{\frac{\text{Capacidade da Cache}}{24}}
 <li>Qual o <strong>tamanho de bloco</strong> que apresentou o melhor equilíbrio entre tempo de execução e aproveitamento de cache em cada fila?</li>
 </ol>
 <h2 id="entregaveis">Entregáveis:<a class="headerlink" href="#entregaveis" title="Permanent link">&para;</a></h2>
-<p>Submeta via <a href="https://classroom.github.com/a/DnVGRWYD">Classroom</a> um arquivo PDF contendo obrigatoriamente:</p>
+<p>Submeta via <a href="https://classroom.github.com/a/DnVGRWYD">Classroom</a> um relatório contendo obrigatoriamente:</p>
 <ul>
 <li>
 <p>Identificação: seu nome completo</p>
@@ -930,7 +1116,7 @@ B \leq \sqrt{\frac{\text{Capacidade da Cache}}{24}}
 <p>Gráficos comparativos: que ilustrem as diferenças de desempenho entre as versões testadas</p>
 </li>
 <li>
-<p>Respostas às perguntas: análise crítica com base nos resultados observados </p>
+<p>Respostas às perguntas: análise com base nos resultados observados </p>
 </li>
 </ul>
 <p><strong>Faça a submissão do relatório até 22/08, 08h30 pelo link do <a href="https://classroom.github.com/a/DnVGRWYD">Github Classromm</a></strong></p>
