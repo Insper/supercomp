@@ -19,7 +19,9 @@
 **Exemplos**
 
 Pedido simples de execução de tarefa para o SLURM
-`srun --nodelist=compute10 --partition=normal --ntasks=1 --pty bash`
+```bash
+srun --nodelist=compute10 --partition=normal --ntasks=1 --pty bash
+```
 --srun: Comando SLURM para executar tarefas 
 --nodelist=compute10: força o SLURM a alocar exatamente esse nó.
 --partition=normal: indica a partição à qual o nó pertence.
@@ -28,15 +30,14 @@ Pedido simples de execução de tarefa para o SLURM
 
 
 Pedido sem especificar o nó exato:
-`srun --partition=normal --ntasks=1 --pty bash`
+```bash
+srun --partition=normal --ntasks=1 --pty bash
+```
 
 Pedido com varias tasks para executar seu programa direto:
-`srun --partition=normal --ntasks=4 ./meu_programa_paralelo`
-
-Ótima pergunta! Com o comando `srun`, você pode **pedir ao SLURM recursos de computação específicos** — como número de tarefas, CPUs, memória, tempo de execução, GPUs, nós específicos e muito mais.
-
-Claro! Aqui está o **resumo equivalente para o `sbatch`**, seguindo o mesmo formato que você usou para o `srun`:
-
+```bash
+srun --partition=normal --ntasks=4 ./meu_programa_paralelo
+```
 
 ### Principais recursos que você pode pedir com `sbatch`
 
@@ -96,35 +97,35 @@ sbatch job1.slurm
 ```bash
 sinfo -N -l
 ```
-> Útil para ver quais nós estão **idle, alocados, down ou drain**.
+Útil para ver quais nós estão **idle, alocados, down ou drain**.
 
 ### Ver informações completas do nó `compute24`
 
 ```bash
 scontrol show node compute24
 ```
-> Mostra: memória total e usada, CPUs alocadas, jobs em execução, estado (`IDLE`, `ALLOCATED`, etc.).
+Mostra: memória total e usada, CPUs alocadas, jobs em execução, estado (`IDLE`, `ALLOCATED`, etc.).
 
 ### Ver configurações de uma partição especifica
 
 ```bash
 scontrol show partition normal
 ```
-> Mostra: tempo máximo de job, número de nós, limites de memória/CPU, GPUs, estado da fila.
+Mostra: tempo máximo de job, número de nós, limites de memória/CPU, GPUs, estado da fila.
 
 ### Ver jobs no sistema
 
 ```bash
 squeue
 ```
-> Mostra todos os jobs na fila e em execução com status `R` (running), `PD` (pending), etc.
+Mostra todos os jobs na fila e em execução com status `R` (running), `PD` (pending), etc.
 
 ### Ver só os jobs da usuária `liciascl`
 
 ```bash
 squeue -u liciascl
 ```
-> Útil para depurar seus próprios jobs (ID, partição, status, tempo, nó, etc.)
+Útil para depurar seus próprios jobs (ID, partição, status, tempo, nó, etc.)
 
 
 ### Ver informações completas de um job específico
@@ -132,7 +133,7 @@ squeue -u liciascl
 ```bash
 scontrol show job 12345
 ```
-> Mostra: usuário, partição, CPUs/nós alocados, prioridade, estado, tempo usado, comando enviado.
+Mostra: usuário, partição, CPUs/nós alocados, prioridade, estado, tempo usado, comando enviado.
 
 
 ### Cancelar job com ID `12345`
@@ -140,14 +141,14 @@ scontrol show job 12345
 ```bash
 scancel 12345
 ```
-> Útil se o job travou ou está consumindo recursos indevidamente.
+Útil se o job travou ou está consumindo recursos indevidamente.
 
 ### Cancelar **todos os seus jobs**
 
 ```bash
 scancel -u $USER
 ```
-> Cancela em lote — ótimo em caso de erro em scripts ou submissões mal feitas.
+Cancela em lote — ótimo em caso de erro em scripts ou submissões mal feitas.
 
 
 Para mais consulte a documentação oficial em https://slurm.schedmd.com/documentation.html
@@ -163,7 +164,7 @@ Para mais consulte a documentação oficial em https://slurm.schedmd.com/documen
   lscpu
   ```
 
-  > Exemplo de saída:
+  Exemplo de saída:
 
   ```
   Architecture:           x86_64
@@ -176,7 +177,6 @@ Para mais consulte a documentação oficial em https://slurm.schedmd.com/documen
   L3 cache:               13M
   ```
 
-* **cat /proc/cpuinfo**
 
 Lista detalhes por CPU lógico (modelo, MHz, cache).
 
@@ -184,7 +184,6 @@ Lista detalhes por CPU lógico (modelo, MHz, cache).
   cat /proc/cpuinfo 
   ```
 
-* **nproc**
 
 Mostra o número de CPUs disponíveis.
 
@@ -194,14 +193,11 @@ Mostra o número de CPUs disponíveis.
 
 ## **Memória RAM**
 
-* **free -h**
   Mostra uso e total de memória física e swap.
 
   ```bash
   free -h
   ```
-
-* **cat /proc/meminfo**
 
 Detalhes avançados de memória (MemTotal, MemFree, Buffers, Cached).
 
@@ -209,7 +205,6 @@ Detalhes avançados de memória (MemTotal, MemFree, Buffers, Cached).
   cat /proc/meminfo | grep -E "MemTotal|MemFree|MemAvailable|Swap"
   ```
 
-* **vmstat**
 
 Estatísticas de memória, processos e CPU.
 
@@ -220,15 +215,11 @@ Estatísticas de memória, processos e CPU.
 
 ## **Cache**
 
-* **lscpu | grep cache**
   Mostra rapidamente o tamanho das caches.
 
   ```bash
   lscpu | grep cache
   ```
-
-
-* **ls /sys/devices/system/cpu/cpu0/cache/index*/size*\*
 
 Lista tamanhos de cada nível de cache (por CPU).
 
