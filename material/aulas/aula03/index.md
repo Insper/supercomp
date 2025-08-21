@@ -35,6 +35,8 @@ Analise o código `matmul_seq.cpp`:
 #include <cstdlib>
 #include <algorithm>
 
+
+#define TAM_MATRIZ 1000
 /*
  ============================================================
    OBJETIVO
@@ -53,63 +55,99 @@ Analise o código `matmul_seq.cpp`:
 
  ============================================================
 */
-int main(int argc, char* argv[]) {
-    const int N = 2000; // Tamanho da matriz
-    int B = 0;          // Tamanho do bloco. Se for 0 → versão ingênua.
 
-    // Lê o tamanho do bloco da linha de comando
-    // Exemplo: ./matmul_seq 200  → roda com blocos 200×200
-    if (argc > 1) {
-        // Atualiza o valor de B de acordo com o parâmetro de entrada
-        B = std::atoi(argv[1]);
-    }
+/* Definicoes para melhorar a legibilidade*/
+
+using Matriz = std::vector<std::vector<double>>;
+
+inline Matriz criaMatriz(int size, double value){
+    return Matriz(size, std::vector<double>(size, value));
+}
+
+/**
+ * @brief Versão ingênua da multiplicação de matrizes.
+ * 
+ * Implementa a multiplicação com três loops aninhados (i, j, k) sem uso de tiling.
+ * O acesso às matrizes é feito de forma direta, sem otimizações de cache.
+ */
+inline void versaoIngenua(){
 
     // Cria três matrizes NxN em memória, preenchidas com valores fixos
     // - A inicializada com 1.0
     // - Bmat inicializada com 2.0
     // - C inicializada com 0.0 (resultado)
-    std::vector<std::vector<double>> A(N, std::vector<double>(N, 1.0));
-    std::vector<std::vector<double>> Bmat(N, std::vector<double>(N, 2.0));
-    std::vector<std::vector<double>> C(N, std::vector<double>(N, 0.0));
 
-    // Marca o início da medição de tempo
-    auto start = std::chrono::high_resolution_clock::now();
+    Matriz A    = criaMatriz(TAM_MATRIZ, 1.0);
+    Matriz Bmat = criaMatriz(TAM_MATRIZ, 2.0);
+    Matriz C    = criaMatriz(TAM_MATRIZ, 0.0);
 
-    if (B <= 0) {
-        // ========================================================
-        // VERSÃO INGENUA
-        // --------------------------------------------------------
-        // Três loops aninhados (i, j, k)
-        // Acesso às matrizes sem tiling
-        // ========================================================
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
-                for (int k = 0; k < N; k++) {
-                    C[i][j] += A[i][k] * Bmat[k][j];
-                }
+    for (int i = 0; i < TAM_MATRIZ; i++) {
+        for (int j = 0; j < TAM_MATRIZ; j++) {
+            for (int k = 0; k < TAM_MATRIZ; k++) {
+                C[i][j] += A[i][k] * Bmat[k][j];
             }
         }
-    } else {
-        // ========================================================
-        // VERSÃO COM TILING
-        // ========================================================
-        for (int ii = 0; ii < N; ii += B) {             // blocos de linhas
-            for (int jj = 0; jj < N; jj += B) {         // blocos de colunas
-                for (int kk = 0; kk < N; kk += B) {     // blocos intermediários
-                    // Multiplicação de submatrizes B×B
-                    // Ordem j -> i -> k
-                    for (int j = jj; j < std::min(jj + B, N); j++) {
-                        for (int i = ii; i < std::min(ii + B, N); i++) {
-                            double sum = C[i][j];
-                            for (int k = kk; k < std::min(kk + B, N); k++) {
-                                sum += A[i][k] * Bmat[k][j];
-                            }
-                            C[i][j] = sum;
+    }
+}
+
+/**
+ * @brief Multiplicação de matrizes utilizando a técnica de tiling (blocking).
+ * 
+ * Realiza a multiplicação de matrizes dividindo as matrizes em blocos (tiles) de tamanho `tamBloco`.
+ * Otimiza o uso da cache ao trabalhar com submatrizes menores que cabem na hierarquia de memória.
+ * 
+ * @param tamBloco Tamanho do bloco (tile) usado para dividir as matrizes na multiplicação.
+ */
+inline void versaoTiling(int tamBloco){
+
+    // Cria três matrizes NxN em memória, preenchidas com valores fixos
+    // - A inicializada com 1.0
+    // - Bmat inicializada com 2.0
+    // - C inicializada com 0.0 (resultado)
+
+    Matriz A    = criaMatriz(TAM_MATRIZ, 1.0);
+    Matriz Bmat = criaMatriz(TAM_MATRIZ, 2.0);
+    Matriz C    = criaMatriz(TAM_MATRIZ, 0.0);
+
+    for (int ii = 0; ii < TAM_MATRIZ; ii += tamBloco) {        // blocos de linhas
+        for (int jj = 0; jj < TAM_MATRIZ; jj += tamBloco) {    // blocos de colunas
+            for (int kk = 0; kk < TAM_MATRIZ; kk += tamBloco) {// blocos intermediários
+                // Multiplicação de submatrizes tamBloco x tamBloco
+                // Ordem j -> i -> k
+                for (int j = jj; j < std::min(jj + tamBloco, TAM_MATRIZ); j++) {
+                    for (int i = ii; i < std::min(ii + tamBloco, TAM_MATRIZ); i++) {
+                        double sum = C[i][j];
+                        for (int k = kk; k < std::min(kk + tamBloco, TAM_MATRIZ); k++) {
+                            sum += A[i][k] * Bmat[k][j];
                         }
+                        C[i][j] = sum;
                     }
                 }
             }
         }
+    }
+}
+
+
+
+int main(int argc, char* argv[]) {
+    int tamBloco = 0; // Tamanho do bloco. Se for 0 → versão ingênua.
+
+    // Lê o tamanho do bloco da linha de comando
+    // Exemplo: ./matmul_seq 200  → roda com blocos 200×200
+    if (argc > 1) {
+        // Atualiza o valor de tamBloco de acordo com o parâmetro de entrada
+        tamBloco = std::atoi(argv[1]);
+    }
+
+    // Marca o início da medição de tempo
+    auto start = std::chrono::high_resolution_clock::now();
+
+    if (tamBloco <= 0) {
+        versaoIngenua();
+    } 
+    else {
+        versaoTiling(tamBloco);
     }
 
     // Marca o fim da medição
@@ -117,7 +155,7 @@ int main(int argc, char* argv[]) {
 
     // Calcula e imprime o tempo total em milissegundos
     std::cout << "Execução ("
-              << (B <= 0 ? "ingênua" : "tiling B=" + std::to_string(B))
+              << (tamBloco <= 0 ? "ingênua" : "tiling tamBloco=" + std::to_string(tamBloco))
               << "): "
               << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()
               << " ms" << std::endl;
