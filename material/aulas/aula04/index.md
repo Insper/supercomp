@@ -161,21 +161,24 @@ int main() {
 
 **Objetivo:** Analisar e aprimorar a heurística exemplo.
 
-**Tarefa:**
-
 1. Execute o código acima 5 vezes.
 2. Compare:
 
-   * O número de tentativas e o tempo da busca linear.
-   * O número de tentativas e o tempo da busca aleatória com heurística.
-   * Qual das duas abordagem acerta mais?
+   - O número de tentativas e o tempo da busca linear.
+
+   - O número de tentativas e o tempo da busca aleatória com heurística.
+
+   - Qual das duas abordagem acerta mais?
 
 3. Interprete os resultados:
 
-   * A heurística sempre é mais rápida?
-   * Em qual cenário a heuristica aleatória pode ser pior?
-   * O que fazer para que a busca aleatória com heurística encontre o nonce com mais frequência?
-   * Por que usar aleatoriedade e filtros simples (como descartar hashes que não começam com '0') pode acelerar a busca por um hash válido?
+   - A heurística sempre é mais rápida?
+
+   - Em qual cenário a heuristica aleatória pode ser pior?
+   
+   - O que fazer para que a busca aleatória com heurística encontre o nonce com mais frequência?
+   
+   - Por que usar aleatoriedade e filtros simples (como descartar hashes que não começam com '0') pode acelerar a busca por um hash válido?
 
 **Pergunta para reflexão:**
 
