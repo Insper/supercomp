@@ -161,8 +161,8 @@ int main() {
 
 **Objetivo:** Analisar e aprimorar a heurística exemplo.
 
-1. Execute o código acima 5 vezes.
-2. Compare:
+Execute o código acima 5 vezes.
+Compare:
 
    - O número de tentativas e o tempo da busca linear.
 
@@ -170,7 +170,7 @@ int main() {
 
    - Qual das duas abordagem acerta mais?
 
-3. Interprete os resultados:
+Interprete os resultados:
 
    - A heurística sempre é mais rápida?
 
