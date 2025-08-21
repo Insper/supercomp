@@ -11,6 +11,10 @@
         <link rel="canonical" href="https://insper.github.io/supercomp/aulas/aula04/">
       
       
+        <link rel="prev" href="../aula03/">
+      
+      
+        <link rel="next" href="../../teoria/aula01/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -18,7 +22,7 @@
     
     
       
-        <title>Index - SuperComputação - 2025/2</title>
+        <title>Aula 04 - Heurísticas e alocação eficiente de memória - SuperComputação - 2025/2</title>
       
     
     
@@ -114,7 +118,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Index
+              Aula 04 - Heurísticas e alocação eficiente de memória
             
           </span>
         </div>
@@ -235,10 +239,12 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
+      <li class="md-tabs__item md-tabs__item--active">
         <a href="../aula01/" class="md-tabs__link">
           
   
@@ -364,24 +370,29 @@
       
   
   
+    
   
   
+  
     
     
     
     
-      
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
             
   
   
@@ -394,7 +405,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             Aulas
@@ -465,6 +476,112 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Aula 04 - Heurísticas e alocação eficiente de memória
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Aula 04 - Heurísticas e alocação eficiente de memória
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objetivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Objetivo
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#um-pouco-de-teoria-o-que-e-nonce" class="md-nav__link">
+    <span class="md-ellipsis">
+      Um pouco de teoria: O que é Nonce?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#por-que-usar-heuristicas-com-aleatoriedade" class="md-nav__link">
+    <span class="md-ellipsis">
+      Por que usar heurísticas com aleatoriedade?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#desafio" class="md-nav__link">
+    <span class="md-ellipsis">
+      Desafio!
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esta-atividade-nao-tem-entrega-bom-final-de-semana" class="md-nav__link">
+    <span class="md-ellipsis">
+      Esta atividade não tem entrega, bom final de semana!
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -651,117 +768,36 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#relembrando-o-contexto" class="md-nav__link">
+  <a href="#um-pouco-de-teoria-o-que-e-nonce" class="md-nav__link">
     <span class="md-ellipsis">
-      Relembrando o contexto
+      Um pouco de teoria: O que é Nonce?
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#aleatoriedade" class="md-nav__link">
+  <a href="#por-que-usar-heuristicas-com-aleatoriedade" class="md-nav__link">
     <span class="md-ellipsis">
-      Aleatoriedade
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Aleatoriedade">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#por-que-usar-aleatoriedade" class="md-nav__link">
-    <span class="md-ellipsis">
-      Por que usar aleatoriedade?
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#heuristicas" class="md-nav__link">
-    <span class="md-ellipsis">
-      Heurísticas
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Heurísticas">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#ideias-simples" class="md-nav__link">
-    <span class="md-ellipsis">
-      Ideias simples:
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#eficiencia-de-memoria" class="md-nav__link">
-    <span class="md-ellipsis">
-      Eficiência de Memória
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Eficiência de Memória">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#por-que-importa" class="md-nav__link">
-    <span class="md-ellipsis">
-      Por que importa?
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#melhorias-possiveis" class="md-nav__link">
-    <span class="md-ellipsis">
-      Melhorias possíveis:
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#codigo-base-inicial" class="md-nav__link">
-    <span class="md-ellipsis">
-      Código base inicial
+      Por que usar heurísticas com aleatoriedade?
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#perguntas-para-responder-no-relatorio" class="md-nav__link">
+  <a href="#desafio" class="md-nav__link">
     <span class="md-ellipsis">
-      Perguntas para responder no relatório:
+      Desafio!
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#entregaveis" class="md-nav__link">
+  <a href="#esta-atividade-nao-tem-entrega-bom-final-de-semana" class="md-nav__link">
     <span class="md-ellipsis">
-      Entregáveis:
+      Esta atividade não tem entrega, bom final de semana!
     </span>
   </a>
   
@@ -786,387 +822,180 @@
   
 
 
-  <h1>Index</h1>
+  <h1>Aula 04 - Heurísticas e alocação eficiente de memória</h1>
 
 <h2 id="objetivo">Objetivo<a class="headerlink" href="#objetivo" title="Permanent link">&para;</a></h2>
 <p>Ao final desta atividade, você será capaz de:</p>
 <ul>
-<li>Entender <strong>o que é um nonce</strong> e como ele se relaciona com o Proof of Work.</li>
+<li>Analisar <strong>heurísticas</strong> com aleatoriedade para reduzir o espaço de busca e fugir de mínimos locais.</li>
 <li>Usar <strong>aleatoriedade</strong> para guiar a busca de soluções.</li>
-<li>Implementar <strong>heurísticas</strong> para reduzir o espaço de busca.</li>
-<li>Medir e comparar desempenho em diferentes <strong>estratégias e ambientes</strong>.</li>
 </ul>
+<h2 id="um-pouco-de-teoria-o-que-e-nonce">Um pouco de teoria: O que é Nonce?<a class="headerlink" href="#um-pouco-de-teoria-o-que-e-nonce" title="Permanent link">&para;</a></h2>
+<p>Um <strong>nonce</strong> é um número que só pode ser usado uma única vez dentro de um determinado contexto. A palavra vem da expressão inglesa <em>“number used once”</em>. O nonce tem um papel fundamental dentro do mecanismo conhecido como <strong>Proof of Work</strong>.</p>
+<p>No sistema de Proof of Work, que é usado por diversas criptomoedas como o Bitcoin, o objetivo principal é garantir que novos blocos de transações só sejam adicionados à blockchain mediante a realização de um trabalho computacional significativo. Esse trabalho é feito pelos mineradores, que tentam encontrar um valor de nonce que, quando combinado com os dados de um bloco e passado por uma função hash (o SHA-256), gere um resultado que satisfaça uma condição específica de dificuldade. Essa condição normalmente exige que o hash gerado comece com um certo número de zeros, <strong>quanto mais zeros, mais difícil o problema</strong>.</p>
+<p>Para encontrar esse nonce, o minerador precisa testar diferentes valores, um a um, recalculando o hash a cada tentativa. Como a função hash é determinística, mas seu resultado parece aleatório mesmo com pequenas mudanças nos dados de entrada, não há como prever qual nonce gerará um hash válido. Isso significa que a única forma de resolver o problema é por tentativa e erro, <strong>o que exige muito poder computacional e tempo.</strong></p>
 <hr />
-<h2 id="relembrando-o-contexto"><strong>Relembrando o contexto</strong><a class="headerlink" href="#relembrando-o-contexto" title="Permanent link">&para;</a></h2>
-<p>Na mineração de criptomoedas:</p>
-<ol>
-<li>Cada bloco de transações precisa de um <strong>hash</strong> válido.</li>
-<li>O <strong>nonce</strong> é um número que o minerador altera até que o hash tenha um formato específico.</li>
-<li>Essa busca é <strong>exaustiva</strong>, o minerador testa muitos nonces até achar um válido.</li>
-</ol>
-<h2 id="aleatoriedade"><strong>Aleatoriedade</strong><a class="headerlink" href="#aleatoriedade" title="Permanent link">&para;</a></h2>
-<h3 id="por-que-usar-aleatoriedade">Por que usar aleatoriedade?<a class="headerlink" href="#por-que-usar-aleatoriedade" title="Permanent link">&para;</a></h3>
-<p>Em busca linear, você testa <strong>sempre na mesma ordem</strong> (0, 1, 2, 3...). Em ambientes distribuídos, isso pode causar <strong>sobreposição</strong>, vários nós podem testar o mesmo nonce, desperdiçando tempo, usar aleatoriedade permite <strong>espalhar tentativas</strong>, reduzindo repetições.</p>
-<ul>
-<li>Pesquise sobre <strong><code>std::mt19937</code></strong> para gerar nonces aleatórios.</li>
-</ul>
-<p>Exemplo:</p>
-<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;random&gt;</span>
-
-<span class="n">std</span><span class="o">::</span><span class="n">random_device</span><span class="w"> </span><span class="n">rd</span><span class="p">;</span>
-<span class="n">std</span><span class="o">::</span><span class="n">mt19937_64</span><span class="w"> </span><span class="nf">gen</span><span class="p">(</span><span class="n">rd</span><span class="p">());</span>
-<span class="n">std</span><span class="o">::</span><span class="n">uniform_int_distribution</span><span class="o">&lt;</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="o">&gt;</span><span class="w"> </span><span class="n">distrib</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">ULLONG_MAX</span><span class="p">);</span>
-
-<span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nb">true</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">nonce</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">distrib</span><span class="p">(</span><span class="n">gen</span><span class="p">);</span><span class="w"> </span><span class="c1">// aleatório</span>
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">tentativa</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bloco</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">nonce</span><span class="p">);</span>
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">hash</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sha256</span><span class="p">(</span><span class="n">tentativa</span><span class="p">);</span>
-
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">validaHash</span><span class="p">(</span><span class="n">hash</span><span class="p">,</span><span class="w"> </span><span class="n">dificuldade</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Nonce encontrado: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">nonce</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
-<span class="w">        </span><span class="k">break</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
-<p><strong>Experimento:</strong></p>
-<ul>
-<li>Rode versão sequencial e versão aleatória <strong>3 vezes cada</strong>.</li>
-<li>Compare tempos.</li>
-<li>Aleatoriedade ajudou ou atrapalhou?</li>
-</ul>
-<h2 id="heuristicas"><strong>Heurísticas</strong><a class="headerlink" href="#heuristicas" title="Permanent link">&para;</a></h2>
-<p>Heurísticas são regras para <strong>guiar a busca</strong> e evitar trabalho desnecessário.</p>
-<h3 id="ideias-simples">Ideias simples:<a class="headerlink" href="#ideias-simples" title="Permanent link">&para;</a></h3>
-<ul>
-<li><strong>Filtrar</strong>: Se os primeiros bytes do hash não têm um padrão parcial, pule.</li>
-<li><strong>Memorizar</strong>: Guardar nonces testados e evitar repetição.</li>
-<li><strong>Pular ranges</strong>: Se um range foi testado e não funcionou, vá para outro.</li>
-</ul>
-<p><strong>Experimento:</strong></p>
-<ul>
-<li>Compare execução <strong>com e sem</strong> essa heurística.</li>
-<li>Veja se ela reduz tempo (cuidado: guardar nonces testados consome memória).</li>
-</ul>
-<h2 id="eficiencia-de-memoria"><strong>Eficiência de Memória</strong><a class="headerlink" href="#eficiencia-de-memoria" title="Permanent link">&para;</a></h2>
-<h3 id="por-que-importa">Por que importa?<a class="headerlink" href="#por-que-importa" title="Permanent link">&para;</a></h3>
-<ul>
-<li>SHA-256 roda muitas vezes; se você aloca/desaloca memória a cada iteração, perde desempenho.</li>
-<li>Uso eficiente da memória reduz <strong>cache misses</strong>.</li>
-</ul>
-<h3 id="melhorias-possiveis">Melhorias possíveis:<a class="headerlink" href="#melhorias-possiveis" title="Permanent link">&para;</a></h3>
-<ol>
-<li><strong>Pré-alocação de strings</strong> (<code>reserve</code>):</li>
-</ol>
-<div class="highlight"><pre><span></span><code><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">tentativa</span><span class="p">;</span>
-<span class="n">tentativa</span><span class="p">.</span><span class="n">reserve</span><span class="p">(</span><span class="n">bloco</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">20</span><span class="p">);</span>
-</code></pre></div>
-<ol>
-<li><strong>Reuso de buffers</strong>:</li>
-</ol>
-<div class="highlight"><pre><span></span><code><span class="n">tentativa</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bloco</span><span class="p">;</span>
-<span class="n">tentativa</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">nonce</span><span class="p">);</span>
-</code></pre></div>
-<ol>
-<li>
-<p><strong>Evitar cópias</strong>:</p>
-</li>
-<li>
-<p>Passar strings por <strong>referência const</strong>.</p>
-</li>
-<li>Usar arrays fixos quando possível.</li>
-</ol>
-<h2 id="codigo-base-inicial"><strong>Código base inicial</strong><a class="headerlink" href="#codigo-base-inicial" title="Permanent link">&para;</a></h2>
-<p>Este é o código base para os exercícios:</p>
-<div class="highlight"><pre><span></span><code><span class="c1">// ------------------------------------------------------------</span>
-<span class="c1">// Uso:</span>
-<span class="c1">//   ./miner_base &lt;dificuldade&gt; [estrategia] [limite]</span>
-<span class="c1">//     - dificuldade: Ex.: 5 (nº de zeros à esquerda no hash)</span>
-<span class="c1">//     - estrategia : &quot;linear&quot; (padrão), &quot;random&quot;, &quot;heuristic&quot;</span>
-<span class="c1">//     - limite     : nº máx. de tentativas (só para estratégias não lineares)</span>
-<span class="c1">// Exemplos:</span>
-<span class="c1">//   ./miner_base 5</span>
-<span class="c1">//   ./miner_base 6 linear</span>
-<span class="c1">//   ./miner_base 5 random 2000000</span>
-<span class="c1">//</span>
-<span class="c1">// Compilação:</span>
-<span class="c1">//   g++ miner_base.cpp -o miner_base -lssl -lcrypto</span>
-<span class="c1">// ------------------------------------------------------------</span>
-
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Quer saber mais? Assista <a href="https://www.youtube.com/watch?v=diwHGOA1_c4&amp;t=6s">esse vídeo sobre nonce</a></p>
+</div>
+<h2 id="por-que-usar-heuristicas-com-aleatoriedade">Por que usar heurísticas com aleatoriedade?<a class="headerlink" href="#por-que-usar-heuristicas-com-aleatoriedade" title="Permanent link">&para;</a></h2>
+<p>Em contextos como Proof of Work, usar heurísticas com aleatoriedade é interessante porque o espaço de busca é enorme e imprevisível. A função hash se comporta como uma caixa-preta: pequenas mudanças no nonce geram resultados totalmente diferentes, sem padrão aparente. Isso torna estratégias determinísticas (como testar de 0 em diante) ineficientes e vulneráveis a colisões entre mineradores.</p>
+<p>A aleatoriedade permite explorar regiões diferentes do espaço de busca, reduzindo repetição de esforços e aumentando a chance de sucesso. Além disso, torna o processo menos previsível, dificultando ataques ou manipulações. Em um problema onde não há como saber onde está a solução, tentar caminhos variados aleatoriamente é uma boa forma de encontrar uma resposta mais rápido.</p>
+<p>Analise o código exemplo <code>mineracao.cpp</code></p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;random&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;chrono&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iomanip&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;sstream&gt;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;chrono&gt;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdexcept&gt;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;openssl/evp.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;functional&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;climits&gt;</span>
 
-<span class="c1">// ========================= SHA-256 ==========================</span>
-<span class="c1">// Calcula o SHA-256 de uma string e devolve a saída em hexadecimal.</span>
+<span class="c1">// -------------------------------------------------------------</span>
+<span class="c1">// - Retorna string hex com 16 bytes (64 bits) -&gt; 16 dígitos hex em ambientes 64 bits.</span>
+<span class="c1">// -------------------------------------------------------------</span>
 <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="nf">sha256</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// Cria o contexto do algoritmo</span>
-<span class="w">    </span><span class="n">EVP_MD_CTX</span><span class="o">*</span><span class="w"> </span><span class="n">ctx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EVP_MD_CTX_new</span><span class="p">();</span>
-<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">EVP_MD</span><span class="o">*</span><span class="w"> </span><span class="n">md</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EVP_sha256</span><span class="p">();</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">hash</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">hasher</span><span class="p">;</span><span class="w">     </span><span class="c1">// Functor de hash da STL</span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hasher</span><span class="p">(</span><span class="n">input</span><span class="p">);</span><span class="w">          </span><span class="c1">// Aplica o hash de 64 bits à string</span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="o">&gt;</span><span class="p">(</span><span class="n">h</span><span class="p">);</span><span class="w"> </span><span class="c1">// Normaliza para 64 bits</span>
 
-<span class="w">    </span><span class="c1">// Buffers auxiliares</span>
-<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">hash</span><span class="p">[</span><span class="n">EVP_MAX_MD_SIZE</span><span class="p">];</span><span class="w"> </span><span class="c1">// onde o hash bruto (bytes) será escrito</span>
-<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">             </span><span class="c1">// número de bytes de hash realmente gerados</span>
-
-<span class="w">    </span><span class="c1">//  Executa as etapas do hash</span>
-<span class="w">    </span><span class="n">EVP_DigestInit_ex</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="n">md</span><span class="p">,</span><span class="w"> </span><span class="k">nullptr</span><span class="p">);</span><span class="w">                    </span><span class="c1">// inicia SHA-256</span>
-<span class="w">    </span><span class="n">EVP_DigestUpdate</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="n">input</span><span class="p">.</span><span class="n">c_str</span><span class="p">(),</span><span class="w"> </span><span class="n">input</span><span class="p">.</span><span class="n">size</span><span class="p">());</span><span class="w">     </span><span class="c1">// alimenta com dados</span>
-<span class="w">    </span><span class="n">EVP_DigestFinal_ex</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="n">hash</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">length</span><span class="p">);</span><span class="w">                 </span><span class="c1">// finaliza e escreve em &#39;hash&#39;</span>
-
-<span class="w">    </span><span class="c1">// Libera o contexto</span>
-<span class="w">    </span><span class="n">EVP_MD_CTX_free</span><span class="p">(</span><span class="n">ctx</span><span class="p">);</span>
-
-<span class="w">    </span><span class="c1">// Converte bytes -&gt; string hexadecimal (2 dígitos por byte)</span>
+<span class="w">    </span><span class="c1">// Converte o valor inteiro para string hexadecimal com padding à esquerda</span>
+<span class="w">    </span><span class="c1">// Para 64 bits -&gt; 16 dígitos hex (2 por byte * 8 bytes)</span>
 <span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">ostringstream</span><span class="w"> </span><span class="n">os</span><span class="p">;</span>
-<span class="w">    </span><span class="n">os</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">hex</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">setfill</span><span class="p">(</span><span class="sc">&#39;0&#39;</span><span class="p">);</span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">length</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">os</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">setw</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">hash</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">os</span><span class="p">.</span><span class="n">str</span><span class="p">();</span><span class="w"> </span><span class="c1">// 64 caracteres hex para SHA-256</span>
+<span class="w">    </span><span class="n">os</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">hex</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">nouppercase</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">setfill</span><span class="p">(</span><span class="sc">&#39;0&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">setw</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">v</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">os</span><span class="p">.</span><span class="n">str</span><span class="p">();</span><span class="w"> </span><span class="c1">// Ex.: &quot;00af3c...&quot;; comprimento típico: 16 chars em 64 bits</span>
 <span class="p">}</span>
 
-<span class="c1">// =================== Checagem de dificuldade =================</span>
-<span class="c1">// Verifica se o hash (em hex) começa com N zeros.</span>
-<span class="c1">// Ex.: zeros=5 → hash deve iniciar com &quot;00000&quot;.</span>
-<span class="kt">bool</span><span class="w"> </span><span class="nf">has_leading_zeros_hex</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">hash</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">zeros</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">zeros</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w">      </span><span class="c1">// dificuldade 0 sempre &quot;passa&quot;</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">zeros</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">64</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w">     </span><span class="c1">// limite do SHA-256 em hex</span>
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">alvo</span><span class="p">(</span><span class="n">zeros</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;0&#39;</span><span class="p">);</span><span class="w">     </span><span class="c1">// &quot;000...0&quot; (zeros vezes)</span>
-<span class="w">    </span><span class="c1">// rfind(sub, 0) == 0 → &#39;sub&#39; aparece na posição 0 (início da string)</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">hash</span><span class="p">.</span><span class="n">rfind</span><span class="p">(</span><span class="n">alvo</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="c1">// -------------------------------------------------------------</span>
+<span class="c1">// Verifica se o &quot;hash&quot; (string hex) começa com &#39;dificuldade&#39; zeros.</span>
+<span class="c1">// -------------------------------------------------------------</span>
+<span class="kt">bool</span><span class="w"> </span><span class="nf">validaHash</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">hash</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">dificuldade</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">dificuldade</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w">               </span><span class="c1">// dificuldade 0 sempre passa</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">dificuldade</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">hash</span><span class="p">.</span><span class="n">size</span><span class="p">()))</span><span class="w"> </span><span class="c1">// não pode exigir mais zeros do que o tamanho do hash</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">hash</span><span class="p">.</span><span class="n">rfind</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="n">dificuldade</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;0&#39;</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="c1">// true se começa com zeros</span>
 <span class="p">}</span>
 
-<span class="c1">// ================ Marcação de tempo para logs =================</span>
-<span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="nf">now_iso8601</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="o">::</span><span class="nn">chrono</span><span class="p">;</span>
-<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">now</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="n">system_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
-<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="kt">time_t</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">system_clock</span><span class="o">::</span><span class="n">to_time_t</span><span class="p">(</span><span class="n">now</span><span class="p">);</span>
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">tm</span><span class="w"> </span><span class="n">tm</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">std</span><span class="o">::</span><span class="n">localtime</span><span class="p">(</span><span class="o">&amp;</span><span class="n">t</span><span class="p">);</span>
+<span class="c1">// -------------------------------------------------------------</span>
+<span class="c1">// Estratégia 1: Busca linear — testa nonces em ordem: 0, 1, 2, ...</span>
+<span class="c1">// -------------------------------------------------------------</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">minerar_linear</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">bloco</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">dificuldade</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span><span class="w"> </span><span class="c1">// Marca início do cronômetro</span>
 
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">ostringstream</span><span class="w"> </span><span class="n">os</span><span class="p">;</span>
-<span class="w">    </span><span class="n">os</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">put_time</span><span class="p">(</span><span class="o">&amp;</span><span class="n">tm</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;%Y-%m-%d %H:%M:%S&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">os</span><span class="p">.</span><span class="n">str</span><span class="p">();</span>
-<span class="p">}</span>
-
-<span class="c1">// =================== Modelos simples de dados =================</span>
-<span class="k">enum</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Strategy</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Linear</span><span class="p">,</span><span class="w"> </span><span class="n">Random</span><span class="p">,</span><span class="w"> </span><span class="n">Heuristic</span><span class="p">,</span><span class="w"> </span><span class="n">MemOpt</span><span class="w"> </span><span class="p">};</span>
-
-<span class="k">struct</span><span class="w"> </span><span class="nc">Config</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">bloco</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;dados_transacao&quot;</span><span class="p">;</span><span class="w"> </span><span class="c1">// conteúdo simplificado do bloco</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">dificuldade</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w">                 </span><span class="c1">// zeros à esquerda</span>
-<span class="w">    </span><span class="n">Strategy</span><span class="w"> </span><span class="n">strategy</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="n">Strategy</span><span class="o">::</span><span class="n">Linear</span><span class="p">;</span><span class="w"> </span><span class="c1">// qual estratégia usar</span>
-<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">max_trials</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">          </span><span class="c1">// limite p/ estratégias não lineares</span>
-<span class="p">};</span>
-
-<span class="k">struct</span><span class="w"> </span><span class="nc">Result</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">found</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w">                    </span><span class="c1">// achou um nonce válido?</span>
-<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">nonce</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">          </span><span class="c1">// nonce encontrado</span>
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">hash</span><span class="p">;</span><span class="w">                      </span><span class="c1">// hash correspondente</span>
-<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">iters</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">          </span><span class="c1">// nº de tentativas</span>
-<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">seconds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span><span class="w">                  </span><span class="c1">// tempo total (s)</span>
-<span class="p">};</span>
-
-<span class="c1">// =================== Estratégia LINEAR (implementada) ===================</span>
-<span class="c1">// Busca exaustiva: testa nonce = 0, 1, 2, ...</span>
-<span class="n">Result</span><span class="w"> </span><span class="nf">mine_linear</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Config</span><span class="o">&amp;</span><span class="w"> </span><span class="n">cfg</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">clock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="p">;</span>
-<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">t0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
-
-<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">nonce</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">iters</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">nonce</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">        </span><span class="c1">// Começa do 0</span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">tentativas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">   </span><span class="c1">// Contador de tentativas</span>
 
 <span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nb">true</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="c1">// Concatena &quot;bloco || nonce&quot; e calcula SHA-256</span>
-<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">tentativa</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cfg</span><span class="p">.</span><span class="n">bloco</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">nonce</span><span class="p">);</span>
-<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sha256</span><span class="p">(</span><span class="n">tentativa</span><span class="p">);</span>
-<span class="w">        </span><span class="o">++</span><span class="n">iters</span><span class="p">;</span>
+<span class="w">        </span><span class="c1">// Monta a entrada &quot;bloco || nonce&quot;</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">tentativa</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bloco</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">nonce</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">// Calcula o &quot;hash&quot; da tentativa</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">hash</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sha256</span><span class="p">(</span><span class="n">tentativa</span><span class="p">);</span>
+<span class="w">        </span><span class="o">++</span><span class="n">tentativas</span><span class="p">;</span>
 
-<span class="w">        </span><span class="c1">// Verifica se o hash começa com N zeros</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">has_leading_zeros_hex</span><span class="p">(</span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="n">cfg</span><span class="p">.</span><span class="n">dificuldade</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
-<span class="w">            </span><span class="kt">double</span><span class="w"> </span><span class="n">secs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">duration</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">t1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">t0</span><span class="p">).</span><span class="n">count</span><span class="p">();</span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="p">{</span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="n">nonce</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="n">iters</span><span class="p">,</span><span class="w"> </span><span class="n">secs</span><span class="p">};</span>
+<span class="w">        </span><span class="c1">// Se atendeu à dificuldade (começa com N zeros), reporta e encerra</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">validaHash</span><span class="p">(</span><span class="n">hash</span><span class="p">,</span><span class="w"> </span><span class="n">dificuldade</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">auto</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+<span class="w">            </span><span class="kt">double</span><span class="w"> </span><span class="n">tempo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">duration</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">end</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start</span><span class="p">).</span><span class="n">count</span><span class="p">();</span>
+<span class="w">            </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;[LINEAR] Nonce: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">nonce</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">Hash: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">hash</span>
+<span class="w">                      </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">Tentativas: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">tentativas</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">Tempo: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">tempo</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;s</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span>
 <span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="o">++</span><span class="n">nonce</span><span class="p">;</span><span class="w"> </span><span class="c1">// tenta o próximo</span>
+<span class="w">        </span><span class="o">++</span><span class="n">nonce</span><span class="p">;</span><span class="w"> </span><span class="c1">// Tenta o próximo nonce</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 
-<span class="n">Result</span><span class="w"> </span><span class="nf">mine_random</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Config</span><span class="o">&amp;</span><span class="w"> </span><span class="n">cfg</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">clock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="p">;</span>
-<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">t0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+<span class="c1">// -------------------------------------------------------------</span>
+<span class="c1">// Estratégia 2: Busca aleatória com heurística simples</span>
+<span class="c1">// - Gera nonces aleatórios em 64 bits</span>
+<span class="c1">// - Heurística: só segue para validação completa se o hash começar com &#39;0&#39;</span>
+<span class="c1">// - maxTentativas: evita loop &quot;infinito&quot; </span>
+<span class="c1">// -------------------------------------------------------------</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">minerar_random_heuristica</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">bloco</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">dificuldade</span><span class="p">,</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">maxTentativas</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span><span class="w"> </span><span class="c1">// Cronômetro</span>
 
-<span class="w">    </span><span class="c1">// TODO: implementar busca com nonces aleatórios.</span>
-<span class="w">    </span><span class="c1">// Pesquise sobre:</span>
-<span class="w">    </span><span class="c1">//   - std::mt19937_64</span>
-<span class="w">    </span><span class="c1">//   - std::uniform_int_distribution</span>
+<span class="w">    </span><span class="c1">// Preparação do gerador aleatório:</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">random_device</span><span class="w"> </span><span class="n">rd</span><span class="p">;</span><span class="w">                          </span><span class="c1">// Fonte de entropia (seed)</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">mt19937_64</span><span class="w"> </span><span class="n">gen</span><span class="p">(</span><span class="n">rd</span><span class="p">());</span><span class="w">                      </span><span class="c1">// Gerador de aleatórios</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">uniform_int_distribution</span><span class="o">&lt;</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="o">&gt;</span><span class="w"> </span><span class="n">distrib</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">ULLONG_MAX</span><span class="p">);</span><span class="w"> </span><span class="c1">// Uniforme em [0, 2^64-1]</span>
 
-<span class="w">    </span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">cfg</span><span class="p">;</span><span class="w"> </span><span class="c1">// evita warning de parâmetro não usado</span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">tentativas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="c1">// Contador de tentativas</span>
 
-<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
-<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">secs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">duration</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">t1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">t0</span><span class="p">).</span><span class="n">count</span><span class="p">();</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">{</span><span class="nb">false</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">secs</span><span class="p">};</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">tentativas</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">maxTentativas</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Sorteia um nonce (exploração aleatória do espaço de busca)</span>
+<span class="w">        </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">nonce</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">distrib</span><span class="p">(</span><span class="n">gen</span><span class="p">);</span>
 
-<span class="n">Result</span><span class="w"> </span><span class="nf">mine_heuristic</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Config</span><span class="o">&amp;</span><span class="w"> </span><span class="n">cfg</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">clock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="p">;</span>
-<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">t0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+<span class="w">        </span><span class="c1">// Monta a tentativa e calcula o hash simulado</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">tentativa</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bloco</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">nonce</span><span class="p">);</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">hash</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sha256</span><span class="p">(</span><span class="n">tentativa</span><span class="p">);</span>
+<span class="w">        </span><span class="o">++</span><span class="n">tentativas</span><span class="p">;</span>
 
-<span class="w">    </span><span class="c1">// TODO: implementar alguma heurística de filtro para nonces já utilizados.</span>
-<span class="w">    </span><span class="c1">// Pense sobre:</span>
-<span class="w">    </span><span class="c1">//   - pré-filtro por byte do hash antes de checar tudo</span>
-<span class="w">    </span><span class="c1">//   - evitar repetição de nonces já testados</span>
-<span class="w">    </span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">cfg</span><span class="p">;</span>
+<span class="w">        </span><span class="c1">// Heurística: se o primeiro dígito não é &#39;0&#39;, provavelmente não atende a dificuldades maiores</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">hash</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="sc">&#39;0&#39;</span><span class="p">)</span><span class="w"> </span><span class="k">continue</span><span class="p">;</span>
 
-<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
-<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">secs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">duration</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">t1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">t0</span><span class="p">).</span><span class="n">count</span><span class="p">();</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">{</span><span class="nb">false</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">secs</span><span class="p">};</span>
-<span class="p">}</span>
-
-<span class="c1">// =================== Seletor de estratégia ===================</span>
-<span class="n">Result</span><span class="w"> </span><span class="nf">mine</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Config</span><span class="o">&amp;</span><span class="w"> </span><span class="n">cfg</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">cfg</span><span class="p">.</span><span class="n">strategy</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="no">Strategy</span><span class="o">::</span><span class="no">Linear</span><span class="p">:</span><span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="n">mine_linear</span><span class="p">(</span><span class="n">cfg</span><span class="p">);</span>
-<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="no">Strategy</span><span class="o">::</span><span class="no">Random</span><span class="p">:</span><span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="n">mine_random</span><span class="p">(</span><span class="n">cfg</span><span class="p">);</span>
-<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="no">Strategy</span><span class="o">::</span><span class="no">Heuristic</span><span class="p">:</span><span class="k">return</span><span class="w"> </span><span class="n">mine_heuristic</span><span class="p">(</span><span class="n">cfg</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">{};</span><span class="w"> </span><span class="c1">// fallback</span>
-<span class="p">}</span>
-
-<span class="c1">// =================== Parse de texto -&gt; Strategy ===================</span>
-<span class="n">Strategy</span><span class="w"> </span><span class="nf">parse_strategy</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;linear&quot;</span><span class="p">)</span><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Strategy</span><span class="o">::</span><span class="n">Linear</span><span class="p">;</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;random&quot;</span><span class="p">)</span><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Strategy</span><span class="o">::</span><span class="n">Random</span><span class="p">;</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;heuristic&quot;</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">Strategy</span><span class="o">::</span><span class="n">Heuristic</span><span class="p">;</span>
-<span class="w">    </span><span class="k">throw</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">invalid_argument</span><span class="p">(</span><span class="s">&quot;Estrategia invalida: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">s</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="c1">// =================== Impressão ===================</span>
-<span class="kt">void</span><span class="w"> </span><span class="nf">print_header</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Config</span><span class="o">&amp;</span><span class="w"> </span><span class="n">cfg</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;=== Mineracao PoW (base) ===</span><span class="se">\n</span><span class="s">&quot;</span>
-<span class="w">              </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Iniciado em: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">now_iso8601</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span>
-<span class="w">              </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Bloco      : &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">cfg</span><span class="p">.</span><span class="n">bloco</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span>
-<span class="w">              </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Dificuldade: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">cfg</span><span class="p">.</span><span class="n">dificuldade</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; zeros</span><span class="se">\n</span><span class="s">&quot;</span>
-<span class="w">              </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Estrategia : &quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">cfg</span><span class="p">.</span><span class="n">strategy</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="no">Strategy</span><span class="o">::</span><span class="no">Linear</span><span class="p">:</span><span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;linear</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span><span class="w">    </span><span class="k">break</span><span class="p">;</span>
-<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="no">Strategy</span><span class="o">::</span><span class="no">Random</span><span class="p">:</span><span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;random (STUB)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span><span class="w">    </span><span class="k">break</span><span class="p">;</span>
-<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="no">Strategy</span><span class="o">::</span><span class="no">Heuristic</span><span class="p">:</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;heuristic (STUB)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">break</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cfg</span><span class="p">.</span><span class="n">strategy</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">Strategy</span><span class="o">::</span><span class="n">Linear</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Limite Tent.: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">cfg</span><span class="p">.</span><span class="n">max_trials</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;=============================</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="kt">void</span><span class="w"> </span><span class="nf">print_result</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Result</span><span class="o">&amp;</span><span class="w"> </span><span class="n">r</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">found</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;STATUS  : ENCONTRADO</span><span class="se">\n</span><span class="s">&quot;</span>
-<span class="w">                  </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;NONCE   : &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">r</span><span class="p">.</span><span class="n">nonce</span><span class="w">   </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span>
-<span class="w">                  </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;HASH    : &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">r</span><span class="p">.</span><span class="n">hash</span><span class="w">    </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span>
-<span class="w">                  </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;ITERS   : &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">r</span><span class="p">.</span><span class="n">iters</span><span class="w">   </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span>
-<span class="w">                  </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;TEMPO(s): &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">r</span><span class="p">.</span><span class="n">seconds</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;STATUS  : NAO ENCONTRADO (stub)</span><span class="se">\n</span><span class="s">&quot;</span>
-<span class="w">                  </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;ITERS   : &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">r</span><span class="p">.</span><span class="n">iters</span><span class="w">   </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span>
-<span class="w">                  </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;TEMPO(s): &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">r</span><span class="p">.</span><span class="n">seconds</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
-
-<span class="kt">void</span><span class="w"> </span><span class="nf">print_usage</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">prog</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Uso: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">prog</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &lt;dificuldade 0..64&gt; [estrategia] [limite]</span><span class="se">\n</span><span class="s">&quot;</span>
-<span class="w">              </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;  estrategia: linear | random | heuristic </span><span class="se">\n</span><span class="s">&quot;</span>
-<span class="w">              </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;  limite    : inteiro &gt;= 0 (apenas para random/heuristic)</span><span class="se">\n</span><span class="s">&quot;</span>
-<span class="w">              </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Exemplos:</span><span class="se">\n</span><span class="s">&quot;</span>
-<span class="w">              </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;  &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">prog</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; 5</span><span class="se">\n</span><span class="s">&quot;</span>
-<span class="w">              </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;  &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">prog</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; 6 linear</span><span class="se">\n</span><span class="s">&quot;</span>
-<span class="w">              </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;  &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">prog</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; 5 random 2000000</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="c1">// =================== main ===================</span>
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">**</span><span class="w"> </span><span class="n">argv</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="c1">// 1) Leitura/validação dos argumentos</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">argc</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">print_usage</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">        </span><span class="c1">// Verificação completa do critério de dificuldade</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">validaHash</span><span class="p">(</span><span class="n">hash</span><span class="p">,</span><span class="w"> </span><span class="n">dificuldade</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">auto</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+<span class="w">            </span><span class="kt">double</span><span class="w"> </span><span class="n">tempo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">duration</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">end</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start</span><span class="p">).</span><span class="n">count</span><span class="p">();</span>
+<span class="w">            </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;[HEURISTICA-RANDOM] Nonce: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">nonce</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">Hash: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">hash</span>
+<span class="w">                      </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">Tentativas: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">tentativas</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">Tempo: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">tempo</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;s</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">            </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">// Sucesso: encerra a função</span>
 <span class="w">        </span><span class="p">}</span>
-
-<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">dificuldade</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
-<span class="w">        </span><span class="p">{</span>
-<span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">stoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">d</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">64</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Dificuldade invalida (0..64).</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
-<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
-<span class="w">            </span><span class="p">}</span>
-<span class="w">            </span><span class="n">dificuldade</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">d</span><span class="p">;</span>
-<span class="w">        </span><span class="p">}</span>
-
-<span class="w">        </span><span class="n">Strategy</span><span class="w"> </span><span class="n">strat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Strategy</span><span class="o">::</span><span class="n">Linear</span><span class="p">;</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">argc</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">strat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">parse_strategy</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
-<span class="w">        </span><span class="p">}</span>
-
-<span class="w">        </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">limite</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0ULL</span><span class="p">;</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">argc</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">l</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">stoll</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">]);</span>
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">l</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Limite invalido (&gt;= 0).</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
-<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
-<span class="w">            </span><span class="p">}</span>
-<span class="w">            </span><span class="n">limite</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="o">&gt;</span><span class="p">(</span><span class="n">l</span><span class="p">);</span>
-<span class="w">        </span><span class="p">}</span>
-
-<span class="w">        </span><span class="c1">// 2) Monta a configuração</span>
-<span class="w">        </span><span class="n">Config</span><span class="w"> </span><span class="n">cfg</span><span class="p">;</span>
-<span class="w">        </span><span class="n">cfg</span><span class="p">.</span><span class="n">bloco</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;dados_transacao&quot;</span><span class="p">;</span>
-<span class="w">        </span><span class="n">cfg</span><span class="p">.</span><span class="n">dificuldade</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dificuldade</span><span class="p">;</span>
-<span class="w">        </span><span class="n">cfg</span><span class="p">.</span><span class="n">strategy</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="n">strat</span><span class="p">;</span>
-<span class="w">        </span><span class="n">cfg</span><span class="p">.</span><span class="n">max_trials</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">limite</span><span class="p">;</span>
-
-<span class="w">        </span><span class="c1">// 3) Roda a mineração</span>
-<span class="w">        </span><span class="n">print_header</span><span class="p">(</span><span class="n">cfg</span><span class="p">);</span>
-<span class="w">        </span><span class="n">Result</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mine</span><span class="p">(</span><span class="n">cfg</span><span class="p">);</span>
-<span class="w">        </span><span class="n">print_result</span><span class="p">(</span><span class="n">r</span><span class="p">);</span>
-
-<span class="w">        </span><span class="c1">// Saída de processo: 0 (ok) | 2 (não encontrou nas estratégias não lineares)</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">r</span><span class="p">.</span><span class="n">found</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">exception</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Erro: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="n">what</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
-<span class="w">        </span><span class="n">print_usage</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Se não encontrou dentro do limite de tentativas, informa</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;[HEURISTICA-RANDOM] Não encontrou nonce válido em &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">maxTentativas</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; tentativas.</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// -------------------------------------------------------------</span>
+<span class="c1">// main: executa as duas estratégias para comparação </span>
+<span class="c1">// -------------------------------------------------------------</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">bloco</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;transacao_simples&quot;</span><span class="p">;</span><span class="w"> </span><span class="c1">// Simulação de transação</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">dificuldade</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w">                     </span><span class="c1">// Nº de zeros à esquerda no hash simulado</span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">limite_random</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">500000</span><span class="p">;</span><span class="w"> </span><span class="c1">// Limite de tentativas para a estratégia aleatória</span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;=== Mineração  | dificuldade = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">dificuldade</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; ===</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Estratégia linear </span>
+<span class="w">    </span><span class="n">minerar_linear</span><span class="p">(</span><span class="n">bloco</span><span class="p">,</span><span class="w"> </span><span class="n">dificuldade</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Estratégia aleatória + heurística</span>
+<span class="w">    </span><span class="n">minerar_random_heuristica</span><span class="p">(</span><span class="n">bloco</span><span class="p">,</span><span class="w"> </span><span class="n">dificuldade</span><span class="p">,</span><span class="w"> </span><span class="n">limite_random</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span>
 <span class="p">}</span>
 </code></pre></div>
-<h2 id="perguntas-para-responder-no-relatorio">Perguntas para responder no relatório:<a class="headerlink" href="#perguntas-para-responder-no-relatorio" title="Permanent link">&para;</a></h2>
-<ul>
-<li>Aleatoriedade ajudou, atrapalhou ou não mudou nada?</li>
-<li>Heurística fez diferença?</li>
-<li>Memória otimizada trouxe ganhos?</li>
-<li>Entre as versões qual apresentou o menor tempo médio? Por </li>
-</ul>
-<h2 id="entregaveis">Entregáveis:<a class="headerlink" href="#entregaveis" title="Permanent link">&para;</a></h2>
-<p>Gere um PDF que contenha obrigatoriamente:</p>
-<ul>
+<h2 id="desafio">Desafio!<a class="headerlink" href="#desafio" title="Permanent link">&para;</a></h2>
+<p><strong>Objetivo:</strong> Analisar e aprimorar a heurística exemplo.</p>
+<p><strong>Tarefa:</strong></p>
+<ol>
+<li>Execute o código acima 5 vezes.</li>
 <li>
-<p>Identificação: seu nome completo.</p>
+<p>Compare:</p>
 </li>
 <li>
-<p>Descrição breve do ambiente de teste: partição do Franky, dificuldade (nº de zeros), nº de repetições por versão.</p>
+<p>O número de tentativas e o tempo da busca linear.</p>
+</li>
+<li>O número de tentativas e o tempo da busca aleatória com heurística.</li>
+<li>
+<p>Qual das duas abordagem acerta mais?</p>
 </li>
 <li>
-<p>Tabelas comparativas com os resultados (por versão e dificuldade).</p>
+<p>Interprete os resultados:</p>
 </li>
 <li>
-<p>Gráficos comparativos (ex.: tempo × versão; opcionalmente boxplot por versão).</p>
+<p>A heurística sempre é mais rápida?</p>
 </li>
-<li>
-<p>Respostas às perguntas acima, com análise crítica baseada nos resultados obtidos.</p>
-</li>
-</ul>
+<li>Em qual cenário a heuristica aleatória pode ser pior?</li>
+<li>O que fazer para que a busca aleatória com heurística encontre o nonce com mais frequência?</li>
+<li>Por que usar aleatoriedade e filtros simples (como descartar hashes que não começam com '0') pode acelerar a busca por um hash válido?</li>
+</ol>
+<p><strong>Pergunta para reflexão:</strong></p>
+<blockquote>
+<p><em>Quais melhorias poderiam ser implementadas neste algoritmo para ter uma heuristica mais eficiente?</em></p>
+</blockquote>
+<h2 id="esta-atividade-nao-tem-entrega-bom-final-de-semana"><strong>Esta atividade não tem entrega, bom final de semana!</strong><a class="headerlink" href="#esta-atividade-nao-tem-entrega-bom-final-de-semana" title="Permanent link">&para;</a></h2>
 
 
 

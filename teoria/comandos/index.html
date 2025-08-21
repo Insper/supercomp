@@ -474,6 +474,29 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/aula04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Aula 04 - Heurísticas e alocação eficiente de memória
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1081,18 +1104,19 @@
 </table>
 <p><strong>Exemplos</strong></p>
 <p>Pedido simples de execução de tarefa para o SLURM
-<code>srun --nodelist=compute10 --partition=normal --ntasks=1 --pty bash</code>
+<div class="highlight"><pre><span></span><code>srun<span class="w"> </span>--nodelist<span class="o">=</span>compute10<span class="w"> </span>--partition<span class="o">=</span>normal<span class="w"> </span>--ntasks<span class="o">=</span><span class="m">1</span><span class="w"> </span>--pty<span class="w"> </span>bash
+</code></pre></div>
 --srun: Comando SLURM para executar tarefas 
 --nodelist=compute10: força o SLURM a alocar exatamente esse nó.
 --partition=normal: indica a partição à qual o nó pertence.
 --ntasks=1: pede uma tarefa.
 --pty bash: pede um terminal dentro do nó.</p>
 <p>Pedido sem especificar o nó exato:
-<code>srun --partition=normal --ntasks=1 --pty bash</code></p>
+<div class="highlight"><pre><span></span><code>srun<span class="w"> </span>--partition<span class="o">=</span>normal<span class="w"> </span>--ntasks<span class="o">=</span><span class="m">1</span><span class="w"> </span>--pty<span class="w"> </span>bash
+</code></pre></div></p>
 <p>Pedido com varias tasks para executar seu programa direto:
-<code>srun --partition=normal --ntasks=4 ./meu_programa_paralelo</code></p>
-<p>Ótima pergunta! Com o comando <code>srun</code>, você pode <strong>pedir ao SLURM recursos de computação específicos</strong> — como número de tarefas, CPUs, memória, tempo de execução, GPUs, nós específicos e muito mais.</p>
-<p>Claro! Aqui está o <strong>resumo equivalente para o <code>sbatch</code></strong>, seguindo o mesmo formato que você usou para o <code>srun</code>:</p>
+<div class="highlight"><pre><span></span><code>srun<span class="w"> </span>--partition<span class="o">=</span>normal<span class="w"> </span>--ntasks<span class="o">=</span><span class="m">4</span><span class="w"> </span>./meu_programa_paralelo
+</code></pre></div></p>
 <h3 id="principais-recursos-que-voce-pode-pedir-com-sbatch">Principais recursos que você pode pedir com <code>sbatch</code><a class="headerlink" href="#principais-recursos-que-voce-pode-pedir-com-sbatch" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -1227,53 +1251,37 @@
 </tbody>
 </table>
 <h3 id="ver-todos-os-nos-com-status-detalhado">Ver todos os nós com status detalhado<a class="headerlink" href="#ver-todos-os-nos-com-status-detalhado" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>sinfo<span class="w"> </span>-N<span class="w"> </span>-l
+<p><div class="highlight"><pre><span></span><code>sinfo<span class="w"> </span>-N<span class="w"> </span>-l
 </code></pre></div>
-<blockquote>
-<p>Útil para ver quais nós estão <strong>idle, alocados, down ou drain</strong>.</p>
-</blockquote>
+Útil para ver quais nós estão <strong>idle, alocados, down ou drain</strong>.</p>
 <h3 id="ver-informacoes-completas-do-no-compute24">Ver informações completas do nó <code>compute24</code><a class="headerlink" href="#ver-informacoes-completas-do-no-compute24" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>scontrol<span class="w"> </span>show<span class="w"> </span>node<span class="w"> </span>compute24
+<p><div class="highlight"><pre><span></span><code>scontrol<span class="w"> </span>show<span class="w"> </span>node<span class="w"> </span>compute24
 </code></pre></div>
-<blockquote>
-<p>Mostra: memória total e usada, CPUs alocadas, jobs em execução, estado (<code>IDLE</code>, <code>ALLOCATED</code>, etc.).</p>
-</blockquote>
+Mostra: memória total e usada, CPUs alocadas, jobs em execução, estado (<code>IDLE</code>, <code>ALLOCATED</code>, etc.).</p>
 <h3 id="ver-configuracoes-de-uma-particao-especifica">Ver configurações de uma partição especifica<a class="headerlink" href="#ver-configuracoes-de-uma-particao-especifica" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>scontrol<span class="w"> </span>show<span class="w"> </span>partition<span class="w"> </span>normal
+<p><div class="highlight"><pre><span></span><code>scontrol<span class="w"> </span>show<span class="w"> </span>partition<span class="w"> </span>normal
 </code></pre></div>
-<blockquote>
-<p>Mostra: tempo máximo de job, número de nós, limites de memória/CPU, GPUs, estado da fila.</p>
-</blockquote>
+Mostra: tempo máximo de job, número de nós, limites de memória/CPU, GPUs, estado da fila.</p>
 <h3 id="ver-jobs-no-sistema">Ver jobs no sistema<a class="headerlink" href="#ver-jobs-no-sistema" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>squeue
+<p><div class="highlight"><pre><span></span><code>squeue
 </code></pre></div>
-<blockquote>
-<p>Mostra todos os jobs na fila e em execução com status <code>R</code> (running), <code>PD</code> (pending), etc.</p>
-</blockquote>
+Mostra todos os jobs na fila e em execução com status <code>R</code> (running), <code>PD</code> (pending), etc.</p>
 <h3 id="ver-so-os-jobs-da-usuaria-liciascl">Ver só os jobs da usuária <code>liciascl</code><a class="headerlink" href="#ver-so-os-jobs-da-usuaria-liciascl" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>squeue<span class="w"> </span>-u<span class="w"> </span>liciascl
+<p><div class="highlight"><pre><span></span><code>squeue<span class="w"> </span>-u<span class="w"> </span>liciascl
 </code></pre></div>
-<blockquote>
-<p>Útil para depurar seus próprios jobs (ID, partição, status, tempo, nó, etc.)</p>
-</blockquote>
+Útil para depurar seus próprios jobs (ID, partição, status, tempo, nó, etc.)</p>
 <h3 id="ver-informacoes-completas-de-um-job-especifico">Ver informações completas de um job específico<a class="headerlink" href="#ver-informacoes-completas-de-um-job-especifico" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>scontrol<span class="w"> </span>show<span class="w"> </span>job<span class="w"> </span><span class="m">12345</span>
+<p><div class="highlight"><pre><span></span><code>scontrol<span class="w"> </span>show<span class="w"> </span>job<span class="w"> </span><span class="m">12345</span>
 </code></pre></div>
-<blockquote>
-<p>Mostra: usuário, partição, CPUs/nós alocados, prioridade, estado, tempo usado, comando enviado.</p>
-</blockquote>
+Mostra: usuário, partição, CPUs/nós alocados, prioridade, estado, tempo usado, comando enviado.</p>
 <h3 id="cancelar-job-com-id-12345">Cancelar job com ID <code>12345</code><a class="headerlink" href="#cancelar-job-com-id-12345" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>scancel<span class="w"> </span><span class="m">12345</span>
+<p><div class="highlight"><pre><span></span><code>scancel<span class="w"> </span><span class="m">12345</span>
 </code></pre></div>
-<blockquote>
-<p>Útil se o job travou ou está consumindo recursos indevidamente.</p>
-</blockquote>
+Útil se o job travou ou está consumindo recursos indevidamente.</p>
 <h3 id="cancelar-todos-os-seus-jobs">Cancelar <strong>todos os seus jobs</strong><a class="headerlink" href="#cancelar-todos-os-seus-jobs" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>scancel<span class="w"> </span>-u<span class="w"> </span><span class="nv">$USER</span>
+<p><div class="highlight"><pre><span></span><code>scancel<span class="w"> </span>-u<span class="w"> </span><span class="nv">$USER</span>
 </code></pre></div>
-<blockquote>
-<p>Cancela em lote — ótimo em caso de erro em scripts ou submissões mal feitas.</p>
-</blockquote>
+Cancela em lote — ótimo em caso de erro em scripts ou submissões mal feitas.</p>
 <p>Para mais consulte a documentação oficial em <a href="https://slurm.schedmd.com/documentation.html">https://slurm.schedmd.com/documentation.html</a></p>
 <h2 id="pra-verificar-hardware">Pra verificar Hardware<a class="headerlink" href="#pra-verificar-hardware" title="Permanent link">&para;</a></h2>
 <h2 id="cpu"><strong>CPU</strong><a class="headerlink" href="#cpu" title="Permanent link">&para;</a></h2>
@@ -1283,9 +1291,7 @@
 </ul>
 <div class="highlight"><pre><span></span><code>lscpu
 </code></pre></div>
-<blockquote>
 <p>Exemplo de saída:</p>
-</blockquote>
 <div class="highlight"><pre><span></span><code>Architecture:           x86_64
 CPU(s):                 40
 Thread(s) per core:     2
@@ -1295,47 +1301,26 @@ L1d cache:              32K
 L2 cache:               1M
 L3 cache:               13M
 </code></pre></div>
-<ul>
-<li><strong>cat /proc/cpuinfo</strong></li>
-</ul>
 <p>Lista detalhes por CPU lógico (modelo, MHz, cache).</p>
 <div class="highlight"><pre><span></span><code>cat<span class="w"> </span>/proc/cpuinfo<span class="w"> </span>
 </code></pre></div>
-<ul>
-<li><strong>nproc</strong></li>
-</ul>
 <p>Mostra o número de CPUs disponíveis.</p>
 <div class="highlight"><pre><span></span><code>nproc
 </code></pre></div>
 <h2 id="memoria-ram"><strong>Memória RAM</strong><a class="headerlink" href="#memoria-ram" title="Permanent link">&para;</a></h2>
-<ul>
-<li><strong>free -h</strong>
-  Mostra uso e total de memória física e swap.</li>
-</ul>
+<p>Mostra uso e total de memória física e swap.</p>
 <div class="highlight"><pre><span></span><code>free<span class="w"> </span>-h
 </code></pre></div>
-<ul>
-<li><strong>cat /proc/meminfo</strong></li>
-</ul>
 <p>Detalhes avançados de memória (MemTotal, MemFree, Buffers, Cached).</p>
 <div class="highlight"><pre><span></span><code>cat<span class="w"> </span>/proc/meminfo<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">&quot;MemTotal|MemFree|MemAvailable|Swap&quot;</span>
 </code></pre></div>
-<ul>
-<li><strong>vmstat</strong></li>
-</ul>
 <p>Estatísticas de memória, processos e CPU.</p>
 <div class="highlight"><pre><span></span><code>vmstat<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">5</span>
 </code></pre></div>
 <h2 id="cache"><strong>Cache</strong><a class="headerlink" href="#cache" title="Permanent link">&para;</a></h2>
-<ul>
-<li><strong>lscpu | grep cache</strong>
-  Mostra rapidamente o tamanho das caches.</li>
-</ul>
+<p>Mostra rapidamente o tamanho das caches.</p>
 <div class="highlight"><pre><span></span><code>lscpu<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>cache
 </code></pre></div>
-<ul>
-<li>**ls /sys/devices/system/cpu/cpu0/cache/index*/size**</li>
-</ul>
 <p>Lista tamanhos de cada nível de cache (por CPU).</p>
 <div class="highlight"><pre><span></span><code>cat<span class="w"> </span>/sys/devices/system/cpu/cpu0/cache/index*/size
 </code></pre></div>
