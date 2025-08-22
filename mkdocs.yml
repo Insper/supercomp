@@ -38,9 +38,9 @@ nav:
         - "Aula 04 - Heurísticas e Aleatoriedade": aulas/aula04/index.md
         #- "Aula 05 - Programação paralela em CPU": aulas/aula05/index.md
         #- "Aula 06 - Efeitos colaterais do paralelismo": aulas/aula06/index.md
-        #- "Aula 07 - Programação distribuída com MPI": aulas/aula07/index.md
-        #- "Aula 08 - Programação paralela e distribuída": aulas/aula08/index.md
-        #- "Aula 09 - Programação paralela em GPU": aulas/aula09/index.md
+        #- "Aula 07 - Programação Distribuída": aulas/aula07/index.md
+        #- "Aula 08 - Programação Paralela e Distribuída": aulas/aula08/index.md
+        #- "Aula 09 - Programação Paralela em GPU": aulas/aula09/index.md
 
     - Suporte:
         - "Aula 01" : teoria/aula01/index.md

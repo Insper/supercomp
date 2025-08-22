@@ -6,6 +6,8 @@ Ao final desta atividade, você será capaz de:
 * Analisar **heurísticas** com aleatoriedade para reduzir o espaço de busca e fugir de mínimos locais.
 * Usar **aleatoriedade** para guiar a busca de soluções.
 
+!!! warning
+    [Clique aqui para ter acesso ao relatório completo do Emil](https://github.com/emil-freme/supercomp/blob/main/Benchmark_Compiladores_HPC_E_Blocking.ipynb)
 
 ## Um pouco de teoria: O que é Nonce?
 
