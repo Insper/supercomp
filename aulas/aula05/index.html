@@ -11,6 +11,10 @@
         <link rel="canonical" href="https://insper.github.io/supercomp/aulas/aula05/">
       
       
+        <link rel="prev" href="../aula04/">
+      
+      
+        <link rel="next" href="../../teoria/aula01/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -18,7 +22,7 @@
     
     
       
-        <title>Paralelismo em CPU com OpenMP - SuperComputação - 2025/2</title>
+        <title>Aula 05 - Programação paralela em CPU - SuperComputação - 2025/2</title>
       
     
     
@@ -114,7 +118,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Paralelismo em CPU com OpenMP
+              Aula 05 - Programação paralela em CPU
             
           </span>
         </div>
@@ -235,10 +239,12 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
+      <li class="md-tabs__item md-tabs__item--active">
         <a href="../aula01/" class="md-tabs__link">
           
   
@@ -364,24 +370,29 @@
       
   
   
+    
   
   
+  
     
     
     
     
-      
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
             
   
   
@@ -394,7 +405,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             Aulas
@@ -488,6 +499,164 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Aula 05 - Programação paralela em CPU
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Aula 05 - Programação paralela em CPU
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objetivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Objetivo
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scheduling-no-openmp" class="md-nav__link">
+    <span class="md-ellipsis">
+      Scheduling no OpenMP
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Scheduling no OpenMP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#analisando-os-schedulers-no-openmp" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analisando os Schedulers no OpenMP
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#atividade-03-paralelismo-com-openmp" class="md-nav__link">
+    <span class="md-ellipsis">
+      Atividade 03 - Paralelismo com OpenMP
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Atividade 03 - Paralelismo com OpenMP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objetivo_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Objetivo
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tarefa-a-map-transformacao-elemento-a-elemento" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tarefa A - Map: transformação elemento-a-elemento
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tarefa-b-reducao-ingenua-soma-de-quadrados" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tarefa B - Redução ingênua: soma de quadrados
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coleta-de-resultados-minimo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Coleta de Resultados (mínimo)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parametros-de-execucao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parâmetros de Execução
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -633,6 +802,52 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../teoria/heuristicas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Heurísticas
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../teoria/openmp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    OpenMP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -676,29 +891,86 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#esqueleto-do-codigo-miner_ompcpp" class="md-nav__link">
+  <a href="#scheduling-no-openmp" class="md-nav__link">
     <span class="md-ellipsis">
-      Esqueleto do Código miner_omp.cpp
+      Scheduling no OpenMP
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Scheduling no OpenMP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#analisando-os-schedulers-no-openmp" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analisando os Schedulers no OpenMP
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#atividade" class="md-nav__link">
-    <span class="md-ellipsis">
-      Atividade
-    </span>
-  </a>
+        
+      </ul>
+    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-objetivo-do-exercicio" class="md-nav__link">
+  <a href="#atividade-03-paralelismo-com-openmp" class="md-nav__link">
     <span class="md-ellipsis">
-      5. Objetivo do exercício
+      Atividade 03 - Paralelismo com OpenMP
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Atividade 03 - Paralelismo com OpenMP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objetivo_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Objetivo
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tarefa-a-map-transformacao-elemento-a-elemento" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tarefa A - Map: transformação elemento-a-elemento
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tarefa-b-reducao-ingenua-soma-de-quadrados" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tarefa B - Redução ingênua: soma de quadrados
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coleta-de-resultados-minimo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Coleta de Resultados (mínimo)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parametros-de-execucao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parâmetros de Execução
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -726,261 +998,464 @@
 <ul>
 <li><strong>Paralelismo em CPU</strong>: como dividir o trabalho entre múltiplos <em>cores</em>.</li>
 <li><strong>Threads</strong>: cada thread executa uma parte do trabalho.</li>
-<li><strong>OpenMP</strong>: diretivas simples em C++ para paralelizar loops e seções de código.</li>
+<li><strong>OpenMP</strong>: diretivas em OpenMP para paralelizar loops.</li>
 <li><strong>Scheduling</strong>: forma como as iterações do loop são distribuídas entre threads (<code>static</code>, <code>dynamic</code>, <code>guided</code>).</li>
 </ul>
-<h2 id="esqueleto-do-codigo-miner_ompcpp">Esqueleto do Código <code>miner_omp.cpp</code><a class="headerlink" href="#esqueleto-do-codigo-miner_ompcpp" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;random&gt;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;chrono&gt;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iomanip&gt;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;sstream&gt;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;functional&gt;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;climits&gt;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;omp.h&gt;</span><span class="c1"> // OpenMP</span>
+<p>Os processadores atuais possuem múltiplos núcleos de execução (<em>cores</em>). Para aproveitar essa capacidade, podemos dividir o trabalho em partes menores que possam ser executadas simultaneamente. Essa divisão é feita por meio de <strong>threads</strong>, onde cada thread executa uma fração das instruções.</p>
+<p>No caso de <strong>laços de repetição</strong>, o paralelismo é obtido ao repartir as iterações entre várias threads. Em vez de uma única thread percorrer todo o laço, cada thread recebe um subconjunto de iterações, reduzindo o tempo total de execução. O OpenMP facilita esse processo por meio de diretivas como <code>#pragma omp parallel for</code>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Para saber mais, veja o material disponível em <a href="../../teoria/openmp/">Guia de Pragmas OpnMP</a> </p>
+</div>
+<h2 id="scheduling-no-openmp">Scheduling no OpenMP<a class="headerlink" href="#scheduling-no-openmp" title="Permanent link">&para;</a></h2>
+<p>Quando um laço é paralelizado, é preciso definir <strong>como as iterações serão distribuídas entre as threads</strong>. Essa estratégia é chamada de <strong>schedule</strong> (escalonamento).</p>
+<ul>
+<li><strong>static</strong> → divide as iterações em blocos fixos, atribuídos antecipadamente a cada thread.</li>
+<li><strong>dynamic</strong> → as iterações são distribuídas em blocos sob demanda, conforme as threads terminam suas tarefas.</li>
+<li><strong>guided</strong> → inicia com blocos maiores e reduz gradualmente o tamanho, equilibrando a carga de trabalho.</li>
+<li><strong>auto</strong> → delega ao compilador a escolha da estratégia.</li>
+<li><strong>runtime</strong> → a estratégia é definida em tempo de execução pela variável de ambiente <code>OMP_SCHEDULE</code>.</li>
+</ul>
+<p>A escolha do escalonamento não altera o resultado final da computação, mas impacta diretamente o desempenho e o balanceamento da carga de trabalho.</p>
+<p>O programa <code>omp_schedulers.cpp</code> é um código exemplo para <strong>visualizar a distribuição das iterações de um laço entre threads</strong> em diferentes estratégias de <code>schedule</code>.</p>
+<p>Para cada política de escalonamento, o programa registra quais iterações foram executadas por cada thread e exibe uma saída gráfica com <code>*</code>, indicando a distribuição.</p>
+<p>Dessa forma, é possível observar o comportamento de cada política:</p>
+<p><code>omp_schedulers.cpp</code>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span><span class="c1">   </span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span><span class="c1">     </span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span><span class="c1">     </span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;algorithm&gt;</span><span class="c1">  </span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;omp.h&gt;</span><span class="c1">      // OpenMP (omp_get_thread_num, diretivas)</span>
 
-<span class="c1">// =============================================================</span>
-<span class="c1">// Hash: converte string -&gt; 64 bits -&gt; hex</span>
-<span class="c1">// =============================================================</span>
-<span class="k">static</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="nf">hash_simples_hex</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">hash</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">hasher</span><span class="p">;</span>
-<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="o">&gt;</span><span class="p">(</span><span class="n">hasher</span><span class="p">(</span><span class="n">input</span><span class="p">));</span>
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">ostringstream</span><span class="w"> </span><span class="n">os</span><span class="p">;</span>
-<span class="w">    </span><span class="n">os</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">hex</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">nouppercase</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">setfill</span><span class="p">(</span><span class="sc">&#39;0&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">setw</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">v</span><span class="p">;</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">os</span><span class="p">.</span><span class="n">str</span><span class="p">();</span><span class="w"> </span><span class="c1">// ~16 hex chars (64 bits)</span>
-<span class="p">}</span>
-
-<span class="c1">// =============================================================</span>
-<span class="c1">// Critério de dificuldade: hash deve começar com N zeros</span>
-<span class="c1">// =============================================================</span>
-<span class="k">static</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">validaHash</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">dificuldade</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">dificuldade</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">((</span><span class="kt">int</span><span class="p">)</span><span class="n">h</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">dificuldade</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">dificuldade</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">h</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="sc">&#39;0&#39;</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="c1">// =============================================================</span>
-<span class="c1">// Baseline SEQUENCIAL (linear): testa nonce = 0..limite-1</span>
-<span class="c1">// =============================================================</span>
-<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">minerar_linear_seq</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">bloco</span><span class="p">,</span>
-<span class="w">                               </span><span class="kt">int</span><span class="w"> </span><span class="n">dificuldade</span><span class="p">,</span>
-<span class="w">                               </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">limite</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">t0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
-
-<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">vencedor_nonce</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">vencedor_hash</span><span class="p">;</span>
-<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">found</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
-
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">nonce</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">nonce</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">limite</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">nonce</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">tentativa</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bloco</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">nonce</span><span class="p">);</span>
-<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hash_simples_hex</span><span class="p">(</span><span class="n">tentativa</span><span class="p">);</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">validaHash</span><span class="p">(</span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="n">dificuldade</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">found</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
-<span class="w">            </span><span class="n">vencedor_nonce</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nonce</span><span class="p">;</span>
-<span class="w">            </span><span class="n">vencedor_hash</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">h</span><span class="p">;</span>
-<span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<span class="c1">// -----------------------------------------------------------------------------</span>
+<span class="c1">// print_iterations:</span>
+<span class="c1">//   - Recebe uma descrição, um vetor de vetores &#39;vectors&#39; (4 vetores, um por thread),</span>
+<span class="c1">//     e &#39;n&#39; (número total de iterações do laço).</span>
+<span class="c1">//   - Constrói 4 strings com &#39;*&#39; indicando quais iterações cada thread executou.</span>
+<span class="c1">//   - Imprime a distribuição para visualizar o efeito do &#39;schedule&#39;.</span>
+<span class="c1">// -----------------------------------------------------------------------------</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">print_iterations</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">description</span><span class="p">,</span>
+<span class="w">                      </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">vectors</span><span class="p">,</span>
+<span class="w">                      </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">strings</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">());</span><span class="w"> </span><span class="c1">// 4 linhas de saída, uma por thread</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w">                        </span><span class="c1">// varre todas as iterações 0..n-1</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="w">                   </span><span class="c1">// para cada &quot;thread&quot; (0..3)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">vector</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vectors</span><span class="p">[</span><span class="n">j</span><span class="p">];</span><span class="w">           </span><span class="c1">// vetor com as iterações que a thread j executou</span>
+<span class="w">            </span><span class="k">auto</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">find</span><span class="p">(</span><span class="n">vector</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">vector</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="w"> </span><span class="n">i</span><span class="p">);</span><span class="w"> </span><span class="c1">// procura o i dentro do vetor da thread j</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">it</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">vector</span><span class="p">.</span><span class="n">end</span><span class="p">())</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="n">strings</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s">&quot;*&quot;</span><span class="p">;</span><span class="w">                     </span><span class="c1">// se a thread j executou a iteração i, marca &#39;*&#39;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">else</span>
+<span class="w">            </span><span class="p">{</span><span class="w"> </span>
+<span class="w">                </span><span class="n">strings</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">;</span><span class="w">                     </span><span class="c1">// caso contrário, espaço em branco</span>
+<span class="w">            </span><span class="p">}</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
-<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">secs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">duration</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">t1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">t0</span><span class="p">).</span><span class="n">count</span><span class="p">();</span>
-
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;[SEQ-LINEAR] dif=&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">dificuldade</span>
-<span class="w">              </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; | limite=&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">limite</span>
-<span class="w">              </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; | tempo=&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">secs</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;s&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">found</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; | nonce=&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">vencedor_nonce</span>
-<span class="w">                  </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; | hash=&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">vencedor_hash</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; | (nao encontrou)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">description</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w">             </span><span class="c1">// título/descrição da experiência</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">strings</span><span class="p">)</span><span class="w">                            </span><span class="c1">// imprime as 4 linhas (uma por thread)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="c1">// =============================================================</span>
-<span class="c1">// ESQUELETO PARALELO (linear) — OpenMP</span>
-<span class="c1">// Objetivo: paralelizar o for abaixo.</span>
-<span class="c1">// =============================================================</span>
-<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">minerar_linear_omp_skel</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">bloco</span><span class="p">,</span>
-<span class="w">                                    </span><span class="kt">int</span><span class="w"> </span><span class="n">dificuldade</span><span class="p">,</span>
-<span class="w">                                    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">limite</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">t0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+<span class="c1">// -----------------------------------------------------------------------------</span>
+<span class="c1">// schedule (template):</span>
+<span class="c1">//   - Função &quot;driver&quot; que recebe outra função &#39;function&#39; (uma política de agendamento),</span>
+<span class="c1">//     a descrição e &#39;n&#39;.</span>
+<span class="c1">//   - Aloca &#39;vectors&#39; (4 vetores: um por thread) e chama &#39;function&#39; para preenchê-los.</span>
+<span class="c1">//   - Depois imprime o resultado com print_iterations.</span>
+<span class="c1">// -----------------------------------------------------------------------------</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">schedule</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">function</span><span class="p">,</span><span class="w"> </span>
+<span class="w">              </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">description</span><span class="p">,</span><span class="w"> </span>
+<span class="w">              </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">vectors</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">());</span><span class="w"> </span><span class="c1">// 4 threads simuladas</span>
+<span class="w">    </span><span class="n">function</span><span class="p">(</span><span class="n">vectors</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">);</span><span class="w">                                         </span><span class="c1">// executa a política (preenche vectors)</span>
+<span class="w">    </span><span class="n">print_iterations</span><span class="p">(</span><span class="n">description</span><span class="p">,</span><span class="w"> </span><span class="n">vectors</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">);</span><span class="w">                    </span><span class="c1">// visualiza distribuição</span>
+<span class="p">}</span>
 
-<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">found</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w">                </span><span class="c1">// compartilhado</span>
-<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">vencedor_nonce</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="c1">// compartilhado</span>
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">vencedor_hash</span><span class="p">;</span><span class="w">         </span><span class="c1">// compartilhado</span>
+<span class="c1">// -----------------------------------------------------------------------------</span>
+<span class="c1">// Cada função &#39;scheduleXYZ&#39; abaixo:</span>
+<span class="c1">//   - Abre uma região paralela com 4 threads (num_threads(4))</span>
+<span class="c1">//   - Faz um for paralelo &#39;#pragma omp for&#39; sobre i = 0..n-1</span>
+<span class="c1">//   - Cada thread registra a iteração &#39;i&#39; que executou em vectors[tid]</span>
+<span class="c1">//   Observação didática: push_back em &#39;vectors[tid]&#39; é aceitável aqui para fins</span>
+<span class="c1">//   de visualização (em geral, acessos concorrentes a containers exigem cuidado).</span>
+<span class="c1">// -----------------------------------------------------------------------------</span>
 
-<span class="w">    </span><span class="c1">// TODO: inserir diretiva OpenMP aqui:</span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">nonce</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">nonce</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">limite</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">nonce</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">found</span><span class="p">)</span><span class="w"> </span><span class="k">continue</span><span class="p">;</span><span class="w"> </span>
-
-<span class="w">        </span><span class="c1">// variáveis locais (privadas por padrão no loop)</span>
-<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">tentativa</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bloco</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">nonce</span><span class="p">);</span>
-<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hash_simples_hex</span><span class="p">(</span><span class="n">tentativa</span><span class="p">);</span>
-
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">validaHash</span><span class="p">(</span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="n">dificuldade</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="c1">// registrar um possível vencedor </span>
-<span class="w">            </span><span class="n">found</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
-<span class="w">            </span><span class="n">vencedor_nonce</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nonce</span><span class="p">;</span>
-<span class="w">            </span><span class="n">vencedor_hash</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">h</span><span class="p">;</span>
-<span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<span class="c1">// Default: sem especificar &#39;schedule&#39; explicitamente (deixa o runtime decidir)</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">scheduleDefault</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span><span class="w"> </span><span class="n">vectors</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="cp">#pragma omp parallel num_threads(4) shared(vectors, n)</span>
+<span class="w">    </span><span class="p">{</span><span class="w">    </span>
+<span class="w">        </span><span class="cp">#pragma omp for</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">vectors</span><span class="p">[</span><span class="n">omp_get_thread_num</span><span class="p">()].</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span><span class="w"> </span><span class="c1">// registra a iteração i sob a thread atual</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
-<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">secs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">duration</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">t1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">t0</span><span class="p">).</span><span class="n">count</span><span class="p">();</span>
-
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;[OMP-LINEAR]  dif=&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">dificuldade</span>
-<span class="w">              </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; | limite=&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">limite</span>
-<span class="w">              </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; | tempo=&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">secs</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;s&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">found</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; | nonce=&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">vencedor_nonce</span>
-<span class="w">                  </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; | hash=&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">vencedor_hash</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; | (nao encontrou)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 
-<span class="c1">// =============================================================</span>
-<span class="c1">// Baseline SEQUENCIAL (random+heurística):</span>
-<span class="c1">// - Gera nonce aleatório 64-bit por tentativa (uniforme)</span>
-<span class="c1">// - Pré-filtro simples: exige primeiro char &#39;0&#39; antes de validar tudo</span>
-<span class="c1">// =============================================================</span>
-<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">minerar_random_heuristica_seq</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">bloco</span><span class="p">,</span>
-<span class="w">                                          </span><span class="kt">int</span><span class="w"> </span><span class="n">dificuldade</span><span class="p">,</span>
-<span class="w">                                          </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">tentativas</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">t0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
-
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">random_device</span><span class="w"> </span><span class="n">rd</span><span class="p">;</span>
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">mt19937_64</span><span class="w"> </span><span class="n">gen</span><span class="p">(</span><span class="n">rd</span><span class="p">());</span>
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">uniform_int_distribution</span><span class="o">&lt;</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="o">&gt;</span><span class="w"> </span><span class="n">distrib</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">ULLONG_MAX</span><span class="p">);</span>
-
-<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">found</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
-<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">vencedor_nonce</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">vencedor_hash</span><span class="p">;</span>
-
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">tentativas</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">nonce</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">distrib</span><span class="p">(</span><span class="n">gen</span><span class="p">);</span>
-<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">tentativa</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bloco</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">nonce</span><span class="p">);</span>
-<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hash_simples_hex</span><span class="p">(</span><span class="n">tentativa</span><span class="p">);</span>
-
-<span class="w">        </span><span class="c1">// Heurística barata (pré-filtro):</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">h</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="sc">&#39;0&#39;</span><span class="p">)</span><span class="w"> </span><span class="k">continue</span><span class="p">;</span>
-
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">validaHash</span><span class="p">(</span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="n">dificuldade</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">found</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
-<span class="w">            </span><span class="n">vencedor_nonce</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nonce</span><span class="p">;</span>
-<span class="w">            </span><span class="n">vencedor_hash</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">h</span><span class="p">;</span>
-<span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<span class="c1">// schedule(static): divide as iterações em blocos fixos, um por thread (tamanho auto)</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">scheduleStatic</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span><span class="w"> </span><span class="n">vectors</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="cp">#pragma omp parallel num_threads(4) shared(vectors, n)</span>
+<span class="w">    </span><span class="p">{</span><span class="w">    </span>
+<span class="w">        </span><span class="cp">#pragma omp for schedule(static)</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">vectors</span><span class="p">[</span><span class="n">omp_get_thread_num</span><span class="p">()].</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
-<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">secs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">duration</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">t1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">t0</span><span class="p">).</span><span class="n">count</span><span class="p">();</span>
-
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;[SEQ-RANDH]  dif=&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">dificuldade</span>
-<span class="w">              </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; | tent=&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">tentativas</span>
-<span class="w">              </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; | tempo=&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">secs</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;s&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">found</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; | nonce=&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">vencedor_nonce</span>
-<span class="w">                  </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; | hash=&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">vencedor_hash</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; | (nao encontrou)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="c1">// schedule(static, 4): blocos fixos de 4 iterações por vez</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">scheduleStatic4</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span><span class="w"> </span><span class="n">vectors</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="cp">#pragma omp parallel num_threads(4) shared(vectors, n)</span>
+<span class="w">    </span><span class="p">{</span><span class="w">    </span>
+<span class="w">        </span><span class="cp">#pragma omp for schedule(static, 4)</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">vectors</span><span class="p">[</span><span class="n">omp_get_thread_num</span><span class="p">()].</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 
-<span class="c1">// =============================================================</span>
-<span class="c1">// ESQUELETO PARALELO (random+heurística) — OpenMP</span>
-<span class="c1">// Objetivo: paralelizar o &quot;lote de tentativas&quot; por thread.</span>
-<span class="c1">// =============================================================</span>
-<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">minerar_random_heuristica_omp_skel</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">bloco</span><span class="p">,</span>
-<span class="w">                                               </span><span class="kt">int</span><span class="w"> </span><span class="n">dificuldade</span><span class="p">,</span>
-<span class="w">                                               </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">tentativas_total</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">t0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
-
-<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">found</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w">                </span><span class="c1">// compartilhado</span>
-<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">vencedor_nonce</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="c1">// compartilhado</span>
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">vencedor_hash</span><span class="p">;</span><span class="w">         </span><span class="c1">// compartilhado</span>
-
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">omp_get_max_threads</span><span class="p">();</span><span class="w">     </span>
-<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">quota</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">tentativas_total</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">1</span><span class="p">));</span>
-
-<span class="w">    </span><span class="c1">// TODO: criar região paralela OpenMP</span>
-<span class="w">        </span><span class="c1">// TODO: obter id da thread </span>
-<span class="w">        </span><span class="c1">// TODO: RNG por thread (seed distinta; ex.: rd() ^ (constante * tid))</span>
-<span class="w">        </span><span class="c1">// TODO: cada thread executa sua quota de tentativas</span>
-
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
-<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">secs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">duration</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">t1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">t0</span><span class="p">).</span><span class="n">count</span><span class="p">();</span>
-
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;[OMP-RANDH]  dif=&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">dificuldade</span>
-<span class="w">              </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; | tent(TOTAL)=&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">tentativas_total</span>
-<span class="w">              </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; | tempo=&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">secs</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;s&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">found</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; | nonce=&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">vencedor_nonce</span>
-<span class="w">                  </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; | hash=&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">vencedor_hash</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; | (nao encontrou)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="c1">// schedule(static, 8): blocos fixos de 8 iterações por vez</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">scheduleStatic8</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span><span class="w"> </span><span class="n">vectors</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="cp">#pragma omp parallel num_threads(4) shared(vectors, n)</span>
+<span class="w">    </span><span class="p">{</span><span class="w">    </span>
+<span class="w">        </span><span class="cp">#pragma omp for schedule(static, 8)</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">vectors</span><span class="p">[</span><span class="n">omp_get_thread_num</span><span class="p">()].</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 
-<span class="c1">// =============================================================</span>
-<span class="c1">// argv[1]=dificuldade | argv[2]=limiteLinear | argv[3]=tentativasRandom</span>
-<span class="c1">// =============================================================</span>
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">**</span><span class="w"> </span><span class="n">argv</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">bloco</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;transacao_simples&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">dificuldade</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">argc</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">stoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">5</span><span class="p">);</span>
-<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">limiteLinear</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">argc</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">stoull</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">500000ULL</span><span class="p">);</span>
-<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">tentativasRandom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">argc</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">stoull</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">500000ULL</span><span class="p">);</span>
+<span class="c1">// schedule(dynamic): threads pegam blocos sob demanda (tamanho padrão do runtime)</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">scheduleDynamic</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span><span class="w"> </span><span class="n">vectors</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="cp">#pragma omp parallel num_threads(4) shared(vectors, n)</span>
+<span class="w">    </span><span class="p">{</span><span class="w">    </span>
+<span class="w">        </span><span class="cp">#pragma omp for schedule(dynamic)</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">vectors</span><span class="p">[</span><span class="n">omp_get_thread_num</span><span class="p">()].</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;=== Exercício OpenMP (Skeleton) | dif=&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">dificuldade</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; ===</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="c1">// schedule(dynamic, 1): blocos dinâmicos de 1 iteração (alto overhead, ótimo balanceamento)</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">scheduleDynamic1</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span><span class="w"> </span><span class="n">vectors</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="cp">#pragma omp parallel num_threads(4) shared(vectors, n)</span>
+<span class="w">    </span><span class="p">{</span><span class="w">    </span>
+<span class="w">        </span><span class="cp">#pragma omp for schedule(dynamic, 1)</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">vectors</span><span class="p">[</span><span class="n">omp_get_thread_num</span><span class="p">()].</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 
-<span class="w">    </span><span class="c1">// Baselines sequenciais</span>
-<span class="w">    </span><span class="n">minerar_linear_seq</span><span class="p">(</span><span class="n">bloco</span><span class="p">,</span><span class="w"> </span><span class="n">dificuldade</span><span class="p">,</span><span class="w"> </span><span class="n">limiteLinear</span><span class="p">);</span>
-<span class="w">    </span><span class="n">minerar_random_heuristica_seq</span><span class="p">(</span><span class="n">bloco</span><span class="p">,</span><span class="w"> </span><span class="n">dificuldade</span><span class="p">,</span><span class="w"> </span><span class="n">tentativasRandom</span><span class="p">);</span>
+<span class="c1">// schedule(dynamic, 4): blocos dinâmicos de 4 iterações</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">scheduleDynamic4</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span><span class="w"> </span><span class="n">vectors</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="cp">#pragma omp parallel num_threads(4) shared(vectors, n)</span>
+<span class="w">    </span><span class="p">{</span><span class="w">    </span>
+<span class="w">        </span><span class="cp">#pragma omp for schedule(dynamic, 4)</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">vectors</span><span class="p">[</span><span class="n">omp_get_thread_num</span><span class="p">()].</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 
-<span class="w">    </span><span class="c1">// Skeletons paralelos (para os alunos completarem)</span>
-<span class="w">    </span><span class="n">minerar_linear_omp_skel</span><span class="p">(</span><span class="n">bloco</span><span class="p">,</span><span class="w"> </span><span class="n">dificuldade</span><span class="p">,</span><span class="w"> </span><span class="n">limiteLinear</span><span class="p">);</span>
-<span class="w">    </span><span class="n">minerar_random_heuristica_omp_skel</span><span class="p">(</span><span class="n">bloco</span><span class="p">,</span><span class="w"> </span><span class="n">dificuldade</span><span class="p">,</span><span class="w"> </span><span class="n">tentativasRandom</span><span class="p">);</span>
+<span class="c1">// schedule(dynamic, 8): blocos dinâmicos de 8 iterações</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">scheduleDynamic8</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span><span class="w"> </span><span class="n">vectors</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="cp">#pragma omp parallel num_threads(4) shared(vectors, n)</span>
+<span class="w">    </span><span class="p">{</span><span class="w">    </span>
+<span class="w">        </span><span class="cp">#pragma omp for schedule(dynamic, 8)</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">vectors</span><span class="p">[</span><span class="n">omp_get_thread_num</span><span class="p">()].</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// schedule(guided): blocos começam grandes e vão diminuindo (bom p/ carga irregular)</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">scheduleGuided</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span><span class="w"> </span><span class="n">vectors</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="cp">#pragma omp parallel num_threads(4) shared(vectors, n)</span>
+<span class="w">    </span><span class="p">{</span><span class="w">    </span>
+<span class="w">        </span><span class="cp">#pragma omp for schedule(guided)</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">vectors</span><span class="p">[</span><span class="n">omp_get_thread_num</span><span class="p">()].</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// schedule(guided, 2): guided com bloco mínimo de 2</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">scheduleGuided2</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span><span class="w"> </span><span class="n">vectors</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="cp">#pragma omp parallel num_threads(4) shared(vectors, n)</span>
+<span class="w">    </span><span class="p">{</span><span class="w">    </span>
+<span class="w">        </span><span class="cp">#pragma omp for schedule(guided, 2)</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">vectors</span><span class="p">[</span><span class="n">omp_get_thread_num</span><span class="p">()].</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// schedule(guided, 4): guided com bloco mínimo de 4</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">scheduleGuided4</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span><span class="w"> </span><span class="n">vectors</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="cp">#pragma omp parallel num_threads(4) shared(vectors, n)</span>
+<span class="w">    </span><span class="p">{</span><span class="w">    </span>
+<span class="w">        </span><span class="cp">#pragma omp for schedule(guided, 4)</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">vectors</span><span class="p">[</span><span class="n">omp_get_thread_num</span><span class="p">()].</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// schedule(guided, 8): guided com bloco mínimo de 8</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">scheduleGuided8</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span><span class="w"> </span><span class="n">vectors</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="cp">#pragma omp parallel num_threads(4) shared(vectors, n)</span>
+<span class="w">    </span><span class="p">{</span><span class="w">    </span>
+<span class="w">        </span><span class="cp">#pragma omp for schedule(guided, 8)</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">vectors</span><span class="p">[</span><span class="n">omp_get_thread_num</span><span class="p">()].</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// schedule(auto): deixa o runtime escolher o melhor esquema</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">scheduleAuto</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span><span class="w"> </span><span class="n">vectors</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="cp">#pragma omp parallel num_threads(4) shared(vectors, n)</span>
+<span class="w">    </span><span class="p">{</span><span class="w">    </span>
+<span class="w">        </span><span class="cp">#pragma omp for schedule(auto)</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">vectors</span><span class="p">[</span><span class="n">omp_get_thread_num</span><span class="p">()].</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// schedule(auto): deixa o compilador escolher a melhor estratégia</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">scheduleRuntime</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span><span class="w"> </span><span class="n">vectors</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="cp">#pragma omp parallel num_threads(4) shared(vectors, n)</span>
+<span class="w">    </span><span class="p">{</span><span class="w">    </span>
+<span class="w">        </span><span class="cp">#pragma omp for schedule(auto) </span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">vectors</span><span class="p">[</span><span class="n">omp_get_thread_num</span><span class="p">()].</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">64</span><span class="p">;</span><span class="w"> </span><span class="c1">// número de iterações do laço a serem distribuídas entre 4 threads</span>
+
+<span class="w">    </span><span class="c1">// Executa cada política de agendamento e imprime a “faixa” de iterações por thread.</span>
+<span class="w">    </span><span class="n">schedule</span><span class="p">(</span><span class="n">scheduleDefault</span><span class="p">,</span><span class="w">  </span><span class="s">&quot;default:               &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">);</span>
+<span class="w">    </span><span class="n">schedule</span><span class="p">(</span><span class="n">scheduleStatic</span><span class="p">,</span><span class="w">   </span><span class="s">&quot;schedule(static):      &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">);</span>
+<span class="w">    </span><span class="n">schedule</span><span class="p">(</span><span class="n">scheduleStatic4</span><span class="p">,</span><span class="w">  </span><span class="s">&quot;schedule(static, 4):   &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">);</span>
+<span class="w">    </span><span class="n">schedule</span><span class="p">(</span><span class="n">scheduleStatic8</span><span class="p">,</span><span class="w">  </span><span class="s">&quot;schedule(static, 8):   &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">);</span>
+<span class="w">    </span><span class="n">schedule</span><span class="p">(</span><span class="n">scheduleDynamic</span><span class="p">,</span><span class="w">  </span><span class="s">&quot;schedule(dynamic):     &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">);</span>
+<span class="w">    </span><span class="n">schedule</span><span class="p">(</span><span class="n">scheduleDynamic1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;schedule(dynamic, 1):  &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">);</span>
+<span class="w">    </span><span class="n">schedule</span><span class="p">(</span><span class="n">scheduleDynamic4</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;schedule(dynamic, 4):  &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">);</span>
+<span class="w">    </span><span class="n">schedule</span><span class="p">(</span><span class="n">scheduleDynamic8</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;schedule(dynamic, 8):  &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">);</span>
+<span class="w">    </span><span class="n">schedule</span><span class="p">(</span><span class="n">scheduleGuided</span><span class="p">,</span><span class="w">   </span><span class="s">&quot;schedule(guided):      &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">);</span>
+<span class="w">    </span><span class="n">schedule</span><span class="p">(</span><span class="n">scheduleGuided2</span><span class="p">,</span><span class="w">  </span><span class="s">&quot;schedule(guided, 2):   &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">);</span>
+<span class="w">    </span><span class="n">schedule</span><span class="p">(</span><span class="n">scheduleGuided4</span><span class="p">,</span><span class="w">  </span><span class="s">&quot;schedule(guided, 4):   &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">);</span>
+<span class="w">    </span><span class="n">schedule</span><span class="p">(</span><span class="n">scheduleGuided8</span><span class="p">,</span><span class="w">  </span><span class="s">&quot;schedule(guided, 8):   &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">);</span>
+<span class="w">    </span><span class="n">schedule</span><span class="p">(</span><span class="n">scheduleAuto</span><span class="p">,</span><span class="w">     </span><span class="s">&quot;schedule(auto):        &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">);</span>
+<span class="w">    </span><span class="n">schedule</span><span class="p">(</span><span class="n">scheduleRuntime</span><span class="p">,</span><span class="w">  </span><span class="s">&quot;schedule(runtime):     &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
+</code></pre></div></p>
+<p><strong>Compilar o código com OpenMP</strong></p>
+<div class="highlight"><pre><span></span><code>g++<span class="w"> </span>-fopenmp<span class="w"> </span>omp_schedulers.cpp<span class="w"> </span>-o<span class="w"> </span>omp_schedulers
 </code></pre></div>
-<h2 id="atividade">Atividade<a class="headerlink" href="#atividade" title="Permanent link">&para;</a></h2>
-<ol>
-<li><strong>Compilar o código com OpenMP</strong></li>
-</ol>
-<div class="highlight"><pre><span></span><code>g++<span class="w"> </span>-fopenmp<span class="w"> </span>miner_omp.cpp<span class="w"> </span>-o<span class="w"> </span>miner_omp
-</code></pre></div>
-<ol>
-<li><strong>Rodar no cluster com SLURM</strong> definindo o número de threads:</li>
-</ol>
-<div class="highlight"><pre><span></span><code>srun<span class="w"> </span>-c<span class="w"> </span><span class="m">4</span><span class="w"> </span>./miner_parallel
+<p><strong>Rodar no cluster com SLURM</strong> definindo o número de threads:</p>
+<div class="highlight"><pre><span></span><code>srun<span class="w"> </span>--partition<span class="o">=</span>normal<span class="w"> </span>--ntasks<span class="o">=</span><span class="m">1</span><span class="w"> </span>--cpus-per-task<span class="o">=</span><span class="m">4</span><span class="w"> </span>./omp_schedulers
 </code></pre></div>
 <p>ou</p>
-<div class="highlight"><pre><span></span><code><span class="nv">OMP_NUM_THREADS</span><span class="o">=</span><span class="m">8</span><span class="w"> </span>./miner_parallel
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="c1">#SBATCH --job-name=omp_scheduler_test   # nome do job</span>
+<span class="c1">#SBATCH --output=output_omp_schedulers.out  # arquivo de saída</span>
+<span class="c1">#SBATCH --ntasks=1                      # 1 processo (1 task MPI)</span>
+<span class="c1">#SBATCH --cpus-per-task=4               # 4 CPUs para essa task → 4 threads OMP</span>
+<span class="c1">#SBATCH --time=00:05:00                 # tempo máximo de execução</span>
+<span class="c1">#SBATCH --mem=2G                        # Memória total do job (ex.: 2 GB)</span>
+
+<span class="c1"># garante que o OpenMP use exatamente os recursos alocados pelo SLURM</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">OMP_NUM_THREADS</span><span class="o">=</span><span class="si">${</span><span class="nv">SLURM_CPUS_PER_TASK</span><span class="si">}</span>
+
+<span class="c1"># executa o binário</span>
+./omp_schedulers
 </code></pre></div>
+<h3 id="analisando-os-schedulers-no-openmp">Analisando os Schedulers no OpenMP<a class="headerlink" href="#analisando-os-schedulers-no-openmp" title="Permanent link">&para;</a></h3>
+<p>Cada scheduler do OpenMP se comporta de maneira diferente, e você deve observar o impacto de cada um:</p>
+<p><strong>static</strong>: As iterações são divididas igualmente entre as threads.</p>
+<p><strong>dynamic</strong>: As threads pegam blocos de iterações conforme terminam o trabalho.</p>
+<p><strong>guided</strong>: Distribui blocos maiores no início e menores no final, equilibrando a carga.</p>
+<p><strong>auto</strong>: Deixa o compilador escolher a melhor estratégia.</p>
+<p><strong>runtime</strong>: Usa a estratégia definida em tempo de execução.</p>
+<h2 id="atividade-03-paralelismo-com-openmp">Atividade 03 - Paralelismo com OpenMP<a class="headerlink" href="#atividade-03-paralelismo-com-openmp" title="Permanent link">&para;</a></h2>
+<p>Código base para a atividade 03:</p>
+<p><code>paralelo.cpp</code>
+<div class="highlight"><pre><span></span><code><span class="c1">// Compile: g++ -FlagDeOtimização -fopenmp paralelo.cpp -o paralelo</span>
+<span class="c1">// Execute: ./paralelo [N]  (N padrão = 10&#39;000&#39;000)</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;random&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;algorithm&gt;</span><span class="c1"> </span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;omp.h&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">**</span><span class="w"> </span><span class="n">argv</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// ------------------------------</span>
+<span class="w">    </span><span class="c1">// Parâmetros e dados de entrada</span>
+<span class="w">    </span><span class="c1">// ------------------------------</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">argc</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">stoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">10&#39;000&#39;000</span><span class="p">);</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;N = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Vetor base (valores aleatórios em [0,1))</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="w"> </span><span class="n">a</span><span class="p">(</span><span class="n">N</span><span class="p">);</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">mt19937</span><span class="w"> </span><span class="n">rng</span><span class="p">(</span><span class="mi">123</span><span class="p">);</span><span class="w">                </span><span class="c1">// seed fixa só p/ reprodutibilidade</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">uniform_real_distribution</span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="n">U</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">);</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="n">U</span><span class="p">(</span><span class="n">rng</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// =========================================================</span>
+<span class="w">    </span><span class="c1">// TAREFA A: Transformação elemento-a-elemento (map)</span>
+<span class="w">    </span><span class="c1">// =========================================================</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.0f</span><span class="p">,</span><span class="w"> </span><span class="n">beta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">35.5f</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="w"> </span><span class="n">c</span><span class="p">(</span><span class="n">N</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">t0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">omp_get_wtime</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">beta</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">omp_get_wtime</span><span class="p">();</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;[A] tempo = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="p">(</span><span class="n">t1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">t0</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">idx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">N</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="c1">// pega o elemento do meio do vetor</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;[A] c[&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">idx</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;] = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">c</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// =========================================================</span>
+<span class="w">    </span><span class="c1">// TAREFA B: Soma (redução) da norma L2 parcial</span>
+<span class="w">    </span><span class="c1">// =========================================================</span>
+<span class="w">    </span><span class="n">t0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">omp_get_wtime</span><span class="p">();</span>
+
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">soma</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">soma</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">t1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">omp_get_wtime</span><span class="p">();</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;[B] tempo = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="p">(</span><span class="n">t1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">t0</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; s | soma  = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">soma</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+Para Compilar:</p>
+<div class="highlight"><pre><span></span><code>g++<span class="w"> </span>-FlagDeOtimização<span class="w"> </span>-fopenmp<span class="w"> </span>paralelo.cpp<span class="w"> </span>-o<span class="w"> </span>paralelo
+</code></pre></div>
+<p>Para Executar:
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="c1">#SBATCH --job-name=paralelo_todo      # Nome do job</span>
+<span class="c1">#SBATCH --output=paralelo.txt         # nome do arquivo de saida</span>
+<span class="c1">#SBATCH --ntasks=1                    # Sempre 1 processo (o programa roda só uma vez)</span>
+<span class="c1">#SBATCH --cpus-per-task=4             # Esse processo tem 4 CPUs disponíveis para usar</span>
+<span class="c1">#SBATCH --mem=2G                      # Memória solicitada</span>
+<span class="c1">#SBATCH --time=00:05:00               # Tempo solicitado (hh:mm:ss)</span>
+<span class="c1">#SBATCH --partition=normal            # fila</span>
+
+<span class="c1"># ------------------------------</span>
+<span class="c1"># Configurações OpenMP</span>
+<span class="c1"># ------------------------------</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">OMP_NUM_THREADS</span><span class="o">=</span><span class="si">${</span><span class="nv">SLURM_CPUS_PER_TASK</span><span class="si">}</span><span class="w">   </span><span class="c1"># OpenMP abre 4 threads e distribui o trabalho entre elas</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">OMP_PLACES</span><span class="o">=</span>cores<span class="w">                         </span><span class="c1"># Fixa threads em cores</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">OMP_PROC_BIND</span><span class="o">=</span>close<span class="w">                      </span><span class="c1"># Coloca threads próximas (melhor cache)</span>
+
+<span class="c1"># Troque aqui o Schedule do seu teste</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">OMP_SCHEDULE</span><span class="o">=</span>static
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;==== Configuração de Execução ====&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Job ID          : </span><span class="nv">$SLURM_JOB_ID</span><span class="s2">&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;CPUs-per-task   : </span><span class="nv">$SLURM_CPUS_PER_TASK</span><span class="s2">&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Memória total   : </span><span class="nv">$SLURM_MEM_PER_NODE</span><span class="s2"> MB&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;OMP_NUM_THREADS : </span><span class="nv">$OMP_NUM_THREADS</span><span class="s2">&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;OMP_SCHEDULE    : </span><span class="nv">$OMP_SCHEDULE</span><span class="s2">&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;==================================&quot;</span>
+
+<span class="c1"># ------------------------------</span>
+<span class="c1"># Executa o programa</span>
+<span class="c1"># ------------------------------</span>
+<span class="c1"># paralelo (4 threads, por ex.)</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">OMP_NUM_THREADS</span><span class="o">=</span><span class="si">${</span><span class="nv">SLURM_CPUS_PER_TASK</span><span class="si">}</span><span class="w">   </span><span class="c1"># OpenMP abre 4 threads e distribui o trabalho entre elas</span>
+./paralelo<span class="w"> </span>
+</code></pre></div></p>
+<h3 id="objetivo_1">Objetivo<a class="headerlink" href="#objetivo_1" title="Permanent link">&para;</a></h3>
+<p>Paralelizar laços com OpenMP, comparar o efeito de <code>schedule</code> no desempenho.</p>
+<h3 id="tarefa-a-map-transformacao-elemento-a-elemento">Tarefa A - Map: transformação elemento-a-elemento<a class="headerlink" href="#tarefa-a-map-transformacao-elemento-a-elemento" title="Permanent link">&para;</a></h3>
+<p><strong>Solicitações de Implementação</strong></p>
 <ol>
-<li>
-<p><strong>Explorar os seguintes pontos</strong>:</p>
-</li>
-<li>
-<p>O que acontece quando aumentamos o número de threads?</p>
-</li>
-<li>Qual diferença entre <code>schedule(static)</code> e <code>schedule(dynamic)</code>?</li>
-<li>O tempo de execução cai de forma linear com mais threads? Por quê?</li>
-<li>Como a aleatoriedade influencia os resultados de cada execução?</li>
+<li>Paralelize o código correspondente a Tarefa A.</li>
+<li>Registre <strong>tempo</strong> e <strong>valor da conta</strong> em 3 execuções para cada <code>OMP_SCHEDULE = static</code>, <code>dynamic</code>, <code>guided</code>.</li>
+<li>O que está sendo paralelizado nesse for? O que está sendo distribuido entre as threads?</li>
 </ol>
 <hr />
-<h2 id="5-objetivo-do-exercicio">5. Objetivo do exercício<a class="headerlink" href="#5-objetivo-do-exercicio" title="Permanent link">&para;</a></h2>
-<p>Com essa prática, o aluno deve:</p>
+<h3 id="tarefa-b-reducao-ingenua-soma-de-quadrados">Tarefa B - Redução ingênua: soma de quadrados<a class="headerlink" href="#tarefa-b-reducao-ingenua-soma-de-quadrados" title="Permanent link">&para;</a></h3>
+<p><strong>Solicitações de Implementação</strong></p>
+<ol>
+<li>Paralelize o código correspondente a Tarefa B.</li>
+<li>Registre <strong>tempo</strong> e <strong>valor da soma</strong> em 3 execuções para cada <code>OMP_SCHEDULE = static</code>, <code>dynamic</code>, <code>guided</code>.</li>
+<li>Compare com a execução <strong>sequencial</strong> (threads=1).</li>
+<li>O que está sendo paralelizado nesse for? O que está sendo distribuido entre as threads?</li>
+</ol>
+<hr />
+<h3 id="coleta-de-resultados-minimo">Coleta de Resultados (mínimo)<a class="headerlink" href="#coleta-de-resultados-minimo" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Entender <strong>como aplicar OpenMP</strong> em um problema real.</li>
-<li>Comparar desempenho entre versão sequencial e paralela.</li>
-<li>Refletir sobre os <strong>ganhos e limitações</strong> do paralelismo em CPU.</li>
-<li>Perceber que a mineração de nonces é um exemplo claro de problema "paralelizável", mas que a aleatoriedade e a sincronização (variáveis compartilhadas) afetam o resultado.</li>
+<li><strong>Tabela tempos (Parte 1)</strong>: <code>scheduler</code>, <code>execução</code>, <code>tempo (s)</code>.</li>
+<li><strong>Tabela tempos (Parte 2)</strong>: <code>schedule</code>, <code>threads</code>, <code>média (s)</code>, <code>desvio</code>.</li>
+<li><strong>Tabela soma (Parte 3)</strong>: <code>schedule</code>, <code>tempo (s)</code>, <code>soma obtida</code>.</li>
 </ul>
+<h3 id="parametros-de-execucao">Parâmetros de Execução<a class="headerlink" href="#parametros-de-execucao" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Varie <code>OMP_NUM_THREADS</code> em {1, 2, 4, 8} (quando solicitado).</li>
+<li>Mantenha os <strong>mesmos N</strong> (tamanho do problema) em todas as comparações do mesmo grupo.</li>
+</ul>
+<p><strong>Perguntas de Análise</strong></p>
+<ul>
+<li>Houve <strong>speedup</strong> com mais threads? Até onde?</li>
+<li><code>static</code> vs <code>dynamic</code> vs <code>guided</code>: quem foi melhor? Alguma diferença relevante?</li>
+<li>Alguma mudança no resultado das contas? </li>
+</ul>
+<p><strong>Faça um relatório com as suas análises e entregue até as 23h59 de 28/08 pelo <a href="https://classroom.github.com/a/kMFUt-E8">GitHub Classroom</a></strong> </p>
 
 
 
