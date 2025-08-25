@@ -36,7 +36,7 @@ nav:
         - "Aula 02 - Sistemas de HPC": aulas/aula02/index.md
         - "Aula 03 - Otimização e Tiling": aulas/aula03/index.md
         - "Aula 04 - Heurísticas e Aleatoriedade": aulas/aula04/index.md
-        #- "Aula 05 - Programação paralela em CPU": aulas/aula05/index.md
+        - "Aula 05 - Programação paralela em CPU": aulas/aula05/index.md
         #- "Aula 06 - Efeitos colaterais do paralelismo": aulas/aula06/index.md
         #- "Aula 07 - Programação Distribuída": aulas/aula07/index.md
         #- "Aula 08 - Programação Paralela e Distribuída": aulas/aula08/index.md
@@ -47,6 +47,8 @@ nav:
         - "Compilar C++" : teoria/aula01/compilar-executar-C++.md
         - "Aula 02" : teoria/aula02/index.md
         - "Lista de Comandos" : teoria/comandos.md
+        - "Heurísticas" : teoria/heuristicas.md
+        - "OpenMP" : teoria/openmp.md
 extra_javascript:
     - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML
     - https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.0.0/js-yaml.min.js
