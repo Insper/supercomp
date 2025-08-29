@@ -11,6 +11,10 @@
         <link rel="canonical" href="https://insper.github.io/supercomp/aulas/aula06/">
       
       
+        <link rel="prev" href="../aula05/">
+      
+      
+        <link rel="next" href="../../teoria/aula01/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -18,7 +22,7 @@
     
     
       
-        <title>Index - SuperComputação - 2025/2</title>
+        <title>Aula 06 - Efeitos colaterais do paralelismo - SuperComputação - 2025/2</title>
       
     
     
@@ -79,6 +83,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#efeitos-colaterais-do-paralelismo" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -109,7 +118,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Index
+              Aula 06 - Efeitos colaterais do paralelismo
             
           </span>
         </div>
@@ -230,10 +239,12 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
+      <li class="md-tabs__item md-tabs__item--active">
         <a href="../aula01/" class="md-tabs__link">
           
   
@@ -359,24 +370,29 @@
       
   
   
+    
   
   
+  
     
     
     
     
-      
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
             
   
   
@@ -389,7 +405,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             Aulas
@@ -506,6 +522,140 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Aula 06 - Efeitos colaterais do paralelismo
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Aula 06 - Efeitos colaterais do paralelismo
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tarefa-a-transformacao-elemento-a-elemento-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      TAREFA A: Transformação elemento-a-elemento (map)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tarefa-b-soma-reducao-da-norma-l2-parcial" class="md-nav__link">
+    <span class="md-ellipsis">
+      TAREFA B: Soma (redução) da norma L2 parcial
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#corrigindo-com-reduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Corrigindo com reduction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dependencia-de-dados" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dependência de dados
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Dependência de dados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#versao-paralelizavel" class="md-nav__link">
+    <span class="md-ellipsis">
+      Versão paralelizável:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recursao-com-tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Recursão com tasks
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusão
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -721,6 +871,85 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tarefa-a-transformacao-elemento-a-elemento-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      TAREFA A: Transformação elemento-a-elemento (map)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tarefa-b-soma-reducao-da-norma-l2-parcial" class="md-nav__link">
+    <span class="md-ellipsis">
+      TAREFA B: Soma (redução) da norma L2 parcial
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#corrigindo-com-reduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Corrigindo com reduction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dependencia-de-dados" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dependência de dados
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Dependência de dados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#versao-paralelizavel" class="md-nav__link">
+    <span class="md-ellipsis">
+      Versão paralelizável:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recursao-com-tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Recursão com tasks
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusão
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -739,9 +968,93 @@
   
 
 
-  <h1>Index</h1>
+<h1 id="efeitos-colaterais-do-paralelismo">Efeitos Colaterais do Paralelismo<a class="headerlink" href="#efeitos-colaterais-do-paralelismo" title="Permanent link">&para;</a></h1>
+<p>Nesta atividade vamos explorar os problemas que aparecem quando paralelizamos de forma ingênua e ver como corrigir logo em seguida. </p>
+<h2 id="tarefa-a-transformacao-elemento-a-elemento-map">TAREFA A: Transformação elemento-a-elemento (map)<a class="headerlink" href="#tarefa-a-transformacao-elemento-a-elemento-map" title="Permanent link">&para;</a></h2>
+<p>Na aula passada foi pedido que você paralelizasse e analisasse este laço:</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#pragma omp parallel for schedule(runtime)</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">beta</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<ul>
+<li>Você executou com 1, 2, 4 e 8 threads.</li>
+<li>Testou diferentes <code>OMP_SCHEDULE</code> (<code>static</code>, <code>dynamic</code>, <code>guided</code>).</li>
+<li>Observou que o <strong>resultado não muda nunca</strong>, apenas o <strong>tempo de execução</strong> varia.</li>
+</ul>
+<p>Este é um exemplo de paralelismo <strong>seguro</strong>, pois cada iteração escreve em posições diferentes do vetor <code>c</code>.</p>
+<p><strong>Pergunta para pensar:</strong> por que este laço é naturalmente paralelizável sem dar problemas?</p>
+<h2 id="tarefa-b-soma-reducao-da-norma-l2-parcial">TAREFA B: Soma (redução) da norma L2 parcial<a class="headerlink" href="#tarefa-b-soma-reducao-da-norma-l2-parcial" title="Permanent link">&para;</a></h2>
+<p>Outro laço analisado na aula passada foi:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">double</span><span class="w"> </span><span class="n">soma</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
+<span class="cp">#pragma omp parallel for schedule(runtime)</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">soma</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span><span class="w"> </span><span class="c1">// &lt;- condição de corrida</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Neste caso os valores da soma ficaram inconsistentes.
+Isso acontece porque várias threads tentam atualizar a mesma variável ao mesmo tempo → condição de corrida (<em>race condition</em>).</p>
+<p><strong>Pergunta para pensar:</strong> se for pedido ao SLURM cpus-per-task=1 não vemos inconsistências no resultado da conta?</p>
+<h2 id="corrigindo-com-reduction">Corrigindo com reduction<a class="headerlink" href="#corrigindo-com-reduction" title="Permanent link">&para;</a></h2>
+<p>A correção é simples: usar uma redução.</p>
+<div class="highlight"><pre><span></span><code><span class="kt">double</span><span class="w"> </span><span class="n">soma</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
+<span class="cp">#pragma omp parallel for schedule(runtime) reduction(+:soma)</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">soma</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">];</span><span class="w"> </span><span class="c1">// &lt;- corrigido</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Agora cada thread acumula uma soma local e no final todas são combinadas.
+O resultado fica estável e correto em qualquer número de threads.</p>
+<h2 id="dependencia-de-dados">Dependência de dados<a class="headerlink" href="#dependencia-de-dados" title="Permanent link">&para;</a></h2>
+<p>Nem todos os laços podem ser paralelizados:</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="mi">-1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="c1">// depende da iteração anterior</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Aqui há uma dependência entre iterações: para calcular <code>a[i]</code> é necessário já ter calculado <code>a[i-1]</code>.
+Paralelizar assim gera resultado incorreto.</p>
+<p>Só é possível resolver reformulando o algoritmo. O objetivo é apenas perceber que nem todo loop é paralelizável.</p>
+<p>Maaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaas se observarmos bem, esse cálculo é apenas uma progressão aritmética:</p>
+<ul>
+<li><code>a[1] = a[0] + 1</code></li>
+<li><code>a[2] = a[0] + 2</code></li>
+<li><code>a[3] = a[0] + 3</code></li>
+<li>…</li>
+<li><code>a[i] = a[0] + i</code></li>
+</ul>
+<p>Ou seja, o valor de <code>a[i]</code> não precisa necessariamente <code>a[i-1]</code>, pode ser calculado diretamente.</p>
+<h3 id="versao-paralelizavel">Versão paralelizável:<a class="headerlink" href="#versao-paralelizavel" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="cp">#pragma omp parallel for schedule(dynamic)</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>O loop original tem dependência sequencial, mas ao analisar o padrão, vemos que é uma progressão. Reformulando o cálculo, eliminamos a dependência, agora cada iteração é independente e pode ser distribuída entre threads sem problemas.
+Esse exemplo é ótimo para mostrar que paralelizar não é só usar <code>#pragma</code>, às vezes é preciso pensar no algoritmo.</p>
+<h2 id="recursao-com-tasks">Recursão com tasks<a class="headerlink" href="#recursao-com-tasks" title="Permanent link">&para;</a></h2>
+<p>O OpenMP também permite paralelizar recursão, mas com cuidado.</p>
+<p>Exemplo: Fibonacci recursivo.</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="nf">fib</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">n</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">;</span>
 
+<span class="w">    </span><span class="cp">#pragma omp task shared(x)</span>
+<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="mi">-1</span><span class="p">);</span>
 
+<span class="w">    </span><span class="cp">#pragma omp task shared(y)</span>
+<span class="w">    </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="mi">-2</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cp">#pragma omp taskwait</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Se você testar <code>fib(30)</code> ou <code>fib(35)</code>. Verá que muitas tasks pequenas podem até piorar o tempo, devido ao overhead.</p>
+<p>Pois é, nem sempre mais paralelismo significa mais velocidade.</p>
+<h2 id="conclusao">Conclusão<a class="headerlink" href="#conclusao" title="Permanent link">&para;</a></h2>
+<p>Na aula de hoje vimos que nem todo problema é igual. No caso da transformação elemento a elemento (map), o paralelismo funciona sem complicações porque cada iteração é totalmente independente. Já na soma parcial, o acesso simultâneo a uma variável compartilhada gera condições de corrida, que precisam ser resolvidas com mecanismos como <code>reduction</code>.</p>
+<p>Também vimos que alguns laços possuem dependência entre iterações, nestes casos, não basta inserir diretivas OpenMP: é necessário repensar o algoritmo para eliminar a dependência.</p>
+<p>Por fim, a experiência com recursão e tasks mostrou que o paralelismo pode gerar overhead se não for bem controlado. Criar muitas tarefas pequenas pode ser pior do que executar de forma sequencial.</p>
+<p><strong>Esta atividade não tem entrega, bom fim de semana!!!</strong></p>
 
 
 
