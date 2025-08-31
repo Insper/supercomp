@@ -8,8 +8,10 @@
       
       
       
-        <link rel="canonical" href="https://insper.github.io/supercomp/projetos/2021-2/">
+        <link rel="canonical" href="https://insper.github.io/supercomp/teoria/MPI/">
       
+      
+        <link rel="prev" href="../openmp/">
       
       
       
@@ -18,7 +20,7 @@
     
     
       
-        <title>Alinhamento de Sequencias de DNA - SuperComputação - 2025/2</title>
+        <title>MPI - SuperComputação - 2025/2</title>
       
     
     
@@ -80,7 +82,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#alinhamento-de-sequencias-de-dna" class="md-skip">
+        <a href="#conceitos-basicos-de-mpi" class="md-skip">
           Skip to content
         </a>
       
@@ -114,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Alinhamento de Sequencias de DNA
+              MPI
             
           </span>
         </div>
@@ -255,11 +257,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../teoria/aula01/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../aula01/" class="md-tabs__link">
           
   
   
@@ -573,24 +577,29 @@
       
   
   
+    
   
   
+  
     
     
     
     
-      
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
             
   
   
@@ -603,7 +612,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             Suporte
@@ -617,7 +626,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../teoria/aula01/" class="md-nav__link">
+      <a href="../aula01/" class="md-nav__link">
         
   
   
@@ -640,7 +649,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../teoria/aula01/compilar-executar-C%2B%2B/" class="md-nav__link">
+      <a href="../aula01/compilar-executar-C%2B%2B/" class="md-nav__link">
         
   
   
@@ -663,7 +672,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../teoria/aula02/" class="md-nav__link">
+      <a href="../aula02/" class="md-nav__link">
         
   
   
@@ -686,7 +695,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../teoria/comandos/" class="md-nav__link">
+      <a href="../comandos/" class="md-nav__link">
         
   
   
@@ -709,7 +718,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../teoria/heuristicas/" class="md-nav__link">
+      <a href="../heuristicas/" class="md-nav__link">
         
   
   
@@ -732,7 +741,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../teoria/openmp/" class="md-nav__link">
+      <a href="../openmp/" class="md-nav__link">
         
   
   
@@ -752,10 +761,30 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../teoria/MPI/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    MPI
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -766,6 +795,102 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#conceitos-basicos-de-mpi" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conceitos básicos de MPI
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comunicacao-ponto-a-ponto" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comunicação ponto a ponto
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Comunicação ponto a ponto">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#envio-e-recebimento-bloqueantes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Envio e recebimento bloqueantes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#envio-e-recebimento-nao-bloqueantes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Envio e recebimento não-bloqueantes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comunicacao-coletiva" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comunicação coletiva
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#medicao-de-tempo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Medição de tempo
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estruturas-uteis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Estruturas úteis
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compilacao-e-execucao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compilação e execução
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -795,8 +920,6 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -805,55 +928,37 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#estrategias-a-serem-estudadas-e-correcao-automatica" class="md-nav__link">
+  <a href="#conceitos-basicos-de-mpi" class="md-nav__link">
     <span class="md-ellipsis">
-      Estratégias a serem estudadas e correção automática
+      Conceitos básicos de MPI
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#avaliacao" class="md-nav__link">
+  <a href="#comunicacao-ponto-a-ponto" class="md-nav__link">
     <span class="md-ellipsis">
-      Avaliação
+      Comunicação ponto a ponto
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Avaliação">
+    <nav class="md-nav" aria-label="Comunicação ponto a ponto">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#conceito-d" class="md-nav__link">
+  <a href="#envio-e-recebimento-bloqueantes" class="md-nav__link">
     <span class="md-ellipsis">
-      Conceito D
+      Envio e recebimento bloqueantes
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#conceito-c" class="md-nav__link">
+  <a href="#envio-e-recebimento-nao-bloqueantes" class="md-nav__link">
     <span class="md-ellipsis">
-      Conceito C
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#conceito-c_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      Conceito C+
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#conceitos-avancados" class="md-nav__link">
-    <span class="md-ellipsis">
-      Conceitos avançados
+      Envio e recebimento não-bloqueantes
     </span>
   </a>
   
@@ -861,6 +966,42 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comunicacao-coletiva" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comunicação coletiva
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#medicao-de-tempo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Medição de tempo
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estruturas-uteis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Estruturas úteis
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compilacao-e-execucao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compilação e execução
+    </span>
+  </a>
   
 </li>
       
@@ -883,115 +1024,103 @@
   
 
 
-<h1 id="alinhamento-de-sequencias-de-dna">Alinhamento de Sequencias de DNA<a class="headerlink" href="#alinhamento-de-sequencias-de-dna" title="Permanent link">&para;</a></h1>
-<p>Em Bioinformática, o problema de <strong>alinhamento de sequências de DNA</strong> consiste no processo de comparar duas ou mais sequências de bases de forma a se observar seu nível de similaridade. Trata-se de um problema extremamente importante no contexto atual, pois permite comparar sequencias virais de SARS-COV2 em bancos de dados genômicos para detecção de novas mutações.</p>
-<p>O nível de similaridade pode ser calculado com base em <strong>acertos (match)</strong> e <strong>erros (gap e mismatch)</strong>. Os acertos contribuem com sinal positivo (+) para o nível de similaridade e, os erros, com sinal negativo (-). Abaixo temos um exemplo de cálculo do nível similaridade:</p>
-<p><img alt="image" src="alignment.png" /></p>
-<p>Vamos associar a pontuação <strong>+1 (match)</strong> e as penalidades <strong>-1 (gap)</strong> e <strong>-4 (mismatch)</strong>. Assim, teremos o seguinte nível de similaridade:</p>
-<p>23 matches x (+1) + 4 gaps x (-1) + 3 mismatches x (-4) = 23-4-12 = 7</p>
-<p>Neste contexto, o problema de alinhamento de sequencias de DNA pode ser colocado da seguinte forma:</p>
-<div class="highlight"><pre><span></span><code>Dadas duas sequencias de DNA, com as bases A,T,G,C e - para indicar gap, 
-encontrar o alinhamento que maximize o nível de similaridade. 
+  <h1>MPI</h1>
+
+<h2 id="conceitos-basicos-de-mpi">Conceitos básicos de MPI<a class="headerlink" href="#conceitos-basicos-de-mpi" title="Permanent link">&para;</a></h2>
+<p>MPI (Message Passing Interface) é um padrão para programação paralela em memória compartilhada, o seja, em vários nós de computação. Cada processo é identificado por um <strong>rank</strong> (um número de 0 até <code>size-1</code>), todos os processos de um programa MPI formam um <strong>comunicador</strong> (por padrão <code>MPI_COMM_WORLD</code>).</p>
+<h2 id="comunicacao-ponto-a-ponto">Comunicação ponto a ponto<a class="headerlink" href="#comunicacao-ponto-a-ponto" title="Permanent link">&para;</a></h2>
+<h3 id="envio-e-recebimento-bloqueantes">Envio e recebimento <strong>bloqueantes</strong><a class="headerlink" href="#envio-e-recebimento-bloqueantes" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">MPI_Send</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span><span class="w"> </span><span class="n">count</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_CHAR</span><span class="p">,</span><span class="w"> </span><span class="n">destino</span><span class="p">,</span><span class="w"> </span><span class="n">tag</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_COMM_WORLD</span><span class="p">);</span>
+<span class="n">MPI_Recv</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span><span class="w"> </span><span class="n">count</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_CHAR</span><span class="p">,</span><span class="w"> </span><span class="n">origem</span><span class="p">,</span><span class="w"> </span><span class="n">tag</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">status</span><span class="p">);</span>
 </code></pre></div>
-<p>Neste projeto, seu objetivo será construir programas para encontrar este alinhamento de nível máximo de similaridade, utilizando várias estratégias. </p>
-<p>Cada um dos seus programas tomará como entrada a seguinte estrutura: a primeira linha contém dois números <code>n</code> e <code>m</code>, onde <code>n</code> é o tamanho da primeira sequencia e, <code>m</code>, o tamanho da segunda. Assuma <code>n ≤ 200</code> e <code>m ≤ 200</code>. A segunda linha contém as bases da primeira sequencia e, a terceira linha, as bases da segunda.</p>
-<div class="highlight"><pre><span></span><code>5 7
-AT-CC
-TTTCCAA
+<ul>
+<li><code>buffer</code>: ponteiro para os dados.</li>
+<li><code>count</code>: número de elementos.</li>
+<li><code>MPI_CHAR</code>, <code>MPI_INT</code>, <code>MPI_DOUBLE</code> etc.</li>
+<li><code>destino</code> / <code>origem</code>: rank do processo de envio/recebimento.</li>
+<li><code>tag</code>: identificador da mensagem (permite diferenciar mensagens).</li>
+<li><code>status</code>: metadados sobre a recepção.</li>
+</ul>
+<h3 id="envio-e-recebimento-nao-bloqueantes">Envio e recebimento <strong>não-bloqueantes</strong><a class="headerlink" href="#envio-e-recebimento-nao-bloqueantes" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">MPI_Request</span><span class="w"> </span><span class="n">req</span><span class="p">;</span>
+<span class="n">MPI_Isend</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span><span class="w"> </span><span class="n">count</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_INT</span><span class="p">,</span><span class="w"> </span><span class="n">destino</span><span class="p">,</span><span class="w"> </span><span class="n">tag</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">req</span><span class="p">);</span>
+<span class="n">MPI_Wait</span><span class="p">(</span><span class="o">&amp;</span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_STATUS_IGNORE</span><span class="p">);</span>
 </code></pre></div>
-<p>A saída deve ser uma linha com um número inteiro indicando o nível máximo de similaridade.</p>
-<p><div class="highlight"><pre><span></span><code>2
+<div class="highlight"><pre><span></span><code><span class="n">MPI_Request</span><span class="w"> </span><span class="n">req</span><span class="p">;</span>
+<span class="n">MPI_Irecv</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span><span class="w"> </span><span class="n">count</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_INT</span><span class="p">,</span><span class="w"> </span><span class="n">origem</span><span class="p">,</span><span class="w"> </span><span class="n">tag</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">req</span><span class="p">);</span>
+<span class="n">MPI_Wait</span><span class="p">(</span><span class="o">&amp;</span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_STATUS_IGNORE</span><span class="p">);</span>
 </code></pre></div>
-Neste caso, este nível máximo de similaridade pode ser associado ao alinhamento T-CC/TTCC (1-1+1+1=2) ou a CC/CC(1+1=2). Você pode usar o código python abaixo para gerar instâncias aleatórias para seus testes.</p>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
-<span class="n">n</span> <span class="o">=</span> <span class="mi">10</span> <span class="c1"># tamanho da primeira sequência</span>
-<span class="n">m</span> <span class="o">=</span> <span class="mi">40</span> <span class="c1"># tamanho da segunda sequência</span>
-<span class="n">file</span> <span class="o">=</span> <span class="s1">&#39;dna.seq&#39;</span> <span class="c1"># nome do arquivo a ser gerado</span>
-<span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
-<span class="n">seq</span><span class="o">=</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span>
-     <span class="nb">str</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span>
-     <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">choices</span><span class="p">([</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="s1">&#39;T&#39;</span><span class="p">,</span><span class="s1">&#39;C&#39;</span><span class="p">,</span><span class="s1">&#39;G&#39;</span><span class="p">,</span><span class="s1">&#39;-&#39;</span><span class="p">],</span><span class="n">k</span><span class="o">=</span><span class="n">n</span><span class="p">))</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span>
-     <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">choices</span><span class="p">([</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="s1">&#39;T&#39;</span><span class="p">,</span><span class="s1">&#39;C&#39;</span><span class="p">,</span><span class="s1">&#39;G&#39;</span><span class="p">,</span><span class="s1">&#39;-&#39;</span><span class="p">],</span><span class="n">k</span><span class="o">=</span><span class="n">m</span><span class="p">))]</span>
-<span class="n">f</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span>
-<span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">seq</span><span class="p">))</span>
+<ul>
+<li>Permitem <strong>sobrepor comunicação e computação</strong>.</li>
+<li>Precisa sempre de <code>MPI_Wait</code> (ou <code>MPI_Test</code>).</li>
+</ul>
+<h2 id="comunicacao-coletiva">Comunicação coletiva<a class="headerlink" href="#comunicacao-coletiva" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Broadcast</strong></li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">MPI_Bcast</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span><span class="w"> </span><span class="n">count</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_INT</span><span class="p">,</span><span class="w"> </span><span class="n">root</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_COMM_WORLD</span><span class="p">);</span>
 </code></pre></div>
-<p>Um possível output para este código acima é:</p>
-<div class="highlight"><pre><span></span><code>10
-40
-TGGCGAT--C
-AGC-TCTCTTC--ATT--CAC-TACACCGACA-CGC-G-A
+<p>Envia <code>buffer</code> do processo <code>root</code> para todos.</p>
+<ul>
+<li><strong>Scatter</strong></li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">MPI_Scatter</span><span class="p">(</span><span class="n">sendbuf</span><span class="p">,</span><span class="w"> </span><span class="n">count</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_INT</span><span class="p">,</span><span class="w"> </span><span class="n">recvbuf</span><span class="p">,</span><span class="w"> </span><span class="n">count</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_INT</span><span class="p">,</span><span class="w"> </span><span class="n">root</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_COMM_WORLD</span><span class="p">);</span>
 </code></pre></div>
-<h2 id="estrategias-a-serem-estudadas-e-correcao-automatica">Estratégias a serem estudadas e correção automática<a class="headerlink" href="#estrategias-a-serem-estudadas-e-correcao-automatica" title="Permanent link">&para;</a></h2>
-<p>Para cada estratégia que vamos estudar, implementaremos um programa correspondente no projeto. Veja abaixo as datas de entrega e descrições de cada estratégia a ser implementada. Em geral, o enunciado de uma parte é liberado após a data de entrega da parte anterior.</p>
-<ol>
-<li>Solução Heurística (18/03)</li>
-<li>Busca Local (01/04)</li>
-<li>Busca Exaustiva (15/04)</li>
-<li>Relatório Preliminar (29/04)</li>
-<li>Paralelismo Multicore (13/05)</li>
-<li>Paralelismo GPU (27/05)</li>
-<li>Relatório Final (03/06)</li>
-</ol>
-<!-- 1. [Solução Heurística](heuristico) (23/03)
-2. [Busca local](busca-local) (09/04)
-3. [Busca exaustiva](busca-exaustiva) (16/04)
-4. [Relatório preliminar](relatorio-1) (30/04)
-5. [Paralelismo MultiCore](paralelismo-multicore) (21/05) -->
-<!-- 
-Cada parte de implementação será conferida usando um script de correção checagem de resultados disponível no repositório de entregas do projeto, juntamente com instruções de uso. Registre seu usuário do github até **15/03** para ser convidado para seu repositório de entregas.
-
-<iframe width="640px" height= "480px" src= "https://forms.office.com/Pages/ResponsePage.aspx?id=wKZwY5B7CUe9blnCjt6DO36bxJ3XetxChDUDKdweTOJURUNKWkFLSklHNk1RWlVBTUNHWEszVExOViQlQCN0PWcu&embed=true" frameborder= "0" marginwidth= "0" marginheight= "0" style= "border: none; max-width:100%; max-height:100vh" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen> </iframe>
-
-### Instruções de correção
-
-O corretor automático depende do pacote `grading-tools`, que deverá ser instalado como abaixo.
-
-<div class="highlight"><pre><span></span><code>$&gt;<span class="w"> </span>python3.8<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>git+https://github.com/igordsm/grading-tools
+<p>Distribui partes de um vetor do root para todos.</p>
+<ul>
+<li><strong>Gather</strong></li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">MPI_Gather</span><span class="p">(</span><span class="n">sendbuf</span><span class="p">,</span><span class="w"> </span><span class="n">count</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_INT</span><span class="p">,</span><span class="w"> </span><span class="n">recvbuf</span><span class="p">,</span><span class="w"> </span><span class="n">count</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_INT</span><span class="p">,</span><span class="w"> </span><span class="n">root</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_COMM_WORLD</span><span class="p">);</span>
 </code></pre></div>
-
-??? tip "Python 3.8 no Ubuntu"
-    Se seu `python3` é uma versão inferior ao 3.8, você pode instalá-lo com os pacotes abaixo:
-
-    <div class="highlight"><pre><span></span><code>python3.8 python3.8-dev
+<p>Cada processo envia dados para o root.</p>
+<ul>
+<li><strong>Reduce</strong></li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">MPI_Reduce</span><span class="p">(</span><span class="o">&amp;</span><span class="n">valor_local</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">valor_total</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_INT</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_SUM</span><span class="p">,</span><span class="w"> </span><span class="n">root</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_COMM_WORLD</span><span class="p">);</span>
 </code></pre></div>
-
-    A partir daí poderá seguir normalmente as instruções desta página.
-
-Com isso configurado, é só compilar seu programa e rodar `python3.8 corretor.py executavel`. Para baixar os novos exercícios é só rodar `git pull`. Os exercícios serão entregues criando um commit com sua resposta e dando `git push`.
-
-
-!!! warning
-    Fique atento a atualizações no seu repositório de projeto. Atualizações no corretor serão feitas ao longo do semestre, assim como serão disponibilizados novos arquivos de entrada/saída para cada parte a ser implementada. -->
-
-<h2 id="avaliacao">Avaliação<a class="headerlink" href="#avaliacao" title="Permanent link">&para;</a></h2>
-<p>O projeto será avaliado usando rubricas para as entregas básicas. As rubricas de avaliação dos relatórios estarão descritas em suas páginas de entrega.</p>
-<h3 id="conceito-d">Conceito D<a class="headerlink" href="#conceito-d" title="Permanent link">&para;</a></h3>
-<p>Algum dos seguintes itens não foi entregue corretamente ou possui problemas sérios (no caso do relatório final).</p>
-<ol>
-<li>Solução heurística</li>
-<li>Busca local</li>
-<li>Busca exaustiva</li>
-<li>Busca local paralela (CPU)</li>
-<li>Busca local paralela (GPU)</li>
-<li>Relatório preliminar</li>
-<li>Relatório final</li>
-</ol>
-<h3 id="conceito-c">Conceito C<a class="headerlink" href="#conceito-c" title="Permanent link">&para;</a></h3>
-<p>Todas as atividades abaixo foram validadas pelo corretor e (no caso do relatório final) alcançaram qualidade mínima exigida.</p>
-<ol>
-<li>Solução heurística</li>
-<li>Busca local</li>
-<li>Busca exaustiva</li>
-<li>Busca local paralela (CPU)</li>
-<li>Busca local paralela (GPU)</li>
-<li>Relatório preliminar</li>
-<li>Relatório final</li>
-</ol>
-<h3 id="conceito-c_1">Conceito C+<a class="headerlink" href="#conceito-c_1" title="Permanent link">&para;</a></h3>
-<p>Além do já validado no conceito <strong>C</strong>, os relatórios entregues não tinham nenhum ponto <strong>em desenvolvimento</strong> ou <strong>insatisfatório</strong> na rubrica do relatório.</p>
-<h3 id="conceitos-avancados">Conceitos avançados<a class="headerlink" href="#conceitos-avancados" title="Permanent link">&para;</a></h3>
-<p>A partir do  conceito <strong>C+</strong> cada atividade avançada vale meio conceito. Elas serão listadas aqui conforme o semestre avança e serão testadas pela checagem de resultados disponível no repositório de entregas.</p>
+<p>Combina valores de todos os processos (soma, máximo, mínimo, etc.).</p>
+<ul>
+<li><strong>Barrier</strong></li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">MPI_Barrier</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">);</span>
+</code></pre></div>
+<p>Todos os processos param até que todos cheguem aqui.</p>
+<hr />
+<h2 id="medicao-de-tempo">Medição de tempo<a class="headerlink" href="#medicao-de-tempo" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kt">double</span><span class="w"> </span><span class="n">t0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI_Wtime</span><span class="p">();</span>
+<span class="c1">// ... código ...</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI_Wtime</span><span class="p">();</span>
+<span class="k">if</span><span class="p">(</span><span class="n">rank</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Tempo = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="p">(</span><span class="n">t1</span><span class="o">-</span><span class="n">t0</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; segundos</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+</code></pre></div>
+<hr />
+<h2 id="estruturas-uteis">Estruturas úteis<a class="headerlink" href="#estruturas-uteis" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>MPI_Status</strong> → contém informações de mensagens recebidas (como rank origem).</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">MPI_Status</span><span class="w"> </span><span class="n">status</span><span class="p">;</span>
+<span class="n">MPI_Recv</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_INT</span><span class="p">,</span><span class="w"> </span><span class="n">origem</span><span class="p">,</span><span class="w"> </span><span class="n">tag</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">status</span><span class="p">);</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">origem_real</span><span class="p">;</span><span class="w"> </span><span class="n">MPI_Get_count</span><span class="p">(</span><span class="o">&amp;</span><span class="n">status</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_INT</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">origem_real</span><span class="p">);</span>
+</code></pre></div>
+<ul>
+<li><strong>Tags</strong> → permitem diferenciar mensagens diferentes em paralelo.</li>
+</ul>
+<h2 id="compilacao-e-execucao">Compilação e execução<a class="headerlink" href="#compilacao-e-execucao" title="Permanent link">&para;</a></h2>
+<p>Compilar:</p>
+<div class="highlight"><pre><span></span><code>mpic++<span class="w"> </span>programa.cpp<span class="w"> </span>-o<span class="w"> </span>programa
+</code></pre></div>
+<p>Executar com SLURM (arquivo <code>job.slurm</code>):</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="c1">#SBATCH --job-name=mpi_job</span>
+<span class="c1">#SBATCH --ntasks=4</span>
+<span class="c1">#SBATCH --time=00:05:00</span>
+<span class="c1">#SBATCH --partition=normal</span>
+srun<span class="w"> </span>./programa<span class="w"> </span>arg1<span class="w"> </span>arg2
+</code></pre></div>
+<p>Submit:</p>
+<div class="highlight"><pre><span></span><code>sbatch<span class="w"> </span>job.slurm
+</code></pre></div>
+<p>Documentação:
+<a href="https://www.physics.rutgers.edu/~haule/509/MPI_Guide_C++.pdf">https://www.physics.rutgers.edu/~haule/509/MPI_Guide_C++.pdf</a></p>
 
 
 

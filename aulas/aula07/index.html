@@ -11,6 +11,10 @@
         <link rel="canonical" href="https://insper.github.io/supercomp/aulas/aula07/">
       
       
+        <link rel="prev" href="../aula06/">
+      
+      
+        <link rel="next" href="../../teoria/aula01/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -18,7 +22,7 @@
     
     
       
-        <title>Index - SuperComputação - 2025/2</title>
+        <title>Aula 07 - Programação Distribuída - SuperComputação - 2025/2</title>
       
     
     
@@ -79,6 +83,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#ping-pong" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -109,7 +118,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Index
+              Aula 07 - Programação Distribuída
             
           </span>
         </div>
@@ -230,10 +239,12 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
+      <li class="md-tabs__item md-tabs__item--active">
         <a href="../aula01/" class="md-tabs__link">
           
   
@@ -359,24 +370,29 @@
       
   
   
+    
   
   
+  
     
     
     
     
-      
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
             
   
   
@@ -389,7 +405,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             Aulas
@@ -529,6 +545,103 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Aula 07 - Programação Distribuída
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Aula 07 - Programação Distribuída
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#ping-pong" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ping-pong
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#token-em-anel" class="md-nav__link">
+    <span class="md-ellipsis">
+      Token em anel
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alternancia" class="md-nav__link">
+    <span class="md-ellipsis">
+      Alternância
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-voce-deve-entregar" class="md-nav__link">
+    <span class="md-ellipsis">
+      O que você deve entregar:
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -720,6 +833,29 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../teoria/MPI/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MPI
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -745,6 +881,50 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#ping-pong" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ping-pong
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#token-em-anel" class="md-nav__link">
+    <span class="md-ellipsis">
+      Token em anel
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alternancia" class="md-nav__link">
+    <span class="md-ellipsis">
+      Alternância
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-voce-deve-entregar" class="md-nav__link">
+    <span class="md-ellipsis">
+      O que você deve entregar:
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -762,9 +942,116 @@
   
 
 
-  <h1>Index</h1>
+<p>Message Passing Interface (MPI) é um padrão para comunicação de dados em computação paralela. Existem várias modalidades de computação paralela, e dependendo do problema que se está tentando resolver, pode ser necessário passar informações entre os vários processadores ou nós de um cluster, e o MPI oferece uma infraestrutura para essa tarefa.</p>
+<p>Para iniciarmos o nosso estudo de MPI, implemente os desafios abaixo, entendendo como encadear sends e receives, e o impacto nos resultados.</p>
+<h2 id="ping-pong"><strong>Ping-pong</strong><a class="headerlink" href="#ping-pong" title="Permanent link">&para;</a></h2>
+<p>A ideia é medir a <strong>latência de comunicação ponto a ponto</strong>.</p>
+<p>Implemente o ping-pong: rank 0 envia uma mensagem ao rank 1, que responde.
+Faça duas versões:</p>
+<ul>
+<li><strong>Bloqueante</strong> (<code>MPI_Send/MPI_Recv</code>)</li>
+<li><strong>Não-bloqueante</strong> (<code>MPI_Isend/Irecv + MPI_Wait</code>)</li>
+</ul>
+<p>Rode os testes:</p>
+<ul>
+<li>Mensagens de <strong>16 B, 1 KB, 64 KB, 1 MB</strong></li>
+<li>Em 2, 3 e 4 nós </li>
+</ul>
+<p>Analise: </p>
+<ul>
+<li>Para mensagens pequenas, o que domina: <strong>latência fixa</strong> ou <strong>tamanho da mensagem</strong>?</li>
+<li>A partir de que tamanho de mensagem o gargalo passa a ser a <strong>largura de banda</strong> da rede?</li>
+</ul>
+<p>Código base:
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;mpi.h&gt;</span><span class="c1">        // Biblioteca principal do MPI para comunicação entre processos</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span><span class="c1">    </span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstring&gt;</span><span class="c1">      </span>
 
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">**</span><span class="w"> </span><span class="n">argv</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">rank</span><span class="p">;</span><span class="w">               </span><span class="c1">// Variável que armazenará o &quot;rank&quot; (identificador) do processo</span>
+<span class="w">    </span><span class="n">MPI_Status</span><span class="w"> </span><span class="n">status</span><span class="p">;</span><span class="w">      </span><span class="c1">// Estrutura que armazenará o status da comunicação MPI</span>
+<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">mensagem</span><span class="p">[</span><span class="mi">100</span><span class="p">];</span><span class="w">     </span><span class="c1">// Vetor de caracteres para armazenar a mensagem a ser enviada/recebida</span>
 
+<span class="w">    </span><span class="c1">// Inicializa o ambiente MPI (todos os processos são iniciados)</span>
+<span class="w">    </span><span class="n">MPI_Init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">argv</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Descobre o &quot;rank&quot; do processo atual dentro do comunicador global (MPI_COMM_WORLD)</span>
+<span class="w">    </span><span class="n">MPI_Comm_rank</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rank</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Se este for o processo de rank 0 (emissor inicial)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rank</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Copia a string &quot;Olá&quot; para a variável mensagem</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">strcpy</span><span class="p">(</span><span class="n">mensagem</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Olá&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// Envia a mensagem para o processo de rank 1</span>
+<span class="w">        </span><span class="c1">// Parâmetros: buffer, tamanho, tipo, destino, tag, comunicador</span>
+<span class="w">        </span><span class="n">MPI_Send</span><span class="p">(</span><span class="n">mensagem</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">strlen</span><span class="p">(</span><span class="n">mensagem</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_CHAR</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_COMM_WORLD</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// Imprime no terminal que a mensagem foi enviada</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Processo 0 enviou: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">mensagem</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">        </span><span class="c1">// Aguarda a resposta do processo 1</span>
+<span class="w">        </span><span class="c1">// Parâmetros: buffer, tamanho máximo, tipo, origem, tag, comunicador, status</span>
+<span class="w">        </span><span class="n">MPI_Recv</span><span class="p">(</span><span class="n">mensagem</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_CHAR</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">status</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// Imprime a mensagem recebida</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Processo 0 recebeu: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">mensagem</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Se este for o processo de rank 1 (receptor inicial)</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rank</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Recebe a mensagem enviada pelo processo 0</span>
+<span class="w">        </span><span class="n">MPI_Recv</span><span class="p">(</span><span class="n">mensagem</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_CHAR</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">status</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// Imprime a mensagem recebida</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Processo 1 recebeu: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">mensagem</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">        </span><span class="c1">// Prepara a resposta &quot;Oi&quot;</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">strcpy</span><span class="p">(</span><span class="n">mensagem</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Oi&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// Envia a resposta de volta ao processo 0</span>
+<span class="w">        </span><span class="n">MPI_Send</span><span class="p">(</span><span class="n">mensagem</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">strlen</span><span class="p">(</span><span class="n">mensagem</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_CHAR</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_COMM_WORLD</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// Imprime que a mensagem foi enviada</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Processo 1 enviou: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">mensagem</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Todos os outros processos apenas informam que estão ociosos</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Processo &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">rank</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; está ocioso neste exercício.&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Finaliza o ambiente MPI (todos os processos encerram)</span>
+<span class="w">    </span><span class="n">MPI_Finalize</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<h2 id="token-em-anel"><strong>Token em anel</strong><a class="headerlink" href="#token-em-anel" title="Permanent link">&para;</a></h2>
+<p>A ideia é perceber o custo de <strong>coletar informações sequencialmente</strong>.</p>
+<p>Implemente o token em anel: cada rank adiciona uma informação nova ao vetor e passa adiante.
+Execute em 2, 3 e 4 nós .
+Compare com o mesmo problema usando <code>MPI_Gather</code>.</p>
+<p>Analise:</p>
+<ul>
+<li>Como cresce o tempo do anel com o número de processos?</li>
+<li>Qual o gargalo de percorrer todos em sequência?</li>
+<li>Qual a vantagem de usar <code>MPI_Gather</code>?</li>
+</ul>
+<hr />
+<h2 id="alternancia"><strong>Alternância</strong><a class="headerlink" href="#alternancia" title="Permanent link">&para;</a></h2>
+<p>A ideia é entender como funciona uma <strong>distribuição de tarefas</strong>.</p>
+<p>Rank 0 possui 13 tarefas cada uma com diferentes niveis de complexidade. Implemente uma distribuição dinâmica de tarefas, o worker que terminar primeiro recebe a próxima tarefa.</p>
+<p>O que acontece quando as tarefas variam muito de custo?</p>
+<h1 id="o-que-voce-deve-entregar">O que você deve entregar:<a class="headerlink" href="#o-que-voce-deve-entregar" title="Permanent link">&para;</a></h1>
+<p>Para cada exercício:</p>
+<ol>
+<li><strong>Código</strong> (disponível no repositório do github).</li>
+<li><strong>Tabela de resultados</strong> (parâmetros usados, tempos medidos).</li>
+<li><strong>Gráficos</strong>: tempo × P, tempo × tamanho, throughput × blocos, etc.</li>
+<li><strong>Discussão</strong>: Análise dos resultados</li>
+</ol>
+<p><strong>Envie o seu relatório com as suas análises até as 23h59 de 04/09 pelo <a href="https://classroom.github.com/a/ilH4AsH_">GitHub Classroom</a></strong> </p>
 
 
 
