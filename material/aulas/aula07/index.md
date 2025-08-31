@@ -150,7 +150,7 @@ Para cada exercício:
 
 1. **Código** (disponível no repositório do github).
 2. **Tabela de resultados** (parâmetros usados, tempos medidos).
-3. **Gráficos**: tempo × P, tempo × tamanho, throughput × blocos, etc.
+3. **Gráficos**: tempo × tamanho, throughput × blocos, etc.
 4. **Discussão**: Análise dos resultados
 
 **Envie o seu relatório com as suas análises até as 23h59 de 04/09 pelo [GitHub Classroom](https://classroom.github.com/a/ilH4AsH_)** 
