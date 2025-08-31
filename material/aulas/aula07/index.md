@@ -90,6 +90,31 @@ int main(int argc, char** argv) {
 }
 ```
 
+### Compile o programa:
+```bash
+mpic++ -FlagdeOtimização seu_codigo.cpp -o seu_binario
+```
+
+
+### Script SLURM
+
+```bash
+#!/bin/bash
+#SBATCH --job-name=mpi_hello
+#SBATCH --output=saida_%j.txt
+#SBATCH --ntasks=5
+#SBATCH --time=00:01:00
+#SBATCH --partition=gpu
+
+
+mpirun -np $SLURM_NTASKS ./seu_binario
+```
+
+### Submeta o job com SLURM:
+```bash
+sbatch SeuSlurm.slurm
+```
+
 
 ## **Token em anel**
 
