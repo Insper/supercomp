@@ -38,7 +38,7 @@ nav:
         - "Aula 04 - Heurísticas e Aleatoriedade": aulas/aula04/index.md
         - "Aula 05 - Programação paralela em CPU": aulas/aula05/index.md
         - "Aula 06 - Efeitos colaterais do paralelismo": aulas/aula06/index.md
-        #- "Aula 07 - Programação Distribuída": aulas/aula07/index.md
+        - "Aula 07 - Programação Distribuída": aulas/aula07/index.md
         #- "Aula 08 - Programação Paralela e Distribuída": aulas/aula08/index.md
         #- "Aula 09 - Programação Paralela em GPU": aulas/aula09/index.md
 
@@ -49,6 +49,7 @@ nav:
         - "Lista de Comandos" : teoria/comandos.md
         - "Heurísticas" : teoria/heuristicas.md
         - "OpenMP" : teoria/openmp.md
+        - "MPI" : teoria/MPI.md
 extra_javascript:
     - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML
     - https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.0.0/js-yaml.min.js
