@@ -609,6 +609,39 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Ping-pong">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#compile-o-programa" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compile o programa:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#script-slurm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Script SLURM
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#submeta-o-job-com-slurm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Submeta o job com SLURM:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -894,6 +927,39 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Ping-pong">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#compile-o-programa" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compile o programa:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#script-slurm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Script SLURM
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#submeta-o-job-com-slurm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Submeta o job com SLURM:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1027,6 +1093,23 @@ Faça duas versões:</p>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div></p>
+<h3 id="compile-o-programa">Compile o programa:<a class="headerlink" href="#compile-o-programa" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>mpic++<span class="w"> </span>-FlagdeOtimização<span class="w"> </span>seu_codigo.cpp<span class="w"> </span>-o<span class="w"> </span>seu_binario
+</code></pre></div>
+<h3 id="script-slurm">Script SLURM<a class="headerlink" href="#script-slurm" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="c1">#SBATCH --job-name=mpi_hello</span>
+<span class="c1">#SBATCH --output=saida_%j.txt</span>
+<span class="c1">#SBATCH --ntasks=5</span>
+<span class="c1">#SBATCH --time=00:01:00</span>
+<span class="c1">#SBATCH --partition=gpu</span>
+
+
+mpirun<span class="w"> </span>-np<span class="w"> </span><span class="nv">$SLURM_NTASKS</span><span class="w"> </span>./seu_binario
+</code></pre></div>
+<h3 id="submeta-o-job-com-slurm">Submeta o job com SLURM:<a class="headerlink" href="#submeta-o-job-com-slurm" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>sbatch<span class="w"> </span>SeuSlurm.slurm
+</code></pre></div>
 <h2 id="token-em-anel"><strong>Token em anel</strong><a class="headerlink" href="#token-em-anel" title="Permanent link">&para;</a></h2>
 <p>A ideia é perceber o custo de <strong>coletar informações sequencialmente</strong>.</p>
 <p>Implemente o token em anel: cada rank adiciona uma informação nova ao vetor e passa adiante.
