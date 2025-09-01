@@ -1188,13 +1188,13 @@ warranty<span class="p">;</span><span class="w"> </span>not<span class="w"> </sp
 <div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
 <span class="c1">#SBATCH --job-name=mpi_hello</span>
 <span class="c1">#SBATCH --output=saida%j.txt</span>
-<span class="c1">#SBATCH --partition=normal</span>
+<span class="c1">#SBATCH --partition=express</span>
+<span class="c1">#SBATCH --mem=1GB</span>
 <span class="c1">#SBATCH --nodes=2</span>
 <span class="c1">#SBATCH --ntasks=5</span>
 <span class="c1">#SBATCH --cpus-per-task=1</span>
 <span class="c1">#SBATCH --time=00:02:00</span>
 <span class="c1">#SBATCH --export=ALL</span>
-
 
 
 <span class="c1"># Faça load nos módulos dentro do nó de computação</span>
