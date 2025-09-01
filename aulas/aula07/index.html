@@ -1023,6 +1023,10 @@ Faça duas versões:</p>
 <li>Mensagens de <strong>16 B, 1 KB, 64 KB, 1 MB</strong></li>
 <li>Em 2, 3 e 4 nós </li>
 </ul>
+<div class="admonition tip">
+<p class="admonition-title">Dica!</p>
+<p>Lembre-se, cada double ocupa 8 bytes, cada float ocupa 4 bytes, cada int ocupa 4 bytes, cada char, 1 byte.</p>
+</div>
 <p>Analise: </p>
 <ul>
 <li>Para mensagens pequenas, o que domina: <strong>latência fixa</strong> ou <strong>tamanho da mensagem</strong>?</li>
@@ -1105,7 +1109,7 @@ Faça duas versões:</p>
 <span class="c1">#SBATCH --cpus-per-task=1 # 1 thread</span>
 <span class="c1">#SBATCH --time=00:01:00</span>
 <span class="c1">#SBATCH --partition=gpu</span>
-<span class="c1">#SBATCH –mem=2G</span>
+<span class="c1">#SBATCH –-mem=2G</span>
 
 mpirun<span class="w"> </span>-np<span class="w"> </span><span class="nv">$SLURM_NTASKS</span><span class="w"> </span>./seu_binario
 </code></pre></div>
