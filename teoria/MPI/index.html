@@ -876,14 +876,47 @@
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#compilacao-e-execucao" class="md-nav__link">
+    <nav class="md-nav" aria-label="Estruturas úteis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#carregue-o-modulo" class="md-nav__link">
     <span class="md-ellipsis">
-      Compilação e execução
+      Carregue o modulo
     </span>
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#teste-para-ver-se-o-modulo-foi-carregado-corretamente" class="md-nav__link">
+    <span class="md-ellipsis">
+      Teste para ver se o modulo foi carregado corretamente
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deve-aparecer-algo-como" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deve aparecer algo como:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compile-o-programa" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compile o programa:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -994,14 +1027,47 @@
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#compilacao-e-execucao" class="md-nav__link">
+    <nav class="md-nav" aria-label="Estruturas úteis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#carregue-o-modulo" class="md-nav__link">
     <span class="md-ellipsis">
-      Compilação e execução
+      Carregue o modulo
     </span>
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#teste-para-ver-se-o-modulo-foi-carregado-corretamente" class="md-nav__link">
+    <span class="md-ellipsis">
+      Teste para ver se o modulo foi carregado corretamente
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deve-aparecer-algo-como" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deve aparecer algo como:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compile-o-programa" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compile o programa:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1104,17 +1170,42 @@
 <ul>
 <li><strong>Tags</strong> → permitem diferenciar mensagens diferentes em paralelo.</li>
 </ul>
-<h2 id="compilacao-e-execucao">Compilação e execução<a class="headerlink" href="#compilacao-e-execucao" title="Permanent link">&para;</a></h2>
-<p>Compilar:</p>
-<div class="highlight"><pre><span></span><code>mpic++<span class="w"> </span>programa.cpp<span class="w"> </span>-o<span class="w"> </span>programa
+<h3 id="carregue-o-modulo">Carregue o modulo<a class="headerlink" href="#carregue-o-modulo" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>spack<span class="w"> </span>load<span class="w"> </span>openmpi
+</code></pre></div>
+<h3 id="teste-para-ver-se-o-modulo-foi-carregado-corretamente">Teste para ver se o modulo foi carregado corretamente<a class="headerlink" href="#teste-para-ver-se-o-modulo-foi-carregado-corretamente" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>mpicc<span class="w"> </span>--version
+</code></pre></div>
+<h3 id="deve-aparecer-algo-como">Deve aparecer algo como:<a class="headerlink" href="#deve-aparecer-algo-como" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>gcc<span class="w"> </span><span class="o">(</span>GCC<span class="o">)</span><span class="w"> </span><span class="m">14</span>.2.0
+Copyright<span class="w"> </span><span class="o">(</span>C<span class="o">)</span><span class="w"> </span><span class="m">2024</span><span class="w"> </span>Free<span class="w"> </span>Software<span class="w"> </span>Foundation,<span class="w"> </span>Inc.
+This<span class="w"> </span>is<span class="w"> </span>free<span class="w"> </span>software<span class="p">;</span><span class="w"> </span>see<span class="w"> </span>the<span class="w"> </span><span class="nb">source</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>copying<span class="w"> </span>conditions.<span class="w">  </span>There<span class="w"> </span>is<span class="w"> </span>NO
+warranty<span class="p">;</span><span class="w"> </span>not<span class="w"> </span>even<span class="w"> </span><span class="k">for</span><span class="w"> </span>MERCHANTABILITY<span class="w"> </span>or<span class="w"> </span>FITNESS<span class="w"> </span>FOR<span class="w"> </span>A<span class="w"> </span>PARTICULAR<span class="w"> </span>PURPOSE.
+</code></pre></div>
+<h3 id="compile-o-programa">Compile o programa:<a class="headerlink" href="#compile-o-programa" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>mpic++<span class="w"> </span>-FlagdeOtimização<span class="w"> </span>seu_codigo.cpp<span class="w"> </span>-o<span class="w"> </span>seu_binario
 </code></pre></div>
 <p>Executar com SLURM (arquivo <code>job.slurm</code>):</p>
 <div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
-<span class="c1">#SBATCH --job-name=mpi_job</span>
-<span class="c1">#SBATCH --ntasks=4</span>
-<span class="c1">#SBATCH --time=00:05:00</span>
-<span class="c1">#SBATCH --partition=normal</span>
-srun<span class="w"> </span>./programa<span class="w"> </span>arg1<span class="w"> </span>arg2
+<span class="c1">#SBATCH --job-name=mpi_hello</span>
+<span class="c1">#SBATCH --output=saida%j.txt</span>
+<span class="c1">#SBATCH --partition=express</span>
+<span class="c1">#SBATCH --mem=1GB</span>
+<span class="c1">#SBATCH --nodes=2</span>
+<span class="c1">#SBATCH --ntasks=5</span>
+<span class="c1">#SBATCH --cpus-per-task=1</span>
+<span class="c1">#SBATCH --time=00:02:00</span>
+<span class="c1">#SBATCH --export=ALL</span>
+
+
+<span class="c1"># Faça load nos módulos dentro do nó de computação</span>
+<span class="nb">source</span><span class="w"> </span>/etc/profile
+.<span class="w"> </span>/opt/spack/share/spack/setup-env.sh
+module<span class="w"> </span>use<span class="w"> </span>/opt/spack/share/spack/lmod/linux-rocky9-x86_64/Core
+module<span class="w"> </span>--ignore_cache<span class="w"> </span>load<span class="w"> </span>openmpi/5.0.8-gcc-14.2.0
+
+<span class="c1"># Execute o seu binário com o MPI</span>
+mpirun<span class="w"> </span>-np<span class="w"> </span><span class="nv">$SLURM_NTASKS</span><span class="w"> </span>./seu_binario
 </code></pre></div>
 <p>Submit:</p>
 <div class="highlight"><pre><span></span><code>sbatch<span class="w"> </span>job.slurm
