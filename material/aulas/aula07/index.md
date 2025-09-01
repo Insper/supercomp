@@ -102,12 +102,15 @@ mpic++ -FlagdeOtimização seu_codigo.cpp -o seu_binario
 #!/bin/bash
 #SBATCH --job-name=mpi_hello
 #SBATCH --output=saida_%j.txt
-#SBATCH --ntasks=5
+#SBATCH --nodes=2   # 2 nós (2 computadores)
+#SBATCH --ntasks=5  # 5 processos (5 task MPI)
+#SBATCH --cpus-per-task=1 # 1 thread
 #SBATCH --time=00:01:00
 #SBATCH --partition=gpu
-
+#SBATCH –mem=2G
 
 mpirun -np $SLURM_NTASKS ./seu_binario
+
 ```
 
 ### Submeta o job com SLURM:
