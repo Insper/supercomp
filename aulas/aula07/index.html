@@ -1100,10 +1100,12 @@ Faça duas versões:</p>
 <div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
 <span class="c1">#SBATCH --job-name=mpi_hello</span>
 <span class="c1">#SBATCH --output=saida_%j.txt</span>
-<span class="c1">#SBATCH --ntasks=5</span>
+<span class="c1">#SBATCH --nodes=2   # 2 nós (2 computadores)</span>
+<span class="c1">#SBATCH --ntasks=5  # 5 processos (5 task MPI)</span>
+<span class="c1">#SBATCH --cpus-per-task=1 # 1 thread</span>
 <span class="c1">#SBATCH --time=00:01:00</span>
 <span class="c1">#SBATCH --partition=gpu</span>
-
+<span class="c1">#SBATCH –mem=2G</span>
 
 mpirun<span class="w"> </span>-np<span class="w"> </span><span class="nv">$SLURM_NTASKS</span><span class="w"> </span>./seu_binario
 </code></pre></div>
