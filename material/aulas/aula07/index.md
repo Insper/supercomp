@@ -18,6 +18,11 @@ Rode os testes:
    * Mensagens de **16 B, 1 KB, 64 KB, 1 MB**
    * Em 2, 3 e 4 nós 
 
+
+!!! tip "Dica!"
+    Lembre-se, cada double ocupa 8 bytes, cada float ocupa 4 bytes, cada int ocupa 4 bytes, cada char, 1 byte.
+
+
 Analise: 
 
    * Para mensagens pequenas, o que domina: **latência fixa** ou **tamanho da mensagem**?
@@ -107,7 +112,7 @@ mpic++ -FlagdeOtimização seu_codigo.cpp -o seu_binario
 #SBATCH --cpus-per-task=1 # 1 thread
 #SBATCH --time=00:01:00
 #SBATCH --partition=gpu
-#SBATCH –mem=2G
+#SBATCH –-mem=2G
 
 mpirun -np $SLURM_NTASKS ./seu_binario
 
