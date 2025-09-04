@@ -254,3 +254,56 @@ srun --partition=normal --ntasks=1 --pty bash -c \
  echo '=== GPU INFO ==='; \
  if command -v nvidia-smi &> /dev/null; then nvidia-smi; else echo 'nvidia-smi não disponível'; fi"
 ```
+
+## Bug de arquivos gerados no Windows
+Trabalhando em 2 ambientes diferentes é comum ocorrer problemas de fim de
+linha entre DOS e UNIX. 
+
+Caso você encontre esse problema aqui vão algumas opções. 
+
+
+[Video ilustrando o passo a passo](https://www.youtube.com/embed/AiHhyOJ526k)
+
+
+
+*Utilizando o editor NANO*
+
+Abra o arquivo utilizando a flag unix:
+```sh
+nano --unix arquivo.ext
+```
+
+feito isso basta salvar com C^O e sair C^X
+
+*Utilizando o editor VI/VIM*
+
+```sh
+vi arquivo.ext
+```
+
+Com ele aberto é possivel definir o `fileformat` com o seguinte comando:
+
+```vi
+:set ff=unix
+```
+
+e então sair e salvar com:
+
+```vi
+:wq!
+```
+
+o `!` irá forçar a sobrescrita. 
+
+*Utilizando o VI/VIM por linha de comando:*
+
+```sh
+vi -c "set ff=unix" -c "wq" arquivo.ext
+```
+
+*Se dos2unix tiver instalado:*
+
+```sh
+dos2unix arquico.ext
+```
+

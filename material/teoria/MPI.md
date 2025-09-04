@@ -104,23 +104,55 @@ int origem_real; MPI_Get_count(&status, MPI_INT, &origem_real);
 * **Tags** → permitem diferenciar mensagens diferentes em paralelo.
 
 
-## Compilação e execução
 
-Compilar:
+### Carregue o modulo
 
 ```bash
-mpic++ programa.cpp -o programa
+spack load openmpi
 ```
+
+### Teste para ver se o modulo foi carregado corretamente
+```bash
+mpicc --version
+```
+
+### Deve aparecer algo como:
+```bash
+gcc (GCC) 14.2.0
+Copyright (C) 2024 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+```
+
+### Compile o programa:
+```bash
+mpic++ -FlagdeOtimização seu_codigo.cpp -o seu_binario
+```
+
 
 Executar com SLURM (arquivo `job.slurm`):
 
 ```bash
 #!/bin/bash
-#SBATCH --job-name=mpi_job
-#SBATCH --ntasks=4
-#SBATCH --time=00:05:00
-#SBATCH --partition=normal
-srun ./programa arg1 arg2
+#SBATCH --job-name=mpi_hello
+#SBATCH --output=saida%j.txt
+#SBATCH --partition=express
+#SBATCH --mem=1GB
+#SBATCH --nodes=2
+#SBATCH --ntasks=5
+#SBATCH --cpus-per-task=1
+#SBATCH --time=00:02:00
+#SBATCH --export=ALL
+
+
+# Faça load nos módulos dentro do nó de computação
+source /etc/profile
+. /opt/spack/share/spack/setup-env.sh
+module use /opt/spack/share/spack/lmod/linux-rocky9-x86_64/Core
+module --ignore_cache load openmpi/5.0.8-gcc-14.2.0
+
+# Execute o seu binário com o MPI
+mpirun -np $SLURM_NTASKS ./seu_binario
 ```
 
 Submit:

@@ -106,14 +106,16 @@ mpic++ -FlagdeOtimização seu_codigo.cpp -o seu_binario
 ```bash
 #!/bin/bash
 #SBATCH --job-name=mpi_hello
-#SBATCH --output=saida_%j.txt
-#SBATCH --nodes=2   # 2 nós (2 computadores)
-#SBATCH --ntasks=5  # 5 processos (5 task MPI)
-#SBATCH --cpus-per-task=1 # 1 thread
-#SBATCH --time=00:01:00
-#SBATCH --partition=gpu
-#SBATCH –-mem=2G
+#SBATCH --output=saida%j.txt
+#SBATCH --partition=express
+#SBATCH --mem=1GB
+#SBATCH --nodes=2
+#SBATCH --ntasks=5
+#SBATCH --cpus-per-task=1
+#SBATCH --time=00:02:00
+#SBATCH --export=ALL
 
+# Execute o seu binário com o MPI
 mpirun -np $SLURM_NTASKS ./seu_binario
 
 ```
@@ -122,6 +124,21 @@ mpirun -np $SLURM_NTASKS ./seu_binario
 ```bash
 sbatch SeuSlurm.slurm
 ```
+
+### Você deve ver algo como isso:
+```bash
+[liciascl@head-node mpi]$ cat saida.txt
+Processo 2 está ocioso neste exercício.
+Processo 3 está ocioso neste exercício.
+Processo 0 enviou: Olá
+Processo 0 recebeu: Oi
+Processo 1 recebeu: Olá
+Processo 1 enviou: Oi
+Processo 4 está ocioso neste exercício.
+```
+
+Agora é a sua vez! 
+Faça as alterações no código exemplo e implemente as outras formas de comunicação entre nós usando MPI
 
 
 ## **Token em anel**
@@ -151,7 +168,6 @@ O que acontece quando as tarefas variam muito de custo?
 
 
 
-
 # O que você deve entregar:
 
 Para cada exercício:
@@ -160,4 +176,4 @@ Para cada exercício:
 2. **Tabela de resultados** (parâmetros usados, tempos medidos).
 3. **Discussão**: Análise dos resultados
 
-**Envie o seu relatório com as suas análises até as 23h59 de 04/09 pelo [GitHub Classroom](https://classroom.github.com/a/ilH4AsH_)** 
+**Envie o seu relatório com as suas análises até as 23h59 de 08/09 pelo [GitHub Classroom](https://classroom.github.com/a/ilH4AsH_)** 
