@@ -34,9 +34,6 @@
 
 
 ??? tip "Plano de Aulas - Supercomputação (2025.2)"
-   Aqui está o cronograma reformatado no modelo pedido:
-Aqui está a tabela corrigida (sem indentação que quebre o Markdown, colunas alinhadas e textos ajustados):
-
     | Data         | Aula    | Tópicos Abordados                                                                                                             | Atividades                                                                                         |
     | ------------ | ------- | ----------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
     | 11/ago (seg) | Aula 01 | Problemas de HPC; mapa de memória; Python × C++; desempenho; objetivos da disciplina; passagem de argumentos; recursos de C++ | Transcrição de códigos Python para C++; comparação de desempenho entre linguagens.                 |
