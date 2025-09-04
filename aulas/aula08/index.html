@@ -11,6 +11,10 @@
         <link rel="canonical" href="https://insper.github.io/supercomp/aulas/aula08/">
       
       
+        <link rel="prev" href="../aula07/">
+      
+      
+        <link rel="next" href="../../teoria/aula01/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -18,7 +22,7 @@
     
     
       
-        <title>Index - SuperComputação - 2025/2</title>
+        <title>Aula 08 - Programação Paralela e Distribuída - SuperComputação - 2025/2</title>
       
     
     
@@ -79,6 +83,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#mpi-e-openmp" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -109,7 +118,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Index
+              Aula 08 - Programação Paralela e Distribuída
             
           </span>
         </div>
@@ -230,10 +239,12 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
+      <li class="md-tabs__item md-tabs__item--active">
         <a href="../aula01/" class="md-tabs__link">
           
   
@@ -259,6 +270,26 @@
   
   
   Suporte
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../projetos/2025-2/projeto-cpu/" class="md-tabs__link">
+          
+  
+  
+  Projetos
 
         </a>
       </li>
@@ -359,24 +390,29 @@
       
   
   
+    
   
   
+  
     
     
     
     
-      
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
             
   
   
@@ -389,7 +425,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             Aulas
@@ -557,6 +593,116 @@
 
               
             
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Aula 08 - Programação Paralela e Distribuída
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Aula 08 - Programação Paralela e Distribuída
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-o-codigo-faz" class="md-nav__link">
+    <span class="md-ellipsis">
+      O que o código faz:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compile-o-binario-com-suporte-para-openmp-e-mpi" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compile o binário com suporte para OpenMP e MPI:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#script-slurm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Script SLURM
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#submeta-o-job-com-slurm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Submeta o job com SLURM:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sua-vez" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sua vez!
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -686,7 +832,7 @@
   
   
   <span class="md-ellipsis">
-    Lista de Comandos
+    Útil
     
   </span>
   
@@ -773,6 +919,77 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Projetos
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Projetos
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../projetos/2025-2/projeto-cpu/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Projeto 1 - Otimizações em CPU
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -790,6 +1007,61 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-o-codigo-faz" class="md-nav__link">
+    <span class="md-ellipsis">
+      O que o código faz:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compile-o-binario-com-suporte-para-openmp-e-mpi" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compile o binário com suporte para OpenMP e MPI:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#script-slurm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Script SLURM
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#submeta-o-job-com-slurm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Submeta o job com SLURM:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sua-vez" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sua vez!
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -808,9 +1080,225 @@
   
 
 
-  <h1>Index</h1>
+<h1 id="mpi-e-openmp">MPI e OpenMP<a class="headerlink" href="#mpi-e-openmp" title="Permanent link">&para;</a></h1>
+<p>Agora que vocês aprenderam sobre <strong>MPI</strong> e já trabalharam bastante com <strong>OpenMP</strong>, vamos juntar o melhor dos dois mundos!</p>
+<p>Combinar essas duas abordagens é uma estratégia poderosa em computação de alto desempenho. Enquanto o <strong>OpenMP</strong> permite paralelizar tarefas de forma simples e eficiente dentro de uma mesma máquina (memória compartilhada), o <strong>MPI</strong> possibilita distribuir o trabalho entre várias máquinas (memória distribuída).</p>
+<p>Ao usar <strong>MPI + OpenMP juntos</strong>, conseguimos:</p>
+<ul>
+<li><strong>Aproveitar ao máximo os recursos de clusters de alto desempenho</strong>, que possuem múltiplos nós (com MPI) e múltiplos núcleos por nó (com OpenMP).</li>
+<li><strong>Reduzir o overhead de comunicação</strong>, evitando o uso excessivo de mensagens MPI quando podemos usar threads locais com OpenMP.</li>
+<li><strong>Escalar aplicações de forma mais eficiente</strong>, especialmente em tarefas intensivas como simulações científicas, análise de dados em larga escala e modelagem computacional.</li>
+</ul>
+<p>A convolução é uma técnica amplamente utilizada em visão computacional, redes neurais, filtragem de sinais e imagens, e é um excelente exemplo de aplicação que exige <strong>acesso a vizinhos</strong> para realizar o cálculo de cada ponto da saída. </p>
+<h3 id="o-que-o-codigo-faz">O que o código faz:<a class="headerlink" href="#o-que-o-codigo-faz" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Inicializa</strong> uma imagem <code>1024x1024</code> em <code>rank 0</code>.</li>
+<li><strong>Distribui a imagem completa para todos os processos</strong> via <code>MPI_Bcast</code>.</li>
+<li>Cada processo <strong>aplica a convolução</strong> apenas na sua faixa de linhas.</li>
+<li>O cálculo é feito de forma paralela com <strong>OpenMP</strong>, em múltiplos cores locais.</li>
+<li>O resultado local de cada processo é <strong>reunido no <code>rank 0</code></strong> usando <code>MPI_Gather</code>.</li>
+<li>O processo <code>rank 0</code> imprime que a convolução foi concluída.</li>
+</ol>
+<p><code>conv.cpp</code>
+<div class="highlight"><pre><span></span><code><span class="c1">// Convolução 2D com OpenMP + MPI</span>
+<span class="c1">// Objetivo: ilustrar os efeitos da combinação de paralelismo inter-nó (MPI) e intra-nó (OpenMP)</span>
 
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;mpi.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;omp.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;algorithm&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdlib&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;ctime&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;climits&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unistd.h&gt;</span>
 
+<span class="cp">#ifndef WIDTH</span>
+<span class="cp">#define WIDTH  1024</span>
+<span class="cp">#endif</span>
+<span class="cp">#ifndef HEIGHT</span>
+<span class="cp">#define HEIGHT 1024</span>
+<span class="cp">#endif</span>
+
+<span class="cp">#define KERNEL_SIZE 3</span>
+<span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">KERNEL</span><span class="p">[</span><span class="n">KERNEL_SIZE</span><span class="p">][</span><span class="n">KERNEL_SIZE</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">{</span><span class="mf">1.f</span><span class="o">/</span><span class="mi">9</span><span class="p">,</span><span class="w"> </span><span class="mf">1.f</span><span class="o">/</span><span class="mi">9</span><span class="p">,</span><span class="w"> </span><span class="mf">1.f</span><span class="o">/</span><span class="mi">9</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="mf">1.f</span><span class="o">/</span><span class="mi">9</span><span class="p">,</span><span class="w"> </span><span class="mf">1.f</span><span class="o">/</span><span class="mi">9</span><span class="p">,</span><span class="w"> </span><span class="mf">1.f</span><span class="o">/</span><span class="mi">9</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="mf">1.f</span><span class="o">/</span><span class="mi">9</span><span class="p">,</span><span class="w"> </span><span class="mf">1.f</span><span class="o">/</span><span class="mi">9</span><span class="p">,</span><span class="w"> </span><span class="mf">1.f</span><span class="o">/</span><span class="mi">9</span><span class="p">},</span>
+<span class="p">};</span>
+
+<span class="c1">// Indexação linear (i,j) -&gt; i*WIDTH + j</span>
+<span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">idx</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">WIDTH</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">j</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">**</span><span class="w"> </span><span class="n">argv</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">MPI_Init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">argv</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">rank</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="n">MPI_Comm_rank</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rank</span><span class="p">);</span>
+<span class="w">    </span><span class="n">MPI_Comm_size</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">size</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Para manter o exemplo simples com MPI_Gather:</span>
+<span class="w">    </span><span class="c1">// exigimos divisão exata de HEIGHT por size.</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">rows_per_process</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">HEIGHT</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">size</span><span class="p">;</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">remainder</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="n">HEIGHT</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">size</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">remainder</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rank</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;[ERRO] HEIGHT (&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">HEIGHT</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;) não é múltiplo de size (&quot;</span>
+<span class="w">                      </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;). Escolha um número de ranks que divida HEIGHT &quot;</span>
+<span class="w">                      </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;ou troque para MPI_Gatherv.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">MPI_Abort</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Buffers contíguos</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="w"> </span><span class="n">image</span><span class="w"> </span><span class="p">(</span><span class="n">HEIGHT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">WIDTH</span><span class="p">);</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="w"> </span><span class="n">output</span><span class="p">(</span><span class="n">HEIGHT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">WIDTH</span><span class="p">,</span><span class="w"> </span><span class="mf">0.f</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Rank 0 inicializa e depois faz broadcast</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rank</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">srand</span><span class="p">(</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">unsigned</span><span class="o">&gt;</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">time</span><span class="p">(</span><span class="k">nullptr</span><span class="p">)));</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">HEIGHT</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">WIDTH</span><span class="p">;</span><span class="w">  </span><span class="o">++</span><span class="n">j</span><span class="p">)</span>
+<span class="w">                </span><span class="n">image</span><span class="p">[</span><span class="n">idx</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">rand</span><span class="p">()</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">256</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">MPI_Bcast</span><span class="p">(</span><span class="n">image</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span><span class="w"> </span><span class="n">HEIGHT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">WIDTH</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_FLOAT</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_COMM_WORLD</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Faixa deste rank</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">start_row</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rank</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">rows_per_process</span><span class="p">;</span><span class="w">      </span><span class="c1">// inclusivo</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">end_row</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="n">start_row</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">rows_per_process</span><span class="p">;</span><span class="w"> </span><span class="c1">// exclusivo</span>
+
+<span class="w">    </span><span class="c1">// Faixa efetiva (evita bordas globais e do bloco)</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i_begin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">max</span><span class="p">(</span><span class="n">start_row</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i_end</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">min</span><span class="p">(</span><span class="n">end_row</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">HEIGHT</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w"> </span><span class="c1">// exclusivo</span>
+
+<span class="w">    </span><span class="c1">// Cabeçalho por rank (ordenado para não embaralhar)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">size</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">r</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">MPI_Barrier</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rank</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">r</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kt">char</span><span class="w"> </span><span class="n">host</span><span class="p">[</span><span class="mi">128</span><span class="p">];</span><span class="w"> </span><span class="n">gethostname</span><span class="p">(</span><span class="n">host</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">host</span><span class="p">));</span>
+<span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">tmax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">omp_get_max_threads</span><span class="p">();</span>
+<span class="w">            </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;------------------------------------------------------------</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">            </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;[Rank &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">rank</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; @ &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">host</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;] &quot;</span>
+<span class="w">                      </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;size=&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">size</span>
+<span class="w">                      </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; | OMP_MAX_THREADS=&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">tmax</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">            </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;  Faixa de dados:    [&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">start_row</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;,&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="p">(</span><span class="n">end_row</span><span class="mi">-1</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;]</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">            </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="p">.</span><span class="n">flush</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">MPI_Barrier</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Vamos medir a faixa REAL tocada por cada thread</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">tmax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">omp_get_max_threads</span><span class="p">();</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">t_min</span><span class="p">(</span><span class="n">tmax</span><span class="p">,</span><span class="w"> </span><span class="n">INT_MAX</span><span class="p">);</span><span class="w"> </span><span class="c1">// por thread</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">t_max</span><span class="p">(</span><span class="n">tmax</span><span class="p">,</span><span class="w"> </span><span class="n">INT_MIN</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">MPI_Barrier</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">);</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">t0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI_Wtime</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// Paraleliza SOMENTE no laço de i (para facilitar leitura de faixas por thread)</span>
+<span class="w">    </span><span class="cp">#pragma omp parallel</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">tid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">omp_get_thread_num</span><span class="p">();</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">local_min</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">INT_MAX</span><span class="p">,</span><span class="w"> </span><span class="n">local_max</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">INT_MIN</span><span class="p">;</span>
+
+<span class="w">        </span><span class="cp">#pragma omp for schedule(static)</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i_begin</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">i_end</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">WIDTH</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">j</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="kt">float</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.f</span><span class="p">;</span>
+<span class="w">                </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">ki</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span><span class="w"> </span><span class="n">ki</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">ki</span><span class="p">)</span>
+<span class="w">                    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">kj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span><span class="w"> </span><span class="n">kj</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">kj</span><span class="p">)</span>
+<span class="w">                        </span><span class="n">sum</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">image</span><span class="p">[</span><span class="n">idx</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="n">ki</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="o">+</span><span class="n">kj</span><span class="p">)]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">KERNEL</span><span class="p">[</span><span class="n">ki</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">kj</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
+<span class="w">                </span><span class="n">output</span><span class="p">[</span><span class="n">idx</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sum</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="n">local_min</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">min</span><span class="p">(</span><span class="n">local_min</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">);</span>
+<span class="w">            </span><span class="n">local_max</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">max</span><span class="p">(</span><span class="n">local_max</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">local_min</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">local_max</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">t_min</span><span class="p">[</span><span class="n">tid</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">local_min</span><span class="p">;</span>
+<span class="w">            </span><span class="n">t_max</span><span class="p">[</span><span class="n">tid</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">local_max</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">MPI_Barrier</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">);</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI_Wtime</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// Impressão das faixas por thread (ordenado por rank)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">size</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">r</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">MPI_Barrier</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rank</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">r</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;[Rank &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">rank</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;] OpenMP (faixas por thread):</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">            </span><span class="kt">bool</span><span class="w"> </span><span class="n">alguma</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">tmax</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">t</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">t_min</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">t_max</span><span class="p">[</span><span class="n">t</span><span class="p">])</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">alguma</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<span class="w">                    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;  - Thread &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">t</span>
+<span class="w">                              </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; → linhas [&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">t_min</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;,&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">t_max</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;]</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">alguma</span><span class="p">)</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;  (nenhuma thread recebeu iterações)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">            </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="p">.</span><span class="n">flush</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">MPI_Barrier</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Reúne as faixas (contíguas) no rank 0</span>
+<span class="w">    </span><span class="n">MPI_Gather</span><span class="p">(</span><span class="n">output</span><span class="p">.</span><span class="n">data</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">start_row</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">WIDTH</span><span class="p">,</span>
+<span class="w">               </span><span class="n">rows_per_process</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">WIDTH</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_FLOAT</span><span class="p">,</span>
+<span class="w">               </span><span class="n">output</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span>
+<span class="w">               </span><span class="n">rows_per_process</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">WIDTH</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_FLOAT</span><span class="p">,</span>
+<span class="w">               </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_COMM_WORLD</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rank</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;------------------------------------------------------------</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Convolução concluída!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;cálculo local + sync: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="p">(</span><span class="n">t1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">t0</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Configuração: size=&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">size</span>
+<span class="w">                  </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; | rows_per_process=&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">rows_per_process</span>
+<span class="w">                  </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; | WIDTH=&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">WIDTH</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; | HEIGHT=&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">HEIGHT</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">MPI_Finalize</span><span class="p">();</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<h3 id="compile-o-binario-com-suporte-para-openmp-e-mpi">Compile o binário com suporte para OpenMP e MPI:<a class="headerlink" href="#compile-o-binario-com-suporte-para-openmp-e-mpi" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>mpic++<span class="w"> </span>-O3<span class="w"> </span>-fopenmp<span class="w"> </span>conv.cpp<span class="w"> </span>-o<span class="w"> </span>conv
+</code></pre></div>
+<h3 id="script-slurm">Script SLURM<a class="headerlink" href="#script-slurm" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="c1">#SBATCH --job-name=mpi_openmp</span>
+<span class="c1">#SBATCH --output=saida_%j.txt</span>
+<span class="c1">#SBATCH --nodes=4                 # 4 nós (computadores)</span>
+<span class="c1">#SBATCH --ntasks-per-node=1       # 1 rank por nó</span>
+<span class="c1">#SBATCH --cpus-per-task=4         # 4 threads OMP por rank</span>
+<span class="c1">#SBATCH --time=00:10:00</span>
+<span class="c1">#SBATCH --partition=gpu</span>
+<span class="c1">#SBATCH --mem=1G                  # 1 GiB por nó</span>
+
+<span class="nb">export</span><span class="w"> </span><span class="nv">OMP_NUM_THREADS</span><span class="o">=</span><span class="si">${</span><span class="nv">SLURM_CPUS_PER_TASK</span><span class="si">}</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">OMP_PROC_BIND</span><span class="o">=</span>close
+<span class="nb">export</span><span class="w"> </span><span class="nv">OMP_PLACES</span><span class="o">=</span>cores
+
+<span class="c1"># Execute o seu binário com o MPI</span>
+mpirun<span class="w"> </span>-np<span class="w"> </span><span class="nv">$SLURM_NTASKS</span><span class="w"> </span>./conv
+</code></pre></div>
+<h3 id="submeta-o-job-com-slurm">Submeta o job com SLURM:<a class="headerlink" href="#submeta-o-job-com-slurm" title="Permanent link">&para;</a></h3>
+<p><div class="highlight"><pre><span></span><code>sbatch<span class="w"> </span>SeuSlurm.slurm
+</code></pre></div>
+Com a configuração de hardware pedida ao Slurm, o programa vai rodar com 4 processos MPI (ranks).
+Como a imagem tem 1024 linhas, cada rank recebe exatamente 256 linhas para processar (1024 ÷ 4 = 256).</p>
+<p>Dentro de cada rank, em vez de um único núcleo calcular todas as linhas, o trabalho é dividido entre 4 threads usando o OpenMP.
+Ou seja: cada rank distribui suas 256 linhas entre 4 threads locais.</p>
+<p><img alt="img1" src="imgs/img1.png" /></p>
+<p>MPI divide a imagem entre os nós (cada computador pega um pedaço), e OpenMP divide esse pedaço entre 4 CPU's dentro do nó de computação.</p>
+<h3 id="sua-vez">Sua vez!<a class="headerlink" href="#sua-vez" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Quanto tempo esse código leva pra rodar no modo sequencial?</li>
+<li><strong>Remova <code>OpenMP</code></strong> e compare os tempos só com MPI.</li>
+<li><strong>Remova <code>MPI</code></strong> e compare os tempos só com OpenMP.</li>
+<li><strong>Meça speedup</strong> em diferentes quantidades de processos e threads.</li>
+</ol>
 
 
 

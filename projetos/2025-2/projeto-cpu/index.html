@@ -8,24 +8,26 @@
       
       
       
-        <link rel="canonical" href="https://insper.github.io/supercomp/projetos/2022-1/">
+        <link rel="canonical" href="https://insper.github.io/supercomp/projetos/2025-2/projeto-cpu/">
+      
+      
+        <link rel="prev" href="../../../teoria/MPI/">
       
       
       
-      
-      <link rel="icon" href="../../assets/images/favicon.png">
+      <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.15">
     
     
       
-        <title>Alinhamento de Sequencias de DNA - SuperComputação - 2025/2</title>
+        <title>Projeto 1 - Otimizações em CPU - SuperComputação - 2025/2</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.342714a4.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -44,19 +46,19 @@
       
     
     
-      <link rel="stylesheet" href="../../css/printing.css">
+      <link rel="stylesheet" href="../../../css/printing.css">
     
-      <link rel="stylesheet" href="../../css/extra.css">
+      <link rel="stylesheet" href="../../../css/extra.css">
     
-      <link rel="stylesheet" href="../../css/equipe.css">
+      <link rel="stylesheet" href="../../../css/equipe.css">
     
-      <link rel="stylesheet" href="../../css/ansi-colours.css">
+      <link rel="stylesheet" href="../../../css/ansi-colours.css">
     
-      <link rel="stylesheet" href="../../css/jupyter-cells.css">
+      <link rel="stylesheet" href="../../../css/jupyter-cells.css">
     
-      <link rel="stylesheet" href="../../css/pandas-dataframe.css">
+      <link rel="stylesheet" href="../../../css/pandas-dataframe.css">
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -80,7 +82,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#alinhamento-de-sequencias-de-dna" class="md-skip">
+        <a href="#projeto-1-mineracao-de-hashes-cpu-em-ambiente-de-hpc" class="md-skip">
           Skip to content
         </a>
       
@@ -94,7 +96,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="SuperComputação - 2025/2" class="md-header__button md-logo" aria-label="SuperComputação - 2025/2" data-md-component="logo">
+    <a href="../../.." title="SuperComputação - 2025/2" class="md-header__button md-logo" aria-label="SuperComputação - 2025/2" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -114,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Alinhamento de Sequencias de DNA
+              Projeto 1 - Otimizações em CPU
             
           </span>
         </div>
@@ -199,7 +201,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../.." class="md-tabs__link">
+      <a href="../../.." class="md-tabs__link">
         
   
   
@@ -218,7 +220,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../sobre/" class="md-tabs__link">
+      <a href="../../../sobre/" class="md-tabs__link">
         
   
   
@@ -239,7 +241,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../aulas/aula01/" class="md-tabs__link">
+        <a href="../../../aulas/aula01/" class="md-tabs__link">
           
   
   
@@ -259,7 +261,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../teoria/aula01/" class="md-tabs__link">
+        <a href="../../../teoria/aula01/" class="md-tabs__link">
           
   
   
@@ -275,11 +277,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../2025-2/projeto-cpu/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
           
   
   
@@ -313,7 +317,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="SuperComputação - 2025/2" class="md-nav__button md-logo" aria-label="SuperComputação - 2025/2" data-md-component="logo">
+    <a href="../../.." title="SuperComputação - 2025/2" class="md-nav__button md-logo" aria-label="SuperComputação - 2025/2" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -343,7 +347,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         
   
   
@@ -365,7 +369,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../sobre/" class="md-nav__link">
+      <a href="../../../sobre/" class="md-nav__link">
         
   
   
@@ -428,7 +432,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../aulas/aula01/" class="md-nav__link">
+      <a href="../../../aulas/aula01/" class="md-nav__link">
         
   
   
@@ -451,7 +455,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../aulas/aula02/" class="md-nav__link">
+      <a href="../../../aulas/aula02/" class="md-nav__link">
         
   
   
@@ -474,7 +478,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../aulas/aula03/" class="md-nav__link">
+      <a href="../../../aulas/aula03/" class="md-nav__link">
         
   
   
@@ -497,7 +501,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../aulas/aula04/" class="md-nav__link">
+      <a href="../../../aulas/aula04/" class="md-nav__link">
         
   
   
@@ -520,7 +524,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../aulas/aula05/" class="md-nav__link">
+      <a href="../../../aulas/aula05/" class="md-nav__link">
         
   
   
@@ -543,7 +547,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../aulas/aula06/" class="md-nav__link">
+      <a href="../../../aulas/aula06/" class="md-nav__link">
         
   
   
@@ -566,7 +570,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../aulas/aula07/" class="md-nav__link">
+      <a href="../../../aulas/aula07/" class="md-nav__link">
         
   
   
@@ -589,7 +593,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../aulas/aula08/" class="md-nav__link">
+      <a href="../../../aulas/aula08/" class="md-nav__link">
         
   
   
@@ -660,7 +664,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../teoria/aula01/" class="md-nav__link">
+      <a href="../../../teoria/aula01/" class="md-nav__link">
         
   
   
@@ -683,7 +687,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../teoria/aula01/compilar-executar-C%2B%2B/" class="md-nav__link">
+      <a href="../../../teoria/aula01/compilar-executar-C%2B%2B/" class="md-nav__link">
         
   
   
@@ -706,7 +710,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../teoria/aula02/" class="md-nav__link">
+      <a href="../../../teoria/aula02/" class="md-nav__link">
         
   
   
@@ -729,7 +733,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../teoria/comandos/" class="md-nav__link">
+      <a href="../../../teoria/comandos/" class="md-nav__link">
         
   
   
@@ -752,7 +756,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../teoria/heuristicas/" class="md-nav__link">
+      <a href="../../../teoria/heuristicas/" class="md-nav__link">
         
   
   
@@ -775,7 +779,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../teoria/openmp/" class="md-nav__link">
+      <a href="../../../teoria/openmp/" class="md-nav__link">
         
   
   
@@ -798,7 +802,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../teoria/MPI/" class="md-nav__link">
+      <a href="../../../teoria/MPI/" class="md-nav__link">
         
   
   
@@ -825,24 +829,29 @@
       
   
   
+    
   
   
+  
     
     
     
     
-      
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
         
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
             
   
   
@@ -855,7 +864,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             Projetos
@@ -866,10 +875,30 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../2025-2/projeto-cpu/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Projeto 1 - Otimizações em CPU
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -880,6 +909,90 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#projeto-1-mineracao-de-hashes-cpu-em-ambiente-de-hpc" class="md-nav__link">
+    <span class="md-ellipsis">
+      Projeto 1 - Mineração de Hashes CPU em ambiente de HPC
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Projeto 1 - Mineração de Hashes CPU em ambiente de HPC">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objetivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Objetivo
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rubrica-de-avaliacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rúbrica de Avaliação
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#entrega" class="md-nav__link">
+    <span class="md-ellipsis">
+      Entrega
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bonus-por-qualidade-do-relatorio-tecnico" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bônus por Qualidade do relatório técnico
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Bônus por Qualidade do relatório técnico">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#observacoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Observações
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -909,8 +1022,6 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -919,55 +1030,61 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#estrategias-a-serem-estudadas-e-correcao-automatica" class="md-nav__link">
+  <a href="#projeto-1-mineracao-de-hashes-cpu-em-ambiente-de-hpc" class="md-nav__link">
     <span class="md-ellipsis">
-      Estratégias a serem estudadas e correção automática
+      Projeto 1 - Mineração de Hashes CPU em ambiente de HPC
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Projeto 1 - Mineração de Hashes CPU em ambiente de HPC">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objetivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Objetivo
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rubrica-de-avaliacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rúbrica de Avaliação
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#avaliacao" class="md-nav__link">
+  <a href="#entrega" class="md-nav__link">
     <span class="md-ellipsis">
-      Avaliação
+      Entrega
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Avaliação">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bonus-por-qualidade-do-relatorio-tecnico" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bônus por Qualidade do relatório técnico
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Bônus por Qualidade do relatório técnico">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#conceito-d" class="md-nav__link">
+  <a href="#observacoes" class="md-nav__link">
     <span class="md-ellipsis">
-      Conceito D
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#conceito-c" class="md-nav__link">
-    <span class="md-ellipsis">
-      Conceito C
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#conceito-c_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      Conceito C+
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#conceitos-avancados" class="md-nav__link">
-    <span class="md-ellipsis">
-      Conceitos avançados
+      Observações
     </span>
   </a>
   
@@ -997,96 +1114,100 @@
   
 
 
-<h1 id="alinhamento-de-sequencias-de-dna">Alinhamento de Sequencias de DNA<a class="headerlink" href="#alinhamento-de-sequencias-de-dna" title="Permanent link">&para;</a></h1>
-<p>Em Bioinformática, o problema de <strong>alinhamento de sequências de DNA</strong> consiste no processo de comparar duas ou mais sequências de bases de forma a se observar seu nível de similaridade. Trata-se de um problema extremamente importante no contexto atual, pois permite comparar sequencias virais de SARS-COV2 em bancos de dados genômicos para detecção de novas mutações.</p>
-<p>O nível de similaridade pode ser calculado com base em <strong>acertos (match)</strong> e <strong>erros (gap e mismatch)</strong>. Os acertos contribuem com sinal positivo (+) para o nível de similaridade e, os erros, com sinal negativo (-). Abaixo temos um exemplo de cálculo do nível similaridade:</p>
-<p><img alt="image" src="alignment.png" /></p>
-<p>Vamos associar a pontuação <strong>+1 (match)</strong> e as penalidades <strong>-1 (gap)</strong> e <strong>-4 (mismatch)</strong>. Assim, teremos o seguinte nível de similaridade:</p>
-<p>23 matches x (+1) + 4 gaps x (-1) + 3 mismatches x (-4) = 23-4-12 = 7</p>
-<p>Neste contexto, o problema de alinhamento de sequencias de DNA pode ser colocado da seguinte forma:</p>
-<div class="highlight"><pre><span></span><code>Dadas duas sequencias de DNA, com as bases A,T,G,C e - para indicar gap, 
-encontrar o alinhamento que maximize o nível de similaridade. 
-</code></pre></div>
-<p>Neste projeto, seu objetivo será construir programas para encontrar este alinhamento de nível máximo de similaridade, utilizando várias estratégias. </p>
-<p>Cada um dos seus programas tomará como entrada a seguinte estrutura: a primeira linha contém dois números <code>n</code> e <code>m</code>, onde <code>n</code> é o tamanho da primeira sequencia e, <code>m</code>, o tamanho da segunda. Assuma <code>n ≤ 200</code> e <code>m ≤ 200</code>. A segunda linha contém as bases da primeira sequencia e, a terceira linha, as bases da segunda.</p>
-<div class="highlight"><pre><span></span><code>5 7
-AT-CC
-TTTCCAA
-</code></pre></div>
-<p>A saída deve ser uma linha com um número inteiro indicando o nível máximo de similaridade.</p>
-<p><div class="highlight"><pre><span></span><code>2
-</code></pre></div>
-Neste caso, este nível máximo de similaridade pode ser associado ao alinhamento T-CC/TTCC (1-1+1+1=2) ou a CC/CC(1+1=2). Você pode usar o notebook SequenceGenerator.ipynb para gerar instâncias aleatórias para seus testes.</p>
-<h2 id="estrategias-a-serem-estudadas-e-correcao-automatica">Estratégias a serem estudadas e correção automática<a class="headerlink" href="#estrategias-a-serem-estudadas-e-correcao-automatica" title="Permanent link">&para;</a></h2>
-<p>Para cada estratégia que vamos estudar, implementaremos um programa correspondente no projeto. Veja abaixo as datas de entrega e descrições de cada estratégia a ser implementada. Em geral, o enunciado de uma parte é liberado após a data de entrega da parte anterior.</p>
+  <h1>Projeto 1 - Otimizações em CPU</h1>
+
+<h2 id="projeto-1-mineracao-de-hashes-cpu-em-ambiente-de-hpc"><strong>Projeto 1 - Mineração de Hashes CPU em ambiente de HPC</strong><a class="headerlink" href="#projeto-1-mineracao-de-hashes-cpu-em-ambiente-de-hpc" title="Permanent link">&para;</a></h2>
+<p>Neste projeto, seu grupo deverá <strong>diagnosticar e otimizar um algoritmo de mineração de criptomoedas implementado em C++</strong>. O código inicial foi propositalmente escrito de forma ineficiente, apresentando gargalos péssimas práticas de uso de memória.</p>
+<p>Espera-se que seu grupo seja capaz de identificar esses problemas, propor hipóteses de melhoria, aplicar técnicas de otimização e mensurar o impacto das mudanças no desempenho da aplicação. Ao final, seu grupo deverá elaborar um relatório técnico com perfil, documentando todo o processo de análise e otimização.</p>
+<p>A dificuldade da mineração é ajustada pela quantidade de zeros exigida no início do hash. À medida que vocês aumentam essa dificuldade, o desafio computacional cresce, o que demanda boas decisões de otimização e uso eficiente de CPU e memória. Analise adequadamente os recursos disponíveis das filas do Cluster Franky para realizar os seus testes e suas otimizações.</p>
+<hr />
+<h3 id="objetivo"><strong>Objetivo</strong><a class="headerlink" href="#objetivo" title="Permanent link">&para;</a></h3>
+<p>Aplicar conhecimentos de:</p>
+<ul>
+<li>Análise de desempenho</li>
+<li>Diagnóstico de gargalos</li>
+<li>Boas práticas de gerenciamento de memória</li>
+<li>Paralelismo com OpenMP</li>
+<li>Distribuição com MPI</li>
+</ul>
+<h2 id="rubrica-de-avaliacao"><strong>Rúbrica de Avaliação</strong><a class="headerlink" href="#rubrica-de-avaliacao" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Conceito</th>
+<th>Critérios Técnicos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>C</strong></td>
+<td>Executa o minerador sequencial no cluster Franky com dificuldade <strong>6 zeros</strong>, Realiza Passagem de objetos grandes por referência ou ponteiro; Minimização de cópias desnecessárias; Uso eficiente de buffers;  Implementa uma heurísitca eficiente.</td>
+</tr>
+<tr>
+<td><strong>B</strong></td>
+<td>Executa o minerador com dificuldade <strong>7 zeros</strong>, Realiza as otimizações da rúbrica C e aplica <strong>paralelização com OpenMP ou distribuição com MPI</strong></td>
+</tr>
+<tr>
+<td><strong>A</strong></td>
+<td>Executa o minerador com dificuldade <strong>8 zeros</strong>, Realiza as otimizações da rúbrica C e aplica <strong>paralelização com OpenMP E distribuição com MPI</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="entrega"><strong>Entrega</strong><a class="headerlink" href="#entrega" title="Permanent link">&para;</a></h2>
+<p>A entrega deve conter:</p>
 <ol>
-<li><a href="heuristico/">Solução Heurística</a> (18/03)</li>
-<li><a href="busca-local">Busca Local</a>(01/04)</li>
-<li><a href="busca-exaustiva">Busca Exaustiva</a>(15/04)</li>
-<li><a href="relatorio-1">Relatório Preliminar</a> (29/04)</li>
-<li><a href="paralelismo-multicore">Paralelismo Multicore</a> (13/05)</li>
-<li><a href="paralelismo-gpu">Paralelismo GPU</a> (27/05)</li>
-<li><a href="relatorio-2">Relatório Final</a> (03/06)</li>
+<li>
+<p><strong>Código-fonte funcional</strong></p>
+</li>
+<li>
+<p>Comentado e organizado</p>
+</li>
+<li>Inclui versão base e versão otimizada</li>
+<li>
+<p>Deve ser entregue via GitHub Classroom </p>
+</li>
+<li>
+<p><strong>Relatório Técnico</strong></p>
+</li>
+<li>
+<p>Diagnóstico dos gargalos do código base</p>
+</li>
+<li>Proposta de otimização e hipótese de melhoria</li>
+<li>Implementação da hipótese</li>
+<li>Comparação de desempenho (tempo, speedup, eficiência, etc.)</li>
+<li>Discussão dos resultados e limitações encontradas</li>
 </ol>
-<!-- 1. [Solução Heurística](heuristico) (23/03)
-2. [Busca local](busca-local) (09/04)
-3. [Busca exaustiva](busca-exaustiva) (16/04)
-4. [Relatório preliminar](relatorio-1) (30/04)
-5. [Paralelismo MultiCore](paralelismo-multicore) (21/05) -->
-<!-- 
-Cada parte de implementação será conferida usando um script de correção checagem de resultados disponível no repositório de entregas do projeto, juntamente com instruções de uso. Registre seu usuário do github até **15/03** para ser convidado para seu repositório de entregas.
-
-<iframe width="640px" height= "480px" src= "https://forms.office.com/Pages/ResponsePage.aspx?id=wKZwY5B7CUe9blnCjt6DO36bxJ3XetxChDUDKdweTOJURUNKWkFLSklHNk1RWlVBTUNHWEszVExOViQlQCN0PWcu&embed=true" frameborder= "0" marginwidth= "0" marginheight= "0" style= "border: none; max-width:100%; max-height:100vh" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen> </iframe>
-
-### Instruções de correção
-
-O corretor automático depende do pacote `grading-tools`, que deverá ser instalado como abaixo.
-
-<div class="highlight"><pre><span></span><code>$&gt;<span class="w"> </span>python3.8<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>git+https://github.com/igordsm/grading-tools
-</code></pre></div>
-
-??? tip "Python 3.8 no Ubuntu"
-    Se seu `python3` é uma versão inferior ao 3.8, você pode instalá-lo com os pacotes abaixo:
-
-    <div class="highlight"><pre><span></span><code>python3.8 python3.8-dev
-</code></pre></div>
-
-    A partir daí poderá seguir normalmente as instruções desta página.
-
-Com isso configurado, é só compilar seu programa e rodar `python3.8 corretor.py executavel`. Para baixar os novos exercícios é só rodar `git pull`. Os exercícios serão entregues criando um commit com sua resposta e dando `git push`.
-
-
-!!! warning
-    Fique atento a atualizações no seu repositório de projeto. Atualizações no corretor serão feitas ao longo do semestre, assim como serão disponibilizados novos arquivos de entrada/saída para cada parte a ser implementada. -->
-
-<h2 id="avaliacao">Avaliação<a class="headerlink" href="#avaliacao" title="Permanent link">&para;</a></h2>
-<p>O projeto será avaliado usando rubricas para as entregas básicas. As rubricas de avaliação dos relatórios estarão descritas em suas páginas de entrega.</p>
-<h3 id="conceito-d">Conceito D<a class="headerlink" href="#conceito-d" title="Permanent link">&para;</a></h3>
-<p>Algum dos seguintes itens não foi entregue corretamente ou possui problemas sérios (no caso do relatório final).</p>
-<ol>
-<li>Solução heurística</li>
-<li>Busca local</li>
-<li>Busca exaustiva</li>
-<li>Busca local paralela (CPU)</li>
-<li>Busca local paralela (GPU)</li>
-<li>Relatório preliminar</li>
-<li>Relatório final</li>
-</ol>
-<h3 id="conceito-c">Conceito C<a class="headerlink" href="#conceito-c" title="Permanent link">&para;</a></h3>
-<p>Todas as atividades abaixo foram validadas pelo corretor e (no caso do relatório final) alcançaram qualidade mínima exigida.</p>
-<ol>
-<li>Solução heurística</li>
-<li>Busca local</li>
-<li>Busca exaustiva</li>
-<li>Busca local paralela (CPU)</li>
-<li>Busca local paralela (GPU)</li>
-<li>Relatório preliminar</li>
-<li>Relatório final</li>
-</ol>
-<h3 id="conceito-c_1">Conceito C+<a class="headerlink" href="#conceito-c_1" title="Permanent link">&para;</a></h3>
-<p>Além do já validado no conceito <strong>C</strong>, os relatórios entregues não tinham nenhum ponto <strong>em desenvolvimento</strong> ou <strong>insatisfatório</strong> na rubrica do relatório.</p>
-<h3 id="conceitos-avancados">Conceitos avançados<a class="headerlink" href="#conceitos-avancados" title="Permanent link">&para;</a></h3>
-<p>A partir do  conceito <strong>C+</strong> cada atividade avançada vale meio conceito. Elas serão listadas aqui conforme o semestre avança e serão testadas pela checagem de resultados disponível no repositório de entregas.</p>
+<hr />
+<h2 id="bonus-por-qualidade-do-relatorio-tecnico"><strong>Bônus por Qualidade do relatório técnico</strong><a class="headerlink" href="#bonus-por-qualidade-do-relatorio-tecnico" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Conceito Base</th>
+<th>Com Bônus</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C</td>
+<td>C+</td>
+</tr>
+<tr>
+<td>B</td>
+<td>B+</td>
+</tr>
+<tr>
+<td>A</td>
+<td>A+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="observacoes">Observações<a class="headerlink" href="#observacoes" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Espera-se que o aluno entenda os problemas do código base antes de corrigir.</li>
+<li>O binário <code>transacoes</code> simula um ambiente de rede assíncrono com envio de blocos não simultâneos, para que o código minerador seja tolerante a ordem e tempo de chegada.</li>
+<li>A execução dos testes pode demorar minutos. Se planeje bem, escolha adequadamente a fila que será utilizada nos seus testes.</li>
+</ul>
 
 
 
@@ -1135,18 +1256,18 @@ Com isso configurado, é só compilar seu programa e rodar `python3.8 corretor.p
     
     
       
-      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "content.code.copy"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.56ea9cef.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.56ea9cef.min.js"></script>
       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.0.0/js-yaml.min.js"></script>
       
-        <script src="../../js/markdown-enhancer.js"></script>
+        <script src="../../../js/markdown-enhancer.js"></script>
       
-        <script src="../../js/slides.js"></script>
+        <script src="../../../js/slides.js"></script>
       
     
   </body>

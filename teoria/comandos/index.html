@@ -22,7 +22,7 @@
     
     
       
-        <title>Lista de Comandos - SuperComputação - 2025/2</title>
+        <title>Útil - SuperComputação - 2025/2</title>
       
     
     
@@ -118,7 +118,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Lista de Comandos
+              Útil
             
           </span>
         </div>
@@ -270,6 +270,26 @@
   
   
   Suporte
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../projetos/2025-2/projeto-cpu/" class="md-tabs__link">
+          
+  
+  
+  Projetos
 
         </a>
       </li>
@@ -568,6 +588,29 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/aula08/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Aula 08 - Programação Paralela e Distribuída
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -709,7 +752,7 @@
   
   
   <span class="md-ellipsis">
-    Lista de Comandos
+    Útil
     
   </span>
   
@@ -722,7 +765,7 @@
   
   
   <span class="md-ellipsis">
-    Lista de Comandos
+    Útil
     
   </span>
   
@@ -898,6 +941,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#bug-de-arquivos-gerados-no-windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bug de arquivos gerados no Windows
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -966,6 +1018,77 @@
   
   <span class="md-ellipsis">
     MPI
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Projetos
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Projetos
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../projetos/2025-2/projeto-cpu/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Projeto 1 - Otimizações em CPU
     
   </span>
   
@@ -1163,6 +1286,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#bug-de-arquivos-gerados-no-windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bug de arquivos gerados no Windows
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1182,7 +1314,7 @@
   
 
 
-  <h1>Lista de Comandos</h1>
+  <h1>Útil</h1>
 
 <h2 id="comandos-slurm">Comandos SLURM<a class="headerlink" href="#comandos-slurm" title="Permanent link">&para;</a></h2>
 <h3 id="principais-recursos-que-voce-pode-pedir-com-srun">Principais recursos que você pode pedir com <code>srun</code><a class="headerlink" href="#principais-recursos-que-voce-pode-pedir-com-srun" title="Permanent link">&para;</a></h3>
@@ -1486,6 +1618,32 @@ Para executar dentro de um nó de computação:</p>
 <span class="s2"> lscpu | grep -E &#39;Model name|Socket|Core|Thread|CPU\\(s\\)|cache&#39;</span>
 <span class="s2"> echo &#39;=== GPU INFO ===&#39;; \</span>
 <span class="s2"> if command -v nvidia-smi &amp;&gt; /dev/null; then nvidia-smi; else echo &#39;nvidia-smi não disponível&#39;; fi&quot;</span>
+</code></pre></div>
+<h2 id="bug-de-arquivos-gerados-no-windows">Bug de arquivos gerados no Windows<a class="headerlink" href="#bug-de-arquivos-gerados-no-windows" title="Permanent link">&para;</a></h2>
+<p>Trabalhando em 2 ambientes diferentes é comum ocorrer problemas de fim de
+linha entre DOS e UNIX. </p>
+<p>Caso você encontre esse problema aqui vão algumas opções. </p>
+<p><a href="https://www.youtube.com/embed/AiHhyOJ526k">Video ilustrando o passo a passo</a></p>
+<p><em>Utilizando o editor NANO</em></p>
+<p>Abra o arquivo utilizando a flag unix:
+<div class="highlight"><pre><span></span><code>nano<span class="w"> </span>--unix<span class="w"> </span>arquivo.ext
+</code></pre></div></p>
+<p>feito isso basta salvar com C^O e sair C^X</p>
+<p><em>Utilizando o editor VI/VIM</em></p>
+<div class="highlight"><pre><span></span><code>vi<span class="w"> </span>arquivo.ext
+</code></pre></div>
+<p>Com ele aberto é possivel definir o <code>fileformat</code> com o seguinte comando:</p>
+<div class="highlight"><pre><span></span><code>:set ff=unix
+</code></pre></div>
+<p>e então sair e salvar com:</p>
+<div class="highlight"><pre><span></span><code>:wq!
+</code></pre></div>
+<p>o <code>!</code> irá forçar a sobrescrita. </p>
+<p><em>Utilizando o VI/VIM por linha de comando:</em></p>
+<div class="highlight"><pre><span></span><code>vi<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;set ff=unix&quot;</span><span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;wq&quot;</span><span class="w"> </span>arquivo.ext
+</code></pre></div>
+<p><em>Se dos2unix tiver instalado:</em></p>
+<div class="highlight"><pre><span></span><code>dos2unix<span class="w"> </span>arquico.ext
 </code></pre></div>
 
 
