@@ -7,7 +7,7 @@ https://classroom.github.com/a/2374xoSF)
 
 Neste projeto, seu grupo deverá **diagnosticar e otimizar um algoritmo de mineração de criptomoedas implementado em C++**. O código inicial foi propositalmente escrito de forma ineficiente, apresentando gargalos péssimas práticas de uso de memória.
 
-Espera-se que seu grupo seja capaz de identificar esses problemas, propor hipóteses de melhoria, aplicar técnicas de otimização e mensurar o impacto das mudanças no desempenho da aplicação. Ao final, seu grupo deverá elaborar um relatório técnico com perfil, documentando todo o processo de análise e otimização.
+Espera-se que seu grupo seja capaz de identificar esses problemas, propor hipóteses de melhoria, aplicar técnicas de otimização e mensurar o impacto das mudanças no desempenho da aplicação. Ao final, seu grupo deverá elaborar um relatório técnico, documentando todo o processo de análise e otimização.
 
 A dificuldade da mineração é ajustada pela quantidade de zeros exigida no início do hash. À medida que vocês aumentam essa dificuldade, o desafio computacional cresce, o que demanda boas decisões de otimização e uso eficiente de CPU e memória. Analise adequadamente os recursos disponíveis das filas do Cluster Franky para realizar os seus testes e suas otimizações.
 
@@ -37,19 +37,21 @@ Aplicar conhecimentos de:
 
 A entrega deve conter:
 
-1. **Código-fonte funcional**
+0. **O nome de cada integrante do grupo**
 
-   * Comentado e organizado
-   * Inclui versão base e versão otimizada
-   * Deve ser entregue via GitHub Classroom 
+1. **Código-fonte funcional**
+   
+   - Comentado e organizado
+   - Inclui versão base e versão otimizada
+   - Deve ser entregue via GitHub Classroom 
 
 2. **Relatório Técnico**
 
-   * Diagnóstico dos gargalos do código base
-   * Proposta de otimização e hipótese de melhoria
-   * Implementação da hipótese
-   * Comparação de desempenho (tempo, speedup, eficiência, etc.)
-   * Discussão dos resultados e limitações encontradas
+   - Diagnóstico dos gargalos do código base
+   - Proposta de otimização e hipótese de melhoria
+   - Implementação da hipótese
+   - Comparação de desempenho (tempo, speedup, eficiência, etc.)
+   - Discussão dos resultados e limitações encontradas
 
 ---
 
