@@ -1,6 +1,6 @@
-# **Projeto 1 - Mineração de Hashes CPU em ambiente de HPC**
+# **Projeto 1 - Mineração de Hashes em ambiente de HPC**
 
-## Grupos de no máximo 3 alunos, data de entrega 29/Setembro
+## **Grupos de no máximo 3 alunos, data de entrega 29/Setembro**
 
 [Acesse o repositório do projeto aqui](
 https://classroom.github.com/a/2374xoSF)
