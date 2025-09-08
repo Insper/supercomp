@@ -37,21 +37,19 @@ Aplicar conhecimentos de:
 
 A entrega deve conter:
 
-0. **O nome de cada integrante do grupo**
+0. O nome de cada integrante do grupo
 
-1. **Código-fonte funcional**
-   
-   - Comentado e organizado
-   - Inclui versão base e versão otimizada
-   - Deve ser entregue via GitHub Classroom 
+1. Código-fonte funcional
 
-2. **Relatório Técnico**
+2. Diagnóstico dos gargalos do código base
 
-   - Diagnóstico dos gargalos do código base
-   - Proposta de otimização e hipótese de melhoria
-   - Implementação da hipótese
-   - Comparação de desempenho (tempo, speedup, eficiência, etc.)
-   - Discussão dos resultados e limitações encontradas
+3. Proposta de otimização e hipótese de melhoria
+
+4. Implementação da hipótese
+
+5. Comparação de desempenho (tempo, speedup, eficiência, etc.)
+
+6. Discussão dos resultados e limitações encontradas
 
 ---
 
