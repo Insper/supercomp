@@ -41,13 +41,17 @@ Preencha o documento conforme os exemplos abaixo:
 
 Você pode optar por:
 
-- **Assinar à mão**, imprimir e escanear o formulário;
-- **Ou assinar digitalmente com sua conta Gov.br** pelo site [https://assinador.iti.br/](https://assinador.iti.br/).
+- **Assinar digitalmente com sua conta Gov.br** pelo site [https://assinador.iti.br/](https://assinador.iti.br/).
+
+- **ou assinar à mão**, imprimir e escanear o formulário;
 
 ## Próximos passos
 Anexe ao e-mail um documento de identificação oficial como RG ou CNH;
+
 Envie os documentos por e-mail para liciascl@insper.edu.br.
 
-Após o envio, os formulários serão encaminhados para o LNCC para criação do acesso ao SDumont.
+**Após o envio, os formulários devidamente preenchidos e assinados serão encaminhados para o LNCC para criação do acesso ao SDumont.**
 
 > **Importante:** O supercomputador SDumont é uma ferramenta poderosa para aprendizado e pesquisa. Use-o com responsabilidade.
+
+Site oficial do Santos Dumont [https://sdumont.lncc.br/index.php](https://sdumont.lncc.br/index.php)

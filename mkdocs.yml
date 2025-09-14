@@ -42,6 +42,7 @@ nav:
         - "Aula 08 - Programação Paralela e Distribuída": aulas/aula08/index.md
         - "Aula 09 - Projeto 1 - Otimizações em CPU": aulas/aula09/index.md
         - "Aula 10 - Acesso ao Supercomputador SDumont": aulas/aula10/index.md
+        - "Aula 11 - MPI e as Operações Coletivas": aulas/aula11/index.md
 
     - Suporte:
         - "Aula 01" : teoria/aula01/index.md
