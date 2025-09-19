@@ -1,0 +1,1624 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://insper.github.io/supercomp/Exercicios/aula04/aula04/">
+      
+      
+        <link rel="prev" href="../../aula03/aula03/">
+      
+      
+        <link rel="next" href="../../aula05/aula05/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.7">
+    
+    
+      
+        <title>Aula 04 Otimização de Estratégias e Heurísticas - SuperComputação - 2025/2</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.8608ea7d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../css/printing.css">
+    
+      <link rel="stylesheet" href="../../../css/extra.css">
+    
+      <link rel="stylesheet" href="../../../css/equipe.css">
+    
+      <link rel="stylesheet" href="../../../css/ansi-colours.css">
+    
+      <link rel="stylesheet" href="../../../css/jupyter-cells.css">
+    
+      <link rel="stylesheet" href="../../../css/pandas-dataframe.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue-gray" data-md-color-accent="red">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#questao-1-teorica-heuristicas-e-aleatoriedade" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="SuperComputação - 2025/2" class="md-header__button md-logo" aria-label="SuperComputação - 2025/2" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SuperComputação - 2025/2
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Aula 04 Otimização de Estratégias e Heurísticas 
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/insper/supercomp" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    SuperComp
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../sobre/" class="md-tabs__link">
+        
+  
+    
+  
+  Burocracias
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../aulas/aula01/" class="md-tabs__link">
+          
+  
+  Aulas
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../teoria/aula01/" class="md-tabs__link">
+          
+  
+  Suporte
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../aula01/aula01/" class="md-tabs__link">
+          
+  
+  Exercícios
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../projetos/2025-2/projeto-cpu/" class="md-tabs__link">
+          
+  
+  Projetos
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="SuperComputação - 2025/2" class="md-nav__button md-logo" aria-label="SuperComputação - 2025/2" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    SuperComputação - 2025/2
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/insper/supercomp" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    SuperComp
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../sobre/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Burocracias
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Aulas
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Aulas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aulas/aula01/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aula 01 - Problemas de HPC
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aulas/aula02/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aula 02 - Sistemas de HPC
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aulas/aula03/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aula 03 - Otimização e Tiling
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aulas/aula04/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aula 04 - Heurísticas e Aleatoriedade
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aulas/aula05/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aula 05 - Programação paralela em CPU
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aulas/aula06/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aula 06 - Efeitos colaterais do paralelismo
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aulas/aula07/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aula 07 - Programação Distribuída
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aulas/aula08/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aula 08 - Programação Paralela e Distribuída
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aulas/aula09/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aula 09 - Projeto 1 - Otimizações em CPU
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aulas/aula10/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aula 10 - Acesso ao Supercomputador SDumont
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aulas/aula11/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aula 11 - MPI e as Operações Coletivas
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aulas/aula12/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aula 12 - Exercícios preparatórios para AI
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Suporte
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Suporte
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../teoria/aula01/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aula 01
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../teoria/aula01/compilar-executar-C%2B%2B/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Compilar C++
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../teoria/aula02/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aula 02
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../teoria/comandos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Útil
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../teoria/heuristicas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Heurísticas
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../teoria/openmp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    OpenMP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../teoria/MPI/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MPI
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Exercícios
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Exercícios
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aula01/aula01/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aula 01 e 02 Otimizações basicas
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aula03/aula03/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aula 03 Otimizações no uso da memória
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Aula 04 Otimização de Estratégias e Heurísticas 
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Aula 04 Otimização de Estratégias e Heurísticas 
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#questao-1-teorica-heuristicas-e-aleatoriedade" class="md-nav__link">
+    <span class="md-ellipsis">
+      Questão 1 — Teórica (Heurísticas e Aleatoriedade)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#questao-2-busca-linear-vs-aleatoria-em-vetor" class="md-nav__link">
+    <span class="md-ellipsis">
+      Questão 2 — Busca linear vs aleatória em vetor
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#questao-3-estrategia-hibrida-busca-sequencial-aleatoria" class="md-nav__link">
+    <span class="md-ellipsis">
+      Questão 3 — Estratégia híbrida (busca sequencial + aleatória)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#questao-4-heuristica-com-pre-filtro" class="md-nav__link">
+    <span class="md-ellipsis">
+      Questão 4 — Heurística com pré-filtro
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aula05/aula05/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aula 05 Otimizações usando paralelismo de memória local
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aula06/aula06/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aula 06 lidando com efeitos colaterais do paralelismo
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aula07/aula07/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aula 07 Otimizações usando paralelismo de memória Distribuída
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aula08/aula08/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aula 08 Otimizações usando paralelismo de memória local e distribuída
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Projetos
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Projetos
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../projetos/2025-2/projeto-cpu/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Projeto 1 - Otimizações em CPU
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#questao-1-teorica-heuristicas-e-aleatoriedade" class="md-nav__link">
+    <span class="md-ellipsis">
+      Questão 1 — Teórica (Heurísticas e Aleatoriedade)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#questao-2-busca-linear-vs-aleatoria-em-vetor" class="md-nav__link">
+    <span class="md-ellipsis">
+      Questão 2 — Busca linear vs aleatória em vetor
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#questao-3-estrategia-hibrida-busca-sequencial-aleatoria" class="md-nav__link">
+    <span class="md-ellipsis">
+      Questão 3 — Estratégia híbrida (busca sequencial + aleatória)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#questao-4-heuristica-com-pre-filtro" class="md-nav__link">
+    <span class="md-ellipsis">
+      Questão 4 — Heurística com pré-filtro
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+  <h1>Aula 04 Otimização de Estratégias e Heurísticas </h1>
+
+<h2 id="questao-1-teorica-heuristicas-e-aleatoriedade">Questão 1 — Teórica (Heurísticas e Aleatoriedade)<a class="headerlink" href="#questao-1-teorica-heuristicas-e-aleatoriedade" title="Permanent link">&para;</a></h2>
+<p><strong>Tipo:</strong> múltipla escolha (múltiplas corretas)<br />
+<strong>Enunciado:</strong><br />
+Sobre heurísticas com aleatoriedade em problemas de otimização:  </p>
+<p>a) Uma heurística sempre garante encontrar a solução ótima.<br />
+b) O uso de aleatoriedade pode ajudar a escapar de mínimos locais.<br />
+c) Estratégias puramente determinísticas podem explorar repetidamente as mesmas regiões do espaço de busca.<br />
+d) Uma heurística aleatória nunca pode ser menos eficiente que uma busca determinística.  </p>
+<details class="note">
+<summary>Ver resposta</summary>
+<p>a) Incorreta. Heurísticas <strong>não garantem a solução ótima</strong>, mas sim uma <strong>boa solução em tempo razoável</strong>. </p>
+<p>b) Correta. Técnicas como Algoritmos Genéticos usam aleatoriedade justamente para evitar que a busca fique presa em soluções subótimas.</p>
+<p>c) Correta. Sem variação aleatória, a busca pode focar em regiões já visitadas, perdendo diversidade na exploração.</p>
+<p>d) Incorreta. O uso de aleatoriedade não garante eficiência. Pode inclusive aumentar o custo (mais iterações, soluções piores) se mal calibrada. A eficiência depende da implementação.</p>
+</details>
+<h2 id="questao-2-busca-linear-vs-aleatoria-em-vetor">Questão 2 — Busca linear vs aleatória em vetor<a class="headerlink" href="#questao-2-busca-linear-vs-aleatoria-em-vetor" title="Permanent link">&para;</a></h2>
+<p><strong>Enunciado:</strong><br />
+Implemente duas funções para encontrar um valor <code>alvo</code> em um vetor:  </p>
+<ul>
+<li><strong>Versão linear</strong>: percorre o vetor de <code>0</code> até <code>N-1</code>.  </li>
+<li><strong>Versão aleatória</strong>: sorteia índices aleatórios até encontrar o alvo (ou até <code>maxTentativas</code>).  </li>
+</ul>
+<p>Depois:<br />
+- Compile no cluster.<br />
+- <strong>Crie um script SLURM</strong> para rodar ambas versões.<br />
+- Compare o tempo e número de tentativas de cada abordagem.  </p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="nf">busca_linear</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">alvo</span><span class="p">);</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">busca_aleatoria</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">alvo</span><span class="p">,</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">maxTentativas</span><span class="p">);</span>
+</code></pre></div>
+<details class="note">
+<summary>Ver resposta</summary>
+<p><code>busca_linear</code> percorre <strong>sequencialmente</strong> → excelente <strong>localidade espacial</strong>.<br />
+<code>busca_aleatoria</code> tem <strong>acessos aleatórios</strong> → pouca localidade, alta variância; pode repetir índices.<br />
+ Com o vetor <code>v[i]=i</code>, a <strong>linear encontra rápido</strong> (especialmente se <code>alvo</code> for pequeno); a aleatória pode demorar mesmo com alvo “próximo”.  </p>
+<div class="codehilite"><pre><span></span><code>#include &lt;vector&gt;
+#include &lt;random&gt;
+
+// ---------------------------------------------------------
+// Função: busca_linear
+// Objetivo: procurar o valor &#39;alvo&#39; de forma sequencial
+// Estratégia: percorre o vetor do início ao fim (índices 0..N-1)
+// ---------------------------------------------------------
+int busca_linear(const std::vector&lt;int&gt;&amp; v, int alvo) {
+    // Percorre todos os elementos do vetor
+    for (size_t i = 0; i &lt; v.size(); i++) {
+        // Se encontrou o alvo, retorna o índice
+        if (v[i] == alvo) return (int)i;
+    }
+    // Se chegou até aqui, o alvo não existe no vetor
+    return -1;
+}
+
+// ---------------------------------------------------------
+// Função: busca_aleatoria
+// Objetivo: procurar o valor &#39;alvo&#39; de forma aleatória
+// Estratégia: sorteia índices ao acaso até achar o alvo
+// ou até atingir o limite de tentativas (maxTentativas).
+// ---------------------------------------------------------
+int busca_aleatoria(const std::vector&lt;int&gt;&amp; v, int alvo, unsigned long long maxTentativas) {
+    // Caso o vetor esteja vazio, não há o que buscar
+    if (v.empty()) return -1;
+
+    // Gerador de números aleatórios
+    std::random_device rd;        // fonte de entropia (pode variar a cada execução)
+    std::mt19937 gen(rd());       // gerador pseudo-aleatório (Mersenne Twister)
+    std::uniform_int_distribution&lt;size_t&gt; dist(0, v.size() - 1); 
+    // distribuição uniforme de índices válidos [0, N-1]
+
+    // Tenta encontrar o alvo até atingir o número máximo de tentativas
+    for (unsigned long long t = 0; t &lt; maxTentativas; t++) {
+        size_t idx = dist(gen);   // sorteia um índice válido
+        if (v[idx] == alvo) {
+            // se encontrou, retorna o índice
+            return (int)idx;
+        }
+    }
+    // Se não encontrou dentro do limite de tentativas, retorna -1
+    return -1;
+}
+</code></pre></div>
+
+<p>Script SLURM</p>
+<div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="c1">#SBATCH --job-name=busca            # nome do job</span>
+<span class="c1">#SBATCH --output=busca.%j.txt       # saída em arquivo</span>
+<span class="c1">#SBATCH --time=00:05:00             # tempo limite</span>
+<span class="c1">#SBATCH --nodes=1                   # 1 nó</span>
+<span class="c1">#SBATCH --ntasks=1                  # 1 tarefa</span>
+<span class="c1">#SBATCH --cpus-per-task=1           # 1 CPU</span>
+<span class="c1">#SBATCH --partition=express         # ou &#39;normal&#39;, se preferir</span>
+<span class="c1">#SBATCH --mem=1GB                   # memória</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;=== Rodada 1: N=1e6 alvo=500000 maxTent=1e6 seed=42 ===&quot;</span>
+./busca<span class="w"> </span><span class="m">1000000</span><span class="w"> </span><span class="m">500000</span><span class="w"> </span><span class="m">1000000</span><span class="w"> </span><span class="m">42</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;=======================================================&quot;</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;=== Rodada 2: N=1e6 alvo=10 maxTent=1e6 seed=123 ===&quot;</span>
+./busca<span class="w"> </span><span class="m">1000000</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="m">1000000</span><span class="w"> </span><span class="m">123</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;====================================================&quot;</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;=== Rodada 3: N=1e6 alvo=999999 maxTent=1e6 seed=777 ===&quot;</span>
+./busca<span class="w"> </span><span class="m">1000000</span><span class="w"> </span><span class="m">999999</span><span class="w"> </span><span class="m">1000000</span><span class="w"> </span><span class="m">777</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;=======================================================&quot;</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;=== Rodada 4: N=1e6 alvo=37 (usa N/2) maxTent=1e6 seed=2025 ===&quot;</span>
+./busca<span class="w"> </span><span class="m">1000000</span><span class="w"> </span><span class="m">37</span><span class="w"> </span><span class="m">1000000</span><span class="w"> </span><span class="m">2025</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;=============================================================&quot;</span>
+</code></pre></div></td></tr></table></div>
+
+</details>
+<h2 id="questao-3-estrategia-hibrida-busca-sequencial-aleatoria">Questão 3 — Estratégia híbrida (busca sequencial + aleatória)<a class="headerlink" href="#questao-3-estrategia-hibrida-busca-sequencial-aleatoria" title="Permanent link">&para;</a></h2>
+<p><strong>Enunciado:</strong><br />
+Implemente uma função que:<br />
+- Primeiro verifica os <strong>K primeiros elementos</strong> do vetor sequencialmente.<br />
+- Se não encontrar, passa a buscar usando índices aleatórios até <code>maxTentativas</code>.  </p>
+<p>Depois:<br />
+- Compile e rode no cluster com SLURM.<br />
+- Compare os resultados com as funções da Questão 2.  </p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="nf">busca_hibrida</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">alvo</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">K</span><span class="p">,</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">maxTentativas</span><span class="p">);</span>
+</code></pre></div>
+<details class="note">
+<summary>Ver resposta</summary>
+<div class="codehilite"><pre><span></span><code>#include &lt;vector&gt;
+#include &lt;random&gt;
+
+// ---------------------------------------------------------
+// Função: busca_hibrida
+// Objetivo: combinar duas estratégias de busca:
+//   (1) varre sequencialmente os K primeiros elementos (bom p/ localidade)
+//   (2) se não achar, usa tentativas aleatórias até maxTentativas
+//
+// Quando é útil?
+// - Se o alvo tem maior probabilidade de estar no início do vetor,
+//   a parte sequencial encontra rápido.
+// - Caso contrário, a fase aleatória pode &quot;acertar&quot; em elementos distantes
+//   sem percorrer todo o vetor sequencialmente.
+// ---------------------------------------------------------
+int busca_hibrida(const std::vector&lt;int&gt;&amp; v, int alvo, int K, unsigned long long maxTentativas) {
+    // -------- Parte 1: busca sequencial nos primeiros K elementos --------
+    // Varre de 0 até K-1 (limitando também pelo tamanho do vetor).
+    // Vantagem: acesso contíguo → melhor localidade de memória.
+    for (int i = 0; i &lt; K &amp;&amp; i &lt; (int)v.size(); i++) {
+        if (v[i] == alvo) return i;  // achou no prefixo
+    }
+
+    // -------- Parte 2: busca aleatória no vetor inteiro --------
+    // Observação: esta versão sorteia em [0, N-1]. Em muitos casos,
+    // restringir a [K, N-1] faz mais sentido (evita repetir o prefixo já checado).
+    if (v.empty()) return -1;        // vetor vazio → não há o que buscar
+
+    // Geradores para sorteio de índices válidos
+    std::random_device rd;           // fonte de entropia (não determinística)
+    std::mt19937 gen(rd());          // PRNG (Mersenne Twister)
+    std::uniform_int_distribution&lt;size_t&gt; dist(0, v.size() - 1); // sorteia 0..N-1
+
+    // Tenta até atingir o limite de tentativas aleatórias
+    for (unsigned long long t = 0; t &lt; maxTentativas; t++) {
+        size_t idx = dist(gen);      // sorteia um índice
+        if (v[idx] == alvo) {        // compara com o alvo
+            return (int)idx;         // achou durante a fase aleatória
+        }
+    }
+
+    // Não encontrou nem na parte sequencial, nem na aleatória
+    return -1;
+}
+</code></pre></div>
+
+</details>
+<h2 id="questao-4-heuristica-com-pre-filtro">Questão 4 — Heurística com pré-filtro<a class="headerlink" href="#questao-4-heuristica-com-pre-filtro" title="Permanent link">&para;</a></h2>
+<p><strong>Enunciado:</strong><br />
+Implemente uma função de busca que usa uma <strong>heurística simples de pré-filtro</strong>:<br />
+- Antes de acessar <code>v[i]</code>, só considere o índice se <code>i % 2 == 0</code> (ou seja, só olha posições pares).<br />
+- Se não encontrar após <code>maxTentativas</code>, faça busca linear completa como fallback.  </p>
+<p>Depois:<br />
+- Compile e rode no cluster com SLURM.<br />
+- Compare desempenho e número de acessos com as versões anteriores.  </p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="nf">busca_com_filtro</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">alvo</span><span class="p">,</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">maxTentativas</span><span class="p">);</span>
+</code></pre></div>
+<details class="note">
+<summary>Ver resposta</summary>
+<p>A busca aleatória é <strong>restrita a índices pares</strong>, tentando reduzir acessos.<br />
+Caso não encontre dentro de <code>maxTentativas</code>, entra uma busca linear 
+O pré-filtro pode ser vantajoso se há <strong>maior probabilidade</strong> de o alvo estar em posições pares.<br />
+Porém, pode desperdiçar tentativas (índices ímpares descartados) e no pior caso cair na busca linear.</p>
+<div class="codehilite"><pre><span></span><code>#include &lt;vector&gt;
+#include &lt;random&gt;
+
+int busca_com_filtro(const std::vector&lt;int&gt;&amp; v, int alvo, unsigned long long maxTentativas) {
+    if (v.empty()) return -1;
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution&lt;size_t&gt; dist(0, v.size() - 1);
+
+    // Heurística: só verifica índices pares
+    for (unsigned long long t = 0; t &lt; maxTentativas; t++) {
+        size_t idx = dist(gen);
+        if (idx % 2 != 0) continue;       // ignora índices ímpares
+        if (v[idx] == alvo) return (int)idx;
+    }
+
+    // Fallback: se não achou, faz busca linear completa
+    for (size_t i = 0; i &lt; v.size(); i++) {
+        if (v[i] == alvo) return (int)i;
+    }
+    return -1; // não encontrado
+}
+</code></pre></div>
+
+</details>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.0.0/js-yaml.min.js"></script>
+      
+        <script src="../../../js/markdown-enhancer.js"></script>
+      
+        <script src="../../../js/slides.js"></script>
+      
+    
+  </body>
+</html>
