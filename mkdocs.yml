@@ -43,6 +43,7 @@ nav:
         - "Aula 09 - Projeto 1 - Otimizações em CPU": aulas/aula09/index.md
         - "Aula 10 - Acesso ao Supercomputador SDumont": aulas/aula10/index.md
         - "Aula 11 - MPI e as Operações Coletivas": aulas/aula11/index.md
+        - "Aula 12 - Exercícios preparatórios para AI": aulas/aula12/index.md
 
     - Suporte:
         - "Aula 01" : teoria/aula01/index.md
@@ -53,7 +54,14 @@ nav:
         - "OpenMP" : teoria/openmp.md
         - "MPI" : teoria/MPI.md
         
-
+    - Exercícios: 
+        - "Aula 01 e 02 Otimizações basicas": Exercicios/aula01/aula01.md
+        - "Aula 03 Otimizações no uso da memória": Exercicios/aula03/aula03.md
+        - "Aula 04 Otimização de Estratégias e Heurísticas ": Exercicios/aula04/aula04.md
+        - "Aula 05 Otimizações usando paralelismo de memória local": Exercicios/aula05/aula05.md
+        - "Aula 06 lidando com efeitos colaterais do paralelismo": Exercicios/aula06/aula06.md
+        - "Aula 07 Otimizações usando paralelismo de memória Distribuída": Exercicios/aula07/aula07.md
+        - "Aula 08 Otimizações usando paralelismo de memória local e distribuída": Exercicios/aula08/aula08.md
 
     - Projetos:
         - "Projeto 1 - Otimizações em CPU" : projetos/2025-2/projeto-cpu.md
