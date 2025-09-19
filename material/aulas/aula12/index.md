@@ -2,11 +2,11 @@
 
 ## Exercícios para estudar para AI
 
-A **Ninja Laís Freitas** trabalhou na elaboração de  exercícios para que vocês se ambientem com o estilo de prova e exercitem os seus conhecimentos, os Exercícios estão separados por aula, você pode acessa-los [clicando aqui](../../Exercicios/aula01/aula01.md) ou em **"Exercícios"** ao lado de **"Suporte"**;
+A **Ninja Laíz Freitas** trabalhou na elaboração de  exercícios para que vocês se ambientem com o estilo de prova e exercitem os seus conhecimentos, os Exercícios estão separados por aula, você pode acessa-los [clicando aqui](../../Exercicios/aula01/aula01.md) ou em **"Exercícios"** ao lado de **"Suporte"**;
 
 ## **Simulado AI**
 
-Além dos exercícios preparados pela Ninja Laís, também disponibilizo um simulado. A prova contará com questões teóricas no Blackboard e questões práticas no Classroom, elaboradas no mesmo nível de dificuldade do simulado disponibilizado. 
+Além dos exercícios preparados pela Ninja Laíz, também disponibilizo um simulado. A prova contará com questões teóricas no Blackboard e questões práticas no Classroom, elaboradas no mesmo nível de dificuldade do simulado disponibilizado. 
 
 ??? warning ""É fundamental que você realize os testes necessários para garantir que o SMOWL esteja funcionando corretamente em seu computador antes da prova. A responsabilidade pela infraestrutura adequada é inteiramente do aluno. Caso a ferramenta não esteja disponível, a sua prova será anulada. Em situações de dificuldade técnica, procure o Helpdesk."
 
