@@ -6,12 +6,6 @@ b) Quais são as vantagens dessa abordagem híbrida em relação a usar apenas M
 c) Dê um exemplo de problema em que **somente OpenMP** não seria suficiente.  
 d) Cite uma dificuldade extra que surge ao programar em MPI+OpenMP em comparação com usar apenas OpenMP.  
 
-Aqui vai um **gabarito didático** para a questão sobre **MPI + OpenMP**:
-
----
-
-## Questão 1 — Teórica (MPI + OpenMP)
-
 ??? note "Ver resposta"
     
     a) Os clusters HPC têm múltiplos nós (máquinas diferentes) e múltiplos núcleos por nó (vários core dentro da CPU). O MPI é usado para comunicação entre nós, O OpenMP é usado para paralelismo dentro de cada nó, usandos as threads e a memória compartilhada (L1, L2, L3 e RAM). Juntos, aproveitam ao máximo a hierarquia do hardware (distribuído + compartilhado).
