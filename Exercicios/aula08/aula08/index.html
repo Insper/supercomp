@@ -1135,15 +1135,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#questao-1-teorica-mpi-openmp_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      Questão 1 — Teórica (MPI + OpenMP)
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#questao-2-somas-parciais-em-matriz-hibrida" class="md-nav__link">
     <span class="md-ellipsis">
       Questão 2 — Somas parciais em matriz híbrida
@@ -1366,15 +1357,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#questao-1-teorica-mpi-openmp_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      Questão 1 — Teórica (MPI + OpenMP)
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#questao-2-somas-parciais-em-matriz-hibrida" class="md-nav__link">
     <span class="md-ellipsis">
       Questão 2 — Somas parciais em matriz híbrida
@@ -1504,9 +1486,6 @@ a) Explique por que faz sentido combinar <strong>MPI</strong> e <strong>OpenMP</
 b) Quais são as vantagens dessa abordagem híbrida em relação a usar apenas MPI puro?<br />
 c) Dê um exemplo de problema em que <strong>somente OpenMP</strong> não seria suficiente.<br />
 d) Cite uma dificuldade extra que surge ao programar em MPI+OpenMP em comparação com usar apenas OpenMP.  </p>
-<p>Aqui vai um <strong>gabarito didático</strong> para a questão sobre <strong>MPI + OpenMP</strong>:</p>
-<hr />
-<h2 id="questao-1-teorica-mpi-openmp_1">Questão 1 — Teórica (MPI + OpenMP)<a class="headerlink" href="#questao-1-teorica-mpi-openmp_1" title="Permanent link">&para;</a></h2>
 <details class="note">
 <summary>Ver resposta</summary>
 <p>a) Os clusters HPC têm múltiplos nós (máquinas diferentes) e múltiplos núcleos por nó (vários core dentro da CPU). O MPI é usado para comunicação entre nós, O OpenMP é usado para paralelismo dentro de cada nó, usandos as threads e a memória compartilhada (L1, L2, L3 e RAM). Juntos, aproveitam ao máximo a hierarquia do hardware (distribuído + compartilhado).</p>
