@@ -11,18 +11,22 @@
         <link rel="canonical" href="https://insper.github.io/supercomp/aulas/aula13/">
       
       
+        <link rel="prev" href="../aula12/">
+      
+      
+        <link rel="next" href="../../teoria/aula01/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.7">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.15">
     
     
       
-        <title>Index - SuperComputação - 2025/2</title>
+        <title>Aula 13 - Programação em GPU com CUDA - SuperComputação - 2025/2</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.8608ea7d.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
@@ -79,6 +83,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#uma-introducao-a-cuda" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -109,7 +118,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Index
+              Aula 13 - Programação em GPU com CUDA
             
           </span>
         </div>
@@ -121,11 +130,13 @@
     
     
     
-      <label class="md-header__button md-icon" for="__search">
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
-      </label>
-      <div class="md-search" data-md-component="search" role="dialog">
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
@@ -157,6 +168,7 @@
     </div>
   </div>
 </div>
+      
     
     
       <div class="md-header__source">
@@ -189,9 +201,11 @@
   
   
   
+  
     <li class="md-tabs__item">
       <a href="../.." class="md-tabs__link">
         
+  
   
     
   
@@ -206,9 +220,11 @@
   
   
   
+  
     <li class="md-tabs__item">
       <a href="../../sobre/" class="md-tabs__link">
         
+  
   
     
   
@@ -224,10 +240,14 @@
   
   
     
+  
+  
     
-      <li class="md-tabs__item">
+    
+      <li class="md-tabs__item md-tabs__item--active">
         <a href="../aula01/" class="md-tabs__link">
           
+  
   
   Aulas
 
@@ -241,11 +261,13 @@
   
   
   
+  
     
     
       <li class="md-tabs__item">
         <a href="../../teoria/aula01/" class="md-tabs__link">
           
+  
   
   Suporte
 
@@ -259,11 +281,13 @@
   
   
   
+  
     
     
       <li class="md-tabs__item">
         <a href="../../Exercicios/aula01/aula01/" class="md-tabs__link">
           
+  
   
   Exercícios
 
@@ -277,11 +301,13 @@
   
   
   
+  
     
     
       <li class="md-tabs__item">
         <a href="../../projetos/2025-2/projeto-cpu/" class="md-tabs__link">
           
+  
   
   Projetos
 
@@ -346,6 +372,7 @@
       <a href="../.." class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Home
     
@@ -367,6 +394,7 @@
       <a href="../../sobre/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Burocracias
     
@@ -382,24 +410,31 @@
       
   
   
+    
   
   
+  
     
     
     
-      
-      
     
-    
-    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
             
+  
   
   <span class="md-ellipsis">
     Aulas
@@ -410,7 +445,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             Aulas
@@ -426,6 +461,7 @@
     <li class="md-nav__item">
       <a href="../aula01/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     Aula 01 - Problemas de HPC
@@ -449,6 +485,7 @@
       <a href="../aula02/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Aula 02 - Sistemas de HPC
     
@@ -470,6 +507,7 @@
     <li class="md-nav__item">
       <a href="../aula03/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     Aula 03 - Otimização e Tiling
@@ -493,6 +531,7 @@
       <a href="../aula04/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Aula 04 - Heurísticas e Aleatoriedade
     
@@ -514,6 +553,7 @@
     <li class="md-nav__item">
       <a href="../aula05/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     Aula 05 - Programação paralela em CPU
@@ -537,6 +577,7 @@
       <a href="../aula06/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Aula 06 - Efeitos colaterais do paralelismo
     
@@ -558,6 +599,7 @@
     <li class="md-nav__item">
       <a href="../aula07/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     Aula 07 - Programação Distribuída
@@ -581,6 +623,7 @@
       <a href="../aula08/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Aula 08 - Programação Paralela e Distribuída
     
@@ -602,6 +645,7 @@
     <li class="md-nav__item">
       <a href="../aula09/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     Aula 09 - Projeto 1 - Otimizações em CPU
@@ -625,6 +669,7 @@
       <a href="../aula10/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Aula 10 - Acesso ao Supercomputador SDumont
     
@@ -646,6 +691,7 @@
     <li class="md-nav__item">
       <a href="../aula11/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     Aula 11 - MPI e as Operações Coletivas
@@ -669,6 +715,7 @@
       <a href="../aula12/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Aula 12 - Exercícios preparatórios para AI
     
@@ -676,6 +723,212 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Aula 13 - Programação em GPU com CUDA
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Aula 13 - Programação em GPU com CUDA
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#etapa-1-preparando-o-ambiente" class="md-nav__link">
+    <span class="md-ellipsis">
+      Etapa 1 — Preparando o ambiente
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#etapa-2-codigo-base-cpu" class="md-nav__link">
+    <span class="md-ellipsis">
+      Etapa 2 — Código Base (CPU)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#etapa-3-migrando-para-gpu-cuda" class="md-nav__link">
+    <span class="md-ellipsis">
+      Etapa 3 — Migrando para GPU (CUDA)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#etapa-4-executando-no-no-gpu-com-slurm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Etapa 4 — Executando no nó GPU com SLURM
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#explicacao-do-kernel-cuda" class="md-nav__link">
+    <span class="md-ellipsis">
+      Explicação do Kernel CUDA
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Explicação do Kernel CUDA">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#o-que-e-uma-grid-e-o-que-e-um-block" class="md-nav__link">
+    <span class="md-ellipsis">
+      O que é uma Grid e o que é um Block?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configurando-a-execucao-com-multiplos-blocos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configurando a Execução com Múltiplos Blocos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#calculando-o-indice-global-de-cada-thread" class="md-nav__link">
+    <span class="md-ellipsis">
+      Calculando o Índice Global de Cada Thread
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#percorrendo-grandes-vetores-com-grid-stride-loop" class="md-nav__link">
+    <span class="md-ellipsis">
+      Percorrendo Grandes Vetores com Grid-Stride Loop
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kernel-completo-com-multiplos-blocos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Kernel completo com múltiplos blocos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualizacao-do-modelo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Visualização do Modelo
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compilando-e-executando-no-hpc" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compilando e executando no HPC
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conceitos-chave-dessa-etapa" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conceitos-chave dessa etapa
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercicios" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercícios:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#se-quiser-aprender-mais" class="md-nav__link">
+    <span class="md-ellipsis">
+      Se quiser aprender mais
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -697,6 +950,7 @@
     
     
     
+    
       
       
     
@@ -710,6 +964,7 @@
           
           <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     Suporte
@@ -737,6 +992,7 @@
       <a href="../../teoria/aula01/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Aula 01
     
@@ -758,6 +1014,7 @@
     <li class="md-nav__item">
       <a href="../../teoria/aula01/compilar-executar-C%2B%2B/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     Compilar C++
@@ -781,6 +1038,7 @@
       <a href="../../teoria/aula02/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Aula 02
     
@@ -802,6 +1060,7 @@
     <li class="md-nav__item">
       <a href="../../teoria/comandos/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     Útil
@@ -825,6 +1084,7 @@
       <a href="../../teoria/heuristicas/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Heurísticas
     
@@ -847,6 +1107,7 @@
       <a href="../../teoria/openmp/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     OpenMP
     
@@ -868,6 +1129,7 @@
     <li class="md-nav__item">
       <a href="../../teoria/MPI/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     MPI
@@ -897,6 +1159,7 @@
     
     
     
+    
       
       
     
@@ -910,6 +1173,7 @@
           
           <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     Exercícios
@@ -937,6 +1201,7 @@
       <a href="../../Exercicios/aula01/aula01/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Aula 01 e 02 Otimizações basicas
     
@@ -958,6 +1223,7 @@
     <li class="md-nav__item">
       <a href="../../Exercicios/aula03/aula03/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     Aula 03 Otimizações no uso da memória
@@ -981,6 +1247,7 @@
       <a href="../../Exercicios/aula04/aula04/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Aula 04 Otimização de Estratégias e Heurísticas 
     
@@ -1002,6 +1269,7 @@
     <li class="md-nav__item">
       <a href="../../Exercicios/aula05/aula05/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     Aula 05 Otimizações usando paralelismo de memória local
@@ -1025,6 +1293,7 @@
       <a href="../../Exercicios/aula06/aula06/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Aula 06 lidando com efeitos colaterais do paralelismo
     
@@ -1047,6 +1316,7 @@
       <a href="../../Exercicios/aula07/aula07/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
     Aula 07 Otimizações usando paralelismo de memória Distribuída
     
@@ -1068,6 +1338,7 @@
     <li class="md-nav__item">
       <a href="../../Exercicios/aula08/aula08/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     Aula 08 Otimizações usando paralelismo de memória local e distribuída
@@ -1097,6 +1368,7 @@
     
     
     
+    
       
       
     
@@ -1110,6 +1382,7 @@
           
           <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
             
+  
   
   <span class="md-ellipsis">
     Projetos
@@ -1136,6 +1409,7 @@
     <li class="md-nav__item">
       <a href="../../projetos/2025-2/projeto-cpu/" class="md-nav__link">
         
+  
   
   <span class="md-ellipsis">
     Projeto 1 - Otimizações em CPU
@@ -1173,6 +1447,157 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#etapa-1-preparando-o-ambiente" class="md-nav__link">
+    <span class="md-ellipsis">
+      Etapa 1 — Preparando o ambiente
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#etapa-2-codigo-base-cpu" class="md-nav__link">
+    <span class="md-ellipsis">
+      Etapa 2 — Código Base (CPU)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#etapa-3-migrando-para-gpu-cuda" class="md-nav__link">
+    <span class="md-ellipsis">
+      Etapa 3 — Migrando para GPU (CUDA)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#etapa-4-executando-no-no-gpu-com-slurm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Etapa 4 — Executando no nó GPU com SLURM
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#explicacao-do-kernel-cuda" class="md-nav__link">
+    <span class="md-ellipsis">
+      Explicação do Kernel CUDA
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Explicação do Kernel CUDA">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#o-que-e-uma-grid-e-o-que-e-um-block" class="md-nav__link">
+    <span class="md-ellipsis">
+      O que é uma Grid e o que é um Block?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configurando-a-execucao-com-multiplos-blocos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configurando a Execução com Múltiplos Blocos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#calculando-o-indice-global-de-cada-thread" class="md-nav__link">
+    <span class="md-ellipsis">
+      Calculando o Índice Global de Cada Thread
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#percorrendo-grandes-vetores-com-grid-stride-loop" class="md-nav__link">
+    <span class="md-ellipsis">
+      Percorrendo Grandes Vetores com Grid-Stride Loop
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kernel-completo-com-multiplos-blocos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Kernel completo com múltiplos blocos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualizacao-do-modelo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Visualização do Modelo
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compilando-e-executando-no-hpc" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compilando e executando no HPC
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conceitos-chave-dessa-etapa" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conceitos-chave dessa etapa
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercicios" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercícios:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#se-quiser-aprender-mais" class="md-nav__link">
+    <span class="md-ellipsis">
+      Se quiser aprender mais
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -1191,9 +1616,478 @@
   
 
 
-  <h1>Index</h1>
+<h1 id="uma-introducao-a-cuda">Uma Introdução a CUDA<a class="headerlink" href="#uma-introducao-a-cuda" title="Permanent link">&para;</a></h1>
+<p>O <strong>CUDA (Compute Unified Device Architecture)</strong> é o modelo de programação paralela desenvolvido pela <strong>NVIDIA</strong>.
+Ele permite que desenvolvedores usem o poder das <strong>GPUs</strong> para acelerar aplicações de alto desempenho, executando milhares de threads simultaneamente.</p>
+<p>Em um <strong>sistema HPC com SLURM</strong>, como o Franky ou o SDumont, a execução de programas CUDA segue três etapas principais:</p>
+<ol>
+<li><strong>Carregar o módulo CUDA</strong> disponível no cluster.</li>
+<li><strong>Compilar o código</strong> com o compilador <code>nvcc</code>.</li>
+<li><strong>Executar o binário</strong> com o <code>srun</code> ou <code>sbatch</code>(solicitando uma GPU).</li>
+</ol>
+<hr />
+<h2 id="etapa-1-preparando-o-ambiente">Etapa 1 — Preparando o ambiente<a class="headerlink" href="#etapa-1-preparando-o-ambiente" title="Permanent link">&para;</a></h2>
+<p>Para saber informações sobre as filas que você tem acesso</p>
+<div class="highlight"><pre><span></span><code>sacctmgr<span class="w"> </span>list<span class="w"> </span>user<span class="w"> </span><span class="nv">$USER</span><span class="w"> </span>-s<span class="w"> </span><span class="nv">format</span><span class="o">=</span>partition%20,MaxJobs,MaxSubmit,MaxNodes,MaxCPUs,MaxWall
+</code></pre></div>
+<p>Dentro do seu diretório de trabalho <code>/scratch/insperhpc/seu_login/GPU/</code>:</p>
+<div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>/scratch/insperhpc/seu_login/GPU
+<span class="nb">cd</span><span class="w"> </span>/scratch/insperhpc/seu_login/GPU
+</code></pre></div>
+<p>Liste os módulos disponíveis e carregue o CUDA:</p>
+<div class="highlight"><pre><span></span><code>module<span class="w"> </span>avail<span class="w"> </span>cuda
+module<span class="w"> </span>load<span class="w"> </span>cuda/12.6_sequana
+</code></pre></div>
+<p>Verifique se o compilador CUDA está ativo:</p>
+<div class="highlight"><pre><span></span><code>nvcc<span class="w"> </span>--version
+</code></pre></div>
+<hr />
+<h2 id="etapa-2-codigo-base-cpu">Etapa 2 — Código Base (CPU)<a class="headerlink" href="#etapa-2-codigo-base-cpu" title="Permanent link">&para;</a></h2>
+<p>Vamos começar com um programa simples em <strong>C++</strong> que soma os elementos de dois vetores na <strong>CPU</strong>.</p>
+<p>Crie o arquivo:</p>
+<div class="highlight"><pre><span></span><code>nano<span class="w"> </span>exemplo_cpu.cpp
+</code></pre></div>
+<p>Cole o código abaixo:</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;math.h&gt;</span>
 
+<span class="c1">// Função que soma os elementos de dois vetores</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">y</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">      </span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="p">}</span>
 
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="mi">20</span><span class="p">;</span><span class="w"> </span><span class="c1">// 1 milhão de elementos</span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">float</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">float</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>
+
+<span class="w">  </span><span class="c1">// Inicializa os vetores</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">;</span>
+<span class="w">    </span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.0f</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="c1">// Executa a soma na CPU</span>
+<span class="w">  </span><span class="n">add</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">// Verifica erro</span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">maxError</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">    </span><span class="n">maxError</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fmax</span><span class="p">(</span><span class="n">maxError</span><span class="p">,</span><span class="w"> </span><span class="n">fabs</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="mf">-3.0f</span><span class="p">));</span>
+
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Erro máximo: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">maxError</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">delete</span><span class="w"> </span><span class="p">[]</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
+<span class="w">  </span><span class="k">delete</span><span class="w"> </span><span class="p">[]</span><span class="w"> </span><span class="n">y</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Compile e execute localmente (sem GPU):</p>
+<div class="highlight"><pre><span></span><code>g++<span class="w"> </span>exemplo_cpu.cpp<span class="w"> </span>-o<span class="w"> </span>ex_cpu
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>srun<span class="w"> </span>--partition<span class="o">=</span>sequana_cpu_dev<span class="w"> </span>./ex_cpu
+</code></pre></div>
+<p>Saída esperada:</p>
+<div class="highlight"><pre><span></span><code>srun: job 123456 queued and waiting for resources
+srun: job 123456 has been allocated resources
+Erro máximo: 0
+</code></pre></div>
+<hr />
+<h2 id="etapa-3-migrando-para-gpu-cuda">Etapa 3 — Migrando para GPU (CUDA)<a class="headerlink" href="#etapa-3-migrando-para-gpu-cuda" title="Permanent link">&para;</a></h2>
+<p>Agora, vamos reescrever o mesmo código para rodar <strong>na GPU</strong>.</p>
+<p>Crie o arquivo:</p>
+<div class="highlight"><pre><span></span><code>nano<span class="w"> </span>exemplo1.cu
+</code></pre></div>
+<p>Cole o código abaixo:</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;math.h&gt;</span>
+
+<span class="c1">// Kernel CUDA: soma os elementos de dois vetores</span>
+<span class="n">__global__</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">add</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">y</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">blockIdx</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">blockDim</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">threadIdx</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">stride</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">blockDim</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">gridDim</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">index</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">stride</span><span class="p">)</span>
+<span class="w">    </span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="mi">20</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">y</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// Aloca Memória Unificada – acessível pela CPU e pela GPU</span>
+<span class="w">  </span><span class="n">cudaMallocManaged</span><span class="p">(</span><span class="o">&amp;</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="o">*</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
+<span class="w">  </span><span class="n">cudaMallocManaged</span><span class="p">(</span><span class="o">&amp;</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="o">*</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
+
+<span class="w">  </span><span class="c1">// Inicializa vetores na CPU</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">;</span>
+<span class="w">    </span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.0f</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="c1">// Configuração da grade e dos blocos</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">blockSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">256</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">numBlocks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">N</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">blockSize</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">blockSize</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// Lança o kernel na GPU</span>
+<span class="w">  </span><span class="n">add</span><span class="o">&lt;&lt;&lt;</span><span class="n">numBlocks</span><span class="p">,</span><span class="w"> </span><span class="n">blockSize</span><span class="o">&gt;&gt;&gt;</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">// Aguarda a GPU terminar</span>
+<span class="w">  </span><span class="n">cudaDeviceSynchronize</span><span class="p">();</span>
+
+<span class="w">  </span><span class="c1">// Verifica o erro máximo</span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">maxError</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">    </span><span class="n">maxError</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fmax</span><span class="p">(</span><span class="n">maxError</span><span class="p">,</span><span class="w"> </span><span class="n">fabs</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="mf">-3.0f</span><span class="p">));</span>
+
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Erro máximo: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">maxError</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// Libera memória</span>
+<span class="w">  </span><span class="n">cudaFree</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+<span class="w">  </span><span class="n">cudaFree</span><span class="p">(</span><span class="n">y</span><span class="p">);</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Compile com o <code>nvcc</code>:</p>
+<div class="highlight"><pre><span></span><code>nvcc<span class="w"> </span>exemplo1.cu<span class="w"> </span>-o<span class="w"> </span>ex1
+</code></pre></div>
+<hr />
+<h2 id="etapa-4-executando-no-no-gpu-com-slurm">Etapa 4 — Executando no nó GPU com SLURM<a class="headerlink" href="#etapa-4-executando-no-no-gpu-com-slurm" title="Permanent link">&para;</a></h2>
+<p>Agora, vamos executar o binário <strong>pedindo uma GPU</strong> via <code>srun</code>:</p>
+<div class="highlight"><pre><span></span><code>srun<span class="w"> </span>--partition<span class="o">=</span>sequana_gpu_dev<span class="w"> </span>--gres<span class="o">=</span>gpu:1<span class="w"> </span>./ex1
+</code></pre></div>
+<p>💡 <strong>Explicação dos parâmetros:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Opção</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--partition=sequana_gpu_dev</code></td>
+<td>Escolhe a fila de GPU</td>
+</tr>
+<tr>
+<td><code>--gres=gpu:1</code></td>
+<td>Solicita 1 GPU</td>
+</tr>
+<tr>
+<td><code>./ex1</code></td>
+<td>Executa o programa compilado</td>
+</tr>
+</tbody>
+</table>
+<p>Saída esperada:</p>
+<div class="highlight"><pre><span></span><code>srun: job 11402255 queued and waiting for resources
+srun: job 11402255 has been allocated resources
+Erro máximo: 0
+</code></pre></div>
+<hr />
+<h2 id="explicacao-do-kernel-cuda">Explicação do Kernel CUDA<a class="headerlink" href="#explicacao-do-kernel-cuda" title="Permanent link">&para;</a></h2>
+<p>Até agora, vimos como executar um <strong>kernel CUDA</strong> com múltiplas <em>threads</em> dentro de <strong>um único bloco</strong>.
+Mas as <strong>GPUs modernas</strong> são compostas por <strong>múltiplos processadores paralelos</strong>, chamados <strong>Streaming Multiprocessors (SMs)</strong>.
+Cada <strong>SM</strong> pode executar <strong>vários blocos de threads simultaneamente</strong>.</p>
+<p>Por exemplo:</p>
+<ul>
+<li>Uma <strong>GPU Tesla P100 (arquitetura Pascal)</strong> possui <strong>56 SMs</strong>.</li>
+<li>Cada SM pode manter até <strong>2048 threads ativas</strong>.</li>
+<li>Isso totaliza mais de <strong>100 mil threads em execução paralela real</strong>!</li>
+</ul>
+<p>Para aproveitar todo esse paralelismo, precisamos <strong>lançar o kernel com múltiplos blocos</strong>, e não apenas um.</p>
+<h3 id="o-que-e-uma-grid-e-o-que-e-um-block">O que é uma <em>Grid</em> e o que é um <em>Block</em>?<a class="headerlink" href="#o-que-e-uma-grid-e-o-que-e-um-block" title="Permanent link">&para;</a></h3>
+<p>Em CUDA:</p>
+<ul>
+<li>Cada <strong>bloco</strong> (<em>block</em>) é um grupo de threads que trabalham juntas e compartilham memória local.</li>
+<li>O conjunto de todos os blocos forma uma <strong>grade</strong> (<em>grid</em>).</li>
+</ul>
+<p>Portanto:</p>
+<blockquote>
+<p>Uma <strong>grade</strong> é composta por <strong>vários blocos</strong>, e cada <strong>bloco</strong> contém várias <strong>threads</strong>.</p>
+</blockquote>
+<p>A GPU distribui esses blocos entre seus SMs, executando eles conforme há recursos disponíveis.</p>
+<h3 id="configurando-a-execucao-com-multiplos-blocos">Configurando a Execução com Múltiplos Blocos<a class="headerlink" href="#configurando-a-execucao-com-multiplos-blocos" title="Permanent link">&para;</a></h3>
+<p>Se temos <code>N</code> elementos (ex: 1 milhão) e queremos 256 threads por bloco,
+precisamos calcular <strong>quantos blocos</strong> são necessários para cobrir todos os elementos.</p>
+<p>O cálculo é simples:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">blockSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">256</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">numBlocks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">N</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">blockSize</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">blockSize</span><span class="p">;</span>
+<span class="n">add</span><span class="o">&lt;&lt;&lt;</span><span class="n">numBlocks</span><span class="p">,</span><span class="w"> </span><span class="n">blockSize</span><span class="o">&gt;&gt;&gt;</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
+</code></pre></div>
+<ul>
+<li><code>blockSize</code> → número de threads por bloco (normalmente múltiplo de 32).</li>
+<li><code>numBlocks</code> → número de blocos necessários (arredondando para cima).</li>
+<li><code>&lt;&lt;&lt;numBlocks, blockSize&gt;&gt;&gt;</code> → diz ao CUDA quantos blocos e threads criar.</li>
+</ul>
+<blockquote>
+<p>Dessa forma, garantimos pelo menos <strong>N threads</strong> para processar todos os elementos.</p>
+</blockquote>
+<h3 id="calculando-o-indice-global-de-cada-thread">Calculando o Índice Global de Cada Thread<a class="headerlink" href="#calculando-o-indice-global-de-cada-thread" title="Permanent link">&para;</a></h3>
+<p>Agora, dentro do <em>kernel</em>, precisamos adaptar o código para que <strong>cada thread saiba qual parte do vetor processar</strong>.</p>
+<p>CUDA fornece variáveis internas que ajudam nisso:</p>
+<ul>
+<li><code>threadIdx.x</code> → índice da thread dentro do bloco</li>
+<li><code>blockIdx.x</code> → índice do bloco dentro da grade</li>
+<li><code>blockDim.x</code> → número de threads por bloco</li>
+<li><code>gridDim.x</code> → número total de blocos</li>
+</ul>
+<p>O índice global é calculado assim:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">blockIdx</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">blockDim</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">threadIdx</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
+</code></pre></div>
+<p>Esse cálculo é <strong>padrão em CUDA</strong>, porque é o permite mapear cada thread a uma posição única no vetor.</p>
+<h3 id="percorrendo-grandes-vetores-com-grid-stride-loop">Percorrendo Grandes Vetores com <em>Grid-Stride Loop</em><a class="headerlink" href="#percorrendo-grandes-vetores-com-grid-stride-loop" title="Permanent link">&para;</a></h3>
+<p>Mesmo com muitos blocos, às vezes o número de threads <strong>ainda é menor que N</strong>.
+Para lidar com isso, usamos um padrão chamado <strong>grid-stride loop</strong>:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">stride</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">blockDim</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">gridDim</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">index</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">stride</span><span class="p">)</span>
+<span class="w">    </span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</code></pre></div>
+<p><strong>O que isso faz:</strong></p>
+<ul>
+<li><code>stride</code> representa o número total de threads ativas na GPU.</li>
+<li>Cada thread processa múltiplos elementos separados por esse intervalo.</li>
+<li>Assim, mesmo que <code>N</code> seja muito grande, todas as posições do vetor são tratadas.</li>
+</ul>
+<hr />
+<h3 id="kernel-completo-com-multiplos-blocos">Kernel completo com múltiplos blocos<a class="headerlink" href="#kernel-completo-com-multiplos-blocos" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;math.h&gt;</span>
+
+<span class="c1">// Kernel CUDA para somar dois vetores usando múltiplos blocos</span>
+<span class="n">__global__</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">add</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">y</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">index</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">blockIdx</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">blockDim</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">threadIdx</span><span class="p">.</span><span class="n">x</span><span class="p">;</span><span class="w"> </span><span class="c1">// índice global da thread</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">stride</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">blockDim</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">gridDim</span><span class="p">.</span><span class="n">x</span><span class="p">;</span><span class="w">                </span><span class="c1">// salto entre iterações</span>
+
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">index</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">stride</span><span class="p">)</span>
+<span class="w">    </span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="mi">20</span><span class="p">;</span><span class="w"> </span><span class="c1">// 1 milhão de elementos</span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">y</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// Memória unificada (CPU + GPU)</span>
+<span class="w">  </span><span class="n">cudaMallocManaged</span><span class="p">(</span><span class="o">&amp;</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="o">*</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
+<span class="w">  </span><span class="n">cudaMallocManaged</span><span class="p">(</span><span class="o">&amp;</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="o">*</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
+
+<span class="w">  </span><span class="c1">// Inicialização dos vetores</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">;</span>
+<span class="w">    </span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.0f</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="c1">// Configuração da execução</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">blockSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">256</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">numBlocks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">N</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">blockSize</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">blockSize</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// Lançamento do kernel</span>
+<span class="w">  </span><span class="n">add</span><span class="o">&lt;&lt;&lt;</span><span class="n">numBlocks</span><span class="p">,</span><span class="w"> </span><span class="n">blockSize</span><span class="o">&gt;&gt;&gt;</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">// Sincronização</span>
+<span class="w">  </span><span class="n">cudaDeviceSynchronize</span><span class="p">();</span>
+
+<span class="w">  </span><span class="c1">// Verificação do resultado</span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">maxError</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">    </span><span class="n">maxError</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fmax</span><span class="p">(</span><span class="n">maxError</span><span class="p">,</span><span class="w"> </span><span class="n">fabs</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="mf">-3.0f</span><span class="p">));</span>
+
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Erro máximo: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">maxError</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">cudaFree</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+<span class="w">  </span><span class="n">cudaFree</span><span class="p">(</span><span class="n">y</span><span class="p">);</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Versão com prints didáticos 
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;math.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cuda_runtime.h&gt;</span>
+
+<span class="c1">// Kernel CUDA para somar dois vetores usando múltiplos blocos</span>
+<span class="n">__global__</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">add</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">y</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="c1">// Calcula o índice global e o salto entre iterações</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">index</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">blockIdx</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">blockDim</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">threadIdx</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">stride</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">blockDim</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">gridDim</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// Imprime informações das primeiras threads de cada bloco</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">threadIdx</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Bloco %d ativo com %d threads (index inicial global = %d)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
+<span class="w">           </span><span class="n">blockIdx</span><span class="p">.</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">blockDim</span><span class="p">.</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">index</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="c1">// Cada thread processa múltiplos elementos separados por &#39;stride&#39;</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">index</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">stride</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">blockIdx</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">threadIdx</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;[Thread %d | Bloco %d] somando x[%d]=%.1f + y[%d]=%.1f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
+<span class="w">             </span><span class="n">threadIdx</span><span class="p">.</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">blockIdx</span><span class="p">.</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="mi">20</span><span class="p">;</span><span class="w"> </span><span class="c1">// 1 milhão de elementos</span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">y</span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;=== Inicializando memória unificada ===&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">  </span><span class="n">cudaMallocManaged</span><span class="p">(</span><span class="o">&amp;</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="o">*</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
+<span class="w">  </span><span class="n">cudaMallocManaged</span><span class="p">(</span><span class="o">&amp;</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="o">*</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
+
+<span class="w">  </span><span class="c1">// Inicialização dos vetores</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;=== Inicializando vetores x e y ===&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">;</span>
+<span class="w">    </span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.0f</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="c1">// Configuração da execução</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">blockSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">256</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">numBlocks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">N</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">blockSize</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">blockSize</span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;=== Configuração do kernel ===&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Número total de elementos: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Threads por bloco (blockSize): &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">blockSize</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Número de blocos (numBlocks): &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">numBlocks</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Threads totais (gridDim*blockDim): &quot;</span>
+<span class="w">            </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">numBlocks</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">blockSize</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;=======================================&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// Lançamento do kernel</span>
+<span class="w">  </span><span class="n">add</span><span class="o">&lt;&lt;&lt;</span><span class="n">numBlocks</span><span class="p">,</span><span class="w"> </span><span class="n">blockSize</span><span class="o">&gt;&gt;&gt;</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">// Sincronização</span>
+<span class="w">  </span><span class="n">cudaDeviceSynchronize</span><span class="p">();</span>
+
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">=== Kernel finalizado, verificando resultados ===&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// Verificação do resultado</span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">maxError</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">    </span><span class="n">maxError</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fmax</span><span class="p">(</span><span class="n">maxError</span><span class="p">,</span><span class="w"> </span><span class="n">fabs</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="mf">-3.0f</span><span class="p">));</span>
+
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Erro máximo: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">maxError</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// Mostra os primeiros 10 resultados</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">=== Amostra dos primeiros 10 valores de y ===&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;y[&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;] = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">cudaFree</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+<span class="w">  </span><span class="n">cudaFree</span><span class="p">(</span><span class="n">y</span><span class="p">);</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">=== Execução completa ===&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<h3 id="visualizacao-do-modelo">Visualização do Modelo<a class="headerlink" href="#visualizacao-do-modelo" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Nível</th>
+<th>Identificador</th>
+<th>Exemplo</th>
+<th>Função</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Thread</td>
+<td><code>threadIdx.x</code></td>
+<td>0–255</td>
+<td>Uma linha de execução</td>
+</tr>
+<tr>
+<td>Bloco</td>
+<td><code>blockIdx.x</code></td>
+<td>0–4095</td>
+<td>Agrupa 256 threads</td>
+</tr>
+<tr>
+<td>Grade</td>
+<td><code>gridDim.x</code></td>
+<td>4096</td>
+<td>Agrupa todos os blocos</td>
+</tr>
+</tbody>
+</table>
+<p>Cada thread calcula:</p>
+<div class="highlight"><pre><span></span><code>index = blockIdx.x * blockDim.x + threadIdx.x
+</code></pre></div>
+<p>e acessa <code>y[index]</code>.</p>
+<h3 id="compilando-e-executando-no-hpc">Compilando e executando no HPC<a class="headerlink" href="#compilando-e-executando-no-hpc" title="Permanent link">&para;</a></h3>
+<p>No seu ambiente:</p>
+<div class="highlight"><pre><span></span><code>module<span class="w"> </span>load<span class="w"> </span>cuda/12.6_sequana
+nvcc<span class="w"> </span>add_grid.cu<span class="w"> </span>-o<span class="w"> </span>add_grid
+srun<span class="w"> </span>--partition<span class="o">=</span>sequana_gpu_dev<span class="w"> </span>--gres<span class="o">=</span>gpu:1<span class="w"> </span>./add_grid
+</code></pre></div>
+<p>Saída esperada:</p>
+<div class="highlight"><pre><span></span><code>srun: job 11402255 queued and waiting for resources
+srun: job 11402255 has been allocated resources
+Erro máximo: 0
+</code></pre></div>
+<h3 id="conceitos-chave-dessa-etapa">Conceitos-chave dessa etapa<a class="headerlink" href="#conceitos-chave-dessa-etapa" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Conceito</th>
+<th>Explicação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Streaming Multiprocessor (SM)</strong></td>
+<td>Unidade de processamento paralela da GPU</td>
+</tr>
+<tr>
+<td><strong>Grid</strong></td>
+<td>Conjunto de blocos lançados na GPU</td>
+</tr>
+<tr>
+<td><strong>Block</strong></td>
+<td>Grupo de threads que compartilham memória local</td>
+</tr>
+<tr>
+<td><strong>Grid-Stride Loop</strong></td>
+<td>Técnica para percorrer grandes vetores com menos threads</td>
+</tr>
+<tr>
+<td><strong>blockIdx.x * blockDim.x + threadIdx.x</strong></td>
+<td>Fórmula padrão de indexação CUDA</td>
+</tr>
+</tbody>
+</table>
+<h2 id="exercicios">Exercícios:<a class="headerlink" href="#exercicios" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Teste outros tamanhos de vetor.</li>
+<li>Modifique o número de blocos e threads para observar o impacto.</li>
+<li>Adicione medições de tempo com as funções CUDA (<code>cudaEventRecord</code>).</li>
+<li>Teste kernels com mais dimensões.</li>
+</ol>
+<h2 id="se-quiser-aprender-mais">Se quiser aprender mais<a class="headerlink" href="#se-quiser-aprender-mais" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Explore a <a href="https://docs.nvidia.com/cuda/index.html">documentação do CUDA Toolkit</a>.
+   Veja o <a href="https://docs.nvidia.com/cuda/cuda-quick-start-guide/index.html">Guia Rápido de Instalação</a> e o <a href="https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html">Programming Guide</a>.</li>
+<li>Teste o uso de <code>printf()</code> dentro do kernel para imprimir <code>threadIdx.x</code> e <code>blockIdx.x</code>.</li>
+<li>Experimente <code>threadIdx.y</code>, <code>threadIdx.z</code> e <code>blockIdx.y</code>.
+   Descubra como definir grids e blocos em múltiplas dimensões.</li>
+<li>Leia sobre a <a href="https://developer.nvidia.com/blog/unified-memory-cuda-beginners/">Unified Memory no CUDA 8</a> e o mecanismo de migração de páginas da arquitetura Pascal.</li>
+</ol>
+<p>obs: Material adaptado do Deep Learning Institute NVIDIA e do NVIDIA Teaching kit - Accelerated Computing</p>
+<p>```</p>
 
 
 
@@ -1240,10 +2134,12 @@
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "content.code.copy"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "content.code.copy"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      <script src="../../assets/javascripts/bundle.56ea9cef.min.js"></script>
       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
       
