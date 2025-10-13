@@ -44,6 +44,7 @@ nav:
         - "Aula 10 - Acesso ao Supercomputador SDumont": aulas/aula10/index.md
         - "Aula 11 - MPI e as Operações Coletivas": aulas/aula11/index.md
         - "Aula 12 - Exercícios preparatórios para AI": aulas/aula12/index.md
+        - "Aula 13 - Programação em GPU com CUDA": aulas/aula13/index.md
 
     - Suporte:
         - "Aula 01" : teoria/aula01/index.md
