@@ -281,9 +281,7 @@ Por isso, **usar funções atômicas deve ser o último recurso**, reservado ape
 A verdadeira otimização em CUDA não está em “usar mais threads”, e sim em **organizar o trabalho de modo que cada thread e cada bloco acessem dados diferentes**.
 Sempre que o acesso for independente, a GPU mostra toda sua força; quando há disputa, ela se comporta de forma lenta.
 
-Perfeito 🌟 — vamos montar uma explicação **didática e direta** de **throughput**, adaptada para o contexto desse código CUDA (histograma com “chunks”), com analogias que dialogam com o que seus alunos já viram em OpenMP e CPU paralela.
 
----
 
 ### O que é **Throughput**
 
@@ -304,9 +302,9 @@ O tempo total de execução (`tempo_ms`) é medido com os eventos do CUDA (`cuda
 
 O throughput é calculado como:
 
-[
+$$
 \text{Throughput (M ops/s)} = \frac{N}{t_s} \div 10^6
-]
+$$
 
 onde:
 
@@ -318,15 +316,8 @@ onde:
 
 Como `cudaEventElapsedTime()` retorna o tempo em **milissegundos**, fazemos:
 
-[
+$$
 t_s = \frac{t_{ms}}{1000}
-]
+$$
 
-e portanto, no código:
-
-```cpp
-auto throughput = [&](float ms) {
-    return static_cast<double>(N) / (ms / 1000.0) / 1e6;
-};
-```
 
