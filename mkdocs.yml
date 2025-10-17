@@ -44,7 +44,8 @@ nav:
         - "Aula 10 - Acesso ao Supercomputador SDumont": aulas/aula10/index.md
         - "Aula 11 - MPI e as Operações Coletivas": aulas/aula11/index.md
         - "Aula 12 - Exercícios preparatórios para AI": aulas/aula12/index.md
-        - "Aula 13 - Programação em GPU com CUDA": aulas/aula13/index.md
+        - "Aula 13 - Paralelismo em GPU com CUDA": aulas/aula13/index.md
+        - "Aula 14 - Condições de corrida e throughput": aulas/aula14/index.md
 
     - Suporte:
         - "Aula 01" : teoria/aula01/index.md
@@ -66,6 +67,12 @@ nav:
 
     - Projetos:
         - "Projeto 1 - Otimizações em CPU" : projetos/2025-2/projeto-cpu.md
+        - "Projeto 2 - Otimizações em GPU" : projetos/2025-2/projeto-gpu.md
+
+    - Complementar:
+        - "Conectando ao Cluster Franky": complementar/aula02/index.md
+
+        
 extra_javascript:
     - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML
     - https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.0.0/js-yaml.min.js
