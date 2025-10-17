@@ -1,0 +1,1901 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://insper.github.io/supercomp/complementar/aula02/">
+      
+      
+        <link rel="prev" href="../../projetos/2025-2/projeto-gpu/">
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.15">
+    
+    
+      
+        <title>Conectando ao Cluster Franky - SuperComputação - 2025/2</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/printing.css">
+    
+      <link rel="stylesheet" href="../../css/extra.css">
+    
+      <link rel="stylesheet" href="../../css/equipe.css">
+    
+      <link rel="stylesheet" href="../../css/ansi-colours.css">
+    
+      <link rel="stylesheet" href="../../css/jupyter-cells.css">
+    
+      <link rel="stylesheet" href="../../css/pandas-dataframe.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue-gray" data-md-color-accent="red">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#explorando-o-poder-de-um-cluster-hpc" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="SuperComputação - 2025/2" class="md-header__button md-logo" aria-label="SuperComputação - 2025/2" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SuperComputação - 2025/2
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Conectando ao Cluster Franky
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/insper/supercomp" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    SuperComp
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../sobre/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Burocracias
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../aulas/aula01/" class="md-tabs__link">
+          
+  
+  
+  Aulas
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../teoria/aula01/" class="md-tabs__link">
+          
+  
+  
+  Suporte
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Exercicios/aula01/aula01/" class="md-tabs__link">
+          
+  
+  
+  Exercícios
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../projetos/2025-2/projeto-cpu/" class="md-tabs__link">
+          
+  
+  
+  Projetos
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+  Complementar
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="SuperComputação - 2025/2" class="md-nav__button md-logo" aria-label="SuperComputação - 2025/2" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    SuperComputação - 2025/2
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/insper/supercomp" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    SuperComp
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sobre/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Burocracias
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Aulas
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Aulas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/aula01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Aula 01 - Problemas de HPC
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/aula02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Aula 02 - Sistemas de HPC
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/aula03/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Aula 03 - Otimização e Tiling
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/aula04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Aula 04 - Heurísticas e Aleatoriedade
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/aula05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Aula 05 - Programação paralela em CPU
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/aula06/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Aula 06 - Efeitos colaterais do paralelismo
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/aula07/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Aula 07 - Programação Distribuída
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/aula08/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Aula 08 - Programação Paralela e Distribuída
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/aula09/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Aula 09 - Projeto 1 - Otimizações em CPU
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/aula10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Aula 10 - Acesso ao Supercomputador SDumont
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/aula11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Aula 11 - MPI e as Operações Coletivas
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/aula12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Aula 12 - Exercícios preparatórios para AI
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/aula13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Aula 13 - Paralelismo em GPU com CUDA
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/aula14/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Aula 14 - Condições de corrida e throughput
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Suporte
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Suporte
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../teoria/aula01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Aula 01
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../teoria/aula01/compilar-executar-C%2B%2B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Compilar C++
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../teoria/aula02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Aula 02
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../teoria/comandos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Útil
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../teoria/heuristicas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Heurísticas
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../teoria/openmp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    OpenMP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../teoria/MPI/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MPI
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Exercícios
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Exercícios
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Exercicios/aula01/aula01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Aula 01 e 02 Otimizações basicas
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Exercicios/aula03/aula03/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Aula 03 Otimizações no uso da memória
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Exercicios/aula04/aula04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Aula 04 Otimização de Estratégias e Heurísticas 
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Exercicios/aula05/aula05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Aula 05 Otimizações usando paralelismo de memória local
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Exercicios/aula06/aula06/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Aula 06 lidando com efeitos colaterais do paralelismo
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Exercicios/aula07/aula07/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Aula 07 Otimizações usando paralelismo de memória Distribuída
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Exercicios/aula08/aula08/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Aula 08 Otimizações usando paralelismo de memória local e distribuída
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Projetos
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Projetos
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../projetos/2025-2/projeto-cpu/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Projeto 1 - Otimizações em CPU
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../projetos/2025-2/projeto-gpu/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Projeto 2 - Otimizações em GPU
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Complementar
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Complementar
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Conectando ao Cluster Franky
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Conectando ao Cluster Franky
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#para-macbook-ou-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      Para Macbook ou Linux:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#para-windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      Para Windows:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conhecendo-o-sistema" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conhecendo o Sistema
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comandos-utilizados" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comandos utilizados
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comando-srun" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comando SRUN
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introducao-teorica" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introdução Teórica
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parte-1-baseline-sequencial" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parte 1 — Baseline Sequencial
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parte-2-paralelismo-em-cpu" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parte 2 - Paralelismo em CPU
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#para-macbook-ou-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      Para Macbook ou Linux:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#para-windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      Para Windows:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conhecendo-o-sistema" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conhecendo o Sistema
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comandos-utilizados" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comandos utilizados
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comando-srun" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comando SRUN
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introducao-teorica" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introdução Teórica
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parte-1-baseline-sequencial" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parte 1 — Baseline Sequencial
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parte-2-paralelismo-em-cpu" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parte 2 - Paralelismo em CPU
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="explorando-o-poder-de-um-cluster-hpc">Explorando o Poder de um Cluster HPC<a class="headerlink" href="#explorando-o-poder-de-um-cluster-hpc" title="Permanent link">&para;</a></h1>
+<p>Antes de qualquer coisa, precisamos configurar a conexão SSH com o sistema de HPC.</p>
+<p>Para ter acesso ao Cluster Franky você precisa configurar suas credenciais de acesso e realizar acesso remoto via SSH.</p>
+<p>As chaves foram enviadas para o seu email Insper, Faça o download da pasta completa, que contém os arquivos <code>id_rsa</code> (chave privada) e <code>id_rsa.pub</code> (chave pública). Dependendo do sistema operacional que você utiliza, siga as instruções abaixo para configurar corretamente seu acesso ao cluster Franky.</p>
+<h4 id="para-macbook-ou-linux"><strong>Para Macbook ou Linux:</strong><a class="headerlink" href="#para-macbook-ou-linux" title="Permanent link">&para;</a></h4>
+<p>Abra o terminal, navegue até a pasta onde a chave privada (<code>id_rsa</code>) foi baixada, mova a chave para o diretório <code>.ssh</code> em sua home:</p>
+<div class="highlight"><pre><span></span><code>mv<span class="w"> </span>id_rsa<span class="w"> </span>~/.ssh/
+</code></pre></div>
+<p>Garanta que apenas você possa ler o arquivo:</p>
+<div class="highlight"><pre><span></span><code>chmod<span class="w"> </span><span class="m">400</span><span class="w"> </span>~/.ssh/id_rsa
+</code></pre></div>
+<p>Conecte-se ao cluster utilizando o comando SSH:</p>
+<p>O login é o seu "usuario Insper", o endereço de IP foi fornecido durante a aula.</p>
+<p><div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>-i<span class="w"> </span>~/.ssh/id_rsa<span class="w"> </span>login@ip_do_cluster
+</code></pre></div>
+ou</p>
+<div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>login@ip_do_cluster
+</code></pre></div>
+<h4 id="para-windows"><strong>Para Windows:</strong><a class="headerlink" href="#para-windows" title="Permanent link">&para;</a></h4>
+<p><strong>Usando MobaXTerm</strong></p>
+<p>Baixe o MobaXterm Home Edition em:
+<a href="https://mobaxterm.mobatek.net/download-home-edition.html">https://mobaxterm.mobatek.net/download-home-edition.html</a></p>
+<p>Execute a aplicação, com o MobaXterm aberto, clique em Session, depois em SSH.
+<img alt="moba1" src="imgs/moba1.png" /></p>
+<p>Preencha todos os campos marcados em vermelho
+<img alt="moba2" src="imgs/moba2.png" /></p>
+<p>Estabeleça a conexão, se tudo der certo, você verá algo como:
+<img alt="moba3" src="imgs/moba3.png" /></p>
+<h3 id="conhecendo-o-sistema">Conhecendo o Sistema<a class="headerlink" href="#conhecendo-o-sistema" title="Permanent link">&para;</a></h3>
+<p>Antes de começar a fazer pedidos de recursos pro SLURM, vamos conhecer os diferentes hardwares que temos disponível no Franky. Vamos utilizar alguns comandos de sistema operacional para ler os recursos de CPU, memória e GPU disponíveis</p>
+<h3 id="comandos-utilizados">Comandos utilizados<a class="headerlink" href="#comandos-utilizados" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>lscpu</code>: mostra detalhes da CPU (núcleos, threads, memória cache...)</li>
+<li><code>cat /proc/meminfo</code>: mostra detalhes sobre a memória RAM </li>
+<li><code>nvidia-smi</code>: mostra detalhes de GPU, se disponível</li>
+</ul>
+<h3 id="comando-srun">Comando SRUN<a class="headerlink" href="#comando-srun" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>srun<span class="w"> </span>--partition<span class="o">=</span>normal<span class="w"> </span>--ntasks<span class="o">=</span><span class="m">1</span><span class="w"> </span>--cpus-per-task<span class="o">=</span><span class="m">1</span><span class="w"> </span>--mem<span class="o">=</span>1G<span class="w"> </span>--time<span class="o">=</span><span class="m">00</span>:05:00<span class="w"> </span><span class="se">\</span>
+--pty<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;hostname &amp;&amp; \</span>
+<span class="s2">cat /proc/meminfo | grep -E &#39;MemTotal|MemFree|MemAvailable|Swap&#39; &amp;&amp; \</span>
+<span class="s2">lscpu | grep -E &#39;Model name|Socket|Core|Thread|CPU\\(s\\)|cache&#39; &amp;&amp; \</span>
+<span class="s2">{ command -v nvidia-smi &amp;&gt; /dev/null &amp;&amp; nvidia-smi || echo &#39;nvidia-smi não disponível ou GPU não detectada&#39;; }&quot;</span><span class="w"> </span>
+</code></pre></div>
+<p>Você deve ver algo como:</p>
+<p><img alt="fila normal" src="imgs/fila_normal.png" /></p>
+<p><code>srun</code></p>
+<blockquote>
+<p>É o comando do SLURM usado para <strong>executar uma tarefa interativamente</strong> em um nó do cluster.</p>
+</blockquote>
+<p><code>--partition=normal</code></p>
+<blockquote>
+<p>Indica <strong>em qual fila</strong> (partição) o job será executado.
+No seu caso, <code>normal</code> pode ser substituído por qualquer outra fila do sistema</p>
+</blockquote>
+<p><code>--ntasks=1</code></p>
+<blockquote>
+<p>Solicita <strong>1 tarefa</strong> (processo).
+Se você estivesse rodando um código paralelo, faz sentido trocar esse valor.</p>
+</blockquote>
+<p><code>--cpus-per-task=1</code></p>
+<blockquote>
+<p>Cada tarefa receberá <strong>1 CPU (core)</strong>.
+Quando estiver usando paralelismo com várias threads , faz sentido aumentar esse valor.</p>
+</blockquote>
+<hr />
+<p><code>--mem=1G</code></p>
+<blockquote>
+<p>Aloca <strong>1 gigabyte de memória RAM</strong> para essa tarefa.
+Se ultrapassar esse limite, o job será encerrado.</p>
+</blockquote>
+<p><code>--time=00:05:00</code></p>
+<blockquote>
+<p>Define um <strong>tempo máximo de execução de 5 minutos</strong>.
+Depois disso, o SLURM mata o processo automaticamente.</p>
+</blockquote>
+<p><code>--pty bash</code></p>
+<blockquote>
+<p>Solicita um terminal para o SLURM dentro do nó de computação.
+Interessante para fazer testes no código ou realizar debugs</p>
+</blockquote>
+<p><code>{ command -v nvidia-smi &amp;&gt; /dev/null &amp;&amp; nvidia-smi || echo 'nvidia-smi não disponível ou GPU não detectada'; }</code></p>
+<blockquote>
+<p>Esse trecho verifica se o comando <code>nvidia-smi</code> está disponível no sistema (ou seja, se há driver NVIDIA instalado e uma GPU NVIDIA acessível).</p>
+<ul>
+<li>Se <strong><code>nvidia-smi</code> estiver disponível</strong>, ele será executado e mostrará as informações da(s) GPU(s) no nó (como nome, memória, uso, driver etc).</li>
+<li>Se <strong>não estiver disponível</strong> (por exemplo, em nós sem GPU ou sem driver instalado), exibirá a mensagem:
+  <code>"nvidia-smi não disponível ou GPU não detectada"</code>.</li>
+</ul>
+</blockquote>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<ul>
+<li>Em <strong>nós CPU-only</strong> (como os da partição <code>normal</code>), é esperado que <code>nvidia-smi</code> <strong>não esteja presente</strong>.</li>
+<li>Para testar o comando em um nó <strong>com GPU</strong>, use <code>--partition=gpu</code> ou <code>--partition=monstrao</code>  para alocar nós com placas NVIDIA.</li>
+</ul>
+</div>
+<p>O comando abaixo faz exatamente a mesma coisa, mas eu coloquei ele dentro de um shell script para ter uma formatação melhor no display:</p>
+<div class="highlight"><pre><span></span><code>srun<span class="w"> </span>--partition<span class="o">=</span>normal<span class="w"> </span>--ntasks<span class="o">=</span><span class="m">1</span><span class="w"> </span>--pty<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="se">\</span>
+<span class="s2">&quot;echo &#39;=== HOSTNAME ===&#39;; hostname; echo; \</span>
+<span class="s2"> echo &#39;=== MEMORIA (GB) ===&#39;; \</span>
+<span class="s2"> cat /proc/meminfo | grep -E &#39;MemTotal|MemFree|MemAvailable|Swap&#39; | \</span>
+<span class="s2"> awk &#39;{printf \&quot;%s %.2f GB\\n\&quot;, \$1, \$2 / 1048576}&#39;; \</span>
+<span class="s2"> echo; \</span>
+<span class="s2"> echo &#39;=== CPU INFO ===&#39;; \</span>
+<span class="s2"> lscpu | grep -E &#39;Model name|Socket|Core|Thread|CPU\\(s\\)|cache&#39;</span>
+<span class="s2"> echo &#39;=== GPU INFO ===&#39;; \</span>
+<span class="s2"> if command -v nvidia-smi &amp;&gt; /dev/null; then nvidia-smi; else echo &#39;nvidia-smi não disponível&#39;; fi&quot;</span>
+</code></pre></div>
+<p><img alt="fila normal formatada" src="imgs/fila_normal_formatada.png" /></p>
+<p>O comando <code>sinfo</code> mostra quais são as filas e quais são os status dos nós </p>
+<p><div class="highlight"><pre><span></span><code>sinfo
+</code></pre></div>
+O comando abaixo mostra detalhes sobre os recursos de cada fila</p>
+<div class="highlight"><pre><span></span><code>scontrol<span class="w"> </span>show<span class="w"> </span>partition
+</code></pre></div>
+<p>Recomendo que você mude o nome da fila (partition) no comando abaixo para se ambientar no Cluster Franky e desconrir quais são as diferenças entre as filas</p>
+<div class="highlight"><pre><span></span><code>srun<span class="w"> </span>--partition<span class="o">=</span>normal<span class="w"> </span>--ntasks<span class="o">=</span><span class="m">1</span><span class="w"> </span>--cpus-per-task<span class="o">=</span><span class="m">1</span><span class="w"> </span>--mem<span class="o">=</span>1G<span class="w"> </span>--time<span class="o">=</span><span class="m">00</span>:05:00<span class="w"> </span><span class="se">\</span>
+<span class="w">     </span>--pty<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;hostname &amp;&amp; cat /proc/meminfo | grep -E &#39;MemTotal|MemFree|MemAvailable|Swap&#39; &amp;&amp; lscpu | grep -E &#39;Model name|Socket|Core|Thread|CPU\\(s\\)|cache&#39;&quot;</span>
+</code></pre></div>
+<h2 id="introducao-teorica">Introdução Teórica<a class="headerlink" href="#introducao-teorica" title="Permanent link">&para;</a></h2>
+<p>Antes de partir para o código, é importante compreender o <strong>modelo de execução em HPC</strong>.</p>
+<table>
+<thead>
+<tr>
+<th>Tipo de paralelismo</th>
+<th>Exemplo de biblioteca</th>
+<th>Escopo</th>
+<th>Comunicação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Paralelismo local (CPU)</td>
+<td><code>multiprocessing</code>, <code>threading</code>, <code>numba</code></td>
+<td>Dentro do mesmo nó</td>
+<td>Memória compartilhada</td>
+</tr>
+<tr>
+<td>Paralelismo em GPU</td>
+<td><code>numba.cuda</code>, <code>cupy</code>, <code>pycuda</code></td>
+<td>Dentro do mesmo nó</td>
+<td>Memória da GPU</td>
+</tr>
+<tr>
+<td>Paralelismo distribuído</td>
+<td><code>mpi4py</code></td>
+<td>Entre nós do cluster</td>
+<td>Mensagens (MPI)</td>
+</tr>
+</tbody>
+</table>
+<p>Um cluster é formado por <strong>vários nós interligados</strong>, e o SLURM coordena a execução dos programas nesses nós.<br />
+Cada camada de paralelismo atua em um nível diferente do hardware:</p>
+<h2 id="parte-1-baseline-sequencial">Parte 1 — Baseline Sequencial<a class="headerlink" href="#parte-1-baseline-sequencial" title="Permanent link">&para;</a></h2>
+<p>Começamos com um problema simples, mas computacionalmente intenso:<br />
+<strong>Aproximar o valor de pi usando o método de Monte Carlo.</strong></p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/usr/bin/env python3</span>
+<span class="c1"># seq_montecarlo.py</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">estimate_pi</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+    <span class="n">inside</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(),</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">x</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="o">*</span><span class="n">y</span> <span class="o">&lt;=</span> <span class="mf">1.0</span><span class="p">:</span>
+            <span class="n">inside</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">inside</span> <span class="o">/</span> <span class="n">N</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="mi">10_000_000</span>
+    <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">pi</span> <span class="o">=</span> <span class="n">estimate_pi</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;π ≈ </span><span class="si">{</span><span class="n">pi</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> (tempo: </span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">s)&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>Vamos criar um arquivo slurm para executar esse código:</p>
+<div class="highlight"><pre><span></span><code>srun<span class="w"> </span>--partition<span class="o">=</span>normal<span class="w"> </span>--ntasks<span class="o">=</span><span class="m">1</span><span class="w"> </span>--nodes<span class="o">=</span><span class="m">1</span><span class="w"> </span>--cpus-per-task<span class="o">=</span><span class="m">1</span><span class="w"> </span>python<span class="w"> </span>seq_montecarlo.py
+</code></pre></div>
+<h2 id="parte-2-paralelismo-em-cpu">Parte 2 - Paralelismo em CPU<a class="headerlink" href="#parte-2-paralelismo-em-cpu" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/usr/bin/env python3</span>
+<span class="c1"># paralelo_montecarlo.py</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">multiprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pool</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">worker</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">inside</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(),</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">x</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="o">*</span><span class="n">y</span> <span class="o">&lt;=</span> <span class="mf">1.0</span><span class="p">:</span>
+            <span class="n">inside</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">inside</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="mi">10_000</span>
+    <span class="n">nproc</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;SLURM_CPUS_PER_TASK&quot;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">cpu_count</span><span class="p">()))</span>
+    <span class="n">chunk</span> <span class="o">=</span> <span class="n">N</span> <span class="o">//</span> <span class="n">nproc</span>
+
+    <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="k">with</span> <span class="n">Pool</span><span class="p">(</span><span class="n">nproc</span><span class="p">)</span> <span class="k">as</span> <span class="n">p</span><span class="p">:</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">worker</span><span class="p">,</span> <span class="p">[</span><span class="n">chunk</span><span class="p">]</span><span class="o">*</span><span class="n">nproc</span><span class="p">)</span>
+
+    <span class="n">pi</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">(</span><span class="n">results</span><span class="p">)</span> <span class="o">/</span> <span class="n">N</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;π ≈ </span><span class="si">{</span><span class="n">pi</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> (nproc=</span><span class="si">{</span><span class="n">nproc</span><span class="si">}</span><span class="s2">, tempo=</span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">s)&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div>
+<p>Criando um arquivo .slurm</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="c1">#SBATCH --job-name=pi-mp</span>
+<span class="c1">#SBATCH --output=pi_paralelo_%j.out</span>
+<span class="c1">#SBATCH --nodes=1</span>
+<span class="c1">#SBATCH --ntasks=1</span>
+<span class="c1">#SBATCH --cpus-per-task=2</span>
+<span class="c1">#SBATCH --time=00:05:00</span>
+<span class="c1">#SBATCH --partition=normal</span>
+<span class="c1">#SBATCH --mem=2G                       </span>
+
+python<span class="w"> </span>paralelo_montecarlo.py
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "content.code.copy"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.56ea9cef.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.0.0/js-yaml.min.js"></script>
+      
+        <script src="../../js/markdown-enhancer.js"></script>
+      
+        <script src="../../js/slides.js"></script>
+      
+    
+  </body>
+</html>
