@@ -20,6 +20,7 @@ Convolução - Fonte: https://www.ibm.com/think/topics/convolutional-neural-netw
 ### Exemplo: Filtro 3×3
 
 **Problema:** cada thread acessa os mesmos elementos da memória global.
+
 **Solução:** usar shared memory com tiling.
 
 ```cpp
@@ -29,61 +30,27 @@ __global__ void conv2D(float *input,   // ponteiro para a imagem de entrada
                        int width,      // largura da imagem
                        int height) {   // altura da imagem
 
-    // ----------------------------------------------------------------
-    // Cálculo da posição (i, j) que esta thread deve processar
-    // Cada bloco tem blockDim.x * blockDim.y threads
-    // blockIdx indica qual bloco (x,y)
-    // threadIdx indica qual thread dentro do bloco
-    // ----------------------------------------------------------------
     int i = blockIdx.y * blockDim.y + threadIdx.y; // linha da imagem
     int j = blockIdx.x * blockDim.x + threadIdx.x; // coluna da imagem
 
-    // ----------------------------------------------------------------
-    // Inicializa o acumulador que armazenará o resultado da convolução
-    // ----------------------------------------------------------------
-    float acc = 0.0f;
-    // --------------------------------------------------------------------
-    // Varre a vizinhança 3x3 ao redor do pixel central (i, j)
-    // Os deslocamentos y e x variam de -1 a +1, cobrindo:
-    // (-1,-1), (-1,0), (-1,1)
-    // ( 0,-1), ( 0,0), ( 0,1)
-    // (+1,-1), (+1,0), (+1,1)
-    // --------------------------------------------------------------------
+    float acc = 0.0f; // acumulador
+   
+   // Varre a vizinhança 3x3 ao redor do pixel central (i, j)
     for (int y = -1; y <= 1; y++) {
         for (int x = -1; x <= 1; x++) {
 
-            // ------------------------------------------------------------
             // Calcula a posição do vizinho dentro da imagem de entrada
-            // (r = linha, c = coluna)
-            // ------------------------------------------------------------
             int r = i + y;
             int c = j + x;
 
-            // ------------------------------------------------------------
             // Verifica se a posição (r, c) está dentro dos limites da imagem
-            // Se estiver fora (nas bordas), ignoramos para evitar acesso inválido
-            // ------------------------------------------------------------
             bool dentroDaImagem = (r >= 0 && r < height && c >= 0 && c < width);
 
             if (dentroDaImagem) {
-                // --------------------------------------------------------
-                // Converte coordenadas 2D (r, c) em índice linear 1D
-                // Exemplo: linha 2, coluna 5 → índice = 2 * largura + 5
-                // --------------------------------------------------------
                 int pixelIndex = r * width + c;
-
-                // --------------------------------------------------------
-                // Localiza o elemento correspondente da máscara 3x3
-                // y e x variam de -1 a 1 → deslocamos +1 para obter índices 0 a 2
-                // --------------------------------------------------------
                 int maskRow = y + 1;
                 int maskCol = x + 1;
                 int maskIndex = maskRow * 3 + maskCol;
-
-                // --------------------------------------------------------
-                // Multiplica o valor do pixel pela máscara
-                // e adiciona ao acumulador (acc)
-                // --------------------------------------------------------
                 float pixelValue = input[pixelIndex];
                 float maskValue  = mask[maskIndex];
 
@@ -92,11 +59,7 @@ __global__ void conv2D(float *input,   // ponteiro para a imagem de entrada
         }
     }
 
-
-    // ----------------------------------------------------------------
     // Escreve o resultado final no pixel correspondente da saída.
-    // A posição linear é dada por i * width + j.
-    // ----------------------------------------------------------------
     output[i * width + j] = acc;
 }
 
@@ -125,9 +88,8 @@ __global__ void conv2D_tiled(float *input,   // imagem de entrada
                              float *mask,    // máscara 3x3
                              int width,      // largura da imagem
                              int height) {   // altura da imagem
-    // --------------------------------------------------------------------
-    // Blocos e threads: cada bloco processa um tile (submatriz) da imagem
-    // --------------------------------------------------------------------
+                             
+                             
     int tx = threadIdx.x;  // coluna da thread dentro do bloco
     int ty = threadIdx.y;  // linha da thread dentro do bloco
 
@@ -135,49 +97,31 @@ __global__ void conv2D_tiled(float *input,   // imagem de entrada
     int j = blockIdx.x * TILE_SIZE + tx;
     int i = blockIdx.y * TILE_SIZE + ty;
 
-    // --------------------------------------------------------------------
     // Memória compartilhada do bloco
-    // Adicionamos uma "margem" para armazenar os vizinhos do tile
-    // --------------------------------------------------------------------
     __shared__ float tile[TILE_SIZE + 2 * MASK_RADIUS][TILE_SIZE + 2 * MASK_RADIUS];
 
-    // --------------------------------------------------------------------
     // Calcula a posição global do pixel que esta thread deve carregar
-    // A borda do "halo" é carregada pelas threads extras do bloco
-    // --------------------------------------------------------------------
     int inputRow = i - MASK_RADIUS;
     int inputCol = j - MASK_RADIUS;
 
-    // --------------------------------------------------------------------
-    // Carregamento da imagem para a memória compartilhada
-    // Cada thread carrega um elemento
-    // --------------------------------------------------------------------
+    // Carregamento da imagem para a memória compartilhada, cada thread carrega um elemento
     if (inputRow >= 0 && inputRow < height && inputCol >= 0 && inputCol < width) {
         tile[ty][tx] = input[inputRow * width + inputCol];
     } else {
         tile[ty][tx] = 0.0f;  // preenche com 0 fora da imagem 
     }
 
-    // --------------------------------------------------------------------
-    // Sincronização obrigatória:
     // Garante que todas as threads terminaram de carregar o tile
-    // antes que qualquer thread comece a usar os dados
-    // --------------------------------------------------------------------
     __syncthreads();
 
-    // --------------------------------------------------------------------
     // Somente threads dentro da região útil calculam o pixel de saída
-    // (ignora threads que carregaram apenas halo)
-    // --------------------------------------------------------------------
     if (tx >= MASK_RADIUS && tx < TILE_SIZE + MASK_RADIUS &&
         ty >= MASK_RADIUS && ty < TILE_SIZE + MASK_RADIUS &&
         i < height && j < width) {
 
         float acc = 0.0f; // acumulador da convolução
 
-        // ---------------------------------------------------------------
         // Varre a vizinhança 3x3 dentro da memória compartilhada
-        // ---------------------------------------------------------------
         for (int y = -MASK_RADIUS; y <= MASK_RADIUS; y++) {
             for (int x = -MASK_RADIUS; x <= MASK_RADIUS; x++) {
                 int maskRow = y + MASK_RADIUS;
@@ -188,9 +132,7 @@ __global__ void conv2D_tiled(float *input,   // imagem de entrada
             }
         }
 
-        // ---------------------------------------------------------------
         // Escreve o valor final na imagem de saída (memória global)
-        // ---------------------------------------------------------------
         output[i * width + j] = acc;
     }
 }
@@ -210,6 +152,10 @@ Fonte: https://developer.codeplay.com/products/computecpp/ce/1.3.0/guides/sycl-f
 * **SM (Streaming Multiprocessor):** executa vários warps alternadamente para amenizar a latência.
 * O **agendador de warps** alterna entre os warps prontos para computação.
 
+
+![alt text](kernel-execution-on-gpu-1-625x438.png)
+Fonte: https://developer.nvidia.com/blog/cuda-refresher-cuda-programming-model/
+
 ### Implicações práticas:
 
 * Melhor usar **blocos com múltiplos de 32 threads**.
@@ -227,9 +173,9 @@ Aplicando todas as otimizações:
 using namespace std;
 
 #define MASK_RADIUS 1
-#define ITER_LOCAL 100  // mais carga computacional por pixel
+#define ITER_LOCAL 100  
 
-// Kernel: heat stencil 2D com tiling em shared
+// Stencil 2D com tiling em shared
 __global__ void heatStencil2D(float *input, float *output,
                               int width, int height,
                               float alpha, float dt,
@@ -260,8 +206,6 @@ __global__ void heatStencil2D(float *input, float *output,
         float Tij  = tile[ty * TILE_EXT + tx];
         float Tnew = Tij;
 
-        // iteracoes locais para aumentar a intensidade aritmética
-        #pragma unroll 4
         for (int k = 0; k < ITER_LOCAL; k++) {
             float lap =
                 tile[(ty-1) * TILE_EXT + tx] +
@@ -271,7 +215,6 @@ __global__ void heatStencil2D(float *input, float *output,
                 4.0f * Tij;
 
             Tnew = Tij + alpha * dt * tanhf(lap);
-            // pequena não-linearidade para “forçar” conta
             Tij  = 0.99f * Tnew + 0.01f * sinf(Tnew);
         }
 
@@ -279,18 +222,9 @@ __global__ void heatStencil2D(float *input, float *output,
     }
 }
 
-// utilitário para checar CUDA
-#define CHECK_CUDA(call) do { \
-  cudaError_t err = (call); \
-  if (err != cudaSuccess) { \
-    cerr << "CUDA error: " << cudaGetErrorString(err) \
-         << " at " << __FILE__ << ":" << __LINE__ << endl; \
-    exit(1); \
-  } \
-} while(0)
 
 int main() {
-    // tamanho “grande” para GPU fazer sentido
+    // Conjunto de dados
     const int width  = 8192;
     const int height = 8192;
     const long long N = 1LL * width * height;
@@ -298,11 +232,11 @@ int main() {
     cout << "Stencil 2D em GPU (" << width << "x" << height
          << "), " << fixed << setprecision(1) << (N/1e6) << " Mpx\n";
 
-    // parâmetros “físicos”
+    // parâmetros “físicos” para a conta
     const float alpha = 0.25f;
     const float dt    = 0.1f;
 
-    // alocação unificada
+    // alocação com cuda Malloc Managed
     float *input = nullptr, *output = nullptr;
     CHECK_CUDA(cudaMallocManaged(&input,  N * sizeof(float)));
     CHECK_CUDA(cudaMallocManaged(&output, N * sizeof(float)));
@@ -310,14 +244,16 @@ int main() {
     // inicialização simples
     for (long long i = 0; i < N; i++) input[i] = 1.0f;
 
-    // ocupa sugestionada teoricamente (threads por bloco)
+    // threads por bloco
     int minGrid=0, optBlock=0;
     CHECK_CUDA(cudaOccupancyMaxPotentialBlockSize(&minGrid, &optBlock,
                      heatStencil2D, 0, 0));
-    // converte threads/bloco -> tile aproximado
+
+    // tile aproximado
     int suggestedTileExt  = (int)floor(sqrt((double)optBlock));
     int suggestedTileSize = suggestedTileExt - 2*MASK_RADIUS;
     if (suggestedTileSize < 4) suggestedTileSize = 4; // sanidade
+    
     // ================================================================
     // Análise de ocupação teórica (CUDA)
     // ================================================================
@@ -367,10 +303,6 @@ int main() {
 
         size_t shmem = (size_t)TILE_EXT * TILE_EXT * sizeof(float);
 
-        // --- Warm-up (compilação + carregamento inicial do contexto) ---
-        heatStencil2D<<<blocks, threads, shmem>>>(input, output, width, height, alpha, dt, TILE_SIZE);
-        CHECK_CUDA(cudaDeviceSynchronize());
-
         // --- Medição do tempo médio ---
         cudaEvent_t start, stop;
         CHECK_CUDA(cudaEventCreate(&start));
@@ -414,7 +346,7 @@ int main() {
     CHECK_CUDA(cudaFree(input));
     CHECK_CUDA(cudaFree(output));
     return 0;
-
+}
 ```
 
 Slurm para executar em um Cluster HPC:
