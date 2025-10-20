@@ -202,6 +202,10 @@ __global__ void conv2D_tiled(float *input,   // imagem de entrada
 
 A GPU organiza o trabalho em:
 
+![warp](warp.png)
+Fonte: https://developer.codeplay.com/products/computecpp/ce/1.3.0/guides/sycl-for-cuda-developers/execution-model
+
+
 * **Warps:** grupos de 32 threads que executam em *SIMT* (Single Instruction, Multiple Thread).
 * **SM (Streaming Multiprocessor):** executa vários warps alternadamente para amenizar a latência.
 * O **agendador de warps** alterna entre os warps prontos para computação.

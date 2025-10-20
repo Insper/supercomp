@@ -46,7 +46,7 @@ nav:
         - "Aula 12 - Exercícios preparatórios para AI": aulas/aula12/index.md
         - "Aula 13 - Paralelismo em GPU com CUDA": aulas/aula13/index.md
         - "Aula 14 - Condições de corrida e throughput": aulas/aula14/index.md
-        - "Aula 15 - "Stencil, tilling e agendamento de threads": aulas/aula15/index.md
+        - "Aula 15 - Stencil, tilling e agendamento de threads": aulas/aula15/index.md
 
     - Suporte:
         - "Aula 01" : teoria/aula01/index.md
