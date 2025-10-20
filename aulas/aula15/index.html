@@ -1841,6 +1841,8 @@ Convolução - Fonte: <a href="https://www.ibm.com/think/topics/convolutional-ne
 </code></pre></div>
 <h2 id="agendamento-de-threads"><strong>Agendamento de Threads</strong><a class="headerlink" href="#agendamento-de-threads" title="Permanent link">&para;</a></h2>
 <p>A GPU organiza o trabalho em:</p>
+<p><img alt="warp" src="warp.png" />
+Fonte: <a href="https://developer.codeplay.com/products/computecpp/ce/1.3.0/guides/sycl-for-cuda-developers/execution-model">https://developer.codeplay.com/products/computecpp/ce/1.3.0/guides/sycl-for-cuda-developers/execution-model</a></p>
 <ul>
 <li><strong>Warps:</strong> grupos de 32 threads que executam em <em>SIMT</em> (Single Instruction, Multiple Thread).</li>
 <li><strong>SM (Streaming Multiprocessor):</strong> executa vários warps alternadamente para amenizar a latência.</li>
