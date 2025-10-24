@@ -1,4 +1,4 @@
-# **Programação Paralela em GPU com CUDA – Stencil, Tiling e Agendamento de Threads**
+# **Programação Paralela em GPU com CUDA Stencil, Tiling e Agendamento de Threads**
 
 ## O que é um *Stencil Operation*?
 
@@ -173,24 +173,35 @@ Aplicando todas as otimizações:
 using namespace std;
 
 #define MASK_RADIUS 1
-#define ITER_LOCAL 100  
+#define ITER_LOCAL 100
 
-// Stencil 2D com tiling em shared
+// ================================================================
+// Utilitário para verificar erros de CUDA
+// ================================================================
+#define CHECK_CUDA(call) do { \
+    cudaError_t err = (call); \
+    if (err != cudaSuccess) { \
+        cerr << "CUDA error: " << cudaGetErrorString(err) \
+             << " at " << __FILE__ << ":" << __LINE__ << endl; \
+        exit(1); \
+    } \
+} while(0)
+
+// ================================================================
+// Kernel: Stencil 2D com tiling em memória compartilhada
+// ================================================================
 __global__ void heatStencil2D(float *input, float *output,
                               int width, int height,
                               float alpha, float dt,
                               int tileSize) {
-    extern __shared__ float tile[];  // shared dinâmica (TILE_EXT*TILE_EXT floats)
+    extern __shared__ float tile[];
     const int TILE_EXT = tileSize + 2 * MASK_RADIUS;
 
     int tx = threadIdx.x;
     int ty = threadIdx.y;
-
-    // mapeia thread do bloco para coordenadas globais com halo
     int j = blockIdx.x * tileSize + tx - MASK_RADIUS;
     int i = blockIdx.y * tileSize + ty - MASK_RADIUS;
 
-    // carrega input -> shared (com padding 0 fora da imagem)
     if (i >= 0 && i < height && j >= 0 && j < width)
         tile[ty * TILE_EXT + tx] = input[i * width + j];
     else
@@ -198,7 +209,6 @@ __global__ void heatStencil2D(float *input, float *output,
 
     __syncthreads();
 
-    // região útil (ignora threads que só carregaram halo)
     if (tx >= MASK_RADIUS && tx < TILE_EXT - MASK_RADIUS &&
         ty >= MASK_RADIUS && ty < TILE_EXT - MASK_RADIUS &&
         i < height && j < width) {
@@ -222,70 +232,60 @@ __global__ void heatStencil2D(float *input, float *output,
     }
 }
 
-
+// ================================================================
+// Função principal
+// ================================================================
 int main() {
-    // Conjunto de dados
     const int width  = 8192;
     const int height = 8192;
     const long long N = 1LL * width * height;
 
     cout << "Stencil 2D em GPU (" << width << "x" << height
-         << "), " << fixed << setprecision(1) << (N/1e6) << " Mpx\n";
+         << "), " << fixed << setprecision(1) << (N / 1e6) << " Mpx\n";
 
-    // parâmetros “físicos” para a conta
     const float alpha = 0.25f;
     const float dt    = 0.1f;
 
-    // alocação com cuda Malloc Managed
     float *input = nullptr, *output = nullptr;
     CHECK_CUDA(cudaMallocManaged(&input,  N * sizeof(float)));
     CHECK_CUDA(cudaMallocManaged(&output, N * sizeof(float)));
 
-    // inicialização simples
     for (long long i = 0; i < N; i++) input[i] = 1.0f;
 
-    // threads por bloco
-    int minGrid=0, optBlock=0;
+    int minGrid = 0, optBlock = 0;
     CHECK_CUDA(cudaOccupancyMaxPotentialBlockSize(&minGrid, &optBlock,
                      heatStencil2D, 0, 0));
 
-    // tile aproximado
     int suggestedTileExt  = (int)floor(sqrt((double)optBlock));
-    int suggestedTileSize = suggestedTileExt - 2*MASK_RADIUS;
-    if (suggestedTileSize < 4) suggestedTileSize = 4; // sanidade
-    
-    // ================================================================
-    // Análise de ocupação teórica (CUDA)
-    // ================================================================
+    int suggestedTileSize = suggestedTileExt - 2 * MASK_RADIUS;
+    if (suggestedTileSize < 4) suggestedTileSize = 4;
+
     cout << "\n============================================================\n";
-    cout << "ANÁLISE DOS TILES\n";
+    cout << "ANÁLISE TEÓRICA DE OCUPAÇÃO (CUDA)\n";
     cout << "------------------------------------------------------------\n";
     cout << "• Threads ideais por bloco : " << optBlock << "\n";
     cout << "• TILE_EXT sugerido        : " << suggestedTileExt
-        << "  →  TILE_SIZE sugerido ≈ " << suggestedTileSize << "\n";
+         << "  →  TILE_SIZE sugerido ≈ " << suggestedTileSize << "\n";
     cout << "• Grade mínima recomendada : " << minGrid << " blocos totais\n";
     cout << "============================================================\n\n";
 
-    // ================================================================
-    // Testando diferentes tamanhos de TILE
-    // ================================================================
+    // Agora declaramos repeats antes de usar
+    const int repeats = 20;
+
     int tileSizes[] = {suggestedTileSize, 8, 12, 14, 16, 32};
-    const int numTests = sizeof(tileSizes)/sizeof(tileSizes[0]);
+    const int numTests = sizeof(tileSizes) / sizeof(tileSizes[0]);
 
     cout << "INICIANDO EXPERIMENTO DE DESEMPENHO GPU\n";
     cout << "   (média de " << repeats << " execuções por configuração)\n\n";
 
     cout << left
-        << setw(10) << "Tile"
-        << setw(16) << "Threads/Bloco"
-        << setw(8)  << "Warps"
-        << setw(14) << "Tempo (ms)"
-        << setw(14) << "Mpx/s"
-        << "Comentário\n";
+         << setw(10) << "Tile"
+         << setw(16) << "Threads/Bloco"
+         << setw(8)  << "Warps"
+         << setw(14) << "Tempo (ms)"
+         << setw(14) << "Mpx/s"
+         << "Comentário\n";
     cout << string(75, '-') << "\n";
-
-    // Mede média de várias execuções para precisão
-    const int repeats = 20;
 
     for (int t = 0; t < numTests; t++) {
         int TILE_SIZE = tileSizes[t];
@@ -303,7 +303,7 @@ int main() {
 
         size_t shmem = (size_t)TILE_EXT * TILE_EXT * sizeof(float);
 
-        // --- Medição do tempo médio ---
+        // Eventos CUDA para medir tempo
         cudaEvent_t start, stop;
         CHECK_CUDA(cudaEventCreate(&start));
         CHECK_CUDA(cudaEventCreate(&stop));
@@ -321,12 +321,11 @@ int main() {
         CHECK_CUDA(cudaEventDestroy(stop));
 
         const double ms = msTotal / repeats;
-        const double mpxPerSec = (N / 1e6) / (ms / 1000.0); // milhões de pixels por segundo
+        const double mpxPerSec = (N / 1e6) / (ms / 1000.0);
 
-        // --- Análise do resultado ---
         string comment;
         if (threadsPerBlock == optBlock)
-            comment = "≈ Ideal teórico ";
+            comment = "≈ Ideal teórico";
         else if (abs(threadsPerBlock - optBlock) < 64)
             comment = "Próximo ao ideal";
         else if (threadsPerBlock < optBlock)
@@ -335,12 +334,12 @@ int main() {
             comment = "Shared alta";
 
         cout << left
-            << setw(10) << (to_string(TILE_SIZE) + "x" + to_string(TILE_SIZE))
-            << setw(16) << threadsPerBlock
-            << setw(8)  << warps
-            << setw(14) << fixed << setprecision(3) << ms
-            << setw(14) << fixed << setprecision(2) << mpxPerSec
-            << comment << "\n";
+             << setw(10) << (to_string(TILE_SIZE) + "x" + to_string(TILE_SIZE))
+             << setw(16) << threadsPerBlock
+             << setw(8)  << warps
+             << setw(14) << fixed << setprecision(3) << ms
+             << setw(14) << fixed << setprecision(2) << mpxPerSec
+             << comment << "\n";
     }
 
     CHECK_CUDA(cudaFree(input));

@@ -47,6 +47,7 @@ nav:
         - "Aula 13 - Paralelismo em GPU com CUDA": aulas/aula13/index.md
         - "Aula 14 - Condições de corrida e throughput": aulas/aula14/index.md
         - "Aula 15 - Stencil, tilling e agendamento de threads": aulas/aula15/index.md
+        - "Aula 16 - Redução e Scan com CUDA" : aulas/aula16/index.md
 
     - Suporte:
         - "Aula 01" : teoria/aula01/index.md
@@ -73,6 +74,7 @@ nav:
     - Complementar:
         - "Conectando ao Cluster Franky": complementar/aula02/index.md
         - "Paralelismo com Python": complementar/aula03/index.md
+        - "Paralelismo com Numba": complementar/aula04/index.md
 
         
 extra_javascript:
