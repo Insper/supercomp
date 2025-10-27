@@ -11,6 +11,10 @@
         <link rel="canonical" href="https://insper.github.io/supercomp/aulas/aula17/">
       
       
+        <link rel="prev" href="../aula16/">
+      
+      
+        <link rel="next" href="../../teoria/aula01/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -18,7 +22,7 @@
     
     
       
-        <title>Index - SuperComputação - 2025/2</title>
+        <title>Aula 17 - Matriz esparsa e Computação Assíncrona - SuperComputação - 2025/2</title>
       
     
     
@@ -79,6 +83,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#lidando-com-matrizes-esparsas" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -109,7 +118,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Index
+              Aula 17 - Matriz esparsa e Computação Assíncrona
             
           </span>
         </div>
@@ -222,10 +231,12 @@
         
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
+      <li class="md-tabs__item md-tabs__item--active">
         <a href="../aula01/" class="md-tabs__link">
           
   
@@ -400,23 +411,28 @@
       
   
   
+    
   
   
+  
     
     
     
-      
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
             
   
   <span class="md-ellipsis">
@@ -428,7 +444,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             Aulas
@@ -782,6 +798,107 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Aula 17 - Matriz esparsa e Computação Assíncrona
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Aula 17 - Matriz esparsa e Computação Assíncrona
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#lidando-com-matrizes-esparsas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lidando com Matrizes esparsas
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Lidando com Matrizes esparsas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#estrutura-csr" class="md-nav__link">
+    <span class="md-ellipsis">
+      Estrutura CSR
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#computacao-assincrona-com-streams" class="md-nav__link">
+    <span class="md-ellipsis">
+      Computação assíncrona com streams
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-e-uma-stream" class="md-nav__link">
+    <span class="md-ellipsis">
+      O que é uma Stream
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1414,6 +1531,56 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#lidando-com-matrizes-esparsas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lidando com Matrizes esparsas
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Lidando com Matrizes esparsas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#estrutura-csr" class="md-nav__link">
+    <span class="md-ellipsis">
+      Estrutura CSR
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#computacao-assincrona-com-streams" class="md-nav__link">
+    <span class="md-ellipsis">
+      Computação assíncrona com streams
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-e-uma-stream" class="md-nav__link">
+    <span class="md-ellipsis">
+      O que é uma Stream
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1431,9 +1598,297 @@
   
 
 
-  <h1>Index</h1>
+  <h1>Aula 17 - Matriz esparsa e Computação Assíncrona</h1>
 
+<p>Nesta aula, o objetivo é compreender como estruturas de dados e estratégias de execução assíncrona influenciam diretamente o desempenho de um algoritmo na GPU. </p>
+<h2 id="lidando-com-matrizes-esparsas">Lidando com Matrizes esparsas<a class="headerlink" href="#lidando-com-matrizes-esparsas" title="Permanent link">&para;</a></h2>
+<p>Uma matriz esparsa é uma matriz na qual a maioria dos elementos é zero. Para processar dados com essa característica, é preciso levar em conta que armazenar todos os zeros seria um grande desperdício de memória e de tempo de processamento.</p>
+<p>Por exemplo, imagine uma matriz 1.000 × 1.000.
+Se apenas 10.000 elementos são diferentes de zero, isso significa que <strong>99% dos elementos são zeros</strong>.
+Armazenar todos os 1.000.000 de elementos seria extremamente ineficiente, além de custar mais memória, na programação teriamos que elaborar estratégias para lidar com esse dado e evitar por exemplo, erros de divisões por zero.</p>
+<p>Para resolver isso, surgiram representações que guardam apenas os elementos não nulos e suas posições. Existem vários formatos, CSR, COO, ELL, CSC, cada um com vantagens específicas dependendo da arquitetura e do tipo de acesso.</p>
+<p>O formato CSR (Compressed Sparse Row), é o mais popular em ambientes de HPC, principalmente para operações de multiplicação matriz-vetor (SpMV).
+Ele organiza os dados de forma compacta e cache-friendly, o que reduz o volume de memória transferido e melhora a eficiência de acesso, especialmente na GPU, onde o gerenciamento de acesso a memória é fundamental.</p>
+<h3 id="estrutura-csr">Estrutura CSR<a class="headerlink" href="#estrutura-csr" title="Permanent link">&para;</a></h3>
+<p><img alt="https://www.john-ros.com/Rcourse/sparse.html" src="image.png" />
+Fonte: <a href="https://www.john-ros.com/Rcourse/sparse.html">https://www.john-ros.com/Rcourse/sparse.html</a></p>
+<p>Na matriz 3×4 temos cinco elementos não nulos: $$ a_{01}, a_{02}, a_{11}, a_{13},   a_{20}  $$</p>
+<p>Em vez de armazenar os doze elementos (incluindo zeros), o formato CSR guarda apenas as informações essenciais. O  vetor, chamado <strong>Non-zeros</strong>, contém os valores não nulos da matriz, organizados linha por linha. </p>
+<p>Para que seja possível saber a posição de cada valor dentro da matriz original, é necessário também registrar as colunas correspondentes. Isso é feito no vetor <strong>Column Indices</strong>, que contém o índice da coluna de cada elemento armazenado em <strong>Non-zeros</strong>.</p>
+<p>Por fim, o vetor mais importante é o <strong>Row Pointers</strong>, que indica onde começa e termina cada linha dentro do vetor de valores. Ele tem tamanho igual ao número de linhas mais um, pois o último elemento marca o fim da última linha. No exemplo, o vetor é ([0, 2, 4, 5]). O zero inicial indica que a primeira linha começa no índice 0 do vetor <strong>Non-zeros</strong>; o número 2 indica que a segunda linha começa no índice 2; o número 4 marca o início da terceira linha; e o número 5 representa o limite final do vetor. Assim, ao percorrer a linha (i), basta ler os elementos entre <code>row_ptr[i]</code> e <code>row_ptr[i+1]</code>. Isso elimina a necessidade de armazenar zeros, mantendo uma correspondência precisa entre os valores e suas posições.</p>
+<p>De forma prática, este é um exemplo de implementação:</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cuda_runtime.h&gt;</span>
 
+<span class="c1">// Kernel CUDA para multiplicação matriz-vetor no formato CSR</span>
+<span class="n">__global__</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">multiplicar_csr_kernel</span><span class="p">(</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">num_linhas</span><span class="p">,</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">ponteiro_linha</span><span class="p">,</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">indice_coluna</span><span class="p">,</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">valores</span><span class="p">,</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">vetor_x</span><span class="p">,</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">vetor_y</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">linha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">blockIdx</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">blockDim</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">threadIdx</span><span class="p">.</span><span class="n">x</span><span class="p">;</span><span class="w"> </span><span class="c1">// Cada thread calcula uma linha</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">linha</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">num_linhas</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">float</span><span class="w"> </span><span class="n">soma</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span>
+
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">inicio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ponteiro_linha</span><span class="p">[</span><span class="n">linha</span><span class="p">];</span><span class="w">       </span><span class="c1">// Índice inicial da linha</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">fim</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="n">ponteiro_linha</span><span class="p">[</span><span class="n">linha</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">];</span><span class="w">   </span><span class="c1">// Índice final (não incluso)</span>
+
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">inicio</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">fim</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">coluna</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">indice_coluna</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="w">            </span><span class="n">soma</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">valores</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">vetor_x</span><span class="p">[</span><span class="n">coluna</span><span class="p">];</span><span class="w">  </span><span class="c1">// Multiplica valor não nulo pelo x correspondente</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="n">vetor_y</span><span class="p">[</span><span class="n">linha</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">soma</span><span class="p">;</span><span class="w"> </span><span class="c1">// Armazena o resultado final</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Considerando a matriz do exemplo:</span>
+<span class="w">    </span><span class="c1">// [0  a01 a02  0]</span>
+<span class="w">    </span><span class="c1">// [0  a11  0  a13]</span>
+<span class="w">    </span><span class="c1">// [a20  0  0   0]</span>
+
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">num_linhas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">num_colunas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">num_nao_nulos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Estruturas CSR no host (CPU)</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">h_ponteiro_linha</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">};</span><span class="w">         </span><span class="c1">// Indica o início de cada linha</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">h_indice_coluna</span><span class="p">[]</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">};</span><span class="w">      </span><span class="c1">// Colunas correspondentes</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">h_valores</span><span class="p">[]</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mf">1.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">4.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">5.0f</span><span class="p">};</span><span class="w"> </span><span class="c1">// Valores não nulos</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">h_vetor_x</span><span class="p">[]</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mf">1.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">};</span><span class="w">        </span><span class="c1">// Vetor x</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">h_vetor_y</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mf">0.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">};</span><span class="w">              </span><span class="c1">// Resultado y</span>
+
+<span class="w">    </span><span class="c1">// Alocação de memória na GPU</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">d_ponteiro_linha</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">d_indice_coluna</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">d_valores</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">d_vetor_x</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">d_vetor_y</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">cudaMalloc</span><span class="p">(</span><span class="o">&amp;</span><span class="n">d_ponteiro_linha</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">num_linhas</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+<span class="w">    </span><span class="n">cudaMalloc</span><span class="p">(</span><span class="o">&amp;</span><span class="n">d_indice_coluna</span><span class="p">,</span><span class="w"> </span><span class="n">num_nao_nulos</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+<span class="w">    </span><span class="n">cudaMalloc</span><span class="p">(</span><span class="o">&amp;</span><span class="n">d_valores</span><span class="p">,</span><span class="w"> </span><span class="n">num_nao_nulos</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
+<span class="w">    </span><span class="n">cudaMalloc</span><span class="p">(</span><span class="o">&amp;</span><span class="n">d_vetor_x</span><span class="p">,</span><span class="w"> </span><span class="n">num_colunas</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
+<span class="w">    </span><span class="n">cudaMalloc</span><span class="p">(</span><span class="o">&amp;</span><span class="n">d_vetor_y</span><span class="p">,</span><span class="w"> </span><span class="n">num_linhas</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
+
+<span class="w">    </span><span class="c1">// Cópia dos dados da CPU para a GPU</span>
+<span class="w">    </span><span class="n">cudaMemcpy</span><span class="p">(</span><span class="n">d_ponteiro_linha</span><span class="p">,</span><span class="w"> </span><span class="n">h_ponteiro_linha</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">num_linhas</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">),</span><span class="w"> </span><span class="n">cudaMemcpyHostToDevice</span><span class="p">);</span>
+<span class="w">    </span><span class="n">cudaMemcpy</span><span class="p">(</span><span class="n">d_indice_coluna</span><span class="p">,</span><span class="w"> </span><span class="n">h_indice_coluna</span><span class="p">,</span><span class="w"> </span><span class="n">num_nao_nulos</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">),</span><span class="w"> </span><span class="n">cudaMemcpyHostToDevice</span><span class="p">);</span>
+<span class="w">    </span><span class="n">cudaMemcpy</span><span class="p">(</span><span class="n">d_valores</span><span class="p">,</span><span class="w"> </span><span class="n">h_valores</span><span class="p">,</span><span class="w"> </span><span class="n">num_nao_nulos</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">),</span><span class="w"> </span><span class="n">cudaMemcpyHostToDevice</span><span class="p">);</span>
+<span class="w">    </span><span class="n">cudaMemcpy</span><span class="p">(</span><span class="n">d_vetor_x</span><span class="p">,</span><span class="w"> </span><span class="n">h_vetor_x</span><span class="p">,</span><span class="w"> </span><span class="n">num_colunas</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">),</span><span class="w"> </span><span class="n">cudaMemcpyHostToDevice</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Configuração de blocos e threads</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">threads_por_bloco</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">128</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">blocos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">num_linhas</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">threads_por_bloco</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">threads_por_bloco</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Execução do kernel</span>
+<span class="w">    </span><span class="n">multiplicar_csr_kernel</span><span class="o">&lt;&lt;&lt;</span><span class="n">blocos</span><span class="p">,</span><span class="w"> </span><span class="n">threads_por_bloco</span><span class="o">&gt;&gt;&gt;</span><span class="p">(</span>
+<span class="w">        </span><span class="n">num_linhas</span><span class="p">,</span><span class="w"> </span><span class="n">d_ponteiro_linha</span><span class="p">,</span><span class="w"> </span><span class="n">d_indice_coluna</span><span class="p">,</span><span class="w"> </span><span class="n">d_valores</span><span class="p">,</span><span class="w"> </span><span class="n">d_vetor_x</span><span class="p">,</span><span class="w"> </span><span class="n">d_vetor_y</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Cópia do resultado da GPU para a CPU</span>
+<span class="w">    </span><span class="n">cudaMemcpy</span><span class="p">(</span><span class="n">h_vetor_y</span><span class="p">,</span><span class="w"> </span><span class="n">d_vetor_y</span><span class="p">,</span><span class="w"> </span><span class="n">num_linhas</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">),</span><span class="w"> </span><span class="n">cudaMemcpyDeviceToHost</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Exibição do resultado</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Resultado y = A * x:&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">num_linhas</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;y[&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;] = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">h_vetor_y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Liberação de memória da GPU</span>
+<span class="w">    </span><span class="n">cudaFree</span><span class="p">(</span><span class="n">d_ponteiro_linha</span><span class="p">);</span>
+<span class="w">    </span><span class="n">cudaFree</span><span class="p">(</span><span class="n">d_indice_coluna</span><span class="p">);</span>
+<span class="w">    </span><span class="n">cudaFree</span><span class="p">(</span><span class="n">d_valores</span><span class="p">);</span>
+<span class="w">    </span><span class="n">cudaFree</span><span class="p">(</span><span class="n">d_vetor_x</span><span class="p">);</span>
+<span class="w">    </span><span class="n">cudaFree</span><span class="p">(</span><span class="n">d_vetor_y</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Cada linha da matriz é independente das outras, então podemos ter uma thread por linha.</p>
+<p>Cada thread recebe um número de <code>linha</code> e calcula o resultado daquela linha, salvando no vetor de saída <code>y</code>.</p>
+<p>Para saber onde estão os elementos da <code>linha</code> dentro da estrutura CSR, a thread consulta o vetor <code>ponteiro_linha</code>. Os valores <code>ponteiro_linha[linha]</code> e <code>ponteiro_linha[linha + 1]</code> marcam início e fim, indicando quais posições do vetor <code>valores</code> pertencem aquela linha.</p>
+<p>A thread então percorre esse trecho da memória. Em <code>indice_coluna[i]</code>, aponta a coluna onde o valor está localizado na matriz original.</p>
+<p>Em <code>valores[i]</code>, está o número não nulo que deve ser usado no cálculo.</p>
+<p>Com essas informações, a thread sabe que deve multiplicar o valor <code>valores[i]</code> pelo elemento correspondente do vetor <code>x</code>.</p>
+<p>Cada produto parcial é somado no acumulador <code>soma</code>.</p>
+<p>Quando a thread termina de percorrer seus elementos, ela grava o resultado acumulado em <code>vetor_y[linha]</code>.</p>
+<p>No final, todas as threads juntas produzem o vetor <code>y</code>, que contém o resultado da multiplicação <code>A * x</code>.</p>
+<h2 id="computacao-assincrona-com-streams">Computação assíncrona com streams<a class="headerlink" href="#computacao-assincrona-com-streams" title="Permanent link">&para;</a></h2>
+<p>Até agora, o que vimos foi computação síncrona, com um fluxo de trabalho desta forma:</p>
+<ol>
+<li><strong>Host → transfere os dados para GPU</strong></li>
+<li><strong>Device → Executa o kernel</strong></li>
+<li><strong>Device → transfere os dados para o Host</strong></li>
+</ol>
+<p>Durante cada etapa, o hardware que não está envolvido permanece ocioso, a GPU espera a CPU passar os dados para fazer a computação, a CPU espera a GPU fazer a computação dos dados para ter os dados trabalhados.</p>
+<p>A computação assíncrona é outra estratégia. Ela permite enfileirar tarefas para que a CPU não precise esperar o término das operações na GPU, e para que a GPU possa executar diferentes funções.</p>
+<p>Com isso temos uma "sobreposição de operações", melhor aproveitamento do hardware e redução do tempo total de execução da aplicação.</p>
+<h2 id="o-que-e-uma-stream">O que é uma Stream<a class="headerlink" href="#o-que-e-uma-stream" title="Permanent link">&para;</a></h2>
+<p>Uma stream é uma fila de comandos assíncronos na GPU.
+Cada stream mantém sua própria sequência de tarefas, como:</p>
+<div class="highlight"><pre><span></span><code>Stream 0: Memcpy (H2D) → Kernel → Memcpy (D2H)
+Stream 1: Memcpy (H2D) → Kernel → Memcpy (D2H)
+Stream 2: ...
+</code></pre></div>
+<p>As operações dentro de uma mesma stream são executadas na ordem em que foram emitidas (ordem FIFO).
+Mas operações em streams diferentes podem ser executadas de forma concorrente na GPU.</p>
+<p>Assim, enquanto uma stream executa um kernel, outra pode estar transferindo dados, e outra pode executar outro kernel.</p>
+<p>Sua missão é planejar o envio dessas tarefas de modo que as dependências sejam respeitadas, mas que o máximo possível de operações aconteçam em paralelo.</p>
+<p><img alt="alt text" src="C1060Timeline-1024x679-1.png" />
+Fonte: <a href="https://developer.nvidia.com/blog/how-overlap-data-transfers-cuda-cc/">https://developer.nvidia.com/blog/how-overlap-data-transfers-cuda-cc/</a></p>
+<p>Na versão sequencial, todas as operações ocorrem de forma estritamente ordenada: primeiro os dados são transferidos da CPU para a GPU, depois o kernel é executado e, em seguida, os resultados são copiados de volta para a CPU. </p>
+<p>Na Versão assíncrona I, o código passa a utilizar streams CUDA, que permitem a execução de tarefas em filas independentes, como o C1060 possui apenas um motor de cópia. As operações de transferência são executadas de forma alternada dentro do mesmo Copy Engine, essa sequência impede a sobreposição entre cópias e execução de kernels, pois o motor de cópia permanece ocupado o tempo todo alternando entre transferências de entrada e saída. </p>
+<p>Na segunda versão assíncrona, a ordem de emissão das operações é modificada: todas as transferências do host para o device são lançadas primeiro, seguidas da execução dos kernels e, por fim, das transferências de volta. Essa mudança de ordem permite que, enquanto o Kernel processa um conjunto de dados, o Copy Engine possa iniciar a transferência dos dados seguintes. Assim, parte das cópias e das execuções ocorre simultaneamente, o que reduz o tempo total de execução. </p>
+<p>Na prática, para implementar isso em CUDA, fazemos algo assim:</p>
+<div class="highlight"><pre><span></span><code><span class="n">cudaMemcpyAsync</span><span class="p">(</span><span class="n">d_A</span><span class="p">,</span><span class="w"> </span><span class="n">h_A</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="n">cudaMemcpyHostToDevice</span><span class="p">,</span><span class="w"> </span><span class="n">stream1</span><span class="p">);</span>
+<span class="n">kernel</span><span class="o">&lt;&lt;&lt;</span><span class="n">blocks</span><span class="p">,</span><span class="w"> </span><span class="n">threads</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">stream1</span><span class="o">&gt;&gt;&gt;</span><span class="p">(</span><span class="n">d_A</span><span class="p">,</span><span class="w"> </span><span class="n">d_B</span><span class="p">,</span><span class="w"> </span><span class="n">d_C</span><span class="p">);</span>
+<span class="n">cudaMemcpyAsync</span><span class="p">(</span><span class="n">h_C</span><span class="p">,</span><span class="w"> </span><span class="n">d_C</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="n">cudaMemcpyDeviceToHost</span><span class="p">,</span><span class="w"> </span><span class="n">stream1</span><span class="p">);</span>
+</code></pre></div>
+<p>Repetindo isso para <code>stream2</code>, <code>stream3</code>, etc, a GPU executa várias dessas sequências em paralelo.</p>
+<p>Aqui temos o exemplo da matriz esparsa, agora, de forma assíncrona:</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cuda_runtime.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdlib&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;ctime&gt;</span>
+
+<span class="cp">#define NSTREAMS 6  </span><span class="c1">// número de streams (blocos em paralelo)</span>
+<span class="cp">#define LARGURA 3840</span>
+<span class="cp">#define ALTURA 2160</span>
+
+<span class="c1">// Kernel: inverte a intensidade do pixel (simula processamento de imagem)</span>
+<span class="n">__global__</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">inverter_pixels</span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">imagem</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">tamanho</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">idx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">blockIdx</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">blockDim</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">threadIdx</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">idx</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">tamanho</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">imagem</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">255</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">imagem</span><span class="p">[</span><span class="n">idx</span><span class="p">];</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Função auxiliar para medir tempo entre eventos</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">medir_tempo</span><span class="p">(</span><span class="n">cudaEvent_t</span><span class="w"> </span><span class="n">start</span><span class="p">,</span><span class="w"> </span><span class="n">cudaEvent_t</span><span class="w"> </span><span class="n">stop</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">ms</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span>
+<span class="w">    </span><span class="n">cudaEventElapsedTime</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ms</span><span class="p">,</span><span class="w"> </span><span class="n">start</span><span class="p">,</span><span class="w"> </span><span class="n">stop</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">ms</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">srand</span><span class="p">(</span><span class="n">time</span><span class="p">(</span><span class="k">nullptr</span><span class="p">));</span>
+
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">largura</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LARGURA</span><span class="p">;</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">altura</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ALTURA</span><span class="p">;</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">tamanho_total</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">largura</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">altura</span><span class="p">;</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">bytes_total</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tamanho_total</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Imagem sintética 4K gerada: &quot;</span><span class="w"> </span>
+<span class="w">              </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">largura</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;x&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">altura</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; (&quot;</span><span class="w"> </span>
+<span class="w">              </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="p">(</span><span class="n">bytes_total</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="mf">1024.0</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">1024.0</span><span class="p">))</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; MB)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Cria imagem de entrada com dados aleatórios</span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">h_imagem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="n">bytes_total</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">h_saida</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="n">bytes_total</span><span class="p">);</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">tamanho_total</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">        </span><span class="n">h_imagem</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">()</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">256</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Divide a imagem em blocos verticais</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">linhas_por_stream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">altura</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">NSTREAMS</span><span class="p">;</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">pixels_por_stream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">linhas_por_stream</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">largura</span><span class="p">;</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">bytes_por_stream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pixels_por_stream</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">d_blocos</span><span class="p">[</span><span class="n">NSTREAMS</span><span class="p">];</span>
+<span class="w">    </span><span class="n">cudaStream_t</span><span class="w"> </span><span class="n">streams</span><span class="p">[</span><span class="n">NSTREAMS</span><span class="p">];</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">NSTREAMS</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">cudaMalloc</span><span class="p">(</span><span class="o">&amp;</span><span class="n">d_blocos</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="n">bytes_por_stream</span><span class="p">);</span>
+<span class="w">        </span><span class="n">cudaStreamCreate</span><span class="p">(</span><span class="o">&amp;</span><span class="n">streams</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// =====================</span>
+<span class="w">    </span><span class="c1">// EXECUÇÃO SÍNCRONA</span>
+<span class="w">    </span><span class="c1">// =====================</span>
+<span class="w">    </span><span class="n">cudaEvent_t</span><span class="w"> </span><span class="n">start_sync</span><span class="p">,</span><span class="w"> </span><span class="n">stop_sync</span><span class="p">;</span>
+<span class="w">    </span><span class="n">cudaEventCreate</span><span class="p">(</span><span class="o">&amp;</span><span class="n">start_sync</span><span class="p">);</span>
+<span class="w">    </span><span class="n">cudaEventCreate</span><span class="p">(</span><span class="o">&amp;</span><span class="n">stop_sync</span><span class="p">);</span>
+<span class="w">    </span><span class="n">cudaEventRecord</span><span class="p">(</span><span class="n">start_sync</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">NSTREAMS</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">h_chunk_in</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">h_imagem</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">pixels_por_stream</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">h_chunk_out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">h_saida</span><span class="w">  </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">pixels_por_stream</span><span class="p">;</span>
+
+<span class="w">        </span><span class="n">cudaMemcpy</span><span class="p">(</span><span class="n">d_blocos</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="n">h_chunk_in</span><span class="p">,</span><span class="w"> </span><span class="n">bytes_por_stream</span><span class="p">,</span><span class="w"> </span><span class="n">cudaMemcpyHostToDevice</span><span class="p">);</span>
+
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">threads</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">256</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">blocks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">pixels_por_stream</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">threads</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">threads</span><span class="p">;</span>
+<span class="w">        </span><span class="n">inverter_pixels</span><span class="o">&lt;&lt;&lt;</span><span class="n">blocks</span><span class="p">,</span><span class="w"> </span><span class="n">threads</span><span class="o">&gt;&gt;&gt;</span><span class="p">(</span><span class="n">d_blocos</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="n">pixels_por_stream</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">cudaMemcpy</span><span class="p">(</span><span class="n">h_chunk_out</span><span class="p">,</span><span class="w"> </span><span class="n">d_blocos</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="n">bytes_por_stream</span><span class="p">,</span><span class="w"> </span><span class="n">cudaMemcpyDeviceToHost</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">cudaEventRecord</span><span class="p">(</span><span class="n">stop_sync</span><span class="p">);</span>
+<span class="w">    </span><span class="n">cudaEventSynchronize</span><span class="p">(</span><span class="n">stop_sync</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">tempo_sync</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">medir_tempo</span><span class="p">(</span><span class="n">start_sync</span><span class="p">,</span><span class="w"> </span><span class="n">stop_sync</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// =====================</span>
+<span class="w">    </span><span class="c1">// EXECUÇÃO ASSÍNCRONA</span>
+<span class="w">    </span><span class="c1">// =====================</span>
+<span class="w">    </span><span class="n">cudaEvent_t</span><span class="w"> </span><span class="n">start_async</span><span class="p">,</span><span class="w"> </span><span class="n">stop_async</span><span class="p">;</span>
+<span class="w">    </span><span class="n">cudaEventCreate</span><span class="p">(</span><span class="o">&amp;</span><span class="n">start_async</span><span class="p">);</span>
+<span class="w">    </span><span class="n">cudaEventCreate</span><span class="p">(</span><span class="o">&amp;</span><span class="n">stop_async</span><span class="p">);</span>
+<span class="w">    </span><span class="n">cudaEventRecord</span><span class="p">(</span><span class="n">start_async</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">NSTREAMS</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">h_chunk_in</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">h_imagem</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">pixels_por_stream</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">h_chunk_out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">h_saida</span><span class="w">  </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">pixels_por_stream</span><span class="p">;</span>
+
+<span class="w">        </span><span class="n">cudaMemcpyAsync</span><span class="p">(</span><span class="n">d_blocos</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="n">h_chunk_in</span><span class="p">,</span><span class="w"> </span><span class="n">bytes_por_stream</span><span class="p">,</span><span class="w"> </span><span class="n">cudaMemcpyHostToDevice</span><span class="p">,</span><span class="w"> </span><span class="n">streams</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">threads</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">256</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">blocks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">pixels_por_stream</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">threads</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">threads</span><span class="p">;</span>
+<span class="w">        </span><span class="n">inverter_pixels</span><span class="o">&lt;&lt;&lt;</span><span class="n">blocks</span><span class="p">,</span><span class="w"> </span><span class="n">threads</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">streams</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&gt;&gt;&gt;</span><span class="p">(</span><span class="n">d_blocos</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="n">pixels_por_stream</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">cudaMemcpyAsync</span><span class="p">(</span><span class="n">h_chunk_out</span><span class="p">,</span><span class="w"> </span><span class="n">d_blocos</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="n">bytes_por_stream</span><span class="p">,</span><span class="w"> </span><span class="n">cudaMemcpyDeviceToHost</span><span class="p">,</span><span class="w"> </span><span class="n">streams</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Sincroniza todas as streams</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">NSTREAMS</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">        </span><span class="n">cudaStreamSynchronize</span><span class="p">(</span><span class="n">streams</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+
+<span class="w">    </span><span class="n">cudaEventRecord</span><span class="p">(</span><span class="n">stop_async</span><span class="p">);</span>
+<span class="w">    </span><span class="n">cudaEventSynchronize</span><span class="p">(</span><span class="n">stop_async</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">tempo_async</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">medir_tempo</span><span class="p">(</span><span class="n">start_async</span><span class="p">,</span><span class="w"> </span><span class="n">stop_async</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// =====================</span>
+<span class="w">    </span><span class="c1">// RESULTADOS</span>
+<span class="w">    </span><span class="c1">// =====================</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;--------------------------------------------</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Tempo SÍNCRONO   : &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">tempo_sync</span><span class="w">  </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; ms</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Tempo ASSÍNCRONO : &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">tempo_async</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; ms</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Speedup          : &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">tempo_sync</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">tempo_async</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;x</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;--------------------------------------------</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Amostra de pixels (antes e depois):</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Pixel[&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;] &quot;</span><span class="w"> </span>
+<span class="w">                  </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">h_imagem</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; → &quot;</span><span class="w"> </span>
+<span class="w">                  </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">h_saida</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Libera recursos</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">NSTREAMS</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">cudaFree</span><span class="p">(</span><span class="n">d_blocos</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<span class="w">        </span><span class="n">cudaStreamDestroy</span><span class="p">(</span><span class="n">streams</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">cudaEventDestroy</span><span class="p">(</span><span class="n">start_sync</span><span class="p">);</span>
+<span class="w">    </span><span class="n">cudaEventDestroy</span><span class="p">(</span><span class="n">stop_sync</span><span class="p">);</span>
+<span class="w">    </span><span class="n">cudaEventDestroy</span><span class="p">(</span><span class="n">start_async</span><span class="p">);</span>
+<span class="w">    </span><span class="n">cudaEventDestroy</span><span class="p">(</span><span class="n">stop_async</span><span class="p">);</span>
+<span class="w">    </span><span class="n">free</span><span class="p">(</span><span class="n">h_imagem</span><span class="p">);</span>
+<span class="w">    </span><span class="n">free</span><span class="p">(</span><span class="n">h_saida</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
 
 
 
