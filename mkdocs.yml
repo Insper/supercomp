@@ -49,6 +49,7 @@ nav:
         - "Aula 15 - Stencil, tilling e agendamento de threads": aulas/aula15/index.md
         - "Aula 16 - Redução e Scan com CUDA" : aulas/aula16/index.md
         - "Aula 17 - Matriz esparsa e Computação Assíncrona" : aulas/aula17/index.md
+        - "Aula 18 - Profiling em GPU" : aulas/aula18/index.md
 
     - Suporte:
         - "Aula 01" : teoria/aula01/index.md
