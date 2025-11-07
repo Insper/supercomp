@@ -1855,8 +1855,8 @@ Quando aplicamos um filtro de convolução, como uma máscara Laplaciana, esse f
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>
-<div class="admonition implementação em gpu">
-<p class="admonition-title">Implementação</p>
+<details class="implementação em gpu">
+<summary>Implementação</summary>
 <div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cuda_runtime.h&gt;</span>
 
@@ -1954,9 +1954,9 @@ Quando aplicamos um filtro de convolução, como uma máscara Laplaciana, esse f
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>
-</div>
-<div class="admonition arquivo slurm">
-<p class="admonition-title">Arquivo</p>
+</details>
+<details class="arquivo slurm">
+<summary>Arquivo</summary>
 <p>Submetendo com <code>srun</code>:
 <div class="highlight"><pre><span></span><code>module<span class="w"> </span>load<span class="w"> </span>cuda/12.8.1
 srun<span class="w"> </span>--partition<span class="o">=</span>gpu<span class="w"> </span>--gres<span class="o">=</span>gpu:1<span class="w"> </span>./binario_gpu
@@ -1973,7 +1973,7 @@ srun<span class="w"> </span>--partition<span class="o">=</span>gpu<span class="w
 module<span class="w"> </span>load<span class="w"> </span>cuda/12.8.1
 ./binario_gpu
 </code></pre></div></p>
-</div>
+</details>
 <h2 id="exercicio-2">Exercício 2<a class="headerlink" href="#exercicio-2" title="Permanent link">&para;</a></h2>
 <p>A computação do calculo de matrizes esparças podem apresentar gargalos de desempenho quando o número de elementos não nulos por linha é irregular.</p>
 <p>Seu objetivo é aplicar técnicas de otimização para garantir desempenho na implementação abaixo: </p>
