@@ -155,7 +155,7 @@ int main() {
 
 ```
 
-!!! Implementação em GPU
+??? Implementação em GPU
     ```cpp
     #include <iostream>
     #include <cuda_runtime.h>
@@ -256,7 +256,7 @@ int main() {
 
     ```
 
-!!! Arquivo Slurm 
+??? Arquivo Slurm 
     Submetendo com `srun`:
     ```bash
     module load cuda/12.8.1
@@ -449,7 +449,7 @@ Seu objetivo é aplicar técnicas de otimização para garantir desempenho na im
     ```
 
 
-    
+
 
 ??? Profiling com Slurm
     É importante sempre garantir que o modulo cuda foi carregado no ambiente:
