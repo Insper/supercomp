@@ -284,10 +284,13 @@ A computação do calculo de matrizes esparças podem apresentar gargalos de des
 
 Seu objetivo é aplicar técnicas de otimização para garantir desempenho na implementação abaixo: 
 
-** Missões:**
-* **Faça uso eficiente de memória, garantindo boa localidade espacial**;
-* **Garanta uma configuração adequada de blocos e threads**;
-* **Utilize técnicas de profiling para medir adequadamente as melhorias do código otimizado**
+**Missões:**
+
+- Faça uso eficiente de memória, garantindo boa localidade espacial;
+
+- Garanta uma configuração adequada de blocos e threads;
+
+- Utilize técnicas de profiling para medir adequadamente as melhorias do código otimizado.
 
 
  
