@@ -256,7 +256,7 @@ int main() {
 
     ```
 
-??? Arquivo Slurm 
+??? Slurm 
     Submetendo com `srun`:
     ```bash
     module load cuda/12.8.1
@@ -451,7 +451,7 @@ Seu objetivo é aplicar técnicas de otimização para garantir desempenho na im
 
 
 
-??? Profiling com Slurm
+??? Profiling Slurm
     É importante sempre garantir que o modulo cuda foi carregado no ambiente:
     ```bash
     module load cuda/12.8.1
