@@ -377,7 +377,7 @@ Seu objetivo é aplicar técnicas de otimização para garantir desempenho na im
 
 ```
 
-!!! Gabarito
+??? Gabarito
     ```cpp
     #include <stdio.h>
     #include <cuda_runtime.h>
@@ -448,7 +448,7 @@ Seu objetivo é aplicar técnicas de otimização para garantir desempenho na im
 
     ```
 
-!!! Profiling com Slurm
+??? Profiling com Slurm
     É importante sempre garantir que o modulo cuda foi carregado no ambiente:
     ```bash
     module load cuda/12.8.1
