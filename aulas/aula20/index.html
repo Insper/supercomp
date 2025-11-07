@@ -1955,8 +1955,8 @@ Quando aplicamos um filtro de convolução, como uma máscara Laplaciana, esse f
 <span class="p">}</span>
 </code></pre></div>
 </details>
-<details class="arquivo slurm">
-<summary>Arquivo</summary>
+<details class="slurm">
+<summary>Slurm</summary>
 <p>Submetendo com <code>srun</code>:
 <div class="highlight"><pre><span></span><code>module<span class="w"> </span>load<span class="w"> </span>cuda/12.8.1
 srun<span class="w"> </span>--partition<span class="o">=</span>gpu<span class="w"> </span>--gres<span class="o">=</span>gpu:1<span class="w"> </span>./binario_gpu
@@ -2159,7 +2159,7 @@ module<span class="w"> </span>load<span class="w"> </span>cuda/12.8.1
 <span class="p">}</span>
 </code></pre></div>
 </details>
-<details class="profiling com slurm">
+<details class="profiling slurm">
 <summary>Profiling</summary>
 <p>É importante sempre garantir que o modulo cuda foi carregado no ambiente:
 <div class="highlight"><pre><span></span><code>module<span class="w"> </span>load<span class="w"> </span>cuda/12.8.1
