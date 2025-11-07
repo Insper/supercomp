@@ -1,5 +1,4 @@
-# Simulando a  Prova Final
-
+# Exercícios - Recrusão, SCAN, Programação Síncrona e Assíncrona em GPU
 
 ## Exercício 1
 
@@ -361,7 +360,7 @@ int main() {
     ```
 
 
-## Exercício 
+## Exercício 2
 
 Paralelize esse código que calcula a média harmônica dos elementos de um vetor em GPU:
 
@@ -369,7 +368,7 @@ Paralelize esse código que calcula a média harmônica dos elementos de um veto
 | Critério                                                | Descrição                                                                                                                                                     | Peso     |
 | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | 
 | **Compilação sem erros** | O código compila corretamente usando `nvcc`, sem erros | **0.2**  |
-| **Implementação em GPU Síncrona**  | O código é paralelizado corretamente em GPU de forma assíncrona. | **+0.6** |
+| **Implementação em GPU Síncrona**  | O código é paralelizado corretamente em GPU de forma síncrona. | **+0.6** |
 | **Implementação em GPU Assíncrona** | O código utiliza *streams*, com sobreposição de operações entre GPU e CPU. | **+0.9** | 
 |**Uso correto do SLURM no Cluster Franky**  | Configurou corretamente o ambiente HPC (via `srun` ou `sbatch`), com parâmetros adequados de GPU.| **+0.3** | 
 | **Total**  |                    | **2.0**  | 
