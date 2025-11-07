@@ -2089,8 +2089,8 @@ module<span class="w"> </span>load<span class="w"> </span>cuda/12.8.1
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 </code></pre></div>
-<div class="admonition gabarito">
-<p class="admonition-title">Gabarito</p>
+<details class="gabarito">
+<summary>Gabarito</summary>
 <div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cuda_runtime.h&gt;</span>
 
@@ -2158,9 +2158,9 @@ module<span class="w"> </span>load<span class="w"> </span>cuda/12.8.1
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>
-</div>
-<div class="admonition profiling com slurm">
-<p class="admonition-title">Profiling</p>
+</details>
+<details class="profiling com slurm">
+<summary>Profiling</summary>
 <p>É importante sempre garantir que o modulo cuda foi carregado no ambiente:
 <div class="highlight"><pre><span></span><code>module<span class="w"> </span>load<span class="w"> </span>cuda/12.8.1
 </code></pre></div>
@@ -2168,7 +2168,7 @@ Comando para realizar o profiling do código
 <div class="highlight"><pre><span></span><code>srun<span class="w"> </span>--partition<span class="o">=</span>gpu<span class="w"> </span>--gres<span class="o">=</span>gpu:1<span class="w"> </span>nsys<span class="w"> </span>profile<span class="w"> </span>-o<span class="w"> </span>relatorio<span class="w"> </span>--stats<span class="o">=</span><span class="nb">true</span><span class="w"> </span>--trace<span class="o">=</span>cuda,osrt<span class="w"> </span>./binario
 </code></pre></div></p>
 <p>Lembre-se de executar mais de uma vez, a primeira execução sempre vai ser mais lenta!</p>
-</div>
+</details>
 
 
 
