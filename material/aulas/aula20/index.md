@@ -448,6 +448,9 @@ Seu objetivo é aplicar técnicas de otimização para garantir desempenho na im
 
     ```
 
+
+    
+
 ??? Profiling com Slurm
     É importante sempre garantir que o modulo cuda foi carregado no ambiente:
     ```bash
