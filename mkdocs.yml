@@ -52,7 +52,7 @@ nav:
         - "Aula 18 - Profiling em GPU" : aulas/aula18/index.md
         - "Aula 19 - Exercícios preparatórios Prova Final" : aulas/aula19/index.md
         - "Aula 20 - Exercícios preparatórios Prova Final" : aulas/aula20/index.md
-
+        - "Aula 21 - Revisão" : aulas/aula21/index.md
     - Suporte:
         - "Aula 01" : teoria/aula01/index.md
         - "Compilar C++" : teoria/aula01/compilar-executar-C++.md
