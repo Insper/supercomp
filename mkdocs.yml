@@ -75,9 +75,9 @@ nav:
         - "Projeto 1 - Otimizações em CPU" : projetos/2025-2/projeto-cpu.md
         - "Projeto 2 - Otimizações em GPU" : projetos/2025-2/projeto-gpu.md
 
-    - Complementar:
-        - "Conectando ao Cluster Franky": complementar/aula02/index.md
-        - "Paralelismo com Python": complementar/aula03/index.md
+    - Bonus:
+        #- "Conectando ao Cluster Franky": complementar/aula02/index.md
+        #- "Paralelismo com Python": complementar/aula03/index.md
         - "Paralelismo com Numba": complementar/aula04/index.md
 
         
