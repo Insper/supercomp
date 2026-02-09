@@ -32,8 +32,8 @@ nav:
     - Home: index.md
     - Burocracias: sobre.md
     - Aulas:
-        - "Aula 01 - Problemas de HPC": aulas/aula01/index.md
-        - "Aula 02 - Sistemas de HPC": aulas/aula02/index.md
+        - "Aula 01 - Introdução e Overview": aulas/aula01/index.md
+        - "Aula 02 - Cluster Franky": aulas/aula02/index.md
 #        - "Aula 03 - Otimização e Tiling": aulas/aula03/index.md
 #        - "Aula 04 - Heurísticas e Aleatoriedade": aulas/aula04/index.md
 #        - "Aula 05 - Programação paralela em CPU": aulas/aula05/index.md
