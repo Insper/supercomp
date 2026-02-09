@@ -9,9 +9,9 @@
     
     Sexta -> 14h15 -- 16h15
 
-    **Atendimento:**
+    **Atendimento -> Início 27/02/26**
     
-    Segunda -> 18h30 -- 20h00
+    Sexta -> 12:30 às 14:00
 
 
 ??? info "Objetivos de Aprendizagem"
@@ -33,119 +33,55 @@
     **Obj 7.** Desenvolver aplicações que utilizam protocolos otimizados para paralelização, como MPI, OpenMP e CUDA.
 
 
-??? tip "Plano de Aulas - Supercomputação (2025.2)"
-    | Data         | Aula    | Tópicos Abordados                                                                                                             | Atividades                                                                                         |
-    | ------------ | ------- | ----------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-    | 11/ago (seg) | Aula 01 | Problemas de HPC; mapa de memória; Python × C++; desempenho; objetivos da disciplina; passagem de argumentos; recursos de C++ | Transcrição de códigos Python para C++; comparação de desempenho entre linguagens.                 |
-    | 15/ago (sex) | Aula 02 | Sistemas de HPC; rede, hardware, filas, jobs; SLURM; clusters no Brasil e no mundo                                            | Testes com SLURM no Cluster Franky; comparação de desempenho em diferentes filas.                  |
-    | 18/ago (seg) | Aula 03 | Hierarquia de memória (L1, L2, L3); técnica de tiling (fateamento em blocos); localidade espacial e temporal                  | Aplicar tiling para melhorar uso de cache; reorganizar estruturas de dados para melhor localidade. |
-    | 22/ago (sex) | Aula 04 | Aleatoriedade, heurísticas, alocação de memória                                                                               | Ajustes em heurísticas, estrutura de dados e uso eficiente da memória.                             |
-    | 25/ago (seg) | Aula 05 | Paralelismo em CPU; threads; cores; OpenMP; variáveis privadas e compartilhadas; scheduling                                   | Paralelismo com OpenMP; compartilhamento entre threads; efeitos do scheduler.                      |
-    | 29/ago (sex) | Aula 06 | Efeitos colaterais do paralelismo; race conditions; dependências; recursão                                                    | Estudo de caso: mapear problemas, levantar hipóteses de otimização e comparar desempenho.          |
-    | 01/set (seg) | Aula 07 | Memória distribuída; comunicação com MPI; ponto-a-ponto e coletiva; grupos e comunicadores                                    | Paralelismo com MPI; comunicação entre nós.                                                        |
-    | 05/set (sex) | Aula 08 | Estratégias híbridas MPI + OpenMP                                                                                             | Estudo de caso com MPI + OpenMP; identificação de gargalos e possíveis otimizações.                |
-    | 08/set (seg) | Aula 09 | Apresentação do Projeto – Mineração de criptomoedas em CPU                                                                    | Aula estúdio.                                                                                      |
-    | 12/set (sex) | Aula 10 | Discussão sobre exercícios de técnicas de otimização e aplicação de paralelismo/distribuição em CPU                           | Resolução de exercícios preparatórios para a Prova Intermediária.                                  |
-    | 15/set (seg) | Aula 11 | Aula estúdio                                                                                                                  | Suporte ao desenvolvimento do Projeto 1; discussão sobre exercícios para a Prova Intermediária.    |
-    | 19/set (sex) | Aula 12 | Aula estúdio                                                                                                                  | Suporte ao desenvolvimento do Projeto 1; discussão sobre exercícios para a Prova Intermediária.    |
-    | 22/set (seg) | Aula 13 | Aula estúdio                                                                                                                  | Ajustes finais no Projeto 1 – Mineração de criptomoedas em CPU.                                    |
-    | 26/set (sex) | Aula 14 | Prova Intermediária                                                                                                           | Avaliação dos conteúdos até Estratégias híbridas MPI + OpenMP.                                     |
-    | 29/set (seg) | Aula 15 | Prova Intermediária                                                                                                           | Avaliação dos conteúdos até Estratégias híbridas MPI + OpenMP.                                     |
-    | 06/out (seg) | Aula 16 | CURSO NVIDIA – CUDA                                                                                                           | CURSO NVIDIA – CUDA.                                                                               |
-    | 10/out (sex) | Aula 17 | CURSO NVIDIA – CUDA                                                                                                           | CURSO NVIDIA – CUDA.                                                                               |
-    | 13/out (seg) | Aula 18 | Profiling em GPU; análise de divergências; uso de memória em ambientes HPC                                                    | Atividade prática no ambiente de HPC Santos Dumont.                                                |
-    | 17/out (sex) | Aula 19 | Histogramming; data race em GPU; atomic; throughput                                                                           | Estudo de caso; visualização de data race e throughput em ambientes de HPC.                        |
-    | 20/out (seg) | Aula 20 | Técnicas stencil; convolução; tile boundaries; agendamento de threads                                                         | Atividade prática sobre tiling, agendamento de threads e stencil para convolução em GPU/HPC.       |
-    | 24/out (sex) | Aula 21 | Estabilidade numérica; ponto flutuante; controle de erro                                                                      | Aula expositiva; estudo de caso; visualização de estabilidade numérica e controle de erros.        |
-    | 27/out (seg) | Aula 22 | Estratégias híbridas com MPI + CUDA; gerenciamento de dados                                                                   | Atividade prática sobre programação distribuída em GPU para ambientes de HPC.                      |
-    | 31/out (sex) | Aula 23 | Lançamento do Projeto 2 – Mineração de criptomoedas em GPU                                                                    | Discussão sobre técnicas de otimização vistas no curso e aplicações no projeto.                    |
-    | 03/nov (seg) | Aula 24 | Aula estúdio                                                                                                                  | Suporte ao Projeto 2 – Mineração de criptomoedas em GPU.                                           |
-    | 07/nov (sex) | Aula 25 | Aula estúdio                                                                                                                  | Suporte ao Projeto 2 – Mineração de criptomoedas em GPU.                                           |
-    | 10/nov (seg) | Aula 26 | Aula estúdio                                                                                                                  | Ajustes finais no Projeto 2.                                                                       |
-    | 14/nov (sex) | Aula 27 | Devolutiva do Projeto 2; exercícios de preparação para Avaliação Final                                                        | Revisão prática.                                                                                   |
-    | 17/nov (seg) | Aula 28 | Avaliação Final                                                                                                               | Avaliação Final.                                                                                   |
-    | 24/nov (seg) | Aula 29 | Avaliação Final                                                                                                               | Encerramento e avaliação final.                                                                    |
+??? tip "Plano de Aulas - Supercomputação (2026.1)"
+    | Data          | Aula | Tópicos Abordados                                                                                                                                 | Atividades                                                                                                   |
+    |---------------|------|---------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|
+    | 09/fev (seg)  | 01   | Introdução à disciplina; conceitos de HPC; plataforma de HPC; acesso remoto (SSH); políticas de uso do Cluster Franky                             | Criação de conta no cluster; configuração do ambiente; primeiro código em C++; uso da IDE                   |
+    | 13/fev (sex)  | 02   | Sistemas de HPC; arquitetura de clusters; rede e hardware; filas e jobs; SLURM; clusters no Brasil e no mundo                                     | Atividade prática com SLURM no Cluster Franky; submissão de jobs via SLURM                     |
+    | 20/fev (sex)  | 03   | C++ para HPC: vetores; gerenciamento de memória; STL; alocação dinâmica; acesso cache-friendly                                                    | Exercícios de fixação em C++; análise de desempenho                                                          |
+    | 23/fev (seg)  | 04   | C++ para HPC: matrizes; layout de memória (row-major); acesso sequencial vs aleatório; custo computacional                                         | Exercícios de fixação; comparação de padrões de acesso à memória                                             |
+    | 27/fev (sex)  | 05   | Otimizações em CPU; hierarquia de memória; caches; prefetching; localidade temporal e espacial; loop unrolling                                    | Exercícios de otimização em CPU; medição de desempenho                                                       |
+    | 02/mar (seg)  | 06   | Estratégias e algoritmos de otimização; BLAS; Roofline Model; limites computacionais vs memória                                                    | Exercícios de fixação; análise comparativa de desempenho e relatório técnico                                 |
+    | 06/mar (sex)  | 07   | Algoritmos avançados de otimização; algoritmo de Strassen; matrizes esparsas; estruturas CSR e CSC                                                | Exercícios de fixação; análise de custo computacional                                                         |
+    | 09/mar (seg)  | 08   | Concorrência e paralelismo; modelo fork-join; speedup; eficiência; Leis de Amdahl e Gustafson                                                     | Exercícios de paralelização; análise de escalabilidade                                                       |
+    | 13/mar (sex)  | 09   | Otimizações de memória em estratégias paralelas; false sharing; alinhamento; afinidade de memória                                                  | Exercícios de fixação; comparação de desempenho antes e depois da otimização                                 |
+    | 16/mar (seg)  | 10   | Gerenciamento de threads; thread pools; sincronização; barreiras; mutexes                                                                         | Exercícios de fixação; implementação correta sem condições de corrida                                        |
+    | 20/mar (sex)  | 11   | Aula Estúdio: resolução orientada de problemas reais em HPC                                                                                       | Desenvolvimento incremental da APS 1; acompanhamento em sala                                                |
+    | 23/mar (seg)  | 12   | Aula Estúdio: continuação da APS 1                                                                                                                 | Desenvolvimento incremental da APS 1                                                                        |
+    | 27/mar (sex)  | 13   | Avaliação Intermediária                                                                                                                             | Avaliação prática e teórica                                                                                 |
+    | 30/mar (seg)  | 14   | Avaliação Intermediária                                                                                                                             | Avaliação prática e teórica                                                                                 |
+    | 06/abr (seg)  | 15   | Paralelismo com OpenMP; compartilhamento entre threads; efeitos do scheduler; escalonamento estático e dinâmico                                   | Exercícios de fixação com OpenMP                                                                             |
+    | 10/abr (sex)  | 16   | Efeitos colaterais do paralelismo; race conditions; dependências de dados; recursão                                                               | Exercícios de fixação; correção de erros concorrentes                                                        |
+    | 13/abr (seg)  | 17   | Memória distribuída; MPI ponto a ponto; Send/Recv; latência e topologias de comunicação                                                           | Exercícios de fixação; implementação MPI no cluster                                                          |
+    | 17/abr (sex)  | 18   | MPI comunicação coletiva; Broadcast; Scatter; Gather; Reduce                                                                                       | Exercícios de fixação; análise de eficiência de comunicação                                                  |
+    | 24/abr (sex)  | 19   | Grupos e comunicadores; programação híbrida MPI + OpenMP                                                                                           | Exercícios de fixação; implementação híbrida                                                                 |
+    | 27/abr (seg)  | 20   | Introdução à programação paralela em GPU; arquitetura de GPUs; modelo SIMT; hierarquia de memória                                                 | Exercícios de fixação; primeiro código CUDA                                                                 |
+    | 04/mai (seg)  | 21   | Programação em CUDA; kernels; grids e blocks; memória global e compartilhada                                                                       | Exercícios de fixação; implementação de kernels                                                              |
+    | 08/mai (sex)  | 22   | CUDA avançado: stencil, tiling e agendamento de threads                                                                                            | Exercícios de fixação; comparação entre versões otimizadas                                                   |
+    | 11/mai (seg)  | 23   | Redução e scan em CUDA; algoritmos paralelos clássicos; uso de memória compartilhada                                                              | Exercícios de fixação; medição de speedup                                                                    |
+    | 15/mai (sex)  | 24   | Matrizes esparsas em GPU; SpMV; computação assíncrona; streams; sobreposição comunicação–cálculo                                                  | Exercícios de fixação; análise de desempenho                                                                 |
+    | 18/mai (seg)  | 25   | Código síncrono vs assíncrono em CUDA; streams; eventos; latência e throughput                                                                    | Exercícios de fixação; comparação quantitativa entre abordagens                                              |
+    | 22/mai (sex)  | 26   | Revisão geral do conteúdo; exercícios preparatórios para Avaliação Final                                                                          | Lista de exercícios preparatórios                                                                            |
+    | 25/mai (seg)  | 27   | Simulado da Avaliação Final                                                                                                                         | Resolução comentada do simulado                                                                              |
+    | 29/mai (sex)  | 28   | Avaliação Final                                                                                                                                     | Avaliação Final                                                                                              |
+    | 01/jun (seg)  | 29   | Avaliação Final                                                                                                                                     | Avaliação Final                                                                                              |
 
 
 ??? note "Atividades (Individual) 15%"
-    | Percentual de Atividades | Conceito | Com Participação Voluntária |
-    |--------------------------|----------|-----------------------------|
-    | 50%                     | C        | C+                          |
-    | 70%                     | B        | B+                          |
-    | 90%                     | A        | A+                          |
+    | Percentual de Atividades | Conceito |
+    |--------------------------|----------|
+    | 50%                      | C        |
+    | 70%                      | B        |
+    | 90%                      | A        |
+    | 100%                     | A +      |
 
 
 
 
-??? note "Projeto 1 (Grupo) 10%"
-
-    ### **Mineração de criptomoedas em CPU**
-    Este projeto consiste na implementação e otimização de um minerador de criptomoedas que roda em CPU. Aplicando técnicas de paralelismo para melhorar desempenho no cluster Franky. A dificuldade da mineração é ajustada pela quantidade de zeros no hash, aumentando o desafio computacional conforme otimizimos a aplicação.
-
-    | **Rubrica** | **Critérios Técnicos**  |
-    | ----------- | ----------------------- |   
-    | **C**       | Executa o código minerador **assíncrono no cluster Franky com dificuldade **5 zeros** e pelo menos 5 gerações diferentes de async_gen`. |      
-    | **B**       | Executa o código minerador **assíncrono** no cluster Franky com dificuldade **6 zeros** e pelo menos 5 gerações diferentes de `async_gen`; utiliza paralelismo **ou** distribuição do código em CPU. |
-    | **A**       | Executa o código minerador **assíncrono** no cluster Franky com dificuldade **7 zeros** e pelo menos 5 gerações diferentes de `async_gen`; realiza paralelização **e** distribuição do código em CPU.         | 
-
-    ### Entrega
-    Código-fonte funcional, comentado e documentado. Relatório técnico com: 
+??? note "APS 1  10%"
+    Em construção
     
-    - Diagnóstico dos gargalos;
-    - Proposta de otimização;
-    - Hipótese de melhoria;
-    - Implementação da hipótese;
-    - Comparação de desempenho;
-    - Discussão dos resultados.
 
-    ### Bônus por Qualidade
-
-    | Conceito Base | Com Bônus |
-    |---------------|-----------|
-    | C             | C+        |
-    | B             | B+        |
-    | A             | A+        |
-
-
-??? note "Projeto 2 (Individual) 20%"
-    Projeto Minerador em GPU 
-    Neste projeto, o foco é explorar o uso de paralelismo e estratégias de otimização em GPU para maximizar o desempenho computacional.
-
-    Objetivos principais:
-
-    - Executar o projeto utilizando o sistema de HPC SDumont, do LNCC;
+??? note "APS 2 20%"
+    Em construção
     
-    - Implementar estratégias de paralelismo e distribuição em GPUs;
-
-    - Aumentar a dificuldade da mineração (número de zeros);
-
-    - Comparar desempenho, eficiência e consumo de recursos entre as versões CPU e GPU;
-
-    ### Rúbrica de Avaliação
-
-    | Nível       | Critérios Técnicos                                                                 | Complexidade Computacional Esperado                                                                                         |
-    |-------------|--------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------|
-    | Rúbrica C   | Parte da otimização realizada em CPU e parte implementada em GPU, executada no SDumont | 7 zeros |                                                                  |
-    | Rúbrica B   | Paralelismo e distribuição em CPU, com parte da otimização feita em GPU, utilizando o SDumont          | 8 zeros                                                        |
-    | Rúbrica A   |Paralelismo e distribuição focados principalmente em GPU, com tarefas simples executadas em CPU, utilizando o sistema SDumont  | 9 zeros         |
-
-    ---
-
-    ### Entrega
-    Código-fonte funcional, comentado e documentado. Relatório técnico com: 
-    
-    - Diagnóstico dos gargalos;
-    - Proposta de otimização;
-    - Hipótese de melhoria;
-    - Implementação da hipótese;
-    - Comparação de desempenho;
-    - Discussão dos resultados.
-
-    ### Bônus por Qualidade
-
-    | Conceito Base | Com Bônus |
-    |---------------|-----------|
-    | C             | C+        |
-    | B             | B+        |
-    | A             | A+        |
-

@@ -1,10 +1,10 @@
-site_name: SuperComputação - 2025/2
+site_name: SuperComputação - 2026/1
 site_author: 
 
 extra:
     materia: SuperComputação
     professor: Lícia Sales  
-    semestre: 2025/2
+    semestre: 2026/1
     url_acompanhamentos: http://localhost:8081
     id_curso: 1
 
@@ -34,51 +34,50 @@ nav:
     - Aulas:
         - "Aula 01 - Problemas de HPC": aulas/aula01/index.md
         - "Aula 02 - Sistemas de HPC": aulas/aula02/index.md
-        - "Aula 03 - Otimização e Tiling": aulas/aula03/index.md
-        - "Aula 04 - Heurísticas e Aleatoriedade": aulas/aula04/index.md
-        - "Aula 05 - Programação paralela em CPU": aulas/aula05/index.md
-        - "Aula 06 - Efeitos colaterais do paralelismo": aulas/aula06/index.md
-        - "Aula 07 - Programação Distribuída": aulas/aula07/index.md
-        - "Aula 08 - Programação Paralela e Distribuída": aulas/aula08/index.md
-        - "Aula 09 - Projeto 1 - Otimizações em CPU": aulas/aula09/index.md
-        - "Aula 10 - Acesso ao Supercomputador SDumont": aulas/aula10/index.md
-        - "Aula 11 - MPI e as Operações Coletivas": aulas/aula11/index.md
-        - "Aula 12 - Exercícios preparatórios para AI": aulas/aula12/index.md
-        - "Aula 13 - Paralelismo em GPU com CUDA": aulas/aula13/index.md
-        - "Aula 14 - Condições de corrida e throughput": aulas/aula14/index.md
-        - "Aula 15 - Stencil, tilling e agendamento de threads": aulas/aula15/index.md
-        - "Aula 16 - Redução e Scan com CUDA" : aulas/aula16/index.md
-        - "Aula 17 - Matriz esparsa e Computação Assíncrona" : aulas/aula17/index.md
-        - "Aula 18 - Profiling em GPU" : aulas/aula18/index.md
-        - "Aula 19 - Exercícios preparatórios Prova Final" : aulas/aula19/index.md
-        - "Aula 20 - Exercícios preparatórios Prova Final" : aulas/aula20/index.md
-        - "Aula 21 - Revisão" : aulas/aula21/index.md
+#        - "Aula 03 - Otimização e Tiling": aulas/aula03/index.md
+#        - "Aula 04 - Heurísticas e Aleatoriedade": aulas/aula04/index.md
+#        - "Aula 05 - Programação paralela em CPU": aulas/aula05/index.md
+#        - "Aula 06 - Efeitos colaterais do paralelismo": aulas/aula06/index.md
+#        - "Aula 07 - Programação Distribuída": aulas/aula07/index.md
+#        - "Aula 08 - Programação Paralela e Distribuída": aulas/aula08/index.md
+#        - "Aula 09 - Projeto 1 - Otimizações em CPU": aulas/aula09/index.md
+#        - "Aula 10 - Acesso ao Supercomputador SDumont": aulas/aula10/index.md
+#        - "Aula 11 - MPI e as Operações Coletivas": aulas/aula11/index.md
+#        - "Aula 12 - Exercícios preparatórios para AI": aulas/aula12/index.md
+#        - "Aula 13 - Paralelismo em GPU com CUDA": aulas/aula13/index.md
+#        - "Aula 14 - Condições de corrida e throughput": aulas/aula14/index.md
+#       - "Aula 15 - Stencil, tilling e agendamento de threads": aulas/aula15/index.md
+#        - "Aula 16 - Redução e Scan com CUDA" : aulas/aula16/index.md
+#        - "Aula 17 - Matriz esparsa e Computação Assíncrona" : aulas/aula17/index.md
+#        - "Aula 18 - Profiling em GPU" : aulas/aula18/index.md
+#        - "Aula 19 - Exercícios preparatórios Prova Final" : aulas/aula19/index.md
+#        - "Aula 20 - Exercícios preparatórios Prova Final" : aulas/aula20/index.md
+#        - "Aula 21 - Revisão" : aulas/aula21/index.md
     - Suporte:
-        - "Aula 01" : teoria/aula01/index.md
-        - "Compilar C++" : teoria/aula01/compilar-executar-C++.md
+        - "Aula 01" : teoria/aula01/compilar-executar-C++.md
         - "Aula 02" : teoria/aula02/index.md
         - "Útil" : teoria/comandos.md
-        - "Heurísticas" : teoria/heuristicas.md
-        - "OpenMP" : teoria/openmp.md
-        - "MPI" : teoria/MPI.md
+ #       - "Heurísticas" : teoria/heuristicas.md
+ #       - "OpenMP" : teoria/openmp.md
+ #       - "MPI" : teoria/MPI.md
         
-    - Exercícios: 
-        - "Aula 01 e 02 Otimizações basicas": Exercicios/aula01/aula01.md
-        - "Aula 03 Otimizações no uso da memória": Exercicios/aula03/aula03.md
-        - "Aula 04 Otimização de Estratégias e Heurísticas ": Exercicios/aula04/aula04.md
-        - "Aula 05 Otimizações usando paralelismo de memória local": Exercicios/aula05/aula05.md
-        - "Aula 06 lidando com efeitos colaterais do paralelismo": Exercicios/aula06/aula06.md
-        - "Aula 07 Otimizações usando paralelismo de memória Distribuída": Exercicios/aula07/aula07.md
-        - "Aula 08 Otimizações usando paralelismo de memória local e distribuída": Exercicios/aula08/aula08.md
+ #   - Exercícios: 
+ #       - "Aula 01 Otimizações basicas": Exercicios/aula01/aula01.md
+ #       - "Aula 03 Otimizações no uso da memória": Exercicios/aula03/aula03.md
+ #       - "Aula 04 Otimização de Estratégias e Heurísticas ": Exercicios/aula04/aula04.md
+ #       - "Aula 05 Otimizações usando paralelismo de memória local": Exercicios/aula05/aula05.md
+ #       - "Aula 06 lidando com efeitos colaterais do paralelismo": Exercicios/aula06/aula06.md
+ #       - "Aula 07 Otimizações usando paralelismo de memória Distribuída": Exercicios/aula07/aula07.md
+ #       - "Aula 08 Otimizações usando paralelismo de memória local e distribuída": Exercicios/aula08/aula08.md
 
-    - Projetos:
-        - "Projeto 1 - Otimizações em CPU" : projetos/2025-2/projeto-cpu.md
-        - "Projeto 2 - Otimizações em GPU" : projetos/2025-2/projeto-gpu.md
+ #   - Projetos:
+ #       - "Projeto 1 - Otimizações em CPU" : projetos/2025-2/projeto-cpu.md
+ #       - "Projeto 2 - Otimizações em GPU" : projetos/2025-2/projeto-gpu.md
 
-    - Bonus:
+ #   - Bonus:
         #- "Conectando ao Cluster Franky": complementar/aula02/index.md
         #- "Paralelismo com Python": complementar/aula03/index.md
-        - "Paralelismo com Numba": complementar/aula04/index.md
+  #      - "Paralelismo com Numba": complementar/aula04/index.md
 
         
 extra_javascript:
