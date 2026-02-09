@@ -225,7 +225,7 @@ Se quiser comparar o desempenho com a versão do código em python:
     ```
 
 # Exercícios
-Submeta os exercícios resolvidos no [github Classroom](https://classroom.github.com/a/lBx_S1nd) até 13/02 ás 23h59 para receber o seu pontinho de atividade.
+Para você entender se você entendeu 
 
 ## Ponteiros
 

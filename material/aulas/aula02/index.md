@@ -55,36 +55,6 @@ Estabeleça a conexão, se tudo der certo, você verá algo como:
 ![moba3](imgs/moba3.png)
 
 
-### Configurar o VS Code para Acesso Remoto ao Cluster
-
-**Instale a Extensão Remote - SSH**:
-
-Abra o VS Code, vá para a aba de extensões (ícone de quadrado no lado esquerdo). Pesquise por "Remote - SSH" e instale a extensão oficial da Microsoft.
-
-**Configurar o Acesso Remoto**:
-
-Pressione `Ctrl+Shift+P` (ou `Cmd+Shift+P` no Mac) para abrir o painel de comandos.
-
-Digite `Remote-SSH: Add New SSH Host...` e selecione a opção.
-
-Insira o comando SSH para conexão com o Franky:
-```bash
-ssh -i Endereço_da_cahve/id_rsa login@ip_do_cluster
-```
-Escolha o arquivo de configuração padrão (`~/.ssh/config` para Mac/Linux ou `C:\Users\seu_usuario\.ssh\config` para Windows).
-
-Pressione `Ctrl+Shift+P` (ou `Cmd+Shift+P` no Mac) novamente e digite `Remote-SSH: Connect to Host...`. Selecione o host configurado.
-
-O VS Code abrirá uma nova janela conectada ao ambiente remoto do cluster.
-
-![ssh](imgs/RemoteSSHVsCode.png)
-
-**Gerenciar Projetos Remotamente**:
-
- Após a conexão, você pode abrir pastas e arquivos no cluster diretamente pelo VS Code.
-
- Você pode utilizar os recursos do VS Code, como o terminal integrado e o debug para trabalhar no cluster Franky.
-
 
 ###  Executando a Atividade no Cluster Franky usando SLURM
 
@@ -211,7 +181,7 @@ srun --partition=normal --ntasks=1 --cpus-per-task=1 --mem=1G --time=00:05:00 \
 ```
 
 
-# Atividade 02
+# Exercício
 
 Na aula passada nós vimos que a linguagem importa, além disso, existem recursos da linguagem que tem o poder de acelerar o nosso código, e mais ainda, podemos usar otimizações a nível de compilação para ir além e conseguir uma otimização ainda maior. Agora vamos executar os scripts da aula passada no Cluster Franky para verificar o quanto o hardware impacta nessa abordagem, como será que ficará o desempenho ao executar os códigos em diferentes arquiteturas de computadores?
 
@@ -326,10 +296,7 @@ Após a execução dos jobs, os resultados estarão disponíveis nos arquivos `.
 
   - Troque a fila de submissão no arquivo .slurm e compare o desempenho dos programas novamente
 
-  - Analise como as diferentes arquiteturas de hardware dentro do cluster impactam o desempenho do código, compare também com os seus resultados obtidos na atividade 1, executando na sua máquina local.
-
-!!! tip 
-      Se quiser explorar mais os comandos do SLURM, [temos uma material aqui que pode te ajudar](../../teoria/comandos.md)
+  - Analise como as diferentes arquiteturas de hardware dentro do cluster impactam o desempenho do código, compare também com os seus resultados obtidos executando na sua máquina local.
 
 !!! tip "Links úteis"
       [Guia do Slurm - CENAPAD](https://cenapad.ufc.br/documentacao/guia-do-slurm/)
