@@ -474,15 +474,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#parte-0-configurando-seu-acesso-ao-cluster-franky" class="md-nav__link">
-    <span class="md-ellipsis">
-      Parte 0: Configurando seu acesso ao Cluster Franky
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#configurando-acesso-ssh-ao-github-dentro-do-cluster-franky" class="md-nav__link">
     <span class="md-ellipsis">
       Configurando Acesso SSH ao GitHub dentro do Cluster Franky
@@ -715,15 +706,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#parte-0-configurando-seu-acesso-ao-cluster-franky" class="md-nav__link">
-    <span class="md-ellipsis">
-      Parte 0: Configurando seu acesso ao Cluster Franky
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#configurando-acesso-ssh-ao-github-dentro-do-cluster-franky" class="md-nav__link">
     <span class="md-ellipsis">
       Configurando Acesso SSH ao GitHub dentro do Cluster Franky
@@ -821,8 +803,6 @@
 
 
 <h1 id="aula-02-acessando-o-cluster-franky">Aula 02: Acessando o Cluster Franky<a class="headerlink" href="#aula-02-acessando-o-cluster-franky" title="Permanent link">&para;</a></h1>
-<p>Na Atividade 2, você irá executar os códigos que foram testados na Aula 1, mas agora no ambiente de um cluster HPC usando SLURM. O objetivo é observar como o ambiente de cluster, com suas diferentes arquiteturas de hardware, pode impactar o desempenho das nossas aplicações.</p>
-<h3 id="parte-0-configurando-seu-acesso-ao-cluster-franky"><strong>Parte 0: Configurando seu acesso ao Cluster Franky</strong><a class="headerlink" href="#parte-0-configurando-seu-acesso-ao-cluster-franky" title="Permanent link">&para;</a></h3>
 <p>Para ter acesso ao Cluster Franky você precisa configurar suas credenciais de acesso e realizar acesso remoto via SSH.</p>
 <p>As chaves foram enviadas para o seu email Insper, Faça o download da pasta completa, que contém os arquivos <code>id_rsa</code> (chave privada) e <code>id_rsa.pub</code> (chave pública), salve essas chaves em algum lugar que você não vai esquecer, depois, siga as instruções abaixo para configurar corretamente seu acesso ao Cluster Franky.</p>
 <p>Conecte-se ao cluster utilizando o comando SSH:</p>
@@ -858,25 +838,25 @@ ou</p>
 <p>Acesse GitHub</p>
 </li>
 <li>
-<p>Vá em <strong>Settings</strong>
-<img alt="settings" src="/imgs/settings.png" /></p>
-</li>
-<li>
-<p>Clique em <strong>SSH and GPG keys</strong>
-<img alt="ssh" src="/imgs/ssh.png" /></p>
-</li>
-<li>
-<p>Clique em <strong>New SSH key</strong>
-<img alt="ssh" src="/imgs/new_ssh.png" /></p>
-</li>
-<li>
-<p>Cole a chave pública e depois clique em "Add SSH key"
-<img alt="add" src="/imgs/add.png" /></p>
+<p>Vá em <strong>Settings</strong></p>
 </li>
 </ol>
+<p><img alt="settings" src="imgs/settings.png" /></p>
+<ol>
+<li>Clique em <strong>SSH and GPG keys</strong></li>
+</ol>
+<p><img alt="ssh" src="imgs/ssh.png" /></p>
+<ol>
+<li>Clique em <strong>New SSH key</strong></li>
+</ol>
+<p><img alt="ssh" src="imgs/new_ssh.png" /></p>
+<ol>
+<li>Cole a chave pública e depois clique em "Add SSH key"</li>
+</ol>
+<p><img alt="add" src="imgs/add.png" /></p>
 <h2 id="ajustar-o-arquivo-sshconfig">Ajustar o arquivo <code>~/.ssh/config</code><a class="headerlink" href="#ajustar-o-arquivo-sshconfig" title="Permanent link">&para;</a></h2>
-<p>Ambientes de Clusters normalmente possuem uma configuração global no arquivo ~/.ssh/config que permie a comunicação interna entre os nós. </p>
-<p>Para permitir o uso da sua chave pessoal para acesso ssh ao GitHub;</p>
+<p>Ambientes de Clusters normalmente possuem uma configuração global no arquivo <code>~/.ssh/config</code> que permie a comunicação interna entre os nós. </p>
+<p>Para permitir o uso da sua chave pessoal para acesso ssh ao GitHub sem desconfigurar o acesso entre os nós do cluster;</p>
 <p>Cole este conteúdo no arquivo  <code>~/.ssh/config</code>:</p>
 <div class="highlight"><pre><span></span><code># GitHub
 Host github.com
@@ -896,7 +876,6 @@ Host *
 <p>Para colar use Crtl + Shift + v</p>
 <p>Para salvar use Crtl + s</p>
 <p>Para sair use Crtl + x</p>
-<p>⚠️ A ordem importa: o bloco do GitHub deve vir antes do <code>Host *</code>.</p>
 <h3 id="teste-a-conexao">Teste a conexão<a class="headerlink" href="#teste-a-conexao" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>-T<span class="w"> </span>git@github.com
 </code></pre></div>
@@ -1018,12 +997,9 @@ O comando abaixo mostra detalhes sobre os recursos de cada fila</p>
 Você cria um script e o SLURM executa quando houver recursos disponíveis.</p>
 <p>Para criar um arquivo lançador de job:</p>
 <div class="highlight"><pre><span></span><code>nano<span class="w"> </span>teste.sh
-<span class="sb">````</span>
-
-Coloque<span class="w"> </span>o<span class="w"> </span>conteúdo<span class="w"> </span>abaixo:
-
-<span class="sb">```</span>bash
-<span class="c1">#!/bin/bash</span>
+</code></pre></div>
+<p>Cole o conteúdo abaixo:</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
 
 <span class="c1">#SBATCH --job-name=sbatch_belezinha        # Nome do job (aparece no squeue)</span>
 <span class="c1">#SBATCH --partition=gpu           # Fila (partition) onde o job será executado</span>
