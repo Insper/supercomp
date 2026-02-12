@@ -1,9 +1,5 @@
 # Aula 02: Acessando o Cluster Franky
 
-Na Atividade 2, você irá executar os códigos que foram testados na Aula 1, mas agora no ambiente de um cluster HPC usando SLURM. O objetivo é observar como o ambiente de cluster, com suas diferentes arquiteturas de hardware, pode impactar o desempenho das nossas aplicações.
-
-### **Parte 0: Configurando seu acesso ao Cluster Franky**
-
 Para ter acesso ao Cluster Franky você precisa configurar suas credenciais de acesso e realizar acesso remoto via SSH.
 
 As chaves foram enviadas para o seu email Insper, Faça o download da pasta completa, que contém os arquivos `id_rsa` (chave privada) e `id_rsa.pub` (chave pública), salve essas chaves em algum lugar que você não vai esquecer, depois, siga as instruções abaixo para configurar corretamente seu acesso ao Cluster Franky.
@@ -66,24 +62,28 @@ Adicione a chave no seu GitHub
 1. Acesse GitHub
 
 2. Vá em **Settings**
-![settings](/imgs/settings.png)
+
+![settings](imgs/settings.png)
 
 3. Clique em **SSH and GPG keys**
-![ssh](/imgs/ssh.png)
+
+![ssh](imgs/ssh.png)
 
 4. Clique em **New SSH key**
-![ssh](/imgs/new_ssh.png)
+
+![ssh](imgs/new_ssh.png)
 
 5. Cole a chave pública e depois clique em "Add SSH key"
-![add](/imgs/add.png)
+
+![add](imgs/add.png)
 
 
 
 ## Ajustar o arquivo `~/.ssh/config` 
 
-Ambientes de Clusters normalmente possuem uma configuração global no arquivo ~/.ssh/config que permie a comunicação interna entre os nós. 
+Ambientes de Clusters normalmente possuem uma configuração global no arquivo `~/.ssh/config` que permie a comunicação interna entre os nós. 
 
-Para permitir o uso da sua chave pessoal para acesso ssh ao GitHub;
+Para permitir o uso da sua chave pessoal para acesso ssh ao GitHub sem desconfigurar o acesso entre os nós do cluster;
 
 Cole este conteúdo no arquivo  `~/.ssh/config`:
 
@@ -112,8 +112,6 @@ Para colar use Crtl + Shift + v
 Para salvar use Crtl + s
 
 Para sair use Crtl + x
-
-⚠️ A ordem importa: o bloco do GitHub deve vir antes do `Host *`.
 
 
 ### Teste a conexão
@@ -279,9 +277,9 @@ Para criar um arquivo lançador de job:
 
 ```bash
 nano teste.sh
-````
+```
 
-Coloque o conteúdo abaixo:
+Cole o conteúdo abaixo:
 
 ```bash
 #!/bin/bash
