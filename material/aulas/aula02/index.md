@@ -1,83 +1,161 @@
 # Aula 02: Acessando o Cluster Franky
 
-Na Atividade 2, você irá executar as implementações que foram testadas na Atividade 1, mas agora no ambiente de um cluster HPC usando SLURM. O objetivo é observar como o ambiente de cluster, com suas diferentes arquiteturas de hardware, pode impactar o desempenho das operações computacionalmente intensivas que você já explorou.
+Na Atividade 2, você irá executar os códigos que foram testados na Aula 1, mas agora no ambiente de um cluster HPC usando SLURM. O objetivo é observar como o ambiente de cluster, com suas diferentes arquiteturas de hardware, pode impactar o desempenho das nossas aplicações.
 
 ### **Parte 0: Configurando seu acesso ao Cluster Franky**
 
 Para ter acesso ao Cluster Franky você precisa configurar suas credenciais de acesso e realizar acesso remoto via SSH.
 
-As chaves foram enviadas para o seu email Insper, Faça o download da pasta completa, que contém os arquivos `id_rsa` (chave privada) e `id_rsa.pub` (chave pública). Dependendo do sistema operacional que você utiliza, siga as instruções abaixo para configurar corretamente seu acesso ao cluster Franky.
+As chaves foram enviadas para o seu email Insper, Faça o download da pasta completa, que contém os arquivos `id_rsa` (chave privada) e `id_rsa.pub` (chave pública), salve essas chaves em algum lugar que você não vai esquecer, depois, siga as instruções abaixo para configurar corretamente seu acesso ao Cluster Franky.
 
-#### **Para Macbook ou Linux:**
-
-Abra o terminal, navegue até a pasta onde a chave privada (`id_rsa`) foi baixada, mova a chave para o diretório `.ssh` em sua home:
-
-```bash
-mv id_rsa ~/.ssh/
-```
-
-Garanta que apenas você possa ler o arquivo:
-
-```bash
-chmod 400 ~/.ssh/id_rsa
-```
 
 Conecte-se ao cluster utilizando o comando SSH:
 
 O login é o seu "usuario Insper", o endereço de IP foi fornecido durante a aula.
 
 
+Se você está com o terminal aberto na pasta em que está a sua chave SSH, basta usar o comando:
 ```bash
-ssh -i ~/.ssh/id_rsa login@ip_do_cluster
+ssh -i id_rsa login@ip_do_cluster
 ```
 ou
 
+Se você abriu o terminal em qualquer lugar, então, o comando é este aqui:
 ```bash
-ssh login@ip_do_cluster
+ssh -i caminho_para_a_chave_ssh/id_rsa login@ip_do_cluster
+```
+
+### Configurando Acesso SSH ao GitHub dentro do Cluster Franky
+
+Para que você possa realizar clones e commits em repositórios privados sem problemas 
+
+## Gerar uma nova chave SSH
+
+No terminal autenticado dentro do cluster, use o comando:
+
+```bash
+ssh-keygen -t ed25519 -C "seu_email_do_github"
+```
+
+Quando aparecer:
+
+```
+Enter file in which to save the key
+```
+
+Pressione **Enter** eternamente até que apareça algo como:
+
+```
+...bla bla bla, criamos as chaves nos diretórios
+~/.ssh/id_ed25519        ← chave privada
+~/.ssh/id_ed25519.pub    ← chave pública
+```
+
+Copie a chave pública usando o comando:
+
+```bash
+cat ~/.ssh/id_ed25519.pub
+```
+
+Copie **toda a linha exibida**, começa com `ssh-ed25519`, termina com o seu email.
+
+
+Adicione a chave no seu GitHub
+
+
+1. Acesse GitHub
+
+2. Vá em **Settings**
+![settings](/imgs/settings.png)
+
+3. Clique em **SSH and GPG keys**
+![ssh](/imgs/ssh.png)
+
+4. Clique em **New SSH key**
+![ssh](/imgs/new_ssh.png)
+
+5. Cole a chave pública e depois clique em "Add SSH key"
+![add](/imgs/add.png)
+
+
+
+## Ajustar o arquivo `~/.ssh/config` 
+
+Ambientes de Clusters normalmente possuem uma configuração global no arquivo ~/.ssh/config que permie a comunicação interna entre os nós. 
+
+Para permitir o uso da sua chave pessoal para acesso ssh ao GitHub;
+
+Cole este conteúdo no arquivo  `~/.ssh/config`:
+
+```
+# GitHub
+Host github.com
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/id_ed25519
+    IdentitiesOnly yes
+
+# Configuração interna do cluster (não remover)
+Host *
+   IdentityFile ~/.ssh/cluster
+   StrictHostKeyChecking=no
+```
+
+Para abrir o arquivo:
+
+```bash
+nano ~/.ssh/config
+```
+
+Para colar use Crtl + Shift + v
+
+Para salvar use Crtl + s
+
+Para sair use Crtl + x
+
+⚠️ A ordem importa: o bloco do GitHub deve vir antes do `Host *`.
+
+
+### Teste a conexão
+
+```bash
+ssh -T git@github.com
+```
+
+Se estiver correto, aparecerá:
+
+```
+Hi usuario! You've successfully authenticated...
 ```
 
 
-#### **Para Windows:**
-
-
-**Usando MobaXTerm**
-
-Baixe o MobaXterm Home Edition em:
-https://mobaxterm.mobatek.net/download-home-edition.html
-
-Execute a aplicação, com o MobaXterm aberto, clique em Session, depois em SSH.
-![moba1](imgs/moba1.png)
-
-Preencha todos os campos marcados em vermelho
-![moba2](imgs/moba2.png)
-
-Estabeleça a conexão, se tudo der certo, você verá algo como:
-![moba3](imgs/moba3.png)
-
-
-
-###  Executando a Atividade no Cluster Franky usando SLURM
-
-Um arquivo .slurm é usado para "lançar jobs" no sistema SLURM, especificando os recursos necessários para a execução, como memória, número de máquinas e núcleos. Nesse arquivo, também definimos como desejamos o output do executável e onde o sistema pode encontrar o arquivo a ser executado. Como a equipe que gerencia o Cluster definiu que os jobs sejam lançados apenas da pasta SCRATCH, podemos omitir o caminho do arquivo nos nossos arquivos .slurm.
-
-!!! warning
-      Quando você escreve um script para ser executado pelo SLURM o gerenciador de jobs SLURM interpreta `#SBATCH` como **diretivas que definem como o job deve ser executado.**
-
-
-
-
-### Conhecendo o Sistema
+### **Parte 1: Ambientação no Cluster Franky**
 
 Antes de começar a fazer pedidos de recursos pro SLURM, vamos conhecer os diferentes hardwares que temos disponível no Franky. Vamos utilizar alguns comandos de sistema operacional para ler os recursos de CPU, memória e GPU disponíveis
 
 
-### Comandos utilizados
+### Comandos linux que serão utilizados:
 
 * `lscpu`: mostra detalhes da CPU (núcleos, threads, memória cache...)
 * `cat /proc/meminfo`: mostra detalhes sobre a memória RAM 
 * `nvidia-smi`: mostra detalhes de GPU, se disponível
 
 ### Comando SRUN
+O SRUN abre um terminal dentro do nó de computação, podemos simplesmente pedir um terminal para, de forma livre, executar nossos comandos:
+
+```bash
+srun --partition=gpu --pty bash
+```
+Você deve ver algo como isso:
+![add](/imgs/add.png)
+Como acessamos o nó pelo SLURM, o sistema não sabe quem é o usuário, então você entra sem identificação no nó.
+
+Para sair, basta digitar no terminal:
+```bash
+exit
+```
+
+Ou, podemos usar o SRUN com um comando definido que será executado no nó de computação de forma direta pelo terminal:
 
 ```bash
 srun --partition=normal --ntasks=1 --cpus-per-task=1 --mem=1G --time=00:05:00 \
@@ -175,11 +253,125 @@ scontrol show partition
 Recomendo que você mude o nome da fila (partition) no comando abaixo para se ambientar no Cluster Franky e desconrir quais são as diferenças entre as filas
 
 ```bash
-srun --partition=normal --ntasks=1 --cpus-per-task=1 --mem=1G --time=00:05:00 \
-     --pty bash -c "hostname && cat /proc/meminfo | grep -E 'MemTotal|MemFree|MemAvailable|Swap' && lscpu | grep -E 'Model name|Socket|Core|Thread|CPU\\(s\\)|cache'"
-
+srun --partition=normal --ntasks=1 --pty bash -c \
+"echo '=== HOSTNAME ==='; hostname; echo; \
+ echo '=== MEMORIA (GB) ==='; \
+ cat /proc/meminfo | grep -E 'MemTotal|MemFree|MemAvailable|Swap' | \
+ awk '{printf \"%s %.2f GB\\n\", \$1, \$2 / 1048576}'; \
+ echo; \
+ echo '=== CPU INFO ==='; \
+ lscpu | grep -E 'Model name|Socket|Core|Thread|CPU\\(s\\)|cache'
+ echo '=== GPU INFO ==='; \
+ if command -v nvidia-smi &> /dev/null; then nvidia-smi; else echo 'nvidia-smi não disponível'; fi"
 ```
 
+
+
+### SBATCH — Submissão de Jobs no SLURM
+
+`sbatch` é o comando usado para **enviar um job para a fila do cluster**.
+
+Diferente do `srun`, ele **não é interativo**.  
+Você cria um script e o SLURM executa quando houver recursos disponíveis.
+
+
+Para criar um arquivo lançador de job:
+
+```bash
+nano teste.sh
+````
+
+Coloque o conteúdo abaixo:
+
+```bash
+#!/bin/bash
+
+#SBATCH --job-name=sbatch_belezinha        # Nome do job (aparece no squeue)
+#SBATCH --partition=gpu           # Fila (partition) onde o job será executado
+#SBATCH --ntasks=1                   # Número de tarefas (processos)
+#SBATCH --cpus-per-task=1            # Número de CPUs (cores) por tarefa
+#SBATCH --mem=1G                     # Memória RAM solicitada
+#SBATCH --time=00:05:00              # Tempo máximo de execução (HH:MM:SS)
+#SBATCH --output=meu_orgulho_%j.log  # Arquivo de saída (%j = ID do job)
+
+echo "=== HOSTNAME ==="
+hostname
+echo
+
+echo "=== MEMORIA (GB) ==="
+cat /proc/meminfo | grep -E 'MemTotal|MemFree|MemAvailable|Swap' | \
+awk '{printf "%s %.2f GB\n", $1, $2 / 1048576}'
+echo
+
+echo "=== CPU INFO ==="
+lscpu | grep -E 'Model name|Socket|Core|Thread|CPU\(s\)|cache'
+echo
+
+echo "=== GPU INFO ==="
+if command -v nvidia-smi &> /dev/null; then
+    nvidia-smi
+else
+    echo "nvidia-smi não disponível"
+fi
+#Sleep desnecessário, só para você conseguir enxergar o seu job na fila do slurm
+sleep 20
+```
+
+Salve usando Crtl + s, 
+
+e saia usando Crlt + x.
+
+
+Para submeter o job:
+
+```bash
+sbatch teste.sh
+```
+
+Você verá algo como:
+
+```
+Submitted batch job 12345
+```
+
+O número é o **ID do job**.
+
+
+Para verificar se o lançador deu certo e o seu job está rodando:
+
+```bash
+squeue 
+```
+Se quiser filtrar apenas o seu usuário:
+
+```bash
+squeue -u $USER
+```
+
+Quando o job terminar, será criado um arquivo como:
+
+```
+saida_12345.log
+```
+
+Visualize com:
+
+```bash
+cat saida_12345.log
+```
+
+Você deve ver algo parecido com:
+![saida](imgs/saida.png)
+
+Se você não quiser gerar um arquivo de log separado para cada SBATCH que submeter do mesmo arquivo lançador
+![saidas](imgs/saidas.png)
+
+Basta excluir o "%j" do nome do seu arquivo de log
+![j](imgs/j.png)
+
+
+
+Pronto. Você submeteu seus primeiros jobs, uhuuuul!!!
 
 # Exercício
 
