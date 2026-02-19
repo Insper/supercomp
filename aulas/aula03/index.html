@@ -11,6 +11,10 @@
         <link rel="canonical" href="https://insper.github.io/supercomp/aulas/aula03/">
       
       
+        <link rel="prev" href="../aula02/">
+      
+      
+        <link rel="next" href="../../teoria/slides/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -18,7 +22,7 @@
     
     
       
-        <title>Index - SuperComputação - 2026/1</title>
+        <title>Aula 03 - STD, Vector e Tiling - SuperComputação - 2026/1</title>
       
     
     
@@ -114,7 +118,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Index
+              Aula 03 - STD, Vector e Tiling
             
           </span>
         </div>
@@ -227,10 +231,12 @@
         
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
+      <li class="md-tabs__item md-tabs__item--active">
         <a href="../aula01/" class="md-tabs__link">
           
   
@@ -249,7 +255,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../teoria/aula01/compilar-executar-C%2B%2B/" class="md-tabs__link">
+        <a href="../../teoria/slides/" class="md-tabs__link">
           
   
   Suporte
@@ -351,23 +357,28 @@
       
   
   
+    
   
   
+  
     
     
     
-      
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
             
   
   <span class="md-ellipsis">
@@ -379,7 +390,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             Aulas
@@ -425,6 +436,218 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Aula 03 - STD, Vector e Tiling
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Aula 03 - STD, Vector e Tiling
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objetivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Objetivo
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vector-em-c-stdvector" class="md-nav__link">
+    <span class="md-ellipsis">
+      Vector em C++ (std::vector)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-e-um-vector-em-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      O que é um Vector em C++?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-declarar-um-vector-em-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      Como declarar um vector em C++?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Como declarar um vector em C++?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#alocacao-dos-dados-na-memoria" class="md-nav__link">
+    <span class="md-ellipsis">
+      Alocação dos dados na memória
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#memorias-cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      Memórias cache
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#missoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Missões:
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Missões:">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-compilacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Compilação
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-execucao" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Execução
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#explorando-ordenacao-de-loops-e-flags-de-otimizacao-em-diferentes-filas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Explorando Ordenação de Loops e Flags de Otimização em Diferentes Filas
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Explorando Ordenação de Loops e Flags de Otimização em Diferentes Filas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-alterando-a-ordem-dos-loops" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Alterando a Ordem dos Loops
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-testar-diferentes-flags-de-otimizacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Testar Diferentes Flags de Otimização
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-rodar-em-diferentes-filas-do-cluster" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Rodar em Diferentes Filas do Cluster
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#perguntas-para-entender-se-voce-entendeu" class="md-nav__link">
+    <span class="md-ellipsis">
+      Perguntas para entender se você entendeu:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#esta-atividade-nao-tem-entrega-bom-final-de-semana" class="md-nav__link">
+    <span class="md-ellipsis">
+      Esta atividade não tem entrega, Bom final de semana!
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -483,6 +706,28 @@
   
   
     <li class="md-nav__item">
+      <a href="../../teoria/slides/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Slides das aulas
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../teoria/aula01/compilar-executar-C%2B%2B/" class="md-nav__link">
         
   
@@ -510,6 +755,28 @@
   
   <span class="md-ellipsis">
     Aula 02
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../teoria/aula03/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aula 03
     
   </span>
   
@@ -583,15 +850,52 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#contexto" class="md-nav__link">
+  <a href="#vector-em-c-stdvector" class="md-nav__link">
     <span class="md-ellipsis">
-      Contexto
+      Vector em C++ (std::vector)
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
+  <a href="#o-que-e-um-vector-em-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      O que é um Vector em C++?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-declarar-um-vector-em-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      Como declarar um vector em C++?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Como declarar um vector em C++?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#alocacao-dos-dados-na-memoria" class="md-nav__link">
+    <span class="md-ellipsis">
+      Alocação dos dados na memória
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#memorias-cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      Memórias cache
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#missoes" class="md-nav__link">
     <span class="md-ellipsis">
       Missões:
@@ -623,8 +927,8 @@
     </nav>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#explorando-ordenacao-de-loops-e-flags-de-otimizacao-em-diferentes-filas" class="md-nav__link">
     <span class="md-ellipsis">
       Explorando Ordenação de Loops e Flags de Otimização em Diferentes Filas
@@ -662,9 +966,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#perguntas-para-responder-no-relatorio" class="md-nav__link">
+  <a href="#perguntas-para-entender-se-voce-entendeu" class="md-nav__link">
     <span class="md-ellipsis">
-      Perguntas para responder no relatório:
+      Perguntas para entender se você entendeu:
     </span>
   </a>
   
@@ -674,13 +978,18 @@
     </nav>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#entregaveis" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#esta-atividade-nao-tem-entrega-bom-final-de-semana" class="md-nav__link">
     <span class="md-ellipsis">
-      Entregáveis:
+      Esta atividade não tem entrega, Bom final de semana!
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -703,17 +1012,179 @@
   
 
 
-  <h1>Index</h1>
-
 <h2 id="objetivo">Objetivo<a class="headerlink" href="#objetivo" title="Permanent link">&para;</a></h2>
 <p>Explorar técnicas de otimização de código sequencial em C++ a partir da análise de desempenho.
 O foco será:</p>
 <ul>
 <li>Compreender a relação entre <strong>hierarquia de memória (L1, L2, L3)</strong> e desempenho.</li>
 <li>Aplicar <strong>tiling (fateamento em blocos)</strong> para melhorar o aproveitamento da memória cache.</li>
-<li>Reorganizar estruturas de dados para um melhor aproveitamento do principio da localidade espacial.</li>
+<li>Usar a classe vector do C++ para manipular os dados</li>
 </ul>
-<h2 id="contexto">Contexto<a class="headerlink" href="#contexto" title="Permanent link">&para;</a></h2>
+<h2 id="vector-em-c-stdvector">Vector em C++ (std::vector)<a class="headerlink" href="#vector-em-c-stdvector" title="Permanent link">&para;</a></h2>
+<p>O <code>vector</code> é uma classe da biblioteca padrão do C++ (a famosa STL) e, sinceramente, é uma das estruturas mais úteis para a nossa vida. O grande diferencial do <code>vector</code>, além da variedade de métodos que já vêm prontos para facilitar a manipulação e as operações nos dados, é que ele oferece <strong>redimensionamento dinâmico</strong> e <strong>gerenciamento eficiente de memória</strong>.</p>
+<p>Na prática, isso significa que você não precisa se preocupar com detalhes como alocação, realocação ou liberação de memória, o próprio <code>vector</code> cuida disso pra gente. Claro, se você quiser muito ter total controle sobre tudo, você é livre, inclusive, usando vector, fica até mais facil realizar essas operações. Mas, na maioria dos casos, dá para simplesmente usar os métodos e não se preocupar com isso.</p>
+<h2 id="o-que-e-um-vector-em-c">O que é um Vector em C++?<a class="headerlink" href="#o-que-e-um-vector-em-c" title="Permanent link">&para;</a></h2>
+<p>Um <strong>vector em C++</strong> é um <strong>array dinâmico</strong> que se redimensiona automaticamente quando elementos são adicionados ou removidos. Diferente dos arrays tradicionais (de tamanho fixo), o <code>std::vector</code> pode crescer ou diminuir em tempo de execução.</p>
+<p>O armazenamento interno é gerenciado automaticamente pelo próprio contêiner.</p>
+<p>Os elementos de um vector são armazenados em <strong>posições contíguas de memória</strong>, permitindo:</p>
+<ul>
+<li>Acesso eficiente via operador de índice <code>[]</code></li>
+<li>Uso de iteradores</li>
+<li>Passagem de ponteiro para funções que esperam arrays</li>
+</ul>
+<p>Você pode <strong>pré-alocar</strong> um espaço específico para os seus dados e ir preenchendo ao longo do código, se já souber aproximadamente quantos elementos vai utilizar. Mas também pode deixar o contêiner se virar sozinho: sempre que precisar de mais espaço, o <code>vector</code> se redimensiona automaticamente, realocando memória de forma eficiente para acomodar os novos dados.</p>
+<p>Embora utilize um pouco mais de memória do que um array de tamanho fixo, o <code>std::vector</code> costuma ser mais eficiente no acesso aos elementos quando comparado a outros contêineres sequenciais, como o <code>std::deque</code> e o <code>std::list</code>, principalmente porque seus elementos ficam armazenados de forma contígua na memória.</p>
+<h1 id="como-declarar-um-vector-em-c">Como declarar um <code>vector</code> em C++?<a class="headerlink" href="#como-declarar-um-vector-em-c" title="Permanent link">&para;</a></h1>
+<p>Primeiro, você precisa incluir a biblioteca:</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
+</code></pre></div>
+<p>Depois disso, pode declarar um vector assim:</p>
+<div class="highlight"><pre><span></span><code><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">v</span><span class="p">;</span>
+</code></pre></div>
+<p>Isso cria um vector de números inteiros vazio.</p>
+<ul>
+<li><code>vector</code> → é o tipo da estrutura.</li>
+<li><code>&lt;int&gt;</code> → é o tipo de dado que será armazenado.</li>
+<li><code>std::</code> → indica que o vector pertence à biblioteca std.</li>
+</ul>
+<p>Se você usar:</p>
+<div class="highlight"><pre><span></span><code><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+</code></pre></div>
+<p>Pode escrever apenas:</p>
+<div class="highlight"><pre><span></span><code><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">v</span><span class="p">;</span>
+</code></pre></div>
+<p>Você já pode criar o vector com valores iniciais:</p>
+<div class="highlight"><pre><span></span><code><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">};</span>
+</code></pre></div>
+<p>ou</p>
+<div class="highlight"><pre><span></span><code><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">v</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">};</span>
+</code></pre></div>
+<p>O vector já nasce com esses quatro elementos.</p>
+<p>Você também pode criar um vector com tamanho definido:</p>
+<div class="highlight"><pre><span></span><code><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">v</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">);</span>
+</code></pre></div>
+<p>Isso significa:</p>
+<ul>
+<li>O vector terá <strong>3 posições</strong></li>
+<li>Todas começam com o valor <strong>4</strong></li>
+</ul>
+<p>Equivalente a:</p>
+<div class="highlight"><pre><span></span><code>{4, 4, 4}
+</code></pre></div>
+<p>Você pode:</p>
+<ul>
+<li>Criar vazio → <code>vector&lt;int&gt; v;</code></li>
+<li>Criar com valores → <code>{1,2,3}</code></li>
+<li>Criar com tamanho fixo inicial → <code>(quantidade, valor)</code></li>
+</ul>
+<h3 id="alocacao-dos-dados-na-memoria">Alocação dos dados na memória<a class="headerlink" href="#alocacao-dos-dados-na-memoria" title="Permanent link">&para;</a></h3>
+<p>Quando usamos pré-alocação em um <code>std::vector</code>, como no caso do <code>reserve()</code>, a principal vantagem está em evitar realocações desnecessárias de memória durante a execução do programa.</p>
+<p>Por padrão, quando você vai inserindo elementos com <code>push_back()</code>, o vector começa com uma capacidade pequena. Quando essa capacidade é atingida, ele precisa alocar um novo bloco de memória maior, copiar todos os elementos antigos para esse novo espaço e depois liberar a memória anterior. Esse processo pode acontecer várias vezes e tem custo computacional.</p>
+<p>Ao usar <code>dados.reserve(quantidade);</code>, você já informa ao programa quantos elementos pretende usar. Assim, o espaço é reservado uma única vez, e os <code>push_back()</code> seguintes apenas colocam os valores nas posições já disponíveis, sem precisar realocar memória. Isso melhora o desempenho porque reduz cópias, reduz chamadas ao alocador de memória e evita interrupções frequentes no fluxo do programa.</p>
+<p>Vamos observar isto acontecendo na prática:</p>
+<p><div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dados</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">dados</span><span class="p">.</span><span class="n">reserve</span><span class="p">(</span><span class="mi">10000</span><span class="p">);</span><span class="w">  </span><span class="c1">// pré-aloca espaço para 10.000 elementos</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">333</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// preenche de 0 a 333</span>
+<span class="w">        </span><span class="n">dados</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span><span class="w">         </span><span class="c1">// aloca os dados sempre ao final</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Tamanho: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">dados</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w">      </span><span class="c1">// não usei o namespace, por isso,</span>
+<span class="w">                                                                </span><span class="c1">// tenho que deixar explicito o sdt </span>
+<span class="w">                                                                </span><span class="c1">// quando for usar as classes da biblioteca</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Capacidade: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">dados</span><span class="p">.</span><span class="n">capacity</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+Saída esperada:</p>
+<div class="highlight"><pre><span></span><code>Tamanho:<span class="w"> </span><span class="m">333</span>
+Capacidade:<span class="w"> </span><span class="m">10000</span>
+</code></pre></div>
+<p>Neste código, não vamos pré-alocar os dados, vamos observar o que acontece:</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
+
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dados</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;=== ESTADO INICIAL ===&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Tamanho: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">dados</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Capacidade: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">dados</span><span class="p">.</span><span class="n">capacity</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">capacidade_anterior</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dados</span><span class="p">.</span><span class="n">capacity</span><span class="p">();</span>
+
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">=== INSERINDO ELEMENTOS ===</span><span class="se">\n</span><span class="s">&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">dado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">23</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">dado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"> </span>
+<span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Inserindo dado: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">dado</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">        </span><span class="n">dados</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">dado</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">dados</span><span class="p">.</span><span class="n">capacity</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">capacidade_anterior</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">            </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;&gt;&gt; Capacidade mudou para: &quot;</span>
+<span class="w">                 </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">dados</span><span class="p">.</span><span class="n">capacity</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">            </span><span class="n">capacidade_anterior</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dados</span><span class="p">.</span><span class="n">capacity</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">=== ESTADO FINAL ===&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Tamanho final: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">dados</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Capacidade final: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">dados</span><span class="p">.</span><span class="n">capacity</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">=== ALOCACAO DOS DADOS ===&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;| &quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">dados</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">dados</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; | &quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Quando trabalhamos com <code>std::vector</code>, é importante entender a diferença entre <strong>tamanho (<code>size</code>)</strong> e <strong>capacidade (<code>capacity</code>)</strong>. O tamanho representa quantos elementos estão realmente armazenados no vector, enquanto a capacidade indica quanto espaço já foi reservado na memória.</p>
+<p>No primeiro exemplo, fazemos:</p>
+<div class="highlight"><pre><span></span><code><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dados</span><span class="p">;</span>
+<span class="n">dados</span><span class="p">.</span><span class="n">reserve</span><span class="p">(</span><span class="mi">10000</span><span class="p">);</span>
+</code></pre></div>
+<p>Aqui o vector começa vazio, mas ao chamar <code>reserve(10000)</code> estamos dizendo ao programa para já separar espaço suficiente para armazenar até 10.000 elementos. Depois disso, o laço insere apenas 333 valores com <code>push_back()</code>.</p>
+<p>Por isso a saída é:</p>
+<div class="highlight"><pre><span></span><code>Tamanho: 333
+Capacidade: 10000
+</code></pre></div>
+<p>O tamanho é 333 porque só inserimos 333 elementos. A capacidade é 10000 porque reservamos esse espaço antecipadamente. Como havia memória suficiente disponível desde o início, o vector não precisou realocar memória durante as inserções. Isso evita cópias internas de dados, reduz chamadas ao alocador de memória e melhora o desempenho.</p>
+<p>Já no segundo exemplo, não usamos <code>reserve()</code>. O código começa com:</p>
+<div class="highlight"><pre><span></span><code><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dados</span><span class="p">;</span>
+</code></pre></div>
+<p>Agora o vector cresce dinamicamente conforme os elementos são inseridos. Sempre que a capacidade atual se esgota, o vector precisa:</p>
+<ol>
+<li>Alocar um novo bloco de memória maior.</li>
+<li>Copiar todos os elementos antigos para esse novo bloco.</li>
+<li>Liberar o bloco anterior.</li>
+</ol>
+<p>O trecho:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">dados</span><span class="p">.</span><span class="n">capacity</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">capacidade_anterior</span><span class="p">)</span>
+</code></pre></div>
+<p>mostra exatamente quando essa realocação acontece. Ao rodar o programa, você verá mensagens indicando que a capacidade mudou várias vezes. Isso acontece porque o vector geralmente dobra sua capacidade quando precisa crescer.</p>
+<p>Essa diferença é justamente onde entra a vantagem da pré-alocação. Quando você sabe aproximadamente quantos elementos irá inserir, usar <code>reserve()</code> evita essas múltiplas realocações. Isso melhora o desempenho porque reduz cópias de memória e torna a execução mais estável.</p>
+<p>Além disso, como o <code>vector</code> armazena seus elementos em posições contíguas de memória, ele favorece a localidade espacial, permitindo melhor aproveitamento do cache do processador. Ao evitar realocações frequentes, também ajudamos a manter esse padrão de acesso eficiente.</p>
+<p>No segundo código aparece também:</p>
+<div class="highlight"><pre><span></span><code><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+</code></pre></div>
+<p>Isso apenas evita que precisemos escrever <code>std::vector</code>, <code>std::cout</code> e <code>std::endl</code>. Não muda o funcionamento do programa, apenas simplifica a escrita.</p>
+<p>O primeiro exemplo mostra como a pré-alocação garante capacidade suficiente desde o início, evitando realocações. O segundo exemplo demonstra o comportamento padrão de crescimento dinâmico do vector, evidenciando quando e como a capacidade aumenta automaticamente.</p>
+<h2 id="memorias-cache">Memórias cache<a class="headerlink" href="#memorias-cache" title="Permanent link">&para;</a></h2>
 <p>Vamos tomar como base o hardware do monstrão, ele tem um processador <strong>Intel Xeon Gold 5215</strong>, que possui:</p>
 <ul>
 <li><strong>L1d cache</strong>: 32 KiB por núcleo</li>
@@ -907,29 +1378,14 @@ Essa mudança melhora a localidade espacial dos acessos à matriz B, e também b
 <p>Encontre a flag de Otimização com o melhor resultado para esse algoritmo (O2, O3, Ofast)</p>
 <h3 id="3-rodar-em-diferentes-filas-do-cluster">3. Rodar em Diferentes Filas do Cluster<a class="headerlink" href="#3-rodar-em-diferentes-filas-do-cluster" title="Permanent link">&para;</a></h3>
 <p>Após identificar as melhores combinações de loop e flags de otimização no <strong>monstrao</strong>, identifique quais são os tamanhos das memórias L1, L2 e L3 na fila GPU e repita os testes.</p>
-<h3 id="perguntas-para-responder-no-relatorio">Perguntas para responder no relatório:<a class="headerlink" href="#perguntas-para-responder-no-relatorio" title="Permanent link">&para;</a></h3>
+<h3 id="perguntas-para-entender-se-voce-entendeu">Perguntas para entender se você entendeu:<a class="headerlink" href="#perguntas-para-entender-se-voce-entendeu" title="Permanent link">&para;</a></h3>
 <ol>
 <li>A troca de ordem dos loops melhorou ou piorou o tempo de execução? Por quê?</li>
 <li>Houveram diferenças entre os nós <strong>monstrao</strong> e <strong>gpu</strong>? Quais?</li>
 <li>Qual o <strong>tamanho de bloco</strong> que apresentou o melhor equilíbrio entre tempo de execução e aproveitamento de cache em cada fila?</li>
 </ol>
-<h2 id="entregaveis">Entregáveis:<a class="headerlink" href="#entregaveis" title="Permanent link">&para;</a></h2>
-<p>Submeta via <a href="https://classroom.github.com/a/DnVGRWYD">Classroom</a> um relatório contendo obrigatoriamente:</p>
-<ul>
-<li>
-<p>Identificação: seu nome completo</p>
-</li>
-<li>
-<p>Tabelas comparativas: contendo os resultados obtidos</p>
-</li>
-<li>
-<p>Gráficos comparativos: que ilustrem as diferenças de desempenho entre as versões testadas</p>
-</li>
-<li>
-<p>Respostas às perguntas: análise com base nos resultados observados </p>
-</li>
-</ul>
-<p><strong>Faça a submissão do relatório até 22/08, 08h30 pelo link do <a href="https://classroom.github.com/a/DnVGRWYD">Github Classromm</a></strong></p>
+<h2 id="esta-atividade-nao-tem-entrega-bom-final-de-semana"><strong>Esta atividade não tem entrega, Bom final de semana!</strong><a class="headerlink" href="#esta-atividade-nao-tem-entrega-bom-final-de-semana" title="Permanent link">&para;</a></h2>
+<p>Se quiser estudar um pouco mais sobre vector, veja as <a href="../../teoria/aula03/">indicações aqui</a> </p>
 
 
 
