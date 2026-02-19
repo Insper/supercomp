@@ -277,92 +277,68 @@ Analise o código `matmul_seq.cpp`:
 #include <cstdlib>
 #include <algorithm>
 
+using namespace std;
 
-#define TAM_MATRIZ 1000
-/*
- ============================================================
-   OBJETIVO
-   -----------------------------------------------------------
-   Este programa faz a multiplicação de matrizes aninhadas
-   de forma SEQUENCIAL e mede o tempo de execução.
+#define N 1500   // Tamanho da matriz N x N
 
-   Ele pode rodar em dois modos:
-   - Versão INGENUA (sem otimizações)
-   - Versão com TILING (fateamento em blocos), onde o tamanho
-     do bloco B é passado como parâmetro na linha de comando.
+// ----------------------------------------------------------
+// Multiplicação INGÊNUA (ordem j -> i -> k)
+// ----------------------------------------------------------
+void multiplicacaoIngenua(vector<double>& A,
+                          vector<double>& B,
+                          vector<double>& C)
+{
 
-   O objetivo é observar como o tamanho do bloco B influencia:
-   - O tempo de execução
-   - O uso de cache
+    for (int j = 0; j < N; j++) {          // percorre colunas
 
- ============================================================
-*/
+        for (int i = 0; i < N; i++) {      // percorre linhas
 
-/* Definicoes para melhorar a legibilidade*/
+            for (int k = 0; k < N; k++) {  // produto interno
 
-using Matriz = std::vector<std::vector<double>>;
-
-inline Matriz criaMatriz(int size, double value){
-    return Matriz(size, std::vector<double>(size, value));
-}
-
-/**
- * @brief Versão ingênua da multiplicação de matrizes.
- * 
- * Implementa a multiplicação com três loops aninhados (i, j, k) sem uso de tiling.
- * O acesso às matrizes é feito de forma direta, sem otimizações de cache.
- */
-inline void versaoIngenua(){
-
-    // Cria três matrizes NxN em memória, preenchidas com valores fixos
-    // - A inicializada com 1.0
-    // - Bmat inicializada com 2.0
-    // - C inicializada com 0.0 (resultado)
-
-    Matriz A    = criaMatriz(TAM_MATRIZ, 1.0);
-    Matriz Bmat = criaMatriz(TAM_MATRIZ, 2.0);
-    Matriz C    = criaMatriz(TAM_MATRIZ, 0.0);
-
-    for (int i = 0; i < TAM_MATRIZ; i++) {
-        for (int j = 0; j < TAM_MATRIZ; j++) {
-            for (int k = 0; k < TAM_MATRIZ; k++) {
-                C[i][j] += A[i][k] * Bmat[k][j];
+                C[i * N + j] +=
+                    A[i * N + k] * B[k * N + j];
             }
         }
     }
 }
 
-/**
- * @brief Multiplicação de matrizes utilizando a técnica de tiling (blocking).
- * 
- * Realiza a multiplicação de matrizes dividindo as matrizes em blocos (tiles) de tamanho `tamBloco`.
- * Otimiza o uso da cache ao trabalhar com submatrizes menores que cabem na hierarquia de memória.
- * 
- * @param tamBloco Tamanho do bloco (tile) usado para dividir as matrizes na multiplicação.
- */
-inline void versaoTiling(int tamBloco){
 
-    // Cria três matrizes NxN em memória, preenchidas com valores fixos
-    // - A inicializada com 1.0
-    // - Bmat inicializada com 2.0
-    // - C inicializada com 0.0 (resultado)
+// ----------------------------------------------------------
+// Multiplicação com TILING (ordem j -> i -> k)
+// ----------------------------------------------------------
+void multiplicacaoTiling(vector<double>& A,
+                         vector<double>& B,
+                         vector<double>& C,
+                         int bloco)
+{
+    /*
+        A matriz é dividida em blocos (tiles) de tamanho "bloco".
 
-    Matriz A    = criaMatriz(TAM_MATRIZ, 1.0);
-    Matriz Bmat = criaMatriz(TAM_MATRIZ, 2.0);
-    Matriz C    = criaMatriz(TAM_MATRIZ, 0.0);
+        Cada bloco representa uma submatriz menor,
+        que idealmente cabe na cache.
 
-    for (int ii = 0; ii < TAM_MATRIZ; ii += tamBloco) {        // blocos de linhas
-        for (int jj = 0; jj < TAM_MATRIZ; jj += tamBloco) {    // blocos de colunas
-            for (int kk = 0; kk < TAM_MATRIZ; kk += tamBloco) {// blocos intermediários
-                // Multiplicação de submatrizes tamBloco x tamBloco
-                // Ordem j -> i -> k
-                for (int j = jj; j < std::min(jj + tamBloco, TAM_MATRIZ); j++) {
-                    for (int i = ii; i < std::min(ii + tamBloco, TAM_MATRIZ); i++) {
-                        double sum = C[i][j];
-                        for (int k = kk; k < std::min(kk + tamBloco, TAM_MATRIZ); k++) {
-                            sum += A[i][k] * Bmat[k][j];
+        Dentro do bloco, estamos usando propositalmente
+        a ordem ruim:
+
+            j -> i -> k
+
+        reorganizem esse loop!
+    */
+
+    // Percorre blocos da matriz
+    for (int jj = 0; jj < N; jj += bloco) {        // blocos de colunas
+        for (int ii = 0; ii < N; ii += bloco) {    // blocos de linhas
+            for (int kk = 0; kk < N; kk += bloco) {// blocos intermediários
+
+                // Percorre elementos dentro do bloco
+                for (int j = jj; j < min(jj + bloco, N); j++) {
+
+                    for (int i = ii; i < min(ii + bloco, N); i++) {
+
+                        for (int k = kk; k < min(kk + bloco, N); k++) {
+                            C[i * N + j] +=
+                                A[i * N + k] * B[k * N + j];
                         }
-                        C[i][j] = sum;
                     }
                 }
             }
@@ -371,39 +347,48 @@ inline void versaoTiling(int tamBloco){
 }
 
 
+// ----------------------------------------------------------
+// Função principal
+// ----------------------------------------------------------
+int main(int argc, char* argv[])
+{
+    int tamanhoBloco = 0;
 
-int main(int argc, char* argv[]) {
-    int tamBloco = 0; // Tamanho do bloco. Se for 0 → versão ingênua.
-
-    // Lê o tamanho do bloco da linha de comando
-    // Exemplo: ./matmul_seq 200  → roda com blocos 200×200
+    // Lê argumento da linha de comando
+    // Se for 0 ou não informado → versão ingênua
     if (argc > 1) {
-        // Atualiza o valor de tamBloco de acordo com o parâmetro de entrada
-        tamBloco = std::atoi(argv[1]);
+        tamanhoBloco = atoi(argv[1]);
     }
 
-    // Marca o início da medição de tempo
-    auto start = std::chrono::high_resolution_clock::now();
+    // Criação das matrizes
+    vector<double> A(N * N, 1.0);
+    vector<double> B(N * N, 2.0);
+    vector<double> C(N * N, 0.0);
 
-    if (tamBloco <= 0) {
-        versaoIngenua();
-    } 
+    // Início da medição
+    auto inicio = chrono::high_resolution_clock::now();
+
+    if (tamanhoBloco <= 0) {
+        multiplicacaoIngenua(A, B, C);
+    }
     else {
-        versaoTiling(tamBloco);
+        multiplicacaoTiling(A, B, C, tamanhoBloco);
     }
 
-    // Marca o fim da medição
-    auto end = std::chrono::high_resolution_clock::now();
+    // Fim da medição
+    auto fim = chrono::high_resolution_clock::now();
 
-    // Calcula e imprime o tempo total em milissegundos
-    std::cout << "Execução ("
-              << (tamBloco <= 0 ? "ingênua" : "tiling tamBloco=" + std::to_string(tamBloco))
-              << "): "
-              << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()
-              << " ms" << std::endl;
+    cout << "Tempo ("
+         << (tamanhoBloco <= 0 ? "Ingenua"
+                               : "Tiling bloco=" + to_string(tamanhoBloco))
+         << "): "
+         << chrono::duration_cast<chrono::seconds>(fim - inicio).count()
+         << "   s" << endl;
+    cout << "Valor C[0][0] = " << C[0] << endl;
 
     return 0;
 }
+
 ```
 ## Missões:
 
@@ -434,14 +419,14 @@ echo "=============== FILA MONSTRAO=============="
 echo "=== Execução versão ingênua ==="
 time ./matmul_seq 0
 
-echo "=== Execução com blocos L1 (~36x36) ==="
-time ./matmul_seq 36
+echo "=== Execução com blocos (~32x32) ==="
+time ./matmul_seq 32
 
-echo "=== Execução com blocos L2 (~200x200) ==="
-time ./matmul_seq 200
+echo "=== Execução com blocos (~128x128) ==="
+time ./matmul_seq 128
 
-echo "=== Execução com blocos L3 (~768x768) ==="
-time ./matmul_seq 768
+echo "=== Execução com blocos (~400x400) ==="
+time ./matmul_seq 400
 ```
 
 Execute com:
@@ -461,6 +446,112 @@ Você já visualizou o efeito do **tiling**. Agora, o objetivo é entender como 
 Modifique o código `matmul_seq.cpp` para usar a ordem **i → k → j** no lugar da ordem original **j → i → k**.
 Essa mudança melhora a localidade espacial dos acessos à matriz B, e também beneficia os acessos às matrizes A e C.
 
+??? note "Ver a resposta"
+    ```cpp
+    #include <iostream>
+    #include <vector>
+    #include <chrono>
+    #include <cstdlib>
+    #include <algorithm>
+
+    using namespace std;
+
+    #define N 1500   // Tamanho da matriz N x N
+
+    // ----------------------------------------------------------
+    // Multiplicação INGÊNUA (ordem CORRETA: i -> k -> j)
+    // ----------------------------------------------------------
+    void multiplicacaoIngenua(vector<double>& A,
+                            vector<double>& B,
+                            vector<double>& C)
+    {
+        for (int i = 0; i < N; i++) {           // linhas
+
+            for (int k = 0; k < N; k++) {       // dimensão interna
+
+                double a_ik = A[i * N + k];     // guarda em registrador
+
+                for (int j = 0; j < N; j++) {   // colunas
+
+                    C[i * N + j] +=
+                        a_ik * B[k * N + j];
+                }
+            }
+        }
+    }
+
+
+    // ----------------------------------------------------------
+    // Multiplicação com TILING (ordem CORRETA: ii -> kk -> jj)
+    // Dentro do bloco: i -> k -> j
+    // ----------------------------------------------------------
+    void multiplicacaoTiling(vector<double>& A,
+                            vector<double>& B,
+                            vector<double>& C,
+                            int bloco)
+    {
+        for (int ii = 0; ii < N; ii += bloco) {
+            for (int kk = 0; kk < N; kk += bloco) {
+                for (int jj = 0; jj < N; jj += bloco) {
+
+                    for (int i = ii; i < min(ii + bloco, N); i++) {
+
+                        for (int k = kk; k < min(kk + bloco, N); k++) {
+
+                            double a_ik = A[i * N + k];
+
+                            for (int j = jj; j < min(jj + bloco, N); j++) {
+
+                                C[i * N + j] +=
+                                    a_ik * B[k * N + j];
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+    // ----------------------------------------------------------
+    // Função principal
+    // ----------------------------------------------------------
+    int main(int argc, char* argv[])
+    {
+        int tamanhoBloco = 0;
+
+        if (argc > 1) {
+            tamanhoBloco = atoi(argv[1]);
+        }
+
+        vector<double> A(N * N, 1.0);
+        vector<double> B(N * N, 2.0);
+        vector<double> C(N * N, 0.0);
+
+        auto inicio = chrono::high_resolution_clock::now();
+
+        if (tamanhoBloco <= 0) {
+            multiplicacaoIngenua(A, B, C);
+        }
+        else {
+            multiplicacaoTiling(A, B, C, tamanhoBloco);
+        }
+
+        auto fim = chrono::high_resolution_clock::now();
+
+        cout << "Tempo ("
+            << (tamanhoBloco <= 0 ? "Ingenua"
+                                : "Tiling bloco=" + to_string(tamanhoBloco))
+            << "): "
+            << chrono::duration_cast<chrono::milliseconds>(fim - inicio).count()
+            << " ms" << endl;
+
+        cout << "Valor C[0][0] = " << C[0] << endl;
+
+        return 0;
+    }
+
+    ```
 
 ### 2. Testar Diferentes Flags de Otimização
 
@@ -474,8 +565,8 @@ Após identificar as melhores combinações de loop e flags de otimização no *
 ### Perguntas para entender se você entendeu:
 
 1. A troca de ordem dos loops melhorou ou piorou o tempo de execução? Por quê?
-2. Houveram diferenças entre os nós **monstrao** e **gpu**? Quais?
-3. Qual o **tamanho de bloco** que apresentou o melhor equilíbrio entre tempo de execução e aproveitamento de cache em cada fila?
+2. Houveram diferenças no uso das flags de otimização? Quais?
+3. Qual o **tamanho de bloco** que apresentou o melhor equilíbrio entre tempo de execução e aproveitamento de cache? 
 
 ## **Esta atividade não tem entrega, Bom final de semana!**
 
