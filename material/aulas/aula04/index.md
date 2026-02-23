@@ -1,190 +1,261 @@
+# O que é busca exaustiva
 
-## Objetivo
+Busca exaustiva é a estratégia que testa todas as soluções possíveis e escolher a melhor.
 
-Ao final desta atividade, você será capaz de:
+Considere um serviço de entregas de comércio eletrônico, como as realizadas pelo Mercado Livre. Um motorista inicia a rota da sua casa, vai até um ponto de coleta para retirar as encomendas e, a partir daí, deve realizar entregas em diversos pontos distribuídos pela cidade. Após concluir todas as entregas, ele retorna ao local de origem.
 
-* Analisar **heurísticas** com aleatoriedade para reduzir o espaço de busca e fugir de mínimos locais.
-* Usar **aleatoriedade** para guiar a busca de soluções.
-
-!!! warning
-    [Clique aqui para ter acesso ao relatório completo do Emil](https://github.com/emil-freme/supercomp/blob/main/Benchmark_Compiladores_HPC_E_Blocking.ipynb)
-
-## Um pouco de teoria: O que é Nonce?
-
-Um **nonce** é um número que só pode ser usado uma única vez dentro de um determinado contexto. A palavra vem da expressão inglesa *“number used once”*. O nonce tem um papel fundamental dentro do mecanismo conhecido como **Proof of Work**.
-
-No sistema de Proof of Work, que é usado por diversas criptomoedas como o Bitcoin, o objetivo principal é garantir que novos blocos de transações só sejam adicionados à blockchain mediante a realização de um trabalho computacional significativo. Esse trabalho é feito pelos mineradores, que tentam encontrar um valor de nonce que, quando combinado com os dados de um bloco e passado por uma função hash (o SHA-256), gere um resultado que satisfaça uma condição específica de dificuldade. Essa condição normalmente exige que o hash gerado comece com um certo número de zeros, **quanto mais zeros, mais difícil o problema**.
-
-Para encontrar esse nonce, o minerador precisa testar diferentes valores, um a um, recalculando o hash a cada tentativa. Como a função hash é determinística, mas seu resultado parece aleatório mesmo com pequenas mudanças nos dados de entrada, não há como prever qual nonce gerará um hash válido. Isso significa que a única forma de resolver o problema é por tentativa e erro, **o que exige muito poder computacional e tempo.**
-
----
-!!! tip 
-    Quer saber mais? Assista [esse vídeo sobre nonce](https://www.youtube.com/watch?v=diwHGOA1_c4&t=6s)
+O objetivo é encontrar a melhor rota com o menor custo total de deslocamento, considerando a localização inicial do motorista, o ponto de coleta e todos os pontos de entrega. Cada ponto de entrega deve ser visitado uma única vez. O custo da rota será definido como a distância total percorrida.
 
 
-##  Por que usar heurísticas com aleatoriedade?
+No nosso caso, o problema é encontrar a melhor ordem de entrega dos pontos. Se existem `n` entregas, então existem `n!` possíveis permutações. O algoritmo de busca exaustiva vai:
 
-Em contextos como Proof of Work, usar heurísticas com aleatoriedade é interessante porque o espaço de busca é enorme e imprevisível. A função hash se comporta como uma caixa-preta: pequenas mudanças no nonce geram resultados totalmente diferentes, sem padrão aparente. Isso torna estratégias determinísticas (como testar de 0 em diante) ineficientes e vulneráveis a colisões entre mineradores.
+1. Gera todas as combinações possíveis.
+2. Calcula o custo de cada uma.
+3. Guardar a melhor.
 
-A aleatoriedade permite explorar regiões diferentes do espaço de busca, reduzindo repetição de esforços e aumentando a chance de sucesso. Além disso, torna o processo menos previsível, dificultando ataques ou manipulações. Em um problema onde não há como saber onde está a solução, tentar caminhos variados aleatoriamente é uma boa forma de encontrar uma resposta mais rápido.
+Essa heuristica sempre encontra a solução ótima, porém, é extremamente cara computacionalmente e não escala.
 
-
-
-Analise o código exemplo `mineracao.cpp`
+Analise o código  `exausto.cpp`
 
 ```cpp
 #include <iostream>
-#include <string>
-#include <random>
+#include <vector>
+#include <cmath>
+#include <limits>
+#include <cstdlib>
 #include <chrono>
-#include <iomanip>
-#include <sstream>
-#include <functional>
-#include <climits>
+#include <algorithm>
 
-// -------------------------------------------------------------
-// - Retorna string hex com 16 bytes (64 bits) -> 16 dígitos hex em ambientes 64 bits.
-// -------------------------------------------------------------
-std::string sha256(const std::string& input) {
-    std::hash<std::string> hasher;     // Functor de hash da STL
-    size_t h = hasher(input);          // Aplica o hash de 64 bits à string
-    unsigned long long v = static_cast<unsigned long long>(h); // Normaliza para 64 bits
+using namespace std;
 
-    // Converte o valor inteiro para string hexadecimal com padding à esquerda
-    // Para 64 bits -> 16 dígitos hex (2 por byte * 8 bytes)
-    std::ostringstream os;
-    os << std::hex << std::nouppercase << std::setfill('0') << std::setw(16) << v;
-    return os.str(); // Ex.: "00af3c..."; comprimento típico: 16 chars em 64 bits
+const int CAPACIDADE_MOTO = 5;
+
+struct Ponto {
+    double x;
+    double y;
+};
+
+/*
+POLEMICA:
+Passagem por valor + uso de pow (muito mais lento que multiplicação direta)
+*/
+double distancia(Ponto a, Ponto b) {
+    return sqrt(pow(a.x - b.x, 2) + pow(a.y - b.y, 2));
 }
 
-// -------------------------------------------------------------
-// Verifica se o "hash" (string hex) começa com 'dificuldade' zeros.
-// -------------------------------------------------------------
-bool validaHash(const std::string& hash, int dificuldade) {
-    if (dificuldade <= 0) return true;               // dificuldade 0 sempre passa
-    if (dificuldade > static_cast<int>(hash.size())) // não pode exigir mais zeros do que o tamanho do hash
-        return false;
-    return hash.rfind(std::string(dificuldade, '0'), 0) == 0; // true se começa com zeros
-}
+/*
+POLEMICA:
+Função cria matriz de distâncias TODA VEZ que é chamada
+*/
+vector<vector<double>> criarMatrizDistancias(vector<Ponto> pontos) {
+    int n = pontos.size();
+    vector<vector<double>> matriz(n, vector<double>(n));
 
-// -------------------------------------------------------------
-// Estratégia 1: Busca linear — testa nonces em ordem: 0, 1, 2, ...
-// -------------------------------------------------------------
-void minerar_linear(const std::string& bloco, int dificuldade) {
-    auto start = std::chrono::high_resolution_clock::now(); // Marca início do cronômetro
-
-    unsigned long long nonce = 0;        // Começa do 0
-    unsigned long long tentativas = 0;   // Contador de tentativas
-
-    while (true) {
-        // Monta a entrada "bloco || nonce"
-        std::string tentativa = bloco + std::to_string(nonce);
-        // Calcula o "hash" da tentativa
-        std::string hash = sha256(tentativa);
-        ++tentativas;
-
-        // Se atendeu à dificuldade (começa com N zeros), reporta e encerra
-        if (validaHash(hash, dificuldade)) {
-            auto end = std::chrono::high_resolution_clock::now();
-            double tempo = std::chrono::duration<double>(end - start).count();
-            std::cout << "[LINEAR] Nonce: " << nonce << "\nHash: " << hash
-                      << "\nTentativas: " << tentativas << "\nTempo: " << tempo << "s\n\n";
-            break;
-        }
-        ++nonce; // Tenta o próximo nonce
-    }
-}
-
-// -------------------------------------------------------------
-// Estratégia 2: Busca aleatória com heurística simples
-// - Gera nonces aleatórios em 64 bits
-// - Heurística: só segue para validação completa se o hash começar com '0'
-// - maxTentativas: evita loop "infinito" 
-// -------------------------------------------------------------
-void minerar_random_heuristica(const std::string& bloco, int dificuldade, unsigned long long maxTentativas) {
-    auto start = std::chrono::high_resolution_clock::now(); // Cronômetro
-
-    // Preparação do gerador aleatório:
-    std::random_device rd;                          // Fonte de entropia (seed)
-    std::mt19937_64 gen(rd());                      // Gerador de aleatórios
-    std::uniform_int_distribution<unsigned long long> distrib(0, ULLONG_MAX); // Uniforme em [0, 2^64-1]
-
-    unsigned long long tentativas = 0; // Contador de tentativas
-
-    while (tentativas < maxTentativas) {
-        // Sorteia um nonce (exploração aleatória do espaço de busca)
-        unsigned long long nonce = distrib(gen);
-
-        // Monta a tentativa e calcula o hash simulado
-        std::string tentativa = bloco + std::to_string(nonce);
-        std::string hash = sha256(tentativa);
-        ++tentativas;
-
-        // Heurística: se o primeiro dígito não é '0', provavelmente não atende a dificuldades maiores
-        if (hash[0] != '0') continue;
-
-        // Verificação completa do critério de dificuldade
-        if (validaHash(hash, dificuldade)) {
-            auto end = std::chrono::high_resolution_clock::now();
-            double tempo = std::chrono::duration<double>(end - start).count();
-            std::cout << "[HEURISTICA-RANDOM] Nonce: " << nonce << "\nHash: " << hash
-                      << "\nTentativas: " << tentativas << "\nTempo: " << tempo << "s\n\n";
-            return; // Sucesso: encerra a função
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            matriz[i][j] = distancia(pontos[i], pontos[j]);
         }
     }
 
-    // Se não encontrou dentro do limite de tentativas, informa
-    std::cout << "[HEURISTICA-RANDOM] Não encontrou nonce válido em " << maxTentativas << " tentativas.\n\n";
+    return matriz;
 }
 
-// -------------------------------------------------------------
-// main: executa as duas estratégias para comparação 
-// -------------------------------------------------------------
-int main() {
-    std::string bloco = "transacao_simples"; // Simulação de transação
-    int dificuldade = 5;                     // Nº de zeros à esquerda no hash simulado
-    unsigned long long limite_random = 500000; // Limite de tentativas para a estratégia aleatória
+/*
+POLEMICA
+Recebe vetores por valor (cópia os dados a cada chamada)
+*/
+double calcularCusto(Ponto motorista,
+                     Ponto coleta,
+                     vector<Ponto> entregas,
+                     vector<int> rota) {
 
-    std::cout << "=== Mineração  | dificuldade = " << dificuldade << " ===\n\n";
+    double custo = 0.0;
 
-    // Estratégia linear 
-    minerar_linear(bloco, dificuldade);
+    // POLEMICA:
+    // Cria vetor auxiliar desnecessário
+    vector<Ponto> todosPontos = entregas;
+    todosPontos.push_back(coleta);
 
-    // Estratégia aleatória + heurística
-    minerar_random_heuristica(bloco, dificuldade, limite_random);
+    // POLEMICA:
+    // Recria matriz inteira a cada cálculo
+    vector<vector<double>> matriz = criarMatrizDistancias(todosPontos);
 
-    return 0; 
+    custo += distancia(motorista, coleta);
+
+    int carga = CAPACIDADE_MOTO;
+    Ponto atual = coleta;
+
+    for (int i = 0; i < rota.size(); i++) {
+
+        if (carga == 0) {
+            custo += distancia(atual, coleta);
+            atual = coleta;
+            carga = CAPACIDADE_MOTO;
+        }
+
+        // POLEMICA:
+        // Acesso indireto ruim para cache
+        Ponto destino = entregas.at(rota.at(i));
+
+        custo += distancia(atual, destino);
+
+        // POLEMICA:
+        // Ordenação inútil dentro do loop
+        sort(entregas.begin(), entregas.end(),
+            [](Ponto a, Ponto b) {
+                return a.x < b.x;
+            });
+
+        atual = destino;
+        carga--;
+    }
+
+    custo += distancia(atual, motorista);
+
+    // POLEMICA:
+    // Loop inútil que não altera nada
+    for (int i = 0; i < 1000; i++) {
+        custo += 0;
+    }
+
+    return custo;
 }
 
+/*
+POLEMICA:
+Recursão recebe tudo por valor
+melhorCusto também por valor 
+*/
+void permutar(Ponto motorista,
+              Ponto coleta,
+              vector<Ponto> entregas,
+              vector<int> rota,
+              int inicio,
+              double melhorCusto,
+              vector<int> melhorRota) {
+
+    if (inicio == rota.size()) {
+
+        double custo = calcularCusto(motorista,
+                                     coleta,
+                                     entregas,
+                                     rota);
+
+        if (custo < melhorCusto) {
+            melhorCusto = custo;
+            melhorRota = rota;
+        }
+
+        return;
+    }
+
+    for (int i = inicio; i < rota.size(); i++) {
+
+        swap(rota[inicio], rota[i]);
+
+        // POLEMICA:
+        // Aloca vetor temporário inútil
+        vector<int> lixo(rota.begin(), rota.end());
+
+        permutar(motorista,
+                 coleta,
+                 entregas,
+                 rota,
+                 inicio + 1,
+                 melhorCusto,
+                 melhorRota);
+
+        swap(rota[inicio], rota[i]);
+    }
+}
+
+int main(int argc, char* argv[]) {
+
+    int n = atoi(argv[1]);
+
+    if (n <= 0) {
+        cout << "Numero invalido\n";
+        return 1;
+    }
+
+    Ponto motorista{0,0};
+    Ponto coleta{5,5};
+
+    vector<Ponto> todos = {
+        {10,10}, {20,10}, {30,10}, {40,10}, {50,10},
+        {10,20}, {20,20}, {30,20}, {40,20}, {50,20},
+        {10,30}, {20,30}, {30,30}, {40,30}, {50,30},
+        {10,40}, {20,40}, {30,40}, {40,40}, {50,40}
+    };
+
+    // Copia elemento por elemento
+    vector<Ponto> entregas;
+    for (int i = 0; i < n; i++) {
+        entregas.push_back(todos[i]);
+    }
+
+    vector<int> rota;
+    for (int i = 0; i < n; i++) {
+        rota.push_back(i);
+    }
+
+    vector<int> melhorRota;
+    double melhorCusto = numeric_limits<double>::max();
+
+    auto inicioTempo = chrono::high_resolution_clock::now();
+
+    permutar(motorista,
+             coleta,
+             entregas,
+             rota,
+             0,
+             melhorCusto,
+             melhorRota);
+
+    auto fimTempo = chrono::high_resolution_clock::now();
+    chrono::duration<double> tempo = fimTempo - inicioTempo;
+
+    cout << "Melhor custo: " << melhorCusto << endl;
+    cout << "Tempo: " << tempo.count() << " segundos\n";
+
+    return 0;
+}
 ```
-
 
 ## Desafio!
 
-**Objetivo:** Analisar e aprimorar a heurística exemplo.
 
-Execute o código acima 5 vezes.
-Compare:
-
-   - O número de tentativas e o tempo da busca linear.
-
-   - O número de tentativas e o tempo da busca aleatória com heurística.
-
-   - Qual das duas abordagem acerta mais?
-
-Interprete os resultados:
-
-   - A heurística sempre é mais rápida?
-
-   - Em qual cenário a heuristica aleatória pode ser pior?
-   
-   - O que fazer para que a busca aleatória com heurística encontre o nonce com mais frequência?
-   
-   - Por que usar aleatoriedade e filtros simples (como descartar hashes que não começam com '0') pode acelerar a busca por um hash válido?
-
-**Pergunta para reflexão:**
-
-> *Quais melhorias poderiam ser implementadas neste algoritmo para ter uma heuristica mais eficiente?*
+O código está cheio de problemas, identifique os problemas e otimize o código;
 
 
-## **Esta atividade não tem entrega, bom final de semana!**
+Execute o seu algorítimo otimizado **N = 13 no Cluster Franky** e responda:
+
+1 - Explique de forma breve e objetiva quais otimizações você aplicou no código.
+
+2 - Qual flag de otimização teve o melhor desempenho?
+
+3 - Qual fila foi mais rápida? O que você acha que influenciou esse resultado?
+
+4 - Compare o código base fornecido com a versão otimizada desenvolvida por você. **Execute ambos para N = 9, 10, 11 e 12** e gere um gráfico comparativo. 
+
+
+[Submeta a sua entrega pelo Classroom diponível neste link até 27/03 ás 14h00](https://classroom.github.com/a/lBx_S1nd)
+
+A entrega deve conter o seu algorítmo e as suas análises (pode deixar as análises no README.md) 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

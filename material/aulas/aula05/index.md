@@ -1,513 +1,564 @@
-# Paralelismo em CPU com OpenMP
+## Busca Exaustiva
+Na aula passada você deveria ter sumido com os erros do código fornecido, e a ideia era que chegasse em algo parecido com isso:
+??? note "Gabarito - Busca Exaustiva"
 
-## Objetivo
+    O código  `exausto.cpp` implementa a busca exaustiva bonitinho:
 
-* **Paralelismo em CPU**: como dividir o trabalho entre múltiplos *cores*.
-* **Threads**: cada thread executa uma parte do trabalho.
-* **OpenMP**: diretivas em OpenMP para paralelizar loops.
-* **Scheduling**: forma como as iterações do loop são distribuídas entre threads (`static`, `dynamic`, `guided`).
+    ```cpp
+    #include <iostream>     // Entrada e saída (cout, cin)
+    #include <vector>       
+    #include <cmath>        // Função sqrt para cálculo de distância
+    #include <limits>       // numeric_limits (usado para infinito)
+    #include <cstdlib>      // atoi (converter string para inteiro)
+    #include <chrono>       // Medição de tempo de execução
 
-Os processadores atuais possuem múltiplos núcleos de execução (*cores*). Para aproveitar essa capacidade, podemos dividir o trabalho em partes menores que possam ser executadas simultaneamente. Essa divisão é feita por meio de **threads**, onde cada thread executa uma fração das instruções.
+    using namespace std;
 
-No caso de **laços de repetição**, o paralelismo é obtido ao repartir as iterações entre várias threads. Em vez de uma única thread percorrer todo o laço, cada thread recebe um subconjunto de iterações, reduzindo o tempo total de execução. O OpenMP facilita esse processo por meio de diretivas como `#pragma omp parallel for`.
+    /*
+    Capacidade máxima da moto.
+    Ela só pode transportar 5 itens por viagem.
+    Quando zera, precisa voltar ao ponto de coleta.
+    */
+    const int CAPACIDADE_MOTO = 5;
 
-!!! tip
-    Para saber mais, veja o material disponível em [Guia de Pragmas OpnMP](../../teoria/openmp.md) 
-    
-## Scheduling no OpenMP
+    /*
+    Estrutura que representa um ponto no plano cartesiano.
+    Cada ponto tem coordenadas (x, y).
+    */
+    struct Ponto {
+        double x;
+        double y;
+    };
 
-Quando um laço é paralelizado, é preciso definir **como as iterações serão distribuídas entre as threads**. Essa estratégia é chamada de **schedule** (escalonamento).
+    /*
+    Função que calcula a distância euclidiana entre dois pontos.
+    Fórmula:
+        d = √[(x1 - x2)^2 + (y1 - y2)^2]
+    */
+    double distancia(const Ponto& a, const Ponto& b) {
+        double dx = a.x - b.x;
+        double dy = a.y - b.y;
+        return sqrt(dx * dx + dy * dy);
+    }
 
-* **static** → divide as iterações em blocos fixos, atribuídos antecipadamente a cada thread.
-* **dynamic** → as iterações são distribuídas em blocos sob demanda, conforme as threads terminam suas tarefas.
-* **guided** → inicia com blocos maiores e reduz gradualmente o tamanho, equilibrando a carga de trabalho.
-* **auto** → delega ao compilador a escolha da estratégia.
-* **runtime** → a estratégia é definida em tempo de execução pela variável de ambiente `OMP_SCHEDULE`.
+    /*
+    Função que calcula o custo total de uma rota completa.
 
-A escolha do escalonamento não altera o resultado final da computação, mas impacta diretamente o desempenho e o balanceamento da carga de trabalho.
+    Regras:
+    - O motorista sai de casa.
+    - Vai até o ponto de coleta.
+    - Realiza as entregas na ordem definida em "rota".
+    - A cada 5 entregas precisa voltar na coleta.
+    - Ao final de todas as entregas, retorna para casa.
+    */
+    double calcularCusto(const Ponto& motorista,
+                        const Ponto& coleta,
+                        const vector<Ponto>& entregas,
+                        const vector<int>& rota) {
 
+        double custo = 0.0;
 
-O programa `omp_schedulers.cpp` é um código exemplo para **visualizar a distribuição das iterações de um laço entre threads** em diferentes estratégias de `schedule`.
+        // 1) Motorista vai até o ponto de coleta
+        custo += distancia(motorista, coleta);
 
-Para cada política de escalonamento, o programa registra quais iterações foram executadas por cada thread e exibe uma saída gráfica com `*`, indicando a distribuição.
+        int cargaAtual = CAPACIDADE_MOTO;   // Quantos itens ainda cabem na moto
+        Ponto posicaoAtual = coleta;        // Começa na coleta
 
-Dessa forma, é possível observar o comportamento de cada política:
+        // 2) Percorre todas as entregas na ordem da permutação
+        for (size_t i = 0; i < rota.size(); i++) {
 
-`omp_schedulers.cpp`
-```cpp
-#include <iostream>   
-#include <string>     
-#include <vector>     
-#include <algorithm>  
-#include <omp.h>      // OpenMP (omp_get_thread_num, diretivas)
-
-// -----------------------------------------------------------------------------
-// print_iterations:
-//   - Recebe uma descrição, um vetor de vetores 'vectors' (4 vetores, um por thread),
-//     e 'n' (número total de iterações do laço).
-//   - Constrói 4 strings com '*' indicando quais iterações cada thread executou.
-//   - Imprime a distribuição para visualizar o efeito do 'schedule'.
-// -----------------------------------------------------------------------------
-void print_iterations(const std::string& description,
-                      const std::vector< std::vector<int> >& vectors,
-                      const int n)
-{
-    std::vector<std::string> strings(4, std::string()); // 4 linhas de saída, uma por thread
-    for (int i = 0; i != n; i++)                        // varre todas as iterações 0..n-1
-    {
-        for (int j = 0; j != 4; j++)                   // para cada "thread" (0..3)
-        {
-            const auto& vector = vectors[j];           // vetor com as iterações que a thread j executou
-            auto it = std::find(vector.begin(), vector.end(), i); // procura o i dentro do vetor da thread j
-            if (it != vector.end())
-            {
-                strings[j] += "*";                     // se a thread j executou a iteração i, marca '*'
+            // Se a carga acabou, volta para coleta para reabastecer
+            if (cargaAtual == 0) {
+                custo += distancia(posicaoAtual, coleta);
+                posicaoAtual = coleta;
+                cargaAtual = CAPACIDADE_MOTO;
             }
-            else
-            { 
-                strings[j] += " ";                     // caso contrário, espaço em branco
+
+            // Vai até o próximo ponto de entrega
+            custo += distancia(posicaoAtual, entregas[rota[i]]);
+            posicaoAtual = entregas[rota[i]];
+            cargaAtual--; // Um item foi entregue
+        }
+
+        // 3) Após a última entrega, retorna para casa
+        custo += distancia(posicaoAtual, motorista);
+
+        return custo;
+    }
+
+    /*
+    Função recursiva que gera TODAS as permutações possíveis
+    (busca exaustiva).
+
+    Parâmetros:
+    - rota: vetor que representa a ordem atual das entregas
+    - inicio: posição atual da recursão
+    - melhorCusto: melhor custo encontrado até agora
+    - melhorRota: rota correspondente ao melhor custo
+    */
+    void permutar(const Ponto& motorista,
+                const Ponto& coleta,
+                const vector<Ponto>& entregas,
+                vector<int>& rota,
+                int inicio,
+                double& melhorCusto,
+                vector<int>& melhorRota) {
+
+        // Caso base:
+        // Se "inicio" chegou ao final, significa que temos uma permutação completa
+        if (inicio == rota.size()) {
+
+            // Calcula o custo da rota completa
+            double custo = calcularCusto(motorista,
+                                        coleta,
+                                        entregas,
+                                        rota);
+
+            // Se essa rota for melhor que a atual melhor, atualiza
+            if (custo < melhorCusto) {
+                melhorCusto = custo;
+                melhorRota = rota;
             }
+
+            return;
+        }
+
+        /*
+        Geração das permutações:
+        Fixamos o elemento da posição "inicio"
+        e permutamos os elementos seguintes.
+        */
+        for (size_t i = inicio; i < rota.size(); i++) {
+
+            // Troca o elemento atual
+            swap(rota[inicio], rota[i]);
+
+            // Chamada recursiva para próxima posição
+            permutar(motorista,
+                    coleta,
+                    entregas,
+                    rota,
+                    inicio + 1,
+                    melhorCusto,
+                    melhorRota);
+
+            // Desfaz a troca 
+            swap(rota[inicio], rota[i]);
         }
     }
-    std::cout << description << std::endl;             // título/descrição da experiência
-    for (auto& s : strings)                            // imprime as 4 linhas (uma por thread)
-    {
-        std::cout << s << "\n";
-    }
-    std::cout << std::endl;
-}
 
-// -----------------------------------------------------------------------------
-// schedule (template):
-//   - Função "driver" que recebe outra função 'function' (uma política de agendamento),
-//     a descrição e 'n'.
-//   - Aloca 'vectors' (4 vetores: um por thread) e chama 'function' para preenchê-los.
-//   - Depois imprime o resultado com print_iterations.
-// -----------------------------------------------------------------------------
-template <typename T>
-void schedule(T function, 
-              const std::string& description, 
-              const int n)
-{
-    std::vector<std::vector<int>> vectors(4, std::vector<int>()); // 4 threads simuladas
-    function(vectors, n);                                         // executa a política (preenche vectors)
-    print_iterations(description, vectors, n);                    // visualiza distribuição
-}
+    int main(int argc, char* argv[]) {
 
-// -----------------------------------------------------------------------------
-// Cada função 'scheduleXYZ' abaixo:
-//   - Abre uma região paralela com 4 threads (num_threads(4))
-//   - Faz um for paralelo '#pragma omp for' sobre i = 0..n-1
-//   - Cada thread registra a iteração 'i' que executou em vectors[tid]
-//   Observação didática: push_back em 'vectors[tid]' é aceitável aqui para fins
-//   de visualização (em geral, acessos concorrentes a containers exigem cuidado).
-// -----------------------------------------------------------------------------
+        /*
+        O programa recebe como parâmetro
+        a quantidade de pontos de entrega.
 
-// Default: sem especificar 'schedule' explicitamente (deixa o runtime decidir)
-void scheduleDefault(std::vector<std::vector<int>>& vectors, int n)
-{
-    #pragma omp parallel num_threads(4) shared(vectors, n)
-    {    
-        #pragma omp for
+        Exemplo:
+        ./exausto 8
+        */
+
+        int n = atoi(argv[1]);
+
+        if (n <= 0 || n > 20) {
+            cout << "Escolha um numero entre 1 e 20.\n";
+            return 1;
+        }
+
+        // Posição fixa do motorista (casa)
+        Ponto motorista{0,0};
+
+        // Posição fixa do ponto de coleta
+        Ponto coleta{5,5};
+
+        /*
+        Lista dos pontos de entrega
+        */
+        vector<Ponto> todos = {
+            {10,10}, {20,10}, {30,10}, {40,10}, {50,10},
+            {10,20}, {20,20}, {30,20}, {40,20}, {50,20},
+            {10,30}, {20,30}, {30,30}, {40,30}, {50,30},
+            {10,40}, {20,40}, {30,40}, {40,40}, {50,40}
+        };
+
+        // Seleciona apenas os primeiros n pontos
+        vector<Ponto> entregas(todos.begin(), todos.begin() + n);
+
+        // Vetor que representa a ordem atual das entregas
+        vector<int> rota(n);
+
+        // Vetor que guardará a melhor rota encontrada
+        vector<int> melhorRota;
+
+        // Inicializa rota com [0,1,2,3,...,n-1]
         for (int i = 0; i < n; i++)
-        {
-            vectors[omp_get_thread_num()].push_back(i); // registra a iteração i sob a thread atual
+            rota[i] = i;
+
+        // Inicializa melhor custo como infinito
+        double melhorCusto = numeric_limits<double>::max();
+
+        // Início da medição de tempo
+        auto inicio = chrono::high_resolution_clock::now();
+
+        // Executa busca exaustiva
+        permutar(motorista,
+                coleta,
+                entregas,
+                rota,
+                0,
+                melhorCusto,
+                melhorRota);
+
+        // Fim da medição
+        auto fim = chrono::high_resolution_clock::now();
+        chrono::duration<double> tempo = fim - inicio;
+
+        // Impressão da melhor rota encontrada
+        cout << "\nMelhor rota encontrada:\n";
+        cout << "Motorista(0,0) -> ";
+
+        int cargaAtual = CAPACIDADE_MOTO;
+        cout << "Coleta(5,5) -> ";
+
+        for (size_t i = 0; i < melhorRota.size(); i++) {
+
+            // Se zerar a carga, volta na coleta
+            if (cargaAtual == 0) {
+                cout << "Coleta(5,5) -> ";
+                cargaAtual = CAPACIDADE_MOTO;
+            }
+
+            int idx = melhorRota[i];
+
+            cout << "P" << idx
+                << "(" << entregas[idx].x
+                << "," << entregas[idx].y << ") -> ";
+
+            cargaAtual--;
         }
+
+        cout << "Motorista(0,0)\n";
+
+        // Exibe custo e tempo total
+        cout << "\nCusto total: " << melhorCusto << endl;
+        cout << "Tempo de execucao: "
+            << tempo.count()
+            << " segundos\n";
+
+        return 0;
     }
-}
+    ```
 
-// schedule(static): divide as iterações em blocos fixos, um por thread (tamanho auto)
-void scheduleStatic(std::vector<std::vector<int>>& vectors, int n)
-{
-    #pragma omp parallel num_threads(4) shared(vectors, n)
-    {    
-        #pragma omp for schedule(static)
-        for (int i = 0; i < n; i++)
-        {
-            vectors[omp_get_thread_num()].push_back(i);
-        }
-    }
-}
+Na busca exaustiva, o algoritmo investe tempo explorando caminhos que já dá pra saber que não levarão a uma solução melhor.
 
-// schedule(static, 4): blocos fixos de 4 iterações por vez
-void scheduleStatic4(std::vector<std::vector<int>>& vectors, int n)
-{
-    #pragma omp parallel num_threads(4) shared(vectors, n)
-    {    
-        #pragma omp for schedule(static, 4)
-        for (int i = 0; i < n; i++)
-        {
-            vectors[omp_get_thread_num()].push_back(i);
-        }
-    }
-}
+É aqui que entra o conceito de poda.
 
-// schedule(static, 8): blocos fixos de 8 iterações por vez
-void scheduleStatic8(std::vector<std::vector<int>>& vectors, int n)
-{
-    #pragma omp parallel num_threads(4) shared(vectors, n)
-    {    
-        #pragma omp for schedule(static, 8)
-        for (int i = 0; i < n; i++)
-        {
-            vectors[omp_get_thread_num()].push_back(i);
-        }
-    }
-}
+## Aplicando a poda (Branch and Bound)
 
-// schedule(dynamic): threads pegam blocos sob demanda (tamanho padrão do runtime)
-void scheduleDynamic(std::vector<std::vector<int>>& vectors, int n)
-{
-    #pragma omp parallel num_threads(4) shared(vectors, n)
-    {    
-        #pragma omp for schedule(dynamic)
-        for (int i = 0; i < n; i++)
-        {
-            vectors[omp_get_thread_num()].push_back(i);
-        }
-    }
-}
+Poda é uma técnica usada em algoritmos de busca para evitar explorar soluções que não melhoram o resultado atual.
 
-// schedule(dynamic, 1): blocos dinâmicos de 1 iteração (alto overhead, ótimo balanceamento)
-void scheduleDynamic1(std::vector<std::vector<int>>& vectors, int n)
-{
-    #pragma omp parallel num_threads(4) shared(vectors, n)
-    {    
-        #pragma omp for schedule(dynamic, 1)
-        for (int i = 0; i < n; i++)
-        {
-            vectors[omp_get_thread_num()].push_back(i);
-        }
-    }
-}
+A ideia central é simples:
 
-// schedule(dynamic, 4): blocos dinâmicos de 4 iterações
-void scheduleDynamic4(std::vector<std::vector<int>>& vectors, int n)
-{
-    #pragma omp parallel num_threads(4) shared(vectors, n)
-    {    
-        #pragma omp for schedule(dynamic, 4)
-        for (int i = 0; i < n; i++)
-        {
-            vectors[omp_get_thread_num()].push_back(i);
-        }
-    }
-}
+Se uma solução parcial já tem custo maior que o melhor custo encontrado até agora, então não faz sentido continuar expandindo esse caminho.
 
-// schedule(dynamic, 8): blocos dinâmicos de 8 iterações
-void scheduleDynamic8(std::vector<std::vector<int>>& vectors, int n)
-{
-    #pragma omp parallel num_threads(4) shared(vectors, n)
-    {    
-        #pragma omp for schedule(dynamic, 8)
-        for (int i = 0; i < n; i++)
-        {
-            vectors[omp_get_thread_num()].push_back(i);
-        }
-    }
-}
+Você interrompe essa ramificação da recursão.
 
-// schedule(guided): blocos começam grandes e vão diminuindo (bom p/ carga irregular)
-void scheduleGuided(std::vector<std::vector<int>>& vectors, int n)
-{
-    #pragma omp parallel num_threads(4) shared(vectors, n)
-    {    
-        #pragma omp for schedule(guided)
-        for (int i = 0; i < n; i++)
-        {
-            vectors[omp_get_thread_num()].push_back(i);
-        }
-    }
-}
+O algoritmo continua correto (ainda encontra o ótimo), mas evita explorar regiões inúteis do espaço de busca.
 
-// schedule(guided, 2): guided com bloco mínimo de 2
-void scheduleGuided2(std::vector<std::vector<int>>& vectors, int n)
-{
-    #pragma omp parallel num_threads(4) shared(vectors, n)
-    {    
-        #pragma omp for schedule(guided, 2)
-        for (int i = 0; i < n; i++)
-        {
-            vectors[omp_get_thread_num()].push_back(i);
-        }
-    }
-}
+## Desafio!
 
-// schedule(guided, 4): guided com bloco mínimo de 4
-void scheduleGuided4(std::vector<std::vector<int>>& vectors, int n)
-{
-    #pragma omp parallel num_threads(4) shared(vectors, n)
-    {    
-        #pragma omp for schedule(guided, 4)
-        for (int i = 0; i < n; i++)
-        {
-            vectors[omp_get_thread_num()].push_back(i);
-        }
-    }
-}
+**Objetivo:** Analisar e aprimorar a heurística exemplo.
 
-// schedule(guided, 8): guided com bloco mínimo de 8
-void scheduleGuided8(std::vector<std::vector<int>>& vectors, int n)
-{
-    #pragma omp parallel num_threads(4) shared(vectors, n)
-    {    
-        #pragma omp for schedule(guided, 8)
-        for (int i = 0; i < n; i++)
-        {
-            vectors[omp_get_thread_num()].push_back(i);
-        }
-    }
-}
+Melhore a heuristica implementando a poda. Você precisará modificar três coisas principais:
 
-// schedule(auto): deixa o runtime escolher o melhor esquema
-void scheduleAuto(std::vector<std::vector<int>>& vectors, int n)
-{
-    #pragma omp parallel num_threads(4) shared(vectors, n)
-    {    
-        #pragma omp for schedule(auto)
-        for (int i = 0; i < n; i++)
-        {
-            vectors[omp_get_thread_num()].push_back(i);
-        }
-    }
-}
+### 1) Passar custo parcial na recursão
 
-// schedule(auto): deixa o compilador escolher a melhor estratégia
-void scheduleRuntime(std::vector<std::vector<int>>& vectors, int n)
-{
-    #pragma omp parallel num_threads(4) shared(vectors, n)
-    {    
-        #pragma omp for schedule(auto) 
-        for (int i = 0; i < n; i++)
-        {
-            vectors[omp_get_thread_num()].push_back(i);
-        }
-    }
-}
+Atualmente o código calcula o custo só no final.
 
-int main()
-{
-    const int n = 64; // número de iterações do laço a serem distribuídas entre 4 threads
+Você deve:
 
-    // Executa cada política de agendamento e imprime a “faixa” de iterações por thread.
-    schedule(scheduleDefault,  "default:               ", n);
-    schedule(scheduleStatic,   "schedule(static):      ", n);
-    schedule(scheduleStatic4,  "schedule(static, 4):   ", n);
-    schedule(scheduleStatic8,  "schedule(static, 8):   ", n);
-    schedule(scheduleDynamic,  "schedule(dynamic):     ", n);
-    schedule(scheduleDynamic1, "schedule(dynamic, 1):  ", n);
-    schedule(scheduleDynamic4, "schedule(dynamic, 4):  ", n);
-    schedule(scheduleDynamic8, "schedule(dynamic, 8):  ", n);
-    schedule(scheduleGuided,   "schedule(guided):      ", n);
-    schedule(scheduleGuided2,  "schedule(guided, 2):   ", n);
-    schedule(scheduleGuided4,  "schedule(guided, 4):   ", n);
-    schedule(scheduleGuided8,  "schedule(guided, 8):   ", n);
-    schedule(scheduleAuto,     "schedule(auto):        ", n);
-    schedule(scheduleRuntime,  "schedule(runtime):     ", n);
-
-    return 0;
-}
-
-```
+* Passar um parâmetro `custoParcial`
+* Atualizar esse custo a cada nível da recursão
 
 
-**Compilar o código com OpenMP**
+### 2) Fazer o teste de poda antes da chamada recursiva
 
-```bash
-g++ -fopenmp omp_schedulers.cpp -o omp_schedulers
-```
+Logo após calcular o novo custo parcial, inserir algo como:
 
-**Rodar no cluster com SLURM** definindo o número de threads:
+se (custoParcial >= melhorCusto)
+retorna;
 
-```bash
-srun --partition=normal --ntasks=1 --cpus-per-task=4 ./omp_schedulers
-```
+Para impedir a expansão da ramificação inutil.
 
-ou
+## 6. Estrutura da nova recursão
 
-```bash
-#!/bin/bash
-#SBATCH --job-name=omp_scheduler_test   # nome do job
-#SBATCH --output=output_omp_schedulers.out  # arquivo de saída
-#SBATCH --ntasks=1                      # 1 processo (1 task MPI)
-#SBATCH --cpus-per-task=4               # 4 CPUs para essa task → 4 threads OMP
-#SBATCH --time=00:05:00                 # tempo máximo de execução
-#SBATCH --mem=2G                        # Memória total do job (ex.: 2 GB)
+Fluxo lógico:
 
-# garante que o OpenMP use exatamente os recursos alocados pelo SLURM
-export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK}
+1. Se custo parcial ≥ melhor custo → poda
+2. Se completou todas as entregas → atualiza melhor custo
+3. Para cada próxima entrega possível:
 
-# executa o binário
-./omp_schedulers
+   * calcula novo custo parcial
+   * atualiza estado (posição, carga)
+   * chama recursivamente
 
 
-```
 
-### Analisando os Schedulers no OpenMP
+Teste o seu algorítimo pelo menos 3 vezes para **para N = 13** e responda:
 
-Cada scheduler do OpenMP se comporta de maneira diferente, e você deve observar o impacto de cada um:
-
-   **static**: As iterações são divididas igualmente entre as threads.
-   
-   **dynamic**: As threads pegam blocos de iterações conforme terminam o trabalho.
-   
-   **guided**: Distribui blocos maiores no início e menores no final, equilibrando a carga.
-   
-   **auto**: Deixa o compilador escolher a melhor estratégia.
-   
-   **runtime**: Usa a estratégia definida em tempo de execução.
+* A poda (Branch and Bound) sempre melhora o desempenho em relação à busca exaustiva? 
 
 
-## Atividade 03 - Paralelismo com OpenMP
+## Hill Climbing
 
-Código base para a atividade 03:
+Hill Climbing, ou Subida da Encosta, é um algoritmo de busca local utilizado para resolver problemas de otimização em que o espaço de soluções é muito grande. A ideia central é simples: a cada passo, tenta-se melhorar a solução explorando pequenas modificações. Sempre que uma solução vizinha apresenta custo menor, o algoritmo se move para ela. Esse processo continua até que nenhuma melhoria seja encontrada. Nesse ponto, o algoritmo para, assumindo que atingiu um ponto de máximo ou mínimo local.
 
-`paralelo.cpp`
+A principal vantagem dessa abordagem é que ela evita a explosão combinatória típica da busca exaustiva. Enquanto a busca completa avalia todas as possíveis combinações, que cresce exponencialmente com o número de entregas, Hill Climbing explora apenas uma pequena parte do espaço de busca, focando em melhorar progressivamente uma solução. Isso torna o método mais escalável para valores maiores de N, onde a busca exaustiva se torna inviável.
+
+
 ```cpp
-// Compile: g++ -FlagDeOtimização -fopenmp paralelo.cpp -o paralelo
-// Execute: ./paralelo [N]  (N padrão = 10'000'000)
-
 #include <iostream>
 #include <vector>
-#include <random>
-#include <algorithm> 
-#include <omp.h>
+#include <cmath>
+#include <limits>
+#include <cstdlib>
+#include <chrono>
 
-int main(int argc, char** argv) {
-    // ------------------------------
-    // Parâmetros e dados de entrada
-    // ------------------------------
-    const int N = (argc >= 2 ? std::stoi(argv[1]) : 10'000'000);
-    std::cout << "N = " << N << "\n";
+using namespace std;
 
-    // Vetor base (valores aleatórios em [0,1))
-    std::vector<float> a(N);
-    {
-        std::mt19937 rng(123);                // seed fixa só p/ reprodutibilidade
-        std::uniform_real_distribution<> U(0.0, 1.0);
-        for (int i = 0; i < N; ++i) a[i] = static_cast<float>(U(rng));
+const int CAPACIDADE_MOTO = 5;
+
+struct Ponto {
+    double x;
+    double y;
+};
+
+// Distância Euclidiana
+double distancia(const Ponto& a, const Ponto& b) {
+    double dx = a.x - b.x;
+    double dy = a.y - b.y;
+    return sqrt(dx * dx + dy * dy);
+}
+
+// Calcula custo total da rota
+double calcularCusto(const Ponto& motorista,
+                     const Ponto& coleta,
+                     const vector<Ponto>& entregas,
+                     const vector<int>& rota) {
+
+    double custo = 0.0;
+
+    custo += distancia(motorista, coleta);
+
+    int carga = CAPACIDADE_MOTO;
+    Ponto atual = coleta;
+
+    for (int i = 0; i < rota.size(); i++) {
+
+        if (carga == 0) {
+            custo += distancia(atual, coleta);
+            atual = coleta;
+            carga = CAPACIDADE_MOTO;
+        }
+
+        const Ponto& destino = entregas[rota[i]];
+        custo += distancia(atual, destino);
+        atual = destino;
+        carga--;
     }
 
-    // =========================================================
-    // TAREFA A: Transformação elemento-a-elemento (map)
-    // =========================================================
-    const float alpha = 2.0f, beta = 35.5f;
-    std::vector<float> c(N);
+    custo += distancia(atual, motorista);
 
-    double t0 = omp_get_wtime();
+    return custo;
+}
 
-    for (int i = 0; i < N; ++i) {
-        c[i] = alpha * a[i] + beta;
+// Hill Climbing
+vector<int> hillClimbing(const Ponto& motorista,
+                         const Ponto& coleta,
+                         const vector<Ponto>& entregas) {
+
+    int n = entregas.size();
+
+    // Solução inicial sequencial
+    vector<int> atual(n);
+    for (int i = 0; i < n; i++)
+        atual[i] = i;
+
+    double melhorCusto = calcularCusto(motorista, coleta, entregas, atual);
+
+    bool melhorou = true;
+
+    while (melhorou) {
+
+        melhorou = false;
+        vector<int> melhorVizinho = atual;
+
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = i + 1; j < n; j++) {
+
+                vector<int> vizinho = atual;
+                swap(vizinho[i], vizinho[j]);
+
+                double custoVizinho = calcularCusto(motorista, coleta, entregas, vizinho);
+
+                if (custoVizinho < melhorCusto) {
+                    melhorCusto = custoVizinho;
+                    melhorVizinho = vizinho;
+                    melhorou = true;
+                }
+            }
+        }
+
+        atual = melhorVizinho;
     }
 
-    double t1 = omp_get_wtime();
-    std::cout << "[A] tempo = " << (t1 - t0) << " s\n";
-    int idx = N/2; // pega o elemento do meio do vetor
-    std::cout << "[A] c[" << idx << "] = " << c[idx] << "\n";
+    return atual;
+}
 
-    // =========================================================
-    // TAREFA B: Soma (redução) da norma L2 parcial
-    // =========================================================
-    t0 = omp_get_wtime();
+int main(int argc, char* argv[]) {
 
-    double soma = 0.0;
-    for (int i = 0; i < N; ++i) {
-        soma += static_cast<double>(c[i]) * static_cast<double>(c[i]);
+    if (argc < 2) {
+        cout << "Uso: ./hill N\n";
+        return 1;
     }
 
-    t1 = omp_get_wtime();
-    std::cout << "[B] tempo = " << (t1 - t0) << " s | soma  = " << soma << "\n";
+    int n = atoi(argv[1]);
+
+    if (n <= 0 || n > 20) {
+        cout << "Escolha um numero entre 1 e 20.\n";
+        return 1;
+    }
+
+    Ponto motorista{0,0};
+    Ponto coleta{5,5};
+
+    vector<Ponto> todos = {
+        {10,10}, {20,10}, {30,10}, {40,10}, {50,10},
+        {10,20}, {20,20}, {30,20}, {40,20}, {50,20},
+        {10,30}, {20,30}, {30,30}, {40,30}, {50,30},
+        {10,40}, {20,40}, {30,40}, {40,40}, {50,40}
+    };
+
+    vector<Ponto> entregas(todos.begin(), todos.begin() + n);
+
+    auto inicio = chrono::high_resolution_clock::now();
+
+    vector<int> melhorRota = hillClimbing(motorista, coleta, entregas);
+
+    double melhorCusto = calcularCusto(motorista, coleta, entregas, melhorRota);
+
+    auto fim = chrono::high_resolution_clock::now();
+    chrono::duration<double> tempo = fim - inicio;
+
+    // Impressão da rota
+    cout << "\nRota encontrada:\n";
+    cout << "Motorista(0,0) -> Coleta(5,5) -> ";
+
+    int carga = CAPACIDADE_MOTO;
+
+    for (int i = 0; i < melhorRota.size(); i++) {
+
+        if (carga == 0) {
+            cout << "Coleta(5,5) -> ";
+            carga = CAPACIDADE_MOTO;
+        }
+
+        int idx = melhorRota[i];
+        cout << "P" << idx
+             << "(" << entregas[idx].x
+             << "," << entregas[idx].y << ") -> ";
+
+        carga--;
+    }
+
+    cout << "Motorista(0,0)\n";
+
+    cout << "\nCusto total: " << melhorCusto << endl;
+    cout << "Tempo de execucao: "
+         << tempo.count()
+         << " segundos\n";
+
     return 0;
 }
 
 ```
-Para Compilar:
 
-```bash
-g++ -FlagDeOtimização -fopenmp paralelo.cpp -o paralelo
-```
-
-Para Executar:
-```bash
-#!/bin/bash
-#SBATCH --job-name=paralelo_todo      # Nome do job
-#SBATCH --output=paralelo.txt         # nome do arquivo de saida
-#SBATCH --ntasks=1                    # Sempre 1 processo (o programa roda só uma vez)
-#SBATCH --cpus-per-task=4             # Esse processo tem 4 CPUs disponíveis para usar
-#SBATCH --mem=2G                      # Memória solicitada
-#SBATCH --time=00:05:00               # Tempo solicitado (hh:mm:ss)
-#SBATCH --partition=normal            # fila
-
-# ------------------------------
-# Configurações OpenMP
-# ------------------------------
-export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK}   # OpenMP abre 4 threads e distribui o trabalho entre elas
-export OMP_PLACES=cores                         # Fixa threads em cores
-export OMP_PROC_BIND=close                      # Coloca threads próximas (melhor cache)
-
-# Troque aqui o Schedule do seu teste
-export OMP_SCHEDULE=static
-
-echo "==== Configuração de Execução ===="
-echo "Job ID          : $SLURM_JOB_ID"
-echo "CPUs-per-task   : $SLURM_CPUS_PER_TASK"
-echo "Memória total   : $SLURM_MEM_PER_NODE MB"
-echo "OMP_NUM_THREADS : $OMP_NUM_THREADS"
-echo "OMP_SCHEDULE    : $OMP_SCHEDULE"
-echo "=================================="
-
-# ------------------------------
-# Executa o programa
-# ------------------------------
-# paralelo (4 threads, por ex.)
-export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK}   # OpenMP abre 4 threads e distribui o trabalho entre elas
-./paralelo 
-
-```
+## Aleatoriedade
+Se utilizarmos aleatoriedade para escolher as rotas iniciais antes de aplicar a heurística poderiamos encontrar as soluções melhores mais rapidamente?
 
 
-### Objetivo
+Quando usamos Hill Climbing “puro”, ele é determinístico: dada a mesma solução inicial e a mesma regra de vizinhança, ele sempre percorre o mesmo caminho e para no mesmo ponto. Isso é polêmico, o algorítimo pode sempre cair nos mesmos minimos locais
 
-Paralelizar laços com OpenMP, comparar o efeito de `schedule` no desempenho.
+A aleatoriedade entra justamente para quebrar esse comportamento rígido.
 
-### Tarefa A - Map: transformação elemento-a-elemento
-
-**Solicitações de Implementação**
-
-1. Paralelize o código correspondente a Tarefa A.
-2. Registre **tempo** e **valor da conta** em 3 execuções para cada `OMP_SCHEDULE = static`, `dynamic`, `guided`.
-3. O que está sendo paralelizado nesse for? O que está sendo distribuido entre as threads?
-
----
-
-### Tarefa B - Redução ingênua: soma de quadrados
-
-**Solicitações de Implementação**
-
-1. Paralelize o código correspondente a Tarefa B.
-2. Registre **tempo** e **valor da soma** em 3 execuções para cada `OMP_SCHEDULE = static`, `dynamic`, `guided`.
-3. Compare com a execução **sequencial** (threads=1).
-4. O que está sendo paralelizado nesse for? O que está sendo distribuido entre as threads?
-
----
-
-### Coleta de Resultados (mínimo)
-
-* **Tabela tempos (Parte 1)**: `scheduler`, `execução`, `tempo (s)`.
-* **Tabela tempos (Parte 2)**: `schedule`, `threads`, `média (s)`, `desvio`.
-* **Tabela soma (Parte 3)**: `schedule`, `tempo (s)`, `soma obtida`.
-
-### Parâmetros de Execução
-
-* Varie `OMP_NUM_THREADS` em {1, 2, 4, 8} (quando solicitado).
-* Mantenha os **mesmos N** (tamanho do problema) em todas as comparações do mesmo grupo.
+Em vez de sempre começar da mesma solução ou explorar vizinhos em uma ordem fixa, colocamos elementos aleatórios para diversificar a exploração do espaço de busca. Isso ajuda o algoritmo a escapar de mínimos locais, explorar regiões diferentes do espaço e, estatisticamente, encontrar soluções melhores.
 
 
-**Perguntas de Análise**
+A aleatoriedade pode ajudar nesses pontos:
 
-* Houve **speedup** com mais threads? Até onde?
-* `static` vs `dynamic` vs `guided`: quem foi melhor? Alguma diferença relevante?
-* Alguma mudança no resultado das contas? 
+Primeiro, na solução inicial. Em vez de começar sempre com a ordem 0,1,2,...,N-1, você pode gerar uma permutação aleatória. Isso faz com que cada execução comece em um ponto diferente. Esse é o conceito de Multi-Start: executar Hill Climbing várias vezes com soluções iniciais diferentes e guardar a melhor solução encontrada.
 
-**Faça um relatório com as suas análises e entregue até as 23h59 de 28/08 pelo [GitHub Classroom](https://classroom.github.com/a/kMFUt-E8)** 
+Segundo, na escolha da vizinhança. Em vez de testar todos os vizinhos possíveis e escolher o melhor, você pode sortear dois índices aleatórios e testar apenas essa troca. Se melhorar, aceita. Caso contrário, tenta outra. Isso reduz o custo por iteração e torna a trajetória imprevisível.
+
+## Desafio!!!
+
+**1 — Tornar a solução inicial aleatória**
+Em vez de preencher o vetor sequencialmente, pense em como embaralhar esse vetor usando uma função de randomização pronta do C++.
+
+
+**2 — Alterar a geração de vizinhos**
+Em vez de dois loops aninhados testando todas as trocas possíveis (i,j), tente:
+
+    sortear dois índices distintos
+
+    trocar temporariamente
+
+    calcular o custo
+
+    decidir se aceita
+
+Pergunta importante: como evitar recalcular o custo completo da rota a cada pequena troca? Existe alguma forma incremental?
+
+**4 — Implementar múltiplos recomeços**
+Crie um laço externo que execute Hill Climbing várias vezes.
+A cada execução:
+    
+    gere uma solução inicial aleatória
+    
+    execute o Hill Climbing
+    
+    compare com a melhor solução global
+
+Pergunta: como você deve armazenar a melhor solução global sem fazer cópias desnecessárias a cada iteração?
+
+**5 — Definir critério de parada**
+Cuidado para não ficar preso eternamente nos loops, um critério de parada é fundamental. Qual critério faz mais sentido neste contexto?
+
+A ideia central é que aleatoriedade não é “bagunça”. Ela é um mecanismo controlado para aumentar diversidade na exploração do espaço de soluções. Em problemas combinatórios grandes, isso quase sempre melhora a qualidade média das soluções encontradas, mesmo que não garanta a ótima global.
+
+
+
+
+## Para analizar as implementações:
+
+Faça os testes para **N = 10, 11, 12 e 13**
+
+1- Comparando Busca Exaustiva, Branch and Bound e Hill Climbing, qual apresentou melhor escalabilidade conforme N aumentou? 
+
+
+2 - O Hill Climbing encontrou a mesma solução que a busca exaustiva? Se não, o que explica essa diferença?
+
+
+3 - O uso de solução inicial aleatória e/ou Multi-Start melhorou a qualidade média das soluções? Houve aumento significativo no tempo total? Analise o custo-benefício.
+
+
+4 Se você tivesse que resolver o problema para N = 100, qual abordagem escolheria e por quê? Considere tempo, qualidade da solução e escalabilidade.
+
+
+
+[Submeta a sua entrega pelo Classroom diponível neste link até 06/03 ás 14h00](https://classroom.github.com/a/XI5jzrP-)
+
+A entrega deve conter o seu algorítmo e as suas análises (pode deixar as análises no README.md) 
+
+
+
 
