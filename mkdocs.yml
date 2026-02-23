@@ -60,6 +60,7 @@ nav:
         - "Aula 03" : teoria/aula03/index.md
         - "Aula 04" : teoria/aula04/index.md
         - "Útil" : teoria/comandos.md
+        - "Permissões" : teoria/permissoes.md
  #       - "Heurísticas" : teoria/heuristicas.md
  #       - "OpenMP" : teoria/openmp.md
  #       - "MPI" : teoria/MPI.md
