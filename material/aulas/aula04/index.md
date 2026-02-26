@@ -239,7 +239,7 @@ Execute o seu algorítimo otimizado **N = 13 no Cluster Franky** e responda:
 4 - Compare o código base fornecido com a versão otimizada desenvolvida por você. **Execute ambos para N = 9, 10, 11 e 12** e gere um gráfico comparativo. 
 
 
-[Submeta a sua entrega pelo Classroom diponível neste link até 27/03 ás 14h00](https://classroom.github.com/a/lBx_S1nd)
+[Submeta a sua entrega pelo Classroom diponível neste link até 27/02 ás 14h00](https://classroom.github.com/a/lBx_S1nd)
 
 A entrega deve conter o seu algorítmo e as suas análises (pode deixar as análises no README.md) 
 
