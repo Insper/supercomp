@@ -11,6 +11,10 @@
         <link rel="canonical" href="https://insper.github.io/supercomp/aulas/aula05/">
       
       
+        <link rel="prev" href="../aula04/">
+      
+      
+        <link rel="next" href="../../teoria/slides/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -18,7 +22,7 @@
     
     
       
-        <title>Index - SuperComputação - 2026/1</title>
+        <title>Aula 05 - Heurísticas e Aleatoriedade - SuperComputação - 2026/1</title>
       
     
     
@@ -114,7 +118,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Index
+              Aula 05 - Heurísticas e Aleatoriedade
             
           </span>
         </div>
@@ -227,10 +231,12 @@
         
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
+      <li class="md-tabs__item md-tabs__item--active">
         <a href="../aula01/" class="md-tabs__link">
           
   
@@ -351,23 +357,28 @@
       
   
   
+    
   
   
+  
     
     
     
-      
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
             
   
   <span class="md-ellipsis">
@@ -379,7 +390,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             Aulas
@@ -469,6 +480,161 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Aula 05 - Heurísticas e Aleatoriedade
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Aula 05 - Heurísticas e Aleatoriedade
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#busca-exaustiva" class="md-nav__link">
+    <span class="md-ellipsis">
+      Busca Exaustiva
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aplicando-a-poda-branch-and-bound" class="md-nav__link">
+    <span class="md-ellipsis">
+      Aplicando a poda (Branch and Bound)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#desafio" class="md-nav__link">
+    <span class="md-ellipsis">
+      Desafio!
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Desafio!">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-passar-custo-parcial-na-recursao" class="md-nav__link">
+    <span class="md-ellipsis">
+      1) Passar custo parcial na recursão
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-fazer-o-teste-de-poda-antes-da-chamada-recursiva" class="md-nav__link">
+    <span class="md-ellipsis">
+      2) Fazer o teste de poda antes da chamada recursiva
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-estrutura-da-nova-recursao" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Estrutura da nova recursão
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hill-climbing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hill Climbing
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aleatoriedade" class="md-nav__link">
+    <span class="md-ellipsis">
+      Aleatoriedade
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#desafio_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Desafio!!!
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#para-analizar-as-implementacoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Para analizar as implementações:
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -820,7 +986,7 @@
   
 
 
-  <h1>Index</h1>
+  <h1>Aula 05 - Heurísticas e Aleatoriedade</h1>
 
 <h2 id="busca-exaustiva">Busca Exaustiva<a class="headerlink" href="#busca-exaustiva" title="Permanent link">&para;</a></h2>
 <p>Na aula passada você deveria ter sumido com os erros do código fornecido, e a ideia era que chegasse em algo parecido com isso:</p>
@@ -854,8 +1020,6 @@
 
 <span class="cm">/*</span>
 <span class="cm">Função que calcula a distância euclidiana entre dois pontos.</span>
-<span class="cm">Fórmula:</span>
-<span class="cm">    d = √[(x1 - x2)^2 + (y1 - y2)^2]</span>
 <span class="cm">*/</span>
 <span class="kt">double</span><span class="w"> </span><span class="nf">distancia</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Ponto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Ponto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">dx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
@@ -866,7 +1030,6 @@
 <span class="cm">/*</span>
 <span class="cm">Função que calcula o custo total de uma rota completa.</span>
 
-<span class="cm">Regras:</span>
 <span class="cm">- O motorista sai de casa.</span>
 <span class="cm">- Vai até o ponto de coleta.</span>
 <span class="cm">- Realiza as entregas na ordem definida em &quot;rota&quot;.</span>
@@ -886,7 +1049,7 @@
 <span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">cargaAtual</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CAPACIDADE_MOTO</span><span class="p">;</span><span class="w">   </span><span class="c1">// Quantos itens ainda cabem na moto</span>
 <span class="w">    </span><span class="n">Ponto</span><span class="w"> </span><span class="n">posicaoAtual</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">coleta</span><span class="p">;</span><span class="w">        </span><span class="c1">// Começa na coleta</span>
 
-<span class="w">    </span><span class="c1">// 2) Percorre todas as entregas na ordem da permutação</span>
+<span class="w">    </span><span class="c1">// 2) Percorre todas as entregas na ordem do vetor</span>
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">rota</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">        </span><span class="c1">// Se a carga acabou, volta para coleta para reabastecer</span>
@@ -909,10 +1072,9 @@
 <span class="p">}</span>
 
 <span class="cm">/*</span>
-<span class="cm">Função recursiva que gera TODAS as permutações possíveis</span>
+<span class="cm">Função recursiva que gera TODAS as possibilidades possíveis</span>
 <span class="cm">(busca exaustiva).</span>
 
-<span class="cm">Parâmetros:</span>
 <span class="cm">- rota: vetor que representa a ordem atual das entregas</span>
 <span class="cm">- inicio: posição atual da recursão</span>
 <span class="cm">- melhorCusto: melhor custo encontrado até agora</span>
@@ -927,7 +1089,7 @@
 <span class="w">            </span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">melhorRota</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="c1">// Caso base:</span>
-<span class="w">    </span><span class="c1">// Se &quot;inicio&quot; chegou ao final, significa que temos uma permutação completa</span>
+<span class="w">    </span><span class="c1">// Se &quot;inicio&quot; chegou ao final, significa que temos o vetor preenchido com os pontos</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">inicio</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">rota</span><span class="p">.</span><span class="n">size</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">        </span><span class="c1">// Calcula o custo da rota completa</span>
@@ -1002,16 +1164,17 @@
 <span class="w">        </span><span class="p">{</span><span class="mi">10</span><span class="p">,</span><span class="mi">40</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="mi">20</span><span class="p">,</span><span class="mi">40</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="mi">30</span><span class="p">,</span><span class="mi">40</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="mi">40</span><span class="p">,</span><span class="mi">40</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="mi">50</span><span class="p">,</span><span class="mi">40</span><span class="p">}</span>
 <span class="w">    </span><span class="p">};</span>
 
-<span class="w">    </span><span class="c1">// Seleciona apenas os primeiros n pontos</span>
+<span class="w">    </span><span class="c1">// Seleciona apenas os pontos até o N escolhido</span>
 <span class="w">    </span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ponto</span><span class="o">&gt;</span><span class="w"> </span><span class="n">entregas</span><span class="p">(</span><span class="n">todos</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">todos</span><span class="p">.</span><span class="n">begin</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">n</span><span class="p">);</span>
 
-<span class="w">    </span><span class="c1">// Vetor que representa a ordem atual das entregas</span>
+<span class="w">    </span><span class="c1">// Vetor da rota das entregas</span>
 <span class="w">    </span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">rota</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
 
-<span class="w">    </span><span class="c1">// Vetor que guardará a melhor rota encontrada</span>
+<span class="w">    </span><span class="c1">// Vetor da melhor rota </span>
 <span class="w">    </span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">melhorRota</span><span class="p">;</span>
 
-<span class="w">    </span><span class="c1">// Inicializa rota com [0,1,2,3,...,n-1]</span>
+
+<span class="w">    </span><span class="c1">// Inicializa o índice dos pontos na ordem [1,2,3 .. N]</span>
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
 <span class="w">        </span><span class="n">rota</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
 
@@ -1317,9 +1480,9 @@ Cuidado para não ficar preso eternamente nos loops, um critério de parada é f
 <p>A ideia central é que aleatoriedade não é “bagunça”. Ela é um mecanismo controlado para aumentar diversidade na exploração do espaço de soluções. Em problemas combinatórios grandes, isso quase sempre melhora a qualidade média das soluções encontradas, mesmo que não garanta a ótima global.</p>
 <h2 id="para-analizar-as-implementacoes">Para analizar as implementações:<a class="headerlink" href="#para-analizar-as-implementacoes" title="Permanent link">&para;</a></h2>
 <p>Faça os testes para <strong>N = 10, 11, 12 e 13</strong></p>
-<p>1- Comparando Busca Exaustiva, Branch and Bound e Hill Climbing, qual apresentou melhor escalabilidade conforme N aumentou? </p>
-<p>2 - O Hill Climbing encontrou a mesma solução que a busca exaustiva? Se não, o que explica essa diferença?</p>
-<p>3 - O uso de solução inicial aleatória e/ou Multi-Start melhorou a qualidade média das soluções? Houve aumento significativo no tempo total? Analise o custo-benefício.</p>
+<p>1- Comparando Busca Exaustiva otimizada, Branch and Bound, Hill Climbing puro e O Hill Climbing aleatório, qual apresentou melhor escalabilidade conforme N aumentou? </p>
+<p>2 - O Hill Climbing puro encontrou a mesma solução que a busca exaustiva? O que será que aconteceu?</p>
+<p>3 - Usando O Hill Climbing aleatório, melhorou a qualidade média das soluções? Houve aumento significativo no tempo total? Analise o custo-benefício.</p>
 <p>4 Se você tivesse que resolver o problema para N = 100, qual abordagem escolheria e por quê? Considere tempo, qualidade da solução e escalabilidade.</p>
 <p><a href="https://classroom.github.com/a/XI5jzrP-">Submeta a sua entrega pelo Classroom diponível neste link até 06/03 ás 14h00</a></p>
 <p>A entrega deve conter o seu algorítmo e as suas análises (pode deixar as análises no README.md) </p>
