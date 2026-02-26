@@ -32,8 +32,6 @@ Na aula passada você deveria ter sumido com os erros do código fornecido, e a 
 
     /*
     Função que calcula a distância euclidiana entre dois pontos.
-    Fórmula:
-        d = √[(x1 - x2)^2 + (y1 - y2)^2]
     */
     double distancia(const Ponto& a, const Ponto& b) {
         double dx = a.x - b.x;
@@ -44,7 +42,6 @@ Na aula passada você deveria ter sumido com os erros do código fornecido, e a 
     /*
     Função que calcula o custo total de uma rota completa.
 
-    Regras:
     - O motorista sai de casa.
     - Vai até o ponto de coleta.
     - Realiza as entregas na ordem definida em "rota".
@@ -64,7 +61,7 @@ Na aula passada você deveria ter sumido com os erros do código fornecido, e a 
         int cargaAtual = CAPACIDADE_MOTO;   // Quantos itens ainda cabem na moto
         Ponto posicaoAtual = coleta;        // Começa na coleta
 
-        // 2) Percorre todas as entregas na ordem da permutação
+        // 2) Percorre todas as entregas na ordem do vetor
         for (size_t i = 0; i < rota.size(); i++) {
 
             // Se a carga acabou, volta para coleta para reabastecer
@@ -87,10 +84,9 @@ Na aula passada você deveria ter sumido com os erros do código fornecido, e a 
     }
 
     /*
-    Função recursiva que gera TODAS as permutações possíveis
+    Função recursiva que gera TODAS as possibilidades possíveis
     (busca exaustiva).
 
-    Parâmetros:
     - rota: vetor que representa a ordem atual das entregas
     - inicio: posição atual da recursão
     - melhorCusto: melhor custo encontrado até agora
@@ -105,7 +101,7 @@ Na aula passada você deveria ter sumido com os erros do código fornecido, e a 
                 vector<int>& melhorRota) {
 
         // Caso base:
-        // Se "inicio" chegou ao final, significa que temos uma permutação completa
+        // Se "inicio" chegou ao final, significa que temos o vetor preenchido com os pontos
         if (inicio == rota.size()) {
 
             // Calcula o custo da rota completa
@@ -180,16 +176,17 @@ Na aula passada você deveria ter sumido com os erros do código fornecido, e a 
             {10,40}, {20,40}, {30,40}, {40,40}, {50,40}
         };
 
-        // Seleciona apenas os primeiros n pontos
+        // Seleciona apenas os pontos até o N escolhido
         vector<Ponto> entregas(todos.begin(), todos.begin() + n);
 
-        // Vetor que representa a ordem atual das entregas
+        // Vetor da rota das entregas
         vector<int> rota(n);
 
-        // Vetor que guardará a melhor rota encontrada
+        // Vetor da melhor rota 
         vector<int> melhorRota;
 
-        // Inicializa rota com [0,1,2,3,...,n-1]
+        
+        // Inicializa o índice dos pontos na ordem [1,2,3 .. N]
         for (int i = 0; i < n; i++)
             rota[i] = i;
 
@@ -537,18 +534,17 @@ A ideia central é que aleatoriedade não é “bagunça”. Ela é um mecanismo
 
 
 
-
 ## Para analizar as implementações:
 
 Faça os testes para **N = 10, 11, 12 e 13**
 
-1- Comparando Busca Exaustiva, Branch and Bound e Hill Climbing, qual apresentou melhor escalabilidade conforme N aumentou? 
+1- Comparando Busca Exaustiva otimizada, Branch and Bound, Hill Climbing puro e O Hill Climbing aleatório, qual apresentou melhor escalabilidade conforme N aumentou? 
 
 
-2 - O Hill Climbing encontrou a mesma solução que a busca exaustiva? Se não, o que explica essa diferença?
+2 - O Hill Climbing puro encontrou a mesma solução que a busca exaustiva? O que será que aconteceu?
 
 
-3 - O uso de solução inicial aleatória e/ou Multi-Start melhorou a qualidade média das soluções? Houve aumento significativo no tempo total? Analise o custo-benefício.
+3 - Usando O Hill Climbing aleatório, melhorou a qualidade média das soluções? Houve aumento significativo no tempo total? Analise o custo-benefício.
 
 
 4 Se você tivesse que resolver o problema para N = 100, qual abordagem escolheria e por quê? Considere tempo, qualidade da solução e escalabilidade.

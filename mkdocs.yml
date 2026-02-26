@@ -36,7 +36,7 @@ nav:
         - "Aula 02 - Cluster Franky": aulas/aula02/index.md
         - "Aula 03 - STD, Vector e Tiling": aulas/aula03/index.md
         - "Aula 04 - Algoritmo Busca exaustiva": aulas/aula04/index.md
-#        - "Aula 05 - Heurísticas e Aleatoriedade": aulas/aula05/index.md
+        - "Aula 05 - Heurísticas e Aleatoriedade": aulas/aula05/index.md
 #        - "Aula 06 - Efeitos colaterais do paralelismo": aulas/aula06/index.md
 #        - "Aula 07 - Programação Distribuída": aulas/aula07/index.md
 #        - "Aula 08 - Programação Paralela e Distribuída": aulas/aula08/index.md
