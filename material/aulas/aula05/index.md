@@ -313,6 +313,132 @@ A principal vantagem dessa abordagem é que ela evita a explosão combinatória 
 
 
 ```cpp
+// Hill Climbing
+vector<int> hillClimbing(const Ponto& motorista,
+                         const Ponto& coleta,
+                         const vector<Ponto>& entregas) {
+
+    int n = entregas.size();
+
+    // Solução inicial sequencial
+    vector<int> atual(n);
+    for (int i = 0; i < n; i++)
+        atual[i] = i;
+
+    double melhorCusto = calcularCusto(motorista, coleta, entregas, atual);
+
+    bool melhorou = true;
+
+    while (melhorou) {
+
+        melhorou = false;
+        vector<int> melhorVizinho = atual;
+
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = i + 1; j < n; j++) {
+
+                vector<int> vizinho = atual;
+                swap(vizinho[i], vizinho[j]);
+
+                double custoVizinho = calcularCusto(motorista, coleta, entregas, vizinho);
+
+                if (custoVizinho < melhorCusto) {
+                    melhorCusto = custoVizinho;
+                    melhorVizinho = vizinho;
+                    melhorou = true;
+                }
+            }
+        }
+
+        atual = melhorVizinho;
+    }
+
+    return atual;
+}
+```
+
+## Aleatoriedade
+Se utilizarmos aleatoriedade para escolher as rotas iniciais antes de aplicar a heurística poderiamos encontrar as soluções melhores mais rapidamente?
+
+
+Quando usamos Hill Climbing “puro”, ele é determinístico: dada a mesma solução inicial e a mesma regra de vizinhança, ele sempre percorre o mesmo caminho e para no mesmo ponto. Isso é polêmico, o algorítimo pode sempre cair nos mesmos minimos locais
+
+A aleatoriedade entra justamente para quebrar esse comportamento rígido.
+
+Em vez de sempre começar da mesma solução ou explorar vizinhos em uma ordem fixa, colocamos elementos aleatórios para diversificar a exploração do espaço de busca. Isso ajuda o algoritmo a escapar de mínimos locais, explorar regiões diferentes do espaço e, estatisticamente, encontrar soluções melhores.
+
+
+A aleatoriedade pode ajudar nesses pontos:
+
+Primeiro, na solução inicial. Em vez de começar sempre com a ordem 0,1,2,...,N-1, você pode gerar uma permutação aleatória. Isso faz com que cada execução comece em um ponto diferente. Esse é o conceito de Multi-Start: executar Hill Climbing várias vezes com soluções iniciais diferentes e guardar a melhor solução encontrada.
+
+Segundo, na escolha da vizinhança. Em vez de testar todos os vizinhos possíveis e escolher o melhor, você pode sortear dois índices aleatórios e testar apenas essa troca. Se melhorar, aceita. Caso contrário, tenta outra. Isso reduz o custo por iteração e torna a trajetória imprevisível.
+
+## Desafio!!!
+
+**1 — Tornar a solução inicial aleatória**
+Em vez de preencher o vetor sequencialmente, pense em como embaralhar esse vetor usando uma função de randomização pronta do C++.
+
+
+**2 — Alterar a geração de vizinhos**
+Em vez de dois loops aninhados testando todas as trocas possíveis (i,j), tente:
+
+    sortear dois índices distintos
+
+    trocar temporariamente
+
+    calcular o custo
+
+    decidir se aceita
+
+Pergunta importante: como evitar recalcular o custo completo da rota a cada pequena troca? Existe alguma forma incremental?
+
+**4 — Implementar múltiplos recomeços**
+Crie um laço externo que execute Hill Climbing várias vezes.
+A cada execução:
+    
+    gere uma solução inicial aleatória
+    
+    execute o Hill Climbing
+    
+    compare com a melhor solução global
+
+Pergunta: como você deve armazenar a melhor solução global sem fazer cópias desnecessárias a cada iteração?
+
+**5 — Definir critério de parada**
+Cuidado para não ficar preso eternamente nos loops, um critério de parada é fundamental. Qual critério faz mais sentido neste contexto?
+
+A ideia central é que aleatoriedade não é “bagunça”. Ela é um mecanismo controlado para aumentar diversidade na exploração do espaço de soluções. Em problemas combinatórios grandes, isso quase sempre melhora a qualidade média das soluções encontradas, mesmo que não garanta a ótima global.
+
+
+
+## Para analizar as implementações:
+
+Faça os testes para **N = 10, 11, 12 e 13**
+
+1- Comparando Busca Exaustiva otimizada, Branch and Bound, Hill Climbing puro e O Hill Climbing aleatório, qual apresentou melhor escalabilidade conforme N aumentou? 
+
+
+2 - O Hill Climbing puro encontrou a mesma solução que a busca exaustiva? O que será que aconteceu?
+
+
+3 - Usando O Hill Climbing aleatório, melhorou a qualidade média das soluções? Houve aumento significativo no tempo total? Analise o custo-benefício.
+
+
+4 Se você tivesse que resolver o problema para N = 100, qual abordagem escolheria e por quê? Considere tempo, qualidade da solução e escalabilidade.
+
+
+
+[Submeta a sua entrega pelo Classroom diponível neste link até 06/03 ás 14h00](https://classroom.github.com/a/XI5jzrP-)
+
+A entrega deve conter o seu algorítmo e as suas análises (pode deixar as análises no README.md) 
+
+
+
+# Código completo com o Hill Climbing
+
+
+```cpp
 #include <iostream>
 #include <vector>
 #include <cmath>
@@ -478,83 +604,3 @@ int main(int argc, char* argv[]) {
 }
 
 ```
-
-## Aleatoriedade
-Se utilizarmos aleatoriedade para escolher as rotas iniciais antes de aplicar a heurística poderiamos encontrar as soluções melhores mais rapidamente?
-
-
-Quando usamos Hill Climbing “puro”, ele é determinístico: dada a mesma solução inicial e a mesma regra de vizinhança, ele sempre percorre o mesmo caminho e para no mesmo ponto. Isso é polêmico, o algorítimo pode sempre cair nos mesmos minimos locais
-
-A aleatoriedade entra justamente para quebrar esse comportamento rígido.
-
-Em vez de sempre começar da mesma solução ou explorar vizinhos em uma ordem fixa, colocamos elementos aleatórios para diversificar a exploração do espaço de busca. Isso ajuda o algoritmo a escapar de mínimos locais, explorar regiões diferentes do espaço e, estatisticamente, encontrar soluções melhores.
-
-
-A aleatoriedade pode ajudar nesses pontos:
-
-Primeiro, na solução inicial. Em vez de começar sempre com a ordem 0,1,2,...,N-1, você pode gerar uma permutação aleatória. Isso faz com que cada execução comece em um ponto diferente. Esse é o conceito de Multi-Start: executar Hill Climbing várias vezes com soluções iniciais diferentes e guardar a melhor solução encontrada.
-
-Segundo, na escolha da vizinhança. Em vez de testar todos os vizinhos possíveis e escolher o melhor, você pode sortear dois índices aleatórios e testar apenas essa troca. Se melhorar, aceita. Caso contrário, tenta outra. Isso reduz o custo por iteração e torna a trajetória imprevisível.
-
-## Desafio!!!
-
-**1 — Tornar a solução inicial aleatória**
-Em vez de preencher o vetor sequencialmente, pense em como embaralhar esse vetor usando uma função de randomização pronta do C++.
-
-
-**2 — Alterar a geração de vizinhos**
-Em vez de dois loops aninhados testando todas as trocas possíveis (i,j), tente:
-
-    sortear dois índices distintos
-
-    trocar temporariamente
-
-    calcular o custo
-
-    decidir se aceita
-
-Pergunta importante: como evitar recalcular o custo completo da rota a cada pequena troca? Existe alguma forma incremental?
-
-**4 — Implementar múltiplos recomeços**
-Crie um laço externo que execute Hill Climbing várias vezes.
-A cada execução:
-    
-    gere uma solução inicial aleatória
-    
-    execute o Hill Climbing
-    
-    compare com a melhor solução global
-
-Pergunta: como você deve armazenar a melhor solução global sem fazer cópias desnecessárias a cada iteração?
-
-**5 — Definir critério de parada**
-Cuidado para não ficar preso eternamente nos loops, um critério de parada é fundamental. Qual critério faz mais sentido neste contexto?
-
-A ideia central é que aleatoriedade não é “bagunça”. Ela é um mecanismo controlado para aumentar diversidade na exploração do espaço de soluções. Em problemas combinatórios grandes, isso quase sempre melhora a qualidade média das soluções encontradas, mesmo que não garanta a ótima global.
-
-
-
-## Para analizar as implementações:
-
-Faça os testes para **N = 10, 11, 12 e 13**
-
-1- Comparando Busca Exaustiva otimizada, Branch and Bound, Hill Climbing puro e O Hill Climbing aleatório, qual apresentou melhor escalabilidade conforme N aumentou? 
-
-
-2 - O Hill Climbing puro encontrou a mesma solução que a busca exaustiva? O que será que aconteceu?
-
-
-3 - Usando O Hill Climbing aleatório, melhorou a qualidade média das soluções? Houve aumento significativo no tempo total? Analise o custo-benefício.
-
-
-4 Se você tivesse que resolver o problema para N = 100, qual abordagem escolheria e por quê? Considere tempo, qualidade da solução e escalabilidade.
-
-
-
-[Submeta a sua entrega pelo Classroom diponível neste link até 06/03 ás 14h00](https://classroom.github.com/a/XI5jzrP-)
-
-A entrega deve conter o seu algorítmo e as suas análises (pode deixar as análises no README.md) 
-
-
-
-
