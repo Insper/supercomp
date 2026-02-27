@@ -1,6 +1,6 @@
 ## Busca Exaustiva
 Na aula passada você deveria ter sumido com os erros do código fornecido, e a ideia era que chegasse em algo parecido com isso:
-??? note "Gabarito - Busca Exaustiva"
+??? note "Busca Exaustiva - Nivel tranquilo"
 
     O código  `exausto.cpp` implementa a busca exaustiva bonitinho:
 
@@ -244,6 +244,192 @@ Na aula passada você deveria ter sumido com os erros do código fornecido, e a 
         return 0;
     }
     ```
+??? note "Busca Exaustiva - Nivel além do horizonte"
+    ```cpp
+    // Foi o Emil
+    #include <algorithm>
+    #include <chrono>
+    #include <cmath>
+    #include <cstdlib>
+    #include <iostream>
+    #include <limits>
+    #include <vector>
+
+    // 1. calcula custo Branchless
+    // 2. precalculated matrix
+
+    using namespace std;
+
+    const int CAPACIDADE_MOTO = 5;
+
+    struct Ponto {
+    double x;
+    double y;
+    };
+
+    inline double distancia_pre(int a, int b){
+
+        alignas(64) static const double DISTS[484] = {
+        0.0000, 7.0711, 14.1421, 22.3607, 31.6228, 41.2311, 50.9902, 22.3607, 28.2843, 36.0555, 44.7214, 53.8516, 31.6228, 36.0555, 42.4264, 50.0000, 58.3095, 41.2311, 44.7214, 50.0000, 56.5685, 64.0312, // Row 0
+        7.0711, 0.0000, 7.0711, 15.8114, 25.4951, 35.3553, 45.2769, 15.8114, 21.2132, 29.1548, 38.0789, 47.4342, 25.4951, 29.1548, 35.3553, 43.0116, 51.4782, 35.3553, 38.0789, 43.0116, 49.4975, 57.0088, // Row 1
+        14.1421, 7.0711, 0.0000, 10.0000, 20.0000, 30.0000, 40.0000, 10.0000, 14.1421, 22.3607, 31.6228, 41.2311, 20.0000, 22.3607, 28.2843, 36.0555, 44.7214, 30.0000, 31.6228, 36.0555, 42.4264, 50.0000, // Row 2
+        22.3607, 15.8114, 10.0000, 0.0000, 10.0000, 20.0000, 30.0000, 14.1421, 10.0000, 14.1421, 22.3607, 31.6228, 22.3607, 20.0000, 22.3607, 28.2843, 36.0555, 31.6228, 30.0000, 31.6228, 36.0555, 42.4264, // Row 3
+        31.6228, 25.4951, 20.0000, 10.0000, 0.0000, 10.0000, 20.0000, 22.3607, 14.1421, 10.0000, 14.1421, 22.3607, 28.2843, 22.3607, 20.0000, 22.3607, 28.2843, 36.0555, 31.6228, 30.0000, 31.6228, 36.0555, // Row 4
+        41.2311, 35.3553, 30.0000, 20.0000, 10.0000, 0.0000, 10.0000, 31.6228, 22.3607, 14.1421, 10.0000, 14.1421, 36.0555, 28.2843, 22.3607, 20.0000, 22.3607, 42.4264, 36.0555, 31.6228, 30.0000, 31.6228, // Row 5
+        50.9902, 45.2769, 40.0000, 30.0000, 20.0000, 10.0000, 0.0000, 41.2311, 31.6228, 22.3607, 14.1421, 10.0000, 44.7214, 36.0555, 28.2843, 22.3607, 20.0000, 50.0000, 42.4264, 36.0555, 31.6228, 30.0000, // Row 6
+        22.3607, 15.8114, 10.0000, 14.1421, 22.3607, 31.6228, 41.2311, 0.0000, 10.0000, 20.0000, 30.0000, 40.0000, 10.0000, 14.1421, 22.3607, 31.6228, 41.2311, 20.0000, 22.3607, 28.2843, 36.0555, 44.7214, // Row 7
+        28.2843, 21.2132, 14.1421, 10.0000, 14.1421, 22.3607, 31.6228, 10.0000, 0.0000, 10.0000, 20.0000, 30.0000, 14.1421, 10.0000, 14.1421, 22.3607, 31.6228, 22.3607, 20.0000, 22.3607, 28.2843, 36.0555, // Row 8
+        36.0555, 29.1548, 22.3607, 14.1421, 10.0000, 14.1421, 22.3607, 20.0000, 10.0000, 0.0000, 10.0000, 20.0000, 22.3607, 14.1421, 10.0000, 14.1421, 22.3607, 28.2843, 22.3607, 20.0000, 22.3607, 28.2843, // Row 9
+        44.7214, 38.0789, 31.6228, 22.3607, 14.1421, 10.0000, 14.1421, 30.0000, 20.0000, 10.0000, 0.0000, 10.0000, 31.6228, 22.3607, 14.1421, 10.0000, 14.1421, 36.0555, 28.2843, 22.3607, 20.0000, 22.3607, // Row 10
+        53.8516, 47.4342, 41.2311, 31.6228, 22.3607, 14.1421, 10.0000, 40.0000, 30.0000, 20.0000, 10.0000, 0.0000, 41.2311, 31.6228, 22.3607, 14.1421, 10.0000, 44.7214, 36.0555, 28.2843, 22.3607, 20.0000, // Row 11
+        31.6228, 25.4951, 20.0000, 22.3607, 28.2843, 36.0555, 44.7214, 10.0000, 14.1421, 22.3607, 31.6228, 41.2311, 0.0000, 10.0000, 20.0000, 30.0000, 40.0000, 10.0000, 14.1421, 22.3607, 31.6228, 41.2311, // Row 12
+        36.0555, 29.1548, 22.3607, 20.0000, 22.3607, 28.2843, 36.0555, 14.1421, 10.0000, 14.1421, 22.3607, 31.6228, 10.0000, 0.0000, 10.0000, 20.0000, 30.0000, 14.1421, 10.0000, 14.1421, 22.3607, 31.6228, // Row 13
+        42.4264, 35.3553, 28.2843, 22.3607, 20.0000, 22.3607, 28.2843, 22.3607, 14.1421, 10.0000, 14.1421, 22.3607, 20.0000, 10.0000, 0.0000, 10.0000, 20.0000, 22.3607, 14.1421, 10.0000, 14.1421, 22.3607, // Row 14
+        50.0000, 43.0116, 36.0555, 28.2843, 22.3607, 20.0000, 22.3607, 31.6228, 22.3607, 14.1421, 10.0000, 14.1421, 30.0000, 20.0000, 10.0000, 0.0000, 10.0000, 31.6228, 22.3607, 14.1421, 10.0000, 14.1421, // Row 15
+        58.3095, 51.4782, 44.7214, 36.0555, 28.2843, 22.3607, 20.0000, 41.2311, 31.6228, 22.3607, 14.1421, 10.0000, 40.0000, 30.0000, 20.0000, 10.0000, 0.0000, 41.2311, 31.6228, 22.3607, 14.1421, 10.0000, // Row 16
+        41.2311, 35.3553, 30.0000, 31.6228, 36.0555, 42.4264, 50.0000, 20.0000, 22.3607, 28.2843, 36.0555, 44.7214, 10.0000, 14.1421, 22.3607, 31.6228, 41.2311, 0.0000, 10.0000, 20.0000, 30.0000, 40.0000, // Row 17
+        44.7214, 38.0789, 31.6228, 30.0000, 31.6228, 36.0555, 42.4264, 22.3607, 20.0000, 22.3607, 28.2843, 36.0555, 14.1421, 10.0000, 14.1421, 22.3607, 31.6228, 10.0000, 0.0000, 10.0000, 20.0000, 30.0000, // Row 18
+        50.0000, 43.0116, 36.0555, 31.6228, 30.0000, 31.6228, 36.0555, 28.2843, 22.3607, 20.0000, 22.3607, 28.2843, 22.3607, 14.1421, 10.0000, 14.1421, 22.3607, 20.0000, 10.0000, 0.0000, 10.0000, 20.0000, // Row 19
+        56.5685, 49.4975, 42.4264, 36.0555, 31.6228, 30.0000, 31.6228, 36.0555, 28.2843, 22.3607, 20.0000, 22.3607, 31.6228, 22.3607, 14.1421, 10.0000, 14.1421, 30.0000, 20.0000, 10.0000, 0.0000, 10.0000, // Row 20
+        64.0312, 57.0088, 50.0000, 42.4264, 36.0555, 31.6228, 30.0000, 44.7214, 36.0555, 28.2843, 22.3607, 20.0000, 41.2311, 31.6228, 22.3607, 14.1421, 10.0000, 40.0000, 30.0000, 20.0000, 10.0000, 0.0000 // Row 21
+    };
+
+        return DISTS[a * 22 + b];
+    }
+
+    /* Removi a referência pois o struct é muito leve e é mais rapido a cópia do que
+    * a dereferênca.
+    */
+    inline double distancia(Ponto a, Ponto b) {
+
+    double u = a.x - b.x;
+    double v = a.y - b.y;
+
+    return sqrt(u * u + v * v);
+    }
+
+    static double calcularCusto(const int motorista, const int coleta, vector<Ponto> & __restrict entregas,
+                        vector<int>& __restrict rota) {
+
+    double custo = 0.0;
+    custo += distancia_pre(motorista, coleta);
+    int carga = CAPACIDADE_MOTO;
+    int atual = coleta;
+
+    for (int i = 0; i < rota.size(); i++) {
+
+        bool vazia = (carga == 0);
+
+        int p_entrega = rota[i];
+
+        custo += vazia ? distancia_pre(atual, coleta) +  distancia_pre(coleta, p_entrega): distancia_pre(atual, p_entrega);
+        atual  = p_entrega;
+        carga  = vazia ? CAPACIDADE_MOTO - 1 : carga-1;
+
+    }
+
+    custo += distancia_pre(atual, motorista);
+
+    return custo;
+    }
+
+    /*
+    https://en.wikipedia.org/wiki/Heap%27s_algorithm
+    */
+    static void permutarItter(const int motorista, const int coleta, vector<Ponto>& __restrict entregas,
+                    vector<int>& rota, int inicio, double &melhorCusto,
+                    vector<int>& melhorRota) {
+
+    vector<int> stack_state(rota.size(), 0);
+
+    double custo = calcularCusto(motorista, coleta, entregas, rota);
+
+    if (custo < melhorCusto) {
+        melhorCusto = custo;
+        melhorRota = rota;
+    }
+
+    // Estudar std::next_iteration
+    int i = 0;
+    for (; i < rota.size();) {
+        if (stack_state[i] < i) {
+        if (i % 2 == 0) {
+            swap(rota[0], rota[i]);
+        } else {
+            swap(rota[stack_state[i]], rota[i]);
+        }
+
+        {
+            custo = calcularCusto(motorista, coleta, entregas, rota);
+
+            if (custo < melhorCusto) {
+            melhorCusto = custo;
+            melhorRota = rota;
+            }
+        }
+        stack_state[i]++;
+        i = 0;
+        }
+        else{
+            stack_state[i] = 0;
+            i++;
+        }
+    }
+    }
+
+    int main(int argc, char *argv[]) {
+
+        if(argc < 2){
+            cout << "Uso invalido, faltou numero\n";
+            return 1;
+        }
+
+    int n = atoi(argv[1]);
+
+    if (n <= 0) {
+        cout << "Numero invalido\n";
+        return 1;
+    }
+
+    Ponto motorista{0, 0};
+    Ponto coleta{5, 5};
+
+    vector<Ponto> pontos = { motorista, coleta,
+                            {10, 10}, {20, 10}, {30, 10}, {40, 10}, {50, 10},
+                            {10, 20}, {20, 20}, {30, 20}, {40, 20}, {50, 20},
+                            {10, 30}, {20, 30}, {30, 30}, {40, 30}, {50, 30},
+                            {10, 40}, {20, 40}, {30, 40}, {40, 40}, {50, 40}};
+
+    // Copia elemento por elemento
+    // Se for sempre assim, posso só passar um limitante para a permutar
+    vector<Ponto> entregas;
+    for (int i = 0; i < n+2; i++) {
+        entregas.push_back(pontos[i]);
+    }
+
+    vector<int> rota;
+    for (int i = 2; i < n+2; i++) {
+        rota.push_back(i);
+    }
+
+    vector<int> melhorRota;
+    double melhorCusto = numeric_limits<double>::max();
+
+    auto inicioTempo = chrono::high_resolution_clock::now();
+        
+    permutarItter(0, 1, entregas, rota, 0, melhorCusto, melhorRota);
+
+    auto fimTempo = chrono::high_resolution_clock::now();
+    chrono::duration<double> tempo = fimTempo - inicioTempo;
+
+    cout << "Melhor custo: " << melhorCusto << endl;
+    cout << "Tempo: " << tempo.count() << " segundos\n";
+
+    return 0;
+    }
+
+    ```
+
 
 Na busca exaustiva, o algoritmo investe tempo explorando caminhos que já dá pra saber que não levarão a uma solução melhor.
 
@@ -261,9 +447,7 @@ Você interrompe essa ramificação da recursão.
 
 O algoritmo continua correto (ainda encontra o ótimo), mas evita explorar regiões inúteis do espaço de busca.
 
-## Desafio!
-
-**Objetivo:** Analisar e aprimorar a heurística exemplo.
+## Desafio 1 - Melhore o Exaustivo!
 
 Melhore a heuristica implementando a poda. Você precisará modificar três coisas principais:
 
@@ -286,7 +470,7 @@ retorna;
 
 Para impedir a expansão da ramificação inutil.
 
-## 6. Estrutura da nova recursão
+## Estrutura da nova recursão
 
 Fluxo lógico:
 
@@ -311,51 +495,222 @@ Hill Climbing, ou Subida da Encosta, é um algoritmo de busca local utilizado pa
 
 A principal vantagem dessa abordagem é que ela evita a explosão combinatória típica da busca exaustiva. Enquanto a busca completa avalia todas as possíveis combinações, que cresce exponencialmente com o número de entregas, Hill Climbing explora apenas uma pequena parte do espaço de busca, focando em melhorar progressivamente uma solução. Isso torna o método mais escalável para valores maiores de N, onde a busca exaustiva se torna inviável.
 
-
+A implementação dele fica assim:
 ```cpp
-// Hill Climbing
-vector<int> hillClimbing(const Ponto& motorista,
-                         const Ponto& coleta,
-                         const vector<Ponto>& entregas) {
+  // Hill Climbing
+    vector<int> hillClimbing(const Ponto& motorista,
+                            const Ponto& coleta,
+                            const vector<Ponto>& entregas) {
 
-    int n = entregas.size();
+        int n = entregas.size();
 
-    // Solução inicial sequencial
-    vector<int> atual(n);
-    for (int i = 0; i < n; i++)
-        atual[i] = i;
+        // Solução inicial sequencial
+        vector<int> atual(n);
+        for (int i = 0; i < n; i++)
+            atual[i] = i;
 
-    double melhorCusto = calcularCusto(motorista, coleta, entregas, atual);
+        double melhorCusto = calcularCusto(motorista, coleta, entregas, atual);
 
-    bool melhorou = true;
+        bool melhorou = true;
 
-    while (melhorou) {
+        while (melhorou) {
 
-        melhorou = false;
-        vector<int> melhorVizinho = atual;
+            melhorou = false;
+            vector<int> melhorVizinho = atual;
 
-        for (int i = 0; i < n - 1; i++) {
-            for (int j = i + 1; j < n; j++) {
+            for (int i = 0; i < n - 1; i++) {
+                for (int j = i + 1; j < n; j++) {
 
-                vector<int> vizinho = atual;
-                swap(vizinho[i], vizinho[j]);
+                    vector<int> vizinho = atual;
+                    swap(vizinho[i], vizinho[j]);
 
-                double custoVizinho = calcularCusto(motorista, coleta, entregas, vizinho);
+                    double custoVizinho = calcularCusto(motorista, coleta, entregas, vizinho);
 
-                if (custoVizinho < melhorCusto) {
-                    melhorCusto = custoVizinho;
-                    melhorVizinho = vizinho;
-                    melhorou = true;
+                    if (custoVizinho < melhorCusto) {
+                        melhorCusto = custoVizinho;
+                        melhorVizinho = vizinho;
+                        melhorou = true;
+                    }
                 }
             }
+
+            atual = melhorVizinho;
         }
 
-        atual = melhorVizinho;
+        return atual;
     }
 
-    return atual;
-}
 ```
+
+
+
+??? note "Código completo - Hill Climbing"
+    ```cpp
+    #include <iostream>
+    #include <vector>
+    #include <cmath>
+    #include <limits>
+    #include <cstdlib>
+    #include <chrono>
+
+    using namespace std;
+
+    const int CAPACIDADE_MOTO = 5;
+
+    struct Ponto {
+        double x;
+        double y;
+    };
+
+    // Distância Euclidiana
+    double distancia(const Ponto& a, const Ponto& b) {
+        double dx = a.x - b.x;
+        double dy = a.y - b.y;
+        return sqrt(dx * dx + dy * dy);
+    }
+
+    // Calcula custo total da rota
+    double calcularCusto(const Ponto& motorista,
+                        const Ponto& coleta,
+                        const vector<Ponto>& entregas,
+                        const vector<int>& rota) {
+
+        double custo = 0.0;
+
+        custo += distancia(motorista, coleta);
+
+        int carga = CAPACIDADE_MOTO;
+        Ponto atual = coleta;
+
+        for (int i = 0; i < rota.size(); i++) {
+
+            if (carga == 0) {
+                custo += distancia(atual, coleta);
+                atual = coleta;
+                carga = CAPACIDADE_MOTO;
+            }
+
+            const Ponto& destino = entregas[rota[i]];
+            custo += distancia(atual, destino);
+            atual = destino;
+            carga--;
+        }
+
+        custo += distancia(atual, motorista);
+
+        return custo;
+    }
+
+    // Hill Climbing
+    vector<int> hillClimbing(const Ponto& motorista,
+                            const Ponto& coleta,
+                            const vector<Ponto>& entregas) {
+
+        int n = entregas.size();
+
+        // Solução inicial sequencial
+        vector<int> atual(n);
+        for (int i = 0; i < n; i++)
+            atual[i] = i;
+
+        double melhorCusto = calcularCusto(motorista, coleta, entregas, atual);
+
+        bool melhorou = true;
+
+        while (melhorou) {
+
+            melhorou = false;
+            vector<int> melhorVizinho = atual;
+
+            for (int i = 0; i < n - 1; i++) {
+                for (int j = i + 1; j < n; j++) {
+
+                    vector<int> vizinho = atual;
+                    swap(vizinho[i], vizinho[j]);
+
+                    double custoVizinho = calcularCusto(motorista, coleta, entregas, vizinho);
+
+                    if (custoVizinho < melhorCusto) {
+                        melhorCusto = custoVizinho;
+                        melhorVizinho = vizinho;
+                        melhorou = true;
+                    }
+                }
+            }
+
+            atual = melhorVizinho;
+        }
+
+        return atual;
+    }
+
+    int main(int argc, char* argv[]) {
+
+        if (argc < 2) {
+            cout << "Uso: ./hill N\n";
+            return 1;
+        }
+
+        int n = atoi(argv[1]);
+
+        if (n <= 0 || n > 20) {
+            cout << "Escolha um numero entre 1 e 20.\n";
+            return 1;
+        }
+
+        Ponto motorista{0,0};
+        Ponto coleta{5,5};
+
+        vector<Ponto> todos = {
+            {10,10}, {20,10}, {30,10}, {40,10}, {50,10},
+            {10,20}, {20,20}, {30,20}, {40,20}, {50,20},
+            {10,30}, {20,30}, {30,30}, {40,30}, {50,30},
+            {10,40}, {20,40}, {30,40}, {40,40}, {50,40}
+        };
+
+        vector<Ponto> entregas(todos.begin(), todos.begin() + n);
+
+        auto inicio = chrono::high_resolution_clock::now();
+
+        vector<int> melhorRota = hillClimbing(motorista, coleta, entregas);
+
+        double melhorCusto = calcularCusto(motorista, coleta, entregas, melhorRota);
+
+        auto fim = chrono::high_resolution_clock::now();
+        chrono::duration<double> tempo = fim - inicio;
+
+        // Impressão da rota
+        cout << "\nRota encontrada:\n";
+        cout << "Motorista(0,0) -> Coleta(5,5) -> ";
+
+        int carga = CAPACIDADE_MOTO;
+
+        for (int i = 0; i < melhorRota.size(); i++) {
+
+            if (carga == 0) {
+                cout << "Coleta(5,5) -> ";
+                carga = CAPACIDADE_MOTO;
+            }
+
+            int idx = melhorRota[i];
+            cout << "P" << idx
+                << "(" << entregas[idx].x
+                << "," << entregas[idx].y << ") -> ";
+
+            carga--;
+        }
+
+        cout << "Motorista(0,0)\n";
+
+        cout << "\nCusto total: " << melhorCusto << endl;
+        cout << "Tempo de execucao: "
+            << tempo.count()
+            << " segundos\n";
+
+        return 0;
+    }
+
+    ```
 
 ## Aleatoriedade
 Se utilizarmos aleatoriedade para escolher as rotas iniciais antes de aplicar a heurística poderiamos encontrar as soluções melhores mais rapidamente?
@@ -374,7 +729,7 @@ Primeiro, na solução inicial. Em vez de começar sempre com a ordem 0,1,2,...,
 
 Segundo, na escolha da vizinhança. Em vez de testar todos os vizinhos possíveis e escolher o melhor, você pode sortear dois índices aleatórios e testar apenas essa troca. Se melhorar, aceita. Caso contrário, tenta outra. Isso reduz o custo por iteração e torna a trajetória imprevisível.
 
-## Desafio!!!
+## Desafio 2 - Hill Climbing aleatório
 
 **1 — Tornar a solução inicial aleatória**
 Em vez de preencher o vetor sequencialmente, pense em como embaralhar esse vetor usando uma função de randomização pronta do C++.
@@ -412,195 +767,26 @@ A ideia central é que aleatoriedade não é “bagunça”. Ela é um mecanismo
 
 
 
-## Para analizar as implementações:
+## Para analizar as implementações dos desafios:
 
 Faça os testes para **N = 10, 11, 12 e 13**
 
-1- Comparando Busca Exaustiva otimizada, Branch and Bound, Hill Climbing puro e O Hill Climbing aleatório, qual apresentou melhor escalabilidade conforme N aumentou? 
+1- Comparando Busca Exaustiva otimizada com poda, Hill Climbing puro e O Hill Climbing aleatório, qual apresentou melhor escalabilidade conforme N aumentou? 
 
 
-2 - O Hill Climbing puro encontrou a mesma solução que a busca exaustiva? O que será que aconteceu?
+2 - O Hill Climbing puro encontrou a mesma solução que a busca exaustiva podada? O que será que aconteceu?
 
 
-3 - Usando O Hill Climbing aleatório, melhorou a qualidade média das soluções? Houve aumento significativo no tempo total? Analise o custo-benefício.
+3 - Usando O Hill Climbing aleatório, melhorou a qualidade média das soluções? Houve aumento significativo no tempo de execução? Analise o custo-benefício.
 
 
-4 Se você tivesse que resolver o problema para N = 100, qual abordagem escolheria e por quê? Considere tempo, qualidade da solução e escalabilidade.
+4 Se você tivesse que resolver o problema para N = 100, qual abordagem escolheria e por quê? Considere tempo, qualidade da solução e escalabilidade para fazer a sua escolha. 
 
 
 
 [Submeta a sua entrega pelo Classroom diponível neste link até 06/03 ás 14h00](https://classroom.github.com/a/XI5jzrP-)
 
-A entrega deve conter o seu algorítmo e as suas análises (pode deixar as análises no README.md) 
 
 
 
-# Código completo com o Hill Climbing
 
-
-```cpp
-#include <iostream>
-#include <vector>
-#include <cmath>
-#include <limits>
-#include <cstdlib>
-#include <chrono>
-
-using namespace std;
-
-const int CAPACIDADE_MOTO = 5;
-
-struct Ponto {
-    double x;
-    double y;
-};
-
-// Distância Euclidiana
-double distancia(const Ponto& a, const Ponto& b) {
-    double dx = a.x - b.x;
-    double dy = a.y - b.y;
-    return sqrt(dx * dx + dy * dy);
-}
-
-// Calcula custo total da rota
-double calcularCusto(const Ponto& motorista,
-                     const Ponto& coleta,
-                     const vector<Ponto>& entregas,
-                     const vector<int>& rota) {
-
-    double custo = 0.0;
-
-    custo += distancia(motorista, coleta);
-
-    int carga = CAPACIDADE_MOTO;
-    Ponto atual = coleta;
-
-    for (int i = 0; i < rota.size(); i++) {
-
-        if (carga == 0) {
-            custo += distancia(atual, coleta);
-            atual = coleta;
-            carga = CAPACIDADE_MOTO;
-        }
-
-        const Ponto& destino = entregas[rota[i]];
-        custo += distancia(atual, destino);
-        atual = destino;
-        carga--;
-    }
-
-    custo += distancia(atual, motorista);
-
-    return custo;
-}
-
-// Hill Climbing
-vector<int> hillClimbing(const Ponto& motorista,
-                         const Ponto& coleta,
-                         const vector<Ponto>& entregas) {
-
-    int n = entregas.size();
-
-    // Solução inicial sequencial
-    vector<int> atual(n);
-    for (int i = 0; i < n; i++)
-        atual[i] = i;
-
-    double melhorCusto = calcularCusto(motorista, coleta, entregas, atual);
-
-    bool melhorou = true;
-
-    while (melhorou) {
-
-        melhorou = false;
-        vector<int> melhorVizinho = atual;
-
-        for (int i = 0; i < n - 1; i++) {
-            for (int j = i + 1; j < n; j++) {
-
-                vector<int> vizinho = atual;
-                swap(vizinho[i], vizinho[j]);
-
-                double custoVizinho = calcularCusto(motorista, coleta, entregas, vizinho);
-
-                if (custoVizinho < melhorCusto) {
-                    melhorCusto = custoVizinho;
-                    melhorVizinho = vizinho;
-                    melhorou = true;
-                }
-            }
-        }
-
-        atual = melhorVizinho;
-    }
-
-    return atual;
-}
-
-int main(int argc, char* argv[]) {
-
-    if (argc < 2) {
-        cout << "Uso: ./hill N\n";
-        return 1;
-    }
-
-    int n = atoi(argv[1]);
-
-    if (n <= 0 || n > 20) {
-        cout << "Escolha um numero entre 1 e 20.\n";
-        return 1;
-    }
-
-    Ponto motorista{0,0};
-    Ponto coleta{5,5};
-
-    vector<Ponto> todos = {
-        {10,10}, {20,10}, {30,10}, {40,10}, {50,10},
-        {10,20}, {20,20}, {30,20}, {40,20}, {50,20},
-        {10,30}, {20,30}, {30,30}, {40,30}, {50,30},
-        {10,40}, {20,40}, {30,40}, {40,40}, {50,40}
-    };
-
-    vector<Ponto> entregas(todos.begin(), todos.begin() + n);
-
-    auto inicio = chrono::high_resolution_clock::now();
-
-    vector<int> melhorRota = hillClimbing(motorista, coleta, entregas);
-
-    double melhorCusto = calcularCusto(motorista, coleta, entregas, melhorRota);
-
-    auto fim = chrono::high_resolution_clock::now();
-    chrono::duration<double> tempo = fim - inicio;
-
-    // Impressão da rota
-    cout << "\nRota encontrada:\n";
-    cout << "Motorista(0,0) -> Coleta(5,5) -> ";
-
-    int carga = CAPACIDADE_MOTO;
-
-    for (int i = 0; i < melhorRota.size(); i++) {
-
-        if (carga == 0) {
-            cout << "Coleta(5,5) -> ";
-            carga = CAPACIDADE_MOTO;
-        }
-
-        int idx = melhorRota[i];
-        cout << "P" << idx
-             << "(" << entregas[idx].x
-             << "," << entregas[idx].y << ") -> ";
-
-        carga--;
-    }
-
-    cout << "Motorista(0,0)\n";
-
-    cout << "\nCusto total: " << melhorCusto << endl;
-    cout << "Tempo de execucao: "
-         << tempo.count()
-         << " segundos\n";
-
-    return 0;
-}
-
-```
