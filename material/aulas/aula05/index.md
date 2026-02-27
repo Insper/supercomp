@@ -247,6 +247,24 @@ Na aula passada você deveria ter sumido com os erros do código fornecido, e a 
 ??? note "Busca Exaustiva - Nivel além do horizonte"
     ```cpp
     // Foi o Emil
+    /*
+    1.  Primeira troca foi deixar de utilizar o algoritmo recursivo para utilizar 
+        um algoritmo iterativo, dessa forma o compilador consegue fazer maiores
+        inferências para melhorar as otimizações;
+        https://en.wikipedia.org/wiki/Heap%27s_algorithm
+        ver: permutarItter
+
+    2. A segunda troca foi utilizar a técnica de "branchless programming" para o
+       calculo do custo.
+       Utilizar o operador ternário (? :) pode ser que se evite ramificação no
+       assembly (CMOV - Conditional Move) e o erro de branch prediction.
+       Outra técnica é utilizar operações bitwise quando possível. 
+    
+    3. A terceira troca e extramamente específica para nosso caso, nem sempre
+       será possivel, é pré-calcular as distâncias que temos em nosso problema,
+       assim trocamos um calculo matemático sqrt(u * u + v * v), lembrando que
+       sqrt ainda é uma operação lenta, por um acesso direto à memoria.
+    */
     #include <algorithm>
     #include <chrono>
     #include <cmath>
@@ -254,9 +272,6 @@ Na aula passada você deveria ter sumido com os erros do código fornecido, e a 
     #include <iostream>
     #include <limits>
     #include <vector>
-
-    // 1. calcula custo Branchless
-    // 2. precalculated matrix
 
     using namespace std;
 
@@ -333,9 +348,6 @@ Na aula passada você deveria ter sumido com os erros do código fornecido, e a 
     return custo;
     }
 
-    /*
-    https://en.wikipedia.org/wiki/Heap%27s_algorithm
-    */
     static void permutarItter(const int motorista, const int coleta, vector<Ponto>& __restrict entregas,
                     vector<int>& rota, int inicio, double &melhorCusto,
                     vector<int>& melhorRota) {
