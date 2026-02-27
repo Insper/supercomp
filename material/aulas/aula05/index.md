@@ -784,7 +784,7 @@ Faça os testes para **N = 10, 11, 12 e 13**
 
 
 
-[Submeta a sua entrega pelo Classroom diponível neste link até 06/03 ás 14h00](https://classroom.github.com/a/XI5jzrP-)
+[Submeta a sua entrega pelo Classroom diponível neste link até 06/03 ás 23h59](https://classroom.github.com/a/XI5jzrP-)
 
 
 
