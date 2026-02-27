@@ -178,7 +178,7 @@ int main(int argc, char* argv[]) {
     // Vetor da melhor rota 
     vector<int> melhorRota;
 
-    
+
     // Inicializa o índice dos pontos na ordem [1,2,3 .. N]
     for (int i = 0; i < n; i++)
         rota[i] = i;
