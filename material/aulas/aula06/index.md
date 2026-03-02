@@ -593,7 +593,7 @@ g++ -fopenmp omp_schedulers.cpp -o omp_schedulers
 **Rodar no cluster com SLURM** definindo o número de threads:
 
 ```bash
-srun --partition=normal --ntasks=1 --cpus-per-task=4 ./omp_schedulers
+srun --partition=normal --cpus-per-task=4 ./omp_schedulers
 ```
 
 ou
@@ -829,26 +829,19 @@ echo "=================================="
 
 ```
 
+### Para entender se você entendeu!!
 
-### Para entender se você entendeu!
+O objetivo desta atividade é praticar a paralelização de laços com OpenMP e analisar como diferentes políticas de escalonamento (`schedule`) impactam o desempenho.
 
-Paralelizar laços com OpenMP, comparar o efeito de `schedule` no desempenho.
+Você deverá modificar o arquivo `paralelo.cpp`, paralelizando os laços apropriados com OpenMP. Em seguida, execute o programa utilizando os três tipos de escalonamento: `static`, `dynamic` e `guided`.
 
-**Solicitações de Implementação**
+Varie o número de threads utilizando `OMP_NUM_THREADS` nos valores {1, 2, 4, 8, 16}.
 
-1. Paralelize o código paralelo.cpp.
-2. Registre **tempo** e **valor da conta** em 3 execuções para cada `OMP_SCHEDULE = static`, `dynamic`, `guided`.
-3. O que está sendo paralelizado nesse for? O que está sendo distribuido entre as threads?
+Observe se houve ganho de desempenho ao aumentar o número de threads. O speedup ocorreu de forma proporcional? Até que ponto o aumento de threads trouxe benefício?
 
-### Parâmetros de Execução
+Compare também os três tipos de escalonamento (`static`, `dynamic` e `guided`). Algum deles apresentou desempenho superior? As diferenças foram significativas ou praticamente irrelevantes para este tipo de problema?
 
-* Varie `OMP_NUM_THREADS` em {1, 2, 4, 8, 16} 
-* Mantenha os **mesmos N** (tamanho do problema) em todas as comparações do mesmo grupo.
 
-**Perguntas de Análise**
 
-* Houve **speedup** com mais threads? Até onde?
-* `static` vs `dynamic` vs `guided`: quem foi melhor? Alguma diferença relevante?
-
-## **Esta atividade não tem entrega, boa semana!**
+# Esta atividade não precisa ser entregue. Boa semana!
 
