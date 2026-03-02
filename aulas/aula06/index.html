@@ -11,6 +11,10 @@
         <link rel="canonical" href="https://insper.github.io/supercomp/aulas/aula06/">
       
       
+        <link rel="prev" href="../aula05/">
+      
+      
+        <link rel="next" href="../../teoria/slides/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -18,7 +22,7 @@
     
     
       
-        <title>Efeitos Colaterais do Paralelismo - SuperComputação - 2026/1</title>
+        <title>Aula 06 - Paralelismo em CPU - SuperComputação - 2026/1</title>
       
     
     
@@ -80,7 +84,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#efeitos-colaterais-do-paralelismo" class="md-skip">
+        <a href="#paralelismo-em-cpu" class="md-skip">
           Skip to content
         </a>
       
@@ -114,7 +118,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Efeitos Colaterais do Paralelismo
+              Aula 06 - Paralelismo em CPU
             
           </span>
         </div>
@@ -227,10 +231,12 @@
         
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
+      <li class="md-tabs__item md-tabs__item--active">
         <a href="../aula01/" class="md-tabs__link">
           
   
@@ -351,23 +357,28 @@
       
   
   
+    
   
   
+  
     
     
     
-      
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
             
   
   <span class="md-ellipsis">
@@ -379,7 +390,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             Aulas
@@ -491,6 +502,312 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Aula 06 - Paralelismo em CPU
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Aula 06 - Paralelismo em CPU
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-e-openmp" class="md-nav__link">
+    <span class="md-ellipsis">
+      O que é OpenMP?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="O que é OpenMP?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#estrutura-minima" class="md-nav__link">
+    <span class="md-ellipsis">
+      Estrutura mínima
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configurando-corretamente-o-slurm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configurando corretamente o SLURM
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#principais-pragmas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Principais Pragmas
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#funcoes-da-api-openmp" class="md-nav__link">
+    <span class="md-ellipsis">
+      Funções da API OpenMP
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#criando-regioes-paralelas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Criando regiões paralelas
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paralelizando-lacos-for" class="md-nav__link">
+    <span class="md-ellipsis">
+      Paralelizando laços (for)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variaveis-privadas-e-compartilhadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Variáveis privadas e compartilhadas
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reducoes-somatorios-produtos-etc" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reduções (somatórios, produtos, etc.)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#secoes-paralelas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Seções paralelas
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#areas-criticas-e-exclusao-mutua" class="md-nav__link">
+    <span class="md-ellipsis">
+      Áreas críticas e exclusão mútua
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#diretiva-single" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diretiva single
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#barreira-de-sincronizacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Barreira de sincronização
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pragma-omp-parallel-for-collapsen" class="md-nav__link">
+    <span class="md-ellipsis">
+      #pragma omp parallel for collapse(n)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pragma-omp-task" class="md-nav__link">
+    <span class="md-ellipsis">
+      #pragma omp task
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pragma-omp-atomic" class="md-nav__link">
+    <span class="md-ellipsis">
+      #pragma omp atomic
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pragma-omp-master-e-pragma-omp-single-nowait" class="md-nav__link">
+    <span class="md-ellipsis">
+      #pragma omp master e #pragma omp single nowait
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pragma-omp-simd" class="md-nav__link">
+    <span class="md-ellipsis">
+      #pragma omp simd
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#controlando-variaveis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Controlando variáveis
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scheduling-no-openmp" class="md-nav__link">
+    <span class="md-ellipsis">
+      Scheduling no OpenMP
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Scheduling no OpenMP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#analisando-os-schedulers-no-openmp" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analisando os Schedulers no OpenMP
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sua-vez-de-paralelizar-com-openmp" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sua vez de paralelizar com OpenMP
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Sua vez de paralelizar com OpenMP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#para-entender-se-voce-entendeu" class="md-nav__link">
+    <span class="md-ellipsis">
+      Para entender se você entendeu!
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parametros-de-execucao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parâmetros de Execução
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esta-atividade-nao-tem-entrega-boa-semana" class="md-nav__link">
+    <span class="md-ellipsis">
+      Esta atividade não tem entrega, boa semana!
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -730,46 +1047,172 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#tarefa-a-transformacao-elemento-a-elemento-map" class="md-nav__link">
+  <a href="#o-que-e-openmp" class="md-nav__link">
     <span class="md-ellipsis">
-      TAREFA A: Transformação elemento-a-elemento (map)
+      O que é OpenMP?
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#tarefa-b-soma-reducao-da-norma-l2-parcial" class="md-nav__link">
-    <span class="md-ellipsis">
-      TAREFA B: Soma (redução) da norma L2 parcial
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#corrigindo-com-reduction" class="md-nav__link">
-    <span class="md-ellipsis">
-      Corrigindo com reduction
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#dependencia-de-dados" class="md-nav__link">
-    <span class="md-ellipsis">
-      Dependência de dados
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Dependência de dados">
+    <nav class="md-nav" aria-label="O que é OpenMP?">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#versao-paralelizavel" class="md-nav__link">
+  <a href="#estrutura-minima" class="md-nav__link">
     <span class="md-ellipsis">
-      Versão paralelizável:
+      Estrutura mínima
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configurando-corretamente-o-slurm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configurando corretamente o SLURM
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#principais-pragmas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Principais Pragmas
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#funcoes-da-api-openmp" class="md-nav__link">
+    <span class="md-ellipsis">
+      Funções da API OpenMP
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#criando-regioes-paralelas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Criando regiões paralelas
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paralelizando-lacos-for" class="md-nav__link">
+    <span class="md-ellipsis">
+      Paralelizando laços (for)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variaveis-privadas-e-compartilhadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Variáveis privadas e compartilhadas
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reducoes-somatorios-produtos-etc" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reduções (somatórios, produtos, etc.)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#secoes-paralelas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Seções paralelas
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#areas-criticas-e-exclusao-mutua" class="md-nav__link">
+    <span class="md-ellipsis">
+      Áreas críticas e exclusão mútua
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#diretiva-single" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diretiva single
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#barreira-de-sincronizacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Barreira de sincronização
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pragma-omp-parallel-for-collapsen" class="md-nav__link">
+    <span class="md-ellipsis">
+      #pragma omp parallel for collapse(n)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pragma-omp-task" class="md-nav__link">
+    <span class="md-ellipsis">
+      #pragma omp task
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pragma-omp-atomic" class="md-nav__link">
+    <span class="md-ellipsis">
+      #pragma omp atomic
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pragma-omp-master-e-pragma-omp-single-nowait" class="md-nav__link">
+    <span class="md-ellipsis">
+      #pragma omp master e #pragma omp single nowait
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pragma-omp-simd" class="md-nav__link">
+    <span class="md-ellipsis">
+      #pragma omp simd
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#controlando-variaveis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Controlando variáveis
     </span>
   </a>
   
@@ -781,18 +1224,66 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#recursao-com-tasks" class="md-nav__link">
+  <a href="#scheduling-no-openmp" class="md-nav__link">
     <span class="md-ellipsis">
-      Recursão com tasks
+      Scheduling no OpenMP
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Scheduling no OpenMP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#analisando-os-schedulers-no-openmp" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analisando os Schedulers no OpenMP
     </span>
   </a>
   
 </li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
-  <a href="#conclusao" class="md-nav__link">
+  <a href="#sua-vez-de-paralelizar-com-openmp" class="md-nav__link">
     <span class="md-ellipsis">
-      Conclusão
+      Sua vez de paralelizar com OpenMP
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Sua vez de paralelizar com OpenMP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#para-entender-se-voce-entendeu" class="md-nav__link">
+    <span class="md-ellipsis">
+      Para entender se você entendeu!
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parametros-de-execucao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parâmetros de Execução
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esta-atividade-nao-tem-entrega-boa-semana" class="md-nav__link">
+    <span class="md-ellipsis">
+      Esta atividade não tem entrega, boa semana!
     </span>
   </a>
   
@@ -817,93 +1308,740 @@
   
 
 
-<h1 id="efeitos-colaterais-do-paralelismo">Efeitos Colaterais do Paralelismo<a class="headerlink" href="#efeitos-colaterais-do-paralelismo" title="Permanent link">&para;</a></h1>
-<p>Nesta atividade vamos explorar os problemas que aparecem quando paralelizamos de forma ingênua e ver como corrigir logo em seguida. </p>
-<h2 id="tarefa-a-transformacao-elemento-a-elemento-map">TAREFA A: Transformação elemento-a-elemento (map)<a class="headerlink" href="#tarefa-a-transformacao-elemento-a-elemento-map" title="Permanent link">&para;</a></h2>
-<p>Na aula passada foi pedido que você paralelizasse e analisasse este laço:</p>
-<div class="highlight"><pre><span></span><code><span class="cp">#pragma omp parallel for schedule(runtime)</span>
+<h1 id="paralelismo-em-cpu">Paralelismo em CPU<a class="headerlink" href="#paralelismo-em-cpu" title="Permanent link">&para;</a></h1>
+<p>Os processadores atuais possuem múltiplos núcleos de execução (<em>cores</em>). Para aproveitar essa capacidade, podemos dividir o trabalho em partes menores que possam ser executadas simultaneamente. Essa divisão é feita por meio de <strong>threads</strong>, onde cada thread executa uma fração das instruções.</p>
+<p>No caso de <strong>laços de repetição</strong>, o paralelismo é obtido ao repartir as iterações entre várias threads. Em vez de uma única thread percorrer todo o laço, cada thread recebe um subconjunto de iterações, reduzindo o tempo total de execução. </p>
+<h2 id="o-que-e-openmp">O que é OpenMP?<a class="headerlink" href="#o-que-e-openmp" title="Permanent link">&para;</a></h2>
+<p>OpenMP é uma API para <strong>paralelismo em memória compartilhada</strong> que permite transformar um código sequencial em paralelo com pequenas mudanças no código.</p>
+<ul>
+<li>Um processo</li>
+<li>Várias threads</li>
+<li>Todas compartilham o mesmo espaço de memória</li>
+</ul>
+<p>Para usar OpenMP é necessário compilar com suporte a API, usando <code>-fopenmp</code>:</p>
+<div class="highlight"><pre><span></span><code>g++<span class="w"> </span>-O3<span class="w"> </span>-fopenmp<span class="w"> </span>codigo.cpp<span class="w"> </span>-o<span class="w"> </span>paralelo
+</code></pre></div>
+<p>Sem <code>-fopenmp</code>, os pragmas são ignorados.</p>
+<h3 id="estrutura-minima">Estrutura mínima<a class="headerlink" href="#estrutura-minima" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;omp.h&gt;</span><span class="c1">      // Biblioteca do OpenMP </span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span><span class="c1">   </span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="c1">// Início de uma região paralela.</span>
+<span class="w">    </span><span class="cp">#pragma omp parallel</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Retorna o ID da thread atual.</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">omp_get_thread_num</span><span class="p">();</span>
+
+<span class="w">        </span><span class="c1">// Retorna o número total de threads.</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">omp_get_num_threads</span><span class="p">();</span>
+
+<span class="w">        </span><span class="c1">// Cada thread executa este trecho, como std::cout é compartilhado, a ordem das mensagens</span>
+<span class="w">        </span><span class="c1">// pode variar entre execuções.</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Thread &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">id</span>
+<span class="w">                  </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; de &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// Ao final da região paralela existe uma barreira implícita:</span>
+<span class="w">    </span><span class="c1">// todas as threads precisam terminar antes do código continuar.</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="configurando-corretamente-o-slurm">Configurando corretamente o SLURM<a class="headerlink" href="#configurando-corretamente-o-slurm" title="Permanent link">&para;</a></h3>
+<p><strong>Rodar no cluster com SLURM</strong> definindo o número de threads:</p>
+<div class="highlight"><pre><span></span><code>srun<span class="w"> </span>--partition<span class="o">=</span>normal<span class="w"> </span>--cpus-per-task<span class="o">=</span><span class="m">4</span><span class="w"> </span>./meu_binario
+</code></pre></div>
+<p>ou</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="c1">#SBATCH --job-name=omp_test   # nome do job</span>
+<span class="c1">#SBATCH --output=output_omp.out  # arquivo de saída</span>
+<span class="c1">#SBATCH --cpus-per-task=4               # 4 threads para usar</span>
+<span class="c1">#SBATCH --time=00:05:00                 # tempo máximo de execução</span>
+<span class="c1">#SBATCH --mem=2G                        # Memória </span>
+
+<span class="c1"># garante que o OpenMP use exatamente os recursos alocados pelo SLURM</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">OMP_NUM_THREADS</span><span class="o">=</span><span class="si">${</span><span class="nv">SLURM_CPUS_PER_TASK</span><span class="si">}</span>
+
+<span class="c1"># executa o binário</span>
+./meu_binario
+</code></pre></div>
+<h3 id="principais-pragmas">Principais Pragmas<a class="headerlink" href="#principais-pragmas" title="Permanent link">&para;</a></h3>
+<h3 id="funcoes-da-api-openmp">Funções da API OpenMP<a class="headerlink" href="#funcoes-da-api-openmp" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>omp_get_thread_num()</code> → retorna o ID da thread.</li>
+<li><code>omp_get_num_threads()</code> → total de threads na região paralela.</li>
+<li><code>omp_get_wtime()</code> → cronômetro de alta resolução.</li>
+<li><code>omp_get_max_threads()</code> → número máximo de threads disponíveis.</li>
+<li><code>OMP_NUM_THREADS</code> → número de threads usadas no programa</li>
+<li><code>OMP_SCHEDULE</code> → define a política de escalonamento quando se usa <code>schedule(runtime)</code></li>
+</ul>
+<h3 id="criando-regioes-paralelas">Criando regiões paralelas<a class="headerlink" href="#criando-regioes-paralelas" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="cp">#pragma omp parallel</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// código aqui roda em paralelo (todas as threads executam)</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="paralelizando-lacos-for">Paralelizando laços (<code>for</code>)<a class="headerlink" href="#paralelizando-lacos-for" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="cp">#pragma omp parallel for</span>
 <span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">beta</span><span class="p">;</span>
+<span class="w">    </span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
 <span class="p">}</span>
 </code></pre></div>
 <ul>
-<li>Você executou com 1, 2, 4 e 8 threads.</li>
-<li>Testou diferentes <code>OMP_SCHEDULE</code> (<code>static</code>, <code>dynamic</code>, <code>guided</code>).</li>
-<li>Observou que o <strong>resultado não muda nunca</strong>, apenas o <strong>tempo de execução</strong> varia.</li>
+<li>
+<p><strong>Cláusula <code>schedule</code></strong>: define como dividir as iterações entre threads</p>
+</li>
+<li>
+<p><code>schedule(static)</code> → divide blocos iguais e fixos</p>
+</li>
+<li><code>schedule(dynamic, chunk)</code> → distribui em blocos de <code>chunk</code> de forma dinâmica</li>
+<li><code>schedule(guided, chunk)</code> → blocos começam grandes e vão diminuindo</li>
+<li><code>schedule(runtime)</code> → definido pela variável de ambiente <code>OMP_SCHEDULE</code></li>
 </ul>
-<p>Este é um exemplo de paralelismo <strong>seguro</strong>, pois cada iteração escreve em posições diferentes do vetor <code>c</code>.</p>
-<p><strong>Pergunta para pensar:</strong> por que este laço é naturalmente paralelizável sem dar problemas?</p>
-<h2 id="tarefa-b-soma-reducao-da-norma-l2-parcial">TAREFA B: Soma (redução) da norma L2 parcial<a class="headerlink" href="#tarefa-b-soma-reducao-da-norma-l2-parcial" title="Permanent link">&para;</a></h2>
-<p>Outro laço analisado na aula passada foi:</p>
-<div class="highlight"><pre><span></span><code><span class="kt">double</span><span class="w"> </span><span class="n">soma</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
-<span class="cp">#pragma omp parallel for schedule(runtime)</span>
+<h3 id="variaveis-privadas-e-compartilhadas">Variáveis privadas e compartilhadas<a class="headerlink" href="#variaveis-privadas-e-compartilhadas" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="cp">#pragma omp parallel for private(x) shared(y)</span>
 <span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">soma</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span><span class="w"> </span><span class="c1">// &lt;- condição de corrida</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w">        </span><span class="c1">// cada thread tem sua cópia</span>
+<span class="w">    </span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">);</span><span class="w">      </span><span class="c1">// y é visível por todas</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>Neste caso os valores da soma ficaram inconsistentes.
-Isso acontece porque várias threads tentam atualizar a mesma variável ao mesmo tempo → condição de corrida (<em>race condition</em>).</p>
-<p><strong>Pergunta para pensar:</strong> se for pedido ao SLURM cpus-per-task=1 não vemos inconsistências no resultado da conta?</p>
-<h2 id="corrigindo-com-reduction">Corrigindo com reduction<a class="headerlink" href="#corrigindo-com-reduction" title="Permanent link">&para;</a></h2>
-<p>A correção é simples: usar uma redução.</p>
-<div class="highlight"><pre><span></span><code><span class="kt">double</span><span class="w"> </span><span class="n">soma</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
-<span class="cp">#pragma omp parallel for schedule(runtime) reduction(+:soma)</span>
-<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">soma</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">];</span><span class="w"> </span><span class="c1">// &lt;- corrigido</span>
-<span class="p">}</span>
-</code></pre></div>
-<p>Agora cada thread acumula uma soma local e no final todas são combinadas.
-O resultado fica estável e correto em qualquer número de threads.</p>
-<h2 id="dependencia-de-dados">Dependência de dados<a class="headerlink" href="#dependencia-de-dados" title="Permanent link">&para;</a></h2>
-<p>Nem todos os laços podem ser paralelizados:</p>
-<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="mi">-1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="c1">// depende da iteração anterior</span>
-<span class="p">}</span>
-</code></pre></div>
-<p>Aqui há uma dependência entre iterações: para calcular <code>a[i]</code> é necessário já ter calculado <code>a[i-1]</code>.
-Paralelizar assim gera resultado incorreto.</p>
-<p>Só é possível resolver reformulando o algoritmo. O objetivo é apenas perceber que nem todo loop é paralelizável.</p>
-<p>Maaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaas se observarmos bem, esse cálculo é apenas uma progressão aritmética:</p>
 <ul>
-<li><code>a[1] = a[0] + 1</code></li>
-<li><code>a[2] = a[0] + 2</code></li>
-<li><code>a[3] = a[0] + 3</code></li>
-<li>…</li>
-<li><code>a[i] = a[0] + i</code></li>
+<li><code>private(var)</code> → cada thread cria sua própria cópia</li>
+<li><code>shared(var)</code> → todas as threads acessam a mesma variável</li>
 </ul>
-<p>Ou seja, o valor de <code>a[i]</code> não precisa necessariamente <code>a[i-1]</code>, pode ser calculado diretamente.</p>
-<h3 id="versao-paralelizavel">Versão paralelizável:<a class="headerlink" href="#versao-paralelizavel" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="cp">#pragma omp parallel for schedule(dynamic)</span>
-<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<h3 id="reducoes-somatorios-produtos-etc">Reduções (somatórios, produtos, etc.)<a class="headerlink" href="#reducoes-somatorios-produtos-etc" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kt">double</span><span class="w"> </span><span class="n">soma</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
+<span class="cp">#pragma omp parallel for reduction(+:soma)</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">soma</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>O loop original tem dependência sequencial, mas ao analisar o padrão, vemos que é uma progressão. Reformulando o cálculo, eliminamos a dependência, agora cada iteração é independente e pode ser distribuída entre threads sem problemas.
-Esse exemplo é ótimo para mostrar que paralelizar não é só usar <code>#pragma</code>, às vezes é preciso pensar no algoritmo.</p>
-<h2 id="recursao-com-tasks">Recursão com tasks<a class="headerlink" href="#recursao-com-tasks" title="Permanent link">&para;</a></h2>
-<p>O OpenMP também permite paralelizar recursão, mas com cuidado.</p>
-<p>Exemplo: Fibonacci recursivo.</p>
-<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="nf">fib</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">n</span><span class="p">;</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">;</span>
+<ul>
+<li><code>+</code> → soma (ex.: <code>soma += ...</code>)</li>
+<li><code>*</code> → produto (ex.: <code>prod *= ...</code>)</li>
+<li><code>max</code> → máximo (ex.: encontra o maior valor)</li>
+<li><code>min</code> → mínimo (ex.: encontra o menor valor)</li>
+<li><code>&amp;&amp;</code> → AND lógico</li>
+<li><code>||</code> → OR lógico</li>
+<li><code>^</code>  → XOR bit a bit</li>
+</ul>
+<h3 id="secoes-paralelas">Seções paralelas<a class="headerlink" href="#secoes-paralelas" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="cp">#pragma omp parallel sections</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="cp">#pragma omp section</span>
+<span class="w">    </span><span class="n">tarefa1</span><span class="p">();</span>
 
-<span class="w">    </span><span class="cp">#pragma omp task shared(x)</span>
-<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="mi">-1</span><span class="p">);</span>
-
-<span class="w">    </span><span class="cp">#pragma omp task shared(y)</span>
-<span class="w">    </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="mi">-2</span><span class="p">);</span>
-
-<span class="w">    </span><span class="cp">#pragma omp taskwait</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="p">;</span>
+<span class="w">    </span><span class="cp">#pragma omp section</span>
+<span class="w">    </span><span class="n">tarefa2</span><span class="p">();</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>Se você testar <code>fib(30)</code> ou <code>fib(35)</code>. Verá que muitas tasks pequenas podem até piorar o tempo, devido ao overhead.</p>
-<p>Pois é, nem sempre mais paralelismo significa mais velocidade.</p>
-<h2 id="conclusao">Conclusão<a class="headerlink" href="#conclusao" title="Permanent link">&para;</a></h2>
-<p>Na aula de hoje vimos que nem todo problema é igual. No caso da transformação elemento a elemento (map), o paralelismo funciona sem complicações porque cada iteração é totalmente independente. Já na soma parcial, o acesso simultâneo a uma variável compartilhada gera condições de corrida, que precisam ser resolvidas com mecanismos como <code>reduction</code>.</p>
-<p>Também vimos que alguns laços possuem dependência entre iterações, nestes casos, não basta inserir diretivas OpenMP: é necessário repensar o algoritmo para eliminar a dependência.</p>
-<p>Por fim, a experiência com recursão e tasks mostrou que o paralelismo pode gerar overhead se não for bem controlado. Criar muitas tarefas pequenas pode ser pior do que executar de forma sequencial.</p>
-<p><strong>Esta atividade não tem entrega, bom fim de semana!!!</strong></p>
+<ul>
+<li>Divide blocos de código independentes entre threads.</li>
+</ul>
+<h3 id="areas-criticas-e-exclusao-mutua">Áreas críticas e exclusão mútua<a class="headerlink" href="#areas-criticas-e-exclusao-mutua" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="cp">#pragma omp critical</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">contador</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<ul>
+<li>Apenas <strong>uma thread por vez</strong> entra nesse bloco.</li>
+<li>Útil para proteger atualizações em variáveis compartilhadas.</li>
+</ul>
+<h3 id="diretiva-single">Diretiva <code>single</code><a class="headerlink" href="#diretiva-single" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="cp">#pragma omp parallel</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="cp">#pragma omp single</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Executado por apenas 1 thread</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<ul>
+<li>Apenas <strong>uma thread</strong> executa esse trecho, mas as outras esperam.</li>
+</ul>
+<h3 id="barreira-de-sincronizacao">Barreira de sincronização<a class="headerlink" href="#barreira-de-sincronizacao" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="cp">#pragma omp barrier</span>
+</code></pre></div>
+<ul>
+<li>Faz todas as threads esperarem umas pelas outras antes de seguir adiante.</li>
+</ul>
+<h3 id="pragma-omp-parallel-for-collapsen"><code>#pragma omp parallel for collapse(n)</code><a class="headerlink" href="#pragma-omp-parallel-for-collapsen" title="Permanent link">&para;</a></h3>
+<p>O <code>collapse(n)</code> junta <code>n</code> loops aninhados em <strong>um só loop paralelo</strong>. Muito útil em matrizes e tensores.</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#pragma omp parallel for collapse(2)</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">M</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">j</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="pragma-omp-task"><code>#pragma omp task</code><a class="headerlink" href="#pragma-omp-task" title="Permanent link">&para;</a></h3>
+<p>Permite criar <strong>tarefas assíncronas</strong> dentro de uma região paralela. Muito usado para grafos, árvores e pipelines.</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#pragma omp parallel</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="cp">#pragma omp single</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="cp">#pragma omp task</span>
+<span class="w">        </span><span class="n">f1</span><span class="p">();</span>
+
+<span class="w">        </span><span class="cp">#pragma omp task</span>
+<span class="w">        </span><span class="n">f2</span><span class="p">();</span>
+
+<span class="w">        </span><span class="cp">#pragma omp taskwait   </span><span class="c1">// sincroniza as tasks</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="pragma-omp-atomic"><code>#pragma omp atomic</code><a class="headerlink" href="#pragma-omp-atomic" title="Permanent link">&para;</a></h3>
+<p>Protege uma operação simples (ex.: incremento) de condições de corrida, com overhead menor que <code>critical</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#pragma omp parallel for</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cp">#pragma omp atomic</span>
+<span class="w">    </span><span class="n">soma</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="pragma-omp-master-e-pragma-omp-single-nowait"><code>#pragma omp master</code> e <code>#pragma omp single nowait</code><a class="headerlink" href="#pragma-omp-master-e-pragma-omp-single-nowait" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>master</code>: só a thread 0 roda.</li>
+<li><code>single</code>: apenas uma thread roda (não necessariamente a 0).</li>
+<li><code>nowait</code>: libera as threads de esperarem.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="cp">#pragma omp parallel</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="cp">#pragma omp master</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Apenas a thread master executa</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cp">#pragma omp single nowait</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Uma thread qualquer executa e não há barreira</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="pragma-omp-simd"><code>#pragma omp simd</code><a class="headerlink" href="#pragma-omp-simd" title="Permanent link">&para;</a></h3>
+<p>Força a vetorização SIMD (Single Instruction Multiple Data). 
+Pode ser combinado com <code>parallel for</code> → <code>#pragma omp parallel for simd</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#pragma omp simd</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="controlando-variaveis">Controlando variáveis<a class="headerlink" href="#controlando-variaveis" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>firstprivate(var)</code> → cada thread ganha uma cópia inicializada com o valor original.</li>
+<li><code>lastprivate(var)</code> → garante que, ao final, o valor da última iteração fique na variável global.</li>
+<li><code>default(shared)</code> → define política padrão de variáveis (bom para pegar erros!).</li>
+</ul>
+<p>Documentação disponível em <a href="https://www.openmp.org/wp-content/uploads/OpenMP-4.5-1115-CPP-web.pdf">openmp.org</a></p>
+<h2 id="scheduling-no-openmp">Scheduling no OpenMP<a class="headerlink" href="#scheduling-no-openmp" title="Permanent link">&para;</a></h2>
+<p>Quando um laço é paralelizado, é preciso definir <strong>como as iterações serão distribuídas entre as threads</strong>. Essa estratégia é chamada de <strong>schedule</strong> (escalonamento).</p>
+<ul>
+<li><strong>static</strong> → divide as iterações em blocos fixos, atribuídos antecipadamente a cada thread.</li>
+<li><strong>dynamic</strong> → as iterações são distribuídas em blocos sob demanda, conforme as threads terminam suas tarefas.</li>
+<li><strong>guided</strong> → inicia com blocos maiores e reduz gradualmente o tamanho, equilibrando a carga de trabalho.</li>
+<li><strong>auto</strong> → delega ao compilador a escolha da estratégia.</li>
+<li><strong>runtime</strong> → a estratégia é definida em tempo de execução pela variável de ambiente <code>OMP_SCHEDULE</code>.</li>
+</ul>
+<p>A escolha do escalonamento não altera o resultado final da computação, mas impacta diretamente o desempenho e o balanceamento da carga de trabalho.</p>
+<p>O programa <code>omp_schedulers.cpp</code> é um código exemplo para <strong>visualizar a distribuição das iterações de um laço entre threads</strong> em diferentes estratégias de <code>schedule</code>.</p>
+<p>Observe a saída do código:
+<code>omp_schedulers.cpp</code>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span><span class="c1">   </span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span><span class="c1">     </span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span><span class="c1">     </span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;algorithm&gt;</span><span class="c1">  </span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;omp.h&gt;</span><span class="c1">      </span>
+
+<span class="c1">// -----------------------------------------------------------------------------</span>
+<span class="c1">//   Imprime a distribuição para visualizar o efeito do &#39;schedule&#39;.</span>
+<span class="c1">// -----------------------------------------------------------------------------</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">print_iterations</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">description</span><span class="p">,</span>
+<span class="w">                      </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">vectors</span><span class="p">,</span>
+<span class="w">                      </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">strings</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">());</span><span class="w"> </span><span class="c1">// 4 linhas de saída, uma por thread</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w">                        </span><span class="c1">// varre todas as iterações 0..n-1</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="w">                   </span><span class="c1">// para cada &quot;thread&quot; (0..3)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">vector</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vectors</span><span class="p">[</span><span class="n">j</span><span class="p">];</span><span class="w">           </span><span class="c1">// vetor com as iterações que a thread j executou</span>
+<span class="w">            </span><span class="k">auto</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">find</span><span class="p">(</span><span class="n">vector</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">vector</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="w"> </span><span class="n">i</span><span class="p">);</span><span class="w"> </span><span class="c1">// procura o i dentro do vetor da thread j</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">it</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">vector</span><span class="p">.</span><span class="n">end</span><span class="p">())</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="n">strings</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s">&quot;*&quot;</span><span class="p">;</span><span class="w">                     </span><span class="c1">// se a thread j executou a iteração i, marca &#39;*&#39;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">else</span>
+<span class="w">            </span><span class="p">{</span><span class="w"> </span>
+<span class="w">                </span><span class="n">strings</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">;</span><span class="w">                     </span><span class="c1">// caso contrário, espaço em branco</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">description</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w">             </span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">strings</span><span class="p">)</span><span class="w">                            </span><span class="c1">// imprime as 4 linhas (uma por thread)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// -----------------------------------------------------------------------------</span>
+<span class="c1">//   - Função que recebe a política de agendamento,</span>
+<span class="c1">//     a descrição e &#39;n&#39;.</span>
+<span class="c1">//   - Aloca &#39;vectors&#39; (4 vetores: um por thread) e chama &#39;function&#39; para preenchê-los.</span>
+<span class="c1">//   - Depois imprime o resultado com print_iterations.</span>
+<span class="c1">// -----------------------------------------------------------------------------</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">schedule</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">function</span><span class="p">,</span><span class="w"> </span>
+<span class="w">              </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">description</span><span class="p">,</span><span class="w"> </span>
+<span class="w">              </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">vectors</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">());</span><span class="w"> </span><span class="c1">// 4 threads simuladas</span>
+<span class="w">    </span><span class="n">function</span><span class="p">(</span><span class="n">vectors</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">);</span><span class="w">                                         </span><span class="c1">// executa a política (preenche vectors)</span>
+<span class="w">    </span><span class="n">print_iterations</span><span class="p">(</span><span class="n">description</span><span class="p">,</span><span class="w"> </span><span class="n">vectors</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">);</span><span class="w">                    </span><span class="c1">// visualiza distribuição</span>
+<span class="p">}</span>
+
+<span class="c1">// -----------------------------------------------------------------------------</span>
+<span class="c1">// Cada função &#39;scheduleXYZ&#39; abaixo:</span>
+<span class="c1">//   - Abre uma região paralela com 4 threads (num_threads(4))</span>
+<span class="c1">//   - Faz um for paralelo sobre i = 0..n-1</span>
+<span class="c1">//   - Cada thread registra a iteração &#39;i&#39; que executou em vectors[tid]</span>
+<span class="c1">// -----------------------------------------------------------------------------</span>
+
+<span class="c1">// Default: sem especificar &#39;schedule&#39; explicitamente (deixa o runtime decidir)</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">scheduleDefault</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span><span class="w"> </span><span class="n">vectors</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="cp">#pragma omp parallel num_threads(4) shared(vectors, n)</span>
+<span class="w">    </span><span class="p">{</span><span class="w">    </span>
+<span class="w">        </span><span class="cp">#pragma omp for</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">vectors</span><span class="p">[</span><span class="n">omp_get_thread_num</span><span class="p">()].</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span><span class="w"> </span><span class="c1">// registra a iteração i sob a thread atual</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// schedule(static): divide as iterações em blocos fixos, um por thread </span>
+<span class="kt">void</span><span class="w"> </span><span class="n">scheduleStatic</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span><span class="w"> </span><span class="n">vectors</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="cp">#pragma omp parallel num_threads(4) shared(vectors, n)</span>
+<span class="w">    </span><span class="p">{</span><span class="w">    </span>
+<span class="w">        </span><span class="cp">#pragma omp for schedule(static)</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">vectors</span><span class="p">[</span><span class="n">omp_get_thread_num</span><span class="p">()].</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// schedule(static, 4): blocos fixos de 4 iterações por vez</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">scheduleStatic4</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span><span class="w"> </span><span class="n">vectors</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="cp">#pragma omp parallel num_threads(4) shared(vectors, n)</span>
+<span class="w">    </span><span class="p">{</span><span class="w">    </span>
+<span class="w">        </span><span class="cp">#pragma omp for schedule(static, 4)</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">vectors</span><span class="p">[</span><span class="n">omp_get_thread_num</span><span class="p">()].</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// schedule(static, 8): blocos fixos de 8 iterações por vez</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">scheduleStatic8</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span><span class="w"> </span><span class="n">vectors</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="cp">#pragma omp parallel num_threads(4) shared(vectors, n)</span>
+<span class="w">    </span><span class="p">{</span><span class="w">    </span>
+<span class="w">        </span><span class="cp">#pragma omp for schedule(static, 8)</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">vectors</span><span class="p">[</span><span class="n">omp_get_thread_num</span><span class="p">()].</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// schedule(dynamic): threads pegam blocos sob demanda </span>
+<span class="kt">void</span><span class="w"> </span><span class="n">scheduleDynamic</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span><span class="w"> </span><span class="n">vectors</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="cp">#pragma omp parallel num_threads(4) shared(vectors, n)</span>
+<span class="w">    </span><span class="p">{</span><span class="w">    </span>
+<span class="w">        </span><span class="cp">#pragma omp for schedule(dynamic)</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">vectors</span><span class="p">[</span><span class="n">omp_get_thread_num</span><span class="p">()].</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// schedule(dynamic, 1): blocos dinâmicos de 1 iteração </span>
+<span class="kt">void</span><span class="w"> </span><span class="n">scheduleDynamic1</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span><span class="w"> </span><span class="n">vectors</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="cp">#pragma omp parallel num_threads(4) shared(vectors, n)</span>
+<span class="w">    </span><span class="p">{</span><span class="w">    </span>
+<span class="w">        </span><span class="cp">#pragma omp for schedule(dynamic, 1)</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">vectors</span><span class="p">[</span><span class="n">omp_get_thread_num</span><span class="p">()].</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// schedule(dynamic, 4): blocos dinâmicos de 4 iterações</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">scheduleDynamic4</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span><span class="w"> </span><span class="n">vectors</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="cp">#pragma omp parallel num_threads(4) shared(vectors, n)</span>
+<span class="w">    </span><span class="p">{</span><span class="w">    </span>
+<span class="w">        </span><span class="cp">#pragma omp for schedule(dynamic, 4)</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">vectors</span><span class="p">[</span><span class="n">omp_get_thread_num</span><span class="p">()].</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// schedule(dynamic, 8): blocos dinâmicos de 8 iterações</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">scheduleDynamic8</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span><span class="w"> </span><span class="n">vectors</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="cp">#pragma omp parallel num_threads(4) shared(vectors, n)</span>
+<span class="w">    </span><span class="p">{</span><span class="w">    </span>
+<span class="w">        </span><span class="cp">#pragma omp for schedule(dynamic, 8)</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">vectors</span><span class="p">[</span><span class="n">omp_get_thread_num</span><span class="p">()].</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// schedule(guided): blocos começam grandes e vão diminuindo </span>
+<span class="kt">void</span><span class="w"> </span><span class="n">scheduleGuided</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span><span class="w"> </span><span class="n">vectors</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="cp">#pragma omp parallel num_threads(4) shared(vectors, n)</span>
+<span class="w">    </span><span class="p">{</span><span class="w">    </span>
+<span class="w">        </span><span class="cp">#pragma omp for schedule(guided)</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">vectors</span><span class="p">[</span><span class="n">omp_get_thread_num</span><span class="p">()].</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// schedule(guided, 2): guided com bloco mínimo de 2</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">scheduleGuided2</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span><span class="w"> </span><span class="n">vectors</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="cp">#pragma omp parallel num_threads(4) shared(vectors, n)</span>
+<span class="w">    </span><span class="p">{</span><span class="w">    </span>
+<span class="w">        </span><span class="cp">#pragma omp for schedule(guided, 2)</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">vectors</span><span class="p">[</span><span class="n">omp_get_thread_num</span><span class="p">()].</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// schedule(guided, 4): guided com bloco mínimo de 4</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">scheduleGuided4</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span><span class="w"> </span><span class="n">vectors</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="cp">#pragma omp parallel num_threads(4) shared(vectors, n)</span>
+<span class="w">    </span><span class="p">{</span><span class="w">    </span>
+<span class="w">        </span><span class="cp">#pragma omp for schedule(guided, 4)</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">vectors</span><span class="p">[</span><span class="n">omp_get_thread_num</span><span class="p">()].</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// schedule(guided, 8): guided com bloco mínimo de 8</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">scheduleGuided8</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span><span class="w"> </span><span class="n">vectors</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="cp">#pragma omp parallel num_threads(4) shared(vectors, n)</span>
+<span class="w">    </span><span class="p">{</span><span class="w">    </span>
+<span class="w">        </span><span class="cp">#pragma omp for schedule(guided, 8)</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">vectors</span><span class="p">[</span><span class="n">omp_get_thread_num</span><span class="p">()].</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// schedule(auto): deixa o runtime escolher o melhor </span>
+<span class="kt">void</span><span class="w"> </span><span class="n">scheduleAuto</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span><span class="w"> </span><span class="n">vectors</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="cp">#pragma omp parallel num_threads(4) shared(vectors, n)</span>
+<span class="w">    </span><span class="p">{</span><span class="w">    </span>
+<span class="w">        </span><span class="cp">#pragma omp for schedule(auto)</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">vectors</span><span class="p">[</span><span class="n">omp_get_thread_num</span><span class="p">()].</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// schedule(auto): deixa o compilador escolher a melhor estratégia</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">scheduleRuntime</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span><span class="w"> </span><span class="n">vectors</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="cp">#pragma omp parallel num_threads(4) shared(vectors, n)</span>
+<span class="w">    </span><span class="p">{</span><span class="w">    </span>
+<span class="w">        </span><span class="cp">#pragma omp for schedule(auto) </span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">vectors</span><span class="p">[</span><span class="n">omp_get_thread_num</span><span class="p">()].</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">64</span><span class="p">;</span><span class="w"> </span><span class="c1">// número de iterações do laço a serem distribuídas entre 4 threads</span>
+
+<span class="w">    </span><span class="c1">// Executa cada política de agendamento e imprime a “faixa” de iterações por thread.</span>
+<span class="w">    </span><span class="n">schedule</span><span class="p">(</span><span class="n">scheduleDefault</span><span class="p">,</span><span class="w">  </span><span class="s">&quot;default:               &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">);</span>
+<span class="w">    </span><span class="n">schedule</span><span class="p">(</span><span class="n">scheduleStatic</span><span class="p">,</span><span class="w">   </span><span class="s">&quot;schedule(static):      &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">);</span>
+<span class="w">    </span><span class="n">schedule</span><span class="p">(</span><span class="n">scheduleStatic4</span><span class="p">,</span><span class="w">  </span><span class="s">&quot;schedule(static, 4):   &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">);</span>
+<span class="w">    </span><span class="n">schedule</span><span class="p">(</span><span class="n">scheduleStatic8</span><span class="p">,</span><span class="w">  </span><span class="s">&quot;schedule(static, 8):   &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">);</span>
+<span class="w">    </span><span class="n">schedule</span><span class="p">(</span><span class="n">scheduleDynamic</span><span class="p">,</span><span class="w">  </span><span class="s">&quot;schedule(dynamic):     &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">);</span>
+<span class="w">    </span><span class="n">schedule</span><span class="p">(</span><span class="n">scheduleDynamic1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;schedule(dynamic, 1):  &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">);</span>
+<span class="w">    </span><span class="n">schedule</span><span class="p">(</span><span class="n">scheduleDynamic4</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;schedule(dynamic, 4):  &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">);</span>
+<span class="w">    </span><span class="n">schedule</span><span class="p">(</span><span class="n">scheduleDynamic8</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;schedule(dynamic, 8):  &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">);</span>
+<span class="w">    </span><span class="n">schedule</span><span class="p">(</span><span class="n">scheduleGuided</span><span class="p">,</span><span class="w">   </span><span class="s">&quot;schedule(guided):      &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">);</span>
+<span class="w">    </span><span class="n">schedule</span><span class="p">(</span><span class="n">scheduleGuided2</span><span class="p">,</span><span class="w">  </span><span class="s">&quot;schedule(guided, 2):   &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">);</span>
+<span class="w">    </span><span class="n">schedule</span><span class="p">(</span><span class="n">scheduleGuided4</span><span class="p">,</span><span class="w">  </span><span class="s">&quot;schedule(guided, 4):   &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">);</span>
+<span class="w">    </span><span class="n">schedule</span><span class="p">(</span><span class="n">scheduleGuided8</span><span class="p">,</span><span class="w">  </span><span class="s">&quot;schedule(guided, 8):   &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">);</span>
+<span class="w">    </span><span class="n">schedule</span><span class="p">(</span><span class="n">scheduleAuto</span><span class="p">,</span><span class="w">     </span><span class="s">&quot;schedule(auto):        &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">);</span>
+<span class="w">    </span><span class="n">schedule</span><span class="p">(</span><span class="n">scheduleRuntime</span><span class="p">,</span><span class="w">  </span><span class="s">&quot;schedule(runtime):     &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<p><strong>Compilar o código com OpenMP</strong></p>
+<div class="highlight"><pre><span></span><code>g++<span class="w"> </span>-fopenmp<span class="w"> </span>omp_schedulers.cpp<span class="w"> </span>-o<span class="w"> </span>omp_schedulers
+</code></pre></div>
+<p><strong>Rodar no cluster com SLURM</strong> definindo o número de threads:</p>
+<div class="highlight"><pre><span></span><code>srun<span class="w"> </span>--partition<span class="o">=</span>normal<span class="w"> </span>--ntasks<span class="o">=</span><span class="m">1</span><span class="w"> </span>--cpus-per-task<span class="o">=</span><span class="m">4</span><span class="w"> </span>./omp_schedulers
+</code></pre></div>
+<p>ou</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="c1">#SBATCH --job-name=omp_scheduler_test   # nome do job</span>
+<span class="c1">#SBATCH --output=output_omp_schedulers.out  # arquivo de saída</span>
+<span class="c1">#SBATCH --cpus-per-task=4               # 4 threads para usar</span>
+<span class="c1">#SBATCH --time=00:05:00                 # tempo máximo de execução</span>
+<span class="c1">#SBATCH --mem=2G                        # Memória </span>
+
+<span class="c1"># garante que o OpenMP use exatamente os recursos alocados pelo SLURM</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">OMP_NUM_THREADS</span><span class="o">=</span><span class="si">${</span><span class="nv">SLURM_CPUS_PER_TASK</span><span class="si">}</span>
+
+<span class="c1"># executa o binário</span>
+./omp_schedulers
+</code></pre></div>
+<h3 id="analisando-os-schedulers-no-openmp">Analisando os Schedulers no OpenMP<a class="headerlink" href="#analisando-os-schedulers-no-openmp" title="Permanent link">&para;</a></h3>
+<p>Cada scheduler do OpenMP se comporta de maneira diferente, e você deve observar o impacto de cada um:</p>
+<p><strong>static</strong>: As iterações são divididas igualmente entre as threads.</p>
+<p><strong>dynamic</strong>: As threads pegam blocos de iterações conforme terminam o trabalho.</p>
+<p><strong>guided</strong>: Distribui blocos maiores no início e menores no final, equilibrando a carga.</p>
+<p><strong>auto</strong>: Deixa o compilador escolher a melhor estratégia.</p>
+<p><strong>runtime</strong>: Usa a estratégia definida em tempo de execução.</p>
+<h2 id="sua-vez-de-paralelizar-com-openmp">Sua vez de paralelizar com OpenMP<a class="headerlink" href="#sua-vez-de-paralelizar-com-openmp" title="Permanent link">&para;</a></h2>
+<p>Código base:</p>
+<p><code>paralelo.cpp</code>
+<div class="highlight"><pre><span></span><code><span class="c1">// Compile: g++ -FlagDeOtimização -fopenmp paralelo.cpp -o paralelo</span>
+<span class="c1">// Execute: ./paralelo [N]  (N padrão = 10&#39;000&#39;000)</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;random&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;algorithm&gt;</span><span class="c1"> </span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;omp.h&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">**</span><span class="w"> </span><span class="n">argv</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// ------------------------------</span>
+<span class="w">    </span><span class="c1">// Parâmetros e dados de entrada</span>
+<span class="w">    </span><span class="c1">// ------------------------------</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">argc</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">stoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">10&#39;000&#39;000</span><span class="p">);</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;N = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Vetor base (valores aleatórios em [0,1))</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="w"> </span><span class="n">a</span><span class="p">(</span><span class="n">N</span><span class="p">);</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">mt19937</span><span class="w"> </span><span class="n">rng</span><span class="p">(</span><span class="mi">123</span><span class="p">);</span><span class="w">                </span><span class="c1">// seed fixa só p/ reprodutibilidade</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">uniform_real_distribution</span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="n">U</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">);</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="n">U</span><span class="p">(</span><span class="n">rng</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// =========================================================</span>
+<span class="w">    </span><span class="c1">// Transformação elemento-a-elemento </span>
+<span class="w">    </span><span class="c1">// =========================================================</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.0f</span><span class="p">,</span><span class="w"> </span><span class="n">beta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">35.5f</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="w"> </span><span class="n">c</span><span class="p">(</span><span class="n">N</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">t0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">omp_get_wtime</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">beta</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">omp_get_wtime</span><span class="p">();</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;[A] tempo = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="p">(</span><span class="n">t1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">t0</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">idx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">N</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="c1">// pega o elemento do meio do vetor</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;[A] c[&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">idx</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;] = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">c</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// =========================================================</span>
+<span class="w">    </span><span class="c1">// TAREFA B: Soma </span>
+<span class="w">    </span><span class="c1">// =========================================================</span>
+<span class="w">    </span><span class="n">t0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">omp_get_wtime</span><span class="p">();</span>
+
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">soma</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">soma</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">t1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">omp_get_wtime</span><span class="p">();</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;[B] tempo = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="p">(</span><span class="n">t1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">t0</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; s | soma  = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">soma</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<details class="note">
+<summary>Gabarito</summary>
+<div class="highlight"><pre><span></span><code><span class="c1">// Compile: g++ -O3 -fopenmp paralelo.cpp -o paralelo</span>
+<span class="c1">// Execute: ./paralelo [N]</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;random&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;algorithm&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;omp.h&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">**</span><span class="w"> </span><span class="n">argv</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="c1">// ------------------------------</span>
+<span class="w">    </span><span class="c1">// Parâmetros e dados de entrada</span>
+<span class="w">    </span><span class="c1">// ------------------------------</span>
+<span class="w">    </span><span class="c1">// Se o usuário passar N na linha de comando, usamos.</span>
+<span class="w">    </span><span class="c1">// Caso contrário, usamos 10 milhões como padrão.</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">argc</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">stoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">10&#39;000&#39;000</span><span class="p">);</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;N = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Mostra quantas threads estão disponíveis</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Threads disponíveis = &quot;</span>
+<span class="w">            </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">omp_get_max_threads</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// ---------------------------------------------------------</span>
+<span class="w">    </span><span class="c1">// Geração do vetor base </span>
+<span class="w">    </span><span class="c1">// ---------------------------------------------------------</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="w"> </span><span class="n">a</span><span class="p">(</span><span class="n">N</span><span class="p">);</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">mt19937</span><span class="w"> </span><span class="n">rng</span><span class="p">(</span><span class="mi">123</span><span class="p">);</span><span class="w">  </span><span class="c1">// seed fixa para reprodutibilidade</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">uniform_real_distribution</span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="n">U</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span>
+<span class="w">            </span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="n">U</span><span class="p">(</span><span class="n">rng</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// =========================================================</span>
+<span class="w">    </span><span class="c1">// TAREFA A: Transformação elemento-a-elemento</span>
+<span class="w">    </span><span class="c1">// =========================================================</span>
+<span class="w">    </span><span class="c1">// Este é um caso clássico de paralelismo de dados:</span>
+<span class="w">    </span><span class="c1">// Cada iteração é independente.</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.0f</span><span class="p">,</span><span class="w"> </span><span class="n">beta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">35.5f</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="w"> </span><span class="n">c</span><span class="p">(</span><span class="n">N</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">t0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">omp_get_wtime</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// parallel for:</span>
+<span class="w">    </span><span class="c1">// - Cria múltiplas threads</span>
+<span class="w">    </span><span class="c1">// - Divide automaticamente o intervalo [0, N)</span>
+<span class="w">    </span><span class="c1">// - Cada thread processa um bloco do vetor</span>
+<span class="w">    </span><span class="c1">// schedule(static) divide igualmente</span>
+<span class="w">    </span><span class="cp">#pragma omp parallel for schedule(static)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">beta</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">omp_get_wtime</span><span class="p">();</span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;[A] tempo = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="p">(</span><span class="n">t1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">t0</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Apenas para verificar correção</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">idx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">N</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;[A] c[&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">idx</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;] = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">c</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// =========================================================</span>
+<span class="w">    </span><span class="c1">// TAREFA B: Soma dos quadrados</span>
+<span class="w">    </span><span class="c1">// =========================================================</span>
+<span class="w">    </span><span class="c1">// Aqui existe dependência de escrita na variável &#39;soma&#39;.</span>
+<span class="w">    </span><span class="c1">// Sem tratamento adequado haveria race condition.</span>
+<span class="w">    </span><span class="n">t0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">omp_get_wtime</span><span class="p">();</span>
+
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">soma</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// reduction(+:soma):</span>
+<span class="w">    </span><span class="c1">// - Cada thread recebe uma cópia privada de &#39;soma&#39;</span>
+<span class="w">    </span><span class="c1">// - Faz a acumulação localmente</span>
+<span class="w">    </span><span class="c1">// - Ao final, OpenMP combina todos os resultados</span>
+<span class="w">    </span><span class="c1">// Isso evita race condition e é mais eficiente que atomic/critical.</span>
+<span class="w">    </span><span class="cp">#pragma omp parallel for reduction(+:soma) schedule(static)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">soma</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="w"> </span><span class="o">*</span>
+<span class="w">                </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">t1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">omp_get_wtime</span><span class="p">();</span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;[B] tempo = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="p">(</span><span class="n">t1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">t0</span><span class="p">)</span>
+<span class="w">            </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; s | soma = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">soma</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+</details>
+<p>Para Compilar:</p>
+<div class="highlight"><pre><span></span><code>g++<span class="w"> </span>-FlagDeOtimização<span class="w"> </span>-fopenmp<span class="w"> </span>paralelo.cpp<span class="w"> </span>-o<span class="w"> </span>paralelo
+</code></pre></div>
+<p>Para Executar:
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="c1">#SBATCH --job-name=paralelo_todo      # Nome do job</span>
+<span class="c1">#SBATCH --output=paralelo.txt         # nome do arquivo de saida</span>
+<span class="c1">#SBATCH --cpus-per-task=4             # Esse processo tem 4 threads disponíveis para usar</span>
+<span class="c1">#SBATCH --mem=2G                      # Memória solicitada</span>
+<span class="c1">#SBATCH --time=00:05:00               # Tempo solicitado (hh:mm:ss)</span>
+<span class="c1">#SBATCH --partition=normal            # fila</span>
+
+<span class="c1"># ------------------------------</span>
+<span class="c1"># Configurações OpenMP</span>
+<span class="c1"># ------------------------------</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">OMP_NUM_THREADS</span><span class="o">=</span><span class="si">${</span><span class="nv">SLURM_CPUS_PER_TASK</span><span class="si">}</span><span class="w">   </span><span class="c1"># OpenMP abre 4 threads e distribui o trabalho entre elas</span>
+
+<span class="c1"># Troque aqui o Schedule do seu teste</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">OMP_SCHEDULE</span><span class="o">=</span>static
+
+<span class="c1"># Prints bonitinhos</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;==== Configuração de Execução ====&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Job ID          : </span><span class="nv">$SLURM_JOB_ID</span><span class="s2">&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;CPUs-per-task   : </span><span class="nv">$SLURM_CPUS_PER_TASK</span><span class="s2">&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Memória total   : </span><span class="nv">$SLURM_MEM_PER_NODE</span><span class="s2"> MB&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;OMP_NUM_THREADS : </span><span class="nv">$OMP_NUM_THREADS</span><span class="s2">&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;OMP_SCHEDULE    : </span><span class="nv">$OMP_SCHEDULE</span><span class="s2">&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;==================================&quot;</span>
+
+<span class="c1"># ------------------------------</span>
+<span class="c1"># Executa o programa</span>
+<span class="c1"># ------------------------------</span>
+./paralelo<span class="w"> </span>
+</code></pre></div></p>
+<h3 id="para-entender-se-voce-entendeu">Para entender se você entendeu!<a class="headerlink" href="#para-entender-se-voce-entendeu" title="Permanent link">&para;</a></h3>
+<p>Paralelizar laços com OpenMP, comparar o efeito de <code>schedule</code> no desempenho.</p>
+<p><strong>Solicitações de Implementação</strong></p>
+<ol>
+<li>Paralelize o código paralelo.cpp.</li>
+<li>Registre <strong>tempo</strong> e <strong>valor da conta</strong> em 3 execuções para cada <code>OMP_SCHEDULE = static</code>, <code>dynamic</code>, <code>guided</code>.</li>
+<li>O que está sendo paralelizado nesse for? O que está sendo distribuido entre as threads?</li>
+</ol>
+<h3 id="parametros-de-execucao">Parâmetros de Execução<a class="headerlink" href="#parametros-de-execucao" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Varie <code>OMP_NUM_THREADS</code> em {1, 2, 4, 8, 16} </li>
+<li>Mantenha os <strong>mesmos N</strong> (tamanho do problema) em todas as comparações do mesmo grupo.</li>
+</ul>
+<p><strong>Perguntas de Análise</strong></p>
+<ul>
+<li>Houve <strong>speedup</strong> com mais threads? Até onde?</li>
+<li><code>static</code> vs <code>dynamic</code> vs <code>guided</code>: quem foi melhor? Alguma diferença relevante?</li>
+</ul>
+<h2 id="esta-atividade-nao-tem-entrega-boa-semana"><strong>Esta atividade não tem entrega, boa semana!</strong><a class="headerlink" href="#esta-atividade-nao-tem-entrega-boa-semana" title="Permanent link">&para;</a></h2>
 
 
 
