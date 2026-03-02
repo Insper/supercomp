@@ -9,3 +9,5 @@
 [Aula 4](slides/Aula04.pdf)
 
 [Aula 5](slides/Aula05.pdf)
+
+[Aula 6](slides/Aula06.pdf)
