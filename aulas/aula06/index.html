@@ -775,16 +775,7 @@
           <li class="md-nav__item">
   <a href="#para-entender-se-voce-entendeu" class="md-nav__link">
     <span class="md-ellipsis">
-      Para entender se você entendeu!
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#parametros-de-execucao" class="md-nav__link">
-    <span class="md-ellipsis">
-      Parâmetros de Execução
+      Para entender se você entendeu!!
     </span>
   </a>
   
@@ -792,15 +783,6 @@
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#esta-atividade-nao-tem-entrega-boa-semana" class="md-nav__link">
-    <span class="md-ellipsis">
-      Esta atividade não tem entrega, boa semana!
-    </span>
-  </a>
   
 </li>
       
@@ -1260,16 +1242,7 @@
           <li class="md-nav__item">
   <a href="#para-entender-se-voce-entendeu" class="md-nav__link">
     <span class="md-ellipsis">
-      Para entender se você entendeu!
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#parametros-de-execucao" class="md-nav__link">
-    <span class="md-ellipsis">
-      Parâmetros de Execução
+      Para entender se você entendeu!!
     </span>
   </a>
   
@@ -1277,15 +1250,6 @@
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#esta-atividade-nao-tem-entrega-boa-semana" class="md-nav__link">
-    <span class="md-ellipsis">
-      Esta atividade não tem entrega, boa semana!
-    </span>
-  </a>
   
 </li>
       
@@ -1813,7 +1777,7 @@ Pode ser combinado com <code>parallel for</code> → <code>#pragma omp parallel 
 <div class="highlight"><pre><span></span><code>g++<span class="w"> </span>-fopenmp<span class="w"> </span>omp_schedulers.cpp<span class="w"> </span>-o<span class="w"> </span>omp_schedulers
 </code></pre></div>
 <p><strong>Rodar no cluster com SLURM</strong> definindo o número de threads:</p>
-<div class="highlight"><pre><span></span><code>srun<span class="w"> </span>--partition<span class="o">=</span>normal<span class="w"> </span>--ntasks<span class="o">=</span><span class="m">1</span><span class="w"> </span>--cpus-per-task<span class="o">=</span><span class="m">4</span><span class="w"> </span>./omp_schedulers
+<div class="highlight"><pre><span></span><code>srun<span class="w"> </span>--partition<span class="o">=</span>normal<span class="w"> </span>--cpus-per-task<span class="o">=</span><span class="m">4</span><span class="w"> </span>./omp_schedulers
 </code></pre></div>
 <p>ou</p>
 <div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
@@ -2023,25 +1987,13 @@ Pode ser combinado com <code>parallel for</code> → <code>#pragma omp parallel 
 <span class="c1"># ------------------------------</span>
 ./paralelo<span class="w"> </span>
 </code></pre></div></p>
-<h3 id="para-entender-se-voce-entendeu">Para entender se você entendeu!<a class="headerlink" href="#para-entender-se-voce-entendeu" title="Permanent link">&para;</a></h3>
-<p>Paralelizar laços com OpenMP, comparar o efeito de <code>schedule</code> no desempenho.</p>
-<p><strong>Solicitações de Implementação</strong></p>
-<ol>
-<li>Paralelize o código paralelo.cpp.</li>
-<li>Registre <strong>tempo</strong> e <strong>valor da conta</strong> em 3 execuções para cada <code>OMP_SCHEDULE = static</code>, <code>dynamic</code>, <code>guided</code>.</li>
-<li>O que está sendo paralelizado nesse for? O que está sendo distribuido entre as threads?</li>
-</ol>
-<h3 id="parametros-de-execucao">Parâmetros de Execução<a class="headerlink" href="#parametros-de-execucao" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Varie <code>OMP_NUM_THREADS</code> em {1, 2, 4, 8, 16} </li>
-<li>Mantenha os <strong>mesmos N</strong> (tamanho do problema) em todas as comparações do mesmo grupo.</li>
-</ul>
-<p><strong>Perguntas de Análise</strong></p>
-<ul>
-<li>Houve <strong>speedup</strong> com mais threads? Até onde?</li>
-<li><code>static</code> vs <code>dynamic</code> vs <code>guided</code>: quem foi melhor? Alguma diferença relevante?</li>
-</ul>
-<h2 id="esta-atividade-nao-tem-entrega-boa-semana"><strong>Esta atividade não tem entrega, boa semana!</strong><a class="headerlink" href="#esta-atividade-nao-tem-entrega-boa-semana" title="Permanent link">&para;</a></h2>
+<h3 id="para-entender-se-voce-entendeu">Para entender se você entendeu!!<a class="headerlink" href="#para-entender-se-voce-entendeu" title="Permanent link">&para;</a></h3>
+<p>O objetivo desta atividade é praticar a paralelização de laços com OpenMP e analisar como diferentes políticas de escalonamento (<code>schedule</code>) impactam o desempenho.</p>
+<p>Você deverá modificar o arquivo <code>paralelo.cpp</code>, paralelizando os laços apropriados com OpenMP. Em seguida, execute o programa utilizando os três tipos de escalonamento: <code>static</code>, <code>dynamic</code> e <code>guided</code>.</p>
+<p>Varie o número de threads utilizando <code>OMP_NUM_THREADS</code> nos valores {1, 2, 4, 8, 16}.</p>
+<p>Observe se houve ganho de desempenho ao aumentar o número de threads. O speedup ocorreu de forma proporcional? Até que ponto o aumento de threads trouxe benefício?</p>
+<p>Compare também os três tipos de escalonamento (<code>static</code>, <code>dynamic</code> e <code>guided</code>). Algum deles apresentou desempenho superior? As diferenças foram significativas ou praticamente irrelevantes para este tipo de problema?</p>
+<h1 id="esta-atividade-nao-precisa-ser-entregue-boa-semana">Esta atividade não precisa ser entregue. Boa semana!<a class="headerlink" href="#esta-atividade-nao-precisa-ser-entregue-boa-semana" title="Permanent link">&para;</a></h1>
 
 
 
