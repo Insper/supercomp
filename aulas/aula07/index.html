@@ -11,6 +11,10 @@
         <link rel="canonical" href="https://insper.github.io/supercomp/aulas/aula07/">
       
       
+        <link rel="prev" href="../aula06/">
+      
+      
+        <link rel="next" href="../../teoria/slides/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -18,7 +22,7 @@
     
     
       
-        <title>Index - SuperComputação - 2026/1</title>
+        <title>Aula 07 - Efeitos colaterias do paralelismo - SuperComputação - 2026/1</title>
       
     
     
@@ -80,7 +84,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#ping-pong" class="md-skip">
+        <a href="#efeitos-colaterais-do-paralelismo" class="md-skip">
           Skip to content
         </a>
       
@@ -114,7 +118,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Index
+              Aula 07 - Efeitos colaterias do paralelismo
             
           </span>
         </div>
@@ -227,10 +231,12 @@
         
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
+      <li class="md-tabs__item md-tabs__item--active">
         <a href="../aula01/" class="md-tabs__link">
           
   
@@ -351,23 +357,28 @@
       
   
   
+    
   
   
+  
     
     
     
-      
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
             
   
   <span class="md-ellipsis">
@@ -379,7 +390,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             Aulas
@@ -513,6 +524,153 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Aula 07 - Efeitos colaterias do paralelismo
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Aula 07 - Efeitos colaterias do paralelismo
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#transformacao-elemento-a-elemento-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      Transformação elemento-a-elemento (map)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#soma-reducao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Soma (redução)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dependencia-de-dados" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dependência de dados
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Dependência de dados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#versao-paralelizavel" class="md-nav__link">
+    <span class="md-ellipsis">
+      Versão paralelizável:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-dos-slides" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemplo dos Slides
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Exemplo dos Slides">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#versao-paralela-com-openmp" class="md-nav__link">
+    <span class="md-ellipsis">
+      Versão paralela com OpenMP
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#versao-iterativa" class="md-nav__link">
+    <span class="md-ellipsis">
+      Versão Iterativa
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusão
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -742,6 +900,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -750,46 +910,37 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#ping-pong" class="md-nav__link">
+  <a href="#transformacao-elemento-a-elemento-map" class="md-nav__link">
     <span class="md-ellipsis">
-      Ping-pong
+      Transformação elemento-a-elemento (map)
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Ping-pong">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#soma-reducao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Soma (redução)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dependencia-de-dados" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dependência de dados
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Dependência de dados">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#compile-o-programa" class="md-nav__link">
+  <a href="#versao-paralelizavel" class="md-nav__link">
     <span class="md-ellipsis">
-      Compile o programa:
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#script-slurm" class="md-nav__link">
-    <span class="md-ellipsis">
-      Script SLURM
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#submeta-o-job-com-slurm" class="md-nav__link">
-    <span class="md-ellipsis">
-      Submeta o job com SLURM:
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#voce-deve-ver-algo-como-isso" class="md-nav__link">
-    <span class="md-ellipsis">
-      Você deve ver algo como isso:
+      Versão paralelizável:
     </span>
   </a>
   
@@ -801,27 +952,42 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#token-em-anel" class="md-nav__link">
+  <a href="#exemplo-dos-slides" class="md-nav__link">
     <span class="md-ellipsis">
-      Token em anel
+      Exemplo dos Slides
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Exemplo dos Slides">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#versao-paralela-com-openmp" class="md-nav__link">
+    <span class="md-ellipsis">
+      Versão paralela com OpenMP
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#alternancia" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#versao-iterativa" class="md-nav__link">
     <span class="md-ellipsis">
-      Alternância
+      Versão Iterativa
     </span>
   </a>
   
 </li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
-  <a href="#o-que-voce-deve-entregar" class="md-nav__link">
+  <a href="#conclusao" class="md-nav__link">
     <span class="md-ellipsis">
-      O que você deve entregar:
+      Conclusão
     </span>
   </a>
   
@@ -846,152 +1012,407 @@
   
 
 
-<p>Message Passing Interface (MPI) é um padrão para comunicação de dados em computação paralela. Existem várias modalidades de computação paralela, e dependendo do problema que se está tentando resolver, pode ser necessário passar informações entre os vários processadores ou nós de um cluster, e o MPI oferece uma infraestrutura para essa tarefa.</p>
-<p>Para iniciarmos o nosso estudo de MPI, implemente os desafios abaixo, entendendo como encadear sends e receives, e o impacto nos resultados.</p>
-<h2 id="ping-pong"><strong>Ping-pong</strong><a class="headerlink" href="#ping-pong" title="Permanent link">&para;</a></h2>
-<p>A ideia é medir a <strong>latência de comunicação ponto a ponto</strong>.</p>
-<p>Implemente o ping-pong: rank 0 envia uma mensagem ao rank 1, que responde.
-Faça duas versões:</p>
+<h1 id="efeitos-colaterais-do-paralelismo">Efeitos Colaterais do Paralelismo<a class="headerlink" href="#efeitos-colaterais-do-paralelismo" title="Permanent link">&para;</a></h1>
+<p>Paralelizar um programa pode parecer simples: basta distribuir as iterações de um laço entre várias threads e esperar que o tempo de execução diminua.</p>
+<p>Na prática, porém, quando múltiplas threads executam ao mesmo tempo elas podem competir pelo acesso a dados compartilhados, gerar condições de corrida, produzir resultados incorretos ou até tornar o programa mais lento devido ao overhead de sincronização e criação de tarefas.</p>
+<p>O objetivo não é apenas adicionar diretivas de paralelismo ao código, mas entender quando o paralelismo funciona bem, e quando é melhor repensar a estratégia para ganhar desempenho.</p>
+<h2 id="transformacao-elemento-a-elemento-map">Transformação elemento-a-elemento (map)<a class="headerlink" href="#transformacao-elemento-a-elemento-map" title="Permanent link">&para;</a></h2>
+<p>Na aula passada implementamos o paralelismo neste laço:</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#pragma omp parallel for schedule(runtime)</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">beta</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
 <ul>
-<li><strong>Bloqueante</strong> (<code>MPI_Send/MPI_Recv</code>)</li>
-<li><strong>Não-bloqueante</strong> (<code>MPI_Isend/Irecv + MPI_Wait</code>)</li>
+<li>Você executou com 1, 2, 4 e 8 threads.</li>
+<li>Testou diferentes <code>OMP_SCHEDULE</code> (<code>static</code>, <code>dynamic</code>, <code>guided</code>).</li>
+<li>Observou que o <strong>resultado não muda nunca</strong>, apenas o <strong>tempo de execução</strong> varia.</li>
 </ul>
-<p>Rode os testes:</p>
+<p>Este é um exemplo de paralelismo <strong>seguro</strong>, pois cada iteração escreve em posições diferentes do vetor <code>c</code>.</p>
+<p><strong>Pergunta para pensar:</strong> por que será que este laço é naturalmente paralelizável e não da problema nenhum?</p>
+<h2 id="soma-reducao">Soma (redução)<a class="headerlink" href="#soma-reducao" title="Permanent link">&para;</a></h2>
+<p>Também vimos esse for, se apenas paralelizar ele sem muito cuidado, pode acabar caindo na cheteação de implementar algo como:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">double</span><span class="w"> </span><span class="n">soma</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
+<span class="cp">#pragma omp parallel for schedule(runtime)</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">soma</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span><span class="w"> </span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Com essa implementação os valores da soma ficaram inconsistentes.
+Isso acontece porque várias threads tentam atualizar a mesma variável ao mesmo tempo gerando condição de corrida (<em>race condition</em>).</p>
+<p>Para situações desse tipo, o certo é usar uma redução.</p>
+<div class="highlight"><pre><span></span><code><span class="kt">double</span><span class="w"> </span><span class="n">soma</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
+<span class="cp">#pragma omp parallel for schedule(runtime) reduction(+:soma)</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">soma</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">];</span><span class="w"> </span><span class="c1">// &lt;- corrigido</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Agora cada thread acumula uma soma local e no final todas são combinadas.
+O resultado fica estável e correto em qualquer número de threads.</p>
+<h2 id="dependencia-de-dados">Dependência de dados<a class="headerlink" href="#dependencia-de-dados" title="Permanent link">&para;</a></h2>
+<p>Nem sempre podemos dar um "jeitinho" para paralelizar</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="mi">-1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="c1">// depende da iteração anterior</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Aqui há uma dependência entre iterações: para calcular <code>a[i]</code> é necessário já ter calculado <code>a[i-1]</code>.
+Paralelizar assim gera resultado incorreto.</p>
+<p>Só é possível resolver reformulando o algoritmo. </p>
+<p>Maaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaas se observarmos bem, esse cálculo é apenas uma progressão aritmética:</p>
 <ul>
-<li>Mensagens de <strong>16 B, 1 KB, 64 KB, 1 MB</strong></li>
-<li>Em 2, 3 e 4 nós </li>
+<li><code>a[1] = a[0] + 1</code></li>
+<li><code>a[2] = a[0] + 2</code></li>
+<li><code>a[3] = a[0] + 3</code></li>
+<li>…</li>
+<li><code>a[i] = a[0] + i</code></li>
 </ul>
-<div class="admonition tip">
-<p class="admonition-title">Dica!</p>
-<p>Lembre-se, cada double ocupa 8 bytes, cada float ocupa 4 bytes, cada int ocupa 4 bytes, cada char, 1 byte.</p>
-</div>
-<p>Analise: </p>
-<ul>
-<li>Para mensagens pequenas, o que domina: <strong>latência fixa</strong> ou <strong>tamanho da mensagem</strong>?</li>
-<li>A partir de que tamanho de mensagem o gargalo passa a ser a <strong>largura de banda</strong> da rede?</li>
-</ul>
-<p>Código base:
-<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;mpi.h&gt;</span><span class="c1">        // Biblioteca principal do MPI para comunicação entre processos</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span><span class="c1">    </span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstring&gt;</span><span class="c1">      </span>
+<p>Ou seja, o valor de <code>a[i]</code> não precisa necessariamente <code>a[i-1]</code>, pode ser calculado diretamente.</p>
+<h3 id="versao-paralelizavel">Versão paralelizável:<a class="headerlink" href="#versao-paralelizavel" title="Permanent link">&para;</a></h3>
+<p>Mas somos BR's, e BR é bom mesmo de estratégia!</p>
+<p>Quem disse que não da pra dar um "jeitinho"?</p>
+<p><div class="highlight"><pre><span></span><code><span class="cp">#pragma omp parallel for schedule(dynamic)</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+O loop original tem dependência sequencial, mas ao analizar o padrão, vemos que é uma progressão. Com uma estratégia adequada eliminamos o problema, agora cada iteração é independente e pode ser distribuída entre threads sem polêmicas.</p>
+<p>Fica ai uma grande lição:</p>
+<p><code>Paralelizar não é só usar #pragma, é preciso analizar o código.</code></p>
+<h2 id="exemplo-dos-slides">Exemplo dos Slides<a class="headerlink" href="#exemplo-dos-slides" title="Permanent link">&para;</a></h2>
+<p>Versão recursiva e sequencial do Fibonacci:
+<div class="highlight"><pre><span></span><code><span class="c1">//fib_seq.cpp</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;chrono&gt;</span>
 
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">**</span><span class="w"> </span><span class="n">argv</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">rank</span><span class="p">;</span><span class="w">               </span><span class="c1">// Variável que armazenará o &quot;rank&quot; (identificador) do processo</span>
-<span class="w">    </span><span class="n">MPI_Status</span><span class="w"> </span><span class="n">status</span><span class="p">;</span><span class="w">      </span><span class="c1">// Estrutura que armazenará o status da comunicação MPI</span>
-<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">mensagem</span><span class="p">[</span><span class="mi">100</span><span class="p">];</span><span class="w">     </span><span class="c1">// Vetor de caracteres para armazenar a mensagem a ser enviada/recebida</span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
 
-<span class="w">    </span><span class="c1">// Inicializa o ambiente MPI (todos os processos são iniciados)</span>
-<span class="w">    </span><span class="n">MPI_Init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">argv</span><span class="p">);</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">fib</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">n</span><span class="p">;</span>
 
-<span class="w">    </span><span class="c1">// Descobre o &quot;rank&quot; do processo atual dentro do comunicador global (MPI_COMM_WORLD)</span>
-<span class="w">    </span><span class="n">MPI_Comm_rank</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rank</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="mi">-1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="mi">-2</span><span class="p">);</span>
+<span class="p">}</span>
 
-<span class="w">    </span><span class="c1">// Se este for o processo de rank 0 (emissor inicial)</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rank</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="c1">// Copia a string &quot;Olá&quot; para a variável mensagem</span>
-<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">strcpy</span><span class="p">(</span><span class="n">mensagem</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Olá&quot;</span><span class="p">);</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">40</span><span class="p">;</span>
 
-<span class="w">        </span><span class="c1">// Envia a mensagem para o processo de rank 1</span>
-<span class="w">        </span><span class="c1">// Parâmetros: buffer, tamanho, tipo, destino, tag, comunicador</span>
-<span class="w">        </span><span class="n">MPI_Send</span><span class="p">(</span><span class="n">mensagem</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">strlen</span><span class="p">(</span><span class="n">mensagem</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_CHAR</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_COMM_WORLD</span><span class="p">);</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">inicio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
 
-<span class="w">        </span><span class="c1">// Imprime no terminal que a mensagem foi enviada</span>
-<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Processo 0 enviou: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">mensagem</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">resultado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
 
-<span class="w">        </span><span class="c1">// Aguarda a resposta do processo 1</span>
-<span class="w">        </span><span class="c1">// Parâmetros: buffer, tamanho máximo, tipo, origem, tag, comunicador, status</span>
-<span class="w">        </span><span class="n">MPI_Recv</span><span class="p">(</span><span class="n">mensagem</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_CHAR</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">status</span><span class="p">);</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">fim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
 
-<span class="w">        </span><span class="c1">// Imprime a mensagem recebida</span>
-<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Processo 0 recebeu: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">mensagem</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">chrono</span><span class="o">::</span><span class="n">duration</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">tempo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fim</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">inicio</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Resultado: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">resultado</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Tempo: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">tempo</span><span class="p">.</span><span class="n">count</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; segundos&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<p>Para gerar o binário:
+<div class="highlight"><pre><span></span><code>g++<span class="w"> </span>-fopenmp<span class="w"> </span>-O3<span class="w"> </span>fib_seq.cpp<span class="w"> </span>-o<span class="w"> </span>fib_seq
+</code></pre></div></p>
+<p>Para testar no Cluster Franky
+<div class="highlight"><pre><span></span><code>srun<span class="w"> </span>--partition<span class="o">=</span>normal<span class="w"> </span>fib_seq
+</code></pre></div></p>
+<h3 id="versao-paralela-com-openmp">Versão paralela com OpenMP<a class="headerlink" href="#versao-paralela-com-openmp" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1">// fib_paralelo.cpp</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;omp.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;chrono&gt;</span>
+
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">fib</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">n</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Evitar overhead de tarefas pequenas</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">20</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="mi">-1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="mi">-2</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">        </span><span class="cp">#pragma omp task shared(x)</span>
+<span class="w">        </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="mi">-1</span><span class="p">);</span>
+
+<span class="w">        </span><span class="cp">#pragma omp task shared(y)</span>
+<span class="w">        </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="mi">-2</span><span class="p">);</span>
+
+<span class="w">        </span><span class="cp">#pragma omp taskwait</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">40</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">resultado</span><span class="p">;</span><span class="w">  </span><span class="o">/</span>
+
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">inicio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cp">#pragma omp parallel</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="cp">#pragma omp single</span>
+<span class="w">        </span><span class="n">resultado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="c1">// Se este for o processo de rank 1 (receptor inicial)</span>
-<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rank</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="c1">// Recebe a mensagem enviada pelo processo 0</span>
-<span class="w">        </span><span class="n">MPI_Recv</span><span class="p">(</span><span class="n">mensagem</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_CHAR</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">status</span><span class="p">);</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">fim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
 
-<span class="w">        </span><span class="c1">// Imprime a mensagem recebida</span>
-<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Processo 1 recebeu: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">mensagem</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">chrono</span><span class="o">::</span><span class="n">duration</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">tempo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fim</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">inicio</span><span class="p">;</span>
 
-<span class="w">        </span><span class="c1">// Prepara a resposta &quot;Oi&quot;</span>
-<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">strcpy</span><span class="p">(</span><span class="n">mensagem</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Oi&quot;</span><span class="p">);</span>
-
-<span class="w">        </span><span class="c1">// Envia a resposta de volta ao processo 0</span>
-<span class="w">        </span><span class="n">MPI_Send</span><span class="p">(</span><span class="n">mensagem</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">strlen</span><span class="p">(</span><span class="n">mensagem</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_CHAR</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_COMM_WORLD</span><span class="p">);</span>
-
-<span class="w">        </span><span class="c1">// Imprime que a mensagem foi enviada</span>
-<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Processo 1 enviou: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">mensagem</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="c1">// Todos os outros processos apenas informam que estão ociosos</span>
-<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Processo &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">rank</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; está ocioso neste exercício.&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="c1">// Finaliza o ambiente MPI (todos os processos encerram)</span>
-<span class="w">    </span><span class="n">MPI_Finalize</span><span class="p">();</span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Resultado: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">resultado</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Tempo: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">tempo</span><span class="p">.</span><span class="n">count</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; segundos&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
+</code></pre></div>
+<p>Para gerar o binário:
+<div class="highlight"><pre><span></span><code>g++<span class="w"> </span>-fopenmp<span class="w"> </span>-O3<span class="w"> </span>fib_paralelo.cpp<span class="w"> </span>-o<span class="w"> </span>fib_paralelo
 </code></pre></div></p>
-<h3 id="compile-o-programa">Compile o programa:<a class="headerlink" href="#compile-o-programa" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>mpic++<span class="w"> </span>-FlagdeOtimização<span class="w"> </span>seu_codigo.cpp<span class="w"> </span>-o<span class="w"> </span>seu_binario
-</code></pre></div>
-<h3 id="script-slurm">Script SLURM<a class="headerlink" href="#script-slurm" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
-<span class="c1">#SBATCH --job-name=mpi_hello</span>
-<span class="c1">#SBATCH --output=saida%j.txt</span>
-<span class="c1">#SBATCH --partition=express</span>
-<span class="c1">#SBATCH --mem=1GB</span>
-<span class="c1">#SBATCH --nodes=2</span>
-<span class="c1">#SBATCH --ntasks=5</span>
-<span class="c1">#SBATCH --cpus-per-task=1</span>
-<span class="c1">#SBATCH --time=00:02:00</span>
-<span class="c1">#SBATCH --export=ALL</span>
+<p>Para testar no Cluster Franky
+<div class="highlight"><pre><span></span><code>srun<span class="w"> </span>--partition<span class="o">=</span>normal<span class="w"> </span>--cpus-per-task<span class="o">=</span><span class="m">4</span><span class="w"> </span>fib_paralelo
+</code></pre></div></p>
+<p>Nesta versão eu coloquei os <code>#pragmas</code> no código procurando evitar problemas, tomei cuidado para não estourar o número de tasks na implementação mas não melhorei a estratégia do código.</p>
+<p>Em relação a versão sequêncial, esses foram os resultados:</p>
+<table>
+<thead>
+<tr>
+<th>Versão</th>
+<th>Tasks</th>
+<th>Tempo (s)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sequencial <code>fib_seq</code></td>
+<td>1</td>
+<td>0.104961</td>
+</tr>
+<tr>
+<td>Paralelo <code>fib_paralelo</code></td>
+<td>2</td>
+<td>0.129041</td>
+</tr>
+<tr>
+<td>Paralelo <code>fib_paralelo</code></td>
+<td>4</td>
+<td>0.0993562</td>
+</tr>
+<tr>
+<td>Paralelo <code>fib_paralelo</code></td>
+<td>8</td>
+<td>0.0510503</td>
+</tr>
+<tr>
+<td>Paralelo <code>fib_paralelo</code></td>
+<td>12</td>
+<td>0.0527775</td>
+</tr>
+<tr>
+<td>Paralelo <code>fib_paralelo</code></td>
+<td>14</td>
+<td>0.0605104</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="plot" src="plot_fib_1.png" /></p>
+<h3 id="versao-iterativa">Versão Iterativa<a class="headerlink" href="#versao-iterativa" title="Permanent link">&para;</a></h3>
+<p>Sempre que for possível trocar a estratégia para fugir de recursões, é aconselhavel fazer isso.</p>
+<p>Nesta implementação em vez de paralelizar, troquei o algoritmo, em vez de chamar a função várias vezes usando a recursão, podemos guardar apenas os dois últimos valores. Depois vamos construindo a sequência passo a passo.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">//fib_sagaz.cpp</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;chrono&gt;</span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
 
-<span class="c1"># Execute o seu binário com o MPI</span>
-mpirun<span class="w"> </span>-np<span class="w"> </span><span class="nv">$SLURM_NTASKS</span><span class="w"> </span>./seu_binario
+<span class="kt">int</span><span class="w"> </span><span class="nf">fib</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">n</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">c</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<span class="w">        </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<span class="w">        </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">40</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">inicio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">resultado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+
+
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">fim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+
+<span class="w">    </span><span class="n">chrono</span><span class="o">::</span><span class="n">duration</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">tempo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fim</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">inicio</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Resultado: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">resultado</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Tempo: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">tempo</span><span class="p">.</span><span class="n">count</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; segundos&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div>
-<h3 id="submeta-o-job-com-slurm">Submeta o job com SLURM:<a class="headerlink" href="#submeta-o-job-com-slurm" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>sbatch<span class="w"> </span>SeuSlurm.slurm
+<p>Para gerar o binário:
+<div class="highlight"><pre><span></span><code>g++<span class="w"> </span>-fopenmp<span class="w"> </span>-O3<span class="w"> </span>fib_sagaz.cpp<span class="w"> </span>-o<span class="w"> </span>fib_sagaz
+</code></pre></div></p>
+<p>Para testar no Cluster Franky
+<div class="highlight"><pre><span></span><code>srun<span class="w"> </span>--partition<span class="o">=</span>normal<span class="w"> </span>fib_sagaz
 </code></pre></div>
-<h3 id="voce-deve-ver-algo-como-isso">Você deve ver algo como isso:<a class="headerlink" href="#voce-deve-ver-algo-como-isso" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="o">[</span>liciascl@head-node<span class="w"> </span>mpi<span class="o">]</span>$<span class="w"> </span>cat<span class="w"> </span>saida.txt
-Processo<span class="w"> </span><span class="m">2</span><span class="w"> </span>está<span class="w"> </span>ocioso<span class="w"> </span>neste<span class="w"> </span>exercício.
-Processo<span class="w"> </span><span class="m">3</span><span class="w"> </span>está<span class="w"> </span>ocioso<span class="w"> </span>neste<span class="w"> </span>exercício.
-Processo<span class="w"> </span><span class="m">0</span><span class="w"> </span>enviou:<span class="w"> </span>Olá
-Processo<span class="w"> </span><span class="m">0</span><span class="w"> </span>recebeu:<span class="w"> </span>Oi
-Processo<span class="w"> </span><span class="m">1</span><span class="w"> </span>recebeu:<span class="w"> </span>Olá
-Processo<span class="w"> </span><span class="m">1</span><span class="w"> </span>enviou:<span class="w"> </span>Oi
-Processo<span class="w"> </span><span class="m">4</span><span class="w"> </span>está<span class="w"> </span>ocioso<span class="w"> </span>neste<span class="w"> </span>exercício.
+O resultado foi:
+<div class="highlight"><pre><span></span><code>Resultado:<span class="w"> </span><span class="m">102334155</span>
+Tempo:<span class="w"> </span><span class="m">1</span>.59e-07<span class="w"> </span>segundos
+</code></pre></div></p>
+<p>E se eu quisesse paralelizar o <code>fib_sagaz</code>?</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// fib_sagaz_paralelo.cpp</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;omp.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;chrono&gt;</span>
+
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">fib_seq</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">n</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">c</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<span class="w">        </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<span class="w">        </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">fib</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cp">#pragma omp parallel for  </span><span class="c1">// coloquei o pragma na esperança de que tudo se resolva &lt;/3</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fib_seq</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">val</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">40</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">inicio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">resultado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+
+
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">fim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+
+<span class="w">    </span><span class="n">chrono</span><span class="o">::</span><span class="n">duration</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">tempo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fim</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">inicio</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Resultado: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">resultado</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Tempo: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">tempo</span><span class="p">.</span><span class="n">count</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; segundos&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div>
-<p>Agora é a sua vez! 
-Faça as alterações no código exemplo e implemente as outras formas de comunicação entre nós usando MPI</p>
-<h2 id="token-em-anel"><strong>Token em anel</strong><a class="headerlink" href="#token-em-anel" title="Permanent link">&para;</a></h2>
-<p>A ideia é perceber o custo de <strong>coletar informações sequencialmente</strong>.</p>
-<p>Implemente o token em anel: cada rank adiciona uma informação nova ao vetor e passa adiante.
-Execute em 2, 3 e 4 nós .
-Compare com o mesmo problema usando <code>MPI_Gather</code>.</p>
-<p>Analise:</p>
-<ul>
-<li>Como cresce o tempo do anel com o número de processos?</li>
-<li>Qual o gargalo de percorrer todos em sequência?</li>
-<li>Qual a vantagem de usar <code>MPI_Gather</code>?</li>
-</ul>
-<hr />
-<h2 id="alternancia"><strong>Alternância</strong><a class="headerlink" href="#alternancia" title="Permanent link">&para;</a></h2>
-<p>A ideia é entender como funciona uma <strong>distribuição de tarefas</strong>.</p>
-<p>Rank 0 possui 13 tarefas cada uma com diferentes niveis de complexidade. Implemente uma distribuição dinâmica de tarefas, o worker que terminar primeiro recebe a próxima tarefa.</p>
-<p>O que acontece quando as tarefas variam muito de custo?</p>
-<h1 id="o-que-voce-deve-entregar">O que você deve entregar:<a class="headerlink" href="#o-que-voce-deve-entregar" title="Permanent link">&para;</a></h1>
-<p>Para cada exercício:</p>
-<ol>
-<li><strong>Código</strong> (disponível no repositório do github).</li>
-<li><strong>Tabela de resultados</strong> (parâmetros usados, tempos medidos).</li>
-<li><strong>Discussão</strong>: Análise dos resultados</li>
-</ol>
-<p><strong>Envie o seu relatório com as suas análises até as 23h59 de 08/09 pelo <a href="https://classroom.github.com/a/ilH4AsH_">GitHub Classroom</a></strong> </p>
+<p>Para gerar o binário:
+<div class="highlight"><pre><span></span><code>g++<span class="w"> </span>-fopenmp<span class="w"> </span>-O3<span class="w"> </span>fib_sagaz_paralelo.cpp<span class="w"> </span>-o<span class="w"> </span>sagaz_paralelo
+</code></pre></div>
+Para testar no Cluster Franky
+<div class="highlight"><pre><span></span><code>srun<span class="w"> </span>--partition<span class="o">=</span>normal<span class="w"> </span>--cpus-per-task<span class="o">=</span><span class="m">4</span><span class="w"> </span>sagaz_paralelo
+</code></pre></div></p>
+<p>O resultado foi:</p>
+<table>
+<thead>
+<tr>
+<th>Versão</th>
+<th>CPUs</th>
+<th>Tempo (s)</th>
+<th>Resultado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sequencial <code>fib_sagaz</code></td>
+<td>1</td>
+<td>1.29e-07</td>
+<td>102334155</td>
+</tr>
+<tr>
+<td>Paralelo <code>sagaz_paralelo</code></td>
+<td>2</td>
+<td>0.000132932</td>
+<td>102334155</td>
+</tr>
+<tr>
+<td>Paralelo <code>sagaz_paralelo</code></td>
+<td>4</td>
+<td>0.000214436</td>
+<td>102334155</td>
+</tr>
+<tr>
+<td>Paralelo <code>sagaz_paralelo</code></td>
+<td>6</td>
+<td>0.000252677</td>
+<td>102334155</td>
+</tr>
+<tr>
+<td>Paralelo <code>sagaz_paralelo</code></td>
+<td>8</td>
+<td>0.000223494</td>
+<td>102334155</td>
+</tr>
+<tr>
+<td>Paralelo <code>sagaz_paralelo</code></td>
+<td>10</td>
+<td>0.000282311</td>
+<td>102334155</td>
+</tr>
+<tr>
+<td>Paralelo <code>sagaz_paralelo</code></td>
+<td>12</td>
+<td>0.000259918</td>
+<td>102334155</td>
+</tr>
+<tr>
+<td>Paralelo <code>sagaz_paralelo</code></td>
+<td>14</td>
+<td>0.000283749</td>
+<td>102334155</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="plot" src="plot_fib_2.png" /></p>
+<p>Paralelizar esse código é uma péssima ideia porque o paralelismo faz trabalho redundante e não resolve nenhum gargalo real do algoritmo. </p>
+<p>O objetivo do programa é calcular apenas <code>fib(n)</code>, mas ao aplicar <code>#pragma omp parallel for</code> no laço que vai de <code>0</code> até <code>n</code>, cada thread passa a calcular vários valores intermediários de Fibonacci (<code>fib(0)</code>, <code>fib(1)</code>, <code>fib(2)</code>, …, <code>fib(n)</code>). Porém, todos esses resultados são descartados, exceto o último, quando <code>i == n</code>. Isso significa que grande parte do trabalho realizado pelas threads <strong>não contribui para o resultado final</strong>.</p>
+<p>Ao paralelizar o laço, temos o overhead de criação e gerenciamento de threads, sincronização e divisão do trabalho entre elas. Fazendo com que a versão paralela seja mais lenta que a versão sequencial.</p>
+<p>Outro problema é que o paralelismo foi aplicado <strong>sem analisar a estrutura do problema</strong>. O cálculo iterativo de Fibonacci possui uma dependência direta entre as iterações: cada novo valor depende dos dois anteriores. Isso significa que o algoritmo original já é naturalmente sequencial. Em vez de explorar paralelismo real, o código apenas replica cálculos independentes que não são necessários.</p>
+<p>Sair paralelizando na esperança de que o desempenho melhore, sem considerar a dependência de dados, o custo das threads e a utilidade real do trabalho distribuído, o resultado é um programa que faz mais trabalho do que o necessário e é mais lento do que a versão original.</p>
+<h2 id="conclusao">Conclusão<a class="headerlink" href="#conclusao" title="Permanent link">&para;</a></h2>
+<p>SEGURA A EMOÇÃO, estude o código com cuidado antes de fazer as suas implementações!</p>
+<p><img alt="gato" src="gato.jpg" /></p>
+<p>Vimos que nem todo problema é igual. No caso da transformação elemento a elemento (map), o paralelismo funciona sem complicações porque cada iteração é totalmente independente. Já na soma parcial, o acesso simultâneo a uma variável compartilhada gera condições de corrida, que precisam ser resolvidas com mecanismos como <code>reduction</code>.</p>
+<p>Também vimos que alguns laços possuem dependência e a solução não é trivial, é necessário repensar o algoritmo para eliminar a dependência.</p>
+<p>Por fim, a experiência com recursão e tasks mostrou que o paralelismo pode gerar overhead se não for bem controlado. Criar muitas tarefas pequenas pode ser pior do que executar de forma sequencial.</p>
+<p><strong>Esta atividade não tem entrega, bom fim de semana!!!</strong></p>
 
 
 
