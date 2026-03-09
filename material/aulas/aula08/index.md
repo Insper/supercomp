@@ -1,241 +1,363 @@
-# MPI e OpenMP
+# Sincronização em CPU com OpenMP
 
-Agora que vocês aprenderam sobre **MPI** e já trabalharam bastante com **OpenMP**, vamos juntar o melhor dos dois mundos!
+Nos exemplos anteriores vimos alguns problemas que aparecem quando múltiplas threads executam ao mesmo tempo:
 
-Combinar essas duas abordagens é uma estratégia poderosa em computação de alto desempenho. Enquanto o **OpenMP** permite paralelizar tarefas de forma simples e eficiente dentro de uma mesma máquina (memória compartilhada), o **MPI** possibilita distribuir o trabalho entre várias máquinas (memória distribuída).
+* **condições de corrida (race condition)**
+* **dependência de dados**
+* **overhead de criação de tarefas**
 
-Ao usar **MPI + OpenMP juntos**, conseguimos:
+Quando várias threads precisam acessar dados compartilhados, às vezes é necessário controlar o acesso a esses dados para evitar resultados incorretos.
 
-- **Aproveitar ao máximo os recursos de clusters de alto desempenho**, que possuem múltiplos nós (com MPI) e múltiplos núcleos por nó (com OpenMP).
-- **Reduzir o overhead de comunicação**, evitando o uso excessivo de mensagens MPI quando podemos usar threads locais com OpenMP.
-- **Escalar aplicações de forma mais eficiente**, especialmente em tarefas intensivas como simulações científicas, análise de dados em larga escala e modelagem computacional.
+OpenMP fornece alguns mecanismos para isso:
 
-A convolução é uma técnica amplamente utilizada em visão computacional, redes neurais, filtragem de sinais e imagens, e é um excelente exemplo de aplicação que exige **acesso a vizinhos** para realizar o cálculo de cada ponto da saída. 
+* `atomic`
+* `critical`
+* `reduction`
+* `barrier`
+* `ordered`
 
-### O que o código faz:
+Esses mecanismos garantem correção do programa, mas têm um custo importante: **Eles reduzem o paralelismo.**
 
-1. **Inicializa** uma imagem `1024x1024` em `rank 0`.
-2. **Distribui a imagem completa para todos os processos** via `MPI_Bcast`.
-3. Cada processo **aplica a convolução** apenas na sua faixa de linhas.
-   * O cálculo é feito de forma paralela com **OpenMP**, em múltiplos cores locais.
-4. O resultado local de cada processo é **reunido no `rank 0`** usando `MPI_Gather`.
-5. O processo `rank 0` imprime que a convolução foi concluída.
+Sempre que usamos um mecanismo de sincronização, estamos dizendo para as threads:
 
-`conv.cpp`
+> "Esperem um pouco, apenas uma de cada vez pode fazer isso."
+
+Ou seja, parte do código volta a se comportar **de forma sequencial**.
+
+
+## O caso clássico: atualização de variável compartilhada
+
+Considere novamente o exemplo da soma:
+
 ```cpp
-// Convolução 2D com OpenMP + MPI
-// Objetivo: ilustrar os efeitos da combinação de paralelismo inter-nó (MPI) e intra-nó (OpenMP)
+double soma = 0.0;
 
-#include <mpi.h>
-#include <omp.h>
-#include <algorithm>
-#include <cstdlib>
-#include <ctime>
+#pragma omp parallel for
+for (int i = 0; i < N; i++) {
+    soma += a[i];
+}
+```
+
+Esse código tem o problema da condição de corrida.
+
+Várias threads podem tentar atualizar `soma` ao mesmo tempo.
+
+O resultado final fica inconsistente.
+
+## Usando `critical`
+
+Se usamos `critical`, apenas uma thread por vez pode executar o trecho dentra regial `critical`.
+
+Isso garante a segurança na leitura e na escrita da variável, mas cria um problema.
+
+Cada atualização de `soma` precisa:
+
+1. esperar outras threads
+2. entrar na região crítica
+3. executar
+4. liberar o acesso
+
+Se o laço tem milhões de iterações, essa espera pode se tornar muito cara.
+
+Na prática, o código pode ficar mais lento que a versão sequencial.
+
+
+```cpp
+double soma = 0.0;
+
+#pragma omp parallel for
+for (int i = 0; i < N; i++) {
+
+    #pragma omp critical
+    soma += a[i];
+}
+```
+
+
+## Usando `atomic`
+
+Para operações simples, OpenMP oferece uma alternativa menos drástica:
+
+```cpp
+double soma = 0.0;
+
+#pragma omp parallel for
+for (int i = 0; i < N; i++) {
+
+    #pragma omp atomic
+    soma += a[i];
+}
+```
+
+`atomic` garante que a atualização da variável será feita de forma indivisível. Que quer dizer que essa operação acontece como se fosse um único passo, que não pode ser interrompido ou intercalado por outra thread.
+
+Ou seja, enquanto uma thread está executando a operação atômica, nenhuma outra thread pode interferir naquela mesma variável.
+
+A diferença é que `atomic` é mais "barata" que `critical`, pois:
+
+* funciona diretamente com instruções atômicas do hardware
+* evita bloqueios mais pesados
+
+Mesmo assim, ainda existe custo.
+
+Se muitas threads atualizam a mesma variável, todas competem por esse acesso.
+
+## Usando variáveis `private`
+
+Outra estratégia muito comum em programação paralela é evitar compartilhar dados entre threads.
+
+Em vez de várias threads competirem pela mesma variável, cada thread trabalha com sua própria cópia local.
+
+No OpenMP isso pode ser feito com variáveis `private`.
+
+```
+double soma = 0.0;
+double soma_local;
+
+#pragma omp parallel private(soma_local)
+{
+    soma_local = 0.0;
+
+    #pragma omp for
+    for (int i = 0; i < N; i++) {
+        soma_local += a[i];
+    }
+
+    #pragma omp critical
+    soma += soma_local;
+}
+```
+
+
+
+## Comparando as três abordagens
+
+O problema é:
+
+> Dado um vetor grande de valores inteiros, queremos contar quantas vezes cada valor aparece.
+
+Isso gera múltiplas threads atualizando o mesmo contador, o que causa condição de corrida.
+
+
+```cpp
+//hist.cpp
 #include <iostream>
 #include <vector>
-#include <climits>
-#include <unistd.h>
+#include <random>
+#include <chrono>
+#include <omp.h>
 
-#ifndef WIDTH
-#define WIDTH  1024
-#endif
-#ifndef HEIGHT
-#define HEIGHT 1024
-#endif
+// tamanho do vetor de dados
+#define N 20000000
 
-#define KERNEL_SIZE 3
-static const float KERNEL[KERNEL_SIZE][KERNEL_SIZE] = {
-    {1.f/9, 1.f/9, 1.f/9},
-    {1.f/9, 1.f/9, 1.f/9},
-    {1.f/9, 1.f/9, 1.f/9},
-};
+// quantidade de categorias do histograma
+#define BINS 2
 
-// Indexação linear (i,j) -> i*WIDTH + j
-static inline int idx(int i, int j) { return i * WIDTH + j; }
+/*
+Função que preenche o vetor com valores aleatórios
+entre 0 e BINS-1
+*/
+void fill_data(std::vector<int> &data) {
 
-int main(int argc, char** argv) {
-    MPI_Init(&argc, &argv);
+    std::mt19937 gen(42);
+    std::uniform_int_distribution<> dist(0, BINS-1);
 
-    int rank = 0, size = 1;
-    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-    MPI_Comm_size(MPI_COMM_WORLD, &size);
-
-    // Para manter o exemplo simples com MPI_Gather:
-    // exigimos divisão exata de HEIGHT por size.
-    const int rows_per_process = HEIGHT / size;
-    const int remainder        = HEIGHT % size;
-    if (remainder != 0) {
-        if (rank == 0) {
-            std::cerr << "[ERRO] HEIGHT (" << HEIGHT << ") não é múltiplo de size ("
-                      << size << "). Escolha um número de ranks que divida HEIGHT "
-                      << "ou troque para MPI_Gatherv.\n";
-        }
-        MPI_Abort(MPI_COMM_WORLD, 1);
+    for (int i = 0; i < N; i++) {
+        data[i] = dist(gen);
     }
-
-    // Buffers contíguos
-    std::vector<float> image (HEIGHT * WIDTH);
-    std::vector<float> output(HEIGHT * WIDTH, 0.f);
-
-    // Rank 0 inicializa e depois faz broadcast
-    if (rank == 0) {
-        std::srand(static_cast<unsigned>(std::time(nullptr)));
-        for (int i = 0; i < HEIGHT; ++i)
-            for (int j = 0; j < WIDTH;  ++j)
-                image[idx(i,j)] = static_cast<float>(std::rand() % 256);
-    }
-    MPI_Bcast(image.data(), HEIGHT * WIDTH, MPI_FLOAT, 0, MPI_COMM_WORLD);
-
-    // Faixa deste rank
-    const int start_row = rank * rows_per_process;      // inclusivo
-    const int end_row   = start_row + rows_per_process; // exclusivo
-
-    // Faixa efetiva (evita bordas globais e do bloco)
-    const int i_begin = std::max(start_row, 1);
-    const int i_end   = std::min(end_row - 1, HEIGHT - 1); // exclusivo
-
-    // Cabeçalho por rank (ordenado para não embaralhar)
-    for (int r = 0; r < size; ++r) {
-        MPI_Barrier(MPI_COMM_WORLD);
-        if (rank == r) {
-            char host[128]; gethostname(host, sizeof(host));
-            int tmax = omp_get_max_threads();
-            std::cout << "------------------------------------------------------------\n";
-            std::cout << "[Rank " << rank << " @ " << host << "] "
-                      << "size=" << size
-                      << " | OMP_MAX_THREADS=" << tmax << "\n";
-            std::cout << "  Faixa de dados:    [" << start_row << "," << (end_row-1) << "]\n";
-            std::cout.flush();
-        }
-    }
-    MPI_Barrier(MPI_COMM_WORLD);
-
-    // Vamos medir a faixa REAL tocada por cada thread
-    const int tmax = omp_get_max_threads();
-    std::vector<int> t_min(tmax, INT_MAX); // por thread
-    std::vector<int> t_max(tmax, INT_MIN);
-
-    MPI_Barrier(MPI_COMM_WORLD);
-    const double t0 = MPI_Wtime();
-
-    // Paraleliza SOMENTE no laço de i (para facilitar leitura de faixas por thread)
-    #pragma omp parallel
-    {
-        const int tid = omp_get_thread_num();
-        int local_min = INT_MAX, local_max = INT_MIN;
-
-        #pragma omp for schedule(static)
-        for (int i = i_begin; i < i_end; ++i) {
-            for (int j = 1; j < WIDTH - 1; ++j) {
-                float sum = 0.f;
-                for (int ki = -1; ki <= 1; ++ki)
-                    for (int kj = -1; kj <= 1; ++kj)
-                        sum += image[idx(i+ki, j+kj)] * KERNEL[ki+1][kj+1];
-                output[idx(i,j)] = sum;
-            }
-            local_min = std::min(local_min, i);
-            local_max = std::max(local_max, i);
-        }
-
-        if (local_min <= local_max) {
-            t_min[tid] = local_min;
-            t_max[tid] = local_max;
-        }
-    }
-
-    MPI_Barrier(MPI_COMM_WORLD);
-    const double t1 = MPI_Wtime();
-
-    // Impressão das faixas por thread (ordenado por rank)
-    for (int r = 0; r < size; ++r) {
-        MPI_Barrier(MPI_COMM_WORLD);
-        if (rank == r) {
-            std::cout << "[Rank " << rank << "] OpenMP (faixas por thread):\n";
-            bool alguma = false;
-            for (int t = 0; t < tmax; ++t) {
-                if (t_min[t] <= t_max[t]) {
-                    alguma = true;
-                    std::cout << "  - Thread " << t
-                              << " → linhas [" << t_min[t] << "," << t_max[t] << "]\n";
-                }
-            }
-            if (!alguma) std::cout << "  (nenhuma thread recebeu iterações)\n";
-            std::cout.flush();
-        }
-    }
-    MPI_Barrier(MPI_COMM_WORLD);
-
-    // Reúne as faixas (contíguas) no rank 0
-    MPI_Gather(output.data() + start_row * WIDTH,
-               rows_per_process * WIDTH, MPI_FLOAT,
-               output.data(),
-               rows_per_process * WIDTH, MPI_FLOAT,
-               0, MPI_COMM_WORLD);
-
-    if (rank == 0) {
-        std::cout << "------------------------------------------------------------\n";
-        std::cout << "Convolução concluída!\n";
-        std::cout << "cálculo local + sync: " << (t1 - t0) << " s\n";
-        std::cout << "Configuração: size=" << size
-                  << " | rows_per_process=" << rows_per_process
-                  << " | WIDTH=" << WIDTH << " | HEIGHT=" << HEIGHT << "\n";
-    }
-
-    MPI_Finalize();
-    return 0;
 }
 
+/*
+Zera o histograma antes de cada execução
+*/
+void reset_histogram(std::vector<int> &hist) {
+    for (int i = 0; i < BINS; i++)
+        hist[i] = 0;
+}
+
+/*
+Versão usando ATOMIC
+Cada incremento no histograma é protegido
+por uma operação atômica.
+
+Isso garante proteção contra condição de corrida, mas cria contenção
+quando muitas threads tentam atualizar
+o mesmo contador.
+*/
+double run_atomic(std::vector<int> &data, std::vector<int> &hist) {
+
+    auto start = std::chrono::high_resolution_clock::now();
+
+    #pragma omp parallel for
+    for (int i = 0; i < N; i++) {
+
+        int bin = data[i];
+
+
+        #pragma omp atomic
+        hist[bin]++;
+    }
+
+    auto end = std::chrono::high_resolution_clock::now();
+
+    return std::chrono::duration<double>(end-start).count();
+}
+
+/*
+Versão usando CRITICAL
+
+A região critical permite que apenas
+uma thread por vez execute o bloco.
+
+Isso resolve a condição de corrida,
+mas pode criar um gargalo forte,
+pois o acesso fica praticamente sequencial.
+*/
+double run_critical(std::vector<int> &data, std::vector<int> &hist) {
+
+    auto start = std::chrono::high_resolution_clock::now();
+
+    #pragma omp parallel for
+    for (int i = 0; i < N; i++) {
+
+        int bin = data[i];
+
+        // apenas uma thread pode executar
+        #pragma omp critical
+        {
+            hist[bin]++;
+        }
+    }
+
+    auto end = std::chrono::high_resolution_clock::now();
+
+    return std::chrono::duration<double>(end-start).count();
+}
+
+/*
+Versão usando histogramas privados
+
+Cada thread cria um histograma local,
+evitando concorrência durante o processamento.
+
+No final, os resultados são combinados.
+
+Essa abordagem reduz drasticamente
+a necessidade de sincronização.
+*/
+double run_private_merge(std::vector<int> &data, std::vector<int> &hist) {
+
+    auto start = std::chrono::high_resolution_clock::now();
+
+    #pragma omp parallel
+    {
+
+        // cada thread cria seu próprio histograma
+        std::vector<int> local_hist(BINS, 0);
+
+        // divide as iterações entre as threads
+        #pragma omp for
+        for (int i = 0; i < N; i++) {
+
+            int bin = data[i];
+
+            local_hist[bin]++;
+        }
+
+        // combinação final dos resultados
+        #pragma omp critical
+        {
+            for (int i = 0; i < BINS; i++)
+                hist[i] += local_hist[i];
+        }
+    }
+
+    auto end = std::chrono::high_resolution_clock::now();
+
+    return std::chrono::duration<double>(end-start).count();
+}
+
+int main() {
+
+    std::vector<int> data(N);
+    std::vector<int> histogram(BINS);
+
+    fill_data(data);
+
+    // diferentes quantidades de threads para testar
+    std::vector<int> thread_tests = {1,2,4,8,16};
+
+    for (int threads : thread_tests) {
+
+        omp_set_num_threads(threads);
+
+        std::cout << "\nThreads: " << threads << std::endl;
+
+        reset_histogram(histogram);
+        double t_atomic = run_atomic(data, histogram);
+
+        reset_histogram(histogram);
+        double t_critical = run_critical(data, histogram);
+
+        reset_histogram(histogram);
+        double t_private = run_private_merge(data, histogram);
+
+        std::cout << "atomic:   " << t_atomic << " s\n";
+        std::cout << "critical: " << t_critical << " s\n";
+        std::cout << "private:  " << t_private << " s\n";
+    }
+
+    return 0;
+}
 ```
 
+Para compilar use
 
-### Compile o binário com suporte para OpenMP e MPI:
+```cpp
+g++ -fopenmp -O3 hist.cpp -o hist
+```
+
+Para testar no SLURM
+
 ```bash
-mpic++ -O3 -fopenmp conv.cpp -o conv
-
+srun --partition=normal --cpus-per-task=16 ./hist
 ```
 
-
-### Script SLURM
+ou
 
 ```bash
 #!/bin/bash
-#SBATCH --job-name=mpi_openmp
-#SBATCH --output=saida_%j.txt
-#SBATCH --nodes=4                 # 4 nós (computadores)
-#SBATCH --ntasks-per-node=1       # 1 rank por nó
-#SBATCH --cpus-per-task=4         # 4 threads OMP por rank
-#SBATCH --time=00:10:00
-#SBATCH --partition=gpu
-#SBATCH --mem=1G                  # 1 GiB por nó
+#SBATCH --job-name=hist   # nome do job
+#SBATCH --output=hist.out  # arquivo de saída
+#SBATCH --cpus-per-task=16              # 4 threads para usar
+#SBATCH --time=00:05:00                 # tempo máximo de execução
+#SBATCH --mem=2G                        # Memória 
 
+# garante que o OpenMP use exatamente os recursos alocados pelo SLURM
 export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK}
-export OMP_PROC_BIND=close
-export OMP_PLACES=cores
 
-# Execute o seu binário com o MPI
-mpirun -np $SLURM_NTASKS ./conv
+# executa o binário
+./hist
 
 ```
 
-### Submeta o job com SLURM:
-```bash
-sbatch SeuSlurm.slurm
+## Conclusão
+
+Os resultados mostram que mecanismos de sincronização podem reduzir o desempenho de um programa paralelo, principalmente quando muitas threads precisam acessar o mesmo dado compartilhado.
+
+As versões com `atomic` e `critical` não escalam bem conforme aumentamos o número de threads.
+
+No caso de `atomic`, todas as threads precisam atualizar a mesma posição do histograma:
+
+```cpp
+hist[bin]++;
 ```
-Com a configuração de hardware pedida ao Slurm, o programa vai rodar com 4 processos MPI (ranks).
-Como a imagem tem 1024 linhas, cada rank recebe exatamente 256 linhas para processar (1024 ÷ 4 = 256).
 
-Dentro de cada rank, em vez de um único núcleo calcular todas as linhas, o trabalho é dividido entre 4 threads usando o OpenMP.
-Ou seja: cada rank distribui suas 256 linhas entre 4 threads locais.
+A diretiva `atomic` garante que essa operação seja executada de forma indivisível, evitando condições de corrida. Para isso, o hardware precisa garantir que apenas uma thread por vez modifique aquela posição de memória. Como resultado, quando várias threads tentam atualizar a mesma variável simultaneamente, ocorre contenção de memória. As threads passam a competir pelo mesmo endereço, gerando invalidações de cache e serialização da operação no nível do hardware. 
 
-![img1](imgs/img1.png)
+Já na versão com `critical`, o comportamento é mais restritivo. A diretiva cria uma região crítica, permitindo que apenas uma thread execute aquele trecho de código por vez. Assim, quando várias threads chegam nesse ponto do programa, elas precisam esperar sua vez para entrar na região crítica. Isso cria uma espécie de fila de execução, tornando aquela parte do código sequencial. Quanto maior o número de threads, maior tende a ser o tempo de espera.
 
-MPI divide a imagem entre os nós (cada computador pega um pedaço), e OpenMP divide esse pedaço entre 4 CPU's dentro do nó de computação.
+Na versão que utiliza `private`, cada thread mantém sua própria estrutura de dados local durante o processamento e só ocorre sincronização no momento final de combinar os resultados. Dessa forma, o número de operações que exigem coordenação entre threads é reduzido, diminuindo o overhead nesta aplicação.
 
+> Sempre que possível, devemos **evitar acesso concorrente a dados compartilhados**, preferindo estruturas locais e reduzindo ao mínimo os pontos de sincronização.
 
-
-### Sua vez!
-
-0. Quanto tempo esse código leva pra rodar no modo sequencial?
-1. **Remova `OpenMP`** e compare os tempos só com MPI.
-2. **Remova `MPI`** e compare os tempos só com OpenMP.
-3. **Meça speedup** em diferentes quantidades de processos e threads.
