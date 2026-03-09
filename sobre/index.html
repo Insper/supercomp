@@ -266,6 +266,24 @@
   
 
       
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../projetos/2026-1/APS1/" class="md-tabs__link">
+          
+  
+  APS's
+
+        </a>
+      </li>
+    
+  
+
+      
     </ul>
   </div>
 </nav>
@@ -763,6 +781,74 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    APS's
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            APS's
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../projetos/2026-1/APS1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    APS 1 - Otimizações em CPU
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -1039,8 +1125,63 @@
 </table>
 </details>
 <details class="note">
-<summary>APS 1  10%</summary>
-<p>Em construção</p>
+<summary>APS 1 - Otimizações e Paralelismo em CPU (Individual 10%)</summary>
+<p><a href="../projetos/2026-1/APS1/">Detalhes em APS 1 - Otimizações e Paralelismo em CPU</a></p>
+<h1 id="avaliacao">Avaliação<a class="headerlink" href="#avaliacao" title="Permanent link">&para;</a></h1>
+<p>A APS será avaliada em 2 aspectos principais; </p>
+<ul>
+<li><strong>A implementação (4 pontos)</strong></li>
+<li><strong>O relatório (6 pontos)</strong></li>
+</ul>
+<h2 id="implementacao-4-pontos">Implementação (4 pontos)<a class="headerlink" href="#implementacao-4-pontos" title="Permanent link">&para;</a></h2>
+<p>A implementação seguirá a seguinte rubrica. </p>
+<ul>
+<li><strong>0</strong> - Não compila, não é possível testar a implementação. </li>
+<li><strong>+1</strong> - Implementou alguma otimização que melhora o algoritmo exaustivo sequencial, mas ainda leva muito tempo para chegar na solução. </li>
+<li><strong>+1</strong> - Otimizou a heurísitca e conseguiu chegar na solução, mas ainda tem uma implementação sequencial. </li>
+<li><strong>+2</strong> - Paralelizou o algorítimo e conseguiu chegar na melhor solução no menor tempo possível.</li>
+</ul>
+<h2 id="relatorio">Relatório<a class="headerlink" href="#relatorio" title="Permanent link">&para;</a></h2>
+<p>O relatório deve apresentar evidências de que os experimentos foram executados e analisados pelo aluno.
+A avaliação será feita de acordo com os critérios abaixo:</p>
+<h3 id="1-reprodutibilidade-dos-experimentos-1-ponto">1. Reprodutibilidade dos experimentos (1 ponto)<a class="headerlink" href="#1-reprodutibilidade-dos-experimentos-1-ponto" title="Permanent link">&para;</a></h3>
+<p>O relatório deve permitir que qualquer pessoa entenda exatamente como os experimentos foram realizados e o como reproduzir os testes.</p>
+<ul>
+<li>
+<p><strong>0</strong> - Não é possível entender como realizar os testes nem como eles foram executados.</p>
+</li>
+<li>
+<p><strong>+1</strong> - O repositório disponibiliza os arquivos SLURM utilizados e todos os arquivos necessários para realizar os testes, há uma descrição clara dos testes realizados e como reproduzir os experimentos.</p>
+</li>
+</ul>
+<h3 id="2-evidencia-de-execucao-dos-experimentos-2-pontos">2. Evidência de execução dos experimentos (2 pontos)<a class="headerlink" href="#2-evidencia-de-execucao-dos-experimentos-2-pontos" title="Permanent link">&para;</a></h3>
+<p>O relatório deve apresentar resultados obtidos a partir da execução do código.
+Esses resultados devem ser apresentados em formas de tabela e gráficos.</p>
+<ul>
+<li>
+<p><strong>0 pontos</strong> - O relatório não apresenta resultados em forma de tabelas e gráficos.</p>
+</li>
+<li>
+<p><strong>+0.5 ponto</strong> - Existe a apresentação dos dados em tabela <strong>ou</strong> gráfico.</p>
+</li>
+<li>
+<p><strong>+1.5 ponto</strong> - O relatório apresenta tabela <strong>e</strong> gráfico contendo os principais parâmetros de execução dos experimento.</p>
+</li>
+</ul>
+<h3 id="3-qualidade-da-analise-dos-resultados-3-pontos">3. Qualidade da análise dos resultados (3 pontos)<a class="headerlink" href="#3-qualidade-da-analise-dos-resultados-3-pontos" title="Permanent link">&para;</a></h3>
+<p>A análise deve mostrar que o aluno entendeu as otimizações que realizou e como elas impactaram os resultados obtidos.</p>
+<ul>
+<li>
+<p><strong>0 pontos</strong> - Texto do relatório genérico, análises claramente geradas por ferramentas de IA ou explicações inconsistentes com os resultados apresentados.</p>
+</li>
+<li>
+<p><strong>+1 ponto</strong> - O relatório menciona resultados, mas a interpretação ainda é superficial.</p>
+</li>
+<li>
+<p><strong>+2 pontos</strong> - O relatório relaciona as otimizações implementadas com os dados obtidos de forma clara e objetiva.</p>
+</li>
+</ul>
+<h1 id="a-entrega-da-aps-1-devera-ser-realizada-ate-o-dia-2003-as-23h59-pelo-github-classroom">A entrega da APS 1 deverá ser realizada até o dia 20/03 as 23h59 pelo <a href="https://classroom.github.com/a/YdsvpTBm">Github Classroom</a><a class="headerlink" href="#a-entrega-da-aps-1-devera-ser-realizada-ate-o-dia-2003-as-23h59-pelo-github-classroom" title="Permanent link">&para;</a></h1>
 </details>
 <details class="note">
 <summary>APS 2 20%</summary>
