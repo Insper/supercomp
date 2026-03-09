@@ -13,16 +13,15 @@ OpenMP fornece alguns mecanismos para isso:
 * `atomic`
 * `critical`
 * `reduction`
-* `barrier`
-* `ordered`
+
 
 Esses mecanismos garantem correção do programa, mas têm um custo importante: **Eles reduzem o paralelismo.**
 
 Sempre que usamos um mecanismo de sincronização, estamos dizendo para as threads:
 
-> "Esperem um pouco, apenas uma de cada vez pode fazer isso."
+> "Espera aaaaaaaiiiiiiiiiiii, apenas uma de cada vez oxi!"
 
-Ou seja, parte do código volta a se comportar **de forma sequencial**.
+Ou seja, aquela parte do código volta a ser sequencial.
 
 
 ## O caso clássico: atualização de variável compartilhada
@@ -285,7 +284,7 @@ int main() {
     fill_data(data);
 
     // diferentes quantidades de threads para testar
-    std::vector<int> thread_tests = {1,2,4,8,16};
+    std::vector<int> thread_tests = {1,2,4,6,8,10,12,14,16};
 
     for (int threads : thread_tests) {
 
