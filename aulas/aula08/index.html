@@ -1073,15 +1073,13 @@
 <li><code>atomic</code></li>
 <li><code>critical</code></li>
 <li><code>reduction</code></li>
-<li><code>barrier</code></li>
-<li><code>ordered</code></li>
 </ul>
 <p>Esses mecanismos garantem correção do programa, mas têm um custo importante: <strong>Eles reduzem o paralelismo.</strong></p>
 <p>Sempre que usamos um mecanismo de sincronização, estamos dizendo para as threads:</p>
 <blockquote>
-<p>"Esperem um pouco, apenas uma de cada vez pode fazer isso."</p>
+<p>"Espera aaaaaaaiiiiiiiiiiii, apenas uma de cada vez oxi!"</p>
 </blockquote>
-<p>Ou seja, parte do código volta a se comportar <strong>de forma sequencial</strong>.</p>
+<p>Ou seja, aquela parte do código volta a ser sequencial.</p>
 <h2 id="o-caso-classico-atualizacao-de-variavel-compartilhada">O caso clássico: atualização de variável compartilhada<a class="headerlink" href="#o-caso-classico-atualizacao-de-variavel-compartilhada" title="Permanent link">&para;</a></h2>
 <p>Considere novamente o exemplo da soma:</p>
 <div class="highlight"><pre><span></span><code><span class="kt">double</span><span class="w"> </span><span class="n">soma</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
@@ -1306,7 +1304,7 @@
 <span class="w">    </span><span class="n">fill_data</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
 
 <span class="w">    </span><span class="c1">// diferentes quantidades de threads para testar</span>
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">thread_tests</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">16</span><span class="p">};</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">thread_tests</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">14</span><span class="p">,</span><span class="mi">16</span><span class="p">};</span>
 
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">threads</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">thread_tests</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
