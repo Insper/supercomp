@@ -78,8 +78,62 @@
 
 
 
-??? note "APS 1  10%"
-    Em construção
+??? note "APS 1 - Otimizações e Paralelismo em CPU (Individual 10%)"
+    [Detalhes em APS 1 - Otimizações e Paralelismo em CPU](projetos/2026-1/APS1.md)
+    # Avaliação
+
+    A APS será avaliada em 2 aspectos principais; 
+
+    * **A implementação (4 pontos)**
+    * **O relatório (6 pontos)**
+
+    ## Implementação (4 pontos)
+
+    A implementação seguirá a seguinte rubrica. 
+
+    * **0** - Não compila, não é possível testar a implementação. 
+    * **+1** - Implementou alguma otimização que melhora o algoritmo exaustivo sequencial, mas ainda leva muito tempo para chegar na solução. 
+    * **+1** - Otimizou a heurísitca e conseguiu chegar na solução, mas ainda tem uma implementação sequencial. 
+    * **+2** - Paralelizou o algorítimo e conseguiu chegar na melhor solução no menor tempo possível.
+        
+    ## Relatório
+
+    O relatório deve apresentar evidências de que os experimentos foram executados e analisados pelo aluno.
+    A avaliação será feita de acordo com os critérios abaixo:
+
+
+    ### 1. Reprodutibilidade dos experimentos (1 ponto)
+
+    O relatório deve permitir que qualquer pessoa entenda exatamente como os experimentos foram realizados e o como reproduzir os testes.
+
+    * **0** - Não é possível entender como realizar os testes nem como eles foram executados.
+
+    * **+1** - O repositório disponibiliza os arquivos SLURM utilizados e todos os arquivos necessários para realizar os testes, há uma descrição clara dos testes realizados e como reproduzir os experimentos.
+
+
+    ### 2. Evidência de execução dos experimentos (2 pontos)
+
+    O relatório deve apresentar resultados obtidos a partir da execução do código.
+    Esses resultados devem ser apresentados em formas de tabela e gráficos.
+
+    * **0 pontos** - O relatório não apresenta resultados em forma de tabelas e gráficos.
+
+    * **+0.5 ponto** - Existe a apresentação dos dados em tabela **ou** gráfico.
+
+    * **+1.5 ponto** - O relatório apresenta tabela **e** gráfico contendo os principais parâmetros de execução dos experimento.
+
+    ### 3. Qualidade da análise dos resultados (3 pontos)
+
+    A análise deve mostrar que o aluno entendeu as otimizações que realizou e como elas impactaram os resultados obtidos.
+
+    * **0 pontos** - Texto do relatório genérico, análises claramente geradas por ferramentas de IA ou explicações inconsistentes com os resultados apresentados.
+
+    * **+1 ponto** - O relatório menciona resultados, mas a interpretação ainda é superficial.
+
+    * **+2 pontos** - O relatório relaciona as otimizações implementadas com os dados obtidos de forma clara e objetiva.
+
+
+    # A entrega da APS 1 deverá ser realizada até o dia 20/03 as 23h59 pelo [Github Classroom](https://classroom.github.com/a/YdsvpTBm) 
     
 
 ??? note "APS 2 20%"

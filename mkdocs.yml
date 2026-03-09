@@ -74,8 +74,8 @@ nav:
  #       - "Aula 07 Otimizações usando paralelismo de memória Distribuída": Exercicios/aula07/aula07.md
  #       - "Aula 08 Otimizações usando paralelismo de memória local e distribuída": Exercicios/aula08/aula08.md
 
- #   - Projetos:
- #       - "Projeto 1 - Otimizações em CPU" : projetos/2025-2/projeto-cpu.md
+    - APS's:
+        - "APS 1 - Otimizações em CPU" : projetos/2026-1/APS1.md
  #       - "Projeto 2 - Otimizações em GPU" : projetos/2025-2/projeto-gpu.md
 
  #   - Bonus:
