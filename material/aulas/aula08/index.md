@@ -12,7 +12,7 @@ OpenMP fornece alguns mecanismos para isso:
 
 * `atomic`
 * `critical`
-* `reduction`
+* `private`
 
 
 Esses mecanismos garantem correção do programa, mas têm um custo importante: **Eles reduzem o paralelismo.**
