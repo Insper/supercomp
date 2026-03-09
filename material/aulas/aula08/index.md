@@ -46,7 +46,7 @@ O resultado final fica inconsistente.
 
 ## Usando `critical`
 
-Se usamos `critical`, apenas uma thread por vez pode executar o trecho dentra regial `critical`.
+Se usamos `critical`, apenas uma thread por vez pode executar o trecho dentro da região `critical`.
 
 Isso garante a segurança na leitura e na escrita da variável, mas cria um problema.
 
@@ -110,7 +110,7 @@ Em vez de várias threads competirem pela mesma variável, cada thread trabalha 
 
 No OpenMP isso pode ser feito com variáveis `private`.
 
-```
+```cpp
 double soma = 0.0;
 double soma_local;
 
