@@ -11,6 +11,10 @@
         <link rel="canonical" href="https://insper.github.io/supercomp/aulas/aula09/">
       
       
+        <link rel="prev" href="../aula08/">
+      
+      
+        <link rel="next" href="../../teoria/slides/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -18,7 +22,7 @@
     
     
       
-        <title>Projeto 1 - Mineração de Hashes em ambiente de HPC - SuperComputação - 2026/1</title>
+        <title>Aula 09 - Programação Distribuída com MPI - SuperComputação - 2026/1</title>
       
     
     
@@ -80,7 +84,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#projeto-1-mineracao-de-hashes-em-ambiente-de-hpc" class="md-skip">
+        <a href="#programacao-distribuida-com-mpi" class="md-skip">
           Skip to content
         </a>
       
@@ -114,7 +118,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Projeto 1 - Mineração de Hashes em ambiente de HPC
+              Aula 09 - Programação Distribuída com MPI
             
           </span>
         </div>
@@ -227,10 +231,12 @@
         
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
+      <li class="md-tabs__item md-tabs__item--active">
         <a href="../aula01/" class="md-tabs__link">
           
   
@@ -369,23 +375,28 @@
       
   
   
+    
   
   
+  
     
     
     
-      
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
             
   
   <span class="md-ellipsis">
@@ -397,7 +408,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             Aulas
@@ -575,6 +586,111 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Aula 09 - Programação Distribuída com MPI
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Aula 09 - Programação Distribuída com MPI
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#token-em-anel" class="md-nav__link">
+    <span class="md-ellipsis">
+      Token em anel
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Token em anel">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#como-compilar-e-rodar" class="md-nav__link">
+    <span class="md-ellipsis">
+      Como compilar e rodar
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#desafio-ping-pong-latencia-e-largura-de-banda" class="md-nav__link">
+    <span class="md-ellipsis">
+      Desafio Ping-Pong: Latência e Largura de Banda
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#perguntas-teoricas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Perguntas Teóricas
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -882,19 +998,19 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#grupos-de-no-maximo-3-alunos-data-de-entrega-29setembro" class="md-nav__link">
+  <a href="#token-em-anel" class="md-nav__link">
     <span class="md-ellipsis">
-      Grupos de no máximo 3 alunos, data de entrega 29/Setembro
+      Token em anel
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Grupos de no máximo 3 alunos, data de entrega 29/Setembro">
+    <nav class="md-nav" aria-label="Token em anel">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#objetivo" class="md-nav__link">
+  <a href="#como-compilar-e-rodar" class="md-nav__link">
     <span class="md-ellipsis">
-      Objetivo
+      Como compilar e rodar
     </span>
   </a>
   
@@ -906,44 +1022,20 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#rubrica-de-avaliacao" class="md-nav__link">
+  <a href="#desafio-ping-pong-latencia-e-largura-de-banda" class="md-nav__link">
     <span class="md-ellipsis">
-      Rúbrica de Avaliação
+      Desafio Ping-Pong: Latência e Largura de Banda
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#entrega" class="md-nav__link">
+  <a href="#perguntas-teoricas" class="md-nav__link">
     <span class="md-ellipsis">
-      Entrega
+      Perguntas Teóricas
     </span>
   </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#bonus-por-qualidade-do-relatorio-tecnico" class="md-nav__link">
-    <span class="md-ellipsis">
-      Bônus por Qualidade do relatório técnico
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Bônus por Qualidade do relatório técnico">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#observacoes" class="md-nav__link">
-    <span class="md-ellipsis">
-      Observações
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -966,101 +1058,209 @@
   
 
 
-<h1 id="projeto-1-mineracao-de-hashes-em-ambiente-de-hpc"><strong>Projeto 1 - Mineração de Hashes em ambiente de HPC</strong><a class="headerlink" href="#projeto-1-mineracao-de-hashes-em-ambiente-de-hpc" title="Permanent link">&para;</a></h1>
-<h2 id="grupos-de-no-maximo-3-alunos-data-de-entrega-29setembro"><strong>Grupos de no máximo 3 alunos, data de entrega 29/Setembro</strong><a class="headerlink" href="#grupos-de-no-maximo-3-alunos-data-de-entrega-29setembro" title="Permanent link">&para;</a></h2>
-<p><a href="https://classroom.github.com/a/2374xoSF">Acesse o repositório do projeto aqui</a></p>
-<p>Neste projeto, seu grupo deverá <strong>diagnosticar e otimizar um algoritmo de mineração de criptomoedas implementado em C++</strong>. O código inicial foi propositalmente escrito de forma ineficiente, apresentando gargalos péssimas práticas de uso de memória.</p>
-<p>Espera-se que seu grupo seja capaz de identificar esses problemas, propor hipóteses de melhoria, aplicar técnicas de otimização e mensurar o impacto das mudanças no desempenho da aplicação. Ao final, seu grupo deverá elaborar um relatório técnico, documentando todo o processo de análise e otimização.</p>
-<p>A dificuldade da mineração é ajustada pela quantidade de zeros exigida no início do hash. À medida que vocês aumentam essa dificuldade, o desafio computacional cresce, o que demanda boas decisões de otimização e uso eficiente de CPU e memória. Analise adequadamente os recursos disponíveis das filas do Cluster Franky para realizar os seus testes e suas otimizações.</p>
-<hr />
-<h3 id="objetivo"><strong>Objetivo</strong><a class="headerlink" href="#objetivo" title="Permanent link">&para;</a></h3>
-<p>Aplicar conhecimentos de:</p>
+<h1 id="programacao-distribuida-com-mpi">Programação Distribuída com MPI<a class="headerlink" href="#programacao-distribuida-com-mpi" title="Permanent link">&para;</a></h1>
+<p>No MPI existem duas formas de comunicação: a ponto-a-ponto e a coletiva.<br />
+Na comunicação ponto-a-ponto, apenas dois processos participam: um envia (<code>MPI_Send</code>) e outro recebe (<code>MPI_Recv</code>).  </p>
+<h2 id="token-em-anel">Token em anel<a class="headerlink" href="#token-em-anel" title="Permanent link">&para;</a></h2>
+<p>No anel, um único “pacote” (token) dá uma volta completa: cada processo recebe o vetor, acrescenta sua informação e passa adiante. Assim, há N mensagens para N processos.</p>
+<p><code>anel.cpp</code> 
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;mpi.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">**</span><span class="w"> </span><span class="n">argv</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">MPI_Init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">argv</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">rank</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">;</span>
+<span class="w">    </span><span class="n">MPI_Comm_rank</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rank</span><span class="p">);</span><span class="w">  </span><span class="c1">// identifica o rank de cada processo</span>
+<span class="w">    </span><span class="n">MPI_Comm_size</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">size</span><span class="p">);</span><span class="w">  </span><span class="c1">// descobre quantos nós estão rodando</span>
+
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">chunk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2048</span><span class="p">;</span><span class="w">                </span><span class="c1">// cada processo envia seu vetor</span>
+
+<span class="w">    </span><span class="c1">// Cada processo prepara seu vetor local </span>
+<span class="w">    </span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">local</span><span class="p">(</span><span class="n">chunk</span><span class="p">);</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">chunk</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// preenche o vetor com o dado</span>
+<span class="w">        </span><span class="n">local</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rank</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1000</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// O root precisa de um buffer para juntar TODOS os blocos: size * chunk</span>
+<span class="w">    </span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rank</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">chunk</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Vamos medir o tempo da troca de dados</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">t0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI_Wtime</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rank</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// O root primeiro coloca o próprio bloco no lugar correto</span>
+<span class="w">        </span><span class="c1">//    (posição 0 .. chunk-1, já que rank==0)</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">copy</span><span class="p">(</span><span class="n">local</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">local</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="n">begin</span><span class="p">());</span>
+
+<span class="w">        </span><span class="c1">// Recebe de cada rank (1..size-1) o respectivo bloco</span>
+<span class="w">        </span><span class="c1">//    e grava diretamente na “faixa” correta do vetor final.</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">src</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">src</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">size</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">src</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">MPI_Recv</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">data</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">src</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">chunk</span><span class="p">,</span><span class="w">   </span><span class="c1">// destino no buffer final</span>
+<span class="w">                    </span><span class="n">chunk</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_INT</span><span class="p">,</span><span class="w">                 </span><span class="c1">// quantos / tipo</span>
+<span class="w">                    </span><span class="n">src</span><span class="p">,</span><span class="w">                            </span><span class="c1">// origem (rank esperado)</span>
+<span class="w">                    </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w">              </span><span class="c1">// tag/comunicador</span>
+<span class="w">                    </span><span class="n">MPI_STATUS_IGNORE</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Ranks != 0 enviam seu bloco para o root</span>
+<span class="w">        </span><span class="n">MPI_Send</span><span class="p">(</span><span class="n">local</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span><span class="w"> </span><span class="n">chunk</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_INT</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_COMM_WORLD</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI_Wtime</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// Root imprime um resumo e alguns elementos para verificação</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rank</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;[Anel] N=&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">size</span>
+<span class="w">            </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; tempo=&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="p">(</span><span class="n">t1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">t0</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; s&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">        </span><span class="c1">// Mostra só os 5 primeiros valores de cada bloco para não poluir</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">size</span><span class="p">;</span><span class="w"> </span><span class="n">p</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Rank &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;: &quot;</span><span class="p">;</span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">                </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">result</span><span class="p">[</span><span class="n">p</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">chunk</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">;</span>
+<span class="w">            </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;...</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">MPI_Finalize</span><span class="p">();</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<h4 id="como-compilar-e-rodar">Como compilar e rodar<a class="headerlink" href="#como-compilar-e-rodar" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>mpic++<span class="w"> </span>-O2<span class="w"> </span>anel.cpp<span class="w"> </span>-o<span class="w"> </span>anel
+</code></pre></div>
+<p>Submetendo ao Slurm</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="c1">#SBATCH --job-name=anel               # nome do job</span>
+<span class="c1">#SBATCH --output=anel.%j.txt           # saída em arquivo</span>
+<span class="c1">#SBATCH --time=00:05:00               # tempo limite</span>
+<span class="c1">#SBATCH --nodes=5                    # número de nós (Computadores)</span>
+<span class="c1">#SBATCH --ntasks=5                    # número total de Ranks MPI</span>
+<span class="c1">#SBATCH --cpus-per-task=1             # CPUs por processo</span>
+<span class="c1">#SBATCH --partition=normal            # Fila do SLURM</span>
+<span class="c1">#SBATCH --mem=1GB                    # memória solicitada</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;=== Executando com 2 processos ===&quot;</span>
+mpirun<span class="w"> </span>-np<span class="w"> </span><span class="m">2</span><span class="w"> </span>./anel
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;==================================&quot;</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;=== Executando com 3 processos ===&quot;</span>
+mpirun<span class="w"> </span>-np<span class="w"> </span><span class="m">3</span><span class="w"> </span>./anel
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;==================================&quot;</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;=== Executando com 4 processos ===&quot;</span>
+mpirun<span class="w"> </span>-np<span class="w"> </span><span class="m">4</span><span class="w"> </span>./anel
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;==================================&quot;</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;=== Executando com 5 processos ===&quot;</span>
+mpirun<span class="w"> </span>-np<span class="w"> </span><span class="m">5</span><span class="w"> </span>./anel
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;==================================&quot;</span>
+</code></pre></div>
+<h2 id="desafio-ping-pong-latencia-e-largura-de-banda">Desafio Ping-Pong: Latência e Largura de Banda<a class="headerlink" href="#desafio-ping-pong-latencia-e-largura-de-banda" title="Permanent link">&para;</a></h2>
+<p>No MPI, a comunicação pode ocorrer de forma ponto-a-ponto, onde dois processos trocam mensagens diretamente usando
+ <code>MPI_Send</code>/<code>MPI_Recv</code></p>
+<p>Para avaliar a qualidade da comunicação em um sistema de HPC o ping-pong pode ser utilizado.
+Esse experimento permite medir dois conceitos fundamentais:</p>
 <ul>
-<li>Análise de desempenho</li>
-<li>Diagnóstico de gargalos</li>
-<li>Boas práticas de gerenciamento de memória</li>
-<li>Paralelismo com OpenMP</li>
-<li>Distribuição com MPI</li>
+<li><strong>Latência</strong> → tempo necessário para realizar a comunicação entre dois processos.</li>
+<li><strong>Largura de banda</strong> → quantidade de dados transferidos por unidade de tempo.</li>
 </ul>
-<h2 id="rubrica-de-avaliacao"><strong>Rúbrica de Avaliação</strong><a class="headerlink" href="#rubrica-de-avaliacao" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>Conceito</th>
-<th>Critérios Técnicos</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>C</strong></td>
-<td>Executa o minerador sequencial no cluster Franky com dificuldade <strong>6 zeros</strong>, Realiza Passagem de objetos grandes por referência ou ponteiro; Minimização de cópias desnecessárias; Uso eficiente de buffers;  Implementa uma heurísitca eficiente.</td>
-</tr>
-<tr>
-<td><strong>B</strong></td>
-<td>Executa o minerador com dificuldade <strong>7 zeros</strong>, Realiza as otimizações da rúbrica C e aplica <strong>paralelização com OpenMP ou distribuição com MPI</strong></td>
-</tr>
-<tr>
-<td><strong>A</strong></td>
-<td>Executa o minerador com dificuldade <strong>8 zeros</strong>, Realiza as otimizações da rúbrica C e aplica <strong>paralelização com OpenMP E distribuição com MPI</strong></td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2 id="entrega"><strong>Entrega</strong><a class="headerlink" href="#entrega" title="Permanent link">&para;</a></h2>
-<p>A entrega deve conter:</p>
+<p>A partir do exemplo <code>anel.cpp</code>, implemente um programa chamado <code>pingpong.cpp</code>.</p>
+<p>O programa deve:</p>
 <ol>
-<li>
-<p>O nome de cada integrante do grupo</p>
-</li>
-<li>
-<p>Código-fonte funcional</p>
-</li>
-<li>
-<p>Diagnóstico dos gargalos do código base</p>
-</li>
-<li>
-<p>Proposta de otimização e hipótese de melhoria</p>
-</li>
-<li>
-<p>Implementação da hipótese</p>
-</li>
-<li>
-<p>Comparação de desempenho (tempo, speedup, eficiência, etc.)</p>
-</li>
-<li>
-<p>Discussão dos resultados e limitações encontradas</p>
-</li>
+<li>Utilizar 2 processos MPI.</li>
+<li>O processo 0 envia uma mensagem ao processo 1.</li>
+<li>O processo 1 recebe a mensagem e envia uma resposta para o processo 0.</li>
+<li>Esse ciclo deve ser repetido várias vezes.</li>
 </ol>
-<hr />
-<h2 id="bonus-por-qualidade-do-relatorio-tecnico"><strong>Bônus por Qualidade do relatório técnico</strong><a class="headerlink" href="#bonus-por-qualidade-do-relatorio-tecnico" title="Permanent link">&para;</a></h2>
+<p>Execute o ping-pong variando o tamanho da mensagem.</p>
+<p>Por exemplo:</p>
 <table>
 <thead>
 <tr>
-<th>Conceito Base</th>
-<th>Com Bônus</th>
+<th>Tamanho da mensagem</th>
+<th>Repetições</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>C</td>
-<td>C+</td>
+<td>8 Bytes</td>
+<td>10000</td>
 </tr>
 <tr>
-<td>B</td>
-<td>B+</td>
+<td>64 Bytes</td>
+<td>10000</td>
 </tr>
 <tr>
-<td>A</td>
-<td>A+</td>
+<td>512 Bytes</td>
+<td>10000</td>
+</tr>
+<tr>
+<td>4 KB</td>
+<td>10000</td>
+</tr>
+<tr>
+<td>32 KB</td>
+<td>10000</td>
+</tr>
+<tr>
+<td>256 KB</td>
+<td>10000</td>
 </tr>
 </tbody>
 </table>
-<h3 id="observacoes">Observações<a class="headerlink" href="#observacoes" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Espera-se que o aluno entenda os problemas do código base antes de corrigir.</li>
-<li>O binário <code>transacoes</code> simula um ambiente de rede assíncrono com envio de blocos não simultâneos, para que o código minerador seja tolerante a ordem e tempo de chegada.</li>
-<li>A execução dos testes pode demorar minutos. Se planeje bem, escolha adequadamente a fila que será utilizada nos seus testes.</li>
-</ul>
+<p>A partir do tempo medido, calcule a latência média e largura_de_banda:</p>
+<p>A latência pode ser aproximada por:</p>
+<div class="arithmatex">
+<div class="MathJax_Preview">
+latencia = \frac{tempo\ total}{2 \times repetições}
+</div>
+<script type="math/tex; mode=display">
+latencia = \frac{tempo\ total}{2 \times repetições}
+</script>
+</div>
+<p>O 2 é porque cada troca possui uma mensagem de envio e uma mensagem de resposta</p>
+<div class="arithmatex">
+<div class="MathJax_Preview">
+larguraBanda =
+\frac{tamanho\ da\ mensagem}{tempo\ medio\ de\ transferencia}
+</div>
+<script type="math/tex; mode=display">
+larguraBanda =
+\frac{tamanho\ da\ mensagem}{tempo\ medio\ de\ transferencia}
+</script>
+</div>
+<p>Apresente o resultado em <strong>MB/s</strong>.</p>
+<p>Monte uma tabela com os resultados:</p>
+<table>
+<thead>
+<tr>
+<th>Tamanho da mensagem</th>
+<th>Tempo total</th>
+<th>Latência</th>
+<th>Largura de banda</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="perguntas-teoricas">Perguntas Teóricas<a class="headerlink" href="#perguntas-teoricas" title="Permanent link">&para;</a></h2>
+<p>1- Qual a diferença entre latência e largura de banda em sistemas de comunicação?</p>
+<p>2- Por que mensagens muito pequenas são mais influenciadas pela latência?</p>
+<p>3- O que acontece com a largura de banda quando o tamanho da mensagem aumenta?</p>
+<p>4- Por que o ping-pong é adequado para medir desempenho de comunicação em sistemas de HPC?</p>
+<h1 id="esta-atividade-nao-precisa-ser-entregue-bom-fim-de-semana">Esta atividade não precisa ser entregue. Bom fim de semana!<a class="headerlink" href="#esta-atividade-nao-precisa-ser-entregue-bom-fim-de-semana" title="Permanent link">&para;</a></h1>
 
 
 
