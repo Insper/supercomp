@@ -15,3 +15,5 @@
 [Aula 7](slides/Aula07.pdf)
 
 [Aula 9](slides/Aula09.pdf)
+
+[Aula 10](slides/Aula10.pdf)
