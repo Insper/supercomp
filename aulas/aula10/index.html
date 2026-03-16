@@ -11,6 +11,10 @@
         <link rel="canonical" href="https://insper.github.io/supercomp/aulas/aula10/">
       
       
+        <link rel="prev" href="../aula09/">
+      
+      
+        <link rel="next" href="../../teoria/slides/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -18,7 +22,7 @@
     
     
       
-        <title>Acesso ao Supercomputador Santos Dumont (SDumont) - SuperComputação - 2026/1</title>
+        <title>Aula 10 - Tipos de comunicação MPI - SuperComputação - 2026/1</title>
       
     
     
@@ -80,7 +84,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#acesso-ao-supercomputador-santos-dumont-sdumont" class="md-skip">
+        <a href="#ping-pong" class="md-skip">
           Skip to content
         </a>
       
@@ -114,7 +118,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Acesso ao Supercomputador Santos Dumont (SDumont)
+              Aula 10 - Tipos de comunicação MPI
             
           </span>
         </div>
@@ -227,10 +231,12 @@
         
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
+      <li class="md-tabs__item md-tabs__item--active">
         <a href="../aula01/" class="md-tabs__link">
           
   
@@ -369,23 +375,28 @@
       
   
   
+    
   
   
+  
     
     
     
-      
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
             
   
   <span class="md-ellipsis">
@@ -397,7 +408,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             Aulas
@@ -597,6 +608,320 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Aula 10 - Tipos de comunicação MPI
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Aula 10 - Tipos de comunicação MPI
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#ping-pong" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ping-pong
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ping-pong">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#compile-o-programa" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compile o programa:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#script-slurm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Script SLURM
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#submeta-o-job-com-slurm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Submeta o job com SLURM:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#voce-deve-ver-algo-como-isso" class="md-nav__link">
+    <span class="md-ellipsis">
+      Você deve ver algo como isso:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#token-em-anel" class="md-nav__link">
+    <span class="md-ellipsis">
+      Token em anel
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#token-em-anel-comunicacao-sequencial" class="md-nav__link">
+    <span class="md-ellipsis">
+      Token em anel (comunicação sequencial)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Código
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Código">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#compile-o-programa_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compile o programa:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#script-slurm_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Script SLURM
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#submeta-o-job-com-slurm_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Submeta o job com SLURM:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#versao-usando-mpi_gather" class="md-nav__link">
+    <span class="md-ellipsis">
+      Versão usando MPI_Gather
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#codigo_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Código
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Código">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#compile-o-programa_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compile o programa:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#script-slurm_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Script SLURM
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#submeta-o-job-com-slurm_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Submeta o job com SLURM:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#distribuicao-de-dados-com-mpi_scatter" class="md-nav__link">
+    <span class="md-ellipsis">
+      Distribuição de dados com MPI_Scatter
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ideia" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ideia
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ideia">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#compile-o-programa_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compile o programa:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#script-slurm_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Script SLURM
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#submeta-o-job-com-slurm_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Submeta o job com SLURM:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#combinacao-de-resultados-com-mpi_reduce" class="md-nav__link">
+    <span class="md-ellipsis">
+      Combinação de resultados com MPI_Reduce
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Combinação de resultados com MPI_Reduce">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#compile-o-programa_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compile o programa:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#script-slurm_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Script SLURM
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#submeta-o-job-com-slurm_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Submeta o job com SLURM:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -894,8 +1219,6 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -904,46 +1227,46 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#o-lncc" class="md-nav__link">
+  <a href="#ping-pong" class="md-nav__link">
     <span class="md-ellipsis">
-      O LNCC
+      Ping-pong
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#o-supercomputador-santos-dumont" class="md-nav__link">
-    <span class="md-ellipsis">
-      O Supercomputador Santos Dumont
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#como-obter-acesso-ao-sdumont" class="md-nav__link">
-    <span class="md-ellipsis">
-      Como obter acesso ao SDumont
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Como obter acesso ao SDumont">
+    <nav class="md-nav" aria-label="Ping-pong">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#dados-institucionais" class="md-nav__link">
+  <a href="#compile-o-programa" class="md-nav__link">
     <span class="md-ellipsis">
-      Dados Institucionais
+      Compile o programa:
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#dados-do-projeto" class="md-nav__link">
+  <a href="#script-slurm" class="md-nav__link">
     <span class="md-ellipsis">
-      Dados do Projeto
+      Script SLURM
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#submeta-o-job-com-slurm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Submeta o job com SLURM:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#voce-deve-ver-algo-como-isso" class="md-nav__link">
+    <span class="md-ellipsis">
+      Você deve ver algo como isso:
     </span>
   </a>
   
@@ -955,20 +1278,206 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#assine-o-documento" class="md-nav__link">
+  <a href="#token-em-anel" class="md-nav__link">
     <span class="md-ellipsis">
-      Assine o documento
+      Token em anel
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#proximos-passos" class="md-nav__link">
+  <a href="#token-em-anel-comunicacao-sequencial" class="md-nav__link">
     <span class="md-ellipsis">
-      Próximos passos
+      Token em anel (comunicação sequencial)
     </span>
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Código
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Código">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#compile-o-programa_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compile o programa:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#script-slurm_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Script SLURM
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#submeta-o-job-com-slurm_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Submeta o job com SLURM:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#versao-usando-mpi_gather" class="md-nav__link">
+    <span class="md-ellipsis">
+      Versão usando MPI_Gather
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#codigo_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Código
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Código">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#compile-o-programa_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compile o programa:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#script-slurm_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Script SLURM
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#submeta-o-job-com-slurm_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Submeta o job com SLURM:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#distribuicao-de-dados-com-mpi_scatter" class="md-nav__link">
+    <span class="md-ellipsis">
+      Distribuição de dados com MPI_Scatter
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ideia" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ideia
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ideia">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#compile-o-programa_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compile o programa:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#script-slurm_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Script SLURM
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#submeta-o-job-com-slurm_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Submeta o job com SLURM:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#combinacao-de-resultados-com-mpi_reduce" class="md-nav__link">
+    <span class="md-ellipsis">
+      Combinação de resultados com MPI_Reduce
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Combinação de resultados com MPI_Reduce">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#compile-o-programa_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compile o programa:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#script-slurm_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Script SLURM
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#submeta-o-job-com-slurm_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Submeta o job com SLURM:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -991,54 +1500,459 @@
   
 
 
-<h1 id="acesso-ao-supercomputador-santos-dumont-sdumont">Acesso ao Supercomputador Santos Dumont (SDumont)<a class="headerlink" href="#acesso-ao-supercomputador-santos-dumont-sdumont" title="Permanent link">&para;</a></h1>
-<h2 id="o-lncc">O LNCC<a class="headerlink" href="#o-lncc" title="Permanent link">&para;</a></h2>
-<p>O <strong>Laboratório Nacional de Computação Científica (LNCC)</strong> é uma unidade de pesquisa do Ministério da Ciência, Tecnologia e Inovações (MCTI), especializada em computação científica de alto desempenho, modelagem matemática, simulação e ciência de dados. </p>
-<h2 id="o-supercomputador-santos-dumont">O Supercomputador Santos Dumont<a class="headerlink" href="#o-supercomputador-santos-dumont" title="Permanent link">&para;</a></h2>
-<p>O <strong>SDumont</strong> é o maior supercomputador da América Latina, operado pelo LNCC. Ele é utilizado por pesquisadores e instituições de todo o Brasil em projetos de alto impacto, como simulações climáticas, modelagem molecular, bioinformática, inteligência artificial, física computacional, entre outros.</p>
-<p>A infraestrutura do SDumont permite:</p>
-<ul>
-<li>Processamento massivo de dados científicos;</li>
-<li>Execução de simulações paralelas e distribuídas;</li>
-<li>Acesso remoto via SSH para submissão de jobs com uso de SLURM.</li>
-</ul>
-<hr />
-<h2 id="como-obter-acesso-ao-sdumont">Como obter acesso ao SDumont<a class="headerlink" href="#como-obter-acesso-ao-sdumont" title="Permanent link">&para;</a></h2>
-<p>Para utilizar o SDumont <strong>você deve preencher e assinar</strong> o formulário oficial fornecido pelo LNCC.</p>
+  <h1>Aula 10 - Tipos de comunicação MPI</h1>
+
+<p>Na aula anterior vimos a comunicação ponto-a-ponto, utilizando operações como <code>MPI_Send</code> e <code>MPI_Recv</code>, e analisamos como o custo de comunicação depende da <strong>latência</strong> e da <strong>largura de banda</strong> da rede por meio do experimento de <em>ping-pong</em>.</p>
+<p>Nesta aula vamos dar mais um passo no uso do MPI. Em vez de trabalhar apenas com comunicação <strong>ponto-a-ponto</strong>, vamos ver alguns <strong>padrões de comunicação</strong> e também as <strong>operações coletivas</strong>, onde vários processos participam da troca de dados ao mesmo tempo.</p>
+<p>Para isso, vamos implementar alguns exemplos e observar como as mensagens circulam entre os processos.</p>
+<h2 id="ping-pong"><strong>Ping-pong</strong><a class="headerlink" href="#ping-pong" title="Permanent link">&para;</a></h2>
+<p>Código base:
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;mpi.h&gt;</span><span class="c1">        // Biblioteca principal do MPI para comunicação entre processos</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span><span class="c1">    </span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstring&gt;</span><span class="c1">      </span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">**</span><span class="w"> </span><span class="n">argv</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">rank</span><span class="p">;</span><span class="w">               </span><span class="c1">// Variável que armazenará o &quot;rank&quot; (identificador) do processo</span>
+<span class="w">    </span><span class="n">MPI_Status</span><span class="w"> </span><span class="n">status</span><span class="p">;</span><span class="w">      </span><span class="c1">// Estrutura que armazenará o status da comunicação MPI</span>
+<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">mensagem</span><span class="p">[</span><span class="mi">100</span><span class="p">];</span><span class="w">     </span><span class="c1">// Vetor de caracteres para armazenar a mensagem a ser enviada/recebida</span>
+
+<span class="w">    </span><span class="c1">// Inicializa o ambiente MPI (todos os processos são iniciados)</span>
+<span class="w">    </span><span class="n">MPI_Init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">argv</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Descobre o &quot;rank&quot; do processo atual dentro do comunicador global (MPI_COMM_WORLD)</span>
+<span class="w">    </span><span class="n">MPI_Comm_rank</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rank</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Se este for o processo de rank 0 (emissor inicial)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rank</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Copia a string &quot;Olá&quot; para a variável mensagem</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">strcpy</span><span class="p">(</span><span class="n">mensagem</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Olá&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// Envia a mensagem para o processo de rank 1</span>
+<span class="w">        </span><span class="c1">// Parâmetros: buffer, tamanho, tipo, destino, tag, comunicador</span>
+<span class="w">        </span><span class="n">MPI_Send</span><span class="p">(</span><span class="n">mensagem</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">strlen</span><span class="p">(</span><span class="n">mensagem</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_CHAR</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_COMM_WORLD</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// Imprime no terminal que a mensagem foi enviada</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Processo 0 enviou: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">mensagem</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">        </span><span class="c1">// Aguarda a resposta do processo 1</span>
+<span class="w">        </span><span class="c1">// Parâmetros: buffer, tamanho máximo, tipo, origem, tag, comunicador, status</span>
+<span class="w">        </span><span class="n">MPI_Recv</span><span class="p">(</span><span class="n">mensagem</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_CHAR</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">status</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// Imprime a mensagem recebida</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Processo 0 recebeu: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">mensagem</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Se este for o processo de rank 1 (receptor inicial)</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rank</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Recebe a mensagem enviada pelo processo 0</span>
+<span class="w">        </span><span class="n">MPI_Recv</span><span class="p">(</span><span class="n">mensagem</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_CHAR</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">status</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// Imprime a mensagem recebida</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Processo 1 recebeu: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">mensagem</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">        </span><span class="c1">// Prepara a resposta &quot;Oi&quot;</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">strcpy</span><span class="p">(</span><span class="n">mensagem</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Oi&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// Envia a resposta de volta ao processo 0</span>
+<span class="w">        </span><span class="n">MPI_Send</span><span class="p">(</span><span class="n">mensagem</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">strlen</span><span class="p">(</span><span class="n">mensagem</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_CHAR</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_COMM_WORLD</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// Imprime que a mensagem foi enviada</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Processo 1 enviou: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">mensagem</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Todos os outros processos apenas informam que estão ociosos</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Processo &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">rank</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; está ocioso neste exercício.&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Finaliza o ambiente MPI (todos os processos encerram)</span>
+<span class="w">    </span><span class="n">MPI_Finalize</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<h3 id="compile-o-programa">Compile o programa:<a class="headerlink" href="#compile-o-programa" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>mpic++<span class="w"> </span>-FlagdeOtimização<span class="w"> </span>seu_codigo.cpp<span class="w"> </span>-o<span class="w"> </span>seu_binario
+</code></pre></div>
+<h3 id="script-slurm">Script SLURM<a class="headerlink" href="#script-slurm" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="c1">#SBATCH --job-name=mpi_hello</span>
+<span class="c1">#SBATCH --output=saida%j.txt</span>
+<span class="c1">#SBATCH --partition=express</span>
+<span class="c1">#SBATCH --mem=1GB</span>
+<span class="c1">#SBATCH --nodes=2</span>
+<span class="c1">#SBATCH --ntasks=5</span>
+<span class="c1">#SBATCH --cpus-per-task=1</span>
+<span class="c1">#SBATCH --time=00:02:00</span>
+<span class="c1">#SBATCH --export=ALL</span>
+
+<span class="c1"># Execute o seu binário com o MPI</span>
+mpirun<span class="w"> </span>-np<span class="w"> </span><span class="nv">$SLURM_NTASKS</span><span class="w"> </span>./seu_binario
+</code></pre></div>
+<h3 id="submeta-o-job-com-slurm">Submeta o job com SLURM:<a class="headerlink" href="#submeta-o-job-com-slurm" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>sbatch<span class="w"> </span>SeuSlurm.slurm
+</code></pre></div>
+<h3 id="voce-deve-ver-algo-como-isso">Você deve ver algo como isso:<a class="headerlink" href="#voce-deve-ver-algo-como-isso" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="o">[</span>liciascl@head-node<span class="w"> </span>mpi<span class="o">]</span>$<span class="w"> </span>cat<span class="w"> </span>saida.txt
+Processo<span class="w"> </span><span class="m">2</span><span class="w"> </span>está<span class="w"> </span>ocioso<span class="w"> </span>neste<span class="w"> </span>exercício.
+Processo<span class="w"> </span><span class="m">3</span><span class="w"> </span>está<span class="w"> </span>ocioso<span class="w"> </span>neste<span class="w"> </span>exercício.
+Processo<span class="w"> </span><span class="m">0</span><span class="w"> </span>enviou:<span class="w"> </span>Olá
+Processo<span class="w"> </span><span class="m">0</span><span class="w"> </span>recebeu:<span class="w"> </span>Oi
+Processo<span class="w"> </span><span class="m">1</span><span class="w"> </span>recebeu:<span class="w"> </span>Olá
+Processo<span class="w"> </span><span class="m">1</span><span class="w"> </span>enviou:<span class="w"> </span>Oi
+Processo<span class="w"> </span><span class="m">4</span><span class="w"> </span>está<span class="w"> </span>ocioso<span class="w"> </span>neste<span class="w"> </span>exercício.
+</code></pre></div>
+<h2 id="token-em-anel"><strong>Token em anel</strong><a class="headerlink" href="#token-em-anel" title="Permanent link">&para;</a></h2>
+<p>A ideia é perceber o custo de <strong>coletar informações sequencialmente</strong>.</p>
+<p>teste o token em anel: cada rank adiciona uma informação nova ao vetor e passa adiante.
+Execute em 2, 3 e 4 nós .
+Compare com o mesmo problema usando <code>MPI_Gather</code>.</p>
+<h2 id="token-em-anel-comunicacao-sequencial">Token em anel (comunicação sequencial)<a class="headerlink" href="#token-em-anel-comunicacao-sequencial" title="Permanent link">&para;</a></h2>
+<p>A ideia é que cada processo <strong>adicione seu rank em um vetor</strong> e passe esse vetor para o próximo processo. O último processo devolve o vetor ao <code>rank 0</code>.</p>
+<p>Isso cria uma comunicação <strong>sequencial</strong>, passando por todos os processos.</p>
+<h2 id="codigo">Código<a class="headerlink" href="#codigo" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;mpi.h&gt;</span><span class="c1">      // Biblioteca principal do MPI (Message Passing Interface)</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span><span class="c1">   // Biblioteca para entrada e saída (cout)</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span><span class="c1">     // Biblioteca para usar std::vector</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">**</span><span class="w"> </span><span class="n">argv</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="c1">// Inicializa o ambiente MPI</span>
+<span class="w">    </span><span class="c1">// Todos os processos começam a execução aqui</span>
+<span class="w">    </span><span class="n">MPI_Init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">argv</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">rank</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Descobre o identificador único (rank) do processo atual</span>
+<span class="w">    </span><span class="n">MPI_Comm_rank</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rank</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Descobre quantos processos estão participando do comunicador</span>
+<span class="w">    </span><span class="n">MPI_Comm_size</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">size</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Vetor que representará o &quot;token&quot; que circula entre os processos</span>
+<span class="w">    </span><span class="c1">// Cada posição será preenchida por um processo diferente</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">token</span><span class="p">(</span><span class="n">size</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Processo inicial do anel</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">rank</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">){</span>
+
+<span class="w">        </span><span class="c1">// O primeiro processo adiciona seu rank na primeira posição do vetor</span>
+<span class="w">        </span><span class="n">token</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rank</span><span class="p">;</span>
+
+<span class="w">        </span><span class="c1">// Envia o vetor para o próximo processo (rank 1)</span>
+<span class="w">        </span><span class="n">MPI_Send</span><span class="p">(</span><span class="n">token</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span><span class="w"> </span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_INT</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_COMM_WORLD</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// Aguarda o retorno do vetor vindo do último processo do anel</span>
+<span class="w">        </span><span class="n">MPI_Recv</span><span class="p">(</span><span class="n">token</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span><span class="w"> </span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_INT</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="mi">-1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_STATUS_IGNORE</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// Após percorrer todos os processos, o vetor estará completo</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Token final: &quot;</span><span class="p">;</span>
+
+<span class="w">        </span><span class="c1">// Imprime o conteúdo final do vetor</span>
+<span class="w">        </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">size</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">            </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">token</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">;</span>
+
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">else</span><span class="p">{</span>
+
+<span class="w">        </span><span class="c1">// Recebe o vetor do processo anterior no anel</span>
+<span class="w">        </span><span class="n">MPI_Recv</span><span class="p">(</span><span class="n">token</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span><span class="w"> </span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_INT</span><span class="p">,</span><span class="w"> </span><span class="n">rank</span><span class="mi">-1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_STATUS_IGNORE</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// Adiciona seu próprio rank no vetor</span>
+<span class="w">        </span><span class="n">token</span><span class="p">[</span><span class="n">rank</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rank</span><span class="p">;</span>
+
+<span class="w">        </span><span class="c1">// Calcula qual será o próximo processo do anel</span>
+<span class="w">        </span><span class="c1">// O operador % garante que o último processo envie de volta ao rank 0</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">rank</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">size</span><span class="p">;</span>
+
+<span class="w">        </span><span class="c1">// Envia o vetor atualizado para o próximo processo</span>
+<span class="w">        </span><span class="n">MPI_Send</span><span class="p">(</span><span class="n">token</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span><span class="w"> </span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_INT</span><span class="p">,</span><span class="w"> </span><span class="n">next</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_COMM_WORLD</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Finaliza o ambiente MPI</span>
+<span class="w">    </span><span class="c1">// Todos os processos encerram a execução aqui</span>
+<span class="w">    </span><span class="n">MPI_Finalize</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="compile-o-programa_1">Compile o programa:<a class="headerlink" href="#compile-o-programa_1" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>mpic++<span class="w"> </span>-FlagdeOtimização<span class="w"> </span>seu_codigo.cpp<span class="w"> </span>-o<span class="w"> </span>seu_binario
+</code></pre></div>
+<h3 id="script-slurm_1">Script SLURM<a class="headerlink" href="#script-slurm_1" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="c1">#SBATCH --job-name=mpi_hello</span>
+<span class="c1">#SBATCH --output=saida%j.txt</span>
+<span class="c1">#SBATCH --partition=express</span>
+<span class="c1">#SBATCH --mem=1GB</span>
+<span class="c1">#SBATCH --nodes=2</span>
+<span class="c1">#SBATCH --ntasks=5</span>
+<span class="c1">#SBATCH --cpus-per-task=1</span>
+<span class="c1">#SBATCH --time=00:02:00</span>
+<span class="c1">#SBATCH --export=ALL</span>
+
+<span class="c1"># Execute o seu binário com o MPI</span>
+mpirun<span class="w"> </span>-np<span class="w"> </span><span class="nv">$SLURM_NTASKS</span><span class="w"> </span>./seu_binario
+</code></pre></div>
+<h3 id="submeta-o-job-com-slurm_1">Submeta o job com SLURM:<a class="headerlink" href="#submeta-o-job-com-slurm_1" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>sbatch<span class="w"> </span>SeuSlurm.slurm
+</code></pre></div>
+<h3 id="versao-usando-mpi_gather">Versão usando MPI_Gather<a class="headerlink" href="#versao-usando-mpi_gather" title="Permanent link">&para;</a></h3>
+<p>Agora cada processo simplesmente envia seu valor para o processo <code>rank 0</code>, e o MPI faz a coleta automaticamente.</p>
+<p>Essa comunicação é <strong>coletiva</strong>, e a biblioteca MPI normalmente usa algoritmos <strong>otimizados em árvore</strong>.</p>
+<h2 id="codigo_1">Código<a class="headerlink" href="#codigo_1" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;mpi.h&gt;</span><span class="c1">      </span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span><span class="c1">   </span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span><span class="c1">     </span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">**</span><span class="w"> </span><span class="n">argv</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="c1">// Inicializa o ambiente MPI</span>
+<span class="w">    </span><span class="c1">// Todos os processos começam a execução aqui</span>
+<span class="w">    </span><span class="n">MPI_Init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">argv</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">rank</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Obtém o identificador único (rank) do processo atual</span>
+<span class="w">    </span><span class="n">MPI_Comm_rank</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rank</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Obtém o número total de processos no comunicador</span>
+<span class="w">    </span><span class="n">MPI_Comm_size</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">size</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Cada processo cria um valor local.</span>
+<span class="w">    </span><span class="c1">// Aqui usamos o próprio rank apenas como exemplo</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">valor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rank</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Vetor que armazenará os resultados coletados</span>
+<span class="w">    </span><span class="c1">// Apenas o processo 0 precisa desse vetor</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">resultado</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Se este for o processo root (rank 0),</span>
+<span class="w">    </span><span class="c1">// ele aloca espaço para armazenar um valor de cada processo</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">rank</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">        </span><span class="n">resultado</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">size</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Operação coletiva que coleta dados de todos os processos</span>
+<span class="w">    </span><span class="c1">// Cada processo envia 1 inteiro (valor)</span>
+<span class="w">    </span><span class="c1">// O processo root recebe todos os valores no vetor &quot;resultado&quot;</span>
+<span class="w">    </span><span class="n">MPI_Gather</span><span class="p">(</span><span class="o">&amp;</span><span class="n">valor</span><span class="p">,</span><span class="w">          </span><span class="c1">// endereço do dado local que será enviado</span>
+<span class="w">               </span><span class="mi">1</span><span class="p">,</span><span class="w">               </span><span class="c1">// quantidade de elementos enviados</span>
+<span class="w">               </span><span class="n">MPI_INT</span><span class="p">,</span><span class="w">         </span><span class="c1">// tipo de dado enviado</span>
+<span class="w">               </span><span class="n">resultado</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span><span class="c1">// buffer onde o root armazenará os dados</span>
+<span class="w">               </span><span class="mi">1</span><span class="p">,</span><span class="w">               </span><span class="c1">// quantidade de elementos recebidos de cada processo</span>
+<span class="w">               </span><span class="n">MPI_INT</span><span class="p">,</span><span class="w">         </span><span class="c1">// tipo de dado recebido</span>
+<span class="w">               </span><span class="mi">0</span><span class="p">,</span><span class="w">               </span><span class="c1">// rank do processo root (destino final)</span>
+<span class="w">               </span><span class="n">MPI_COMM_WORLD</span><span class="p">);</span><span class="w"> </span><span class="c1">// comunicador utilizado</span>
+
+<span class="w">    </span><span class="c1">// Apenas o processo root imprime os resultados</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">rank</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">){</span>
+
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Valores coletados: &quot;</span><span class="p">;</span>
+
+<span class="w">        </span><span class="c1">// Imprime todos os valores recebidos</span>
+<span class="w">        </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">size</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">            </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">resultado</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">;</span>
+
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Finaliza o ambiente MPI</span>
+<span class="w">    </span><span class="n">MPI_Finalize</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="compile-o-programa_2">Compile o programa:<a class="headerlink" href="#compile-o-programa_2" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>mpic++<span class="w"> </span>-FlagdeOtimização<span class="w"> </span>seu_codigo.cpp<span class="w"> </span>-o<span class="w"> </span>seu_binario
+</code></pre></div>
+<h3 id="script-slurm_2">Script SLURM<a class="headerlink" href="#script-slurm_2" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="c1">#SBATCH --job-name=mpi_hello</span>
+<span class="c1">#SBATCH --output=saida%j.txt</span>
+<span class="c1">#SBATCH --partition=express</span>
+<span class="c1">#SBATCH --mem=1GB</span>
+<span class="c1">#SBATCH --nodes=2</span>
+<span class="c1">#SBATCH --ntasks=5</span>
+<span class="c1">#SBATCH --cpus-per-task=1</span>
+<span class="c1">#SBATCH --time=00:02:00</span>
+<span class="c1">#SBATCH --export=ALL</span>
+
+<span class="c1"># Execute o seu binário com o MPI</span>
+mpirun<span class="w"> </span>-np<span class="w"> </span><span class="nv">$SLURM_NTASKS</span><span class="w"> </span>./seu_binario
+</code></pre></div>
+<h3 id="submeta-o-job-com-slurm_2">Submeta o job com SLURM:<a class="headerlink" href="#submeta-o-job-com-slurm_2" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>sbatch<span class="w"> </span>SeuSlurm.slurm
+</code></pre></div>
+<h2 id="distribuicao-de-dados-com-mpi_scatter">Distribuição de dados com <code>MPI_Scatter</code><a class="headerlink" href="#distribuicao-de-dados-com-mpi_scatter" title="Permanent link">&para;</a></h2>
+<p>Neste exemplo, um vetor grande é criado no <strong>processo 0</strong> e distribuído entre todos os processos.
+Cada processo recebe uma parte do vetor e calcula a soma local.</p>
+<h2 id="ideia">Ideia<a class="headerlink" href="#ideia" title="Permanent link">&para;</a></h2>
 <ol>
-<li><strong>Preencha</strong> o formulário de acesso (disponível <a href="formulario_sdumont_usuario.docx">aqui</a>) e <strong>assine</strong> o formulário;</li>
+<li><code>rank 0</code> cria um vetor grande.</li>
+<li>O vetor é dividido entre os processos com <code>MPI_Scatter</code>.</li>
+<li>Cada processo calcula uma soma parcial da sua parte.</li>
 </ol>
-<p>Preencha o documento conforme os exemplos abaixo:</p>
-<h3 id="dados-institucionais">Dados Institucionais<a class="headerlink" href="#dados-institucionais" title="Permanent link">&para;</a></h3>
-<ul>
-<li><strong>Instituição:</strong> Insper  </li>
-<li><strong>Telefone / Ramal:</strong> 4504-2400  </li>
-<li><strong>Departamento / Instituto:</strong> Laboratório de Redes e Supercomputação – Engenharia da Computação  </li>
-<li><strong>Cargo:</strong> Aluno</li>
-</ul>
-<h3 id="dados-do-projeto">Dados do Projeto<a class="headerlink" href="#dados-do-projeto" title="Permanent link">&para;</a></h3>
-<ul>
-<li><strong>Nome do Coordenador:</strong> Lícia Sales Costa Lima  </li>
-<li><strong>Título/Sigla do Projeto:</strong> Computação de Alto Desempenho: Um Modelo de Ensino Prático</li>
-</ul>
-<h2 id="assine-o-documento">Assine o documento<a class="headerlink" href="#assine-o-documento" title="Permanent link">&para;</a></h2>
-<p>Você pode optar por:</p>
-<ul>
-<li>
-<p><strong>Assinar digitalmente com sua conta Gov.br</strong> pelo site <a href="https://assinador.iti.br/">https://assinador.iti.br/</a>.</p>
-</li>
-<li>
-<p><strong>ou assinar à mão</strong>, imprimir e escanear o formulário;</p>
-</li>
-</ul>
-<h2 id="proximos-passos">Próximos passos<a class="headerlink" href="#proximos-passos" title="Permanent link">&para;</a></h2>
-<p>Anexe ao e-mail um documento de identificação oficial como RG ou CNH;</p>
-<p>Envie os documentos por e-mail para <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#108;&#105;&#99;&#105;&#97;&#115;&#99;&#108;&#64;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;">&#108;&#105;&#99;&#105;&#97;&#115;&#99;&#108;&#64;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;</a>.</p>
-<p><strong>Após o envio, os formulários devidamente preenchidos e assinados serão encaminhados para o LNCC para criação do acesso ao SDumont.</strong></p>
-<blockquote>
-<p><strong>Importante:</strong> O supercomputador SDumont é uma ferramenta poderosa para aprendizado e pesquisa. Use-o com responsabilidade.</p>
-</blockquote>
-<p>Site oficial do Santos Dumont <a href="https://sdumont.lncc.br/index.php">https://sdumont.lncc.br/index.php</a></p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;mpi.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">**</span><span class="w"> </span><span class="n">argv</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="n">MPI_Init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">argv</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">rank</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Descobre o rank do processo e o número total de processos</span>
+<span class="w">    </span><span class="n">MPI_Comm_rank</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rank</span><span class="p">);</span>
+<span class="w">    </span><span class="n">MPI_Comm_size</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">size</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000000</span><span class="p">;</span><span class="w"> </span><span class="c1">// tamanho total do vetor global</span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dados</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Apenas o processo 0 cria o vetor completo</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">rank</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">){</span>
+<span class="w">        </span><span class="n">dados</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">N</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// Preenche o vetor com valores crescentes</span>
+<span class="w">        </span><span class="c1">// Isso facilita visualizar os intervalos distribuídos</span>
+<span class="w">        </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">N</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">            </span><span class="n">dados</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Cada processo receberá uma fração do vetor</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">local_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">size</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">local</span><span class="p">(</span><span class="n">local_size</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Distribui partes do vetor para todos os processos</span>
+<span class="w">    </span><span class="n">MPI_Scatter</span><span class="p">(</span><span class="n">dados</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span>
+<span class="w">                </span><span class="n">local_size</span><span class="p">,</span>
+<span class="w">                </span><span class="n">MPI_INT</span><span class="p">,</span>
+<span class="w">                </span><span class="n">local</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span>
+<span class="w">                </span><span class="n">local_size</span><span class="p">,</span>
+<span class="w">                </span><span class="n">MPI_INT</span><span class="p">,</span>
+<span class="w">                </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">                </span><span class="n">MPI_COMM_WORLD</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Calcula soma local</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">soma_local</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">local_size</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">        </span><span class="n">soma_local</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">local</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+
+<span class="w">    </span><span class="c1">// Mostra qual intervalo foi recebido</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Processo &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">rank</span>
+<span class="w">              </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; recebeu intervalo [&quot;</span>
+<span class="w">              </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">local</span><span class="p">.</span><span class="n">front</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;, &quot;</span>
+<span class="w">              </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">local</span><span class="p">.</span><span class="n">back</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;]&quot;</span>
+<span class="w">              </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; | soma local = &quot;</span>
+<span class="w">              </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">soma_local</span>
+<span class="w">              </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">MPI_Finalize</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="compile-o-programa_3">Compile o programa:<a class="headerlink" href="#compile-o-programa_3" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>mpic++<span class="w"> </span>-FlagdeOtimização<span class="w"> </span>seu_codigo.cpp<span class="w"> </span>-o<span class="w"> </span>seu_binario
+</code></pre></div>
+<h3 id="script-slurm_3">Script SLURM<a class="headerlink" href="#script-slurm_3" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="c1">#SBATCH --job-name=mpi_hello</span>
+<span class="c1">#SBATCH --output=saida%j.txt</span>
+<span class="c1">#SBATCH --partition=express</span>
+<span class="c1">#SBATCH --mem=1GB</span>
+<span class="c1">#SBATCH --nodes=2</span>
+<span class="c1">#SBATCH --ntasks=5</span>
+<span class="c1">#SBATCH --cpus-per-task=1</span>
+<span class="c1">#SBATCH --time=00:02:00</span>
+<span class="c1">#SBATCH --export=ALL</span>
+
+<span class="c1"># Execute o seu binário com o MPI</span>
+mpirun<span class="w"> </span>-np<span class="w"> </span><span class="nv">$SLURM_NTASKS</span><span class="w"> </span>./seu_binario
+</code></pre></div>
+<h3 id="submeta-o-job-com-slurm_3">Submeta o job com SLURM:<a class="headerlink" href="#submeta-o-job-com-slurm_3" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>sbatch<span class="w"> </span>SeuSlurm.slurm
+</code></pre></div>
+<h2 id="combinacao-de-resultados-com-mpi_reduce">Combinação de resultados com <code>MPI_Reduce</code><a class="headerlink" href="#combinacao-de-resultados-com-mpi_reduce" title="Permanent link">&para;</a></h2>
+<p>Agora cada processo possui um valor (ou resultado parcial) e queremos combinar esses valores em um único resultado final.</p>
+<p>Aqui usamos <code>MPI_Reduce</code> para calcular a soma total das somas locais.</p>
+<ol>
+<li>Cada processo possui uma soma parcial.</li>
+<li><code>MPI_Reduce</code> combina todas as somas.</li>
+<li>O resultado final aparece no <strong>processo 0</strong>.</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;mpi.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">**</span><span class="w"> </span><span class="n">argv</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="c1">// Inicializa o ambiente MPI</span>
+<span class="w">    </span><span class="n">MPI_Init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">argv</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">rank</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Descobre o identificador do processo</span>
+<span class="w">    </span><span class="n">MPI_Comm_rank</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rank</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Descobre quantos processos existem</span>
+<span class="w">    </span><span class="n">MPI_Comm_size</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">size</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Cada processo cria um valor local</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">valor_local</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rank</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">222</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Mostra o valor local antes da redução</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Processo &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">rank</span><span class="w"> </span>
+<span class="w">              </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; possui valor local = &quot;</span>
+<span class="w">              </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">valor_local</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">soma_total</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Operação coletiva: soma todos os valores locais</span>
+<span class="w">    </span><span class="n">MPI_Reduce</span><span class="p">(</span><span class="o">&amp;</span><span class="n">valor_local</span><span class="p">,</span>
+<span class="w">               </span><span class="o">&amp;</span><span class="n">soma_total</span><span class="p">,</span>
+<span class="w">               </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">               </span><span class="n">MPI_INT</span><span class="p">,</span>
+<span class="w">               </span><span class="n">MPI_SUM</span><span class="p">,</span>
+<span class="w">               </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">               </span><span class="n">MPI_COMM_WORLD</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Apenas o processo raiz recebe o resultado final</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">rank</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">){</span>
+
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">---- Resultado da redução ----</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Todos os valores foram somados no processo 0</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Soma total = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">soma_total</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">MPI_Finalize</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="compile-o-programa_4">Compile o programa:<a class="headerlink" href="#compile-o-programa_4" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>mpic++<span class="w"> </span>-FlagdeOtimização<span class="w"> </span>seu_codigo.cpp<span class="w"> </span>-o<span class="w"> </span>seu_binario
+</code></pre></div>
+<h3 id="script-slurm_4">Script SLURM<a class="headerlink" href="#script-slurm_4" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="c1">#SBATCH --job-name=mpi_hello</span>
+<span class="c1">#SBATCH --output=saida%j.txt</span>
+<span class="c1">#SBATCH --partition=express</span>
+<span class="c1">#SBATCH --mem=1GB</span>
+<span class="c1">#SBATCH --nodes=2</span>
+<span class="c1">#SBATCH --ntasks=5</span>
+<span class="c1">#SBATCH --cpus-per-task=1</span>
+<span class="c1">#SBATCH --time=00:02:00</span>
+<span class="c1">#SBATCH --export=ALL</span>
+
+<span class="c1"># Execute o seu binário com o MPI</span>
+mpirun<span class="w"> </span>-np<span class="w"> </span><span class="nv">$SLURM_NTASKS</span><span class="w"> </span>./seu_binario
+</code></pre></div>
+<h3 id="submeta-o-job-com-slurm_4">Submeta o job com SLURM:<a class="headerlink" href="#submeta-o-job-com-slurm_4" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>sbatch<span class="w"> </span>SeuSlurm.slurm
+</code></pre></div>
 
 
 
