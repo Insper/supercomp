@@ -1,4 +1,4 @@
-# Prova — Programação Distribuída com MPI
+# Programação Distribuída com MPI
 
 ## Questão 1 — Teórica (Conceitos fundamentais de MPI)
 **Enunciado:**  

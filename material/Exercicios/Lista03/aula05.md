@@ -1,4 +1,4 @@
-# Prova — Paralelismo com OpenMP
+# Paralelismo com OpenMP
 
 ## Questão 1 — Teórica (Dependência de dados e paralelismo)
 **Enunciado:**  

@@ -1,4 +1,4 @@
-# Prova — Efeitos Colaterais do Paralelismo em OpenMP
+# Efeitos Colaterais do Paralelismo em OpenMP
 
 ## Questão 1 — Teórica (Race condition e dependência de dados)
 **Enunciado:**  

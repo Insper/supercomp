@@ -1,5 +1,6 @@
+# Distribuição e Paralelismo
 
-## Questão 1 — Teórica (MPI + OpenMP)
+## Questão 1 — Teórica MPI + OpenMP
 **Enunciado:**  
 a) Explique por que faz sentido combinar **MPI** e **OpenMP** em clusters de HPC.  
 b) Quais são as vantagens dessa abordagem híbrida em relação a usar apenas MPI puro?  
