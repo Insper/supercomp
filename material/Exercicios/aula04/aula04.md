@@ -1,229 +1,121 @@
+# Qual a principal vantágem da técnica "Branch & Bound" em relação a busca
+exaustiva? 
 
-## Questão 1 — Teórica (Heurísticas e Aleatoriedade)
-**Tipo:** múltipla escolha (múltiplas corretas)  
-**Enunciado:**  
-Sobre heurísticas com aleatoriedade em problemas de otimização:  
+a. Ela Reduz o espaço de busca ao interromper caminhos que já ultrapassaram o
+melhor custo atual. 
 
-a) Uma heurística sempre garante encontrar a solução ótima.  
-b) O uso de aleatoriedade pode ajudar a escapar de mínimos locais.  
-c) Estratégias puramente determinísticas podem explorar repetidamente as mesmas regiões do espaço de busca.  
-d) Uma heurística aleatória nunca pode ser menos eficiente que uma busca determinística.  
+b. Ela transforma o problema de otimização em um problema de busca linear
+simples. 
 
-??? note "Ver resposta"
-    a) Incorreta. Heurísticas **não garantem a solução ótima**, mas sim uma **boa solução em tempo razoável**. 
+c. Ela garante encontrar uma solição melhor que solução ótima teórica. 
 
-    b) Correta. Técnicas como Algoritmos Genéticos usam aleatoriedade justamente para evitar que a busca fique presa em soluções subótimas.
+d. Ela utiliza de aleatoriedade para saltar entre diferentes partes dos grafo de
+caminhos testando diversas soluções. 
 
-    c) Correta. Sem variação aleatória, a busca pode focar em regiões já visitadas, perdendo diversidade na exploração.
+# Sobre os algoritmos que aplicam a técnica de Hill Climbing:
 
-    d) Incorreta. O uso de aleatoriedade não garante eficiência. Pode inclusive aumentar o custo (mais iterações, soluções piores) se mal calibrada. A eficiência depende da implementação.
+a. É garantido que aquela é a melhor solução na vizinhança imediada. 
+
+b. O algoritimo sempre irá encontra a solução ótima para o problema. 
+
+c. Aumentar o numero de iterações do algorimo sempre irá melhorar o resultado. 
+
+d. É um algoritimo muito custoso e, a depender da situação não vale a pena. 
+
+# Nas aulas foram apresentadas as heurísticas de "Branch & Bound", "Hill
+Climbing" e Aleatoriedade. Encontre uma heurística "nova", e explique como ela
+pode nos ajudar no problema do caixeiro viajante.
 
 
 
-## Questão 2 — Busca linear vs aleatória em vetor
-**Enunciado:**  
-Implemente duas funções para encontrar um valor `alvo` em um vetor:  
+# Na busca exaustiva, além da poda por custo (Branch and Bound), podemos
+podar por viabilidade. Imagine um problema de entrega onde cada pacote tem um
+peso e o veículo tem uma capacidade máxima.
 
-- **Versão linear**: percorre o vetor de `0` até `N-1`.  
-- **Versão aleatória**: sorteia índices aleatórios até encontrar o alvo (ou até `maxTentativas`).  
+Complete o código da busca exaustiva para interromper a exploração de um ramo
+assim que a capacidade for excedida:
 
-Depois:  
-- Compile no cluster.  
-- **Crie um script SLURM** para rodar ambas versões.  
-- Compare o tempo e número de tentativas de cada abordagem.  
+
 
 ```cpp
-int busca_linear(const std::vector<int>& v, int alvo);
-int busca_aleatoria(const std::vector<int>& v, int alvo, unsigned long long maxTentativas);
+
+void busca_com_capacidade(int atual, int peso_acumulado, double custo_atual) {
+    if (caminho_completo()) {
+        atualizar_melhor_solucao(custo_atual);
+        return;
+    }
+}
 ```
 
-??? note "Ver resposta"
-
-    `busca_linear` percorre **sequencialmente** → excelente **localidade espacial**.  
-    `busca_aleatoria` tem **acessos aleatórios** → pouca localidade, alta variância; pode repetir índices.  
-     Com o vetor `v[i]=i`, a **linear encontra rápido** (especialmente se `alvo` for pequeno); a aleatória pode demorar mesmo com alvo “próximo”.  
-
-        #include <vector>
-        #include <random>
-
-        // ---------------------------------------------------------
-        // Função: busca_linear
-        // Objetivo: procurar o valor 'alvo' de forma sequencial
-        // Estratégia: percorre o vetor do início ao fim (índices 0..N-1)
-        // ---------------------------------------------------------
-        int busca_linear(const std::vector<int>& v, int alvo) {
-            // Percorre todos os elementos do vetor
-            for (size_t i = 0; i < v.size(); i++) {
-                // Se encontrou o alvo, retorna o índice
-                if (v[i] == alvo) return (int)i;
-            }
-            // Se chegou até aqui, o alvo não existe no vetor
-            return -1;
-        }
-
-        // ---------------------------------------------------------
-        // Função: busca_aleatoria
-        // Objetivo: procurar o valor 'alvo' de forma aleatória
-        // Estratégia: sorteia índices ao acaso até achar o alvo
-        // ou até atingir o limite de tentativas (maxTentativas).
-        // ---------------------------------------------------------
-        int busca_aleatoria(const std::vector<int>& v, int alvo, unsigned long long maxTentativas) {
-            // Caso o vetor esteja vazio, não há o que buscar
-            if (v.empty()) return -1;
-
-            // Gerador de números aleatórios
-            std::random_device rd;        // fonte de entropia (pode variar a cada execução)
-            std::mt19937 gen(rd());       // gerador pseudo-aleatório (Mersenne Twister)
-            std::uniform_int_distribution<size_t> dist(0, v.size() - 1); 
-            // distribuição uniforme de índices válidos [0, N-1]
-
-            // Tenta encontrar o alvo até atingir o número máximo de tentativas
-            for (unsigned long long t = 0; t < maxTentativas; t++) {
-                size_t idx = dist(gen);   // sorteia um índice válido
-                if (v[idx] == alvo) {
-                    // se encontrou, retorna o índice
-                    return (int)idx;
-                }
-            }
-            // Se não encontrou dentro do limite de tentativas, retorna -1
-            return -1;
-        }
-
-    Script SLURM
-
-        #!/bin/bash
-        #SBATCH --job-name=busca            # nome do job
-        #SBATCH --output=busca.%j.txt       # saída em arquivo
-        #SBATCH --time=00:05:00             # tempo limite
-        #SBATCH --nodes=1                   # 1 nó
-        #SBATCH --ntasks=1                  # 1 tarefa
-        #SBATCH --cpus-per-task=1           # 1 CPU
-        #SBATCH --partition=express         # ou 'normal', se preferir
-        #SBATCH --mem=1GB                   # memória
-
-        echo "=== Rodada 1: N=1e6 alvo=500000 maxTent=1e6 seed=42 ==="
-        ./busca 1000000 500000 1000000 42
-        echo "======================================================="
-
-        echo "=== Rodada 2: N=1e6 alvo=10 maxTent=1e6 seed=123 ==="
-        ./busca 1000000 10 1000000 123
-        echo "===================================================="
-
-        echo "=== Rodada 3: N=1e6 alvo=999999 maxTent=1e6 seed=777 ==="
-        ./busca 1000000 999999 1000000 777
-        echo "======================================================="
-
-        echo "=== Rodada 4: N=1e6 alvo=37 (usa N/2) maxTent=1e6 seed=2025 ==="
-        ./busca 1000000 37 1000000 2025
-        echo "============================================================="
 
 
-## Questão 3 — Estratégia híbrida (busca sequencial + aleatória)
-**Enunciado:**  
-Implemente uma função que:  
-- Primeiro verifica os **K primeiros elementos** do vetor sequencialmente.  
-- Se não encontrar, passa a buscar usando índices aleatórios até `maxTentativas`.  
+# O Problema das N-Rainhas
 
-Depois:  
-- Compile e rode no cluster com SLURM.  
-- Compare os resultados com as funções da Questão 2.  
+O problema das N-Rainhas é um desafio clássico de lógica e otimização
+combinatória que consiste em posicionar N rainhas num tabuleiro de xadrez de
+dimensão N×N de forma a que nenhuma delas consiga atacar outra.
+
+Abaixo temos as funções que serão a base dos próximos exercícios: 
 
 ```cpp
-int busca_hibrida(const std::vector<int>& v, int alvo, int K, unsigned long long maxTentativas);
+
+struct Solucao {
+    vector<int> rainhas; // rainhas[coluna] = linha
+    int ataques;
+};
+
+/* Retorna o número total de conflitos (pares de rainhas que se atacam).
+ * Uma solução com 0 ataques é uma solução válida para o problema. */
+int calcular_ataques(const vector<int>& tabuleiro);
+Solucao gerar_configuracao_aleatoria(int n);
+Solucao executar_hill_climbing(Solucao s);
 ```
 
-??? note "Ver resposta"
-   
-        #include <vector>
-        #include <random>
+## Vizinhança 
 
-        // ---------------------------------------------------------
-        // Função: busca_hibrida
-        // Objetivo: combinar duas estratégias de busca:
-        //   (1) varre sequencialmente os K primeiros elementos (bom p/ localidade)
-        //   (2) se não achar, usa tentativas aleatórias até maxTentativas
-        //
-        // Quando é útil?
-        // - Se o alvo tem maior probabilidade de estar no início do vetor,
-        //   a parte sequencial encontra rápido.
-        // - Caso contrário, a fase aleatória pode "acertar" em elementos distantes
-        //   sem percorrer todo o vetor sequencialmente.
-        // ---------------------------------------------------------
-        int busca_hibrida(const std::vector<int>& v, int alvo, int K, unsigned long long maxTentativas) {
-            // -------- Parte 1: busca sequencial nos primeiros K elementos --------
-            // Varre de 0 até K-1 (limitando também pelo tamanho do vetor).
-            // Vantagem: acesso contíguo → melhor localidade de memória.
-            for (int i = 0; i < K && i < (int)v.size(); i++) {
-                if (v[i] == alvo) return i;  // achou no prefixo
-            }
+Para otimizar o posicionamento das rainhas, o Hill Climbing precisa de uma
+estratégia de "vizinhança". Uma estratégia comum é o swap (troca): escolhemos
+duas colunas e trocamos as linhas das rainhas entre elas.
 
-            // -------- Parte 2: busca aleatória no vetor inteiro --------
-            // Observação: esta versão sorteia em [0, N-1]. Em muitos casos,
-            // restringir a [K, N-1] faz mais sentido (evita repetir o prefixo já checado).
-            if (v.empty()) return -1;        // vetor vazio → não há o que buscar
-
-            // Geradores para sorteio de índices válidos
-            std::random_device rd;           // fonte de entropia (não determinística)
-            std::mt19937 gen(rd());          // PRNG (Mersenne Twister)
-            std::uniform_int_distribution<size_t> dist(0, v.size() - 1); // sorteia 0..N-1
-
-            // Tenta até atingir o limite de tentativas aleatórias
-            for (unsigned long long t = 0; t < maxTentativas; t++) {
-                size_t idx = dist(gen);      // sorteia um índice
-                if (v[idx] == alvo) {        // compara com o alvo
-                    return (int)idx;         // achou durante a fase aleatória
-                }
-            }
-
-            // Não encontrou nem na parte sequencial, nem na aleatória
-            return -1;
-        }
-
-
-
-
-## Questão 4 — Heurística com pré-filtro
-**Enunciado:**  
-Implemente uma função de busca que usa uma **heurística simples de pré-filtro**:  
-- Antes de acessar `v[i]`, só considere o índice se `i % 2 == 0` (ou seja, só olha posições pares).  
-- Se não encontrar após `maxTentativas`, faça busca linear completa como fallback.  
-
-Depois:  
-- Compile e rode no cluster com SLURM.  
-- Compare desempenho e número de acessos com as versões anteriores.  
+Na função gerar_vizinho realize o swap entre `atual.rainhas[i]` e `atual.rainhas[j]`
+Calcule o novo número de ataques usando a função pronta
+Se o novo estado for melhor ou igual, mantenha. Se for pior, desfaça o swap.
 
 ```cpp
-int busca_com_filtro(const std::vector<int>& v, int alvo, unsigned long long maxTentativas);
+
+void gerar_vizinho(Solucao& atual) {
+    int n = atual.rainhas.size();
+    int i = rand() % n;
+    int j = rand() % n;
+
+}
 ```
 
-??? note "Ver resposta"
-    
-    A busca aleatória é **restrita a índices pares**, tentando reduzir acessos.  
-    Caso não encontre dentro de `maxTentativas`, entra uma busca linear 
-    O pré-filtro pode ser vantajoso se há **maior probabilidade** de o alvo estar em posições pares.  
-    Porém, pode desperdiçar tentativas (índices ímpares descartados) e no pior caso cair na busca linear.
+## Mínimos Locais
+O Hill Climbing puro frequentemente fica preso em "mínimos locais", uma forma
+que já vimos de minimizar esse problema é utilizar reinicios aleatórios. 
+
+- Implementar o reinício com aleatorieadade (ponto de partida);
+- Refinar a partir deste ponto de partida;
+- Atualizar valores com a melhor solução;
+- Possiveis melhorias de eficiências;
+
+```cpp
+Solucao resolver_n_rainhas_com_restart(int n, int max_tentativas) {
+
+    return melhor_global;
+}
+```
 
 
-        #include <vector>
-        #include <random>
 
-        int busca_com_filtro(const std::vector<int>& v, int alvo, unsigned long long maxTentativas) {
-            if (v.empty()) return -1;
-            std::random_device rd;
-            std::mt19937 gen(rd());
-            std::uniform_int_distribution<size_t> dist(0, v.size() - 1);
-
-            // Heurística: só verifica índices pares
-            for (unsigned long long t = 0; t < maxTentativas; t++) {
-                size_t idx = dist(gen);
-                if (idx % 2 != 0) continue;       // ignora índices ímpares
-                if (v[idx] == alvo) return (int)idx;
-            }
-
-            // Fallback: se não achou, faz busca linear completa
-            for (size_t i = 0; i < v.size(); i++) {
-                if (v[i] == alvo) return (int)i;
-            }
-            return -1; // não encontrado
-        }
-
+<!-- # Sudoku -->
+<!---->
+<!-- Resolução de Sudoku é frequentemente abordada como um Problema de Satisfação de -->
+<!-- Restrições (CSP) que serve para ilustrar a eficiência de algoritmos de -->
+<!-- backtracking e a importância de podas (pruning) no espaço de busca. Embora um -->
+<!-- tabuleiro 9x9 pareça simples, variações maiores (como 16x16 ou 25x25) tornam o -->
+<!-- custo computacional proibitivo para buscas exaustivas. exigindo que se use  -->
+<!-- heurísticas diversas, e técnicas de paralelismo de tarefas para explorar -->
+<!-- diferentes soluções.  -->
+<!---->
