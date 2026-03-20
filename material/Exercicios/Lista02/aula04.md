@@ -1,7 +1,8 @@
-# Heurísticas e Aleatoriedade
 
-## Questões Teóricas 
-1 - Sobre heurísticas com aleatoriedade em problemas de otimização:  
+## Questão 1 — Teórica (Heurísticas e Aleatoriedade)
+**Tipo:** múltipla escolha (múltiplas corretas)  
+**Enunciado:**  
+Sobre heurísticas com aleatoriedade em problemas de otimização:  
 
 a) Uma heurística sempre garante encontrar a solução ótima.  
 b) O uso de aleatoriedade pode ajudar a escapar de mínimos locais.  
@@ -17,31 +18,9 @@ d) Uma heurística aleatória nunca pode ser menos eficiente que uma busca deter
 
     d) Incorreta. O uso de aleatoriedade não garante eficiência. Pode inclusive aumentar o custo (mais iterações, soluções piores) se mal calibrada. A eficiência depende da implementação.
 
-2 - Qual a principal vantágem da técnica "Branch & Bound" em relação a busca
-exaustiva? 
 
-a. Ela Reduz o espaço de busca ao interromper caminhos que já ultrapassaram o
-melhor custo atual. 
 
-b. Ela transforma o problema de otimização em um problema de busca linear
-simples. 
-
-c. Ela garante encontrar uma solição melhor que solução ótima teórica. 
-
-d. Ela utiliza de aleatoriedade para saltar entre diferentes partes dos grafo de
-caminhos testando diversas soluções. 
-
-3 - Sobre os algoritmos que aplicam a técnica de Hill Climbing:
-
-a. É garantido que aquela é a melhor solução na vizinhança imediada. 
-
-b. O algoritimo sempre irá encontra a solução ótima para o problema. 
-
-c. Aumentar o numero de iterações do algorimo sempre irá melhorar o resultado. 
-
-d. É um algoritimo muito custoso e, a depender da situação não vale a pena. 
-
-## Questões Práticas — Busca linear vs aleatória em vetor
+## Questão 2 — Busca linear vs aleatória em vetor
 **Enunciado:**  
 Implemente duas funções para encontrar um valor `alvo` em um vetor:  
 
@@ -139,7 +118,7 @@ int busca_aleatoria(const std::vector<int>& v, int alvo, unsigned long long maxT
         echo "============================================================="
 
 
-## Estratégia híbrida (busca sequencial + aleatória)
+## Questão 3 — Estratégia híbrida (busca sequencial + aleatória)
 **Enunciado:**  
 Implemente uma função que:  
 - Primeiro verifica os **K primeiros elementos** do vetor sequencialmente.  
@@ -203,7 +182,7 @@ int busca_hibrida(const std::vector<int>& v, int alvo, int K, unsigned long long
 
 
 
-## Heurística com pré-filtro
+## Questão 4 — Heurística com pré-filtro
 **Enunciado:**  
 Implemente uma função de busca que usa uma **heurística simples de pré-filtro**:  
 - Antes de acessar `v[i]`, só considere o índice se `i % 2 == 0` (ou seja, só olha posições pares).  
