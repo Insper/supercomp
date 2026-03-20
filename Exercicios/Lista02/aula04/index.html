@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://insper.github.io/supercomp/Exercicios/aula01/aula01/">
+        <link rel="canonical" href="https://insper.github.io/supercomp/Exercicios/Lista02/aula04/">
       
       
       
@@ -18,7 +18,7 @@
     
     
       
-        <title>Aula01 - SuperComputação - 2026/1</title>
+        <title>Aula04 - SuperComputação - 2026/1</title>
       
     
     
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#questao-1-classificacao-de-problemas-em-hpc-teorica" class="md-skip">
+        <a href="#questoes-teoricas-heuristicas-e-aleatoriedade" class="md-skip">
           Skip to content
         </a>
       
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Aula01
+              Aula04
             
           </span>
         </div>
@@ -624,6 +624,28 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aulas/aula11/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aula 11 - Exercícios preparatórios para AI
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -924,36 +946,36 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#questao-1-classificacao-de-problemas-em-hpc-teorica" class="md-nav__link">
+  <a href="#questoes-teoricas-heuristicas-e-aleatoriedade" class="md-nav__link">
     <span class="md-ellipsis">
-      Questão 1 — Classificação de problemas em HPC (Teórica)
+      Questões Teóricas Heurísticas e Aleatoriedade
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#questao-2-geracao-de-dados-aleatorios-em-c" class="md-nav__link">
+  <a href="#questao-2-busca-linear-vs-aleatoria-em-vetor" class="md-nav__link">
     <span class="md-ellipsis">
-      Questão 2 — Geração de dados aleatórios em C++
+      Questão 2 — Busca linear vs aleatória em vetor
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#questao-3-media-movel-por-valor-e-por-referencia" class="md-nav__link">
+  <a href="#questao-3-estrategia-hibrida-busca-sequencial-aleatoria" class="md-nav__link">
     <span class="md-ellipsis">
-      Questão 3 — Média móvel por valor e por referência
+      Questão 3 — Estratégia híbrida (busca sequencial + aleatória)
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#questao-4-media-movel-por-ponteiro" class="md-nav__link">
+  <a href="#questao-4-heuristica-com-pre-filtro" class="md-nav__link">
     <span class="md-ellipsis">
-      Questão 4 — Média móvel por ponteiro
+      Questão 4 — Heurística com pré-filtro
     </span>
   </a>
   
@@ -978,206 +1000,238 @@
   
 
 
-  <h1>Aula01</h1>
+  <h1>Aula04</h1>
 
-<h2 id="questao-1-classificacao-de-problemas-em-hpc-teorica">Questão 1 — Classificação de problemas em HPC (Teórica)<a class="headerlink" href="#questao-1-classificacao-de-problemas-em-hpc-teorica" title="Permanent link">&para;</a></h2>
+<h2 id="questoes-teoricas-heuristicas-e-aleatoriedade">Questões Teóricas Heurísticas e Aleatoriedade<a class="headerlink" href="#questoes-teoricas-heuristicas-e-aleatoriedade" title="Permanent link">&para;</a></h2>
 <p><strong>Tipo:</strong> múltipla escolha (múltiplas corretas)<br />
-<strong>Enunciado:</strong> Classifique cada cenário como Grande (G), Intensivo (I) ou Combo (C).</p>
-<p>a) Treinar um modelo com bilhões de parâmetros, mas com dataset moderado.<br />
-b) Processar todos os frames de câmeras de uma cidade por 30 dias.<br />
-c) Resolver simulações de mecânica dos fluidos 3D com malha fina para um avião.<br />
-d) Indexar petabytes de logs e calcular métricas em janelas de tempo curtas.  </p>
-<p><strong>Recaptulando...</strong> “Grandes” se refere a um conjunto de dados muito grande, “Intensivos” se refere a algoritimos demorados, resolução complexa de equações, etc.. e “Combo” são as duas características juntas. </p>
+<strong>Enunciado:</strong><br />
+Sobre heurísticas com aleatoriedade em problemas de otimização:  </p>
+<p>a) Uma heurística sempre garante encontrar a solução ótima.<br />
+b) O uso de aleatoriedade pode ajudar a escapar de mínimos locais.<br />
+c) Estratégias puramente determinísticas podem explorar repetidamente as mesmas regiões do espaço de busca.<br />
+d) Uma heurística aleatória nunca pode ser menos eficiente que uma busca determinística.  </p>
 <details class="note">
-<summary>Ver a resposta</summary>
-<p><strong>Gabarito:</strong><br />
-a) <strong>I</strong> (Intensivo)<br />
-b) <strong>G</strong> (Grande)<br />
-c) <strong>I</strong> (Intensivo)<br />
-d) <strong>C</strong> (Combo)</p>
-<p><strong>Por quê?</strong><br />
-- <strong>a)</strong> Treinar um modelo com bilhões de parâmetros é <strong>Intensivo</strong>, o dataset sendo moderado, não é crítico então excluimos a opção de <em>Combo</em>.<br />
-- <strong>b)</strong> Volume massivo de dados ⇒ <strong>Grande</strong>.<br />
-- <strong>c)</strong> CFD 3D com malha fina é clássico <strong>Intensivo</strong>.<br />
-- <strong>d)</strong> Petabytes + métricas em janelas curtas ⇒ <strong>Combo</strong>.</p>
+<summary>Ver resposta</summary>
+<p>a) Incorreta. Heurísticas <strong>não garantem a solução ótima</strong>, mas sim uma <strong>boa solução em tempo razoável</strong>. </p>
+<p>b) Correta. Técnicas como Algoritmos Genéticos usam aleatoriedade justamente para evitar que a busca fique presa em soluções subótimas.</p>
+<p>c) Correta. Sem variação aleatória, a busca pode focar em regiões já visitadas, perdendo diversidade na exploração.</p>
+<p>d) Incorreta. O uso de aleatoriedade não garante eficiência. Pode inclusive aumentar o custo (mais iterações, soluções piores) se mal calibrada. A eficiência depende da implementação.</p>
 </details>
-<hr />
-<h2 id="questao-2-geracao-de-dados-aleatorios-em-c">Questão 2 — Geração de dados aleatórios em C++<a class="headerlink" href="#questao-2-geracao-de-dados-aleatorios-em-c" title="Permanent link">&para;</a></h2>
+<h2 id="questao-2-busca-linear-vs-aleatoria-em-vetor">Questão 2 — Busca linear vs aleatória em vetor<a class="headerlink" href="#questao-2-busca-linear-vs-aleatoria-em-vetor" title="Permanent link">&para;</a></h2>
 <p><strong>Enunciado:</strong><br />
-Complete a função <code>gerar_leituras</code> para criar um vetor de tamanho <code>N</code> contendo valores <code>double</code> aleatórios entre 12.0 e 189.98, usando <code>std::vector</code>, <code>std::mt19937</code> e <code>std::uniform_real_distribution</code>.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">// =========================================</span>
-<span class="c1">// Função para gerar um vetor com valores aleatórios</span>
-<span class="c1">// =========================================</span>
-<span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">gerar_leituras</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">tamanho</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// TODO: Criar um vetor de tamanho `tamanho`</span>
-<span class="w">    </span><span class="c1">// TODO: Criar gerador de números aleatórios com seed fixa (ex: 42)</span>
-<span class="w">    </span><span class="c1">// TODO: Definir distribuição entre 12.0 e 189.98</span>
-<span class="w">    </span><span class="c1">// TODO: Preencher o vetor com números aleatórios</span>
-
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">{};</span><span class="w"> </span><span class="c1">// Substitua pelo vetor preenchido</span>
-<span class="p">}</span>
+Implemente duas funções para encontrar um valor <code>alvo</code> em um vetor:  </p>
+<ul>
+<li><strong>Versão linear</strong>: percorre o vetor de <code>0</code> até <code>N-1</code>.  </li>
+<li><strong>Versão aleatória</strong>: sorteia índices aleatórios até encontrar o alvo (ou até <code>maxTentativas</code>).  </li>
+</ul>
+<p>Depois:<br />
+- Compile no cluster.<br />
+- <strong>Crie um script SLURM</strong> para rodar ambas versões.<br />
+- Compare o tempo e número de tentativas de cada abordagem.  </p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="nf">busca_linear</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">alvo</span><span class="p">);</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">busca_aleatoria</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">alvo</span><span class="p">,</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">maxTentativas</span><span class="p">);</span>
 </code></pre></div>
 <details class="note">
-<summary>Ver a resposta</summary>
+<summary>Ver resposta</summary>
+<p><code>busca_linear</code> percorre <strong>sequencialmente</strong> → excelente <strong>localidade espacial</strong>.<br />
+<code>busca_aleatoria</code> tem <strong>acessos aleatórios</strong> → pouca localidade, alta variância; pode repetir índices.<br />
+ Com o vetor <code>v[i]=i</code>, a <strong>linear encontra rápido</strong> (especialmente se <code>alvo</code> for pequeno); a aleatória pode demorar mesmo com alvo “próximo”.  </p>
 <div class="codehilite"><pre><span></span><code>#include &lt;vector&gt;
 #include &lt;random&gt;
-using std::vector;
 
-// =========================================
-// Função para gerar leituras aleatórias
-// Preenche o vetor passado por referência
-// =========================================
-void gerar_leituras_ref(vector&lt;double&gt;&amp; v) {
-    // Criamos o gerador Mersenne Twister com seed fixa
-    std::mt19937 gen(42);
-
-    // Distribuição uniforme no intervalo [12.0, 189.98]
-    std::uniform_real_distribution&lt;double&gt; dist(12.0, 189.98);
-
-    // Percorremos o vetor pelo índice (sem auto)
+// ---------------------------------------------------------
+// Função: busca_linear
+// Objetivo: procurar o valor &#39;alvo&#39; de forma sequencial
+// Estratégia: percorre o vetor do início ao fim (índices 0..N-1)
+// ---------------------------------------------------------
+int busca_linear(const std::vector&lt;int&gt;&amp; v, int alvo) {
+    // Percorre todos os elementos do vetor
     for (size_t i = 0; i &lt; v.size(); i++) {
-        v[i] = dist(gen);  // gera número e armazena direto no vetor
+        // Se encontrou o alvo, retorna o índice
+        if (v[i] == alvo) return (int)i;
     }
+    // Se chegou até aqui, o alvo não existe no vetor
+    return -1;
+}
+
+// ---------------------------------------------------------
+// Função: busca_aleatoria
+// Objetivo: procurar o valor &#39;alvo&#39; de forma aleatória
+// Estratégia: sorteia índices ao acaso até achar o alvo
+// ou até atingir o limite de tentativas (maxTentativas).
+// ---------------------------------------------------------
+int busca_aleatoria(const std::vector&lt;int&gt;&amp; v, int alvo, unsigned long long maxTentativas) {
+    // Caso o vetor esteja vazio, não há o que buscar
+    if (v.empty()) return -1;
+
+    // Gerador de números aleatórios
+    std::random_device rd;        // fonte de entropia (pode variar a cada execução)
+    std::mt19937 gen(rd());       // gerador pseudo-aleatório (Mersenne Twister)
+    std::uniform_int_distribution&lt;size_t&gt; dist(0, v.size() - 1); 
+    // distribuição uniforme de índices válidos [0, N-1]
+
+    // Tenta encontrar o alvo até atingir o número máximo de tentativas
+    for (unsigned long long t = 0; t &lt; maxTentativas; t++) {
+        size_t idx = dist(gen);   // sorteia um índice válido
+        if (v[idx] == alvo) {
+            // se encontrou, retorna o índice
+            return (int)idx;
+        }
+    }
+    // Se não encontrou dentro do limite de tentativas, retorna -1
+    return -1;
+}
+</code></pre></div>
+
+<p>Script SLURM</p>
+<div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="c1">#SBATCH --job-name=busca            # nome do job</span>
+<span class="c1">#SBATCH --output=busca.%j.txt       # saída em arquivo</span>
+<span class="c1">#SBATCH --time=00:05:00             # tempo limite</span>
+<span class="c1">#SBATCH --nodes=1                   # 1 nó</span>
+<span class="c1">#SBATCH --ntasks=1                  # 1 tarefa</span>
+<span class="c1">#SBATCH --cpus-per-task=1           # 1 CPU</span>
+<span class="c1">#SBATCH --partition=express         # ou &#39;normal&#39;, se preferir</span>
+<span class="c1">#SBATCH --mem=1GB                   # memória</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;=== Rodada 1: N=1e6 alvo=500000 maxTent=1e6 seed=42 ===&quot;</span>
+./busca<span class="w"> </span><span class="m">1000000</span><span class="w"> </span><span class="m">500000</span><span class="w"> </span><span class="m">1000000</span><span class="w"> </span><span class="m">42</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;=======================================================&quot;</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;=== Rodada 2: N=1e6 alvo=10 maxTent=1e6 seed=123 ===&quot;</span>
+./busca<span class="w"> </span><span class="m">1000000</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="m">1000000</span><span class="w"> </span><span class="m">123</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;====================================================&quot;</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;=== Rodada 3: N=1e6 alvo=999999 maxTent=1e6 seed=777 ===&quot;</span>
+./busca<span class="w"> </span><span class="m">1000000</span><span class="w"> </span><span class="m">999999</span><span class="w"> </span><span class="m">1000000</span><span class="w"> </span><span class="m">777</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;=======================================================&quot;</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;=== Rodada 4: N=1e6 alvo=37 (usa N/2) maxTent=1e6 seed=2025 ===&quot;</span>
+./busca<span class="w"> </span><span class="m">1000000</span><span class="w"> </span><span class="m">37</span><span class="w"> </span><span class="m">1000000</span><span class="w"> </span><span class="m">2025</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;=============================================================&quot;</span>
+</code></pre></div></td></tr></table></div>
+
+</details>
+<h2 id="questao-3-estrategia-hibrida-busca-sequencial-aleatoria">Questão 3 — Estratégia híbrida (busca sequencial + aleatória)<a class="headerlink" href="#questao-3-estrategia-hibrida-busca-sequencial-aleatoria" title="Permanent link">&para;</a></h2>
+<p><strong>Enunciado:</strong><br />
+Implemente uma função que:<br />
+- Primeiro verifica os <strong>K primeiros elementos</strong> do vetor sequencialmente.<br />
+- Se não encontrar, passa a buscar usando índices aleatórios até <code>maxTentativas</code>.  </p>
+<p>Depois:<br />
+- Compile e rode no cluster com SLURM.<br />
+- Compare os resultados com as funções da Questão 2.  </p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="nf">busca_hibrida</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">alvo</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">K</span><span class="p">,</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">maxTentativas</span><span class="p">);</span>
+</code></pre></div>
+<details class="note">
+<summary>Ver resposta</summary>
+<div class="codehilite"><pre><span></span><code>#include &lt;vector&gt;
+#include &lt;random&gt;
+
+// ---------------------------------------------------------
+// Função: busca_hibrida
+// Objetivo: combinar duas estratégias de busca:
+//   (1) varre sequencialmente os K primeiros elementos (bom p/ localidade)
+//   (2) se não achar, usa tentativas aleatórias até maxTentativas
+//
+// Quando é útil?
+// - Se o alvo tem maior probabilidade de estar no início do vetor,
+//   a parte sequencial encontra rápido.
+// - Caso contrário, a fase aleatória pode &quot;acertar&quot; em elementos distantes
+//   sem percorrer todo o vetor sequencialmente.
+// ---------------------------------------------------------
+int busca_hibrida(const std::vector&lt;int&gt;&amp; v, int alvo, int K, unsigned long long maxTentativas) {
+    // -------- Parte 1: busca sequencial nos primeiros K elementos --------
+    // Varre de 0 até K-1 (limitando também pelo tamanho do vetor).
+    // Vantagem: acesso contíguo → melhor localidade de memória.
+    for (int i = 0; i &lt; K &amp;&amp; i &lt; (int)v.size(); i++) {
+        if (v[i] == alvo) return i;  // achou no prefixo
+    }
+
+    // -------- Parte 2: busca aleatória no vetor inteiro --------
+    // Observação: esta versão sorteia em [0, N-1]. Em muitos casos,
+    // restringir a [K, N-1] faz mais sentido (evita repetir o prefixo já checado).
+    if (v.empty()) return -1;        // vetor vazio → não há o que buscar
+
+    // Geradores para sorteio de índices válidos
+    std::random_device rd;           // fonte de entropia (não determinística)
+    std::mt19937 gen(rd());          // PRNG (Mersenne Twister)
+    std::uniform_int_distribution&lt;size_t&gt; dist(0, v.size() - 1); // sorteia 0..N-1
+
+    // Tenta até atingir o limite de tentativas aleatórias
+    for (unsigned long long t = 0; t &lt; maxTentativas; t++) {
+        size_t idx = dist(gen);      // sorteia um índice
+        if (v[idx] == alvo) {        // compara com o alvo
+            return (int)idx;         // achou durante a fase aleatória
+        }
+    }
+
+    // Não encontrou nem na parte sequencial, nem na aleatória
+    return -1;
 }
 </code></pre></div>
 
 </details>
-<hr />
-<h2 id="questao-3-media-movel-por-valor-e-por-referencia">Questão 3 — Média móvel por valor e por referência<a class="headerlink" href="#questao-3-media-movel-por-valor-e-por-referencia" title="Permanent link">&para;</a></h2>
+<h2 id="questao-4-heuristica-com-pre-filtro">Questão 4 — Heurística com pré-filtro<a class="headerlink" href="#questao-4-heuristica-com-pre-filtro" title="Permanent link">&para;</a></h2>
 <p><strong>Enunciado:</strong><br />
-Implemente as duas versões abaixo da média móvel simples com janela <code>K</code>:  </p>
-<p>(a) recebendo os dados por valor<br />
-(b) recebendo os dados por referência constante  </p>
-<div class="highlight"><pre><span></span><code><span class="c1">// =========================================</span>
-<span class="c1">// Função para calcular a média móvel (passagem por valor)</span>
-<span class="c1">// =========================================</span>
-<span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">media_movel_por_valor</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dados</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">K</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// TODO: Usar soma inicial dos K primeiros elementos</span>
-<span class="w">    </span><span class="c1">// TODO: Atualizar soma a cada passo removendo o primeiro e adicionando o próximo</span>
-<span class="w">    </span><span class="c1">// TODO: Retornar vetor com médias</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">{};</span>
-<span class="p">}</span>
-
-<span class="c1">// =========================================</span>
-<span class="c1">// Função para calcular a média móvel (passagem por referência)</span>
-<span class="c1">// =========================================</span>
-<span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">media_movel_por_referencia</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">dados</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">K</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// TODO: Mesma lógica da versão por valor</span>
-<span class="w">    </span><span class="c1">// TODO: Não copiar o vetor original</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">{};</span>
-<span class="p">}</span>
+Implemente uma função de busca que usa uma <strong>heurística simples de pré-filtro</strong>:<br />
+- Antes de acessar <code>v[i]</code>, só considere o índice se <code>i % 2 == 0</code> (ou seja, só olha posições pares).<br />
+- Se não encontrar após <code>maxTentativas</code>, faça busca linear completa como fallback.  </p>
+<p>Depois:<br />
+- Compile e rode no cluster com SLURM.<br />
+- Compare desempenho e número de acessos com as versões anteriores.  </p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="nf">busca_com_filtro</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">alvo</span><span class="p">,</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">maxTentativas</span><span class="p">);</span>
 </code></pre></div>
 <details class="note">
-<summary>Ver Resposta</summary>
+<summary>Ver resposta</summary>
+<p>A busca aleatória é <strong>restrita a índices pares</strong>, tentando reduzir acessos.<br />
+Caso não encontre dentro de <code>maxTentativas</code>, entra uma busca linear 
+O pré-filtro pode ser vantajoso se há <strong>maior probabilidade</strong> de o alvo estar em posições pares.<br />
+Porém, pode desperdiçar tentativas (índices ímpares descartados) e no pior caso cair na busca linear.</p>
 <div class="codehilite"><pre><span></span><code>#include &lt;vector&gt;
-using std::vector;
+#include &lt;random&gt;
 
-// =====================================================
-// (a) Função que recebe o vetor por VALOR
-//     → Uma cópia de &#39;dados&#39; é criada dentro da função.
-//     → Essa cópia aumenta custo de memória/tempo se
-//       o vetor for muito grande.
-// =====================================================
-vector&lt;double&gt; media_movel_por_valor(vector&lt;double&gt; dados, size_t K) {
-    const size_t N = dados.size();
+int busca_com_filtro(const std::vector&lt;int&gt;&amp; v, int alvo, unsigned long long maxTentativas) {
+    if (v.empty()) return -1;
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution&lt;size_t&gt; dist(0, v.size() - 1);
 
-    // Se a janela for inválida, retorna vetor vazio
-    if (K == 0 || K &gt; N) return {};
-
-    // Vetor de saída que conterá as médias
-    vector&lt;double&gt; medias;
-
-    // Calcula a soma inicial dos K primeiros elementos
-    double soma = 0.0;
-    for (size_t i = 0; i &lt; K; i++) {
-        soma += dados[i];
-    }
-    medias.push_back(soma / K); // primeira média
-
-    // Desliza a janela: remove o elemento que saiu
-    // e adiciona o próximo elemento
-    for (size_t i = K; i &lt; N; i++) {
-        soma += dados[i] - dados[i - K];
-        medias.push_back(soma / K);
+    // Heurística: só verifica índices pares
+    for (unsigned long long t = 0; t &lt; maxTentativas; t++) {
+        size_t idx = dist(gen);
+        if (idx % 2 != 0) continue;       // ignora índices ímpares
+        if (v[idx] == alvo) return (int)idx;
     }
 
-    // Retorna o vetor de médias
-    return medias;
-}
-
-// =====================================================
-// (b) Função que recebe o vetor por REFERÊNCIA CONST
-//     → Não há cópia: a função acessa o mesmo vetor.
-//     → Mais eficiente em memória e tempo.
-//     → &#39;const&#39; garante que a função NÃO altera os dados.
-// =====================================================
-vector&lt;double&gt; media_movel_por_referencia(const vector&lt;double&gt;&amp; dados, size_t K) {
-    const size_t N = dados.size();
-
-    // Se a janela for inválida, retorna vetor vazio
-    if (K == 0 || K &gt; N) return {};
-
-    // Vetor de saída que conterá as médias
-    vector&lt;double&gt; medias;
-
-    // Calcula a soma inicial dos K primeiros elementos
-    double soma = 0.0;
-    for (size_t i = 0; i &lt; K; i++) {
-        soma += dados[i];
+    // Fallback: se não achou, faz busca linear completa
+    for (size_t i = 0; i &lt; v.size(); i++) {
+        if (v[i] == alvo) return (int)i;
     }
-    medias.push_back(soma / K);
-
-    // Desliza a janela e calcula as médias seguintes
-    for (size_t i = K; i &lt; N; i++) {
-        soma += dados[i] - dados[i - K];
-        medias.push_back(soma / K);
-    }
-
-    // Retorna o vetor de médias
-    return medias;
-}
-</code></pre></div>
-
-</details>
-<hr />
-<h2 id="questao-4-media-movel-por-ponteiro">Questão 4 — Média móvel por ponteiro<a class="headerlink" href="#questao-4-media-movel-por-ponteiro" title="Permanent link">&para;</a></h2>
-<p><strong>Enunciado:</strong><br />
-Implemente a função <code>media_movel_por_ponteiro</code> que recebe um ponteiro para <code>double</code> (<code>const double*</code>) e calcula a média móvel com aritmética de ponteiros. Retorne o vetor de médias.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">// =========================================</span>
-<span class="c1">// Função para calcular a média móvel (passagem por ponteiro)</span>
-<span class="c1">// =========================================</span>
-<span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">media_movel_por_ponteiro</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="o">*</span><span class="w"> </span><span class="n">ptr</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">K</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// TODO: Implementar usando aritmética de ponteiros</span>
-<span class="w">    </span><span class="c1">// Exemplo: *(ptr + i) acessa o elemento i</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">{};</span>
-<span class="p">}</span>
-</code></pre></div>
-<details class="note">
-<summary>ver resposta</summary>
-<div class="codehilite"><pre><span></span><code>#include &lt;vector&gt;
-using std::vector;
-
-// Função para calcular a média móvel usando ponteiros
-vector&lt;double&gt; media_movel_por_ponteiro(const double* ptr, size_t N, size_t K) {
-    // Verifica se o ponteiro é válido e se a janela K faz sentido
-    if (!ptr || K == 0 || K &gt; N) return {};
-
-    vector&lt;double&gt; medias;      // vetor que vai guardar os resultados
-    double soma = 0.0;          // acumulador da soma da janela
-
-    // Calcula a soma inicial dos K primeiros elementos
-    for (size_t i = 0; i &lt; K; i++) {
-        soma += *(ptr + i);     // *(ptr + i) é o mesmo que ptr[i]
-    }
-    medias.push_back(soma / K); // primeira média
-
-    // Desliza a janela até o final
-    for (size_t i = K; i &lt; N; i++) {
-        soma += *(ptr + i) - *(ptr + i - K); // atualiza a soma
-        medias.push_back(soma / K);          // guarda a média
-    }
-
-    return medias; // retorna o vetor de médias
+    return -1; // não encontrado
 }
 </code></pre></div>
 

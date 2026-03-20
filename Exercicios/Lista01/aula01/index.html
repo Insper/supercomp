@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://insper.github.io/supercomp/Exercicios/aula03/aula03/">
+        <link rel="canonical" href="https://insper.github.io/supercomp/Exercicios/Lista01/aula01/">
       
       
       
@@ -18,7 +18,7 @@
     
     
       
-        <title>Aula03 - SuperComputação - 2026/1</title>
+        <title>Otimizações Fundamentais - SuperComputação - 2026/1</title>
       
     
     
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#questao-1-teorica-hierarquia-de-memoria-e-localidade" class="md-skip">
+        <a href="#otimizacoes-fundamentais" class="md-skip">
           Skip to content
         </a>
       
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Aula03
+              Otimizações Fundamentais
             
           </span>
         </div>
@@ -624,6 +624,28 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aulas/aula11/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aula 11 - Exercícios preparatórios para AI
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -916,6 +938,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -924,36 +948,63 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#questao-1-teorica-hierarquia-de-memoria-e-localidade" class="md-nav__link">
+  <a href="#questao-1-classificacao-de-problemas-em-hpc-teorica" class="md-nav__link">
     <span class="md-ellipsis">
-      Questão 1 — Teórica (Hierarquia de Memória e Localidade)
+      Questão 1 — Classificação de problemas em HPC (Teórica)
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#questao-2-versao-ingenua-calculo-de-produto-vetorial" class="md-nav__link">
+  <a href="#questao-2-media-movel-por-valor-e-por-referencia" class="md-nav__link">
     <span class="md-ellipsis">
-      Questão 2 — Versão Ingênua (Cálculo de Produto Vetorial)
+      Questão 2 — Média móvel por valor e por referência
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#questao-3-versao-com-tiling-multiplicacao-de-blocos-de-vetores" class="md-nav__link">
+  <a href="#questao-3-media-movel-por-ponteiro" class="md-nav__link">
     <span class="md-ellipsis">
-      Questão 3 — Versão com Tiling (Multiplicação de Blocos de Vetores)
+      Questão 3 — Média móvel por ponteiro
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#questao-4-reordenacao-de-loops-flags-de-otimizacao" class="md-nav__link">
+  <a href="#questao-4-teorica-hierarquia-de-memoria-e-localidade" class="md-nav__link">
     <span class="md-ellipsis">
-      Questão 4 — Reordenação de Loops + Flags de Otimização
+      Questão 4 — Teórica (Hierarquia de Memória e Localidade)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#questao-5-versao-ingenua-calculo-de-produto-vetorial" class="md-nav__link">
+    <span class="md-ellipsis">
+      Questão 5 — Versão Ingênua (Cálculo de Produto Vetorial)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#questao-6-versao-com-tiling-multiplicacao-de-blocos-de-vetores" class="md-nav__link">
+    <span class="md-ellipsis">
+      Questão 6 — Versão com Tiling (Multiplicação de Blocos de Vetores)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#questao-7-reordenacao-de-loops-flags-de-otimizacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Questão 7 — Reordenação de Loops + Flags de Otimização
     </span>
   </a>
   
@@ -978,9 +1029,169 @@
   
 
 
-  <h1>Aula03</h1>
+<h1 id="otimizacoes-fundamentais">Otimizações Fundamentais<a class="headerlink" href="#otimizacoes-fundamentais" title="Permanent link">&para;</a></h1>
+<h2 id="questao-1-classificacao-de-problemas-em-hpc-teorica">Questão 1 — Classificação de problemas em HPC (Teórica)<a class="headerlink" href="#questao-1-classificacao-de-problemas-em-hpc-teorica" title="Permanent link">&para;</a></h2>
+<p><strong>Tipo:</strong> múltipla escolha (múltiplas corretas)<br />
+<strong>Enunciado:</strong> Classifique cada cenário como Grande (G), Intensivo (I) ou Combo (C).</p>
+<p>a) Treinar um modelo com bilhões de parâmetros, mas com dataset moderado.<br />
+b) Processar todos os frames de câmeras de uma cidade por 30 dias.<br />
+c) Resolver simulações de mecânica dos fluidos 3D com malha fina para um avião.<br />
+d) Indexar petabytes de logs e calcular métricas em janelas de tempo curtas.  </p>
+<p><strong>Recaptulando...</strong> “Grandes” se refere a um conjunto de dados muito grande, “Intensivos” se refere a algoritimos demorados, resolução complexa de equações, etc.. e “Combo” são as duas características juntas. </p>
+<details class="note">
+<summary>Ver a resposta</summary>
+<p><strong>Gabarito:</strong><br />
+a) <strong>I</strong> (Intensivo)<br />
+b) <strong>G</strong> (Grande)<br />
+c) <strong>I</strong> (Intensivo)<br />
+d) <strong>C</strong> (Combo)</p>
+<p><strong>Por quê?</strong><br />
+- <strong>a)</strong> Treinar um modelo com bilhões de parâmetros é <strong>Intensivo</strong>, o dataset sendo moderado, não é crítico então excluimos a opção de <em>Combo</em>.<br />
+- <strong>b)</strong> Volume massivo de dados ⇒ <strong>Grande</strong>.<br />
+- <strong>c)</strong> CFD 3D com malha fina é clássico <strong>Intensivo</strong>.<br />
+- <strong>d)</strong> Petabytes + métricas em janelas curtas ⇒ <strong>Combo</strong>.</p>
+</details>
+<hr />
+<h2 id="questao-2-media-movel-por-valor-e-por-referencia">Questão 2 — Média móvel por valor e por referência<a class="headerlink" href="#questao-2-media-movel-por-valor-e-por-referencia" title="Permanent link">&para;</a></h2>
+<p><strong>Enunciado:</strong><br />
+Implemente as duas versões abaixo da média móvel simples com janela <code>K</code>:  </p>
+<p>(a) recebendo os dados por valor<br />
+(b) recebendo os dados por referência constante  </p>
+<div class="highlight"><pre><span></span><code><span class="c1">// =========================================</span>
+<span class="c1">// Função para calcular a média móvel (passagem por valor)</span>
+<span class="c1">// =========================================</span>
+<span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">media_movel_por_valor</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dados</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">K</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// TODO: Usar soma inicial dos K primeiros elementos</span>
+<span class="w">    </span><span class="c1">// TODO: Atualizar soma a cada passo removendo o primeiro e adicionando o próximo</span>
+<span class="w">    </span><span class="c1">// TODO: Retornar vetor com médias</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">{};</span>
+<span class="p">}</span>
 
-<h2 id="questao-1-teorica-hierarquia-de-memoria-e-localidade">Questão 1 — Teórica (Hierarquia de Memória e Localidade)<a class="headerlink" href="#questao-1-teorica-hierarquia-de-memoria-e-localidade" title="Permanent link">&para;</a></h2>
+<span class="c1">// =========================================</span>
+<span class="c1">// Função para calcular a média móvel (passagem por referência)</span>
+<span class="c1">// =========================================</span>
+<span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">media_movel_por_referencia</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">dados</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">K</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// TODO: Mesma lógica da versão por valor</span>
+<span class="w">    </span><span class="c1">// TODO: Não copiar o vetor original</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">{};</span>
+<span class="p">}</span>
+</code></pre></div>
+<details class="note">
+<summary>Ver Resposta</summary>
+<div class="codehilite"><pre><span></span><code>#include &lt;vector&gt;
+using std::vector;
+
+// =====================================================
+// (a) Função que recebe o vetor por VALOR
+//     → Uma cópia de &#39;dados&#39; é criada dentro da função.
+//     → Essa cópia aumenta custo de memória/tempo se
+//       o vetor for muito grande.
+// =====================================================
+vector&lt;double&gt; media_movel_por_valor(vector&lt;double&gt; dados, size_t K) {
+    const size_t N = dados.size();
+
+    // Se a janela for inválida, retorna vetor vazio
+    if (K == 0 || K &gt; N) return {};
+
+    // Vetor de saída que conterá as médias
+    vector&lt;double&gt; medias;
+
+    // Calcula a soma inicial dos K primeiros elementos
+    double soma = 0.0;
+    for (size_t i = 0; i &lt; K; i++) {
+        soma += dados[i];
+    }
+    medias.push_back(soma / K); // primeira média
+
+    // Desliza a janela: remove o elemento que saiu
+    // e adiciona o próximo elemento
+    for (size_t i = K; i &lt; N; i++) {
+        soma += dados[i] - dados[i - K];
+        medias.push_back(soma / K);
+    }
+
+    // Retorna o vetor de médias
+    return medias;
+}
+
+// =====================================================
+// (b) Função que recebe o vetor por REFERÊNCIA CONST
+//     → Não há cópia: a função acessa o mesmo vetor.
+//     → Mais eficiente em memória e tempo.
+//     → &#39;const&#39; garante que a função NÃO altera os dados.
+// =====================================================
+vector&lt;double&gt; media_movel_por_referencia(const vector&lt;double&gt;&amp; dados, size_t K) {
+    const size_t N = dados.size();
+
+    // Se a janela for inválida, retorna vetor vazio
+    if (K == 0 || K &gt; N) return {};
+
+    // Vetor de saída que conterá as médias
+    vector&lt;double&gt; medias;
+
+    // Calcula a soma inicial dos K primeiros elementos
+    double soma = 0.0;
+    for (size_t i = 0; i &lt; K; i++) {
+        soma += dados[i];
+    }
+    medias.push_back(soma / K);
+
+    // Desliza a janela e calcula as médias seguintes
+    for (size_t i = K; i &lt; N; i++) {
+        soma += dados[i] - dados[i - K];
+        medias.push_back(soma / K);
+    }
+
+    // Retorna o vetor de médias
+    return medias;
+}
+</code></pre></div>
+
+</details>
+<hr />
+<h2 id="questao-3-media-movel-por-ponteiro">Questão 3 — Média móvel por ponteiro<a class="headerlink" href="#questao-3-media-movel-por-ponteiro" title="Permanent link">&para;</a></h2>
+<p><strong>Enunciado:</strong><br />
+Implemente a função <code>media_movel_por_ponteiro</code> que recebe um ponteiro para <code>double</code> (<code>const double*</code>) e calcula a média móvel com aritmética de ponteiros. Retorne o vetor de médias.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// =========================================</span>
+<span class="c1">// Função para calcular a média móvel (passagem por ponteiro)</span>
+<span class="c1">// =========================================</span>
+<span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">media_movel_por_ponteiro</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="o">*</span><span class="w"> </span><span class="n">ptr</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">K</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// TODO: Implementar usando aritmética de ponteiros</span>
+<span class="w">    </span><span class="c1">// Exemplo: *(ptr + i) acessa o elemento i</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">{};</span>
+<span class="p">}</span>
+</code></pre></div>
+<details class="note">
+<summary>ver resposta</summary>
+<div class="codehilite"><pre><span></span><code>#include &lt;vector&gt;
+using std::vector;
+
+// Função para calcular a média móvel usando ponteiros
+vector&lt;double&gt; media_movel_por_ponteiro(const double* ptr, size_t N, size_t K) {
+    // Verifica se o ponteiro é válido e se a janela K faz sentido
+    if (!ptr || K == 0 || K &gt; N) return {};
+
+    vector&lt;double&gt; medias;      // vetor que vai guardar os resultados
+    double soma = 0.0;          // acumulador da soma da janela
+
+    // Calcula a soma inicial dos K primeiros elementos
+    for (size_t i = 0; i &lt; K; i++) {
+        soma += *(ptr + i);     // *(ptr + i) é o mesmo que ptr[i]
+    }
+    medias.push_back(soma / K); // primeira média
+
+    // Desliza a janela até o final
+    for (size_t i = K; i &lt; N; i++) {
+        soma += *(ptr + i) - *(ptr + i - K); // atualiza a soma
+        medias.push_back(soma / K);          // guarda a média
+    }
+
+    return medias; // retorna o vetor de médias
+}
+</code></pre></div>
+
+</details>
+<h2 id="questao-4-teorica-hierarquia-de-memoria-e-localidade">Questão 4 — Teórica (Hierarquia de Memória e Localidade)<a class="headerlink" href="#questao-4-teorica-hierarquia-de-memoria-e-localidade" title="Permanent link">&para;</a></h2>
 <p><strong>Tipo:</strong> múltipla escolha (múltiplas corretas)<br />
 <strong>Enunciado:</strong><br />
 Sobre a hierarquia de memória (L1, L2, L3, RAM) e os princípios de localidade:  </p>
@@ -1006,7 +1217,7 @@ d) Se um loop acessa elementos distantes no vetor (p. ex., <code>array[i*1000]</
 </ul>
 </details>
 <hr />
-<h2 id="questao-2-versao-ingenua-calculo-de-produto-vetorial">Questão 2 — Versão Ingênua (Cálculo de Produto Vetorial)<a class="headerlink" href="#questao-2-versao-ingenua-calculo-de-produto-vetorial" title="Permanent link">&para;</a></h2>
+<h2 id="questao-5-versao-ingenua-calculo-de-produto-vetorial">Questão 5 — Versão Ingênua (Cálculo de Produto Vetorial)<a class="headerlink" href="#questao-5-versao-ingenua-calculo-de-produto-vetorial" title="Permanent link">&para;</a></h2>
 <p><strong>Enunciado:</strong><br />
 Implemente uma função que recebe dois vetores <code>A</code> e <code>B</code> de tamanho <code>N</code> e calcula o vetor <code>C</code>, onde:  </p>
 <div class="arithmatex">
@@ -1070,7 +1281,7 @@ void produtoIngenuo(vector&lt;double&gt;&amp; A, vector&lt;double&gt;&amp; B, ve
 
 </details>
 <hr />
-<h2 id="questao-3-versao-com-tiling-multiplicacao-de-blocos-de-vetores">Questão 3 — Versão com Tiling (Multiplicação de Blocos de Vetores)<a class="headerlink" href="#questao-3-versao-com-tiling-multiplicacao-de-blocos-de-vetores" title="Permanent link">&para;</a></h2>
+<h2 id="questao-6-versao-com-tiling-multiplicacao-de-blocos-de-vetores">Questão 6 — Versão com Tiling (Multiplicação de Blocos de Vetores)<a class="headerlink" href="#questao-6-versao-com-tiling-multiplicacao-de-blocos-de-vetores" title="Permanent link">&para;</a></h2>
 <p><strong>Enunciado:</strong><br />
 Agora implemente uma versão <strong>com tiling</strong>:<br />
 - Divida o vetor <code>B</code> em blocos de tamanho <code>Bsize</code>.<br />
@@ -1125,7 +1336,7 @@ void produtoTiling(vector&lt;double&gt;&amp; A, vector&lt;double&gt;&amp; B, vec
 
 </details>
 <hr />
-<h2 id="questao-4-reordenacao-de-loops-flags-de-otimizacao">Questão 4 — Reordenação de Loops + Flags de Otimização<a class="headerlink" href="#questao-4-reordenacao-de-loops-flags-de-otimizacao" title="Permanent link">&para;</a></h2>
+<h2 id="questao-7-reordenacao-de-loops-flags-de-otimizacao">Questão 7 — Reordenação de Loops + Flags de Otimização<a class="headerlink" href="#questao-7-reordenacao-de-loops-flags-de-otimizacao" title="Permanent link">&para;</a></h2>
 <p><strong>Enunciado:</strong><br />
 Implemente a versão reordenada:<br />
 - Para cada <code>k</code>, carregue uma cópia temporária de <code>B[k]</code> em cache.<br />

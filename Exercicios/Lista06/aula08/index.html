@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://insper.github.io/supercomp/Exercicios/aula07/aula07/">
+        <link rel="canonical" href="https://insper.github.io/supercomp/Exercicios/Lista06/aula08/">
       
       
       
@@ -18,7 +18,7 @@
     
     
       
-        <title>Prova — Programação Distribuída com MPI - SuperComputação - 2026/1</title>
+        <title>Distribuição e Paralelismo - SuperComputação - 2026/1</title>
       
     
     
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#prova-programacao-distribuida-com-mpi" class="md-skip">
+        <a href="#distribuicao-e-paralelismo" class="md-skip">
           Skip to content
         </a>
       
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Prova — Programação Distribuída com MPI
+              Distribuição e Paralelismo
             
           </span>
         </div>
@@ -624,6 +624,28 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aulas/aula11/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aula 11 - Exercícios preparatórios para AI
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -926,36 +948,27 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#questao-1-teorica-conceitos-fundamentais-de-mpi" class="md-nav__link">
+  <a href="#questao-1-teorica-mpi-openmp" class="md-nav__link">
     <span class="md-ellipsis">
-      Questão 1 — Teórica (Conceitos fundamentais de MPI)
+      Questão 1 — Teórica MPI + OpenMP
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#questao-2-broadcast-manual-vs-mpi_bcast" class="md-nav__link">
+  <a href="#questao-2-somas-parciais-em-matriz-hibrida" class="md-nav__link">
     <span class="md-ellipsis">
-      Questão 2 — Broadcast manual vs MPI_Bcast
+      Questão 2 — Somas parciais em matriz híbrida
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#questao-3-reducao-manual-vs-mpi_reduce" class="md-nav__link">
+  <a href="#questao-3-produto-escalar-distribuido" class="md-nav__link">
     <span class="md-ellipsis">
-      Questão 3 — Redução manual vs MPI_Reduce
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#questao-4-scatter-calculo-local-gather" class="md-nav__link">
-    <span class="md-ellipsis">
-      Questão 4 — Scatter + cálculo local + Gather
+      Questão 3 — Produto escalar distribuído
     </span>
   </a>
   
@@ -980,33 +993,34 @@
   
 
 
-<h1 id="prova-programacao-distribuida-com-mpi">Prova — Programação Distribuída com MPI<a class="headerlink" href="#prova-programacao-distribuida-com-mpi" title="Permanent link">&para;</a></h1>
-<h2 id="questao-1-teorica-conceitos-fundamentais-de-mpi">Questão 1 — Teórica (Conceitos fundamentais de MPI)<a class="headerlink" href="#questao-1-teorica-conceitos-fundamentais-de-mpi" title="Permanent link">&para;</a></h2>
+<h1 id="distribuicao-e-paralelismo">Distribuição e Paralelismo<a class="headerlink" href="#distribuicao-e-paralelismo" title="Permanent link">&para;</a></h1>
+<h2 id="questao-1-teorica-mpi-openmp">Questão 1 — Teórica MPI + OpenMP<a class="headerlink" href="#questao-1-teorica-mpi-openmp" title="Permanent link">&para;</a></h2>
 <p><strong>Enunciado:</strong><br />
-a) Diferencie <strong>paralelismo com memória compartilhada</strong> e <strong>paralelismo com memória distribuída</strong>.<br />
-b) Explique o que é um <strong>rank</strong> no contexto do MPI e como ele é utilizado em comunicações.<br />
-c) Cite uma vantagem e uma desvantagem de usar <strong>comunicação coletiva</strong> (ex.: <code>MPI_Bcast</code>, <code>MPI_Reduce</code>) em comparação com várias chamadas ponto a ponto (<code>MPI_Send</code>/<code>MPI_Recv</code>).<br />
-d) O que acontece se dois processos MPI tentarem executar <code>MPI_Send</code> um para o outro sem <code>MPI_Recv</code> correspondente?  </p>
+a) Explique por que faz sentido combinar <strong>MPI</strong> e <strong>OpenMP</strong> em clusters de HPC.<br />
+b) Quais são as vantagens dessa abordagem híbrida em relação a usar apenas MPI puro?<br />
+c) Dê um exemplo de problema em que <strong>somente OpenMP</strong> não seria suficiente.<br />
+d) Cite uma dificuldade extra que surge ao programar em MPI+OpenMP em comparação com usar apenas OpenMP.  </p>
 <details class="note">
-<summary>Ver Resposta</summary>
-<p>a) No paralelismo com memória compartilhada (como no OpenMP), todas as threads acessam a mesma região de memória. Isso facilita a troca de dados. Já no paralelismo com memória distribuída (como no MPI), a comunicação é feita por troca explícita de mensagens. </p>
-<p>b) Rank em MPI
-O rank é o identificador único de cada processo dentro de um comunicador MPI, geralmente numerado de <code>0</code> até <code>size-1</code>. Ele é usado para diferenciar processos e definir o papel de cada um durante a execução. </p>
-<p>c) Comunicação coletiva vs. ponto a ponto
-Uma vantagem das comunicações coletivas é a simplicidade de implementação, pois a biblioteca MPI já otimiza a troca de dados internamente, evitando que o programador tenha de escrever múltiplos <code>MPI_Send</code> e <code>MPI_Recv</code>. A desvantagem é o overhead, todos os processos precisam participar da operação coletiva ao mesmo tempo, o que pode causar esperas desnecessárias se algum processo atrasar. Já a comunicação ponto a ponto dá mais flexibilidade, e controle dos processos e trocas de mensagens.</p>
-<p>d) Dois processos executando apenas <code>MPI_Send</code>
-Se dois processos chamarem <code>MPI_Send</code> simultaneamente um para o outro sem que haja chamadas correspondentes de <code>MPI_Recv</code>, o programa pode entrar em deadlock. Isso acontece porque cada processo fica esperando o envio ser concluído, mas não há recepção ativa para liberar os dados. Para evitar isso, é importante garantir que um processo envie enquanto o outro recebe.</p>
+<summary>Ver resposta</summary>
+<p>a) Os clusters HPC têm múltiplos nós (máquinas diferentes) e múltiplos núcleos por nó (vários core dentro da CPU). O MPI é usado para comunicação entre nós, O OpenMP é usado para paralelismo dentro de cada nó, usandos as threads e a memória compartilhada (L1, L2, L3 e RAM). Juntos, aproveitam ao máximo a hierarquia do hardware (distribuído + compartilhado).</p>
+<p>b) Reduz o número de processos MPI: menos overhead de comunicação entre nós.  </p>
+<p>Aproveita melhor a memória compartilhada dentro de cada nó, que é mais rápida que a troca de mensagens MPI.</p>
+<p>Aproveita melhor os recursos disponíveis no cluster: MPI distribui entre nós, OpenMP paraleliza dentro de cada nó.  </p>
+<p>c) Problemas que não cabem na memória de um único nó. Exemplo: simulação de clima global, que precisa de terabytes de memória, impossível em apenas um nó. Necessário MPI para dividir os dados entre nós diferentes.</p>
+<p>d) Maior complexidade de programação: o programador precisa lidar tanto com gerenciamento de threads (OpenMP) quanto com comunicação entre processos(MPI). Debug e balanceamento de carga ficam mais difíceis em códigos híbridos.  </p>
 </details>
-<h2 id="questao-2-broadcast-manual-vs-mpi_bcast">Questão 2 — Broadcast manual vs MPI_Bcast<a class="headerlink" href="#questao-2-broadcast-manual-vs-mpi_bcast" title="Permanent link">&para;</a></h2>
+<h2 id="questao-2-somas-parciais-em-matriz-hibrida">Questão 2 — Somas parciais em matriz híbrida<a class="headerlink" href="#questao-2-somas-parciais-em-matriz-hibrida" title="Permanent link">&para;</a></h2>
 <p><strong>Enunciado:</strong><br />
-Implemente duas versões para distribuir um mesmo valor inteiro a todos os processos:  </p>
-<ol>
-<li><strong>Versão manual:</strong> o <code>rank 0</code> envia o valor individualmente para cada outro processo usando <code>MPI_Send</code>.  </li>
-<li><strong>Versão coletiva:</strong> use <code>MPI_Bcast</code> para o mesmo objetivo.  </li>
-</ol>
-<p>Compare os tempos de execução à medida que o número de processos aumenta.  </p>
+Implemente um programa que calcula a soma de todos os elementos de uma matriz <code>NxN</code> de forma híbrida:<br />
+- O <code>rank 0</code> inicializa a matriz com valores aleatórios.<br />
+- Cada processo recebe um bloco de linhas usando <code>MPI_Scatter</code>.<br />
+- Dentro de cada processo, use <strong>OpenMP</strong> para somar os elementos do seu bloco.<br />
+- Combine os resultados parciais em <code>rank 0</code> com <code>MPI_Reduce</code>.  </p>
 <div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;mpi.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;omp.h&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdlib&gt;</span>
 
 <span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">**</span><span class="w"> </span><span class="n">argv</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">MPI_Init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">argv</span><span class="p">);</span>
@@ -1014,19 +1028,16 @@ Implemente duas versões para distribuir um mesmo valor inteiro a todos os proce
 <span class="w">    </span><span class="n">MPI_Comm_rank</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rank</span><span class="p">);</span>
 <span class="w">    </span><span class="n">MPI_Comm_size</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">size</span><span class="p">);</span>
 
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">valor</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1024</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">A</span><span class="p">;</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rank</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">valor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span>
-<span class="w">        </span><span class="c1">// TODO: enviar valor manualmente com MPI_Send</span>
-<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="c1">// TODO: receber valor com MPI_Recv</span>
+<span class="w">        </span><span class="n">A</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">N</span><span class="o">*</span><span class="n">N</span><span class="p">);</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="o">*</span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">()</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;[Manual] Processo &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">rank</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; recebeu valor = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">valor</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
-
-<span class="w">    </span><span class="c1">// TODO: implementar versão com MPI_Bcast</span>
-
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;[Bcast] Processo &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">rank</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; recebeu valor = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">valor</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// TODO: MPI_Scatter blocos de linhas</span>
+<span class="w">    </span><span class="c1">// TODO: soma parcial local com OpenMP</span>
+<span class="w">    </span><span class="c1">// TODO: MPI_Reduce para combinar resultados</span>
 
 <span class="w">    </span><span class="n">MPI_Finalize</span><span class="p">();</span>
 <span class="p">}</span>
@@ -1034,124 +1045,94 @@ Implemente duas versões para distribuir um mesmo valor inteiro a todos os proce
 <details class="note">
 <summary>Ver Resposta</summary>
 <div class="codehilite"><pre><span></span><code>#include &lt;mpi.h&gt;
+#include &lt;omp.h&gt;
 #include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;cstdlib&gt;
 
 int main(int argc, char** argv) {
+    // Inicializa o MPI (cria o comunicador global e o ambiente de processos)
     MPI_Init(&amp;argc, &amp;argv);
+
     int rank, size;
-    MPI_Comm_rank(MPI_COMM_WORLD, &amp;rank);
-    MPI_Comm_size(MPI_COMM_WORLD, &amp;size);
+    MPI_Comm_rank(MPI_COMM_WORLD, &amp;rank);  // identificador do processo (0..size-1)
+    MPI_Comm_size(MPI_COMM_WORLD, &amp;size);  // total de processos MPI
 
-    int valor;
+    // Dimensão da matriz NxN 
+    int N = 1024;
+
+    // Apenas o rank 0 mantém a matriz completa; os demais só recebem o seu pedaço
+    std::vector&lt;int&gt; A;
     if (rank == 0) {
-        valor = 42;
-        // versão manual
-        for (int dest = 1; dest &lt; size; dest++) {
-            MPI_Send(&amp;valor, 1, MPI_INT, dest, 0, MPI_COMM_WORLD);
-        }
-    } else {
-        MPI_Recv(&amp;valor, 1, MPI_INT, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+        A.resize(N * N);
+        // Preenche a matriz com inteiros aleatórios simples (0..9)
+        for (int i = 0; i &lt; N * N; i++) A[i] = rand() % 10;
     }
-    std::cout &lt;&lt; &quot;[Manual] Processo &quot; &lt;&lt; rank &lt;&lt; &quot; recebeu valor = &quot; &lt;&lt; valor &lt;&lt; &quot;\n&quot;;
 
-    // versão com MPI_Bcast
-    if (rank == 0) valor = 99;
-    MPI_Bcast(&amp;valor, 1, MPI_INT, 0, MPI_COMM_WORLD);
-    std::cout &lt;&lt; &quot;[Bcast] Processo &quot; &lt;&lt; rank &lt;&lt; &quot; recebeu valor = &quot; &lt;&lt; valor &lt;&lt; &quot;\n&quot;;
+    // Número de linhas por processo (versão simples: exige N % size == 0)
+    int rows_per_proc = N / size;
 
-    MPI_Finalize();
+    // Buffer local do processo: &quot;rows_per_proc&quot; linhas por N colunas
+    std::vector&lt;int&gt; local(rows_per_proc * N);
+
+    // Distribui blocos de linhas de A (contíguas em memória) para todos os processos
+    // - No rank 0: envia pedaços de A
+    // - Nos demais ranks: recebe em &quot;local&quot;
+    MPI_Scatter(
+        A.data(),                 // buffer de envio (apenas significativo no rank 0)
+        rows_per_proc * N,        // elementos enviados para CADA processo
+        MPI_INT,                  // tipo dos elementos
+        local.data(),             // buffer de recepção (todos os ranks)
+        rows_per_proc * N,        // elementos recebidos por processo
+        MPI_INT,                  // tipo dos elementos
+        0,                        // root (rank que envia)
+        MPI_COMM_WORLD            // comunicador
+    );
+
+    // Soma parcial local (vai acumular a soma do bloco deste processo)
+    long long soma_local = 0;
+
+    // Paraleliza a soma dentro do nó com OpenMP:
+    // - Cada thread percorre um pedaço do vetor &quot;local&quot;
+    // - reduction(+:soma_local) evita condição de corrida (cada thread tem acumulador próprio)
+    #pragma omp parallel for reduction(+:soma_local)
+    for (int i = 0; i &lt; rows_per_proc * N; i++) {
+        soma_local += local[i];
+    }
+
+    // Reduz (soma) todas as somas locais em &quot;soma_total&quot; no rank 0
+    long long soma_total = 0;
+    MPI_Reduce(
+        &amp;soma_local,              // dado local
+        &amp;soma_total,              // resultado no root
+        1,                        // quantidade
+        MPI_LONG_LONG,            // tipo do dado
+        MPI_SUM,                  // operação de redução
+        0,                        // root
+        MPI_COMM_WORLD
+    );
+
+    if (rank == 0) {
+        std::cout &lt;&lt; &quot;Soma total = &quot; &lt;&lt; soma_total &lt;&lt; std::endl;
+    }
+
+    MPI_Finalize(); // Finaliza MPI
 }
 </code></pre></div>
 
 </details>
-<h2 id="questao-3-reducao-manual-vs-mpi_reduce">Questão 3 — Redução manual vs MPI_Reduce<a class="headerlink" href="#questao-3-reducao-manual-vs-mpi_reduce" title="Permanent link">&para;</a></h2>
+<h2 id="questao-3-produto-escalar-distribuido">Questão 3 — Produto escalar distribuído<a class="headerlink" href="#questao-3-produto-escalar-distribuido" title="Permanent link">&para;</a></h2>
 <p><strong>Enunciado:</strong><br />
-Implemente a soma de inteiros distribuídos entre os processos de duas formas:  </p>
-<ol>
-<li><strong>Versão manual:</strong> cada processo envia seu valor ao <code>rank 0</code>, que acumula.  </li>
-<li><strong>Versão coletiva:</strong> use <code>MPI_Reduce</code> para calcular a soma diretamente.  </li>
-</ol>
-<p>Verifique se os resultados são iguais.  </p>
+Implemente um programa híbrido para calcular o <strong>produto escalar</strong> entre dois vetores <code>v</code> e <code>w</code>:  </p>
+<p><code>s = sum(v[i] * w[i])</code>  </p>
+<ul>
+<li>O <code>rank 0</code> inicializa os vetores.  </li>
+<li>Cada processo recebe um pedaço dos vetores via <code>MPI_Scatter</code>.  </li>
+<li>Dentro de cada processo, paralelize o cálculo do produto parcial com <strong>OpenMP</strong>.  </li>
+<li>Use <code>MPI_Reduce</code> para reunir a soma no <code>rank 0</code>.  </li>
+</ul>
 <div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;mpi.h&gt;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
-
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">**</span><span class="w"> </span><span class="n">argv</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">MPI_Init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">argv</span><span class="p">);</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">rank</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">;</span>
-<span class="w">    </span><span class="n">MPI_Comm_rank</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rank</span><span class="p">);</span>
-<span class="w">    </span><span class="n">MPI_Comm_size</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">size</span><span class="p">);</span>
-
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">meu_valor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rank</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="c1">// cada processo tem um valor diferente</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">soma</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rank</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">soma</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">meu_valor</span><span class="p">;</span>
-<span class="w">        </span><span class="c1">// TODO: receber valores dos outros processos com MPI_Recv e acumular</span>
-<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="c1">// TODO: enviar valor ao processo 0 com MPI_Send</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rank</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;[Manual] Soma total = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">soma</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="c1">// TODO: implementar versão com MPI_Reduce</span>
-
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rank</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;[Reduce] Soma total = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">soma</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="n">MPI_Finalize</span><span class="p">();</span>
-<span class="p">}</span>
-</code></pre></div>
-<details class="note">
-<summary>Ver Resposta</summary>
-<div class="codehilite"><pre><span></span><code>#include &lt;mpi.h&gt;
-#include &lt;iostream&gt;
-
-int main(int argc, char** argv) {
-    MPI_Init(&amp;argc, &amp;argv);
-    int rank, size;
-    MPI_Comm_rank(MPI_COMM_WORLD, &amp;rank);
-    MPI_Comm_size(MPI_COMM_WORLD, &amp;size);
-
-    int meu_valor = rank + 1; // só para ter valores diferentes
-    int soma = 0;
-
-    if (rank == 0) {
-        soma = meu_valor;
-        for (int src = 1; src &lt; size; src++) {
-            int temp;
-            MPI_Recv(&amp;temp, 1, MPI_INT, src, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-            soma += temp;
-        }
-        std::cout &lt;&lt; &quot;[Manual] Soma total = &quot; &lt;&lt; soma &lt;&lt; &quot;\n&quot;;
-    } else {
-        MPI_Send(&amp;meu_valor, 1, MPI_INT, 0, 0, MPI_COMM_WORLD);
-    }
-
-    // versão com MPI_Reduce
-    int soma_reduce = 0;
-    MPI_Reduce(&amp;meu_valor, &amp;soma_reduce, 1, MPI_INT, MPI_SUM, 0, MPI_COMM_WORLD);
-    if (rank == 0) {
-        std::cout &lt;&lt; &quot;[Reduce] Soma total = &quot; &lt;&lt; soma_reduce &lt;&lt; &quot;\n&quot;;
-    }
-
-    MPI_Finalize();
-}
-</code></pre></div>
-
-</details>
-<h2 id="questao-4-scatter-calculo-local-gather">Questão 4 — Scatter + cálculo local + Gather<a class="headerlink" href="#questao-4-scatter-calculo-local-gather" title="Permanent link">&para;</a></h2>
-<p><strong>Enunciado:</strong><br />
-Implemente um programa que divide um vetor de inteiros igualmente entre os processos, cada processo calcula a soma dos seus elementos, e depois os resultados são reunidos no processo 0:  </p>
-<ol>
-<li>Use <code>MPI_Scatter</code> para distribuir partes do vetor.  </li>
-<li>Cada processo calcula sua soma parcial.  </li>
-<li>Use <code>MPI_Gather</code> para enviar os resultados ao <code>rank 0</code>.  </li>
-<li>O <code>rank 0</code> calcula a soma total e imprime.  </li>
-</ol>
-<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;mpi.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;omp.h&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
 
@@ -1161,80 +1142,231 @@ Implemente um programa que divide um vetor de inteiros igualmente entre os proce
 <span class="w">    </span><span class="n">MPI_Comm_rank</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rank</span><span class="p">);</span>
 <span class="w">    </span><span class="n">MPI_Comm_size</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">size</span><span class="p">);</span>
 
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">16</span><span class="p">;</span>
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dados</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="mi">20</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="w"> </span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="n">w</span><span class="p">;</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rank</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">dados</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">N</span><span class="p">);</span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="n">dados</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+<span class="w">        </span><span class="n">v</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">);</span>
+<span class="w">        </span><span class="n">w</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0f</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">tam_local</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">size</span><span class="p">;</span>
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">local</span><span class="p">(</span><span class="n">tam_local</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// TODO: Scatter pedaços dos vetores</span>
+<span class="w">    </span><span class="c1">// TODO: produto parcial com OpenMP</span>
+<span class="w">    </span><span class="c1">// TODO: MPI_Reduce para juntar resultados</span>
 
-<span class="w">    </span><span class="c1">// TODO: usar MPI_Scatter para enviar partes do vetor</span>
+<span class="w">    </span><span class="n">MPI_Finalize</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>
+<details class="note">
+<summary>Ver resposta</summary>
+<h1 id="include">include <mpi.h><a class="headerlink" href="#include" title="Permanent link">&para;</a></h1>
+<h1 id="include_1">include <omp.h><a class="headerlink" href="#include_1" title="Permanent link">&para;</a></h1>
+<h1 id="include_2">include <iostream><a class="headerlink" href="#include_2" title="Permanent link">&para;</a></h1>
+<h1 id="include_3">include <vector><a class="headerlink" href="#include_3" title="Permanent link">&para;</a></h1>
+<p>int main(int argc, char** argv) {
+    // Inicializa o ambiente MPI (processos distribuídos)
+    MPI_Init(&amp;argc, &amp;argv);</p>
+<div class="codehilite"><pre><span></span><code>int rank, size;
+MPI_Comm_rank(MPI_COMM_WORLD, &amp;rank);  // identificador do processo (0..size-1)
+MPI_Comm_size(MPI_COMM_WORLD, &amp;size);  // total de processos
 
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">soma_local</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">    </span><span class="c1">// TODO: calcular soma local</span>
+// Tamanho global dos vetores (2^20 ~ 1 milhão de elementos)
+int N = 1 &lt;&lt; 20;
 
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">somas</span><span class="p">;</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rank</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="n">somas</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">size</span><span class="p">);</span>
+// Apenas o rank 0 guarda os vetores completos
+std::vector&lt;float&gt; v, w;
+if (rank == 0) {
+    v.resize(N, 1.0f);  // exemplo simples: todos 1.0
+    w.resize(N, 2.0f);  // exemplo simples: todos 2.0
+}
 
-<span class="w">    </span><span class="c1">// TODO: usar MPI_Gather para enviar resultados locais ao rank 0</span>
+// Particionamento simples: assume N % size == 0 (cada rank recebe o mesmo tamanho)
+int elems_per_proc = N / size;
 
+// Buffers locais (cada processo recebe um pedaço contíguo de v e w)
+std::vector&lt;float&gt; v_local(elems_per_proc), w_local(elems_per_proc);
+
+// Distribui um pedaço de v para cada processo
+MPI_Scatter(
+    v.data(),                 // buffer origem (válido no rank 0)
+    elems_per_proc,           // nº de elementos enviados a cada rank
+    MPI_FLOAT,                // tipo
+    v_local.data(),           // buffer destino (todos os ranks)
+    elems_per_proc,           // nº de elementos recebidos
+    MPI_FLOAT,                // tipo
+    0, MPI_COMM_WORLD
+);
+
+// Distribui um pedaço de w para cada processo
+MPI_Scatter(
+    w.data(),
+    elems_per_proc,
+    MPI_FLOAT,
+    w_local.data(),
+    elems_per_proc,
+    MPI_FLOAT,
+    0, MPI_COMM_WORLD
+);
+
+// Soma parcial local do produto escalar desse processo
+// Observação: usar &#39;double&#39; para acumular reduz erro numérico
+double soma_local = 0.0;
+
+// Paraleliza o laço local com OpenMP:
+// - Cada thread processa um bloco de índices [0..elems_per_proc)
+// - reduction(+:soma_local) evita condição de corrida (cada thread acumula localmente)
+#pragma omp parallel for reduction(+:soma_local)
+for (int i = 0; i &lt; elems_per_proc; i++) {
+    soma_local += static_cast&lt;double&gt;(v_local[i]) * static_cast&lt;double&gt;(w_local[i]);
+}
+
+// Redução global: soma todas as parcelas locais em &#39;soma_total&#39; no rank 0
+double soma_total = 0.0;
+MPI_Reduce(
+    &amp;soma_local, &amp;soma_total,
+    1, MPI_DOUBLE, MPI_SUM,
+    0, MPI_COMM_WORLD
+);
+
+// Rank 0 imprime o resultado final
+if (rank == 0) {
+    std::cout &lt;&lt; &quot;Produto escalar = &quot; &lt;&lt; soma_total &lt;&lt; std::endl;
+}
+
+// Encerra o ambiente MPI
+MPI_Finalize();
+</code></pre></div>
+
+<p>}</p>
+</details>
+<h2 id="questao-4-filtro-1d-paralelo-com-halos">Questão 4 — Filtro 1D paralelo com halos<a class="headerlink" href="#questao-4-filtro-1d-paralelo-com-halos" title="Permanent link">&para;</a></h2>
+<p><strong>Enunciado:</strong><br />
+Implemente um <strong>filtro de média móvel 1D</strong> sobre um vetor:  </p>
+<p><code>out[i] = (v[i-1] + v[i] + v[i+1]) / 3</code>  </p>
+<ul>
+<li>O <code>rank 0</code> inicializa o vetor <code>v</code>.  </li>
+<li>O vetor é dividido entre os processos (<code>MPI_Scatter</code>).  </li>
+<li>Cada processo precisa das <strong>bordas vizinhas (halos)</strong> — troque os elementos das extremidades com <code>MPI_Sendrecv</code>.  </li>
+<li>Paralelize o cálculo local com <strong>OpenMP</strong>.  </li>
+<li>Reúna o vetor final no <code>rank 0</code> com <code>MPI_Gather</code>.  </li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;mpi.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;omp.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">**</span><span class="w"> </span><span class="n">argv</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">MPI_Init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">argv</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">rank</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">;</span>
+<span class="w">    </span><span class="n">MPI_Comm_rank</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rank</span><span class="p">);</span>
+<span class="w">    </span><span class="n">MPI_Comm_size</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">size</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1024</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="w"> </span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="n">out</span><span class="p">;</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rank</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">soma_total</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">        </span><span class="c1">// TODO: acumular somas e imprimir resultado final</span>
+<span class="w">        </span><span class="n">v</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">);</span>
+<span class="w">        </span><span class="n">out</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">N</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// TODO: Scatter blocos do vetor</span>
+<span class="w">    </span><span class="c1">// TODO: troca de halos com MPI_Sendrecv</span>
+<span class="w">    </span><span class="c1">// TODO: cálculo local com OpenMP</span>
+<span class="w">    </span><span class="c1">// TODO: MPI_Gather para juntar resultado</span>
 
 <span class="w">    </span><span class="n">MPI_Finalize</span><span class="p">();</span>
 <span class="p">}</span>
 </code></pre></div>
 <details class="note">
 <summary>Ver Resposta</summary>
-<div class="codehilite"><pre><span></span><code>#include &lt;mpi.h&gt;
-#include &lt;iostream&gt;
-#include &lt;vector&gt;
-
-int main(int argc, char** argv) {
+<h1 id="include_4">include <mpi.h><a class="headerlink" href="#include_4" title="Permanent link">&para;</a></h1>
+<h1 id="include_5">include <omp.h><a class="headerlink" href="#include_5" title="Permanent link">&para;</a></h1>
+<h1 id="include_6">include <iostream><a class="headerlink" href="#include_6" title="Permanent link">&para;</a></h1>
+<h1 id="include_7">include <vector><a class="headerlink" href="#include_7" title="Permanent link">&para;</a></h1>
+<p>int main(int argc, char** argv) {
+    // ------------------------------------------------------------
+    // Inicialização do MPI e descoberta de (rank, size)
+    // ------------------------------------------------------------
     MPI_Init(&amp;argc, &amp;argv);
     int rank, size;
-    MPI_Comm_rank(MPI_COMM_WORLD, &amp;rank);
-    MPI_Comm_size(MPI_COMM_WORLD, &amp;size);
+    MPI_Comm_rank(MPI_COMM_WORLD, &amp;rank); // ID do processo (0..size-1)
+    MPI_Comm_size(MPI_COMM_WORLD, &amp;size); // nº total de processos</p>
+<div class="codehilite"><pre><span></span><code>// ------------------------------------------------------------
+// Dimensão global do vetor e buffers no rank 0
+// (v inicializado, out receberá o resultado global)
+// ------------------------------------------------------------
+int N = 1024;
+std::vector&lt;float&gt; v, out;
+if (rank == 0) {
+    v.resize(N, 1.0f); // exemplo simples: todos 1.0
+    out.resize(N);
+}
 
-    int N = 16;
-    std::vector&lt;int&gt; dados;
-    if (rank == 0) {
-        dados.resize(N);
-        for (int i = 0; i &lt; N; i++) dados[i] = i+1;
-    }
+// ------------------------------------------------------------
+// Particionamento simples: assume N % size == 0
+// Cada processo recebe elems_per_proc elementos contíguos
+// ------------------------------------------------------------
+int elems_per_proc = N / size;
+std::vector&lt;float&gt; local(elems_per_proc), local_out(elems_per_proc);
 
-    int tam_local = N / size;
-    std::vector&lt;int&gt; local(tam_local);
-
-    MPI_Scatter(dados.data(), tam_local, MPI_INT,
-                local.data(), tam_local, MPI_INT,
-                0, MPI_COMM_WORLD);
-
-    int soma_local = 0;
-    for (int x : local) soma_local += x;
-
-    std::vector&lt;int&gt; somas;
-    if (rank == 0) somas.resize(size);
-
-    MPI_Gather(&amp;soma_local, 1, MPI_INT,
-            somas.data(), 1, MPI_INT,
+// ------------------------------------------------------------
+// Distribui partes de v para todos os processos
+// (rank 0 envia; demais recebem em &#39;local&#39;)
+// ------------------------------------------------------------
+MPI_Scatter(v.data(), elems_per_proc, MPI_FLOAT,
+            local.data(), elems_per_proc, MPI_FLOAT,
             0, MPI_COMM_WORLD);
 
-    if (rank == 0) {
-        int soma_total = 0;
-        for (int s : somas) soma_total += s;
-        std::cout &lt;&lt; &quot;Soma total = &quot; &lt;&lt; soma_total &lt;&lt; &quot;\n&quot;;
-    }
+// ------------------------------------------------------------
+// Troca de HALOS (bordas vizinhas):
+//   - Cada processo precisa do elemento da esquerda e da direita
+//     pertencentes aos vizinhos (para computar out[i] nas extremidades).
+//   - Política de borda simples: se não há vizinho, usamos o próprio valor.
+// ------------------------------------------------------------
+float left_halo  = local[0];                    // padrão: próprio valor (borda)
+float right_halo = local[elems_per_proc - 1];   // padrão: próprio valor (borda)
 
-    MPI_Finalize();
+// Envia/recebe com o vizinho à esquerda (rank-1), se existir
+if (rank &gt; 0) {
+    MPI_Sendrecv(&amp;local[0],               1, MPI_FLOAT, rank - 1, 0,
+                &amp;left_halo,              1, MPI_FLOAT, rank - 1, 0,
+                MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 }
+// Envia/recebe com o vizinho à direita (rank+1), se existir
+if (rank &lt; size - 1) {
+    MPI_Sendrecv(&amp;local[elems_per_proc - 1], 1, MPI_FLOAT, rank + 1, 0,
+                &amp;right_halo,                1, MPI_FLOAT, rank + 1, 0,
+                MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+}
+
+// ------------------------------------------------------------
+// Cálculo local do filtro (paralelo com OpenMP)
+//   out[i] = (v[i-1] + v[i] + v[i+1]) / 3
+//   - Para i=0 e i=último, usamos halos recebidos (ou próprio valor na borda).
+// ------------------------------------------------------------
+#pragma omp parallel for
+for (int i = 0; i &lt; elems_per_proc; i++) {
+    float left  = (i == 0) ? left_halo : local[i - 1];
+    float right = (i == elems_per_proc - 1) ? right_halo : local[i + 1];
+    local_out[i] = (left + local[i] + right) / 3.0f;
+}
+
+// ------------------------------------------------------------
+// Reúne os pedaços filtrados em &#39;out&#39; no rank 0
+// ------------------------------------------------------------
+MPI_Gather(local_out.data(), elems_per_proc, MPI_FLOAT,
+        out.data(),       elems_per_proc, MPI_FLOAT,
+        0, MPI_COMM_WORLD);
+
+if (rank == 0) {
+    std::cout &lt;&lt; &quot;Filtro 1D concluído.&quot; &lt;&lt; std::endl;
+    // (Opcional) validar/inspecionar alguns elementos de &#39;out&#39;
+    // for (int i = 0; i &lt; 10; ++i) std::cout &lt;&lt; out[i] &lt;&lt; &quot; &quot;;
+    // std::cout &lt;&lt; &quot;\n&quot;;
+}
+
+MPI_Finalize();
 </code></pre></div>
 
+<p>}</p>
 </details>
 
 
