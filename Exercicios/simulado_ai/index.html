@@ -1,0 +1,2147 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://insper.github.io/supercomp/Exercicios/simulado_ai/">
+      
+      
+        <link rel="prev" href="../../teoria/permissoes/">
+      
+      
+        <link rel="next" href="../../projetos/2026-1/APS1/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.7">
+    
+    
+      
+        <title>Simulado AI - SuperComputação - 2026/1</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.8608ea7d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/printing.css">
+    
+      <link rel="stylesheet" href="../../css/extra.css">
+    
+      <link rel="stylesheet" href="../../css/equipe.css">
+    
+      <link rel="stylesheet" href="../../css/ansi-colours.css">
+    
+      <link rel="stylesheet" href="../../css/jupyter-cells.css">
+    
+      <link rel="stylesheet" href="../../css/pandas-dataframe.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue-gray" data-md-color-accent="red">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#simulado-da-avaliacao-intermediaria-de-supercomp-1-semestre-de-2026" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="SuperComputação - 2026/1" class="md-header__button md-logo" aria-label="SuperComputação - 2026/1" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SuperComputação - 2026/1
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Simulado AI
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/insper/supercomp" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    SuperComp
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../sobre/" class="md-tabs__link">
+        
+  
+    
+  
+  Burocracias
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../aulas/aula01/" class="md-tabs__link">
+          
+  
+  Aulas
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../teoria/slides/" class="md-tabs__link">
+          
+  
+  Suporte
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../projetos/2026-1/APS1/" class="md-tabs__link">
+          
+  
+  APS's
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="SuperComputação - 2026/1" class="md-nav__button md-logo" aria-label="SuperComputação - 2026/1" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    SuperComputação - 2026/1
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/insper/supercomp" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    SuperComp
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sobre/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Burocracias
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Aulas
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Aulas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/aula01/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aula 01 - Introdução e Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/aula02/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aula 02 - Cluster Franky
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/aula03/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aula 03 - STD, Vector e Tiling
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/aula04/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aula 04 - Algoritmo Busca exaustiva
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/aula05/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aula 05 - Heurísticas e Aleatoriedade
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/aula06/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aula 06 - Paralelismo em CPU
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/aula07/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aula 07 - Efeitos colaterias do paralelismo
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/aula08/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aula 08 - Sincronização em CPU com OpenMP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/aula09/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aula 09 - Programação Distribuída com MPI
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/aula10/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aula 10 - Tipos de comunicação MPI
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aulas/aula11/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aula 11 - Exercícios preparatórios para AI
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Suporte
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Suporte
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../teoria/slides/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Slides das aulas
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../teoria/aula01/compilar-executar-C%2B%2B/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aula 01
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../teoria/aula02/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aula 02
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../teoria/aula03/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aula 03
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../teoria/aula04/index.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aula 04
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../teoria/comandos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Útil
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../teoria/permissoes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Permissões
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Simulado AI
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Simulado AI
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#questoes-teoricas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Questões Teóricas:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#questoes-praticas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Questões práticas
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercicio-1-otimizacoes-em-cpu-2-pontos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercício 1 - Otimizações em CPU - (2 pontos)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Exercício 1 - Otimizações em CPU - (2 pontos)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#implemente-as-seguintes-otimizcoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implemente as seguintes otimizções:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercicio-2-calculo-de-pi-com-monte-carlo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercício 2 — Cálculo de PI com Monte Carlo
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Exercício 2 — Cálculo de PI com Monte Carlo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parte-1-paralelismo-com-openmp-2-pontos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parte 1 - Paralelismo com OpenMP (2 pontos)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parte-2-distribuicao-com-mpi-2-pontos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parte 2 - Distribuição com MPI (2 pontos)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercicio-3-otimizacao-de-rotas-para-entregas-com-bicicleta-2-pontos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercício 3 — Otimização de Rotas para Entregas com Bicicleta (2 pontos)
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    APS's
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            APS's
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../projetos/2026-1/APS1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    APS 1 - Otimizações em CPU
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#questoes-teoricas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Questões Teóricas:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#questoes-praticas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Questões práticas
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercicio-1-otimizacoes-em-cpu-2-pontos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercício 1 - Otimizações em CPU - (2 pontos)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Exercício 1 - Otimizações em CPU - (2 pontos)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#implemente-as-seguintes-otimizcoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implemente as seguintes otimizções:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercicio-2-calculo-de-pi-com-monte-carlo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercício 2 — Cálculo de PI com Monte Carlo
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Exercício 2 — Cálculo de PI com Monte Carlo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parte-1-paralelismo-com-openmp-2-pontos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parte 1 - Paralelismo com OpenMP (2 pontos)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parte-2-distribuicao-com-mpi-2-pontos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parte 2 - Distribuição com MPI (2 pontos)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercicio-3-otimizacao-de-rotas-para-entregas-com-bicicleta-2-pontos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercício 3 — Otimização de Rotas para Entregas com Bicicleta (2 pontos)
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="simulado-da-avaliacao-intermediaria-de-supercomp-1-semestre-de-2026">Simulado da Avaliação Intermediária de Supercomp, 1 semestre de 2026<a class="headerlink" href="#simulado-da-avaliacao-intermediaria-de-supercomp-1-semestre-de-2026" title="Permanent link">&para;</a></h1>
+<h2 id="questoes-teoricas">Questões Teóricas:<a class="headerlink" href="#questoes-teoricas" title="Permanent link">&para;</a></h2>
+<p>A resposta para questões teóricas devem estar em um arquivo "respostas_teoricas.txt"</p>
+<p>1) O que é um sistema de HPC? (0.5 ponto)</p>
+<details class="note">
+<summary>Gabarito</summary>
+<p>High-Performance Computing (HPC) refere-se ao uso de supercomputadores e clusters de computadores para resolver problemas computacionalmente complexos. HPC é essencial em campos como ciência, engenharia e finanças, onde grandes volumes de dados precisam ser processados rapidamente.<a href="https://insper.github.io/supercomp/teoria/aula02/">Fonte</a></p>
+</details>
+<p>2) Qual é a função do SLURM em um sistema de HPC? (0.5 ponto)</p>
+<details class="note">
+<summary>Gabarito</summary>
+<p>O Slurm é responsável por gerenciar a execução das tarefas que você submete, distribuindo-as eficientemente pelos recursos de computação disponíveis. <a href="https://insper.github.io/supercomp/teoria/aula02/">Fonte</a></p>
+</details>
+<p>3) Explique por que um loop com dependência entre iterações não pode ser paralelizado diretamente. (0.5 ponto)</p>
+<details class="note">
+<summary>Gabarito</summary>
+<p>Se um loop tem dependência entre as iterações, não dá pra paralelizar direto. Isso acontece porque uma iteração precisa do resultado da anterior, então as threads teriam que esperar — e aí perde a vantagem da paralelização.
+Uma forma de resolver é paralelizar só as partes que não dependem umas das outras e usar sincronização quando necessário. Outra ideia é dividir o loop em blocos, deixando as dependências dentro de cada bloco e executando os blocos em paralelo. <a href="https://insper.github.io/supercomp/aulas/aula07/">Fonte</a></p>
+</details>
+<p>4) Qual a diferença entre paralelismo com memória compartilhada e paralelismo com memória distribuída. (0.5 ponto)</p>
+<details class="note">
+<summary>Gabarito</summary>
+<p>No paralelismo com memória compartilhada, os threads acessam a mesma RAM e executam na mesma máquina, usando múltiplos núcleos, cada core pode executar uma ou mais threads simultaneamente. 
+No paralelismo com memória distribuída, os processos executam em máquinas diferentes. A comunicação é feita por troca de mensagens, usando protocolos como TCP/IP. Com o MPI cada processo possui um identificador único (rank), que é usado para organizar a comunicação e a distribuição das tarefas.</p>
+<p>O modelo de memória compartilhada favorece a escalabilidade vertical (mais recursos na mesma máquina), enquanto o modelo distribuído permite escalabilidade horizontal (uso de várias máquinas).<a href="https://insper.github.io/supercomp/teoria/slides/Aula09.pdf">fonte</a></p>
+</details>
+<h2 id="questoes-praticas">Questões práticas<a class="headerlink" href="#questoes-praticas" title="Permanent link">&para;</a></h2>
+<p>Para cada questão, você deve organizar sua resposta da seguinte forma:
+* Questões de implementação devem ser entregues em arquivos no formato: Qx.cpp (onde x é o número da questão)</p>
+<ul>
+<li>
+<p>Questões que exigem execução em cluster devem incluir também o respectivo arquivo de submissão: run_Qx.slurm</p>
+</li>
+<li>
+<p>Questões teóricas devem ser respondidas em arquivos de texto: Qx.txt</p>
+</li>
+</ul>
+<h2 id="exercicio-1-otimizacoes-em-cpu-2-pontos"><strong>Exercício 1 - Otimizações em CPU - (2 pontos)</strong><a class="headerlink" href="#exercicio-1-otimizacoes-em-cpu-2-pontos" title="Permanent link">&para;</a></h2>
+<p>Abaixo temos um código base implementado de forma sequencial em CPU, da forma menos eficiente que eu consegui imaginar, ele realiza o cálculo da soma, média, quantidade de picos e quantidade de vales de um sensor fictício. Quando executado na fila <strong>gpu</strong> do cluster Franky, o programa produz os seguintes resultados:</p>
+<div class="highlight"><pre><span></span><code>Processando<span class="w"> </span>vetor<span class="w"> </span>de<span class="w"> </span><span class="m">123456789</span><span class="w"> </span>elementos...
+Soma<span class="w"> </span>final:<span class="w"> </span><span class="m">7</span>.60016e+09
+Média<span class="w"> </span>final:<span class="w"> </span><span class="m">61</span>.5613
+Quantidade<span class="w"> </span>de<span class="w"> </span>picos:<span class="w"> </span><span class="m">123456</span>
+Quantidade<span class="w"> </span>de<span class="w"> </span>vales:<span class="w"> </span><span class="m">123456</span>
+Tempo<span class="w"> </span>CPU<span class="w"> </span>sequencial:<span class="w"> </span><span class="m">991</span>.454<span class="w"> </span>ms
+</code></pre></div>
+<h3 id="implemente-as-seguintes-otimizcoes">Implemente as seguintes otimizções:<a class="headerlink" href="#implemente-as-seguintes-otimizcoes" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Melhore o acesso aos dados, usando passagem por referência ou por ponteiro <strong>+0.2 pontos</strong></li>
+<li>Aplicar Tilling para melhorar a localidade espacial e temporal e aproveitar melhor a memória cache <strong>+0.5 pontos</strong></li>
+<li>Aplicar paralelismo em CPU usando OpenMP <strong>+0.8 pontos</strong></li>
+<li>Criar um arquivo 'run.slurm' que solicita adequadamete os recursos de hardware para o Cluster Franky executar a versão com paralelismo em <strong>CPU</strong>. <strong>+0.5 pontos</strong></li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cmath&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;chrono&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iomanip&gt;</span>
+
+<span class="c1">// Função ineficiente: inicializa vetor por valor</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="w"> </span><span class="n">inicializar_vetor</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="w"> </span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">N</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">1000</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">0.123f</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">v</span><span class="p">;</span><span class="w"> </span><span class="c1">// retorna uma cópia</span>
+<span class="p">}</span>
+
+<span class="c1">// Função muito ruim: processa os dados por valor</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="w"> </span><span class="n">processar_dados</span><span class="p">(</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="w"> </span><span class="n">v</span><span class="p">,</span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">N</span><span class="p">,</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="o">&amp;</span><span class="n">soma</span><span class="p">,</span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="o">&amp;</span><span class="n">num_picos</span><span class="p">,</span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="o">&amp;</span><span class="n">num_vales</span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="w"> </span><span class="n">out</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">soma</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">num_picos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">num_vales</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">        </span><span class="kt">float</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">];</span>
+<span class="w">        </span><span class="kt">float</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="w">        </span><span class="kt">float</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">];</span>
+
+<span class="w">        </span><span class="c1">// Média local</span>
+<span class="w">        </span><span class="kt">float</span><span class="w"> </span><span class="n">media_local</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">3.0f</span><span class="p">;</span>
+
+<span class="w">        </span><span class="c1">// Pico</span>
+<span class="w">        </span><span class="kt">bool</span><span class="w"> </span><span class="n">pico</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">b</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">c</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// Vale</span>
+<span class="w">        </span><span class="kt">bool</span><span class="w"> </span><span class="n">vale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">b</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">c</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">pico</span><span class="p">)</span><span class="w"> </span><span class="n">num_picos</span><span class="o">++</span><span class="p">;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">vale</span><span class="p">)</span><span class="w"> </span><span class="n">num_vales</span><span class="o">++</span><span class="p">;</span>
+
+<span class="w">        </span><span class="n">out</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">media_local</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">pico</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">soma</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">out</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">out</span><span class="p">;</span><span class="w"> </span><span class="c1">// retorna outra cópia gigante &lt;/3</span>
+<span class="p">}</span>
+
+<span class="c1">// Função horrivel: calcula média por valor</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">calcular_media</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="w"> </span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">soma</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">N</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">soma</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">N</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+<span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">123&#39;456&#39;789</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Vetor inicial</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="w"> </span><span class="n">v</span><span class="p">(</span><span class="n">N</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Processando vetor de &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; elementos...</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Inicialização</span>
+<span class="w">    </span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">inicializar_vetor</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">t0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">soma</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">num_picos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">num_vales</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Processamento sequencial do vetor</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">processar_dados</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">soma</span><span class="p">,</span><span class="w"> </span><span class="n">num_picos</span><span class="p">,</span><span class="w"> </span><span class="n">num_vales</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Mais uma cópia desnecessária de dados para calcular média :&#39;(</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">media_final</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">calcular_media</span><span class="p">(</span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="n">soma</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">tempo_ms</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">duration</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">milli</span><span class="o">&gt;</span><span class="p">(</span><span class="n">t1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">t0</span><span class="p">).</span><span class="n">count</span><span class="p">();</span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Soma final: &quot;</span><span class="w">           </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">soma</span><span class="w">        </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Média final: &quot;</span><span class="w">          </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">media_final</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Quantidade de picos: &quot;</span><span class="w">  </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">num_picos</span><span class="w">   </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Quantidade de vales: &quot;</span><span class="w">  </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">num_vales</span><span class="w">   </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Tempo CPU sequencial: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">tempo_ms</span><span class="w">    </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; ms</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<details class="note">
+<summary>Gabarito</summary>
+<p><div class="highlight"><pre><span></span><code><span class="c1">// Autor: Emil</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cmath&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;chrono&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;omp.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iomanip&gt;</span>
+
+<span class="c1">// Função ineficiente: inicializa vetor por valor</span>
+<span class="c1">// O que foi feito: </span>
+<span class="c1">// foi trocado a cópia do objeto vetor por uma referência</span>
+<span class="c1">// N mantive como valor pois size_t é um dado muito pequeno, e não estamos</span>
+<span class="c1">// alterando ele</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">inicializar_vetor</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">N</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//Como não preciso recuperar dados, é uma inicialização simples, não é</span>
+<span class="w">    </span><span class="c1">//necessário fazer tilling</span>
+<span class="w">    </span><span class="c1">//Utilizado simd para inicialização mais rápida do vetor</span>
+<span class="w">    </span><span class="cp">#pragma omp simd</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">1000</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">0.123f</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Função muito ruim: processa os dados por valor</span>
+<span class="c1">// O que foi feito: </span>
+<span class="c1">// Modificado para que a função para que não seja necessário fazer cópias dos</span>
+<span class="c1">// vetores, no lugar de retornar utilizamos uma referência de saida também, que</span>
+<span class="c1">// estará pré alocada.</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">processar_dados</span><span class="p">(</span>
+<span class="w">                    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">v</span><span class="p">,</span>
+<span class="w">                    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">N</span><span class="p">,</span>
+<span class="w">                    </span><span class="kt">double</span><span class="w"> </span><span class="o">&amp;</span><span class="n">soma</span><span class="p">,</span>
+<span class="w">                    </span><span class="kt">size_t</span><span class="w"> </span><span class="o">&amp;</span><span class="n">num_picos</span><span class="p">,</span>
+<span class="w">                    </span><span class="kt">size_t</span><span class="w"> </span><span class="o">&amp;</span><span class="n">num_vales</span><span class="p">,</span>
+<span class="w">                    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">out</span>
+<span class="w">                    </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="n">soma</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">num_picos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">num_vales</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">//O que  foi feito:</span>
+<span class="w">    </span><span class="c1">//Tilling aplicado no próximo loop</span>
+
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">tile_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2048</span><span class="p">;</span>
+
+
+<span class="w">    </span><span class="c1">//Paralelização do for externo do tilling</span>
+<span class="w">    </span><span class="cp">#pragma omp parallel for reduction(+:soma, num_picos, num_vales)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">+=</span><span class="n">tile_size</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">        </span><span class="c1">//Simd utilizado para pois já fizemos ele caber no Cahe L1</span>
+<span class="w">        </span><span class="cp">#pragma omp simd reduction(+:soma, num_picos, num_vales)</span>
+<span class="w">        </span><span class="k">for</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">min</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="n">tile_size</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="mi">-1</span><span class="p">);</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
+
+<span class="w">            </span><span class="kt">float</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">v</span><span class="p">[</span><span class="n">j</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">];</span>
+<span class="w">            </span><span class="kt">float</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">v</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+<span class="w">            </span><span class="kt">float</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">v</span><span class="p">[</span><span class="n">j</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">];</span>
+
+<span class="w">            </span><span class="c1">// Média local</span>
+<span class="w">            </span><span class="kt">float</span><span class="w"> </span><span class="n">media_local</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">3.0f</span><span class="p">;</span>
+
+<span class="w">            </span><span class="c1">// Pico</span>
+<span class="w">            </span><span class="kt">bool</span><span class="w"> </span><span class="n">pico</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">b</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">c</span><span class="p">);</span>
+
+<span class="w">            </span><span class="c1">// Vale</span>
+<span class="w">            </span><span class="kt">bool</span><span class="w"> </span><span class="n">vale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">b</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">c</span><span class="p">);</span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">pico</span><span class="p">)</span><span class="w"> </span><span class="n">num_picos</span><span class="o">++</span><span class="p">;</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">vale</span><span class="p">)</span><span class="w"> </span><span class="n">num_vales</span><span class="o">++</span><span class="p">;</span>
+
+<span class="w">            </span><span class="n">out</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">media_local</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">pico</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">);</span>
+
+<span class="w">            </span><span class="n">soma</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">out</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Função horrivel: calcula média por valor</span>
+<span class="c1">// Removi o parametro não utilizado e inseri a diretiva inline que indica para</span>
+<span class="c1">// o compilador que pode substituir o chamada da função por seu corpo.</span>
+<span class="kr">inline</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">calcular_media</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">soma</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">N</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">soma</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">N</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">123&#39;456&#39;789</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Vetor inicial</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="w"> </span><span class="n">v</span><span class="p">(</span><span class="n">N</span><span class="p">);</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="w"> </span><span class="n">out</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Processando vetor de &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; elementos...</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Inicialização</span>
+<span class="w">    </span><span class="n">inicializar_vetor</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">t0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">soma</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">num_picos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">num_vales</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Processamento sequencial do vetor</span>
+<span class="w">    </span><span class="n">processar_dados</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">soma</span><span class="p">,</span><span class="w"> </span><span class="n">num_picos</span><span class="p">,</span><span class="w"> </span><span class="n">num_vales</span><span class="p">,</span><span class="w"> </span><span class="n">out</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Mais uma cópia desnecessária de dados para calcular média :&#39;(</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">media_final</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">calcular_media</span><span class="p">(</span><span class="n">soma</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">tempo_ms</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">duration</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">milli</span><span class="o">&gt;</span><span class="p">(</span><span class="n">t1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">t0</span><span class="p">).</span><span class="n">count</span><span class="p">();</span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Soma final: &quot;</span><span class="w">           </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">soma</span><span class="w">        </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Média final: &quot;</span><span class="w">          </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">media_final</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Quantidade de picos: &quot;</span><span class="w">  </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">num_picos</span><span class="w">   </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Quantidade de vales: &quot;</span><span class="w">  </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">num_vales</span><span class="w">   </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Tempo paralelo: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">tempo_ms</span><span class="w">    </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; ms</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/**</span>
+<span class="cm">* Log:</span>
+<span class="cm">* 1. Melhorando o acesso dos dados passando por referência</span>
+<span class="cm">* 2. Aplicar Tilling, selecionei 2048 com tile_size</span>
+<span class="cm">* 3. Aplicar o OpemMP para paralelização de loops</span>
+<span class="cm">**/</span>
+</code></pre></div>
+Para gerar o binário corretamente
+<div class="highlight"><pre><span></span><code><span class="n">g</span><span class="o">++</span><span class="w"> </span><span class="o">-</span><span class="n">fopenmp</span><span class="w"> </span><span class="o">-</span><span class="n">O3</span><span class="w"> </span><span class="n">Q1</span><span class="p">.</span><span class="n">cpp</span><span class="w"> </span><span class="o">-</span><span class="n">o</span><span class="w"> </span><span class="n">Q1</span>
+<span class="err">````</span>
+<span class="n">Arquivo</span><span class="w"> </span><span class="n">SLURM</span>
+
+<span class="err">```</span><span class="n">bash</span>
+<span class="cp">#!/bin/bash</span>
+<span class="cp">#SBATCH --job-name=Q1           # nome do job</span>
+<span class="cp">#SBATCH --output=Q1.out         # arquivo de saída</span>
+<span class="cp">#SBATCH --cpus-per-task=8               # 8 threads para usar</span>
+<span class="cp">#SBATCH --time=00:05:00                 # tempo máximo de execução</span>
+<span class="cp">#SBATCH --mem=2G                        # Memória </span>
+<span class="cp">#SBATCH --partition=normal              # fila</span>
+
+<span class="cp"># garante que o OpenMP use exatamente os recursos alocados pelo SLURM</span>
+<span class="k">export</span><span class="w"> </span><span class="n">OMP_NUM_THREADS</span><span class="o">=</span><span class="n">$</span><span class="p">{</span><span class="n">SLURM_CPUS_PER_TASK</span><span class="p">}</span>
+
+<span class="cp"># executa o binário</span>
+<span class="p">.</span><span class="o">/</span><span class="n">Q1</span>
+</code></pre></div></p>
+</details>
+<h2 id="exercicio-2-calculo-de-pi-com-monte-carlo"><strong>Exercício 2 — Cálculo de PI com Monte Carlo</strong><a class="headerlink" href="#exercicio-2-calculo-de-pi-com-monte-carlo" title="Permanent link">&para;</a></h2>
+<p>O código abaixo implementa o cálculo de PI usando o método de Monte Carlo de forma <strong>sequencial</strong>. Seu objetivo é otimizar este programa usando OpenMP.</p>
+<h3 id="parte-1-paralelismo-com-openmp-2-pontos"><strong>Parte 1 - Paralelismo com OpenMP (2 pontos)</strong><a class="headerlink" href="#parte-1-paralelismo-com-openmp-2-pontos" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>0 pontos</strong> → O aluno <strong>não paralelizou</strong> o código, ou a versão apresentada <strong>não compila/não executa</strong>.</p>
+</li>
+<li>
+<p><strong>0.5 ponto</strong> → O aluno tentou paralelizar, mas não tratou corretamente a variável compartilhada (<code>dentro</code>) causando <strong>condição de corrida</strong>. O programa roda, mas os resultados são inconsistentes.</p>
+</li>
+<li>
+<p><strong>1 ponto</strong> → O aluno paralelizou corretamente, garantindo que o código execute sem conflitos.</p>
+</li>
+<li>
+<p><strong>2 pontos</strong> -&gt; O aluno paralelizou corretamente, garantindo que o código execute sem conflitos, ajustou o número de pontos e configurou corretamente os recursos no SLURM, de modo que o programa gera uma estimativa de PI com precisão 3,1415 em menos de 10 segundos.</p>
+</li>
+</ul>
+<details class="note">
+<summary>Gabarito</summary>
+<p><div class="highlight"><pre><span></span><code><span class="c1">// Autor: Emil</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;random&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;chrono&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iomanip&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;omp.h&gt;</span>
+
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">**</span><span class="w"> </span><span class="n">argv</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">argc</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">atoll</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">850000000</span><span class="p">);</span><span class="w"> </span><span class="c1">// quantidade de pontos</span>
+
+<span class="w">    </span><span class="n">mt19937</span><span class="w"> </span><span class="n">rng</span><span class="p">(</span><span class="mi">42</span><span class="p">);</span><span class="w"> </span><span class="c1">// gerador de números aleatórios</span>
+<span class="w">    </span><span class="n">uniform_real_distribution</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dist</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">dentro</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">time_point</span><span class="w"> </span><span class="n">t0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+
+
+<span class="w">    </span><span class="cp">#pragma omp parallel for reduction(+:dentro)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dist</span><span class="p">(</span><span class="n">rng</span><span class="p">);</span>
+<span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dist</span><span class="p">(</span><span class="n">rng</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mf">1.0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">dentro</span><span class="o">++</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">time_point</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">pi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">4.0</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">dentro</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">N</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">tempo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">chrono</span><span class="o">::</span><span class="n">duration</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">t1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">t0</span><span class="p">).</span><span class="n">count</span><span class="p">();</span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">fixed</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">setprecision</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;N = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;  pi = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">pi</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;  tempo = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">tempo</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;s&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/** </span>
+<span class="cm">* Mudanças:</span>
+<span class="cm">* 1. Adicionado o Pragma parallel com reduction no loop que calcula o dentro</span>
+<span class="cm">* 2. Subi o N para aumentar a precisão no cálculo do PI</span>
+<span class="cm">**/</span>
+</code></pre></div>
+Para compilar corretamente:</p>
+<div class="highlight"><pre><span></span><code><span class="n">g</span><span class="o">++</span><span class="w"> </span><span class="o">-</span><span class="n">fopenmp</span><span class="w"> </span><span class="o">-</span><span class="n">O3</span><span class="w"> </span><span class="n">Q2_p1</span><span class="p">.</span><span class="n">cpp</span><span class="w"> </span><span class="o">-</span><span class="n">o</span><span class="w"> </span><span class="n">Q2_p1</span><span class="w"> </span>
+</code></pre></div>
+<p>Arquivo SLURM
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="c1">#SBATCH --job-name=Q2           # nome do job</span>
+<span class="c1">#SBATCH --output=saida.out         # arquivo de saída</span>
+<span class="c1">#SBATCH --cpus-per-task=4               # 4 threads para usar</span>
+<span class="c1">#SBATCH --time=00:05:00                 # tempo máximo de execução</span>
+<span class="c1">#SBATCH --mem=2G                        # Memória</span>
+<span class="c1">#SBATCH --partition=normal              # fila</span>
+
+<span class="c1"># garante que o OpenMP use exatamente os recursos alocados pelo SLURM</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">OMP_NUM_THREADS</span><span class="o">=</span><span class="si">${</span><span class="nv">SLURM_CPUS_PER_TASK</span><span class="si">}</span>
+
+<span class="c1"># executa o binário</span>
+./Q2_p1
+</code></pre></div></p>
+<p>Resultado:</p>
+<div class="highlight"><pre><span></span><code>N = 850000000  pi = 3.1415  tempo = 6.0315s
+</code></pre></div>
+</details>
+<hr />
+<h3 id="parte-2-distribuicao-com-mpi-2-pontos"><strong>Parte 2 - Distribuição com MPI (2 pontos)</strong><a class="headerlink" href="#parte-2-distribuicao-com-mpi-2-pontos" title="Permanent link">&para;</a></h3>
+<p>Você deve:
+    - Distribuir o número total de pontos N entre os processos MPI
+    - Cada processo deve calcular sua contagem local de pontos 
+    - Utilizar sementes diferentes para o gerador de números aleatórios em cada processo
+    - Centralizar as respostas no Rank0 para exibir o valor de PI calculado.</p>
+<ul>
+<li>
+<p><strong>0 pontos</strong> → Não implementou MPI ou o código não compila/não executa</p>
+</li>
+<li>
+<p><strong>0.5 ponto</strong> → Implementação incompleta, apresentando problemas como:
+    Todos os processos utilizam a mesma seed;
+    Problema de distribuição de dados (todos os nós fazem o mesmo trabalho)</p>
+</li>
+<li>
+<p><strong>2 pontos</strong> → Implementação correta, incluindo:
+    Distribuição adequada de N entre os processos;
+    Uso de seeds independentes por processo;
+    Cálculo correto de PI exibido pelo Rank 0 usando o resultado das contas realizadas nos nós de computação</p>
+</li>
+</ul>
+<details class="note">
+<summary>Gabarito</summary>
+<p><div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;random&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;chrono&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iomanip&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;omp.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;mpi.h&gt;</span>
+
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">**</span><span class="w"> </span><span class="n">argv</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Inicializa o ambiente MPI</span>
+<span class="w">    </span><span class="n">MPI_Init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">argv</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// rank → identifica o processo atual</span>
+<span class="w">    </span><span class="c1">// size → quantidade total de processos</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">rank</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">;</span>
+<span class="w">    </span><span class="n">MPI_Comm_rank</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rank</span><span class="p">);</span>
+<span class="w">    </span><span class="n">MPI_Comm_size</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">size</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Quantidade de pontos</span>
+<span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">850000000</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Divide o trabalho total (N) entre os processos</span>
+<span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">chunk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">size</span><span class="p">;</span><span class="w">   </span><span class="c1">// parte igual para todos</span>
+<span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">resto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">size</span><span class="p">;</span><span class="w">   </span><span class="c1">// sobra</span>
+
+<span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">localN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">chunk</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Rank 0 fica com o resto </span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rank</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">localN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">localN</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">resto</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Os outros Ranks processam o localN que receberam da divisão de trabalho</span>
+<span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">dentro</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">t0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">// parallel → cria as threads</span>
+<span class="w">    </span><span class="c1">// reduction → cada thread usa sua própria cópia de &quot;dentro&quot; e soma tudo no final</span>
+<span class="w">    </span><span class="cp">#pragma omp parallel reduction(+:dentro)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">thread_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">omp_get_thread_num</span><span class="p">();</span>
+
+<span class="w">        </span><span class="kt">unsigned</span><span class="w"> </span><span class="n">seed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">().</span><span class="n">time_since_epoch</span><span class="p">().</span><span class="n">count</span><span class="p">();</span>
+
+<span class="w">      </span><span class="c1">// cada thread tem uma seed diferente para explorar diferentes intervalos do espaço de busca</span>
+<span class="w">        </span><span class="n">seed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">seed</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">rank</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1000</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">thread_id</span><span class="p">;</span>
+<span class="w">        </span><span class="n">mt19937</span><span class="w"> </span><span class="n">rng</span><span class="p">(</span><span class="n">seed</span><span class="p">);</span>
+<span class="w">        </span><span class="n">uniform_real_distribution</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dist</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">);</span>
+
+<span class="w">      </span><span class="c1">// omp for → divide as iterações do loop entre as threads</span>
+<span class="w">        </span><span class="cp">#pragma omp for</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">localN</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">            </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dist</span><span class="p">(</span><span class="n">rng</span><span class="p">);</span>
+<span class="w">            </span><span class="kt">double</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dist</span><span class="p">(</span><span class="n">rng</span><span class="p">);</span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mf">1.0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">dentro</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dentro</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+
+<span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">total_dentro</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Redução MPI:</span>
+<span class="w">    </span><span class="c1">// soma os valores de &quot;dentro&quot; de todos os processos</span>
+<span class="w">    </span><span class="c1">// o resultado final vai para o processo de rank 0</span>
+<span class="w">    </span><span class="n">MPI_Reduce</span><span class="p">(</span><span class="o">&amp;</span><span class="n">dentro</span><span class="p">,</span>
+<span class="w">            </span><span class="o">&amp;</span><span class="n">total_dentro</span><span class="p">,</span>
+<span class="w">            </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">            </span><span class="n">MPI_LONG_LONG</span><span class="p">,</span>
+<span class="w">            </span><span class="n">MPI_SUM</span><span class="p">,</span>
+<span class="w">            </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">            </span><span class="n">MPI_COMM_WORLD</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// Apenas o processo 0 imprime o resultado final</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rank</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">pi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">4.0</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">total_dentro</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">N</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">tempo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">chrono</span><span class="o">::</span><span class="n">duration</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">t1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">t0</span><span class="p">).</span><span class="n">count</span><span class="p">();</span>
+
+<span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">fixed</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">setprecision</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
+<span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;N = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;PI = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">pi</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Tempo = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">tempo</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; s&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">MPI_Finalize</span><span class="p">();</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+Para compilar corretamente:
+<div class="highlight"><pre><span></span><code>mpic++<span class="w"> </span>-fopenmp<span class="w"> </span>-O3<span class="w"> </span>Q2_p2.cpp<span class="w"> </span>-o<span class="w"> </span>Q2_p2
+</code></pre></div>
+Arquivo SLURM
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="c1">#SBATCH --job-name=Q2_p2           # nome do job</span>
+<span class="c1">#SBATCH --output=Q2_p2.out         # arquivo de saída</span>
+<span class="c1">#SBATCH --partition=normal</span>
+<span class="c1">#SBATCH --time=00:05:00                 # tempo máximo de execução</span>
+<span class="c1">#SBATCH --mem=2G                        # Memória</span>
+<span class="c1">#SBATCH --nodes=4                       # Nós de computação</span>
+<span class="c1">#SBATCH --ntasks=4                      # Processos</span>
+<span class="c1">#SBATCH --cpus-per-task=4               #  threads para usar</span>
+
+<span class="c1"># garante que o OpenMP use exatamente os recursos alocados pelo SLURM</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">OMP_NUM_THREADS</span><span class="o">=</span><span class="si">${</span><span class="nv">SLURM_CPUS_PER_TASK</span><span class="si">}</span>
+
+<span class="c1"># executa o binário</span>
+mpirun<span class="w"> </span>-np<span class="w"> </span><span class="nv">$SLURM_NTASKS</span><span class="w"> </span>./Q2_p2
+</code></pre></div>
+Resultado:
+<div class="highlight"><pre><span></span><code><span class="nv">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">850000000</span>
+<span class="nv">PI</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span>.1415
+<span class="nv">Tempo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span>.897940<span class="w"> </span>s
+</code></pre></div></p>
+</details>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;random&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;chrono&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iomanip&gt;</span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">**</span><span class="w"> </span><span class="n">argv</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">argc</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">atoll</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">100000</span><span class="p">);</span><span class="w"> </span><span class="c1">// quantidade de pontos</span>
+
+<span class="w">    </span><span class="n">mt19937</span><span class="w"> </span><span class="n">rng</span><span class="p">(</span><span class="mi">42</span><span class="p">);</span><span class="w"> </span><span class="c1">// gerador de números aleatórios</span>
+<span class="w">    </span><span class="n">uniform_real_distribution</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dist</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">dentro</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">time_point</span><span class="w"> </span><span class="n">t0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// Código sequencial</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dist</span><span class="p">(</span><span class="n">rng</span><span class="p">);</span>
+<span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dist</span><span class="p">(</span><span class="n">rng</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mf">1.0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">dentro</span><span class="o">++</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">time_point</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">pi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">4.0</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">dentro</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">N</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">tempo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">chrono</span><span class="o">::</span><span class="n">duration</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">t1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">t0</span><span class="p">).</span><span class="n">count</span><span class="p">();</span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">fixed</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">setprecision</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;N = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;  pi = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">pi</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;  tempo = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">tempo</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;s&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="exercicio-3-otimizacao-de-rotas-para-entregas-com-bicicleta-2-pontos"><strong>Exercício 3 — Otimização de Rotas para Entregas com Bicicleta (2 pontos)</strong><a class="headerlink" href="#exercicio-3-otimizacao-de-rotas-para-entregas-com-bicicleta-2-pontos" title="Permanent link">&para;</a></h2>
+<p>Voltamos ao problema das entregas, mas agora estamos auxiliando o Rodolfo, um jovem audacioso que realiza entregas de bicicleta.</p>
+<p>Devemos considerar que Rodolfo possui limitações físicas e operacionais:
+    - Ele consegue carregar no máximo 2 pacotes por vez
+    - Precisa retornar ao ponto de coleta sempre que esvaziar a carga
+    - Sua meta diária é realizar 60 entregas
+    - Os pontos de entrega estão <a href="pontos.txt">disponívies aqui</a></p>
+<p>O objetivo é:</p>
+<p>Determinar uma rota de entregas que minimize a distância total percorrida (custo), respeitando a limitação de carga.</p>
+<p>Rúbrica:</p>
+<ul>
+<li><strong>0</strong> - Não compila, não é possível testar a implementação.   </li>
+<li><strong>+0.2</strong> - Implementou a heuristica hill climbing aleatória, mas sem otimizações.</li>
+<li><strong>+0.2</strong> - Otimizou a heurísitca melhorando seu tempo de execução, mas ainda tem uma implementação sequencial.</li>
+<li><strong>+0.6</strong> - Paralelizou o algorítimo e conseguiu melhorar o tempo em relação a versão sequencial.</li>
+<li><strong>+0.4</strong> - Montou o arquivo SLURM de forma correta e exibiu uma tabela comprovando que a versão paralela é mais eficiente que a versão sequencial</li>
+<li><strong>+0.6</strong> - Conseguiu explicar os resultados obtidos nos seus testes com as otimizações aplicadas de forma clara e objetiva.</li>
+</ul>
+<details class="note">
+<summary>Gabarito</summary>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cmath&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;random&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;algorithm&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;numeric&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;chrono&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;fstream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;omp.h&gt;</span>
+
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+
+<span class="k">struct</span><span class="w"> </span><span class="nc">Ponto</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="c1">// Lê os pontos do arquivo</span>
+<span class="n">vector</span><span class="o">&lt;</span><span class="n">Ponto</span><span class="o">&gt;</span><span class="w"> </span><span class="n">lerPontos</span><span class="p">(</span><span class="n">string</span><span class="w"> </span><span class="n">nome</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">ifstream</span><span class="w"> </span><span class="nf">arq</span><span class="p">(</span><span class="n">nome</span><span class="p">);</span>
+<span class="w">    </span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ponto</span><span class="o">&gt;</span><span class="w"> </span><span class="n">pontos</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">arq</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">pontos</span><span class="p">.</span><span class="n">push_back</span><span class="p">({</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">});</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">pontos</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Distância entre dois pontos</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">distancia</span><span class="p">(</span><span class="n">Ponto</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">Ponto</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">dx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">dy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">y</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">y</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">sqrt</span><span class="p">(</span><span class="n">dx</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">dx</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">dy</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">dy</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Calcula o custo da rota considerando capacidade = 2</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">calcularCusto</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">rota</span><span class="p">,</span>
+<span class="w">                    </span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ponto</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">entregas</span><span class="p">,</span>
+<span class="w">                    </span><span class="n">Ponto</span><span class="w"> </span><span class="n">casa</span><span class="p">,</span>
+<span class="w">                    </span><span class="n">Ponto</span><span class="w"> </span><span class="n">coleta</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">custo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">custo</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">distancia</span><span class="p">(</span><span class="n">casa</span><span class="p">,</span><span class="w"> </span><span class="n">coleta</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">carga</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">    </span><span class="n">Ponto</span><span class="w"> </span><span class="n">atual</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">coleta</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">idx</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">rota</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">        </span><span class="c1">// se acabou a carga → volta para coleta</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">carga</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">custo</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">distancia</span><span class="p">(</span><span class="n">atual</span><span class="p">,</span><span class="w"> </span><span class="n">coleta</span><span class="p">);</span>
+<span class="w">            </span><span class="n">atual</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">coleta</span><span class="p">;</span>
+<span class="w">            </span><span class="n">carga</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="n">custo</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">distancia</span><span class="p">(</span><span class="n">atual</span><span class="p">,</span><span class="w"> </span><span class="n">entregas</span><span class="p">[</span><span class="n">idx</span><span class="p">]);</span>
+<span class="w">        </span><span class="n">atual</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">entregas</span><span class="p">[</span><span class="n">idx</span><span class="p">];</span>
+<span class="w">        </span><span class="n">carga</span><span class="o">--</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">custo</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">distancia</span><span class="p">(</span><span class="n">atual</span><span class="p">,</span><span class="w"> </span><span class="n">casa</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">custo</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Gera uma rota inicial </span>
+<span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">rotaAleatoria</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">mt19937</span><span class="o">&amp;</span><span class="w"> </span><span class="n">rng</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">rota</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+<span class="w">    </span><span class="n">iota</span><span class="p">(</span><span class="n">rota</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">rota</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">    </span><span class="n">shuffle</span><span class="p">(</span><span class="n">rota</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">rota</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="w"> </span><span class="n">rng</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">rota</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// ===============================</span>
+<span class="c1">// HILL CLIMBING ALEATÓRIO</span>
+<span class="c1">// ===============================</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">hillClimbing</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ponto</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">entregas</span><span class="p">,</span>
+<span class="w">                    </span><span class="n">Ponto</span><span class="w"> </span><span class="n">casa</span><span class="p">,</span>
+<span class="w">                    </span><span class="n">Ponto</span><span class="w"> </span><span class="n">coleta</span><span class="p">,</span>
+<span class="w">                    </span><span class="n">mt19937</span><span class="o">&amp;</span><span class="w"> </span><span class="n">rng</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">entregas</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+
+<span class="w">    </span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">atual</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rotaAleatoria</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">rng</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">melhor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">calcularCusto</span><span class="p">(</span><span class="n">atual</span><span class="p">,</span><span class="w"> </span><span class="n">entregas</span><span class="p">,</span><span class="w"> </span><span class="n">casa</span><span class="p">,</span><span class="w"> </span><span class="n">coleta</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">uniform_int_distribution</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dist</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">melhorou</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">melhorou</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">melhorou</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+
+<span class="w">        </span><span class="c1">// tenta vizinhos aleatórios (troca de posições)</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">2000</span><span class="p">;</span><span class="w"> </span><span class="n">t</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dist</span><span class="p">(</span><span class="n">rng</span><span class="p">);</span>
+<span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dist</span><span class="p">(</span><span class="n">rng</span><span class="p">);</span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">j</span><span class="p">)</span><span class="w"> </span><span class="k">continue</span><span class="p">;</span>
+
+<span class="w">            </span><span class="n">swap</span><span class="p">(</span><span class="n">atual</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="n">atual</span><span class="p">[</span><span class="n">j</span><span class="p">]);</span>
+
+<span class="w">            </span><span class="kt">double</span><span class="w"> </span><span class="n">custo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">calcularCusto</span><span class="p">(</span><span class="n">atual</span><span class="p">,</span><span class="w"> </span><span class="n">entregas</span><span class="p">,</span><span class="w"> </span><span class="n">casa</span><span class="p">,</span><span class="w"> </span><span class="n">coleta</span><span class="p">);</span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">custo</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">melhor</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">melhor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">custo</span><span class="p">;</span>
+<span class="w">                </span><span class="n">melhorou</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">swap</span><span class="p">(</span><span class="n">atual</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="n">atual</span><span class="p">[</span><span class="n">j</span><span class="p">]);</span><span class="w"> </span><span class="c1">// desfaz</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">melhor</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// ===============================</span>
+<span class="c1">// SEQUENCIAL</span>
+<span class="c1">// ===============================</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">resolverSequencial</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ponto</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">entregas</span><span class="p">,</span>
+<span class="w">                        </span><span class="kt">int</span><span class="w"> </span><span class="n">restarts</span><span class="p">,</span>
+<span class="w">                        </span><span class="kt">unsigned</span><span class="w"> </span><span class="n">seed</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="n">mt19937</span><span class="w"> </span><span class="nf">rng</span><span class="p">(</span><span class="n">seed</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">melhor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1e18</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">restarts</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">        </span><span class="c1">// cada iteração executa um hill climbing completo</span>
+<span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">custo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hillClimbing</span><span class="p">(</span><span class="n">entregas</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">},</span><span class="w"> </span><span class="n">rng</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">custo</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">melhor</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">melhor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">custo</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">melhor</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// ===============================</span>
+<span class="c1">// PARALELO </span>
+<span class="c1">// ===============================</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">resolverParalelo</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ponto</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">entregas</span><span class="p">,</span>
+<span class="w">                    </span><span class="kt">int</span><span class="w"> </span><span class="n">restarts</span><span class="p">,</span>
+<span class="w">                    </span><span class="kt">unsigned</span><span class="w"> </span><span class="n">seed</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="kt">double</span><span class="w"> </span><span class="n">melhor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1e18</span><span class="p">;</span>
+
+<span class="c1">// paraleliza o loop de restarts</span>
+<span class="cp">#pragma omp parallel for</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">restarts</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="c1">// cada iteração explora um intervalo do espaço de busca diferente</span>
+<span class="w">    </span><span class="n">mt19937</span><span class="w"> </span><span class="nf">rng</span><span class="p">(</span><span class="n">seed</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">custo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hillClimbing</span><span class="p">(</span><span class="n">entregas</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">},</span><span class="w"> </span><span class="n">rng</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Operação critica para não bagunçar os resultados de custo de cada thread</span>
+<span class="w">    </span><span class="cp">#pragma omp critical</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">custo</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">melhor</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">melhor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">custo</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">return</span><span class="w"> </span><span class="n">melhor</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">// ===============================</span>
+<span class="c1">// MAIN</span>
+<span class="c1">// ===============================</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ponto</span><span class="o">&gt;</span><span class="w"> </span><span class="n">entregas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lerPontos</span><span class="p">(</span><span class="s">&quot;pontos.txt&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Pontos: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">entregas</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">restarts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">200</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// -------- SEQUENCIAL --------</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">t0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">custoSeq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">resolverSequencial</span><span class="p">(</span><span class="n">entregas</span><span class="p">,</span><span class="w"> </span><span class="n">restarts</span><span class="p">,</span><span class="w"> </span><span class="mi">42</span><span class="p">);</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// -------- PARALELO --------</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">t2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">custoPar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">resolverParalelo</span><span class="p">(</span><span class="n">entregas</span><span class="p">,</span><span class="w"> </span><span class="n">restarts</span><span class="p">,</span><span class="w"> </span><span class="mi">42</span><span class="p">);</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">t3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">tempoSeq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">chrono</span><span class="o">::</span><span class="n">duration</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">t1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">t0</span><span class="p">).</span><span class="n">count</span><span class="p">();</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">tempoPar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">chrono</span><span class="o">::</span><span class="n">duration</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">t3</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">t2</span><span class="p">).</span><span class="n">count</span><span class="p">();</span>
+
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">Sequencial:</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Custo: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">custoSeq</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Tempo: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">tempoSeq</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">Paralelo:</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Custo: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">custoPar</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Tempo: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">tempoPar</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Para compilar corretamente</p>
+<div class="highlight"><pre><span></span><code>g++<span class="w"> </span>-fopenmp<span class="w"> </span>-O3<span class="w"> </span>Q3.cpp<span class="w"> </span>-o<span class="w"> </span>Q3
+</code></pre></div>
+<p>Arquivo SLURM</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="c1">#SBATCH --job-name=Q3</span>
+<span class="c1">#SBATCH --output=S_Q3.out</span>
+<span class="c1">#SBATCH --cpus-per-task=16</span>
+<span class="c1">#SBATCH --time=00:05:00</span>
+<span class="c1">#SBATCH --mem=2G</span>
+<span class="c1">#SBATCH --partition=normal</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Teste de escalabilidade&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;========================&quot;</span>
+
+<span class="c1"># lista de threads que queremos testar</span>
+<span class="k">for</span><span class="w"> </span>t<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="m">6</span><span class="w"> </span><span class="m">8</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="m">12</span><span class="w"> </span><span class="m">14</span><span class="w"> </span><span class="m">16</span>
+<span class="k">do</span>
+<span class="w">    </span><span class="nb">export</span><span class="w"> </span><span class="nv">OMP_NUM_THREADS</span><span class="o">=</span><span class="nv">$t</span>
+
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Executando com </span><span class="nv">$t</span><span class="s2"> threads...&quot;</span>
+
+<span class="w">    </span><span class="c1"># Binário recebendo a lista de pontos</span>
+<span class="w">    </span>./Q3<span class="w"> </span>pontos.txt
+<span class="k">done</span>
+</code></pre></div>
+<p>Resultado dos testes</p>
+<table>
+<thead>
+<tr>
+<th>Threads</th>
+<th>Tempo Sequencial (s)</th>
+<th>Tempo Paralelo (s)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>0.168033</td>
+<td>0.0862287</td>
+</tr>
+<tr>
+<td>4</td>
+<td>0.168010</td>
+<td>0.0444519</td>
+</tr>
+<tr>
+<td>6</td>
+<td>0.168018</td>
+<td>0.0312003</td>
+</tr>
+<tr>
+<td><strong>8</strong></td>
+<td><strong>0.168029</strong></td>
+<td><strong>0.0251245</strong></td>
+</tr>
+<tr>
+<td>10</td>
+<td>0.168049</td>
+<td>0.0322822</td>
+</tr>
+<tr>
+<td>12</td>
+<td>0.167883</td>
+<td>0.0295553</td>
+</tr>
+<tr>
+<td>14</td>
+<td>0.167998</td>
+<td>0.0301920</td>
+</tr>
+<tr>
+<td>16</td>
+<td>0.162080</td>
+<td>0.0333125</td>
+</tr>
+</tbody>
+</table>
+<p>O ganho de desempenho foi obtido ao paralelizar os restarts do algoritmo Hill Climbing. Foi implementado o paralelismo nos restarts permitindo que múltiplas buscas ocorram simultaneamente.Além disso, foram utilizadas sementes diferentes para evitar que as threads trabalhem no mesmo espaço de busca, uma região crítica foi criada apenas para atualizar o melhor resultado sem sobrescrever ou bagunçar os dados. O melhor desempenho ocorreu com 8 threads, pois a partir desse ponto o overhead de criação e sincronização das threads passa a reduzir os ganhos do paralelismo.</p>
+</details>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "content.code.copy"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.0.0/js-yaml.min.js"></script>
+      
+        <script src="../../js/markdown-enhancer.js"></script>
+      
+        <script src="../../js/slides.js"></script>
+      
+    
+  </body>
+</html>
