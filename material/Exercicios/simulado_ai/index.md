@@ -285,9 +285,10 @@ int main() {
 
     ```
     Para gerar o binário corretamente
+
     ```cpp
     g++ -fopenmp -O3 Q1.cpp -o Q1
-    ````
+    ```
     Arquivo SLURM
 
     ```bash
@@ -297,13 +298,32 @@ int main() {
     #SBATCH --cpus-per-task=8               # 8 threads para usar
     #SBATCH --time=00:05:00                 # tempo máximo de execução
     #SBATCH --mem=2G                        # Memória 
-    #SBATCH --partition=normal              # fila
+    #SBATCH --partition=gpu              # fila
 
     # garante que o OpenMP use exatamente os recursos alocados pelo SLURM
     export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK}
 
     # executa o binário
     ./Q1
+    ```
+    Resultado Paralelo
+    ```bash
+    Processando vetor de 123456789 elementos...
+    Soma final: 7.60016e+09
+    Média final: 61.5613
+    Quantidade de picos: 123456
+    Quantidade de vales: 123456
+    Tempo paralelo: 20.9825 ms
+    ```
+
+    Sequencial
+    ```bash
+    Processando vetor de 123456789 elementos...
+    Soma final: 7.60016e+09
+    Média final: 61.5613
+    Quantidade de picos: 123456
+    Quantidade de vales: 123456
+    Tempo CPU sequencial: 991.454 ms
     ```
 
 
