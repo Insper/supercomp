@@ -1,5 +1,5 @@
 
-## Questão 1 — Teórica (Heurísticas e Aleatoriedade)
+## Questões Teóricas Heurísticas e Aleatoriedade
 **Tipo:** múltipla escolha (múltiplas corretas)  
 **Enunciado:**  
 Sobre heurísticas com aleatoriedade em problemas de otimização:  
@@ -17,7 +17,6 @@ d) Uma heurística aleatória nunca pode ser menos eficiente que uma busca deter
     c) Correta. Sem variação aleatória, a busca pode focar em regiões já visitadas, perdendo diversidade na exploração.
 
     d) Incorreta. O uso de aleatoriedade não garante eficiência. Pode inclusive aumentar o custo (mais iterações, soluções piores) se mal calibrada. A eficiência depende da implementação.
-
 
 
 ## Questão 2 — Busca linear vs aleatória em vetor

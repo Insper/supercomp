@@ -64,6 +64,7 @@ nav:
         - "Aula 04" : teoria/aula04/index.md
         - "Útil" : teoria/comandos.md
         - "Permissões" : teoria/permissoes.md
+        - "Simulado AI": Exercicios/simulado_ai/index.md
  #       - "Heurísticas" : teoria/heuristicas.md
  #       - "OpenMP" : teoria/openmp.md
  #       - "MPI" : teoria/MPI.md
