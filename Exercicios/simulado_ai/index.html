@@ -1487,25 +1487,39 @@ Tempo<span class="w"> </span>CPU<span class="w"> </span>sequencial:<span class="
 <span class="cm">* 3. Aplicar o OpemMP para paralelização de loops</span>
 <span class="cm">**/</span>
 </code></pre></div>
-Para gerar o binário corretamente
-<div class="highlight"><pre><span></span><code><span class="n">g</span><span class="o">++</span><span class="w"> </span><span class="o">-</span><span class="n">fopenmp</span><span class="w"> </span><span class="o">-</span><span class="n">O3</span><span class="w"> </span><span class="n">Q1</span><span class="p">.</span><span class="n">cpp</span><span class="w"> </span><span class="o">-</span><span class="n">o</span><span class="w"> </span><span class="n">Q1</span>
-<span class="err">````</span>
-<span class="n">Arquivo</span><span class="w"> </span><span class="n">SLURM</span>
+Para gerar o binário corretamente</p>
+<p><div class="highlight"><pre><span></span><code><span class="n">g</span><span class="o">++</span><span class="w"> </span><span class="o">-</span><span class="n">fopenmp</span><span class="w"> </span><span class="o">-</span><span class="n">O3</span><span class="w"> </span><span class="n">Q1</span><span class="p">.</span><span class="n">cpp</span><span class="w"> </span><span class="o">-</span><span class="n">o</span><span class="w"> </span><span class="n">Q1</span>
+</code></pre></div>
+Arquivo SLURM</p>
+<p><div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="c1">#SBATCH --job-name=Q1           # nome do job</span>
+<span class="c1">#SBATCH --output=Q1.out         # arquivo de saída</span>
+<span class="c1">#SBATCH --cpus-per-task=8               # 8 threads para usar</span>
+<span class="c1">#SBATCH --time=00:05:00                 # tempo máximo de execução</span>
+<span class="c1">#SBATCH --mem=2G                        # Memória </span>
+<span class="c1">#SBATCH --partition=gpu              # fila</span>
 
-<span class="err">```</span><span class="n">bash</span>
-<span class="cp">#!/bin/bash</span>
-<span class="cp">#SBATCH --job-name=Q1           # nome do job</span>
-<span class="cp">#SBATCH --output=Q1.out         # arquivo de saída</span>
-<span class="cp">#SBATCH --cpus-per-task=8               # 8 threads para usar</span>
-<span class="cp">#SBATCH --time=00:05:00                 # tempo máximo de execução</span>
-<span class="cp">#SBATCH --mem=2G                        # Memória </span>
-<span class="cp">#SBATCH --partition=normal              # fila</span>
+<span class="c1"># garante que o OpenMP use exatamente os recursos alocados pelo SLURM</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">OMP_NUM_THREADS</span><span class="o">=</span><span class="si">${</span><span class="nv">SLURM_CPUS_PER_TASK</span><span class="si">}</span>
 
-<span class="cp"># garante que o OpenMP use exatamente os recursos alocados pelo SLURM</span>
-<span class="k">export</span><span class="w"> </span><span class="n">OMP_NUM_THREADS</span><span class="o">=</span><span class="n">$</span><span class="p">{</span><span class="n">SLURM_CPUS_PER_TASK</span><span class="p">}</span>
-
-<span class="cp"># executa o binário</span>
-<span class="p">.</span><span class="o">/</span><span class="n">Q1</span>
+<span class="c1"># executa o binário</span>
+./Q1
+</code></pre></div>
+Resultado Paralelo
+<div class="highlight"><pre><span></span><code>Processando<span class="w"> </span>vetor<span class="w"> </span>de<span class="w"> </span><span class="m">123456789</span><span class="w"> </span>elementos...
+Soma<span class="w"> </span>final:<span class="w"> </span><span class="m">7</span>.60016e+09
+Média<span class="w"> </span>final:<span class="w"> </span><span class="m">61</span>.5613
+Quantidade<span class="w"> </span>de<span class="w"> </span>picos:<span class="w"> </span><span class="m">123456</span>
+Quantidade<span class="w"> </span>de<span class="w"> </span>vales:<span class="w"> </span><span class="m">123456</span>
+Tempo<span class="w"> </span>paralelo:<span class="w"> </span><span class="m">20</span>.9825<span class="w"> </span>ms
+</code></pre></div></p>
+<p>Sequencial
+<div class="highlight"><pre><span></span><code>Processando<span class="w"> </span>vetor<span class="w"> </span>de<span class="w"> </span><span class="m">123456789</span><span class="w"> </span>elementos...
+Soma<span class="w"> </span>final:<span class="w"> </span><span class="m">7</span>.60016e+09
+Média<span class="w"> </span>final:<span class="w"> </span><span class="m">61</span>.5613
+Quantidade<span class="w"> </span>de<span class="w"> </span>picos:<span class="w"> </span><span class="m">123456</span>
+Quantidade<span class="w"> </span>de<span class="w"> </span>vales:<span class="w"> </span><span class="m">123456</span>
+Tempo<span class="w"> </span>CPU<span class="w"> </span>sequencial:<span class="w"> </span><span class="m">991</span>.454<span class="w"> </span>ms
 </code></pre></div></p>
 </details>
 <h2 id="exercicio-2-calculo-de-pi-com-monte-carlo"><strong>Exercício 2 — Cálculo de PI com Monte Carlo</strong><a class="headerlink" href="#exercicio-2-calculo-de-pi-com-monte-carlo" title="Permanent link">&para;</a></h2>
