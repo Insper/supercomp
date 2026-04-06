@@ -43,10 +43,7 @@ nav:
         - "Aula 09 - Programação Distribuída com MPI": aulas/aula09/index.md
         - "Aula 10 - Tipos de comunicação MPI": aulas/aula10/index.md
         - "Aula 11 - Exercícios preparatórios para AI": aulas/aula11/index.md
-#        - "Aula 09 - Projeto 1 - Otimizações em CPU": aulas/aula09/index.md
-#        - "Aula 10 - Acesso ao Supercomputador SDumont": aulas/aula10/index.md
-#        - "Aula 11 - MPI e as Operações Coletivas": aulas/aula11/index.md
-#        - "Aula 12 - Exercícios preparatórios para AI": aulas/aula12/index.md
+        - "Aula 12 - Acesso ao Supercomputador SDumont": aulas/aula10/index.md
 #        - "Aula 13 - Paralelismo em GPU com CUDA": aulas/aula13/index.md
 #        - "Aula 14 - Condições de corrida e throughput": aulas/aula14/index.md
 #       - "Aula 15 - Stencil, tilling e agendamento de threads": aulas/aula15/index.md
@@ -65,6 +62,7 @@ nav:
         - "Útil" : teoria/comandos.md
         - "Permissões" : teoria/permissoes.md
         - "Simulado AI": Exercicios/simulado_ai/index.md
+ #       - "Gabarito AI": Exercicios/ai/index.md
  #       - "Heurísticas" : teoria/heuristicas.md
  #       - "OpenMP" : teoria/openmp.md
  #       - "MPI" : teoria/MPI.md
