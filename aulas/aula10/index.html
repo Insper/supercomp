@@ -11,10 +11,10 @@
         <link rel="canonical" href="https://insper.github.io/supercomp/aulas/aula10/">
       
       
-        <link rel="prev" href="../aula09/">
+        <link rel="prev" href="../aula11/">
       
       
-        <link rel="next" href="../aula11/">
+        <link rel="next" href="../../teoria/slides/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -944,6 +944,320 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Aula 10 - Tipos de comunicação MPI
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Aula 10 - Tipos de comunicação MPI
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#ping-pong" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ping-pong
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ping-pong">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#compile-o-programa" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compile o programa:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#script-slurm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Script SLURM
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#submeta-o-job-com-slurm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Submeta o job com SLURM:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#voce-deve-ver-algo-como-isso" class="md-nav__link">
+    <span class="md-ellipsis">
+      Você deve ver algo como isso:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#token-em-anel" class="md-nav__link">
+    <span class="md-ellipsis">
+      Token em anel
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#token-em-anel-comunicacao-sequencial" class="md-nav__link">
+    <span class="md-ellipsis">
+      Token em anel (comunicação sequencial)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Código
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Código">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#compile-o-programa_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compile o programa:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#script-slurm_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Script SLURM
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#submeta-o-job-com-slurm_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Submeta o job com SLURM:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#versao-usando-mpi_gather" class="md-nav__link">
+    <span class="md-ellipsis">
+      Versão usando MPI_Gather
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#codigo_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Código
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Código">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#compile-o-programa_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compile o programa:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#script-slurm_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Script SLURM
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#submeta-o-job-com-slurm_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Submeta o job com SLURM:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#distribuicao-de-dados-com-mpi_scatter" class="md-nav__link">
+    <span class="md-ellipsis">
+      Distribuição de dados com MPI_Scatter
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ideia" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ideia
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ideia">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#compile-o-programa_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compile o programa:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#script-slurm_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Script SLURM
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#submeta-o-job-com-slurm_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Submeta o job com SLURM:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#combinacao-de-resultados-com-mpi_reduce" class="md-nav__link">
+    <span class="md-ellipsis">
+      Combinação de resultados com MPI_Reduce
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Combinação de resultados com MPI_Reduce">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#compile-o-programa_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compile o programa:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#script-slurm_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Script SLURM
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#submeta-o-job-com-slurm_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Submeta o job com SLURM:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
