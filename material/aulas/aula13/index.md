@@ -235,14 +235,7 @@ Agora, vamos executar o binário **pedindo uma GPU** via `srun`:
 ```bash
 srun --partition=gpu --gres=gpu:1 ./ex-gpu
 ```
-
-💡 **Explicação dos parâmetros:**
-
-| Opção                         | Significado                  |
-| ----------------------------- | ---------------------------- |
-| `--partition=sequana_gpu_dev` | Escolhe a fila de GPU        |
-| `--gres=gpu:1`                | Solicita 1 GPU               |
-| `./ex1`                       | Executa o programa compilado |
+Esse  `--gres=gpu:1` aloca 1 GPU  para executar o binário  `./ex1`  na fila gpu do Cluster Franky
 
 Saída esperada:
 
@@ -251,21 +244,20 @@ Erro máximo: 0
 Soma total: 3e+06
 ```
 
----
 
-##  Explicação do Kernel CUDA
+###  Explicação do Kernel CUDA
 
 Até agora, vimos como executar um **kernel CUDA** com múltiplas *threads* dentro de **um único bloco**.
-Mas as **GPUs modernas** são compostas por **múltiplos processadores paralelos**, chamados **Streaming Multiprocessors (SMs)**.
+Mas as GPUs são compostas por **múltiplos processadores paralelos**, chamados **Streaming Multiprocessors (SMs)**.
 Cada **SM** pode executar **vários blocos de threads simultaneamente**.
 
 Por exemplo:
 
 * Uma **GPU Tesla P100 (arquitetura Pascal)** possui **56 SMs**.
 * Cada SM pode manter até **2048 threads ativas**.
-* Isso totaliza mais de **100 mil threads em execução paralela real**!
+* Isso totaliza mais de **100 mil threads em execução paralela**!
 
-Para aproveitar todo esse paralelismo, precisamos **lançar o kernel com múltiplos blocos**, e não apenas um.
+Para aproveitar todo esse paralelismo, precisamos lançar o kernel com múltiplos blocos.
 
 
 ### O que é uma *Grid* e o que é um *Block*?
@@ -321,14 +313,99 @@ int index = blockIdx.x * blockDim.x + threadIdx.x;
 
 Esse cálculo é **padrão em CUDA**, porque é o permite mapear cada thread a uma posição única no vetor.
 
+Mas, até agora, cada thread processa **apenas um elemento** usando:
+
+```cpp
+int i = blockIdx.x * blockDim.x + threadIdx.x;
+if (i < n) {
+    y[i] = x[i] + y[i];
+}
+```
+
+Isso funciona bem, mas tem uma limitação importante:
+
+> Se o número de threads lançadas for menor que `N`, parte dos dados não será processada.
+
+Além disso, em aplicações reais:
+
+* Nem sempre queremos lançar milhões de threads
+* Queremos reutilizar threads de forma eficiente
+* Precisamos escalar para qualquer tamanho de entrada
+
+**Solução:** usar o padrão de **Grid-Stride Loop**
+
+Em vez de cada thread processar 1 elemento, ela passa a processar vários elementos espaçados pela grid.
+
+O passo (stride) é:
+
+```cpp
+int stride = blockDim.x * gridDim.x;
+```
+
+Ficaria mais ou menos assim:
+```cpp
+__global__
+void add_grid(int n, float *x, float *y)
+{
+    int i = blockIdx.x * blockDim.x + threadIdx.x;
+
+    // Distância total entre threads na grid
+    int stride = blockDim.x * gridDim.x;
+
+    // Cada thread processa múltiplos elementos
+    for (int idx = i; idx < n; idx += stride) {
+        y[idx] = x[idx] + y[idx];
+    }
+}
+```
+
+## O que mudou?
+
+Antes:
+
+* 1 thread → 1 elemento
+
+Agora:
+
+* 1 thread → vários elementos
+* Threads “caminham” pelo vetor em saltos (stride)
 
 
-## Exercícios:
+Agora você pode **limitar propositalmente o número de blocos**, por exemplo:
 
-1. Teste outros tamanhos de vetor.
-2. Modifique o número de blocos e threads para observar o impacto.
-3. Teste kernels com mais dimensões.
+```cpp
+int blockSize = 256;
 
+// número FIXO de blocos 
+int numBlocks = 1024;
+
+add_grid<<<numBlocks, blockSize>>>(N, d_x, d_y);
+```
+Isso permite:
+
+* Controlar melhor o uso da GPU
+* Testar desempenho com diferentes configurações
+
+
+## ATIVIDADE
+
+* Troque o kernel `add` por `add_grid`
+* Faça a computação em grid no kernel `add_grid`
+* Verifique se o resultado continua correto
+
+Teste o código com diferentes configurações:
+
+```cpp
+numBlocks = 32;
+numBlocks = 128;
+numBlocks = 1024;
+```
+
+> "E se os dados fossem uma matriz?”
+
+Como você faria a computação em GPU de uma matriz 2D?
+E de uma matriz 3D?
+Veremos como fazer a computação de matrizes em GPU nos próximos capitulos...
 
 ## Se quiser aprender mais
 
@@ -342,5 +419,5 @@ Esse cálculo é **padrão em CUDA**, porque é o permite mapear cada thread a u
 
 
 obs: Material adaptado do Deep Learning Institute NVIDIA e do NVIDIA Teaching kit - Accelerated Computing
-
+## Esta atividade não tem entrega, bom final de semana!
 ```
