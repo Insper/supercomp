@@ -14,24 +14,12 @@ Em um **sistema HPC com SLURM**, como o Franky ou o SDumont, a execução de pro
 
 ## Etapa 1 — Preparando o ambiente
 
-Para saber informações sobre as filas que você tem acesso
-
-```bash
-sacctmgr list user $USER -s format=partition%20,MaxJobs,MaxSubmit,MaxNodes,MaxCPUs,MaxWall
-```
-
-Dentro do seu diretório de trabalho `/scratch/insperhpc/seu_login/GPU/`:
-
-```bash
-mkdir /scratch/insperhpc/seu_login/GPU
-cd /scratch/insperhpc/seu_login/GPU
-```
 
 Liste os módulos disponíveis e carregue o CUDA:
 
 ```bash
 module avail cuda
-module load cuda/12.6_sequana
+module load cuda/12.8.1
 ```
 
 Verifique se o compilador CUDA está ativo:
@@ -40,7 +28,10 @@ Verifique se o compilador CUDA está ativo:
 nvcc --version
 ```
 
----
+Deve aparecer algo como
+
+![alt text](image.png)
+
 
 ## Etapa 2 — Código Base (CPU)
 
@@ -49,14 +40,15 @@ Vamos começar com um programa simples em **C++** que soma os elementos de dois 
 Crie o arquivo:
 
 ```bash
-nano exemplo_cpu.cpp
+nano exemplo-cpu.cpp
 ```
 
 Cole o código abaixo:
 
 ```cpp
 #include <iostream>
-#include <math.h>
+#include <cmath>
+#include <chrono> 
 
 // Função que soma os elementos de dois vetores
 void add(int n, float *x, float *y)
@@ -67,7 +59,7 @@ void add(int n, float *x, float *y)
 
 int main(void)
 {
-  int N = 1<<20; // 1 milhão de elementos
+  int N = 100'000'000; 
   float *x = new float[N];
   float *y = new float[N];
 
@@ -77,42 +69,51 @@ int main(void)
     y[i] = 2.0f;
   }
 
-  // Executa a soma na CPU
+  // Início da medição de tempo
+  auto start = std::chrono::high_resolution_clock::now();
+
+  // Executa a soma
   add(N, x, y);
 
-  // Verifica erro
+  // Fim da medição
+  auto end = std::chrono::high_resolution_clock::now();
+  std::chrono::duration<double> elapsed = end - start;
+
+  // Calcula erro e soma total
   float maxError = 0.0f;
-  for (int i = 0; i < N; i++)
-    maxError = fmax(maxError, fabs(y[i]-3.0f));
+  double somaTotal = 0.0;
+
+  for (int i = 0; i < N; i++) {
+    maxError = fmax(maxError, fabs(y[i] - 3.0f));
+    somaTotal += y[i];
+  }
 
   std::cout << "Erro máximo: " << maxError << std::endl;
+  std::cout << "Soma total: " << somaTotal << std::endl;
+  std::cout << "Tempo de execução: " << elapsed.count() << " segundos" << std::endl;
 
   delete [] x;
   delete [] y;
 
   return 0;
 }
+
 ```
 
 Compile e execute localmente (sem GPU):
 
 ```bash
-g++ exemplo_cpu.cpp -o ex_cpu
-```
-
-```bash
-srun --partition=sequana_cpu_dev ./ex_cpu
+ srun --partition=gpu  --pty ./ex-cpu
 ```
 
 Saída esperada:
 
 ```
-srun: job 123456 queued and waiting for resources
-srun: job 123456 has been allocated resources
 Erro máximo: 0
+Soma total: 3e+06
+Tempo de execução: 0.00013891 segundos
 ```
 
----
 
 ## Etapa 3 — Migrando para GPU (CUDA)
 
@@ -121,79 +122,118 @@ Agora, vamos reescrever o mesmo código para rodar **na GPU**.
 Crie o arquivo:
 
 ```bash
-nano exemplo1.cu
+nano exemplo-gpu.cu
 ```
 
-Cole o código abaixo:
+Analise o código abaixo:
 
 ```cpp
 #include <iostream>
-#include <math.h>
+#include <cmath>
+#include <chrono>
+#include <cuda_runtime.h>
 
-// Kernel CUDA: soma os elementos de dois vetores
+using namespace std;
+
+// Kernel CUDA (função que será executada na GPU)
 __global__
 void add(int n, float *x, float *y)
 {
-  int index = blockIdx.x * blockDim.x + threadIdx.x;
-  int stride = blockDim.x * gridDim.x;
-  for (int i = index; i < n; i += stride)
+  // Calcula o índice global da thread
+   // cada thread obtém um índice único 'i'
+  int i = blockIdx.x * blockDim.x + threadIdx.x;
+
+  // Garante que a thread só acesse posições válidas do vetor
+  if (i < n)
+
+    // Cada thread realiza a soma de UM elemento:
     y[i] = x[i] + y[i];
 }
 
 int main(void)
 {
-  int N = 1<<20;
-  float *x, *y;
+  int N = 100'000'000;
+  size_t size = N * sizeof(float);
 
-  // Aloca Memória Unificada – acessível pela CPU e pela GPU
-  cudaMallocManaged(&x, N*sizeof(float));
-  cudaMallocManaged(&y, N*sizeof(float));
+  // Cria os vetores na CPU
+  float *x = new float[N];
+  float *y = new float[N];
 
-  // Inicializa vetores na CPU
+  // Inicializa na CPU
   for (int i = 0; i < N; i++) {
     x[i] = 1.0f;
     y[i] = 2.0f;
   }
 
-  // Configuração da grade e dos blocos
+  // Cria os vetores para a GPU
+  float *d_x, *d_y;
+  // reserva o espaço para os vetores na GPU
+  cudaMalloc(&d_x, size);
+  cudaMalloc(&d_y, size);
+
+  // início do tempo (incluindo transferência)
+  auto start = std::chrono::high_resolution_clock::now();
+
+  // Transferencia dos dados CPU → GPU
+  cudaMemcpy(d_x, x, size, cudaMemcpyHostToDevice);
+  cudaMemcpy(d_y, y, size, cudaMemcpyHostToDevice);
+
+  // Configurando o kernel
   int blockSize = 256;
   int numBlocks = (N + blockSize - 1) / blockSize;
 
-  // Lança o kernel na GPU
-  add<<<numBlocks, blockSize>>>(N, x, y);
+  // Computação na GPU
+  add<<<numBlocks, blockSize>>>(N, d_x, d_y);
 
-  // Aguarda a GPU terminar
+  // Semáforo para aguardar o término da computação na GPU 
   cudaDeviceSynchronize();
 
-  // Verifica o erro máximo
-  float maxError = 0.0f;
-  for (int i = 0; i < N; i++)
-    maxError = fmax(maxError, fabs(y[i]-3.0f));
+  // Transferencia de dados GPU → CPU
+  cudaMemcpy(y, d_y, size, cudaMemcpyDeviceToHost);
 
+  // fim do tempo
+  auto end = std::chrono::high_resolution_clock::now();
+  std::chrono::duration<double> elapsed = end - start;
+
+  // Criação dos das variaveis para exibir o output
+  float maxError = 0.0f;
+  double somaTotal = 0.0;
+
+  // Preparação dos dados para exibir
+  for (int i = 0; i < N; i++) {
+    maxError = fmax(maxError, fabs(y[i] - 3.0f));
+    somaTotal += y[i];
+  }
+
+  std::cout << cudaGetLastError() << std::endl;
   std::cout << "Erro máximo: " << maxError << std::endl;
+  std::cout << "Soma total: " << somaTotal << std::endl;
+  std::cout << "Tempo total (CPU->GPU->CPU): "
+            << elapsed.count() << " segundos" << std::endl;
 
   // Libera memória
-  cudaFree(x);
-  cudaFree(y);
+  cudaFree(d_x);
+  cudaFree(d_y);
+  delete[] x;
+  delete[] y;
 
   return 0;
 }
+
 ```
 
 Compile com o `nvcc`:
 
 ```bash
-nvcc exemplo1.cu -o ex1
+nvcc exemplo-gpu.cu -o ex-gpu
 ```
-
----
 
 ## Etapa 4 — Executando no nó GPU com SLURM
 
 Agora, vamos executar o binário **pedindo uma GPU** via `srun`:
 
 ```bash
-srun --partition=sequana_gpu_dev --gres=gpu:1 ./ex1
+srun --partition=gpu --gres=gpu:1 ./ex-gpu
 ```
 
 💡 **Explicação dos parâmetros:**
@@ -207,9 +247,8 @@ srun --partition=sequana_gpu_dev --gres=gpu:1 ./ex1
 Saída esperada:
 
 ```
-srun: job 11402255 queued and waiting for resources
-srun: job 11402255 has been allocated resources
 Erro máximo: 0
+Soma total: 3e+06
 ```
 
 ---
@@ -283,219 +322,12 @@ int index = blockIdx.x * blockDim.x + threadIdx.x;
 Esse cálculo é **padrão em CUDA**, porque é o permite mapear cada thread a uma posição única no vetor.
 
 
-### Percorrendo Grandes Vetores com *Grid-Stride Loop*
-
-Mesmo com muitos blocos, às vezes o número de threads **ainda é menor que N**.
-Para lidar com isso, usamos um padrão chamado **grid-stride loop**:
-
-```cpp
-int stride = blockDim.x * gridDim.x;
-for (int i = index; i < n; i += stride)
-    y[i] = x[i] + y[i];
-```
-
-**O que isso faz:**
-
-* `stride` representa o número total de threads ativas na GPU.
-* Cada thread processa múltiplos elementos separados por esse intervalo.
-* Assim, mesmo que `N` seja muito grande, todas as posições do vetor são tratadas.
-
----
-
-### Kernel completo com múltiplos blocos
-
-```cpp
-#include <iostream>
-#include <math.h>
-
-// Kernel CUDA para somar dois vetores usando múltiplos blocos
-__global__
-void add(int n, float *x, float *y)
-{
-  int index  = blockIdx.x * blockDim.x + threadIdx.x; // índice global da thread
-  int stride = blockDim.x * gridDim.x;                // salto entre iterações
-
-  for (int i = index; i < n; i += stride)
-    y[i] = x[i] + y[i];
-}
-
-int main(void)
-{
-  int N = 1<<20; // 1 milhão de elementos
-  float *x, *y;
-
-  // Memória unificada (CPU + GPU)
-  cudaMallocManaged(&x, N*sizeof(float));
-  cudaMallocManaged(&y, N*sizeof(float));
-
-  // Inicialização dos vetores
-  for (int i = 0; i < N; i++) {
-    x[i] = 1.0f;
-    y[i] = 2.0f;
-  }
-
-  // Configuração da execução
-  int blockSize = 256;
-  int numBlocks = (N + blockSize - 1) / blockSize;
-
-  // Lançamento do kernel
-  add<<<numBlocks, blockSize>>>(N, x, y);
-
-  // Sincronização
-  cudaDeviceSynchronize();
-
-  // Verificação do resultado
-  float maxError = 0.0f;
-  for (int i = 0; i < N; i++)
-    maxError = fmax(maxError, fabs(y[i]-3.0f));
-
-  std::cout << "Erro máximo: " << maxError << std::endl;
-
-  cudaFree(x);
-  cudaFree(y);
-  return 0;
-}
-```
-
-Versão com prints didáticos 
-```cpp
-#include <iostream>
-#include <math.h>
-#include <cuda_runtime.h>
-
-// Kernel CUDA para somar dois vetores usando múltiplos blocos
-__global__
-void add(int n, float *x, float *y)
-{
-  // Calcula o índice global e o salto entre iterações
-  int index  = blockIdx.x * blockDim.x + threadIdx.x;
-  int stride = blockDim.x * gridDim.x;
-
-  // Imprime informações das primeiras threads de cada bloco
-  if (threadIdx.x == 0) {
-    printf("Bloco %d ativo com %d threads (index inicial global = %d)\n",
-           blockIdx.x, blockDim.x, index);
-  }
-
-  // Cada thread processa múltiplos elementos separados por 'stride'
-  for (int i = index; i < n; i += stride) {
-    if (i < 10 && blockIdx.x == 0 && threadIdx.x < 5) {
-      printf("[Thread %d | Bloco %d] somando x[%d]=%.1f + y[%d]=%.1f\n",
-             threadIdx.x, blockIdx.x, i, x[i], i, y[i]);
-    }
-    y[i] = x[i] + y[i];
-  }
-}
-
-int main(void)
-{
-  int N = 1<<20; // 1 milhão de elementos
-  float *x, *y;
-
-  std::cout << "=== Inicializando memória unificada ===" << std::endl;
-  cudaMallocManaged(&x, N*sizeof(float));
-  cudaMallocManaged(&y, N*sizeof(float));
-
-  // Inicialização dos vetores
-  std::cout << "=== Inicializando vetores x e y ===" << std::endl;
-  for (int i = 0; i < N; i++) {
-    x[i] = 1.0f;
-    y[i] = 2.0f;
-  }
-
-  // Configuração da execução
-  int blockSize = 256;
-  int numBlocks = (N + blockSize - 1) / blockSize;
-
-  std::cout << "=== Configuração do kernel ===" << std::endl;
-  std::cout << "Número total de elementos: " << N << std::endl;
-  std::cout << "Threads por bloco (blockSize): " << blockSize << std::endl;
-  std::cout << "Número de blocos (numBlocks): " << numBlocks << std::endl;
-  std::cout << "Threads totais (gridDim*blockDim): "
-            << numBlocks * blockSize << std::endl;
-  std::cout << "=======================================" << std::endl;
-
-  // Lançamento do kernel
-  add<<<numBlocks, blockSize>>>(N, x, y);
-
-  // Sincronização
-  cudaDeviceSynchronize();
-
-  std::cout << "\n=== Kernel finalizado, verificando resultados ===" << std::endl;
-
-  // Verificação do resultado
-  float maxError = 0.0f;
-  for (int i = 0; i < N; i++)
-    maxError = fmax(maxError, fabs(y[i]-3.0f));
-
-  std::cout << "Erro máximo: " << maxError << std::endl;
-
-  // Mostra os primeiros 10 resultados
-  std::cout << "\n=== Amostra dos primeiros 10 valores de y ===" << std::endl;
-  for (int i = 0; i < 10; i++)
-    std::cout << "y[" << i << "] = " << y[i] << std::endl;
-
-  cudaFree(x);
-  cudaFree(y);
-  std::cout << "\n=== Execução completa ===" << std::endl;
-
-  return 0;
-}
-
-```
-
-
-
-### Visualização do Modelo
-
-| Nível  | Identificador | Exemplo | Função                 |
-| ------ | ------------- | ------- | ---------------------- |
-| Thread | `threadIdx.x` | 0–255   | Uma linha de execução  |
-| Bloco  | `blockIdx.x`  | 0–4095  | Agrupa 256 threads     |
-| Grade  | `gridDim.x`   | 4096    | Agrupa todos os blocos |
-
-Cada thread calcula:
-
-```
-index = blockIdx.x * blockDim.x + threadIdx.x
-```
-
-e acessa `y[index]`.
-
-### Compilando e executando no HPC
-
-No seu ambiente:
-
-```bash
-module load cuda/12.6_sequana
-nvcc add_grid.cu -o add_grid
-srun --partition=sequana_gpu_dev --gres=gpu:1 ./add_grid
-```
-
-Saída esperada:
-
-```
-srun: job 11402255 queued and waiting for resources
-srun: job 11402255 has been allocated resources
-Erro máximo: 0
-```
-
-### Conceitos-chave dessa etapa
-
-| Conceito                                  | Explicação                                               |
-| ----------------------------------------- | -------------------------------------------------------- |
-| **Streaming Multiprocessor (SM)**         | Unidade de processamento paralela da GPU                 |
-| **Grid**                                  | Conjunto de blocos lançados na GPU                       |
-| **Block**                                 | Grupo de threads que compartilham memória local          |
-| **Grid-Stride Loop**                      | Técnica para percorrer grandes vetores com menos threads |
-| **blockIdx.x * blockDim.x + threadIdx.x** | Fórmula padrão de indexação CUDA                         |
 
 ## Exercícios:
 
 1. Teste outros tamanhos de vetor.
 2. Modifique o número de blocos e threads para observar o impacto.
-3. Adicione medições de tempo com as funções CUDA (`cudaEventRecord`).
-4. Teste kernels com mais dimensões.
+3. Teste kernels com mais dimensões.
 
 
 ## Se quiser aprender mais
