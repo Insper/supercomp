@@ -767,17 +767,17 @@
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
+    <nav class="md-nav" aria-label="Etapa 4 — Executando no nó GPU com SLURM">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#explicacao-do-kernel-cuda" class="md-nav__link">
     <span class="md-ellipsis">
       Explicação do Kernel CUDA
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Explicação do Kernel CUDA">
-      <ul class="md-nav__list">
+</li>
         
           <li class="md-nav__item">
   <a href="#o-que-e-uma-grid-e-o-que-e-um-block" class="md-nav__link">
@@ -812,9 +812,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#exercicios" class="md-nav__link">
+  <a href="#o-que-mudou" class="md-nav__link">
     <span class="md-ellipsis">
-      Exercícios:
+      O que mudou?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#atividade" class="md-nav__link">
+    <span class="md-ellipsis">
+      ATIVIDADE
     </span>
   </a>
   
@@ -824,6 +833,15 @@
   <a href="#se-quiser-aprender-mais" class="md-nav__link">
     <span class="md-ellipsis">
       Se quiser aprender mais
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esta-atividade-nao-tem-entrega-bom-final-de-semana" class="md-nav__link">
+    <span class="md-ellipsis">
+      Esta atividade não tem entrega, bom final de semana!
     </span>
   </a>
   
@@ -1195,17 +1213,17 @@
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
+    <nav class="md-nav" aria-label="Etapa 4 — Executando no nó GPU com SLURM">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#explicacao-do-kernel-cuda" class="md-nav__link">
     <span class="md-ellipsis">
       Explicação do Kernel CUDA
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Explicação do Kernel CUDA">
-      <ul class="md-nav__list">
+</li>
         
           <li class="md-nav__item">
   <a href="#o-que-e-uma-grid-e-o-que-e-um-block" class="md-nav__link">
@@ -1240,9 +1258,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#exercicios" class="md-nav__link">
+  <a href="#o-que-mudou" class="md-nav__link">
     <span class="md-ellipsis">
-      Exercícios:
+      O que mudou?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#atividade" class="md-nav__link">
+    <span class="md-ellipsis">
+      ATIVIDADE
     </span>
   </a>
   
@@ -1252,6 +1279,15 @@
   <a href="#se-quiser-aprender-mais" class="md-nav__link">
     <span class="md-ellipsis">
       Se quiser aprender mais
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esta-atividade-nao-tem-entrega-bom-final-de-semana" class="md-nav__link">
+    <span class="md-ellipsis">
+      Esta atividade não tem entrega, bom final de semana!
     </span>
   </a>
   
@@ -1465,47 +1501,24 @@ Tempo de execução: 0.00013891 segundos
 </code></pre></div>
 <h2 id="etapa-4-executando-no-no-gpu-com-slurm">Etapa 4 — Executando no nó GPU com SLURM<a class="headerlink" href="#etapa-4-executando-no-no-gpu-com-slurm" title="Permanent link">&para;</a></h2>
 <p>Agora, vamos executar o binário <strong>pedindo uma GPU</strong> via <code>srun</code>:</p>
-<div class="highlight"><pre><span></span><code>srun<span class="w"> </span>--partition<span class="o">=</span>gpu<span class="w"> </span>--gres<span class="o">=</span>gpu:1<span class="w"> </span>./ex-gpu
+<p><div class="highlight"><pre><span></span><code>srun<span class="w"> </span>--partition<span class="o">=</span>gpu<span class="w"> </span>--gres<span class="o">=</span>gpu:1<span class="w"> </span>./ex-gpu
 </code></pre></div>
-<p>💡 <strong>Explicação dos parâmetros:</strong></p>
-<table>
-<thead>
-<tr>
-<th>Opção</th>
-<th>Significado</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>--partition=sequana_gpu_dev</code></td>
-<td>Escolhe a fila de GPU</td>
-</tr>
-<tr>
-<td><code>--gres=gpu:1</code></td>
-<td>Solicita 1 GPU</td>
-</tr>
-<tr>
-<td><code>./ex1</code></td>
-<td>Executa o programa compilado</td>
-</tr>
-</tbody>
-</table>
+Esse  <code>--gres=gpu:1</code> aloca 1 GPU  para executar o binário  <code>./ex1</code>  na fila gpu do Cluster Franky</p>
 <p>Saída esperada:</p>
 <div class="highlight"><pre><span></span><code>Erro máximo: 0
 Soma total: 3e+06
 </code></pre></div>
-<hr />
-<h2 id="explicacao-do-kernel-cuda">Explicação do Kernel CUDA<a class="headerlink" href="#explicacao-do-kernel-cuda" title="Permanent link">&para;</a></h2>
+<h3 id="explicacao-do-kernel-cuda">Explicação do Kernel CUDA<a class="headerlink" href="#explicacao-do-kernel-cuda" title="Permanent link">&para;</a></h3>
 <p>Até agora, vimos como executar um <strong>kernel CUDA</strong> com múltiplas <em>threads</em> dentro de <strong>um único bloco</strong>.
-Mas as <strong>GPUs modernas</strong> são compostas por <strong>múltiplos processadores paralelos</strong>, chamados <strong>Streaming Multiprocessors (SMs)</strong>.
+Mas as GPUs são compostas por <strong>múltiplos processadores paralelos</strong>, chamados <strong>Streaming Multiprocessors (SMs)</strong>.
 Cada <strong>SM</strong> pode executar <strong>vários blocos de threads simultaneamente</strong>.</p>
 <p>Por exemplo:</p>
 <ul>
 <li>Uma <strong>GPU Tesla P100 (arquitetura Pascal)</strong> possui <strong>56 SMs</strong>.</li>
 <li>Cada SM pode manter até <strong>2048 threads ativas</strong>.</li>
-<li>Isso totaliza mais de <strong>100 mil threads em execução paralela real</strong>!</li>
+<li>Isso totaliza mais de <strong>100 mil threads em execução paralela</strong>!</li>
 </ul>
-<p>Para aproveitar todo esse paralelismo, precisamos <strong>lançar o kernel com múltiplos blocos</strong>, e não apenas um.</p>
+<p>Para aproveitar todo esse paralelismo, precisamos lançar o kernel com múltiplos blocos.</p>
 <h3 id="o-que-e-uma-grid-e-o-que-e-um-block">O que é uma <em>Grid</em> e o que é um <em>Block</em>?<a class="headerlink" href="#o-que-e-uma-grid-e-o-que-e-um-block" title="Permanent link">&para;</a></h3>
 <p>Em CUDA:</p>
 <ul>
@@ -1546,12 +1559,82 @@ precisamos calcular <strong>quantos blocos</strong> são necessários para cobri
 <div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">blockIdx</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">blockDim</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">threadIdx</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
 </code></pre></div>
 <p>Esse cálculo é <strong>padrão em CUDA</strong>, porque é o permite mapear cada thread a uma posição única no vetor.</p>
-<h2 id="exercicios">Exercícios:<a class="headerlink" href="#exercicios" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Teste outros tamanhos de vetor.</li>
-<li>Modifique o número de blocos e threads para observar o impacto.</li>
-<li>Teste kernels com mais dimensões.</li>
-</ol>
+<p>Mas, até agora, cada thread processa <strong>apenas um elemento</strong> usando:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">blockIdx</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">blockDim</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">threadIdx</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Isso funciona bem, mas tem uma limitação importante:</p>
+<blockquote>
+<p>Se o número de threads lançadas for menor que <code>N</code>, parte dos dados não será processada.</p>
+</blockquote>
+<p>Além disso, em aplicações reais:</p>
+<ul>
+<li>Nem sempre queremos lançar milhões de threads</li>
+<li>Queremos reutilizar threads de forma eficiente</li>
+<li>Precisamos escalar para qualquer tamanho de entrada</li>
+</ul>
+<p><strong>Solução:</strong> usar o padrão de <strong>Grid-Stride Loop</strong></p>
+<p>Em vez de cada thread processar 1 elemento, ela passa a processar vários elementos espaçados pela grid.</p>
+<p>O passo (stride) é:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">stride</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">blockDim</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">gridDim</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
+</code></pre></div>
+<p>Ficaria mais ou menos assim:
+<div class="highlight"><pre><span></span><code><span class="n">__global__</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">add_grid</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">y</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">blockIdx</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">blockDim</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">threadIdx</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Distância total entre threads na grid</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">stride</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">blockDim</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">gridDim</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Cada thread processa múltiplos elementos</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">idx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w"> </span><span class="n">idx</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">idx</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">stride</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">y</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="p">[</span><span class="n">idx</span><span class="p">];</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<h2 id="o-que-mudou">O que mudou?<a class="headerlink" href="#o-que-mudou" title="Permanent link">&para;</a></h2>
+<p>Antes:</p>
+<ul>
+<li>1 thread → 1 elemento</li>
+</ul>
+<p>Agora:</p>
+<ul>
+<li>1 thread → vários elementos</li>
+<li>Threads “caminham” pelo vetor em saltos (stride)</li>
+</ul>
+<p>Agora você pode <strong>limitar propositalmente o número de blocos</strong>, por exemplo:</p>
+<p><div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">blockSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">256</span><span class="p">;</span>
+
+<span class="c1">// número FIXO de blocos </span>
+<span class="kt">int</span><span class="w"> </span><span class="n">numBlocks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1024</span><span class="p">;</span>
+
+<span class="n">add_grid</span><span class="o">&lt;&lt;&lt;</span><span class="n">numBlocks</span><span class="p">,</span><span class="w"> </span><span class="n">blockSize</span><span class="o">&gt;&gt;&gt;</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">d_x</span><span class="p">,</span><span class="w"> </span><span class="n">d_y</span><span class="p">);</span>
+</code></pre></div>
+Isso permite:</p>
+<ul>
+<li>Controlar melhor o uso da GPU</li>
+<li>Testar desempenho com diferentes configurações</li>
+</ul>
+<h2 id="atividade">ATIVIDADE<a class="headerlink" href="#atividade" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Troque o kernel <code>add</code> por <code>add_grid</code></li>
+<li>Faça a computação em grid no kernel <code>add_grid</code></li>
+<li>Verifique se o resultado continua correto</li>
+</ul>
+<p>Teste o código com diferentes configurações:</p>
+<div class="highlight"><pre><span></span><code><span class="n">numBlocks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="p">;</span>
+<span class="n">numBlocks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">128</span><span class="p">;</span>
+<span class="n">numBlocks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1024</span><span class="p">;</span>
+</code></pre></div>
+<blockquote>
+<p>"E se os dados fossem uma matriz?”</p>
+</blockquote>
+<p>Como você faria a computação em GPU de uma matriz 2D?
+E de uma matriz 3D?
+Veremos como fazer a computação de matrizes em GPU nos próximos capitulos...</p>
 <h2 id="se-quiser-aprender-mais">Se quiser aprender mais<a class="headerlink" href="#se-quiser-aprender-mais" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Explore a <a href="https://docs.nvidia.com/cuda/index.html">documentação do CUDA Toolkit</a>.
@@ -1562,6 +1645,7 @@ precisamos calcular <strong>quantos blocos</strong> são necessários para cobri
 <li>Leia sobre a <a href="https://developer.nvidia.com/blog/unified-memory-cuda-beginners/">Unified Memory no CUDA 8</a> e o mecanismo de migração de páginas da arquitetura Pascal.</li>
 </ol>
 <p>obs: Material adaptado do Deep Learning Institute NVIDIA e do NVIDIA Teaching kit - Accelerated Computing</p>
+<h2 id="esta-atividade-nao-tem-entrega-bom-final-de-semana">Esta atividade não tem entrega, bom final de semana!<a class="headerlink" href="#esta-atividade-nao-tem-entrega-bom-final-de-semana" title="Permanent link">&para;</a></h2>
 <p>```</p>
 
 
