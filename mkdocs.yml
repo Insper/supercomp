@@ -44,7 +44,7 @@ nav:
         - "Aula 10 - Tipos de comunicação MPI": aulas/aula10/index.md
         - "Aula 11 - Exercícios preparatórios para AI": aulas/aula11/index.md
         - "Aula 12 - Acesso ao Supercomputador SDumont": aulas/aula12/index.md
-#        - "Aula 13 - Paralelismo em GPU com CUDA": aulas/aula13/index.md
+        - "Aula 13 - Paralelismo em GPU com CUDA": aulas/aula13/index.md
 #        - "Aula 14 - Condições de corrida e throughput": aulas/aula14/index.md
 #       - "Aula 15 - Stencil, tilling e agendamento de threads": aulas/aula15/index.md
 #        - "Aula 16 - Redução e Scan com CUDA" : aulas/aula16/index.md
