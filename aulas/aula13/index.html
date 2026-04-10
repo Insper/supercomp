@@ -771,36 +771,9 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#explicacao-do-kernel-cuda" class="md-nav__link">
+  <a href="#natureza-do-problema" class="md-nav__link">
     <span class="md-ellipsis">
-      Explicação do Kernel CUDA
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#o-que-e-uma-grid-e-o-que-e-um-block" class="md-nav__link">
-    <span class="md-ellipsis">
-      O que é uma Grid e o que é um Block?
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#configurando-a-execucao-com-multiplos-blocos" class="md-nav__link">
-    <span class="md-ellipsis">
-      Configurando a Execução com Múltiplos Blocos
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#calculando-o-indice-global-de-cada-thread" class="md-nav__link">
-    <span class="md-ellipsis">
-      Calculando o Índice Global de Cada Thread
+      Natureza do problema
     </span>
   </a>
   
@@ -812,18 +785,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#o-que-mudou" class="md-nav__link">
+  <a href="#desafio" class="md-nav__link">
     <span class="md-ellipsis">
-      O que mudou?
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#atividade" class="md-nav__link">
-    <span class="md-ellipsis">
-      ATIVIDADE
+      DESAFIO
     </span>
   </a>
   
@@ -1217,36 +1181,9 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#explicacao-do-kernel-cuda" class="md-nav__link">
+  <a href="#natureza-do-problema" class="md-nav__link">
     <span class="md-ellipsis">
-      Explicação do Kernel CUDA
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#o-que-e-uma-grid-e-o-que-e-um-block" class="md-nav__link">
-    <span class="md-ellipsis">
-      O que é uma Grid e o que é um Block?
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#configurando-a-execucao-com-multiplos-blocos" class="md-nav__link">
-    <span class="md-ellipsis">
-      Configurando a Execução com Múltiplos Blocos
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#calculando-o-indice-global-de-cada-thread" class="md-nav__link">
-    <span class="md-ellipsis">
-      Calculando o Índice Global de Cada Thread
+      Natureza do problema
     </span>
   </a>
   
@@ -1258,18 +1195,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#o-que-mudou" class="md-nav__link">
+  <a href="#desafio" class="md-nav__link">
     <span class="md-ellipsis">
-      O que mudou?
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#atividade" class="md-nav__link">
-    <span class="md-ellipsis">
-      ATIVIDADE
+      DESAFIO
     </span>
   </a>
   
@@ -1351,7 +1279,7 @@ module<span class="w"> </span>load<span class="w"> </span>cuda/12.8.1
 
 <span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
 <span class="p">{</span>
-<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100&#39;000&#39;000</span><span class="p">;</span><span class="w"> </span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1&#39;000&#39;000&#39;000</span><span class="p">;</span><span class="w"> </span>
 <span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">float</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>
 <span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">float</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>
 
@@ -1380,7 +1308,8 @@ module<span class="w"> </span>load<span class="w"> </span>cuda/12.8.1
 <span class="w">    </span><span class="n">somaTotal</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
 <span class="w">  </span><span class="p">}</span>
 
-<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Erro máximo: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">maxError</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Erro: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">maxError</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;N: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 <span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Soma total: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">somaTotal</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 <span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Tempo de execução: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">elapsed</span><span class="p">.</span><span class="n">count</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; segundos&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 
@@ -1394,9 +1323,10 @@ module<span class="w"> </span>load<span class="w"> </span>cuda/12.8.1
 <div class="highlight"><pre><span></span><code><span class="w"> </span>srun<span class="w"> </span>--partition<span class="o">=</span>gpu<span class="w">  </span>--pty<span class="w"> </span>./ex-cpu
 </code></pre></div>
 <p>Saída esperada:</p>
-<div class="highlight"><pre><span></span><code>Erro máximo: 0
-Soma total: 3e+06
-Tempo de execução: 0.00013891 segundos
+<div class="highlight"><pre><span></span><code>Erro: 0
+N: 1000000000
+Soma total: 3e+09
+Tempo de execução: 0.30549 segundos
 </code></pre></div>
 <h2 id="etapa-3-migrando-para-gpu-cuda">Etapa 3 — Migrando para GPU (CUDA)<a class="headerlink" href="#etapa-3-migrando-para-gpu-cuda" title="Permanent link">&para;</a></h2>
 <p>Agora, vamos reescrever o mesmo código para rodar <strong>na GPU</strong>.</p>
@@ -1428,7 +1358,7 @@ Tempo de execução: 0.00013891 segundos
 
 <span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
 <span class="p">{</span>
-<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100&#39;000&#39;000</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1&#39;000&#39;000&#39;000</span><span class="p">;</span>
 <span class="w">  </span><span class="kt">size_t</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">);</span>
 
 <span class="w">  </span><span class="c1">// Cria os vetores na CPU</span>
@@ -1450,26 +1380,40 @@ Tempo de execução: 0.00013891 segundos
 <span class="w">  </span><span class="c1">// início do tempo (incluindo transferência)</span>
 <span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
 
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">dados_start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
 <span class="w">  </span><span class="c1">// Transferencia dos dados CPU → GPU</span>
 <span class="w">  </span><span class="n">cudaMemcpy</span><span class="p">(</span><span class="n">d_x</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="n">cudaMemcpyHostToDevice</span><span class="p">);</span>
 <span class="w">  </span><span class="n">cudaMemcpy</span><span class="p">(</span><span class="n">d_y</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="n">cudaMemcpyHostToDevice</span><span class="p">);</span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">dados_end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
 
 <span class="w">  </span><span class="c1">// Configurando o kernel</span>
 <span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">blockSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">256</span><span class="p">;</span>
 <span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">numBlocks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">N</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">blockSize</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">blockSize</span><span class="p">;</span>
 
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">start_comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
 <span class="w">  </span><span class="c1">// Computação na GPU</span>
 <span class="w">  </span><span class="n">add</span><span class="o">&lt;&lt;&lt;</span><span class="n">numBlocks</span><span class="p">,</span><span class="w"> </span><span class="n">blockSize</span><span class="o">&gt;&gt;&gt;</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">d_x</span><span class="p">,</span><span class="w"> </span><span class="n">d_y</span><span class="p">);</span>
 
 <span class="w">  </span><span class="c1">// Semáforo para aguardar o término da computação na GPU </span>
 <span class="w">  </span><span class="n">cudaDeviceSynchronize</span><span class="p">();</span>
 
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">end_comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+
+
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">start_dados</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
 <span class="w">  </span><span class="c1">// Transferencia de dados GPU → CPU</span>
 <span class="w">  </span><span class="n">cudaMemcpy</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">d_y</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="n">cudaMemcpyDeviceToHost</span><span class="p">);</span>
 
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">end_dados</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+
 <span class="w">  </span><span class="c1">// fim do tempo</span>
 <span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
-<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">duration</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">elapsed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start</span><span class="p">;</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">duration</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start</span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">duration</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">end_comp</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start_comp</span><span class="p">;</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">duration</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dados_crus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dados_end</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">dados_start</span><span class="p">;</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">duration</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dados_comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">end_dados</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start_dados</span><span class="p">;</span>
+
 
 <span class="w">  </span><span class="c1">// Criação dos das variaveis para exibir o output</span>
 <span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">maxError</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span>
@@ -1482,10 +1426,14 @@ Tempo de execução: 0.00013891 segundos
 <span class="w">  </span><span class="p">}</span>
 
 <span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">cudaGetLastError</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Erro máximo: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">maxError</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Erro: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">maxError</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;N: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 <span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Soma total: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">somaTotal</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Tempo total (CPU-&gt;GPU-&gt;CPU): &quot;</span>
-<span class="w">            </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">elapsed</span><span class="p">.</span><span class="n">count</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; segundos&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Tempo de transferência dos dados (CPU-&gt;GPU) &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">dados_crus</span><span class="p">.</span><span class="n">count</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; segundos&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Tempo de calculos na GPU &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">comp</span><span class="p">.</span><span class="n">count</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; segundos&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Tempo de transferência dos dados (CPU&lt;-GPU) &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">dados_comp</span><span class="p">.</span><span class="n">count</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; segundos&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Tempo total de tudo mesmo &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">total</span><span class="p">.</span><span class="n">count</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; segundos&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 
 <span class="w">  </span><span class="c1">// Libera memória</span>
 <span class="w">  </span><span class="n">cudaFree</span><span class="p">(</span><span class="n">d_x</span><span class="p">);</span>
@@ -1505,136 +1453,63 @@ Tempo de execução: 0.00013891 segundos
 </code></pre></div>
 Esse  <code>--gres=gpu:1</code> aloca 1 GPU  para executar o binário  <code>./ex1</code>  na fila gpu do Cluster Franky</p>
 <p>Saída esperada:</p>
-<div class="highlight"><pre><span></span><code>Erro máximo: 0
-Soma total: 3e+06
+<div class="highlight"><pre><span></span><code>0
+Erro: 0
+N: 1000000000
+Soma total: 3e+09
+Tempo de transferência dos dados (CPU-&gt;GPU) 0.663264 segundos
+Tempo de calculos na GPU 0.0722021 segundos
+Tempo de transferência dos dados (CPU&lt;-GPU) 0.307847 segundos
+Tempo total de tudo mesmo 1.04331 segundos
 </code></pre></div>
-<h3 id="explicacao-do-kernel-cuda">Explicação do Kernel CUDA<a class="headerlink" href="#explicacao-do-kernel-cuda" title="Permanent link">&para;</a></h3>
-<p>Até agora, vimos como executar um <strong>kernel CUDA</strong> com múltiplas <em>threads</em> dentro de <strong>um único bloco</strong>.
-Mas as GPUs são compostas por <strong>múltiplos processadores paralelos</strong>, chamados <strong>Streaming Multiprocessors (SMs)</strong>.
-Cada <strong>SM</strong> pode executar <strong>vários blocos de threads simultaneamente</strong>.</p>
-<p>Por exemplo:</p>
+<h3 id="natureza-do-problema">Natureza do problema<a class="headerlink" href="#natureza-do-problema" title="Permanent link">&para;</a></h3>
+<p>A operação:</p>
+<div class="highlight"><pre><span></span><code><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</code></pre></div>
+<p>tem as seguintes características:</p>
 <ul>
-<li>Uma <strong>GPU Tesla P100 (arquitetura Pascal)</strong> possui <strong>56 SMs</strong>.</li>
-<li>Cada SM pode manter até <strong>2048 threads ativas</strong>.</li>
-<li>Isso totaliza mais de <strong>100 mil threads em execução paralela</strong>!</li>
+<li>1 soma por elemento</li>
+<li>2 leituras de memória</li>
+<li>1 escrita de memória</li>
 </ul>
-<p>Para aproveitar todo esse paralelismo, precisamos lançar o kernel com múltiplos blocos.</p>
-<h3 id="o-que-e-uma-grid-e-o-que-e-um-block">O que é uma <em>Grid</em> e o que é um <em>Block</em>?<a class="headerlink" href="#o-que-e-uma-grid-e-o-que-e-um-block" title="Permanent link">&para;</a></h3>
-<p>Em CUDA:</p>
-<ul>
-<li>Cada <strong>bloco</strong> (<em>block</em>) é um grupo de threads que trabalham juntas e compartilham memória local.</li>
-<li>O conjunto de todos os blocos forma uma <strong>grade</strong> (<em>grid</em>).</li>
-</ul>
-<p>Portanto:</p>
+<p>Isso significa que o custo é dominado por acesso à memória, não por cálculo.</p>
+<p>Esse tipo de problema é chamado de:</p>
 <blockquote>
-<p>Uma <strong>grade</strong> é composta por <strong>vários blocos</strong>, e cada <strong>bloco</strong> contém várias <strong>threads</strong>.</p>
+<p>memory-bound</p>
 </blockquote>
-<p>A GPU distribui esses blocos entre seus SMs, executando eles conforme há recursos disponíveis.</p>
-<h3 id="configurando-a-execucao-com-multiplos-blocos">Configurando a Execução com Múltiplos Blocos<a class="headerlink" href="#configurando-a-execucao-com-multiplos-blocos" title="Permanent link">&para;</a></h3>
-<p>Se temos <code>N</code> elementos (ex: 1 milhão) e queremos 256 threads por bloco,
-precisamos calcular <strong>quantos blocos</strong> são necessários para cobrir todos os elementos.</p>
-<p>O cálculo é simples:</p>
-<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">blockSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">256</span><span class="p">;</span>
-<span class="kt">int</span><span class="w"> </span><span class="n">numBlocks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">N</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">blockSize</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">blockSize</span><span class="p">;</span>
-<span class="n">add</span><span class="o">&lt;&lt;&lt;</span><span class="n">numBlocks</span><span class="p">,</span><span class="w"> </span><span class="n">blockSize</span><span class="o">&gt;&gt;&gt;</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
-</code></pre></div>
-<ul>
-<li><code>blockSize</code> → número de threads por bloco (normalmente múltiplo de 32).</li>
-<li><code>numBlocks</code> → número de blocos necessários (arredondando para cima).</li>
-<li><code>&lt;&lt;&lt;numBlocks, blockSize&gt;&gt;&gt;</code> → diz ao CUDA quantos blocos e threads criar.</li>
-</ul>
+<p>O que aconteceu:</p>
+<ol>
+<li>A GPU executou o cálculo muito rapidamente (0.07 s)</li>
+<li>Mas o custo de movimentar os dados foi muito alto (~1 s)</li>
+<li>O tempo total ficou maior que o da CPU</li>
+</ol>
+<p>Conclusão importante:</p>
 <blockquote>
-<p>Dessa forma, garantimos pelo menos <strong>N threads</strong> para processar todos os elementos.</p>
+<p>A GPU não foi mais lenta em computação, mas o sistema como um todo foi mais lento devido à movimentação de dados.</p>
 </blockquote>
-<h3 id="calculando-o-indice-global-de-cada-thread">Calculando o Índice Global de Cada Thread<a class="headerlink" href="#calculando-o-indice-global-de-cada-thread" title="Permanent link">&para;</a></h3>
-<p>Agora, dentro do <em>kernel</em>, precisamos adaptar o código para que <strong>cada thread saiba qual parte do vetor processar</strong>.</p>
-<p>CUDA fornece variáveis internas que ajudam nisso:</p>
+<p>Na CPU </p>
 <ul>
-<li><code>threadIdx.x</code> → índice da thread dentro do bloco</li>
-<li><code>blockIdx.x</code> → índice do bloco dentro da grade</li>
-<li><code>blockDim.x</code> → número de threads por bloco</li>
-<li><code>gridDim.x</code> → número total de blocos</li>
+<li>Threads compartilham a mesma memória</li>
+<li>Não há cópia de dados</li>
+<li>O custo é apenas acesso à RAM</li>
 </ul>
-<p>O índice global é calculado assim:</p>
-<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">blockIdx</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">blockDim</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">threadIdx</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
-</code></pre></div>
-<p>Esse cálculo é <strong>padrão em CUDA</strong>, porque é o permite mapear cada thread a uma posição única no vetor.</p>
-<p>Mas, até agora, cada thread processa <strong>apenas um elemento</strong> usando:</p>
-<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">blockIdx</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">blockDim</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">threadIdx</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
-<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-<span class="p">}</span>
-</code></pre></div>
-<p>Isso funciona bem, mas tem uma limitação importante:</p>
-<blockquote>
-<p>Se o número de threads lançadas for menor que <code>N</code>, parte dos dados não será processada.</p>
-</blockquote>
-<p>Além disso, em aplicações reais:</p>
+<p>Na GPU:</p>
 <ul>
-<li>Nem sempre queremos lançar milhões de threads</li>
-<li>Queremos reutilizar threads de forma eficiente</li>
-<li>Precisamos escalar para qualquer tamanho de entrada</li>
+<li>Existe uma memória separada (device memory)</li>
+<li>É necessário copiar dados explicitamente</li>
+<li>O custo de comunicação é alto</li>
 </ul>
-<p><strong>Solução:</strong> usar o padrão de <strong>Grid-Stride Loop</strong></p>
-<p>Em vez de cada thread processar 1 elemento, ela passa a processar vários elementos espaçados pela grid.</p>
-<p>O passo (stride) é:</p>
-<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">stride</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">blockDim</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">gridDim</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
-</code></pre></div>
-<p>Ficaria mais ou menos assim:
-<div class="highlight"><pre><span></span><code><span class="n">__global__</span>
-<span class="kt">void</span><span class="w"> </span><span class="n">add_grid</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">y</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">blockIdx</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">blockDim</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">threadIdx</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
-
-<span class="w">    </span><span class="c1">// Distância total entre threads na grid</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">stride</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">blockDim</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">gridDim</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
-
-<span class="w">    </span><span class="c1">// Cada thread processa múltiplos elementos</span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">idx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w"> </span><span class="n">idx</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">idx</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">stride</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">y</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="p">[</span><span class="n">idx</span><span class="p">];</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></p>
-<h2 id="o-que-mudou">O que mudou?<a class="headerlink" href="#o-que-mudou" title="Permanent link">&para;</a></h2>
-<p>Antes:</p>
-<ul>
-<li>1 thread → 1 elemento</li>
-</ul>
-<p>Agora:</p>
-<ul>
-<li>1 thread → vários elementos</li>
-<li>Threads “caminham” pelo vetor em saltos (stride)</li>
-</ul>
-<p>Agora você pode <strong>limitar propositalmente o número de blocos</strong>, por exemplo:</p>
-<p><div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">blockSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">256</span><span class="p">;</span>
-
-<span class="c1">// número FIXO de blocos </span>
-<span class="kt">int</span><span class="w"> </span><span class="n">numBlocks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1024</span><span class="p">;</span>
-
-<span class="n">add_grid</span><span class="o">&lt;&lt;&lt;</span><span class="n">numBlocks</span><span class="p">,</span><span class="w"> </span><span class="n">blockSize</span><span class="o">&gt;&gt;&gt;</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">d_x</span><span class="p">,</span><span class="w"> </span><span class="n">d_y</span><span class="p">);</span>
-</code></pre></div>
-Isso permite:</p>
-<ul>
-<li>Controlar melhor o uso da GPU</li>
-<li>Testar desempenho com diferentes configurações</li>
-</ul>
-<h2 id="atividade">ATIVIDADE<a class="headerlink" href="#atividade" title="Permanent link">&para;</a></h2>
-<ul>
-<li>Troque o kernel <code>add</code> por <code>add_grid</code></li>
-<li>Faça a computação em grid no kernel <code>add_grid</code></li>
-<li>Verifique se o resultado continua correto</li>
-</ul>
+<h2 id="desafio">DESAFIO<a class="headerlink" href="#desafio" title="Permanent link">&para;</a></h2>
 <p>Teste o código com diferentes configurações:</p>
 <div class="highlight"><pre><span></span><code><span class="n">numBlocks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="p">;</span>
 <span class="n">numBlocks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">128</span><span class="p">;</span>
 <span class="n">numBlocks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1024</span><span class="p">;</span>
 </code></pre></div>
-<blockquote>
-<p>"E se os dados fossem uma matriz?”</p>
-</blockquote>
-<p>Como você faria a computação em GPU de uma matriz 2D?
+<p>Melhorou ou piorou o tempo?
+Como você faria a computação em GPU de uma matriz 2D?
 E de uma matriz 3D?
-Veremos como fazer a computação de matrizes em GPU nos próximos capitulos...</p>
+Será que da pra melhorar o tempo de alocação dos dados?</p>
+<p>Veremos nos próximos capitulos...</p>
 <h2 id="se-quiser-aprender-mais">Se quiser aprender mais<a class="headerlink" href="#se-quiser-aprender-mais" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Explore a <a href="https://docs.nvidia.com/cuda/index.html">documentação do CUDA Toolkit</a>.
