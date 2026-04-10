@@ -59,7 +59,7 @@ void add(int n, float *x, float *y)
 
 int main(void)
 {
-  int N = 100'000'000; 
+  int N = 1'000'000'000; 
   float *x = new float[N];
   float *y = new float[N];
 
@@ -88,7 +88,8 @@ int main(void)
     somaTotal += y[i];
   }
 
-  std::cout << "Erro máximo: " << maxError << std::endl;
+  std::cout << "Erro: " << maxError << std::endl;
+  std::cout << "N: " << N << std::endl;
   std::cout << "Soma total: " << somaTotal << std::endl;
   std::cout << "Tempo de execução: " << elapsed.count() << " segundos" << std::endl;
 
@@ -109,9 +110,10 @@ Compile e execute localmente (sem GPU):
 Saída esperada:
 
 ```
-Erro máximo: 0
-Soma total: 3e+06
-Tempo de execução: 0.00013891 segundos
+Erro: 0
+N: 1000000000
+Soma total: 3e+09
+Tempo de execução: 0.30549 segundos
 ```
 
 
@@ -152,7 +154,7 @@ void add(int n, float *x, float *y)
 
 int main(void)
 {
-  int N = 100'000'000;
+  int N = 1'000'000'000;
   size_t size = N * sizeof(float);
 
   // Cria os vetores na CPU
@@ -173,27 +175,41 @@ int main(void)
 
   // início do tempo (incluindo transferência)
   auto start = std::chrono::high_resolution_clock::now();
-
+  
+  auto dados_start = std::chrono::high_resolution_clock::now();
   // Transferencia dos dados CPU → GPU
   cudaMemcpy(d_x, x, size, cudaMemcpyHostToDevice);
   cudaMemcpy(d_y, y, size, cudaMemcpyHostToDevice);
-
+  auto dados_end = std::chrono::high_resolution_clock::now();
+  
   // Configurando o kernel
   int blockSize = 256;
   int numBlocks = (N + blockSize - 1) / blockSize;
 
+  auto start_comp = chrono::high_resolution_clock::now();
   // Computação na GPU
   add<<<numBlocks, blockSize>>>(N, d_x, d_y);
 
   // Semáforo para aguardar o término da computação na GPU 
   cudaDeviceSynchronize();
 
+  auto end_comp = chrono::high_resolution_clock::now();
+
+  
+  auto start_dados = chrono::high_resolution_clock::now();
   // Transferencia de dados GPU → CPU
   cudaMemcpy(y, d_y, size, cudaMemcpyDeviceToHost);
 
+  auto end_dados = chrono::high_resolution_clock::now();
+
   // fim do tempo
   auto end = std::chrono::high_resolution_clock::now();
-  std::chrono::duration<double> elapsed = end - start;
+  std::chrono::duration<double> total = end - start;
+
+  std::chrono::duration<double> comp = end_comp - start_comp;
+  std::chrono::duration<double> dados_crus = dados_end - dados_start;
+  std::chrono::duration<double> dados_comp = end_dados - start_dados;
+
 
   // Criação dos das variaveis para exibir o output
   float maxError = 0.0f;
@@ -206,11 +222,15 @@ int main(void)
   }
 
   std::cout << cudaGetLastError() << std::endl;
-  std::cout << "Erro máximo: " << maxError << std::endl;
+  std::cout << "Erro: " << maxError << std::endl;
+  std::cout << "N: " << N << std::endl;
   std::cout << "Soma total: " << somaTotal << std::endl;
-  std::cout << "Tempo total (CPU->GPU->CPU): "
-            << elapsed.count() << " segundos" << std::endl;
 
+  std::cout << "Tempo de transferência dos dados (CPU->GPU) " << dados_crus.count() << " segundos" << std::endl;
+  std::cout << "Tempo de calculos na GPU " << comp.count() << " segundos" << std::endl;
+  std::cout << "Tempo de transferência dos dados (CPU<-GPU) " << dados_comp.count() << " segundos" << std::endl;
+  std::cout << "Tempo total de tudo mesmo " << total.count() << " segundos" << std::endl;
+  
   // Libera memória
   cudaFree(d_x);
   cudaFree(d_y);
@@ -240,158 +260,65 @@ Esse  `--gres=gpu:1` aloca 1 GPU  para executar o binário  `./ex1`  na fila gpu
 Saída esperada:
 
 ```
-Erro máximo: 0
-Soma total: 3e+06
+0
+Erro: 0
+N: 1000000000
+Soma total: 3e+09
+Tempo de transferência dos dados (CPU->GPU) 0.663264 segundos
+Tempo de calculos na GPU 0.0722021 segundos
+Tempo de transferência dos dados (CPU<-GPU) 0.307847 segundos
+Tempo total de tudo mesmo 1.04331 segundos
 ```
 
+### Natureza do problema
 
-###  Explicação do Kernel CUDA
-
-Até agora, vimos como executar um **kernel CUDA** com múltiplas *threads* dentro de **um único bloco**.
-Mas as GPUs são compostas por **múltiplos processadores paralelos**, chamados **Streaming Multiprocessors (SMs)**.
-Cada **SM** pode executar **vários blocos de threads simultaneamente**.
-
-Por exemplo:
-
-* Uma **GPU Tesla P100 (arquitetura Pascal)** possui **56 SMs**.
-* Cada SM pode manter até **2048 threads ativas**.
-* Isso totaliza mais de **100 mil threads em execução paralela**!
-
-Para aproveitar todo esse paralelismo, precisamos lançar o kernel com múltiplos blocos.
-
-
-### O que é uma *Grid* e o que é um *Block*?
-
-Em CUDA:
-
-* Cada **bloco** (*block*) é um grupo de threads que trabalham juntas e compartilham memória local.
-* O conjunto de todos os blocos forma uma **grade** (*grid*).
-
-Portanto:
-
-> Uma **grade** é composta por **vários blocos**, e cada **bloco** contém várias **threads**.
-
-A GPU distribui esses blocos entre seus SMs, executando eles conforme há recursos disponíveis.
-
-
-### Configurando a Execução com Múltiplos Blocos
-
-Se temos `N` elementos (ex: 1 milhão) e queremos 256 threads por bloco,
-precisamos calcular **quantos blocos** são necessários para cobrir todos os elementos.
-
-O cálculo é simples:
+A operação:
 
 ```cpp
-int blockSize = 256;
-int numBlocks = (N + blockSize - 1) / blockSize;
-add<<<numBlocks, blockSize>>>(N, x, y);
+y[i] = x[i] + y[i];
 ```
 
-* `blockSize` → número de threads por bloco (normalmente múltiplo de 32).
-* `numBlocks` → número de blocos necessários (arredondando para cima).
-* `<<<numBlocks, blockSize>>>` → diz ao CUDA quantos blocos e threads criar.
+tem as seguintes características:
 
-> Dessa forma, garantimos pelo menos **N threads** para processar todos os elementos.
+* 1 soma por elemento
+* 2 leituras de memória
+* 1 escrita de memória
 
+Isso significa que o custo é dominado por acesso à memória, não por cálculo.
 
-### Calculando o Índice Global de Cada Thread
-
-Agora, dentro do *kernel*, precisamos adaptar o código para que **cada thread saiba qual parte do vetor processar**.
-
-CUDA fornece variáveis internas que ajudam nisso:
-
-* `threadIdx.x` → índice da thread dentro do bloco
-* `blockIdx.x` → índice do bloco dentro da grade
-* `blockDim.x` → número de threads por bloco
-* `gridDim.x` → número total de blocos
-
-O índice global é calculado assim:
-
-```cpp
-int index = blockIdx.x * blockDim.x + threadIdx.x;
-```
-
-Esse cálculo é **padrão em CUDA**, porque é o permite mapear cada thread a uma posição única no vetor.
-
-Mas, até agora, cada thread processa **apenas um elemento** usando:
-
-```cpp
-int i = blockIdx.x * blockDim.x + threadIdx.x;
-if (i < n) {
-    y[i] = x[i] + y[i];
-}
-```
-
-Isso funciona bem, mas tem uma limitação importante:
-
-> Se o número de threads lançadas for menor que `N`, parte dos dados não será processada.
-
-Além disso, em aplicações reais:
-
-* Nem sempre queremos lançar milhões de threads
-* Queremos reutilizar threads de forma eficiente
-* Precisamos escalar para qualquer tamanho de entrada
-
-**Solução:** usar o padrão de **Grid-Stride Loop**
-
-Em vez de cada thread processar 1 elemento, ela passa a processar vários elementos espaçados pela grid.
-
-O passo (stride) é:
-
-```cpp
-int stride = blockDim.x * gridDim.x;
-```
-
-Ficaria mais ou menos assim:
-```cpp
-__global__
-void add_grid(int n, float *x, float *y)
-{
-    int i = blockIdx.x * blockDim.x + threadIdx.x;
-
-    // Distância total entre threads na grid
-    int stride = blockDim.x * gridDim.x;
-
-    // Cada thread processa múltiplos elementos
-    for (int idx = i; idx < n; idx += stride) {
-        y[idx] = x[idx] + y[idx];
-    }
-}
-```
-
-## O que mudou?
-
-Antes:
-
-* 1 thread → 1 elemento
-
-Agora:
-
-* 1 thread → vários elementos
-* Threads “caminham” pelo vetor em saltos (stride)
+Esse tipo de problema é chamado de:
 
 
-Agora você pode **limitar propositalmente o número de blocos**, por exemplo:
-
-```cpp
-int blockSize = 256;
-
-// número FIXO de blocos 
-int numBlocks = 1024;
-
-add_grid<<<numBlocks, blockSize>>>(N, d_x, d_y);
-```
-Isso permite:
-
-* Controlar melhor o uso da GPU
-* Testar desempenho com diferentes configurações
+> memory-bound
 
 
-## ATIVIDADE
+O que aconteceu:
 
-* Troque o kernel `add` por `add_grid`
-* Faça a computação em grid no kernel `add_grid`
-* Verifique se o resultado continua correto
+1. A GPU executou o cálculo muito rapidamente (0.07 s)
+2. Mas o custo de movimentar os dados foi muito alto (~1 s)
+3. O tempo total ficou maior que o da CPU
+
+Conclusão importante:
+
+> A GPU não foi mais lenta em computação, mas o sistema como um todo foi mais lento devido à movimentação de dados.
+
+
+Na CPU 
+
+* Threads compartilham a mesma memória
+* Não há cópia de dados
+* O custo é apenas acesso à RAM
+
+Na GPU:
+
+* Existe uma memória separada (device memory)
+* É necessário copiar dados explicitamente
+* O custo de comunicação é alto
+
+
+
+
+## DESAFIO
 
 Teste o código com diferentes configurações:
 
@@ -401,11 +328,12 @@ numBlocks = 128;
 numBlocks = 1024;
 ```
 
-> "E se os dados fossem uma matriz?”
-
+Melhorou ou piorou o tempo?
 Como você faria a computação em GPU de uma matriz 2D?
 E de uma matriz 3D?
-Veremos como fazer a computação de matrizes em GPU nos próximos capitulos...
+Será que da pra melhorar o tempo de alocação dos dados?
+
+Veremos nos próximos capitulos...
 
 ## Se quiser aprender mais
 
