@@ -46,7 +46,7 @@ nav:
         - "Aula 12 - Acesso ao Supercomputador SDumont": aulas/aula12/index.md
         - "Aula 13 - Paralelismo em GPU com CUDA": aulas/aula13/index.md
 #        - "Aula 14 - Condições de corrida e throughput": aulas/aula14/index.md
-#       - "Aula 15 - Stencil, tilling e agendamento de threads": aulas/aula15/index.md
+        - "Aula 14 - Otimização de memória em GPU": aulas/aula14/index.md
 #        - "Aula 16 - Redução e Scan com CUDA" : aulas/aula16/index.md
 #        - "Aula 17 - Matriz esparsa e Computação Assíncrona" : aulas/aula17/index.md
 #        - "Aula 18 - Profiling em GPU" : aulas/aula18/index.md
