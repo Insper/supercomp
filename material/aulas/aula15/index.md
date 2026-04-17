@@ -27,7 +27,7 @@ Assim, a cada etapa o número de somas necessárias cai pela metade, logo o núm
 No código, o `stride` representa a distância entre os elementos que estão sendo somados em cada passo:
 
 ```cpp
-for (unsigned int stride = blockDim.x; stride > 0; stride /= 2) {
+for (int stride = blockDim.x; stride > 0; stride /= 2) {
     __syncthreads();
     if (t < stride)
         partialSum[t] += partialSum[t + stride];
@@ -82,7 +82,7 @@ __global__ void reduceShared(float *input, float *output, int N) {
         partialSum[blockDim.x + t] = 0.0f;
 
     // Loop de redução: stride aumenta a cada passo (1, 2, 4, ..., blockDim.x)
-    for (unsigned int stride = 1; stride <= blockDim.x; stride *= 2) {
+    for (int stride = 1; stride <= blockDim.x; stride *= 2) {
         // Garante que todos os valores foram somados antes de prosseguir
         __syncthreads();
 
@@ -132,7 +132,7 @@ Isso significa que, nas iterações iniciais, os warps executam de forma uniform
 Além de reduzir a divergência, essa abordagem também melhora a localidade espacial do código:
 
 ```cpp
-for (unsigned int stride = blockDim.x; stride > 0; stride /= 2) {
+for (int stride = blockDim.x; stride > 0; stride /= 2) {
     __syncthreads();
     if (t < stride)
         partialSum[t] += partialSum[t + stride];
