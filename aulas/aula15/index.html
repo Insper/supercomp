@@ -11,6 +11,10 @@
         <link rel="canonical" href="https://insper.github.io/supercomp/aulas/aula15/">
       
       
+        <link rel="prev" href="../aula14/">
+      
+      
+        <link rel="next" href="../../teoria/slides/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -18,7 +22,7 @@
     
     
       
-        <title>Programação Paralela em GPU com CUDA Stencil, Tiling e Agendamento de Threads - SuperComputação - 2026/1</title>
+        <title>Aula 15 - Redução e Scan com CUDA - SuperComputação - 2026/1</title>
       
     
     
@@ -80,7 +84,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#programacao-paralela-em-gpu-com-cuda-stencil-tiling-e-agendamento-de-threads" class="md-skip">
+        <a href="#programacao-paralela-em-gpu-reducao-e-scan-com-cuda" class="md-skip">
           Skip to content
         </a>
       
@@ -114,7 +118,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Programação Paralela em GPU com CUDA Stencil, Tiling e Agendamento de Threads
+              Aula 15 - Redução e Scan com CUDA
             
           </span>
         </div>
@@ -227,10 +231,12 @@
         
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
+      <li class="md-tabs__item md-tabs__item--active">
         <a href="../aula01/" class="md-tabs__link">
           
   
@@ -369,23 +375,28 @@
       
   
   
+    
   
   
+  
     
     
     
-      
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
             
   
   <span class="md-ellipsis">
@@ -397,7 +408,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             Aulas
@@ -707,6 +718,228 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Aula 15 - Redução e Scan com CUDA
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Aula 15 - Redução e Scan com CUDA
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#reducao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Redução
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Redução">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#estrutura-conceitual-da-reducao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Estrutura conceitual da redução
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#estrategia" class="md-nav__link">
+    <span class="md-ellipsis">
+      Estratégia:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scan" class="md-nav__link">
+    <span class="md-ellipsis">
+      Scan
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Scan">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scan-simples" class="md-nav__link">
+    <span class="md-ellipsis">
+      Scan Simples
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#estrategia_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Estratégia:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#codigo-cuda" class="md-nav__link">
+    <span class="md-ellipsis">
+      Código (CUDA):
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#limitacoes-dessa-abordagem" class="md-nav__link">
+    <span class="md-ellipsis">
+      Limitações dessa abordagem
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#otimizacao-varredura-em-arvore-com-propagacao-reversa" class="md-nav__link">
+    <span class="md-ellipsis">
+      Otimização: Varredura em Árvore com Propagação Reversa
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Otimização: Varredura em Árvore com Propagação Reversa">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#etapas-da-otimizacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Etapas da otimização:
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Etapas da otimização:">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fase-1-up-sweep" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fase 1 – Up-Sweep
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fase-2-down-sweep" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fase 2 – Down-Sweep
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#codigo-cuda-otimizado" class="md-nav__link">
+    <span class="md-ellipsis">
+      Código (CUDA otimizado):
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercicio-reducao-e-scan-com-cuda" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercício: Redução e Scan com CUDA
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#este-exercicio-nao-tem-entrega-bom-final-de-semana" class="md-nav__link">
+    <span class="md-ellipsis">
+      Este Exercício não tem entrega, bom final de semana!
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1036,28 +1269,28 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#o-que-e-um-stencil-operation" class="md-nav__link">
+  <a href="#reducao" class="md-nav__link">
     <span class="md-ellipsis">
-      O que é um Stencil Operation?
+      Redução
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Redução">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#estrutura-conceitual-da-reducao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Estrutura conceitual da redução
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#aplicando-a-logica-de-stencil-a-uma-operacao-de-convolucao" class="md-nav__link">
-    <span class="md-ellipsis">
-      Aplicando a lógica de Stencil a uma operação de convolução
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Aplicando a lógica de Stencil a uma operação de convolução">
-      <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#exemplo-filtro-33" class="md-nav__link">
+  <a href="#estrategia" class="md-nav__link">
     <span class="md-ellipsis">
-      Exemplo: Filtro 3×3
+      Estratégia:
     </span>
   </a>
   
@@ -1069,28 +1302,37 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#tiling" class="md-nav__link">
+  <a href="#scan" class="md-nav__link">
     <span class="md-ellipsis">
-      Tiling
+      Scan
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Tiling">
+    <nav class="md-nav" aria-label="Scan">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#relembrando" class="md-nav__link">
+  <a href="#scan-simples" class="md-nav__link">
     <span class="md-ellipsis">
-      Relembrando:
+      Scan Simples
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#mesmo-codigo-agora-com-shared-memory-e-bordas" class="md-nav__link">
+  <a href="#estrategia_1" class="md-nav__link">
     <span class="md-ellipsis">
-      Mesmo código, agora com shared memory e bordas
+      Estratégia:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#codigo-cuda" class="md-nav__link">
+    <span class="md-ellipsis">
+      Código (CUDA):
     </span>
   </a>
   
@@ -1102,28 +1344,47 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#agendamento-de-threads" class="md-nav__link">
+  <a href="#limitacoes-dessa-abordagem" class="md-nav__link">
     <span class="md-ellipsis">
-      Agendamento de Threads
+      Limitações dessa abordagem
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Agendamento de Threads">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#otimizacao-varredura-em-arvore-com-propagacao-reversa" class="md-nav__link">
+    <span class="md-ellipsis">
+      Otimização: Varredura em Árvore com Propagação Reversa
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Otimização: Varredura em Árvore com Propagação Reversa">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#implicacoes-praticas" class="md-nav__link">
+  <a href="#etapas-da-otimizacao" class="md-nav__link">
     <span class="md-ellipsis">
-      Implicações práticas:
+      Etapas da otimização:
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Etapas da otimização:">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fase-1-up-sweep" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fase 1 – Up-Sweep
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#conclusao" class="md-nav__link">
+  <a href="#fase-2-down-sweep" class="md-nav__link">
     <span class="md-ellipsis">
-      Conclusão
+      Fase 2 – Down-Sweep
     </span>
   </a>
   
@@ -1131,6 +1392,38 @@
         
       </ul>
     </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#codigo-cuda-otimizado" class="md-nav__link">
+    <span class="md-ellipsis">
+      Código (CUDA otimizado):
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercicio-reducao-e-scan-com-cuda" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercício: Redução e Scan com CUDA
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#este-exercicio-nao-tem-entrega-bom-final-de-semana" class="md-nav__link">
+    <span class="md-ellipsis">
+      Este Exercício não tem entrega, bom final de semana!
+    </span>
+  </a>
   
 </li>
       
@@ -1153,363 +1446,655 @@
   
 
 
-<h1 id="programacao-paralela-em-gpu-com-cuda-stencil-tiling-e-agendamento-de-threads"><strong>Programação Paralela em GPU com CUDA Stencil, Tiling e Agendamento de Threads</strong><a class="headerlink" href="#programacao-paralela-em-gpu-com-cuda-stencil-tiling-e-agendamento-de-threads" title="Permanent link">&para;</a></h1>
-<h2 id="o-que-e-um-stencil-operation">O que é um <em>Stencil Operation</em>?<a class="headerlink" href="#o-que-e-um-stencil-operation" title="Permanent link">&para;</a></h2>
-<p>Um <strong>stencil</strong> é um padrão computacional onde o valor de uma célula de saída depende de uma <strong>vizinhança local</strong> de células de entrada.</p>
-<ul>
-<li>Fórmula geral:</li>
-</ul>
-<div class="arithmatex">
-<div class="MathJax_Preview">
-out[i, j] = f(in[i-1, j], in[i, j-1], in[i, j], in[i+1, j], in[i, j+1])
-</div>
-<script type="math/tex; mode=display">
-out[i, j] = f(in[i-1, j], in[i, j-1], in[i, j], in[i+1, j], in[i, j+1])
-</script>
-</div>
-<p>Quando estamos trabalhando em GPU é preciso pensar <strong>em blocos e vizinhos compartilhados</strong>.</p>
-<h2 id="aplicando-a-logica-de-stencil-a-uma-operacao-de-convolucao"><strong>Aplicando a lógica de Stencil a uma operação de convolução</strong><a class="headerlink" href="#aplicando-a-logica-de-stencil-a-uma-operacao-de-convolucao" title="Permanent link">&para;</a></h2>
-<p><img alt="https://www.ibm.com/think/topics/convolutional-neural-networks" src="image.png" />
-Convolução - Fonte: <a href="https://www.ibm.com/think/topics/convolutional-neural-networks">https://www.ibm.com/think/topics/convolutional-neural-networks</a></p>
-<h3 id="exemplo-filtro-33">Exemplo: Filtro 3×3<a class="headerlink" href="#exemplo-filtro-33" title="Permanent link">&para;</a></h3>
-<p><strong>Problema:</strong> cada thread acessa os mesmos elementos da memória global.</p>
-<p><strong>Solução:</strong> usar shared memory com tiling.</p>
-<div class="highlight"><pre><span></span><code><span class="n">__global__</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">conv2D</span><span class="p">(</span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">input</span><span class="p">,</span><span class="w">   </span><span class="c1">// ponteiro para a imagem de entrada </span>
-<span class="w">                       </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">output</span><span class="p">,</span><span class="w">  </span><span class="c1">// ponteiro para a imagem de saída</span>
-<span class="w">                       </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">mask</span><span class="p">,</span><span class="w">    </span><span class="c1">// máscara 3x3 usada na convolução</span>
-<span class="w">                       </span><span class="kt">int</span><span class="w"> </span><span class="n">width</span><span class="p">,</span><span class="w">      </span><span class="c1">// largura da imagem</span>
-<span class="w">                       </span><span class="kt">int</span><span class="w"> </span><span class="n">height</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">   </span><span class="c1">// altura da imagem</span>
-
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">blockIdx</span><span class="p">.</span><span class="n">y</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">blockDim</span><span class="p">.</span><span class="n">y</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">threadIdx</span><span class="p">.</span><span class="n">y</span><span class="p">;</span><span class="w"> </span><span class="c1">// linha da imagem</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">blockIdx</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">blockDim</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">threadIdx</span><span class="p">.</span><span class="n">x</span><span class="p">;</span><span class="w"> </span><span class="c1">// coluna da imagem</span>
-
-<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">acc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span><span class="w"> </span><span class="c1">// acumulador</span>
-
-<span class="w">   </span><span class="c1">// Varre a vizinhança 3x3 ao redor do pixel central (i, j)</span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">y</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">x</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-
-<span class="w">            </span><span class="c1">// Calcula a posição do vizinho dentro da imagem de entrada</span>
-<span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="p">;</span>
-<span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
-
-<span class="w">            </span><span class="c1">// Verifica se a posição (r, c) está dentro dos limites da imagem</span>
-<span class="w">            </span><span class="kt">bool</span><span class="w"> </span><span class="n">dentroDaImagem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">r</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">height</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">width</span><span class="p">);</span>
-
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">dentroDaImagem</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="kt">int</span><span class="w"> </span><span class="n">pixelIndex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">c</span><span class="p">;</span>
-<span class="w">                </span><span class="kt">int</span><span class="w"> </span><span class="n">maskRow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
-<span class="w">                </span><span class="kt">int</span><span class="w"> </span><span class="n">maskCol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
-<span class="w">                </span><span class="kt">int</span><span class="w"> </span><span class="n">maskIndex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">maskRow</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">maskCol</span><span class="p">;</span>
-<span class="w">                </span><span class="kt">float</span><span class="w"> </span><span class="n">pixelValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">input</span><span class="p">[</span><span class="n">pixelIndex</span><span class="p">];</span>
-<span class="w">                </span><span class="kt">float</span><span class="w"> </span><span class="n">maskValue</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">mask</span><span class="p">[</span><span class="n">maskIndex</span><span class="p">];</span>
-
-<span class="w">                </span><span class="n">acc</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">pixelValue</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">maskValue</span><span class="p">;</span>
-<span class="w">            </span><span class="p">}</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="c1">// Escreve o resultado final no pixel correspondente da saída.</span>
-<span class="w">    </span><span class="n">output</span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">acc</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div>
-<h2 id="tiling"><strong>Tiling</strong><a class="headerlink" href="#tiling" title="Permanent link">&para;</a></h2>
-<h3 id="relembrando">Relembrando:<a class="headerlink" href="#relembrando" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Dividimos a matriz em <strong>tiles</strong> (blocos) que cabem na memória compartilhada .</li>
-<li>Cada bloco carrega seu pedaço + uma margem extra para carregar dados vizinhos.</li>
-<li>Cada <em>thread block</em> cuida de um tile.</li>
-<li><em>Halo</em> é o pedaço adicional carregado com os dados vizinhos, para evitar dependência entre blocos.</li>
-<li><code>__syncthreads()</code> barreira para garantir que todas as threads carregaram antes de processar.</li>
-</ul>
-<h3 id="mesmo-codigo-agora-com-shared-memory-e-bordas">Mesmo código, agora com <em>shared memory</em> e bordas<a class="headerlink" href="#mesmo-codigo-agora-com-shared-memory-e-bordas" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="cp">#define TILE_SIZE 16      </span><span class="c1">// tamanho da área de processamento do bloco</span>
-<span class="cp">#define MASK_RADIUS 1     </span><span class="c1">// raio da máscara 3x3</span>
-<span class="cp">#define MASK_SIZE 3</span>
-
-<span class="n">__global__</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">conv2D_tiled</span><span class="p">(</span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">input</span><span class="p">,</span><span class="w">   </span><span class="c1">// imagem de entrada</span>
-<span class="w">                             </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">output</span><span class="p">,</span><span class="w">  </span><span class="c1">// imagem de saída</span>
-<span class="w">                             </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">mask</span><span class="p">,</span><span class="w">    </span><span class="c1">// máscara 3x3</span>
-<span class="w">                             </span><span class="kt">int</span><span class="w"> </span><span class="n">width</span><span class="p">,</span><span class="w">      </span><span class="c1">// largura da imagem</span>
-<span class="w">                             </span><span class="kt">int</span><span class="w"> </span><span class="n">height</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">   </span><span class="c1">// altura da imagem</span>
-
-
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">tx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">threadIdx</span><span class="p">.</span><span class="n">x</span><span class="p">;</span><span class="w">  </span><span class="c1">// coluna da thread dentro do bloco</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">ty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">threadIdx</span><span class="p">.</span><span class="n">y</span><span class="p">;</span><span class="w">  </span><span class="c1">// linha da thread dentro do bloco</span>
-
-<span class="w">    </span><span class="c1">// posição global (i,j) da thread na imagem</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">blockIdx</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">TILE_SIZE</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tx</span><span class="p">;</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">blockIdx</span><span class="p">.</span><span class="n">y</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">TILE_SIZE</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ty</span><span class="p">;</span>
-
-<span class="w">    </span><span class="c1">// Memória compartilhada do bloco</span>
-<span class="w">    </span><span class="n">__shared__</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">tile</span><span class="p">[</span><span class="n">TILE_SIZE</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">MASK_RADIUS</span><span class="p">][</span><span class="n">TILE_SIZE</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">MASK_RADIUS</span><span class="p">];</span>
-
-<span class="w">    </span><span class="c1">// Calcula a posição global do pixel que esta thread deve carregar</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">inputRow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">MASK_RADIUS</span><span class="p">;</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">inputCol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">MASK_RADIUS</span><span class="p">;</span>
-
-<span class="w">    </span><span class="c1">// Carregamento da imagem para a memória compartilhada, cada thread carrega um elemento</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">inputRow</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">inputRow</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">height</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">inputCol</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">inputCol</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">width</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">tile</span><span class="p">[</span><span class="n">ty</span><span class="p">][</span><span class="n">tx</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">input</span><span class="p">[</span><span class="n">inputRow</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">inputCol</span><span class="p">];</span>
-<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">tile</span><span class="p">[</span><span class="n">ty</span><span class="p">][</span><span class="n">tx</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span><span class="w">  </span><span class="c1">// preenche com 0 fora da imagem </span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="c1">// Garante que todas as threads terminaram de carregar o tile</span>
+<h1 id="programacao-paralela-em-gpu-reducao-e-scan-com-cuda"><strong>Programação paralela em GPU Redução e Scan com CUDA</strong><a class="headerlink" href="#programacao-paralela-em-gpu-reducao-e-scan-com-cuda" title="Permanent link">&para;</a></h1>
+<h2 id="reducao">Redução<a class="headerlink" href="#reducao" title="Permanent link">&para;</a></h2>
+<p>Uma redução é uma operação onde muitos elementos são combinados em um só, em CUDA, não podemos usar algo como<code>sum += x[i]</code> diretamente. Precisamos de uma abordagem recursiva que reduza pares de elementos em várias etapas.</p>
+<h3 id="estrutura-conceitual-da-reducao">Estrutura conceitual da redução<a class="headerlink" href="#estrutura-conceitual-da-reducao" title="Permanent link">&para;</a></h3>
+<p>O objetivo da redução é combinar N elementos em um único valor.</p>
+<p>Como cada soma combina dois elementos por vez, após uma etapa de soma, o número de resultados parciais é metade do original.</p>
+<p>Por exemplo:</p>
+<table>
+<thead>
+<tr>
+<th>Etapa</th>
+<th>Entradas</th>
+<th>Operação</th>
+<th>Saídas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0 (inicial)</td>
+<td>8 valores</td>
+<td>-</td>
+<td>8</td>
+</tr>
+<tr>
+<td>1</td>
+<td>(x₀+x₁), (x₂+x₃), (x₄+x₅), (x₆+x₇)</td>
+<td>4 threads somam pares</td>
+<td>4</td>
+</tr>
+<tr>
+<td>2</td>
+<td>(x₀+x₁+x₂+x₃), (x₄+x₅+x₆+x₇)</td>
+<td>2 threads somam resultados anteriores</td>
+<td>2</td>
+</tr>
+<tr>
+<td>3</td>
+<td>(x₀+x₁+x₂+x₃+x₄+x₅+x₆+x₇)</td>
+<td>1 thread soma os últimos dois</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>Assim, a cada etapa o número de somas necessárias cai pela metade, logo o número de threads trabalhando também deve cair pela metade.</p>
+<p>No código, o <code>stride</code> representa a distância entre os elementos que estão sendo somados em cada passo:</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">stride</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">blockDim</span><span class="p">.</span><span class="n">x</span><span class="p">;</span><span class="w"> </span><span class="n">stride</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">stride</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">__syncthreads</span><span class="p">();</span>
-
-<span class="w">    </span><span class="c1">// Somente threads dentro da região útil calculam o pixel de saída</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">tx</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">MASK_RADIUS</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">tx</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">TILE_SIZE</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">MASK_RADIUS</span><span class="w"> </span><span class="o">&amp;&amp;</span>
-<span class="w">        </span><span class="n">ty</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">MASK_RADIUS</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">ty</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">TILE_SIZE</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">MASK_RADIUS</span><span class="w"> </span><span class="o">&amp;&amp;</span>
-<span class="w">        </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">height</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">width</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-
-<span class="w">        </span><span class="kt">float</span><span class="w"> </span><span class="n">acc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span><span class="w"> </span><span class="c1">// acumulador da convolução</span>
-
-<span class="w">        </span><span class="c1">// Varre a vizinhança 3x3 dentro da memória compartilhada</span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">MASK_RADIUS</span><span class="p">;</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">MASK_RADIUS</span><span class="p">;</span><span class="w"> </span><span class="n">y</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">MASK_RADIUS</span><span class="p">;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">MASK_RADIUS</span><span class="p">;</span><span class="w"> </span><span class="n">x</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="kt">int</span><span class="w"> </span><span class="n">maskRow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">MASK_RADIUS</span><span class="p">;</span>
-<span class="w">                </span><span class="kt">int</span><span class="w"> </span><span class="n">maskCol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">MASK_RADIUS</span><span class="p">;</span>
-<span class="w">                </span><span class="kt">float</span><span class="w"> </span><span class="n">pixelValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tile</span><span class="p">[</span><span class="n">ty</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="p">][</span><span class="n">tx</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">x</span><span class="p">];</span>
-<span class="w">                </span><span class="kt">float</span><span class="w"> </span><span class="n">maskValue</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">mask</span><span class="p">[</span><span class="n">maskRow</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">MASK_SIZE</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">maskCol</span><span class="p">];</span>
-<span class="w">                </span><span class="n">acc</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">pixelValue</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">maskValue</span><span class="p">;</span>
-<span class="w">            </span><span class="p">}</span>
-<span class="w">        </span><span class="p">}</span>
-
-<span class="w">        </span><span class="c1">// Escreve o valor final na imagem de saída (memória global)</span>
-<span class="w">        </span><span class="n">output</span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">acc</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">t</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">stride</span><span class="p">)</span>
+<span class="w">        </span><span class="n">partialSum</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">partialSum</span><span class="p">[</span><span class="n">t</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">stride</span><span class="p">];</span>
 <span class="p">}</span>
 </code></pre></div>
-<h2 id="agendamento-de-threads"><strong>Agendamento de Threads</strong><a class="headerlink" href="#agendamento-de-threads" title="Permanent link">&para;</a></h2>
-<p>A GPU organiza o trabalho em:</p>
-<p><img alt="warp" src="warp.png" />
-Fonte: <a href="https://developer.codeplay.com/products/computecpp/ce/1.3.0/guides/sycl-for-cuda-developers/execution-model">https://developer.codeplay.com/products/computecpp/ce/1.3.0/guides/sycl-for-cuda-developers/execution-model</a></p>
+<p>Na primeira iteração (<code>stride = blockDim.x / 2</code>), metade das threads soma pares de elementos:</p>
+<div class="codehilite"><pre><span></span><code>Thread 0 soma elementos 0 e 512
+
+Thread 1 soma elementos 1 e 513
+
+...
+
+Thread 511 soma elementos 511 e 1023
+</code></pre></div>
+
+<p>Após essa etapa, os 512 primeiros elementos já contêm as somas parciais.</p>
+<p>Na próxima iteração (<code>stride = 256</code>), apenas as 256 primeiras threads continuam, elas somam pares de resultados parciais. Esse processo continua até que reste apenas uma thread (t = 0), que contém a soma total.</p>
+<p>Esse padrão forma uma árvore binária de redução, onde cada nível tem metade dos nós do anterior.</p>
+<h3 id="estrategia">Estratégia:<a class="headerlink" href="#estrategia" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>Warps:</strong> grupos de 32 threads que executam em <em>SIMT</em> (Single Instruction, Multiple Thread).</li>
-<li><strong>SM (Streaming Multiprocessor):</strong> executa vários warps alternadamente para amenizar a latência.</li>
-<li>O <strong>agendador de warps</strong> alterna entre os warps prontos para computação.</li>
+<li>Usar <strong>memória compartilhada</strong> (<code>__shared__</code>) para armazenar os somatórios parciais.</li>
+<li>Em cada etapa, <strong>metade das threads</strong> faz soma com valores vizinhos</li>
+<li>O resultado final estará no índice <code>0</code> do vetor parcial.</li>
 </ul>
-<p><img alt="alt text" src="kernel-execution-on-gpu-1-625x438.png" />
-Fonte: <a href="https://developer.nvidia.com/blog/cuda-refresher-cuda-programming-model/">https://developer.nvidia.com/blog/cuda-refresher-cuda-programming-model/</a></p>
-<h3 id="implicacoes-praticas">Implicações práticas:<a class="headerlink" href="#implicacoes-praticas" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Melhor usar <strong>blocos com múltiplos de 32 threads</strong>.</li>
-<li>Evitar <strong>divergência de fluxo</strong> (ifs dentro do warp).</li>
-<li>Maximizar <strong>ocupação</strong>: usar <code>cudaOccupancyMaxPotentialBlockSize()</code> ajuda a determinar o tamanho adequado dos blocos.</li>
-</ul>
-<p>Aplicando todas as otimizações:
-<div class="highlight"><pre><span></span><code><span class="c1">//demo.cu</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iomanip&gt;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cmath&gt;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cuda_runtime.h&gt;</span>
-<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="c1">// Kernel de redução paralela usando memória compartilhada</span>
+<span class="n">__global__</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">reduceShared</span><span class="p">(</span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">input</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">output</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Vetor alocado dinamicamente na memória compartilhada</span>
+<span class="w">    </span><span class="k">extern</span><span class="w"> </span><span class="n">__shared__</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">partialSum</span><span class="p">[];</span>
 
-<span class="cp">#define MASK_RADIUS 1</span>
-<span class="cp">#define ITER_LOCAL 100</span>
+<span class="w">    </span><span class="c1">// Índice da thread no bloco</span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">threadIdx</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
 
-<span class="c1">// ================================================================</span>
-<span class="c1">// Utilitário para verificar erros de CUDA</span>
-<span class="c1">// ================================================================</span>
-<span class="cp">#define CHECK_CUDA(call) do { \</span>
-<span class="cp">    cudaError_t err = (call); \</span>
-<span class="cp">    if (err != cudaSuccess) { \</span>
-<span class="cp">        cerr &lt;&lt; &quot;CUDA error: &quot; &lt;&lt; cudaGetErrorString(err) \</span>
-<span class="cp">             &lt;&lt; &quot; at &quot; &lt;&lt; __FILE__ &lt;&lt; &quot;:&quot; &lt;&lt; __LINE__ &lt;&lt; endl; \</span>
-<span class="cp">        exit(1); \</span>
-<span class="cp">    } \</span>
-<span class="cp">} while(0)</span>
+<span class="w">    </span><span class="c1">// Cálculo do índice inicial do bloco (cada bloco processa 2 * blockDim.x elementos)</span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">blockIdx</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">blockDim</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
 
-<span class="c1">// ================================================================</span>
-<span class="c1">// Kernel: Stencil 2D com tiling em memória compartilhada</span>
-<span class="c1">// ================================================================</span>
-<span class="n">__global__</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">heatStencil2D</span><span class="p">(</span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">input</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">output</span><span class="p">,</span>
-<span class="w">                              </span><span class="kt">int</span><span class="w"> </span><span class="n">width</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">height</span><span class="p">,</span>
-<span class="w">                              </span><span class="kt">float</span><span class="w"> </span><span class="n">alpha</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">dt</span><span class="p">,</span>
-<span class="w">                              </span><span class="kt">int</span><span class="w"> </span><span class="n">tileSize</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">extern</span><span class="w"> </span><span class="n">__shared__</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">tile</span><span class="p">[];</span>
-<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">TILE_EXT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tileSize</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">MASK_RADIUS</span><span class="p">;</span>
-
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">tx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">threadIdx</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">ty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">threadIdx</span><span class="p">.</span><span class="n">y</span><span class="p">;</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">blockIdx</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">tileSize</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tx</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">MASK_RADIUS</span><span class="p">;</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">blockIdx</span><span class="p">.</span><span class="n">y</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">tileSize</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ty</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">MASK_RADIUS</span><span class="p">;</span>
-
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">height</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">width</span><span class="p">)</span>
-<span class="w">        </span><span class="n">tile</span><span class="p">[</span><span class="n">ty</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">TILE_EXT</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tx</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">input</span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">j</span><span class="p">];</span>
+<span class="w">    </span><span class="c1">// Cada thread carrega um elemento para a posição t do vetor compartilhado</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">start</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">)</span>
+<span class="w">        </span><span class="n">partialSum</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">input</span><span class="p">[</span><span class="n">start</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">t</span><span class="p">];</span>
 <span class="w">    </span><span class="k">else</span>
-<span class="w">        </span><span class="n">tile</span><span class="p">[</span><span class="n">ty</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">TILE_EXT</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tx</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span>
+<span class="w">        </span><span class="n">partialSum</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span><span class="w">  </span><span class="c1">// preenchimento com zero se passar do fim do vetor</span>
+
+<span class="w">    </span><span class="c1">// Cada thread também carrega um segundo elemento, para a posição blockDim.x + t</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">start</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">blockDim</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">)</span>
+<span class="w">        </span><span class="n">partialSum</span><span class="p">[</span><span class="n">blockDim</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">t</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">input</span><span class="p">[</span><span class="n">start</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">blockDim</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">t</span><span class="p">];</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">        </span><span class="n">partialSum</span><span class="p">[</span><span class="n">blockDim</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">t</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Loop de redução: stride aumenta a cada passo (1, 2, 4, ..., blockDim.x)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">stride</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">stride</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">blockDim</span><span class="p">.</span><span class="n">x</span><span class="p">;</span><span class="w"> </span><span class="n">stride</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Garante que todos os valores foram somados antes de prosseguir</span>
+<span class="w">        </span><span class="n">__syncthreads</span><span class="p">();</span>
+
+<span class="w">        </span><span class="c1">// Threads cujos índices são múltiplos de &#39;stride&#39; fazem a soma com seu vizinho à direita</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">t</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">stride</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">            </span><span class="n">partialSum</span><span class="p">[</span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">t</span><span class="p">]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">partialSum</span><span class="p">[</span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">stride</span><span class="p">];</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Sincronização final antes de escrever na memória global</span>
+<span class="w">    </span><span class="n">__syncthreads</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// Apenas a primeira thread de cada bloco escreve o resultado parcial no vetor de saída</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">t</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">        </span><span class="n">output</span><span class="p">[</span><span class="n">blockIdx</span><span class="p">.</span><span class="n">x</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">partialSum</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Durante cada etapa da redução paralela, o controle sobre quais threads participam da computação influencia diretamente a eficiência da execução no modelo SIMT (Single Instruction, Multiple Threads) da GPU.</p>
+<p>Em CUDA, as threads são organizadas em warps de 32 threads que executam as mesmas instruções em blocos sincronizados. Quando se usa uma condição como <code>t % stride == 0</code>, as threads ativas a cada etapa ficam espaçadas: apenas aquelas com índice múltiplo de <code>stride</code> participam da operação, enquanto as demais permanecem ociosas. Isso leva a dois problemas principais:</p>
+<ol>
+<li>
+<p><strong>Desalinhamento da execução por warp:</strong> embora não haja necessariamente divergência de controle explícita, os warps passam a executar parcialmente, com poucas threads ativas por warp, o que reduz o aproveitamento do paralelismo interno.</p>
+</li>
+<li>
+<p><strong>Perda da localidade de memória:</strong> os acessos ao vetor compartilhado (<code>partialSum[]</code>) deixam de ser contíguos. Threads ativas acessam posições cada vez mais distantes, prejudicando o uso eficiente da cache e da memória compartilhada.</p>
+</li>
+</ol>
+<p>Esses dois fatores combinados degradam significativamente o desempenho.</p>
+<p><strong>Threads espaçadas (divergência alta)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Stride</th>
+<th>Threads ativas (<code>t % stride == 0</code>)</th>
+<th>Observação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 ... 31</td>
+<td>todas as threads ativas</td>
+</tr>
+<tr>
+<td>2</td>
+<td>0 x 2 x 4 x 6 x 8 x 10 x 12 x 14 x 16 ... 30</td>
+<td>metade das threads ativas</td>
+</tr>
+<tr>
+<td>4</td>
+<td>0 x x x 4 x x x 8 x x x  12 x x x  16 ... 28</td>
+<td>25% das threads ativas</td>
+</tr>
+<tr>
+<td>8</td>
+<td>0 x x x x x x x 8 x x x x x x x x  16 ... 24</td>
+<td>12.5% das threads ativas</td>
+</tr>
+<tr>
+<td>16</td>
+<td>0 x x x x x x x x x x x x x x x x  16 x x x</td>
+<td>apenas 2 threads ativas</td>
+</tr>
+<tr>
+<td>32</td>
+<td>0 x x x x x x x x x x x x x x x x x x x x x</td>
+<td>uma thread ativa</td>
+</tr>
+</tbody>
+</table>
+<p>Para resolver esse problema, uma abordagem mais eficiente é reescrever o laço de redução utilizando a condição <code>if (t &lt; stride)</code> e iniciando o <code>stride</code> com o valor de <code>blockDim.x</code>, reduzindo pela metade a cada iteração. </p>
+<p>Com essa estratégia, em cada etapa da redução, as threads ativas são aquelas com índices consecutivos, formando grupos contíguos de threads. </p>
+<p>Isso significa que, nas iterações iniciais, os warps executam de forma uniforme, com todas as threads de um warp realizando a mesma operação, evitando divergência. A divergência só ocorre nas últimas etapas da redução, quando o número de threads ativas se torna inferior a 32, o que tem impacto muito menor no desempenho geral, pois já há menos trabalho a ser feito.</p>
+<p>Além de reduzir a divergência, essa abordagem também melhora a localidade espacial do código:</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">stride</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">blockDim</span><span class="p">.</span><span class="n">x</span><span class="p">;</span><span class="w"> </span><span class="n">stride</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">stride</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">__syncthreads</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">t</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">stride</span><span class="p">)</span>
+<span class="w">        </span><span class="n">partialSum</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">partialSum</span><span class="p">[</span><span class="n">t</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">stride</span><span class="p">];</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Vantagem: threads ativas são consecutivas → <strong>sem warp divergentes</strong></p>
+<p><strong>Threads contíguas sem divergência</strong></p>
+<table>
+<thead>
+<tr>
+<th>Stride</th>
+<th>Threads ativas (<code>t &lt; stride</code>)</th>
+<th>Observação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>32</td>
+<td>0 1 2 3 4 5 6 7 8 9 10 ... 31</td>
+<td>warp inteiro executa uniformemente</td>
+</tr>
+<tr>
+<td>16</td>
+<td>0 1 2 3 4 5 6 7 8 9 10 ... 15</td>
+<td>metade do warp, contígua</td>
+</tr>
+<tr>
+<td>8</td>
+<td>0 1 2 3 4 5 6 7 x x x</td>
+<td>8 threads contíguas ativas</td>
+</tr>
+<tr>
+<td>4</td>
+<td>0 1 2 3 x x x x x x x</td>
+<td>4 threads contíguas ativas</td>
+</tr>
+<tr>
+<td>2</td>
+<td>0 1 x x x x x x x x x</td>
+<td>2 threads</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0 x x x x x x x x x x</td>
+<td>1 thread</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Comparando as duas versões:</strong></p>
+<div class="highlight"><pre><span></span><code>Versão (t % stride == 0):
+
+Stride  1 → [* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *]
+Stride  2 → [* X * X * X * X * X * X * X * X * X * X * X * X]
+Stride  4 → [* X X X * X X X * X X X * X X X * X X X * X X X]
+Stride  8 → [* X X X X X X X * X X X X X X X * X X X X X X X *]
+Stride 16 → [* X X X X X X X X X X X X X X X * X X X X X X X X X X X X X X X]
+Stride 32 → [* X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X]
+(Localidade espacial ruim)
+
+Versão (t &lt; stride):
+
+Stride 32 → [* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *]
+Stride 16 → [* * * * * * * * * * * * * * * * X X X X X X X X X X X X X X X X]
+Stride  8 → [* * * * * * * * X X X X X X X X X X X X X X X X X X X X X X X X]
+Stride  4 → [* * * * X X X X X X X X X X X X X X X X X X X X X X X X X X X X]
+Stride  2 → [* * X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X]
+Stride  1 → [* X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X]
+(Boa localidade espacial)
+</code></pre></div>
+<h2 id="scan">Scan<a class="headerlink" href="#scan" title="Permanent link">&para;</a></h2>
+<p>Em algumas situações não basta saber apenas o valor total da operação, precisamos saber <strong>a soma parcial até cada ponto</strong> ou seja, os <strong>prefixos acumulados</strong>. Para isso, usamos a operação chamada <strong>scan</strong> (ou <strong>prefix sum</strong>).</p>
+<p>Exemplo de <strong>scan</strong>:</p>
+<div class="highlight"><pre><span></span><code><span class="nl">Entrada</span><span class="p">:</span><span class="w">  </span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span>
+<span class="nl">Scan</span><span class="p">:</span><span class="w">     </span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w"> </span><span class="mi">22</span><span class="p">]</span>
+</code></pre></div>
+<p>Aqui, cada posição <code>i</code> contém a soma de todos os elementos anteriores <code>A[0] + A[1] + ... + A[i-1]</code>.</p>
+<p><strong>Diferença prática entre redução e scan</strong></p>
+<table>
+<thead>
+<tr>
+<th>Operação</th>
+<th>Resultado</th>
+<th>Quando usar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Redução</td>
+<td>Valor único</td>
+<td>Quando só o total importa</td>
+</tr>
+<tr>
+<td>Scan</td>
+<td>Vetor de prefixos</td>
+<td>Quando queremos somas parciais</td>
+</tr>
+</tbody>
+</table>
+<p>A redução descarta as somas intermediárias. Já o scan preserva essas informações, o que é essencial para várias aplicações como:</p>
+<ul>
+<li>Compactação de vetores</li>
+<li>Geração de índices de escrita</li>
+<li>Alocação dinâmica paralela</li>
+<li>Processamento de streams</li>
+<li>Pré-processamento em algoritmos de ordenação (ex: radix sort)</li>
+</ul>
+<h3 id="scan-simples"><strong>Scan Simples</strong><a class="headerlink" href="#scan-simples" title="Permanent link">&para;</a></h3>
+<p>Nesta versão cada thread calcula seu valor somando os valores anteriores, exatamente como faríamos sequencialmente, mas de forma paralela e em várias etapas.</p>
+<h3 id="estrategia_1">Estratégia:<a class="headerlink" href="#estrategia_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Cada thread carrega um valor.</li>
+<li>Em cada etapa, somamos com o valor de uma certa "distância" (<code>stride</code>).</li>
+<li>A distância dobra a cada passo: 1, 2, 4, 8...</li>
+</ul>
+<div class="highlight"><pre><span></span><code>stride = 1 → somar vizinhos:
+[3, 1, 7, 0, 4, 1, 6, 3]
+ ↓  ↓  ↓  ↓
+[3, 4, 7, 7, 4, 5, 6, 9]
+
+stride = 2 → somar a cada 2:
+[3, 4, 7, 7, 4, 5, 6, 9]
+     ↓      ↓
+[3, 4, 10, 7, 4, 5, 15, 9]
+
+stride = 4 → somar centro da árvore:
+[3, 4, 10, 7, 4, 5, 15, 9]
+               ↓
+[3, 4, 10, 7, 4, 5, 15, 25]
+</code></pre></div>
+<p>Esse padrão continua até que todas as somas estejam corretas.</p>
+<h3 id="codigo-cuda">Código (CUDA):<a class="headerlink" href="#codigo-cuda" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">__global__</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">scan_simples</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">entrada</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">saida</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">extern</span><span class="w"> </span><span class="n">__shared__</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">XY</span><span class="p">[];</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">tid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">threadIdx</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">gid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">blockIdx</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">blockDim</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tid</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// 1. Cada thread lê da entrada (ajustado para scan)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">gid</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">gid</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">)</span>
+<span class="w">        </span><span class="n">XY</span><span class="p">[</span><span class="n">tid</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">entrada</span><span class="p">[</span><span class="n">gid</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">];</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">        </span><span class="n">XY</span><span class="p">[</span><span class="n">tid</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">__syncthreads</span><span class="p">();</span>
 
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">tx</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">MASK_RADIUS</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">tx</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">TILE_EXT</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">MASK_RADIUS</span><span class="w"> </span><span class="o">&amp;&amp;</span>
-<span class="w">        </span><span class="n">ty</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">MASK_RADIUS</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">ty</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">TILE_EXT</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">MASK_RADIUS</span><span class="w"> </span><span class="o">&amp;&amp;</span>
-<span class="w">        </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">height</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">width</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 2. Para cada passo, somar com o valor `stride` posições atrás</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">passo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">passo</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">blockDim</span><span class="p">.</span><span class="n">x</span><span class="p">;</span><span class="w"> </span><span class="n">passo</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">tid</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">passo</span><span class="p">)</span>
+<span class="w">            </span><span class="n">temp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">XY</span><span class="p">[</span><span class="n">tid</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">passo</span><span class="p">];</span>
+<span class="w">        </span><span class="n">__syncthreads</span><span class="p">();</span>
+<span class="w">        </span><span class="n">XY</span><span class="p">[</span><span class="n">tid</span><span class="p">]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">temp</span><span class="p">;</span>
+<span class="w">        </span><span class="n">__syncthreads</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
 
-<span class="w">        </span><span class="kt">float</span><span class="w"> </span><span class="n">Tij</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">tile</span><span class="p">[</span><span class="n">ty</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">TILE_EXT</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tx</span><span class="p">];</span>
-<span class="w">        </span><span class="kt">float</span><span class="w"> </span><span class="n">Tnew</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Tij</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// 3. Escreve no vetor de saída</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">gid</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">)</span>
+<span class="w">        </span><span class="n">saida</span><span class="p">[</span><span class="n">gid</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">XY</span><span class="p">[</span><span class="n">tid</span><span class="p">];</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="limitacoes-dessa-abordagem">Limitações dessa abordagem<a class="headerlink" href="#limitacoes-dessa-abordagem" title="Permanent link">&para;</a></h2>
+<p>Apesar de simples, essa versão faz mais operações do que o necessário:</p>
+<ul>
+<li>Todas as threads participam em todas as etapas.</li>
+<li>Muitas threads fazem trabalho redundante ou nulo (especialmente nas etapas iniciais).</li>
+<li>O número total de somas realizadas é maior que o necessário.</li>
+</ul>
+<h2 id="otimizacao-varredura-em-arvore-com-propagacao-reversa">Otimização: Varredura em Árvore com Propagação Reversa<a class="headerlink" href="#otimizacao-varredura-em-arvore-com-propagacao-reversa" title="Permanent link">&para;</a></h2>
+<p>Essa versão reduz o trabalho total usando uma <strong>abordagem em duas fases</strong>:</p>
+<ol>
+<li><strong>Up-sweep (redução):</strong> combina pares de elementos até o topo da árvore (como uma redução soma).</li>
+<li><strong>Down-sweep (propagação):</strong> distribui os prefixos acumulados corretamente.</li>
+</ol>
+<h3 id="etapas-da-otimizacao">Etapas da otimização:<a class="headerlink" href="#etapas-da-otimizacao" title="Permanent link">&para;</a></h3>
+<h4 id="fase-1-up-sweep">Fase 1 – Up-Sweep<a class="headerlink" href="#fase-1-up-sweep" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>[3, 1, 7, 0, 4, 1, 6, 3]
 
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">ITER_LOCAL</span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="kt">float</span><span class="w"> </span><span class="n">lap</span><span class="w"> </span><span class="o">=</span>
-<span class="w">                </span><span class="n">tile</span><span class="p">[(</span><span class="n">ty</span><span class="mi">-1</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">TILE_EXT</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tx</span><span class="p">]</span><span class="w"> </span><span class="o">+</span>
-<span class="w">                </span><span class="n">tile</span><span class="p">[(</span><span class="n">ty</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">TILE_EXT</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tx</span><span class="p">]</span><span class="w"> </span><span class="o">+</span>
-<span class="w">                </span><span class="n">tile</span><span class="p">[</span><span class="n">ty</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">TILE_EXT</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">tx</span><span class="mi">-1</span><span class="p">)]</span><span class="w"> </span><span class="o">+</span>
-<span class="w">                </span><span class="n">tile</span><span class="p">[</span><span class="n">ty</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">TILE_EXT</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">tx</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span><span class="w"> </span><span class="o">-</span>
-<span class="w">                </span><span class="mf">4.0f</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Tij</span><span class="p">;</span>
+Passo 1 (stride = 1): soma pares → [3+1, 7+0, 4+1, 6+3] = [4, 7, 5, 9]
+Passo 2 (stride = 2): soma pares → [4+7, 5+9] = [11, 14]
+Passo 3 (stride = 4): soma final → 11 + 14 = 25
+</code></pre></div>
+<h4 id="fase-2-down-sweep">Fase 2 – Down-Sweep<a class="headerlink" href="#fase-2-down-sweep" title="Permanent link">&para;</a></h4>
+<p>Distribui os prefixos sem repetir as somas anteriores. Cada valor novo é derivado da soma anterior. O valor final de cada posição será a soma de todos os anteriores, <strong>excluindo a própria posição</strong>.</p>
+<h3 id="codigo-cuda-otimizado">Código (CUDA otimizado):<a class="headerlink" href="#codigo-cuda-otimizado" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">__global__</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">scan_otimizado</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="n">entrada</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="n">saida</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">extern</span><span class="w"> </span><span class="n">__shared__</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">vetor_auxiliar</span><span class="p">[];</span>
 
-<span class="w">            </span><span class="n">Tnew</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Tij</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">dt</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">tanhf</span><span class="p">(</span><span class="n">lap</span><span class="p">);</span>
-<span class="w">            </span><span class="n">Tij</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mf">0.99f</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Tnew</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">0.01f</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sinf</span><span class="p">(</span><span class="n">Tnew</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">tid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">threadIdx</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">inicio_bloco</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">blockDim</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">blockIdx</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">indice_global</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">inicio_bloco</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tid</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">tamanho_bloco</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">blockDim</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Carregamento de dois elementos por thread na memória compartilhada</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">valor_esquerda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">valor_direita</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">indice_global</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">)</span>
+<span class="w">        </span><span class="n">valor_esquerda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">entrada</span><span class="p">[</span><span class="n">indice_global</span><span class="p">];</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">indice_global</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">blockDim</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">)</span>
+<span class="w">        </span><span class="n">valor_direita</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">entrada</span><span class="p">[</span><span class="n">indice_global</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">blockDim</span><span class="p">.</span><span class="n">x</span><span class="p">];</span>
+
+<span class="w">    </span><span class="n">vetor_auxiliar</span><span class="p">[</span><span class="n">tid</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">valor_esquerda</span><span class="p">;</span>
+<span class="w">    </span><span class="n">vetor_auxiliar</span><span class="p">[</span><span class="n">tid</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">blockDim</span><span class="p">.</span><span class="n">x</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">valor_direita</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">__syncthreads</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// --- Fase 1: Up-sweep (redução para soma total do bloco) ---</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">passo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">passo</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">tamanho_bloco</span><span class="p">;</span><span class="w"> </span><span class="n">passo</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">indice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">tid</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">passo</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">indice</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">tamanho_bloco</span><span class="p">)</span>
+<span class="w">            </span><span class="n">vetor_auxiliar</span><span class="p">[</span><span class="n">indice</span><span class="p">]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">vetor_auxiliar</span><span class="p">[</span><span class="n">indice</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">passo</span><span class="p">];</span>
+
+<span class="w">        </span><span class="n">__syncthreads</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Zera o último elemento para começar o down-sweep (scan exclusivo)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">tid</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">        </span><span class="n">vetor_auxiliar</span><span class="p">[</span><span class="n">tamanho_bloco</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">__syncthreads</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// --- Fase 2: Down-sweep (distribui os prefixos) ---</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">passo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tamanho_bloco</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="n">passo</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">passo</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">indice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">tid</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">passo</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">indice</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">tamanho_bloco</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">valor_anterior</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vetor_auxiliar</span><span class="p">[</span><span class="n">indice</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">passo</span><span class="p">];</span>
+<span class="w">            </span><span class="n">vetor_auxiliar</span><span class="p">[</span><span class="n">indice</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">passo</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vetor_auxiliar</span><span class="p">[</span><span class="n">indice</span><span class="p">];</span>
+<span class="w">            </span><span class="n">vetor_auxiliar</span><span class="p">[</span><span class="n">indice</span><span class="p">]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">valor_anterior</span><span class="p">;</span>
 <span class="w">        </span><span class="p">}</span>
 
-<span class="w">        </span><span class="n">output</span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Tnew</span><span class="p">;</span>
+<span class="w">        </span><span class="n">__syncthreads</span><span class="p">();</span>
 <span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Escreve os valores de volta no vetor de saída</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">indice_global</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">)</span>
+<span class="w">        </span><span class="n">saida</span><span class="p">[</span><span class="n">indice_global</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vetor_auxiliar</span><span class="p">[</span><span class="n">tid</span><span class="p">];</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">indice_global</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">blockDim</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">)</span>
+<span class="w">        </span><span class="n">saida</span><span class="p">[</span><span class="n">indice_global</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">blockDim</span><span class="p">.</span><span class="n">x</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vetor_auxiliar</span><span class="p">[</span><span class="n">tid</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">blockDim</span><span class="p">.</span><span class="n">x</span><span class="p">];</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="exercicio-reducao-e-scan-com-cuda">Exercício: Redução e Scan com CUDA<a class="headerlink" href="#exercicio-reducao-e-scan-com-cuda" title="Permanent link">&para;</a></h2>
+<p>Neste exercício, você vai aplicar os conceitos de redução e scan (prefix sum) utilizando programação paralela em GPU com CUDA, aproveitando os recursos de memória compartilhada, sincronização de threads e organização de blocos para maximizar o desempenho da operação.</p>
+<p>Implemente um kernel CUDA que receba um vetor com <code>N</code> elementos e produza como saída a soma total desses elementos.</p>
+<ul>
+<li>Utilize memória compartilhada para armazenar os somatórios parciais dentro de cada bloco.</li>
+<li>Dimensione corretamente a quantidade de threads por bloco.</li>
+<li>Use a versão otimizada da redução.</li>
+<li>O resultado parcial de cada bloco deve ser exibido ao final.</li>
+<li>Apresente também o valor total da soma calculado com scan</li>
+</ul>
+<p>O resultado deve ser algo como:</p>
+<p><img alt="alt text" src="image.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;numeric&gt;</span><span class="c1">   // std::iota</span>
+
+
+<span class="c1">// Gera vetor com valores de 1 a N</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">gerar_dados</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dados</span><span class="p">(</span><span class="n">N</span><span class="p">);</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">iota</span><span class="p">(</span><span class="n">dados</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">dados</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w"> </span><span class="c1">// dados = [1, 2, 3, ..., N]</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">dados</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="c1">// ================================================================</span>
-<span class="c1">// Função principal</span>
-<span class="c1">// ================================================================</span>
+<span class="c1">// --- TODO 1: Implementar Redução ---</span>
+<span class="c1">// altere a função para ser executada em um kernel CUDA</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">reducao_soma</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">dados</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">soma</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// TODO: implemente a redução aqui </span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">soma</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// --- TODO 2: Implementar Scan ---</span>
+<span class="c1">// altere a função para ser executada em um kernel CUDA</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">scan_prefix_sum</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">dados</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dados</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">prefixos</span><span class="p">(</span><span class="n">N</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// TODO: implemente o scan aqui</span>
+<span class="w">    </span><span class="c1">// Cada prefixos[i] deve ser igual à soma de dados[0] até dados[i]</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">prefixos</span><span class="p">;</span>
+<span class="p">}</span>
+
 <span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">width</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">8192</span><span class="p">;</span>
-<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8192</span><span class="p">;</span>
-<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1L</span><span class="n">L</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">height</span><span class="p">;</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2048</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">entrada</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gerar_dados</span><span class="p">(</span><span class="n">N</span><span class="p">);</span>
 
-<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Stencil 2D em GPU (&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;x&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">height</span>
-<span class="w">         </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;), &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">fixed</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">setprecision</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="p">(</span><span class="n">N</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">1e6</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; Mpx</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// --- Redução ---</span>
+<span class="w">    </span><span class="c1">// TODO: faça a medição do tempo de execução </span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">resultado_soma</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reducao_soma</span><span class="p">(</span><span class="n">entrada</span><span class="p">);</span>
 
-<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.25f</span><span class="p">;</span>
-<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">dt</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="mf">0.1f</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;[Tempo] Redução de Soma: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="o">??????</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Resultado da soma: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">resultado_soma</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
 
-<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span>
-<span class="w">    </span><span class="n">CHECK_CUDA</span><span class="p">(</span><span class="n">cudaMallocManaged</span><span class="p">(</span><span class="o">&amp;</span><span class="n">input</span><span class="p">,</span><span class="w">  </span><span class="n">N</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">)));</span>
-<span class="w">    </span><span class="n">CHECK_CUDA</span><span class="p">(</span><span class="n">cudaMallocManaged</span><span class="p">(</span><span class="o">&amp;</span><span class="n">output</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">)));</span>
+<span class="w">    </span><span class="c1">// --- Scan ---</span>
+<span class="w">    </span><span class="c1">// TODO: faça a medição do tempo de execução </span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">prefixos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scan_prefix_sum</span><span class="p">(</span><span class="n">entrada</span><span class="p">);</span>
 
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="n">input</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;[Tempo] Scan (prefix sum): &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="o">???????</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Scan parcial (20 primeiros valores):</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">prefixos</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;...</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
 
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">minGrid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">optBlock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">    </span><span class="n">CHECK_CUDA</span><span class="p">(</span><span class="n">cudaOccupancyMaxPotentialBlockSize</span><span class="p">(</span><span class="o">&amp;</span><span class="n">minGrid</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">optBlock</span><span class="p">,</span>
-<span class="w">                     </span><span class="n">heatStencil2D</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">));</span>
+<span class="w">    </span><span class="c1">// TODO: faça o print do valor total da soma calculado pela função scan </span>
 
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">suggestedTileExt</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">floor</span><span class="p">(</span><span class="n">sqrt</span><span class="p">((</span><span class="kt">double</span><span class="p">)</span><span class="n">optBlock</span><span class="p">));</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">suggestedTileSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">suggestedTileExt</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">MASK_RADIUS</span><span class="p">;</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">suggestedTileSize</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="w"> </span><span class="n">suggestedTileSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">============================================================</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;ANÁLISE TEÓRICA DE OCUPAÇÃO (CUDA)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;------------------------------------------------------------</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;• Threads ideais por bloco : &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">optBlock</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;• TILE_EXT sugerido        : &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">suggestedTileExt</span>
-<span class="w">         </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;  →  TILE_SIZE sugerido ≈ &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">suggestedTileSize</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;• Grade mínima recomendada : &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">minGrid</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; blocos totais</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;============================================================</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="p">;</span>
-
-<span class="w">    </span><span class="c1">// Agora declaramos repeats antes de usar</span>
-<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">repeats</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span>
-
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">tileSizes</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">suggestedTileSize</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="mi">14</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p">};</span>
-<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">numTests</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">tileSizes</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">tileSizes</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
-
-<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;INICIANDO EXPERIMENTO DE DESEMPENHO GPU</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;   (média de &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">repeats</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; execuções por configuração)</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="p">;</span>
-
-<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">left</span>
-<span class="w">         </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">setw</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Tile&quot;</span>
-<span class="w">         </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">setw</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Threads/Bloco&quot;</span>
-<span class="w">         </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">setw</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span><span class="w">  </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Warps&quot;</span>
-<span class="w">         </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">setw</span><span class="p">(</span><span class="mi">14</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Tempo (ms)&quot;</span>
-<span class="w">         </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">setw</span><span class="p">(</span><span class="mi">14</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Mpx/s&quot;</span>
-<span class="w">         </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Comentário</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">string</span><span class="p">(</span><span class="mi">75</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;-&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
-
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">numTests</span><span class="p">;</span><span class="w"> </span><span class="n">t</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">TILE_SIZE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tileSizes</span><span class="p">[</span><span class="n">t</span><span class="p">];</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">TILE_SIZE</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">continue</span><span class="p">;</span>
-
-<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">TILE_EXT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TILE_SIZE</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">MASK_RADIUS</span><span class="p">;</span>
-<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">threadsPerBlock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TILE_EXT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">TILE_EXT</span><span class="p">;</span>
-<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">warps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">threadsPerBlock</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">31</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">32</span><span class="p">;</span>
-
-<span class="w">        </span><span class="n">dim3</span><span class="w"> </span><span class="nf">threads</span><span class="p">(</span><span class="n">TILE_EXT</span><span class="p">,</span><span class="w"> </span><span class="n">TILE_EXT</span><span class="p">);</span>
-<span class="w">        </span><span class="n">dim3</span><span class="w"> </span><span class="n">blocks</span><span class="p">(</span>
-<span class="w">            </span><span class="p">(</span><span class="n">width</span><span class="w">  </span><span class="o">+</span><span class="w"> </span><span class="n">TILE_SIZE</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">TILE_SIZE</span><span class="p">,</span>
-<span class="w">            </span><span class="p">(</span><span class="n">height</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">TILE_SIZE</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">TILE_SIZE</span>
-<span class="w">        </span><span class="p">);</span>
-
-<span class="w">        </span><span class="kt">size_t</span><span class="w"> </span><span class="n">shmem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="p">)</span><span class="n">TILE_EXT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">TILE_EXT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">);</span>
-
-<span class="w">        </span><span class="c1">// Eventos CUDA para medir tempo</span>
-<span class="w">        </span><span class="n">cudaEvent_t</span><span class="w"> </span><span class="n">start</span><span class="p">,</span><span class="w"> </span><span class="n">stop</span><span class="p">;</span>
-<span class="w">        </span><span class="n">CHECK_CUDA</span><span class="p">(</span><span class="n">cudaEventCreate</span><span class="p">(</span><span class="o">&amp;</span><span class="n">start</span><span class="p">));</span>
-<span class="w">        </span><span class="n">CHECK_CUDA</span><span class="p">(</span><span class="n">cudaEventCreate</span><span class="p">(</span><span class="o">&amp;</span><span class="n">stop</span><span class="p">));</span>
-
-<span class="w">        </span><span class="n">CHECK_CUDA</span><span class="p">(</span><span class="n">cudaEventRecord</span><span class="p">(</span><span class="n">start</span><span class="p">));</span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">repeats</span><span class="p">;</span><span class="w"> </span><span class="n">r</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">heatStencil2D</span><span class="o">&lt;&lt;&lt;</span><span class="n">blocks</span><span class="p">,</span><span class="w"> </span><span class="n">threads</span><span class="p">,</span><span class="w"> </span><span class="n">shmem</span><span class="o">&gt;&gt;&gt;</span><span class="p">(</span><span class="n">input</span><span class="p">,</span><span class="w"> </span><span class="n">output</span><span class="p">,</span><span class="w"> </span><span class="n">width</span><span class="p">,</span><span class="w"> </span><span class="n">height</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="p">,</span><span class="w"> </span><span class="n">dt</span><span class="p">,</span><span class="w"> </span><span class="n">TILE_SIZE</span><span class="p">);</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="n">CHECK_CUDA</span><span class="p">(</span><span class="n">cudaEventRecord</span><span class="p">(</span><span class="n">stop</span><span class="p">));</span>
-<span class="w">        </span><span class="n">CHECK_CUDA</span><span class="p">(</span><span class="n">cudaEventSynchronize</span><span class="p">(</span><span class="n">stop</span><span class="p">));</span>
-
-<span class="w">        </span><span class="kt">float</span><span class="w"> </span><span class="n">msTotal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span>
-<span class="w">        </span><span class="n">CHECK_CUDA</span><span class="p">(</span><span class="n">cudaEventElapsedTime</span><span class="p">(</span><span class="o">&amp;</span><span class="n">msTotal</span><span class="p">,</span><span class="w"> </span><span class="n">start</span><span class="p">,</span><span class="w"> </span><span class="n">stop</span><span class="p">));</span>
-<span class="w">        </span><span class="n">CHECK_CUDA</span><span class="p">(</span><span class="n">cudaEventDestroy</span><span class="p">(</span><span class="n">start</span><span class="p">));</span>
-<span class="w">        </span><span class="n">CHECK_CUDA</span><span class="p">(</span><span class="n">cudaEventDestroy</span><span class="p">(</span><span class="n">stop</span><span class="p">));</span>
-
-<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">ms</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">msTotal</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">repeats</span><span class="p">;</span>
-<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">mpxPerSec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">N</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">1e6</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">ms</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">1000.0</span><span class="p">);</span>
-
-<span class="w">        </span><span class="n">string</span><span class="w"> </span><span class="n">comment</span><span class="p">;</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">threadsPerBlock</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">optBlock</span><span class="p">)</span>
-<span class="w">            </span><span class="n">comment</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;≈ Ideal teórico&quot;</span><span class="p">;</span>
-<span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">abs</span><span class="p">(</span><span class="n">threadsPerBlock</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">optBlock</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">64</span><span class="p">)</span>
-<span class="w">            </span><span class="n">comment</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Próximo ao ideal&quot;</span><span class="p">;</span>
-<span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">threadsPerBlock</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">optBlock</span><span class="p">)</span>
-<span class="w">            </span><span class="n">comment</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Subocupação (bloco pequeno)&quot;</span><span class="p">;</span>
-<span class="w">        </span><span class="k">else</span>
-<span class="w">            </span><span class="n">comment</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Shared alta&quot;</span><span class="p">;</span>
-
-<span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">left</span>
-<span class="w">             </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">setw</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="p">(</span><span class="n">to_string</span><span class="p">(</span><span class="n">TILE_SIZE</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;x&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">to_string</span><span class="p">(</span><span class="n">TILE_SIZE</span><span class="p">))</span>
-<span class="w">             </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">setw</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">threadsPerBlock</span>
-<span class="w">             </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">setw</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span><span class="w">  </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">warps</span>
-<span class="w">             </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">setw</span><span class="p">(</span><span class="mi">14</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">fixed</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">setprecision</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">ms</span>
-<span class="w">             </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">setw</span><span class="p">(</span><span class="mi">14</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">fixed</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">setprecision</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">mpxPerSec</span>
-<span class="w">             </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">comment</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="n">CHECK_CUDA</span><span class="p">(</span><span class="n">cudaFree</span><span class="p">(</span><span class="n">input</span><span class="p">));</span>
-<span class="w">    </span><span class="n">CHECK_CUDA</span><span class="p">(</span><span class="n">cudaFree</span><span class="p">(</span><span class="n">output</span><span class="p">));</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
-</code></pre></div></p>
-<p>Slurm para executar em um Cluster HPC:</p>
-<div class="highlight"><pre><span></span><code>#!/bin/bash
-#SBATCH --job-name=demo
-#SBATCH --output=saida.out
-#SBATCH --partition=gpu
-#SBATCH --nodes=1
-#SBATCH --ntasks=1
-#SBATCH --gres=gpu:1
-#SBATCH --time=00:10:00
-#SBATCH --mem=4G
-
-./demo
 </code></pre></div>
-<p>!!!! warning "Não esqueça de carregar o modulo cuda e compilar com nvcc"</p>
-<h3 id="conclusao">Conclusão<a class="headerlink" href="#conclusao" title="Permanent link">&para;</a></h3>
-<p>Percebemos como o tamanho do bloco (tile) influencia a eficiência de execução de um kernel em GPU.</p>
-<p>Para interpretar a tabela corretamente, é importante observar <strong>três parâmetros principais</strong>:</p>
-<ul>
-<li>Tempo médio (Tempo ms)</li>
-<li>Taxa de processamento (Mpx/s)</li>
-</ul>
-<p>O <strong>tempo (ms)</strong> indica quanto cada configuração levou para processar toda a matriz. Valores menores significam execuções mais rápidas, mas devem ser analisados com cuidado: blocos grandes podem reduzir artificialmente o tempo total por utilizarem poucos blocos na GPU, o que mascara o real desempenho paralelo.</p>
-<p>O parâmetro mais confiável é o <strong>Mpx/s (milhões de pixels por segundo)</strong>, que mede quantos milhões de elementos foram processados por segundo. Esse valor reflete o <strong>throughput da GPU</strong>, ou seja, quão bem o hardware foi aproveitado. Quanto maior o Mpx/s, mais eficiente foi o uso dos recursos. </p>
-<p>Ao comparar esses valores, percebemos que os blocos menores (8×8, 12×12) apresentam maiores tempos e menores taxas de Mpx/s.</p>
-<p>Isso acontece porque há poucas threads por bloco, resultando em <strong>subocupação</strong> da GPU.</p>
-<p>Nos blocos intermediários (14×14 a 25×25), o desempenho melhora gradualmente: o tempo diminui, e o Mpx/s aumenta até atingir um ponto em torno do tile de <strong>25×25</strong>, o valor sugerido pelo CUDA. Esse é o ponto de equilíbrio entre paralelismo e uso de memória compartilhada, o bloco é grande o suficiente para gerar alto throughput, mas não tão grande a ponto de limitar a quantidade de blocos ativos por SM.</p>
-<p>Já o bloco de 32×32 aparenta ter tempo “zero”, mas isso é um bug de medição: o kernel termina tão rapidamente que o cronômetro perde precisão.
-Na prática, blocos muito grandes consomem mais memória compartilhada e reduzem a <strong>ocupação real da GPU</strong>, resultando em menor eficiência, mesmo que o tempo aparente seja baixo.</p>
-<p>O tempo isolado não é o melhor indicador, o desempenho real está no ponto em que o <strong>Mpx/s é máximo</strong>, pois esse indicador apresenta de fato o trabalho da GPU.</p>
+<details class="gabarito">
+<summary>Gabarito</summary>
+<div class="codehilite"><pre><span></span><code>#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;numeric&gt;
+#include &lt;chrono&gt;
+
+// Kernel 1: Redução
+__global__ void kernel_reducao_soma(int* entrada, int* resultado, int N) {
+    // Vetor na memória compartilhada (visível a todas as threads do bloco)
+    extern __shared__ int soma_parcial[];
+
+    int tid = threadIdx.x;                   // Índice local da thread dentro do bloco
+    int i = blockIdx.x * blockDim.x + tid;   // Índice global no vetor de entrada
+
+    // Cada thread copia um valor da memória global para a memória compartilhada
+    if (i &lt; N)
+        soma_parcial[tid] = entrada[i];
+    else
+        soma_parcial[tid] = 0;
+
+    __syncthreads(); // Sincroniza todas as threads antes da soma
+
+    // Fase de redução binária: combina pares de elementos
+    int passo = blockDim.x / 2;
+    while (passo &gt; 0) {
+        if (tid &lt; passo)
+            soma_parcial[tid] += soma_parcial[tid + passo];
+
+        __syncthreads(); // Garante que todas as somas de um passo terminaram
+        passo = passo / 2;
+    }
+
+    // Apenas a primeira thread escreve o resultado do bloco
+    if (tid == 0)
+        resultado[blockIdx.x] = soma_parcial[0];
+}
+
+// Kernel 2: Scan prefix sum
+__global__ void kernel_scan_exclusivo(int* entrada, int* saida, int N) {
+    extern __shared__ int dados[];
+
+    int tid = threadIdx.x;
+
+    // Carrega os dados de entrada para memória compartilhada
+    if (tid &lt; N)
+        dados[tid] = entrada[tid];
+    else
+        dados[tid] = 0;
+
+    __syncthreads();
+
+    // Etapa 1: up-sweep (redução)
+    int passo = 1;
+    while (passo &lt; N) {
+        int idx = (tid + 1) * passo * 2 - 1;
+        if (idx &lt; N)
+            dados[idx] += dados[idx - passo];
+        __syncthreads();
+        passo = passo * 2;
+    }
+
+    // Zera o último elemento (torna o scan exclusivo)
+    if (tid == 0)
+        dados[N - 1] = 0;
+
+    __syncthreads();
+
+    // Etapa 2: down-sweep (distribuição dos prefixos)
+    passo = N / 2;
+    while (passo &gt;= 1) {
+        int idx = (tid + 1) * passo * 2 - 1;
+        if (idx &lt; N) {
+            int temp = dados[idx - passo];
+            dados[idx - passo] = dados[idx];
+            dados[idx] += temp;
+        }
+        __syncthreads();
+        passo = passo / 2;
+    }
+
+    // Copia o resultado final para a saída
+    if (tid &lt; N)
+        saida[tid] = dados[tid];
+}
+
+std::vector&lt;int&gt; gerar_dados(int N) {
+    std::vector&lt;int&gt; v(N);
+    std::iota(v.begin(), v.end(), 1); // preenche: [1, 2, 3, ..., N]
+    return v;
+}
+
+int main() {
+    const int N = 1234; // Tamanho do vetor
+
+    // --- Gera dados de entrada ---
+    std::vector&lt;int&gt; entrada = gerar_dados(N);
+
+    // --- Ponteiros para a GPU ---
+    int* d_entrada = nullptr;
+    int* d_saida   = nullptr;
+    int* d_blocos  = nullptr;
+
+    // --- Aloca memória na GPU ---
+    cudaMalloc(&amp;d_entrada, N * sizeof(int));
+    cudaMalloc(&amp;d_saida,   N * sizeof(int));
+    cudaMalloc(&amp;d_blocos,  sizeof(int)); // apenas 1 bloco neste exemplo
+
+    // --- Copia dados da CPU para a GPU ---
+    cudaMemcpy(d_entrada, entrada.data(), N * sizeof(int), cudaMemcpyHostToDevice);
+
+    // chamada para o kernel de redução
+    auto inicio_reducao = std::chrono::high_resolution_clock::now();
+
+    kernel_reducao_soma&lt;&lt;&lt;1, N, N * sizeof(int)&gt;&gt;&gt;(d_entrada, d_blocos, N);
+    cudaDeviceSynchronize();
+
+    auto fim_reducao = std::chrono::high_resolution_clock::now();
+
+    // Copia resultado para a CPU
+    int soma_total = 0;
+    cudaMemcpy(&amp;soma_total, d_blocos, sizeof(int), cudaMemcpyDeviceToHost);
+
+    std::chrono::duration&lt;double, std::milli&gt; tempo_reducao = fim_reducao - inicio_reducao;
+    std::cout &lt;&lt; &quot;[Tempo] Redução de soma: &quot; &lt;&lt; tempo_reducao.count() &lt;&lt; &quot; ms\n&quot;;
+    std::cout &lt;&lt; &quot;Resultado da soma: &quot; &lt;&lt; soma_total &lt;&lt; &quot;\n\n&quot;;
+
+    // chamada para o kernel scan
+    auto inicio_scan = std::chrono::high_resolution_clock::now();
+
+    kernel_scan_exclusivo&lt;&lt;&lt;1, N, N * sizeof(int)&gt;&gt;&gt;(d_entrada, d_saida, N);
+    cudaDeviceSynchronize();
+
+    auto fim_scan = std::chrono::high_resolution_clock::now();
+
+    // Copia resultado para a CPU
+    std::vector&lt;int&gt; prefixos(N);
+    cudaMemcpy(prefixos.data(), d_saida, N * sizeof(int), cudaMemcpyDeviceToHost);
+
+    std::chrono::duration&lt;double, std::milli&gt; tempo_scan = fim_scan - inicio_scan;
+    std::cout &lt;&lt; &quot;[Tempo] Scan (prefix sum): &quot; &lt;&lt; tempo_scan.count() &lt;&lt; &quot; ms\n&quot;;
+
+    // Mostra apenas os 20 primeiros valores
+    std::cout &lt;&lt; &quot;Primeiros 20 valores do scan:\n&quot;;
+    for (int i = 0; i &lt; 20; i++)
+        std::cout &lt;&lt; prefixos[i] &lt;&lt; &quot; &quot;;
+    std::cout &lt;&lt; &quot;...\n&quot;;
+
+    // Verifica soma final pelo último prefixo + último valor original
+    int soma_scan = prefixos[N - 1] + entrada[N - 1];
+    std::cout &lt;&lt; &quot;Soma total com Scan: &quot; &lt;&lt; soma_scan &lt;&lt; &quot;\n&quot;;
+
+    // Libera memória da GPU 
+    cudaFree(d_entrada);
+    cudaFree(d_saida);
+    cudaFree(d_blocos);
+
+    return 0;
+}
+</code></pre></div>
+
+</details>
+<h2 id="este-exercicio-nao-tem-entrega-bom-final-de-semana">Este Exercício não tem entrega, bom final de semana!<a class="headerlink" href="#este-exercicio-nao-tem-entrega-bom-final-de-semana" title="Permanent link">&para;</a></h2>
 
 
 
