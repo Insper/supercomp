@@ -1,394 +1,612 @@
-# **Programação Paralela em GPU com CUDA Stencil, Tiling e Agendamento de Threads**
+# **Programação paralela em GPU Redução e Scan com CUDA**
 
-## O que é um *Stencil Operation*?
+## Redução
+Uma redução é uma operação onde muitos elementos são combinados em um só, em CUDA, não podemos usar algo como`sum += x[i]` diretamente. Precisamos de uma abordagem recursiva que reduza pares de elementos em várias etapas.
 
-Um **stencil** é um padrão computacional onde o valor de uma célula de saída depende de uma **vizinhança local** de células de entrada.
+### Estrutura conceitual da redução
 
-* Fórmula geral:
+O objetivo da redução é combinar N elementos em um único valor.
 
-$$
-out[i, j] = f(in[i-1, j], in[i, j-1], in[i, j], in[i+1, j], in[i, j+1])
-$$
+Como cada soma combina dois elementos por vez, após uma etapa de soma, o número de resultados parciais é metade do original.
 
-Quando estamos trabalhando em GPU é preciso pensar **em blocos e vizinhos compartilhados**.
+Por exemplo:
 
+| Etapa       | Entradas                           | Operação                              | Saídas |
+| ----------- | ---------------------------------- | ------------------------------------- | ------ |
+| 0 (inicial) | 8 valores                          | -                                     | 8      |
+| 1           | (x₀+x₁), (x₂+x₃), (x₄+x₅), (x₆+x₇) | 4 threads somam pares                 | 4      |
+| 2           | (x₀+x₁+x₂+x₃), (x₄+x₅+x₆+x₇)       | 2 threads somam resultados anteriores | 2      |
+| 3           | (x₀+x₁+x₂+x₃+x₄+x₅+x₆+x₇)          | 1 thread soma os últimos dois         | 1      |
 
-## **Aplicando a lógica de Stencil a uma operação de convolução**
-
-![https://www.ibm.com/think/topics/convolutional-neural-networks](image.png)
-Convolução - Fonte: https://www.ibm.com/think/topics/convolutional-neural-networks
-### Exemplo: Filtro 3×3
-
-**Problema:** cada thread acessa os mesmos elementos da memória global.
-
-**Solução:** usar shared memory com tiling.
-
-```cpp
-__global__ void conv2D(float *input,   // ponteiro para a imagem de entrada 
-                       float *output,  // ponteiro para a imagem de saída
-                       float *mask,    // máscara 3x3 usada na convolução
-                       int width,      // largura da imagem
-                       int height) {   // altura da imagem
-
-    int i = blockIdx.y * blockDim.y + threadIdx.y; // linha da imagem
-    int j = blockIdx.x * blockDim.x + threadIdx.x; // coluna da imagem
-
-    float acc = 0.0f; // acumulador
-   
-   // Varre a vizinhança 3x3 ao redor do pixel central (i, j)
-    for (int y = -1; y <= 1; y++) {
-        for (int x = -1; x <= 1; x++) {
-
-            // Calcula a posição do vizinho dentro da imagem de entrada
-            int r = i + y;
-            int c = j + x;
-
-            // Verifica se a posição (r, c) está dentro dos limites da imagem
-            bool dentroDaImagem = (r >= 0 && r < height && c >= 0 && c < width);
-
-            if (dentroDaImagem) {
-                int pixelIndex = r * width + c;
-                int maskRow = y + 1;
-                int maskCol = x + 1;
-                int maskIndex = maskRow * 3 + maskCol;
-                float pixelValue = input[pixelIndex];
-                float maskValue  = mask[maskIndex];
-
-                acc += pixelValue * maskValue;
-            }
-        }
-    }
-
-    // Escreve o resultado final no pixel correspondente da saída.
-    output[i * width + j] = acc;
-}
-
-```
-
-## **Tiling**
-
-### Relembrando:
-
-* Dividimos a matriz em **tiles** (blocos) que cabem na memória compartilhada .
-* Cada bloco carrega seu pedaço + uma margem extra para carregar dados vizinhos.
-* Cada *thread block* cuida de um tile.
-* *Halo* é o pedaço adicional carregado com os dados vizinhos, para evitar dependência entre blocos.
-* `__syncthreads()` barreira para garantir que todas as threads carregaram antes de processar.
+Assim, a cada etapa o número de somas necessárias cai pela metade, logo o número de threads trabalhando também deve cair pela metade.
 
 
-### Mesmo código, agora com *shared memory* e bordas
+No código, o `stride` representa a distância entre os elementos que estão sendo somados em cada passo:
 
 ```cpp
-#define TILE_SIZE 16      // tamanho da área de processamento do bloco
-#define MASK_RADIUS 1     // raio da máscara 3x3
-#define MASK_SIZE 3
-
-__global__ void conv2D_tiled(float *input,   // imagem de entrada
-                             float *output,  // imagem de saída
-                             float *mask,    // máscara 3x3
-                             int width,      // largura da imagem
-                             int height) {   // altura da imagem
-                             
-                             
-    int tx = threadIdx.x;  // coluna da thread dentro do bloco
-    int ty = threadIdx.y;  // linha da thread dentro do bloco
-
-    // posição global (i,j) da thread na imagem
-    int j = blockIdx.x * TILE_SIZE + tx;
-    int i = blockIdx.y * TILE_SIZE + ty;
-
-    // Memória compartilhada do bloco
-    __shared__ float tile[TILE_SIZE + 2 * MASK_RADIUS][TILE_SIZE + 2 * MASK_RADIUS];
-
-    // Calcula a posição global do pixel que esta thread deve carregar
-    int inputRow = i - MASK_RADIUS;
-    int inputCol = j - MASK_RADIUS;
-
-    // Carregamento da imagem para a memória compartilhada, cada thread carrega um elemento
-    if (inputRow >= 0 && inputRow < height && inputCol >= 0 && inputCol < width) {
-        tile[ty][tx] = input[inputRow * width + inputCol];
-    } else {
-        tile[ty][tx] = 0.0f;  // preenche com 0 fora da imagem 
-    }
-
-    // Garante que todas as threads terminaram de carregar o tile
+for (unsigned int stride = blockDim.x; stride > 0; stride /= 2) {
     __syncthreads();
-
-    // Somente threads dentro da região útil calculam o pixel de saída
-    if (tx >= MASK_RADIUS && tx < TILE_SIZE + MASK_RADIUS &&
-        ty >= MASK_RADIUS && ty < TILE_SIZE + MASK_RADIUS &&
-        i < height && j < width) {
-
-        float acc = 0.0f; // acumulador da convolução
-
-        // Varre a vizinhança 3x3 dentro da memória compartilhada
-        for (int y = -MASK_RADIUS; y <= MASK_RADIUS; y++) {
-            for (int x = -MASK_RADIUS; x <= MASK_RADIUS; x++) {
-                int maskRow = y + MASK_RADIUS;
-                int maskCol = x + MASK_RADIUS;
-                float pixelValue = tile[ty + y][tx + x];
-                float maskValue  = mask[maskRow * MASK_SIZE + maskCol];
-                acc += pixelValue * maskValue;
-            }
-        }
-
-        // Escreve o valor final na imagem de saída (memória global)
-        output[i * width + j] = acc;
-    }
+    if (t < stride)
+        partialSum[t] += partialSum[t + stride];
 }
-
 ```
 
+Na primeira iteração (`stride = blockDim.x / 2`), metade das threads soma pares de elementos:
 
-## **Agendamento de Threads**
+    Thread 0 soma elementos 0 e 512
 
-A GPU organiza o trabalho em:
+    Thread 1 soma elementos 1 e 513
 
-![warp](warp.png)
-Fonte: https://developer.codeplay.com/products/computecpp/ce/1.3.0/guides/sycl-for-cuda-developers/execution-model
+    ...
 
+    Thread 511 soma elementos 511 e 1023
 
-* **Warps:** grupos de 32 threads que executam em *SIMT* (Single Instruction, Multiple Thread).
-* **SM (Streaming Multiprocessor):** executa vários warps alternadamente para amenizar a latência.
-* O **agendador de warps** alterna entre os warps prontos para computação.
+Após essa etapa, os 512 primeiros elementos já contêm as somas parciais.
 
+Na próxima iteração (`stride = 256`), apenas as 256 primeiras threads continuam, elas somam pares de resultados parciais. Esse processo continua até que reste apenas uma thread (t = 0), que contém a soma total.
 
-![alt text](kernel-execution-on-gpu-1-625x438.png)
-Fonte: https://developer.nvidia.com/blog/cuda-refresher-cuda-programming-model/
-
-### Implicações práticas:
-
-* Melhor usar **blocos com múltiplos de 32 threads**.
-* Evitar **divergência de fluxo** (ifs dentro do warp).
-* Maximizar **ocupação**: usar `cudaOccupancyMaxPotentialBlockSize()` ajuda a determinar o tamanho adequado dos blocos.
+Esse padrão forma uma árvore binária de redução, onde cada nível tem metade dos nós do anterior.
 
 
-Aplicando todas as otimizações:
+### Estratégia:
+
+* Usar **memória compartilhada** (`__shared__`) para armazenar os somatórios parciais.
+* Em cada etapa, **metade das threads** faz soma com valores vizinhos
+* O resultado final estará no índice `0` do vetor parcial.
+
 ```cpp
-//demo.cu
-#include <iostream>
-#include <iomanip>
-#include <cmath>
-#include <cuda_runtime.h>
-using namespace std;
+// Kernel de redução paralela usando memória compartilhada
+__global__ void reduceShared(float *input, float *output, int N) {
+    // Vetor alocado dinamicamente na memória compartilhada
+    extern __shared__ float partialSum[];
 
-#define MASK_RADIUS 1
-#define ITER_LOCAL 100
+    // Índice da thread no bloco
+    unsigned int t = threadIdx.x;
 
-// ================================================================
-// Utilitário para verificar erros de CUDA
-// ================================================================
-#define CHECK_CUDA(call) do { \
-    cudaError_t err = (call); \
-    if (err != cudaSuccess) { \
-        cerr << "CUDA error: " << cudaGetErrorString(err) \
-             << " at " << __FILE__ << ":" << __LINE__ << endl; \
-        exit(1); \
-    } \
-} while(0)
+    // Cálculo do índice inicial do bloco (cada bloco processa 2 * blockDim.x elementos)
+    unsigned int start = 2 * blockIdx.x * blockDim.x;
 
-// ================================================================
-// Kernel: Stencil 2D com tiling em memória compartilhada
-// ================================================================
-__global__ void heatStencil2D(float *input, float *output,
-                              int width, int height,
-                              float alpha, float dt,
-                              int tileSize) {
-    extern __shared__ float tile[];
-    const int TILE_EXT = tileSize + 2 * MASK_RADIUS;
-
-    int tx = threadIdx.x;
-    int ty = threadIdx.y;
-    int j = blockIdx.x * tileSize + tx - MASK_RADIUS;
-    int i = blockIdx.y * tileSize + ty - MASK_RADIUS;
-
-    if (i >= 0 && i < height && j >= 0 && j < width)
-        tile[ty * TILE_EXT + tx] = input[i * width + j];
+    // Cada thread carrega um elemento para a posição t do vetor compartilhado
+    if (start + t < N)
+        partialSum[t] = input[start + t];
     else
-        tile[ty * TILE_EXT + tx] = 0.0f;
+        partialSum[t] = 0.0f;  // preenchimento com zero se passar do fim do vetor
+
+    // Cada thread também carrega um segundo elemento, para a posição blockDim.x + t
+    if (start + blockDim.x + t < N)
+        partialSum[blockDim.x + t] = input[start + blockDim.x + t];
+    else
+        partialSum[blockDim.x + t] = 0.0f;
+
+    // Loop de redução: stride aumenta a cada passo (1, 2, 4, ..., blockDim.x)
+    for (unsigned int stride = 1; stride <= blockDim.x; stride *= 2) {
+        // Garante que todos os valores foram somados antes de prosseguir
+        __syncthreads();
+
+        // Threads cujos índices são múltiplos de 'stride' fazem a soma com seu vizinho à direita
+        if (t % stride == 0)
+            partialSum[2 * t] += partialSum[2 * t + stride];
+    }
+
+    // Sincronização final antes de escrever na memória global
+    __syncthreads();
+
+    // Apenas a primeira thread de cada bloco escreve o resultado parcial no vetor de saída
+    if (t == 0)
+        output[blockIdx.x] = partialSum[0];
+}
+```
+
+Durante cada etapa da redução paralela, o controle sobre quais threads participam da computação influencia diretamente a eficiência da execução no modelo SIMT (Single Instruction, Multiple Threads) da GPU.
+
+Em CUDA, as threads são organizadas em warps de 32 threads que executam as mesmas instruções em blocos sincronizados. Quando se usa uma condição como `t % stride == 0`, as threads ativas a cada etapa ficam espaçadas: apenas aquelas com índice múltiplo de `stride` participam da operação, enquanto as demais permanecem ociosas. Isso leva a dois problemas principais:
+
+1. **Desalinhamento da execução por warp:** embora não haja necessariamente divergência de controle explícita, os warps passam a executar parcialmente, com poucas threads ativas por warp, o que reduz o aproveitamento do paralelismo interno.
+
+2. **Perda da localidade de memória:** os acessos ao vetor compartilhado (`partialSum[]`) deixam de ser contíguos. Threads ativas acessam posições cada vez mais distantes, prejudicando o uso eficiente da cache e da memória compartilhada.
+
+Esses dois fatores combinados degradam significativamente o desempenho.
+
+
+**Threads espaçadas (divergência alta)**
+
+| Stride | Threads ativas (`t % stride == 0`)              | Observação                |
+| ------ | ----------------------------------------------- | ------------------------- |
+| 1      | 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 ... 31 | todas as threads ativas   |
+| 2      | 0 x 2 x 4 x 6 x 8 x 10 x 12 x 14 x 16 ... 30    | metade das threads ativas |
+| 4      | 0 x x x 4 x x x 8 x x x  12 x x x  16 ... 28    | 25% das threads ativas    |
+| 8      | 0 x x x x x x x 8 x x x x x x x x  16 ... 24    | 12.5% das threads ativas  |
+| 16     | 0 x x x x x x x x x x x x x x x x  16 x x x     | apenas 2 threads ativas   |
+| 32     | 0 x x x x x x x x x x x x x x x x x x x x x     | uma thread ativa          |
+
+
+Para resolver esse problema, uma abordagem mais eficiente é reescrever o laço de redução utilizando a condição `if (t < stride)` e iniciando o `stride` com o valor de `blockDim.x`, reduzindo pela metade a cada iteração. 
+
+Com essa estratégia, em cada etapa da redução, as threads ativas são aquelas com índices consecutivos, formando grupos contíguos de threads. 
+
+Isso significa que, nas iterações iniciais, os warps executam de forma uniforme, com todas as threads de um warp realizando a mesma operação, evitando divergência. A divergência só ocorre nas últimas etapas da redução, quando o número de threads ativas se torna inferior a 32, o que tem impacto muito menor no desempenho geral, pois já há menos trabalho a ser feito.
+
+Além de reduzir a divergência, essa abordagem também melhora a localidade espacial do código:
+
+```cpp
+for (unsigned int stride = blockDim.x; stride > 0; stride /= 2) {
+    __syncthreads();
+    if (t < stride)
+        partialSum[t] += partialSum[t + stride];
+}
+```
+
+Vantagem: threads ativas são consecutivas → **sem warp divergentes**
+
+
+**Threads contíguas sem divergência**
+
+| Stride | Threads ativas (`t < stride`) | Observação                         |
+| ------ | ----------------------------- | ---------------------------------- |
+| 32     | 0 1 2 3 4 5 6 7 8 9 10 ... 31 | warp inteiro executa uniformemente |
+| 16     | 0 1 2 3 4 5 6 7 8 9 10 ... 15 | metade do warp, contígua           |
+| 8      | 0 1 2 3 4 5 6 7 x x x         | 8 threads contíguas ativas         |
+| 4      | 0 1 2 3 x x x x x x x         | 4 threads contíguas ativas         |
+| 2      | 0 1 x x x x x x x x x         | 2 threads                          |
+| 1      | 0 x x x x x x x x x x         | 1 thread                           |
+
+
+
+**Comparando as duas versões:**
+
+```
+Versão (t % stride == 0):
+
+Stride  1 → [* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *]
+Stride  2 → [* X * X * X * X * X * X * X * X * X * X * X * X]
+Stride  4 → [* X X X * X X X * X X X * X X X * X X X * X X X]
+Stride  8 → [* X X X X X X X * X X X X X X X * X X X X X X X *]
+Stride 16 → [* X X X X X X X X X X X X X X X * X X X X X X X X X X X X X X X]
+Stride 32 → [* X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X]
+(Localidade espacial ruim)
+
+Versão (t < stride):
+
+Stride 32 → [* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *]
+Stride 16 → [* * * * * * * * * * * * * * * * X X X X X X X X X X X X X X X X]
+Stride  8 → [* * * * * * * * X X X X X X X X X X X X X X X X X X X X X X X X]
+Stride  4 → [* * * * X X X X X X X X X X X X X X X X X X X X X X X X X X X X]
+Stride  2 → [* * X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X]
+Stride  1 → [* X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X X]
+(Boa localidade espacial)
+
+```
+
+## Scan
+
+Em algumas situações não basta saber apenas o valor total da operação, precisamos saber **a soma parcial até cada ponto** ou seja, os **prefixos acumulados**. Para isso, usamos a operação chamada **scan** (ou **prefix sum**).
+
+Exemplo de **scan**:
+
+```cpp
+Entrada:  [3, 1, 7, 0, 4, 1, 6, 3]
+Scan:     [0, 3, 4, 11, 11, 15, 16, 22]
+```
+
+Aqui, cada posição `i` contém a soma de todos os elementos anteriores `A[0] + A[1] + ... + A[i-1]`.
+
+**Diferença prática entre redução e scan**
+
+| Operação | Resultado         | Quando usar                    |
+| -------- | ----------------- | ------------------------------ |
+| Redução  | Valor único       | Quando só o total importa      |
+| Scan     | Vetor de prefixos | Quando queremos somas parciais |
+
+A redução descarta as somas intermediárias. Já o scan preserva essas informações, o que é essencial para várias aplicações como:
+
+* Compactação de vetores
+* Geração de índices de escrita
+* Alocação dinâmica paralela
+* Processamento de streams
+* Pré-processamento em algoritmos de ordenação (ex: radix sort)
+
+### **Scan Simples**
+
+Nesta versão cada thread calcula seu valor somando os valores anteriores, exatamente como faríamos sequencialmente, mas de forma paralela e em várias etapas.
+
+### Estratégia:
+
+* Cada thread carrega um valor.
+* Em cada etapa, somamos com o valor de uma certa "distância" (`stride`).
+* A distância dobra a cada passo: 1, 2, 4, 8...
+
+```plaintext
+stride = 1 → somar vizinhos:
+[3, 1, 7, 0, 4, 1, 6, 3]
+ ↓  ↓  ↓  ↓
+[3, 4, 7, 7, 4, 5, 6, 9]
+
+stride = 2 → somar a cada 2:
+[3, 4, 7, 7, 4, 5, 6, 9]
+     ↓      ↓
+[3, 4, 10, 7, 4, 5, 15, 9]
+
+stride = 4 → somar centro da árvore:
+[3, 4, 10, 7, 4, 5, 15, 9]
+               ↓
+[3, 4, 10, 7, 4, 5, 15, 25]
+
+```
+
+Esse padrão continua até que todas as somas estejam corretas.
+
+### Código (CUDA):
+
+```cpp
+__global__ void scan_simples(int *entrada, int *saida, int N) {
+    extern __shared__ int XY[];
+    int tid = threadIdx.x;
+    int gid = blockIdx.x * blockDim.x + tid;
+
+    // 1. Cada thread lê da entrada (ajustado para scan)
+    if (gid > 0 && gid < N)
+        XY[tid] = entrada[gid - 1];
+    else
+        XY[tid] = 0;
 
     __syncthreads();
 
-    if (tx >= MASK_RADIUS && tx < TILE_EXT - MASK_RADIUS &&
-        ty >= MASK_RADIUS && ty < TILE_EXT - MASK_RADIUS &&
-        i < height && j < width) {
+    // 2. Para cada passo, somar com o valor `stride` posições atrás
+    for (int passo = 1; passo < blockDim.x; passo *= 2) {
+        int temp = 0;
+        if (tid >= passo)
+            temp = XY[tid - passo];
+        __syncthreads();
+        XY[tid] += temp;
+        __syncthreads();
+    }
 
-        float Tij  = tile[ty * TILE_EXT + tx];
-        float Tnew = Tij;
+    // 3. Escreve no vetor de saída
+    if (gid < N)
+        saida[gid] = XY[tid];
+}
+```
 
-        for (int k = 0; k < ITER_LOCAL; k++) {
-            float lap =
-                tile[(ty-1) * TILE_EXT + tx] +
-                tile[(ty+1) * TILE_EXT + tx] +
-                tile[ty * TILE_EXT + (tx-1)] +
-                tile[ty * TILE_EXT + (tx+1)] -
-                4.0f * Tij;
+## Limitações dessa abordagem
 
-            Tnew = Tij + alpha * dt * tanhf(lap);
-            Tij  = 0.99f * Tnew + 0.01f * sinf(Tnew);
+Apesar de simples, essa versão faz mais operações do que o necessário:
+
+* Todas as threads participam em todas as etapas.
+* Muitas threads fazem trabalho redundante ou nulo (especialmente nas etapas iniciais).
+* O número total de somas realizadas é maior que o necessário.
+
+
+## Otimização: Varredura em Árvore com Propagação Reversa
+
+Essa versão reduz o trabalho total usando uma **abordagem em duas fases**:
+
+1. **Up-sweep (redução):** combina pares de elementos até o topo da árvore (como uma redução soma).
+2. **Down-sweep (propagação):** distribui os prefixos acumulados corretamente.
+
+
+### Etapas da otimização:
+
+#### Fase 1 – Up-Sweep
+
+```plaintext
+[3, 1, 7, 0, 4, 1, 6, 3]
+
+Passo 1 (stride = 1): soma pares → [3+1, 7+0, 4+1, 6+3] = [4, 7, 5, 9]
+Passo 2 (stride = 2): soma pares → [4+7, 5+9] = [11, 14]
+Passo 3 (stride = 4): soma final → 11 + 14 = 25
+```
+
+#### Fase 2 – Down-Sweep
+
+Distribui os prefixos sem repetir as somas anteriores. Cada valor novo é derivado da soma anterior. O valor final de cada posição será a soma de todos os anteriores, **excluindo a própria posição**.
+
+### Código (CUDA otimizado):
+
+```cpp
+__global__ void scan_otimizado(int* entrada, int* saida, int N) {
+    extern __shared__ int vetor_auxiliar[];
+
+    int tid = threadIdx.x;
+    int inicio_bloco = 2 * blockDim.x * blockIdx.x;
+    int indice_global = inicio_bloco + tid;
+
+    int tamanho_bloco = 2 * blockDim.x;
+
+    // Carregamento de dois elementos por thread na memória compartilhada
+    int valor_esquerda = 0;
+    int valor_direita  = 0;
+
+    if (indice_global < N)
+        valor_esquerda = entrada[indice_global];
+
+    if (indice_global + blockDim.x < N)
+        valor_direita = entrada[indice_global + blockDim.x];
+
+    vetor_auxiliar[tid] = valor_esquerda;
+    vetor_auxiliar[tid + blockDim.x] = valor_direita;
+
+    __syncthreads();
+
+    // --- Fase 1: Up-sweep (redução para soma total do bloco) ---
+    for (int passo = 1; passo < tamanho_bloco; passo *= 2) {
+        int indice = (tid + 1) * passo * 2 - 1;
+
+        if (indice < tamanho_bloco)
+            vetor_auxiliar[indice] += vetor_auxiliar[indice - passo];
+
+        __syncthreads();
+    }
+
+    // Zera o último elemento para começar o down-sweep (scan exclusivo)
+    if (tid == 0)
+        vetor_auxiliar[tamanho_bloco - 1] = 0;
+
+    __syncthreads();
+
+    // --- Fase 2: Down-sweep (distribui os prefixos) ---
+    for (int passo = tamanho_bloco / 2; passo >= 1; passo /= 2) {
+        int indice = (tid + 1) * passo * 2 - 1;
+
+        if (indice < tamanho_bloco) {
+            int valor_anterior = vetor_auxiliar[indice - passo];
+            vetor_auxiliar[indice - passo] = vetor_auxiliar[indice];
+            vetor_auxiliar[indice] += valor_anterior;
         }
 
-        output[i * width + j] = Tnew;
+        __syncthreads();
     }
+
+    // Escreve os valores de volta no vetor de saída
+    if (indice_global < N)
+        saida[indice_global] = vetor_auxiliar[tid];
+
+    if (indice_global + blockDim.x < N)
+        saida[indice_global + blockDim.x] = vetor_auxiliar[tid + blockDim.x];
 }
 
-// ================================================================
-// Função principal
-// ================================================================
+```
+
+## Exercício: Redução e Scan com CUDA
+
+Neste exercício, você vai aplicar os conceitos de redução e scan (prefix sum) utilizando programação paralela em GPU com CUDA, aproveitando os recursos de memória compartilhada, sincronização de threads e organização de blocos para maximizar o desempenho da operação.
+
+Implemente um kernel CUDA que receba um vetor com `N` elementos e produza como saída a soma total desses elementos.
+
+* Utilize memória compartilhada para armazenar os somatórios parciais dentro de cada bloco.
+* Dimensione corretamente a quantidade de threads por bloco.
+* Use a versão otimizada da redução.
+* O resultado parcial de cada bloco deve ser exibido ao final.
+* Apresente também o valor total da soma calculado com scan
+
+O resultado deve ser algo como:
+
+![alt text](image.png)
+
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <numeric>   // std::iota
+
+
+// Gera vetor com valores de 1 a N
+std::vector<int> gerar_dados(int N) {
+    std::vector<int> dados(N);
+    std::iota(dados.begin(), dados.end(), 1); // dados = [1, 2, 3, ..., N]
+    return dados;
+}
+
+// --- TODO 1: Implementar Redução ---
+// altere a função para ser executada em um kernel CUDA
+int reducao_soma(const std::vector<int>& dados) {
+    int soma = 0;
+
+    // TODO: implemente a redução aqui 
+
+    return soma;
+}
+
+// --- TODO 2: Implementar Scan ---
+// altere a função para ser executada em um kernel CUDA
+std::vector<int> scan_prefix_sum(const std::vector<int>& dados) {
+    int N = dados.size();
+    std::vector<int> prefixos(N);
+
+    // TODO: implemente o scan aqui
+    // Cada prefixos[i] deve ser igual à soma de dados[0] até dados[i]
+
+    return prefixos;
+}
+
 int main() {
-    const int width  = 8192;
-    const int height = 8192;
-    const long long N = 1LL * width * height;
+    const int N = 2048;
+    std::vector<int> entrada = gerar_dados(N);
 
-    cout << "Stencil 2D em GPU (" << width << "x" << height
-         << "), " << fixed << setprecision(1) << (N / 1e6) << " Mpx\n";
+    // --- Redução ---
+    // TODO: faça a medição do tempo de execução 
+    int resultado_soma = reducao_soma(entrada);
+ 
+    std::cout << "[Tempo] Redução de Soma: " << ?????? << "\n";
+    std::cout << "Resultado da soma: " << resultado_soma << "\n";
 
-    const float alpha = 0.25f;
-    const float dt    = 0.1f;
+    // --- Scan ---
+    // TODO: faça a medição do tempo de execução 
+    std::vector<int> prefixos = scan_prefix_sum(entrada);
+    
+    std::cout << "[Tempo] Scan (prefix sum): " << ??????? << "\n";
+    std::cout << "Scan parcial (20 primeiros valores):\n";
+    for (int i = 0; i < 20; ++i)
+        std::cout << prefixos[i] << " ";
+    std::cout << "...\n";
 
-    float *input = nullptr, *output = nullptr;
-    CHECK_CUDA(cudaMallocManaged(&input,  N * sizeof(float)));
-    CHECK_CUDA(cudaMallocManaged(&output, N * sizeof(float)));
+    // TODO: faça o print do valor total da soma calculado pela função scan 
 
-    for (long long i = 0; i < N; i++) input[i] = 1.0f;
 
-    int minGrid = 0, optBlock = 0;
-    CHECK_CUDA(cudaOccupancyMaxPotentialBlockSize(&minGrid, &optBlock,
-                     heatStencil2D, 0, 0));
-
-    int suggestedTileExt  = (int)floor(sqrt((double)optBlock));
-    int suggestedTileSize = suggestedTileExt - 2 * MASK_RADIUS;
-    if (suggestedTileSize < 4) suggestedTileSize = 4;
-
-    cout << "\n============================================================\n";
-    cout << "ANÁLISE TEÓRICA DE OCUPAÇÃO (CUDA)\n";
-    cout << "------------------------------------------------------------\n";
-    cout << "• Threads ideais por bloco : " << optBlock << "\n";
-    cout << "• TILE_EXT sugerido        : " << suggestedTileExt
-         << "  →  TILE_SIZE sugerido ≈ " << suggestedTileSize << "\n";
-    cout << "• Grade mínima recomendada : " << minGrid << " blocos totais\n";
-    cout << "============================================================\n\n";
-
-    // Agora declaramos repeats antes de usar
-    const int repeats = 20;
-
-    int tileSizes[] = {suggestedTileSize, 8, 12, 14, 16, 32};
-    const int numTests = sizeof(tileSizes) / sizeof(tileSizes[0]);
-
-    cout << "INICIANDO EXPERIMENTO DE DESEMPENHO GPU\n";
-    cout << "   (média de " << repeats << " execuções por configuração)\n\n";
-
-    cout << left
-         << setw(10) << "Tile"
-         << setw(16) << "Threads/Bloco"
-         << setw(8)  << "Warps"
-         << setw(14) << "Tempo (ms)"
-         << setw(14) << "Mpx/s"
-         << "Comentário\n";
-    cout << string(75, '-') << "\n";
-
-    for (int t = 0; t < numTests; t++) {
-        int TILE_SIZE = tileSizes[t];
-        if (TILE_SIZE <= 0) continue;
-
-        const int TILE_EXT = TILE_SIZE + 2 * MASK_RADIUS;
-        const int threadsPerBlock = TILE_EXT * TILE_EXT;
-        const int warps = (threadsPerBlock + 31) / 32;
-
-        dim3 threads(TILE_EXT, TILE_EXT);
-        dim3 blocks(
-            (width  + TILE_SIZE - 1) / TILE_SIZE,
-            (height + TILE_SIZE - 1) / TILE_SIZE
-        );
-
-        size_t shmem = (size_t)TILE_EXT * TILE_EXT * sizeof(float);
-
-        // Eventos CUDA para medir tempo
-        cudaEvent_t start, stop;
-        CHECK_CUDA(cudaEventCreate(&start));
-        CHECK_CUDA(cudaEventCreate(&stop));
-
-        CHECK_CUDA(cudaEventRecord(start));
-        for (int r = 0; r < repeats; r++) {
-            heatStencil2D<<<blocks, threads, shmem>>>(input, output, width, height, alpha, dt, TILE_SIZE);
-        }
-        CHECK_CUDA(cudaEventRecord(stop));
-        CHECK_CUDA(cudaEventSynchronize(stop));
-
-        float msTotal = 0.0f;
-        CHECK_CUDA(cudaEventElapsedTime(&msTotal, start, stop));
-        CHECK_CUDA(cudaEventDestroy(start));
-        CHECK_CUDA(cudaEventDestroy(stop));
-
-        const double ms = msTotal / repeats;
-        const double mpxPerSec = (N / 1e6) / (ms / 1000.0);
-
-        string comment;
-        if (threadsPerBlock == optBlock)
-            comment = "≈ Ideal teórico";
-        else if (abs(threadsPerBlock - optBlock) < 64)
-            comment = "Próximo ao ideal";
-        else if (threadsPerBlock < optBlock)
-            comment = "Subocupação (bloco pequeno)";
-        else
-            comment = "Shared alta";
-
-        cout << left
-             << setw(10) << (to_string(TILE_SIZE) + "x" + to_string(TILE_SIZE))
-             << setw(16) << threadsPerBlock
-             << setw(8)  << warps
-             << setw(14) << fixed << setprecision(3) << ms
-             << setw(14) << fixed << setprecision(2) << mpxPerSec
-             << comment << "\n";
-    }
-
-    CHECK_CUDA(cudaFree(input));
-    CHECK_CUDA(cudaFree(output));
     return 0;
 }
-```
-
-Slurm para executar em um Cluster HPC:
 
 ```
-#!/bin/bash
-#SBATCH --job-name=demo
-#SBATCH --output=saida.out
-#SBATCH --partition=gpu
-#SBATCH --nodes=1
-#SBATCH --ntasks=1
-#SBATCH --gres=gpu:1
-#SBATCH --time=00:10:00
-#SBATCH --mem=4G
+??? Gabarito
+        #include <iostream>
+        #include <vector>
+        #include <numeric>
+        #include <chrono>
 
-./demo
+        // Kernel 1: Redução
+        __global__ void kernel_reducao_soma(int* entrada, int* resultado, int N) {
+            // Vetor na memória compartilhada (visível a todas as threads do bloco)
+            extern __shared__ int soma_parcial[];
 
-```
+            int tid = threadIdx.x;                   // Índice local da thread dentro do bloco
+            int i = blockIdx.x * blockDim.x + tid;   // Índice global no vetor de entrada
 
-!!!! warning "Não esqueça de carregar o modulo cuda e compilar com nvcc"
+            // Cada thread copia um valor da memória global para a memória compartilhada
+            if (i < N)
+                soma_parcial[tid] = entrada[i];
+            else
+                soma_parcial[tid] = 0;
+
+            __syncthreads(); // Sincroniza todas as threads antes da soma
+
+            // Fase de redução binária: combina pares de elementos
+            int passo = blockDim.x / 2;
+            while (passo > 0) {
+                if (tid < passo)
+                    soma_parcial[tid] += soma_parcial[tid + passo];
+
+                __syncthreads(); // Garante que todas as somas de um passo terminaram
+                passo = passo / 2;
+            }
+
+            // Apenas a primeira thread escreve o resultado do bloco
+            if (tid == 0)
+                resultado[blockIdx.x] = soma_parcial[0];
+        }
 
 
-### Conclusão
+        // Kernel 2: Scan prefix sum
+        __global__ void kernel_scan_exclusivo(int* entrada, int* saida, int N) {
+            extern __shared__ int dados[];
 
-Percebemos como o tamanho do bloco (tile) influencia a eficiência de execução de um kernel em GPU.
+            int tid = threadIdx.x;
 
-Para interpretar a tabela corretamente, é importante observar **três parâmetros principais**:
+            // Carrega os dados de entrada para memória compartilhada
+            if (tid < N)
+                dados[tid] = entrada[tid];
+            else
+                dados[tid] = 0;
 
-- Tempo médio (Tempo ms)
-- Taxa de processamento (Mpx/s)
+            __syncthreads();
 
-O **tempo (ms)** indica quanto cada configuração levou para processar toda a matriz. Valores menores significam execuções mais rápidas, mas devem ser analisados com cuidado: blocos grandes podem reduzir artificialmente o tempo total por utilizarem poucos blocos na GPU, o que mascara o real desempenho paralelo.
+            // Etapa 1: up-sweep (redução)
+            int passo = 1;
+            while (passo < N) {
+                int idx = (tid + 1) * passo * 2 - 1;
+                if (idx < N)
+                    dados[idx] += dados[idx - passo];
+                __syncthreads();
+                passo = passo * 2;
+            }
 
-O parâmetro mais confiável é o **Mpx/s (milhões de pixels por segundo)**, que mede quantos milhões de elementos foram processados por segundo. Esse valor reflete o **throughput da GPU**, ou seja, quão bem o hardware foi aproveitado. Quanto maior o Mpx/s, mais eficiente foi o uso dos recursos. 
+            // Zera o último elemento (torna o scan exclusivo)
+            if (tid == 0)
+                dados[N - 1] = 0;
 
-Ao comparar esses valores, percebemos que os blocos menores (8×8, 12×12) apresentam maiores tempos e menores taxas de Mpx/s.
+            __syncthreads();
 
-Isso acontece porque há poucas threads por bloco, resultando em **subocupação** da GPU.
+            // Etapa 2: down-sweep (distribuição dos prefixos)
+            passo = N / 2;
+            while (passo >= 1) {
+                int idx = (tid + 1) * passo * 2 - 1;
+                if (idx < N) {
+                    int temp = dados[idx - passo];
+                    dados[idx - passo] = dados[idx];
+                    dados[idx] += temp;
+                }
+                __syncthreads();
+                passo = passo / 2;
+            }
 
-Nos blocos intermediários (14×14 a 25×25), o desempenho melhora gradualmente: o tempo diminui, e o Mpx/s aumenta até atingir um ponto em torno do tile de **25×25**, o valor sugerido pelo CUDA. Esse é o ponto de equilíbrio entre paralelismo e uso de memória compartilhada, o bloco é grande o suficiente para gerar alto throughput, mas não tão grande a ponto de limitar a quantidade de blocos ativos por SM.
+            // Copia o resultado final para a saída
+            if (tid < N)
+                saida[tid] = dados[tid];
+        }
 
-Já o bloco de 32×32 aparenta ter tempo “zero”, mas isso é um bug de medição: o kernel termina tão rapidamente que o cronômetro perde precisão.
-Na prática, blocos muito grandes consomem mais memória compartilhada e reduzem a **ocupação real da GPU**, resultando em menor eficiência, mesmo que o tempo aparente seja baixo.
 
-O tempo isolado não é o melhor indicador, o desempenho real está no ponto em que o **Mpx/s é máximo**, pois esse indicador apresenta de fato o trabalho da GPU.
+        std::vector<int> gerar_dados(int N) {
+            std::vector<int> v(N);
+            std::iota(v.begin(), v.end(), 1); // preenche: [1, 2, 3, ..., N]
+            return v;
+        }
 
+
+        int main() {
+            const int N = 1234; // Tamanho do vetor
+
+            // --- Gera dados de entrada ---
+            std::vector<int> entrada = gerar_dados(N);
+
+            // --- Ponteiros para a GPU ---
+            int* d_entrada = nullptr;
+            int* d_saida   = nullptr;
+            int* d_blocos  = nullptr;
+
+            // --- Aloca memória na GPU ---
+            cudaMalloc(&d_entrada, N * sizeof(int));
+            cudaMalloc(&d_saida,   N * sizeof(int));
+            cudaMalloc(&d_blocos,  sizeof(int)); // apenas 1 bloco neste exemplo
+
+            // --- Copia dados da CPU para a GPU ---
+            cudaMemcpy(d_entrada, entrada.data(), N * sizeof(int), cudaMemcpyHostToDevice);
+
+
+            // chamada para o kernel de redução
+            auto inicio_reducao = std::chrono::high_resolution_clock::now();
+
+            kernel_reducao_soma<<<1, N, N * sizeof(int)>>>(d_entrada, d_blocos, N);
+            cudaDeviceSynchronize();
+
+            auto fim_reducao = std::chrono::high_resolution_clock::now();
+
+            // Copia resultado para a CPU
+            int soma_total = 0;
+            cudaMemcpy(&soma_total, d_blocos, sizeof(int), cudaMemcpyDeviceToHost);
+
+            std::chrono::duration<double, std::milli> tempo_reducao = fim_reducao - inicio_reducao;
+            std::cout << "[Tempo] Redução de soma: " << tempo_reducao.count() << " ms\n";
+            std::cout << "Resultado da soma: " << soma_total << "\n\n";
+
+            // chamada para o kernel scan
+            auto inicio_scan = std::chrono::high_resolution_clock::now();
+
+            kernel_scan_exclusivo<<<1, N, N * sizeof(int)>>>(d_entrada, d_saida, N);
+            cudaDeviceSynchronize();
+
+            auto fim_scan = std::chrono::high_resolution_clock::now();
+
+            // Copia resultado para a CPU
+            std::vector<int> prefixos(N);
+            cudaMemcpy(prefixos.data(), d_saida, N * sizeof(int), cudaMemcpyDeviceToHost);
+
+            std::chrono::duration<double, std::milli> tempo_scan = fim_scan - inicio_scan;
+            std::cout << "[Tempo] Scan (prefix sum): " << tempo_scan.count() << " ms\n";
+
+            // Mostra apenas os 20 primeiros valores
+            std::cout << "Primeiros 20 valores do scan:\n";
+            for (int i = 0; i < 20; i++)
+                std::cout << prefixos[i] << " ";
+            std::cout << "...\n";
+
+            // Verifica soma final pelo último prefixo + último valor original
+            int soma_scan = prefixos[N - 1] + entrada[N - 1];
+            std::cout << "Soma total com Scan: " << soma_scan << "\n";
+
+            // Libera memória da GPU 
+            cudaFree(d_entrada);
+            cudaFree(d_saida);
+            cudaFree(d_blocos);
+
+            return 0;
+        }
+
+## Este Exercício não tem entrega, bom final de semana!
