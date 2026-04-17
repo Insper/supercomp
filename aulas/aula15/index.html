@@ -1451,7 +1451,8 @@
 <p>Uma redução é uma operação onde muitos elementos são combinados em um só, em CUDA, não podemos usar algo como<code>sum += x[i]</code> diretamente. Precisamos de uma abordagem recursiva que reduza pares de elementos em várias etapas.</p>
 <h3 id="estrutura-conceitual-da-reducao">Estrutura conceitual da redução<a class="headerlink" href="#estrutura-conceitual-da-reducao" title="Permanent link">&para;</a></h3>
 <p>O objetivo da redução é combinar N elementos em um único valor.</p>
-<p>Como cada soma combina dois elementos por vez, após uma etapa de soma, o número de resultados parciais é metade do original.</p>
+<p>Como cada soma combina dois elementos por vez, após uma etapa de soma, o número de resultados parciais é metade do original.
+<img alt="reducao" src="reducao" /></p>
 <p>Por exemplo:</p>
 <table>
 <thead>
