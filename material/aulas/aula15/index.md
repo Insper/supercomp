@@ -8,6 +8,9 @@ Uma redução é uma operação onde muitos elementos são combinados em um só,
 O objetivo da redução é combinar N elementos em um único valor.
 
 Como cada soma combina dois elementos por vez, após uma etapa de soma, o número de resultados parciais é metade do original.
+![reducao](reducao)
+
+
 
 Por exemplo:
 
