@@ -375,11 +375,10 @@ Abra o `saida.png` e verifique se as bordas foram detectadas.
 1.  Realize as operações de grayscale e filtro Sobel na GPU.
 Essa será a sua versão ingênua.
 
-2. Otimização
-A partir da versão ingênua, aplique as seguintes otimizações:
+2. A partir da versão ingênua, aplique as seguintes otimizações:
 
 * **tiling**
-* uso de **shared memory**
+* uso de **shared memory** (traga os dados para a memória L1 das SM's )
 
 3. Meça o tempo de execução e complete a tabela:
 
@@ -395,7 +394,7 @@ A partir da versão ingênua, aplique as seguintes otimizações:
 
 
 
-4. Responda:
+### Responda:
 
 * Qual configuração apresentou melhor desempenho?
 * A otimização trouxe ganho significativo?
