@@ -385,11 +385,9 @@ Essa será a sua versão ingênua.
 | Versão         | Block Size | Tempo (ms) |
 |---------------|-----------|-----------|
 | CPU           | -         |           |
-| GPU ingênua   | 8×8       |           |
+| GPU ingênua   | -       |           |
 | GPU otimizada | 8×8       |           |
-| GPU ingênua   | 16×16     |           |
 | GPU otimizada | 16×16     |           |
-| GPU ingênua   | 32×32     |           |
 | GPU otimizada | 32×32     |           |
 
 
