@@ -866,6 +866,21 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Sua vez!">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#responda" class="md-nav__link">
+    <span class="md-ellipsis">
+      Responda:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1276,6 +1291,21 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Sua vez!">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#responda" class="md-nav__link">
+    <span class="md-ellipsis">
+      Responda:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1415,7 +1445,9 @@ Gray = 0.299R + 0.587G + 0.114B
 <p>E é justamente essa intensidade que o Sobel usa para detectar bordas.</p>
 <h2 id="como-testar-o-codigo-base">Como testar o Código base<a class="headerlink" href="#como-testar-o-codigo-base" title="Permanent link">&para;</a></h2>
 <p>Aqui está o codigo base chamado <code>base.cpp</code></p>
-<div class="highlight"><pre><span></span><code><span class="c1">// libs para ler e salvar as imagens em formato png</span>
+<div class="highlight"><pre><span></span><code><span class="c1">// ============================================</span>
+<span class="c1">// Bibliotecas para ler e escrever PNG </span>
+<span class="c1">// ============================================</span>
 <span class="cp">#define STB_IMAGE_IMPLEMENTATION</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;stb_image.h&quot;</span>
 <span class="cp">#define STB_IMAGE_WRITE_IMPLEMENTATION</span>
@@ -1423,11 +1455,21 @@ Gray = 0.299R + 0.587G + 0.114B
 
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cmath&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;chrono&gt;</span><span class="c1">  </span>
 
 <span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="o">::</span><span class="nn">chrono</span><span class="p">;</span>
 
 <span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="c1">// Variáveis da imagem</span>
 <span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">width</span><span class="p">,</span><span class="w"> </span><span class="n">height</span><span class="p">,</span><span class="w"> </span><span class="n">channels</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Medição do tempo total</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">t_total_start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// 1. Leitura da imagem </span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">t0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
 
 <span class="w">    </span><span class="c1">// le a imagem e salva em uma matriz correspondente aos canais RGB</span>
 <span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stbi_load</span><span class="p">(</span><span class="s">&quot;arara.png&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">width</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">height</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">channels</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span>
@@ -1437,30 +1479,37 @@ Gray = 0.299R + 0.587G + 0.114B
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="c1">// cria as variáveis para reservar o espaço de memória </span>
-<span class="w">    </span><span class="c1">// para as transformações que serão aplicadas as imagens</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// Alocação de memória </span>
+<span class="w">    </span><span class="c1">// Cada pixel grayscale ocupa 1 byte</span>
 <span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">gray</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="p">[</span><span class="n">width</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">height</span><span class="p">];</span>
 <span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="p">[</span><span class="n">width</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">height</span><span class="p">];</span>
 
-<span class="w">    </span><span class="c1">// ==============================</span>
-<span class="w">    </span><span class="c1">//  RGB -&gt; GRAYSCALE</span>
-<span class="w">    </span><span class="c1">// ==============================</span>
+<span class="w">    </span><span class="c1">// 2. RGB -&gt; GRAYSCALE</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">t2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">height</span><span class="p">;</span><span class="w"> </span><span class="n">y</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">width</span><span class="p">;</span><span class="w"> </span><span class="n">x</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
+<span class="w">            </span><span class="c1">// Índice linear do pixel (posição no vetor)</span>
 <span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">idx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">y</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
 
+<span class="w">            </span><span class="c1">// Acesso aos canais (layout intercalado: RGBRGB...)</span>
 <span class="w">            </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">input</span><span class="p">[</span><span class="n">idx</span><span class="p">];</span>
 <span class="w">            </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">g</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">input</span><span class="p">[</span><span class="n">idx</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">];</span>
 <span class="w">            </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">input</span><span class="p">[</span><span class="n">idx</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="p">];</span>
 
+<span class="w">            </span><span class="c1">// Conversão para escala de cinza </span>
 <span class="w">            </span><span class="n">gray</span><span class="p">[</span><span class="n">y</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">x</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.299f</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">0.587f</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">g</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">0.114f</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="c1">// ==============================</span>
-<span class="w">    </span><span class="c1">// Aplicação do filtro SOBEL</span>
-<span class="w">    </span><span class="c1">// ==============================</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">t3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// 3. SOBEL (detecção de bordas)</span>
+<span class="w">    </span><span class="c1">// Cada pixel depende de uma vizinhança 3x3</span>
+
 <span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">Gx</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="p">{</span><span class="mi">-1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">},</span>
 <span class="w">        </span><span class="p">{</span><span class="mi">-2</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">},</span>
@@ -1473,12 +1522,16 @@ Gray = 0.299R + 0.587G + 0.114B
 <span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">  </span><span class="mi">2</span><span class="p">,</span><span class="w">  </span><span class="mi">1</span><span class="p">}</span>
 <span class="w">    </span><span class="p">};</span>
 
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">t4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+
+
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">height</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">y</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">x</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">sumX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">sumY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 
+<span class="w">            </span><span class="c1">// Janela 3x3 (convolução)</span>
 <span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">ky</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span><span class="w"> </span><span class="n">ky</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">ky</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">kx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span><span class="w"> </span><span class="n">kx</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">kx</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
@@ -1489,20 +1542,50 @@ Gray = 0.299R + 0.587G + 0.114B
 <span class="w">                </span><span class="p">}</span>
 <span class="w">            </span><span class="p">}</span>
 
+<span class="w">            </span><span class="c1">// Magnitude do gradiente</span>
 <span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">magnitude</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sqrt</span><span class="p">(</span><span class="n">sumX</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sumX</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sumY</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sumY</span><span class="p">);</span>
+
+<span class="w">            </span><span class="c1">// Saturação (limite de 8 bits)</span>
 <span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">magnitude</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">255</span><span class="p">)</span><span class="w"> </span><span class="n">magnitude</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">255</span><span class="p">;</span>
 
 <span class="w">            </span><span class="n">output</span><span class="p">[</span><span class="n">y</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">x</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="p">)</span><span class="n">magnitude</span><span class="p">;</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="c1">// ==============================</span>
-<span class="w">    </span><span class="c1">// salvando a imagem de saida como PNG</span>
-<span class="w">    </span><span class="c1">// ==============================</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">t5</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// 4. Escrita da imagem</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">t6</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// 1 canal → grayscale</span>
 <span class="w">    </span><span class="n">stbi_write_png</span><span class="p">(</span><span class="s">&quot;saida.png&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">width</span><span class="p">,</span><span class="w"> </span><span class="n">height</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">output</span><span class="p">,</span><span class="w"> </span><span class="n">width</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">t7</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">t_total_end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// Cálculo dos tempos (em milissegundos)</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">t_load</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="n">duration_cast</span><span class="o">&lt;</span><span class="n">milliseconds</span><span class="o">&gt;</span><span class="p">(</span><span class="n">t1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">t0</span><span class="p">).</span><span class="n">count</span><span class="p">();</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">t_gray</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="n">duration_cast</span><span class="o">&lt;</span><span class="n">milliseconds</span><span class="o">&gt;</span><span class="p">(</span><span class="n">t3</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">t2</span><span class="p">).</span><span class="n">count</span><span class="p">();</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">t_sobel</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">duration_cast</span><span class="o">&lt;</span><span class="n">milliseconds</span><span class="o">&gt;</span><span class="p">(</span><span class="n">t5</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">t4</span><span class="p">).</span><span class="n">count</span><span class="p">();</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">t_write</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">duration_cast</span><span class="o">&lt;</span><span class="n">milliseconds</span><span class="o">&gt;</span><span class="p">(</span><span class="n">t7</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">t6</span><span class="p">).</span><span class="n">count</span><span class="p">();</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">t_total</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">duration_cast</span><span class="o">&lt;</span><span class="n">milliseconds</span><span class="o">&gt;</span><span class="p">(</span><span class="n">t_total_end</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">t_total_start</span><span class="p">).</span><span class="n">count</span><span class="p">();</span>
+
+
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;=====================================</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;        Relatorio de Tempo</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;=====================================</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Leitura (PNG):     &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">t_load</span><span class="w">  </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; ms</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Grayscale:         &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">t_gray</span><span class="w">  </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; ms</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Sobel:             &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">t_sobel</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; ms</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Escrita (PNG):     &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">t_write</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; ms</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;-------------------------------------</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Tempo total:       &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">t_total</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; ms</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;=====================================</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Bordas detectadas!&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
 
+<span class="w">    </span><span class="c1">// Liberação de memória</span>
 <span class="w">    </span><span class="n">stbi_image_free</span><span class="p">(</span><span class="n">input</span><span class="p">);</span>
 <span class="w">    </span><span class="k">delete</span><span class="p">[]</span><span class="w"> </span><span class="n">gray</span><span class="p">;</span>
 <span class="w">    </span><span class="k">delete</span><span class="p">[]</span><span class="w"> </span><span class="n">output</span><span class="p">;</span>
@@ -1577,14 +1660,13 @@ stb_image_write.h
 Essa será a sua versão ingênua.</p>
 </li>
 <li>
-<p>Otimização
-A partir da versão ingênua, aplique as seguintes otimizações:</p>
+<p>A partir da versão ingênua, aplique as seguintes otimizações:</p>
 </li>
 <li>
 <p><strong>tiling</strong></p>
 </li>
 <li>
-<p>uso de <strong>shared memory</strong></p>
+<p>uso de <strong>shared memory</strong> (traga os dados para a memória L1 das SM's )</p>
 </li>
 <li>
 <p>Meça o tempo de execução e complete a tabela:</p>
@@ -1636,16 +1718,12 @@ A partir da versão ingênua, aplique as seguintes otimizações:</p>
 </tr>
 </tbody>
 </table>
-<ol>
-<li>
-<p>Responda:</p>
-</li>
-<li>
-<p>Qual configuração apresentou melhor desempenho?</p>
-</li>
+<h3 id="responda">Responda:<a class="headerlink" href="#responda" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Qual configuração apresentou melhor desempenho?</li>
 <li>A otimização trouxe ganho significativo?</li>
 <li>O gargalo do código é computação efetiva ou manipulação de dados?</li>
-</ol>
+</ul>
 <h2 id="entregue-a-atividade-pelo-classroom-ate-01052026-as-23h59"><a href="https://classroom.github.com/a/pp9AqNnS">Entregue a atividade pelo Classroom até 01/05/2026 ás 23h59</a><a class="headerlink" href="#entregue-a-atividade-pelo-classroom-ate-01052026-as-23h59" title="Permanent link">&para;</a></h2>
 
 
