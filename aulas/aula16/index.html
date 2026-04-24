@@ -1,0 +1,1711 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://insper.github.io/supercomp/aulas/aula16/">
+      
+      
+        <link rel="prev" href="../aula15/">
+      
+      
+        <link rel="next" href="../../teoria/slides/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.7">
+    
+    
+      
+        <title>Aula 16 - Detecção de Bordas com Sobel - SuperComputação - 2026/1</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.8608ea7d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/printing.css">
+    
+      <link rel="stylesheet" href="../../css/extra.css">
+    
+      <link rel="stylesheet" href="../../css/equipe.css">
+    
+      <link rel="stylesheet" href="../../css/ansi-colours.css">
+    
+      <link rel="stylesheet" href="../../css/jupyter-cells.css">
+    
+      <link rel="stylesheet" href="../../css/pandas-dataframe.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue-gray" data-md-color-accent="red">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#deteccao-de-bordas-e-otimizacao-em-gpu" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="SuperComputação - 2026/1" class="md-header__button md-logo" aria-label="SuperComputação - 2026/1" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SuperComputação - 2026/1
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Aula 16 - Detecção de Bordas com Sobel
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/insper/supercomp" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    SuperComp
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../sobre/" class="md-tabs__link">
+        
+  
+    
+  
+  Burocracias
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../aula01/" class="md-tabs__link">
+          
+  
+  Aulas
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../teoria/slides/" class="md-tabs__link">
+          
+  
+  Suporte
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../projetos/2026-1/APS1/" class="md-tabs__link">
+          
+  
+  APS's
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="SuperComputação - 2026/1" class="md-nav__button md-logo" aria-label="SuperComputação - 2026/1" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    SuperComputação - 2026/1
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/insper/supercomp" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    SuperComp
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sobre/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Burocracias
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Aulas
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Aulas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aula01/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aula 01 - Introdução e Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aula02/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aula 02 - Cluster Franky
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aula03/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aula 03 - STD, Vector e Tiling
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aula04/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aula 04 - Algoritmo Busca exaustiva
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aula05/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aula 05 - Heurísticas e Aleatoriedade
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aula06/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aula 06 - Paralelismo em CPU
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aula07/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aula 07 - Efeitos colaterias do paralelismo
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aula08/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aula 08 - Sincronização em CPU com OpenMP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aula09/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aula 09 - Programação Distribuída com MPI
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aula10/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aula 10 - Tipos de comunicação MPI
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aula11/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aula 11 - Exercícios preparatórios para AI
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aula12/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aula 12 - Acesso ao Supercomputador SDumont
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aula13/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aula 13 - Paralelismo em GPU com CUDA
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aula14/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aula 14 - Otimização de memória em GPU
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aula15/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aula 15 - Redução e Scan com CUDA
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Aula 16 - Detecção de Bordas com Sobel
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Aula 16 - Detecção de Bordas com Sobel
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#a-missao-de-hoje" class="md-nav__link">
+    <span class="md-ellipsis">
+      A Missão de Hoje
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#precisamos-converter-a-imagem-para-escala-de-cinza" class="md-nav__link">
+    <span class="md-ellipsis">
+      Precisamos converter a imagem para escala de cinza
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Precisamos converter a imagem para escala de cinza">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lembra-como-um-pixel-e-representado-em-rgb" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lembra como um pixel é representado em RGB?
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-testar-o-codigo-base" class="md-nav__link">
+    <span class="md-ellipsis">
+      Como testar o Código base
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#para-testar-o-codigo-modo-github" class="md-nav__link">
+    <span class="md-ellipsis">
+      Para testar o código, modo GitHub:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#para-testar-o-codigo-modo-raiz" class="md-nav__link">
+    <span class="md-ellipsis">
+      Para testar o código, modo raiz:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sua-vez" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sua vez!
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#entregue-a-atividade-pelo-classroom-ate-01052026-as-23h59" class="md-nav__link">
+    <span class="md-ellipsis">
+      Entregue a atividade pelo Classroom até 01/05/2026 ás 23h59
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Suporte
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Suporte
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../teoria/slides/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Slides das aulas
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../teoria/aula01/compilar-executar-C%2B%2B/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aula 01
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../teoria/aula02/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aula 02
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../teoria/aula03/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aula 03
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../teoria/aula04/index.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aula 04
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../teoria/comandos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Útil
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../teoria/permissoes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Permissões
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Exercicios/simulado_ai/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Simulado AI
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    APS's
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            APS's
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../projetos/2026-1/APS1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    APS 1 - Otimizações em CPU
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#a-missao-de-hoje" class="md-nav__link">
+    <span class="md-ellipsis">
+      A Missão de Hoje
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#precisamos-converter-a-imagem-para-escala-de-cinza" class="md-nav__link">
+    <span class="md-ellipsis">
+      Precisamos converter a imagem para escala de cinza
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Precisamos converter a imagem para escala de cinza">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lembra-como-um-pixel-e-representado-em-rgb" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lembra como um pixel é representado em RGB?
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-testar-o-codigo-base" class="md-nav__link">
+    <span class="md-ellipsis">
+      Como testar o Código base
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#para-testar-o-codigo-modo-github" class="md-nav__link">
+    <span class="md-ellipsis">
+      Para testar o código, modo GitHub:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#para-testar-o-codigo-modo-raiz" class="md-nav__link">
+    <span class="md-ellipsis">
+      Para testar o código, modo raiz:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sua-vez" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sua vez!
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#entregue-a-atividade-pelo-classroom-ate-01052026-as-23h59" class="md-nav__link">
+    <span class="md-ellipsis">
+      Entregue a atividade pelo Classroom até 01/05/2026 ás 23h59
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="deteccao-de-bordas-e-otimizacao-em-gpu">Detecção de Bordas e Otimização em GPU<a class="headerlink" href="#deteccao-de-bordas-e-otimizacao-em-gpu" title="Permanent link">&para;</a></h1>
+<p>Ao final desta aula, você deverá ser capaz de:</p>
+<ul>
+<li>Entender como mapear um algoritmo sequencial para GPU</li>
+<li>Implementar convolução 2D </li>
+<li>Identificar gargalos de memória</li>
+<li>Aplicar otimizações com shared memory</li>
+<li>Aplicar otimizações com tilling em GPU</li>
+</ul>
+<h2 id="a-missao-de-hoje">A Missão de Hoje<a class="headerlink" href="#a-missao-de-hoje" title="Permanent link">&para;</a></h2>
+<p>Vamos aplicar detecção de bordas a uma imagem usando o operador de Sobel.</p>
+<p>O operador de Sobel é um método clássico para detecção de bordas em imagens. Ele identifica regiões onde há mudanças bruscas de intensidade, o que normalmente acontece em contornos de objetos.</p>
+<p>Imagine percorrer uma imagem pixel a pixel. Em regiões homogêneas (por exemplo, apenas azul), os valores mudam pouco. Já na transição entre azul e amarelo, como na arara, há uma variação intensa.</p>
+<p><img alt="arara" src="arara.png" /></p>
+<p>O Sobel calcula uma aproximação do gradiente da imagem, ou seja, a taxa de variação da intensidade em duas direções:</p>
+<ul>
+<li>horizontal (eixo x)</li>
+<li>vertical (eixo y)</li>
+</ul>
+<p>Para isso, ele utiliza dois filtros (máscaras 3×3):</p>
+<div class="arithmatex">
+<div class="MathJax_Preview">
+G_x = \begin{bmatrix}
+-1 &amp; 0 &amp; 1 \\
+-2 &amp; 0 &amp; 2 \\
+-1 &amp; 0 &amp; 1
+\end{bmatrix},
+\quad
+G_y = \begin{bmatrix}
+-1 &amp; -2 &amp; -1 \\
+0 &amp; 0 &amp; 0 \\
+1 &amp; 2 &amp; 1
+\end{bmatrix}
+</div>
+<script type="math/tex; mode=display">
+G_x = \begin{bmatrix}
+-1 & 0 & 1 \\
+-2 & 0 & 2 \\
+-1 & 0 & 1
+\end{bmatrix},
+\quad
+G_y = \begin{bmatrix}
+-1 & -2 & -1 \\
+0 & 0 & 0 \\
+1 & 2 & 1
+\end{bmatrix}
+</script>
+</div>
+<p>Após aplicar esses filtros, combinamos os resultados para obter a intensidade da borda:</p>
+<div class="arithmatex">
+<div class="MathJax_Preview">
+G = \sqrt{G_x^2 + G_y^2}
+</div>
+<script type="math/tex; mode=display">
+G = \sqrt{G_x^2 + G_y^2}
+</script>
+</div>
+<ul>
+<li><strong>Gx (horizontal)</strong>: detecta variações da esquerda para a direita</li>
+<li><strong>Gy (vertical)</strong>: detecta variações de cima para baixo</li>
+</ul>
+<p>O resultado é uma nova imagem onde as regiões com bordas aparecem claras (valores altos), e as regiões homogêneas ficam escuras. </p>
+<p><img alt="saida" src="saida.png" /></p>
+<h2 id="precisamos-converter-a-imagem-para-escala-de-cinza">Precisamos converter a imagem para escala de cinza<a class="headerlink" href="#precisamos-converter-a-imagem-para-escala-de-cinza" title="Permanent link">&para;</a></h2>
+<p>O Sobel trabalha com intensidade, não cor é importante tratar a imagem antes de aplicar o filtro.</p>
+<h3 id="lembra-como-um-pixel-e-representado-em-rgb">Lembra como um pixel é representado em RGB?<a class="headerlink" href="#lembra-como-um-pixel-e-representado-em-rgb" title="Permanent link">&para;</a></h3>
+<p>Cada pixel em uma imagem colorida possui <strong>3 valores</strong>:</p>
+<ul>
+<li>R (vermelho)</li>
+<li>G (verde)</li>
+<li>B (azul)</li>
+</ul>
+<p>Podemos representar isso como uma matriz de pixels:</p>
+<div class="highlight"><pre><span></span><code>Imagem RGB (cada posição tem 3 valores):
+
+[(R,G,B)   (R,G,B)   (R,G,B)]
+[(R,G,B)   (R,G,B)   (R,G,B)]
+[(R,G,B)   (R,G,B)   (R,G,B)]
+</code></pre></div>
+<p>Exemplo de um pixel:</p>
+<div class="highlight"><pre><span></span><code>(120, 200, 50)
+</code></pre></div>
+<p>Na escala de cinza, cada pixel passa a ter apenas um valor, que representa a intensidade da luz:</p>
+<div class="highlight"><pre><span></span><code>Imagem em escala de cinza:
+
+[  80    120    200 ]
+[  60     90    150 ]
+[  30     70    110 ]
+</code></pre></div>
+<p>Ou seja:</p>
+<p>saímos de <strong>3 valores por pixel para 1 valor por pixel</strong></p>
+<p>Para fazer essa conversão, usamos uma média ponderada dos canais:</p>
+<div class="arithmatex">
+<div class="MathJax_Preview">
+Gray = 0.299R + 0.587G + 0.114B
+</div>
+<script type="math/tex; mode=display">
+Gray = 0.299R + 0.587G + 0.114B
+</script>
+</div>
+<p>Esses valores vem de um padrão chamado <a href="https://tech.ebu.ch/docs/techreview/trev_304-rec601_wood.pdf">Rec. 601</a>, definido pela <a href="https://en.wikipedia.org/wiki/ITU-R">International Telecommunication Union</a>.</p>
+<p>Esse padrão foi criado para sistemas de TV e define como converter cor em luminância.</p>
+<ul>
+<li>RGB → descreve <strong>cor</strong></li>
+<li>Grayscale → descreve <strong>intensidade</strong></li>
+</ul>
+<p>E é justamente essa intensidade que o Sobel usa para detectar bordas.</p>
+<h2 id="como-testar-o-codigo-base">Como testar o Código base<a class="headerlink" href="#como-testar-o-codigo-base" title="Permanent link">&para;</a></h2>
+<p>Aqui está o codigo base chamado <code>base.cpp</code></p>
+<div class="highlight"><pre><span></span><code><span class="c1">// libs para ler e salvar as imagens em formato png</span>
+<span class="cp">#define STB_IMAGE_IMPLEMENTATION</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;stb_image.h&quot;</span>
+<span class="cp">#define STB_IMAGE_WRITE_IMPLEMENTATION</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;stb_image_write.h&quot;</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cmath&gt;</span>
+
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">width</span><span class="p">,</span><span class="w"> </span><span class="n">height</span><span class="p">,</span><span class="w"> </span><span class="n">channels</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// le a imagem e salva em uma matriz correspondente aos canais RGB</span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stbi_load</span><span class="p">(</span><span class="s">&quot;arara.png&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">width</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">height</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">channels</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">input</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Erro ao carregar imagem!&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// cria as variáveis para reservar o espaço de memória </span>
+<span class="w">    </span><span class="c1">// para as transformações que serão aplicadas as imagens</span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">gray</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="p">[</span><span class="n">width</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">height</span><span class="p">];</span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="p">[</span><span class="n">width</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">height</span><span class="p">];</span>
+
+<span class="w">    </span><span class="c1">// ==============================</span>
+<span class="w">    </span><span class="c1">//  RGB -&gt; GRAYSCALE</span>
+<span class="w">    </span><span class="c1">// ==============================</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">height</span><span class="p">;</span><span class="w"> </span><span class="n">y</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">width</span><span class="p">;</span><span class="w"> </span><span class="n">x</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">idx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">y</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+
+<span class="w">            </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">input</span><span class="p">[</span><span class="n">idx</span><span class="p">];</span>
+<span class="w">            </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">g</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">input</span><span class="p">[</span><span class="n">idx</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">];</span>
+<span class="w">            </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">input</span><span class="p">[</span><span class="n">idx</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="p">];</span>
+
+<span class="w">            </span><span class="n">gray</span><span class="p">[</span><span class="n">y</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">x</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.299f</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">0.587f</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">g</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">0.114f</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// ==============================</span>
+<span class="w">    </span><span class="c1">// Aplicação do filtro SOBEL</span>
+<span class="w">    </span><span class="c1">// ==============================</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">Gx</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">{</span><span class="mi">-1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="mi">-2</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="mi">-1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">}</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">Gy</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">{</span><span class="mi">-1</span><span class="p">,</span><span class="w"> </span><span class="mi">-2</span><span class="p">,</span><span class="w"> </span><span class="mi">-1</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">  </span><span class="mi">0</span><span class="p">,</span><span class="w">  </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">  </span><span class="mi">2</span><span class="p">,</span><span class="w">  </span><span class="mi">1</span><span class="p">}</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">height</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">y</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">x</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">sumX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">sumY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">ky</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span><span class="w"> </span><span class="n">ky</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">ky</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">kx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span><span class="w"> </span><span class="n">kx</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">kx</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">                    </span><span class="kt">int</span><span class="w"> </span><span class="n">pixel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gray</span><span class="p">[(</span><span class="n">y</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ky</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">kx</span><span class="p">)];</span>
+
+<span class="w">                    </span><span class="n">sumX</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">pixel</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Gx</span><span class="p">[</span><span class="n">ky</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">][</span><span class="n">kx</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">];</span>
+<span class="w">                    </span><span class="n">sumY</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">pixel</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Gy</span><span class="p">[</span><span class="n">ky</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">][</span><span class="n">kx</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">];</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+
+<span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">magnitude</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sqrt</span><span class="p">(</span><span class="n">sumX</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sumX</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sumY</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sumY</span><span class="p">);</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">magnitude</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">255</span><span class="p">)</span><span class="w"> </span><span class="n">magnitude</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">255</span><span class="p">;</span>
+
+<span class="w">            </span><span class="n">output</span><span class="p">[</span><span class="n">y</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">x</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="p">)</span><span class="n">magnitude</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// ==============================</span>
+<span class="w">    </span><span class="c1">// salvando a imagem de saida como PNG</span>
+<span class="w">    </span><span class="c1">// ==============================</span>
+<span class="w">    </span><span class="n">stbi_write_png</span><span class="p">(</span><span class="s">&quot;saida.png&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">width</span><span class="p">,</span><span class="w"> </span><span class="n">height</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">output</span><span class="p">,</span><span class="w"> </span><span class="n">width</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Bordas detectadas!&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">stbi_image_free</span><span class="p">(</span><span class="n">input</span><span class="p">);</span>
+<span class="w">    </span><span class="k">delete</span><span class="p">[]</span><span class="w"> </span><span class="n">gray</span><span class="p">;</span>
+<span class="w">    </span><span class="k">delete</span><span class="p">[]</span><span class="w"> </span><span class="n">output</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="para-testar-o-codigo-modo-github">Para testar o código, modo GitHub:<a class="headerlink" href="#para-testar-o-codigo-modo-github" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p><a href="https://classroom.github.com/a/pp9AqNnS">Crie o seu repositório da atividade</a></p>
+</li>
+<li>
+<p>Faça o clone do seu repositório no Cluster</p>
+</li>
+<li>
+<p>Faça o clone do seu repositório no seu computador local</p>
+</li>
+<li>
+<p>Gere o binário no cluster Franky</p>
+</li>
+</ol>
+<p>Compile o código base
+<div class="highlight"><pre><span></span><code>g++<span class="w"> </span>-O3<span class="w"> </span>base.cpp<span class="w"> </span>-o<span class="w"> </span>base
+</code></pre></div>
+5. Execute o código base no cluster Franky</p>
+<div class="highlight"><pre><span></span><code>srun<span class="w"> </span>--partition<span class="o">=</span>normal<span class="w"> </span>./base
+</code></pre></div>
+<ol>
+<li>Faça git pull no seu repositório local para verificar a imagem de sáida</li>
+</ol>
+<h2 id="para-testar-o-codigo-modo-raiz">Para testar o código, modo raiz:<a class="headerlink" href="#para-testar-o-codigo-modo-raiz" title="Permanent link">&para;</a></h2>
+<p>Antes de qualquer coisa, vamos preparar o ambiente com os arquivos necessários:</p>
+<p>No seu <strong>computador local</strong>, envie a imagem da arara:</p>
+<div class="highlight"><pre><span></span><code>scp<span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;endereço-da-sua-chave/id_rsa&quot;</span><span class="w"> </span><span class="s2">&quot;endereço-da-arara.png&quot;</span><span class="w"> </span>seu-login-no-franky@ip-do-cluster:~/scratch/diretorio-de-trabalho/
+</code></pre></div>
+<p>Subistituia corretamente os comandos com as suas informações, a imagem vai aperecer dentro da pasta scratch</p>
+<p>No cluster Franky, dentro da pasta que você vai trabalhar, faça o download dos headers que vão possibilitar a manipulação de imagens <code>.png</code></p>
+<div class="highlight"><pre><span></span><code>wget<span class="w"> </span>https://raw.githubusercontent.com/nothings/stb/master/stb_image.h
+wget<span class="w"> </span>https://raw.githubusercontent.com/nothings/stb/master/stb_image_write.h
+</code></pre></div>
+<p>Use o comando <code>ls</code> para visualizar os arquivos no diretório de trabalho:</p>
+<div class="highlight"><pre><span></span><code>stb_image.h
+stb_image_write.h
+</code></pre></div>
+<p>Crie o código base com o nano</p>
+<div class="highlight"><pre><span></span><code>nano<span class="w"> </span>base.cpp
+</code></pre></div>
+<p>Compile o código base
+<div class="highlight"><pre><span></span><code>g++<span class="w"> </span>-O3<span class="w"> </span>base.cpp<span class="w"> </span>-o<span class="w"> </span>base
+</code></pre></div></p>
+<p>Se tudo der certo, se nada der errado o executável <code>base</code> será criado.</p>
+<p>Teste com o <code>srun</code> do SLURM</p>
+<div class="highlight"><pre><span></span><code>srun<span class="w"> </span>--partition<span class="o">=</span>normal<span class="w"> </span>./base
+</code></pre></div>
+<p>A imagem de saída aparecerá no diretório de trabalho</p>
+<div class="highlight"><pre><span></span><code>ls<span class="w"> </span>-lh<span class="w"> </span>saida.png
+</code></pre></div>
+<p>Você verá algo como:</p>
+<div class="highlight"><pre><span></span><code>-rw-r--r--.<span class="w"> </span><span class="m">1</span><span class="w"> </span>liciascl<span class="w"> </span>liciascl<span class="w"> </span><span class="m">1</span>.3M<span class="w"> </span>Apr<span class="w"> </span><span class="m">24</span><span class="w"> </span><span class="m">07</span>:31<span class="w"> </span>saida.png
+</code></pre></div>
+<p>Faça o download da imagem para a sua máquina com o scp:</p>
+<p>No terminal do seu computador, de o comando:
+<div class="highlight"><pre><span></span><code>scp<span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;endereço-da-sua-chave/id_rsa&quot;</span><span class="w"> </span>seu-login-no-franky@ip-do-cluster:~/scratch/diretorio-de-trabalho/saida.png<span class="w"> </span>.
+</code></pre></div></p>
+<p>Isso salva <code>saida.png</code> na pasta atual do seu PC.</p>
+<p>Abra o <code>saida.png</code> e verifique se as bordas foram detectadas.</p>
+<h2 id="sua-vez">Sua vez!<a class="headerlink" href="#sua-vez" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p>Realize as operações de grayscale e filtro Sobel na GPU.
+Essa será a sua versão ingênua.</p>
+</li>
+<li>
+<p>Otimização
+A partir da versão ingênua, aplique as seguintes otimizações:</p>
+</li>
+<li>
+<p><strong>tiling</strong></p>
+</li>
+<li>
+<p>uso de <strong>shared memory</strong></p>
+</li>
+<li>
+<p>Meça o tempo de execução e complete a tabela:</p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>Versão</th>
+<th>Block Size</th>
+<th>Tempo (ms)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CPU</td>
+<td>-</td>
+<td></td>
+</tr>
+<tr>
+<td>GPU ingênua</td>
+<td>8×8</td>
+<td></td>
+</tr>
+<tr>
+<td>GPU otimizada</td>
+<td>8×8</td>
+<td></td>
+</tr>
+<tr>
+<td>GPU ingênua</td>
+<td>16×16</td>
+<td></td>
+</tr>
+<tr>
+<td>GPU otimizada</td>
+<td>16×16</td>
+<td></td>
+</tr>
+<tr>
+<td>GPU ingênua</td>
+<td>32×32</td>
+<td></td>
+</tr>
+<tr>
+<td>GPU otimizada</td>
+<td>32×32</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>
+<p>Responda:</p>
+</li>
+<li>
+<p>Qual configuração apresentou melhor desempenho?</p>
+</li>
+<li>A otimização trouxe ganho significativo?</li>
+<li>O gargalo do código é computação efetiva ou manipulação de dados?</li>
+</ol>
+<h2 id="entregue-a-atividade-pelo-classroom-ate-01052026-as-23h59"><a href="https://classroom.github.com/a/pp9AqNnS">Entregue a atividade pelo Classroom até 01/05/2026 ás 23h59</a><a class="headerlink" href="#entregue-a-atividade-pelo-classroom-ate-01052026-as-23h59" title="Permanent link">&para;</a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "content.code.copy"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.0.0/js-yaml.min.js"></script>
+      
+        <script src="../../js/markdown-enhancer.js"></script>
+      
+        <script src="../../js/slides.js"></script>
+      
+    
+  </body>
+</html>
