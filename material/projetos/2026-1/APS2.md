@@ -2,11 +2,11 @@
 
 Um cliente precisa tomar decisões rápidas no mercado de ações. Para isso, ele utiliza simulações estocásticas para prever o comportamento futuro de um ativo com base em dados históricos.
 
-O modelo utilizado pelo cliente é baseado no movimento browniano geométrico, implementado através da equação de Black-Scholes. A partir de um preço inicial e da volatilidade do mercado, ele simula milhares de cenários possíveis para o preço da ação ao longo do tempo.
+O modelo utilizado pelo cliente é baseado no [movimento browniano geométrico](https://fiscomp.if.ufrgs.br/index.php/Movimento_Browniano_Geom%C3%A9trico_para_Previs%C3%A3o_no_Mercado_de_A%C3%A7%C3%B5es), implementado através da [equação de Black-Scholes](https://www.investopedia.com/terms/b/blackscholes.asp). A partir de um preço inicial e da volatilidade do mercado, ele simula milhares de cenários possíveis para o preço da ação ao longo do tempo.
 
-Cada linha gerada representa um possível “caminho” do preço do ativo, enquanto a linha final média representa o comportamento mais provável segundo o método de Monte Carlo.
+Cada linha gerada representa um possível “caminho” do preço do ativo, enquanto a linha final média representa o comportamento mais provável segundo o [método de Monte Carlo](https://pt.wikipedia.org/wiki/M%C3%A9todo_de_Monte_Carlo).
 
-No entanto, o sistema atual é extremamente lento, dificultando a tomada de decisões em tempo hábil, especialmente em um ambiente onde o tempo de resposta é decisivo.
+No entanto, o sistema atual é extremamente lento, dificultando a tomada de decisões, especialmente em um ambiente onde o tempo de resposta é decisivo.
 
 Seu trabalho será melhorar esse sistema.
 
@@ -23,7 +23,6 @@ A APS será avaliada em dois aspectos principais:
 # Implementação (4 pontos)
 
 A nota da implementação será atribuída de acordo com o nível máximo atingido.
-**Os requisitos são cumulativos.**
 
 ## 2 pontos
 
