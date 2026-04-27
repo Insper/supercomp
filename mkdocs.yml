@@ -48,8 +48,7 @@ nav:
         - "Aula 14 - Otimização de memória em GPU": aulas/aula14/index.md
         - "Aula 15 - Redução e Scan com CUDA": aulas/aula15/index.md
         - "Aula 16 - Detecção de Bordas em GPU": aulas/aula16/index.md
-#        - "Aula 17 - Detecção de Objetos em GPU": aulas/aula17/index.md
-#        - "Aula 16 - Redução e Scan com CUDA" : aulas/aula16/index.md
+        - "Aula 17 - Projeto GPU": aulas/aula17/index.md
 #        - "Aula 17 - Matriz esparsa e Computação Assíncrona" : aulas/aula17/index.md
 #        - "Aula 19 - Exercícios preparatórios Prova Final" : aulas/aula19/index.md
 #        - "Aula 20 - Exercícios preparatórios Prova Final" : aulas/aula20/index.md
@@ -79,7 +78,7 @@ nav:
 
     - APS's:
         - "APS 1 - Otimizações em CPU" : projetos/2026-1/APS1.md
- #       - "Projeto 2 - Otimizações em GPU" : projetos/2025-2/projeto-gpu.md
+        - "APS 2 - Otimizações em GPU" : projetos/2026-1/APS2.md
 
  #   - Bonus:
         #- "Conectando ao Cluster Franky": complementar/aula02/index.md
