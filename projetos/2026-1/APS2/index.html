@@ -8,24 +8,26 @@
       
       
       
-        <link rel="canonical" href="https://insper.github.io/supercomp/projetos/relatorio_parcial/">
+        <link rel="canonical" href="https://insper.github.io/supercomp/projetos/2026-1/APS2/">
+      
+      
+        <link rel="prev" href="../APS1/">
       
       
       
-      
-      <link rel="icon" href="../../assets/images/favicon.png">
+      <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.7">
     
     
       
-        <title>Relatório Parcial - SuperComputação - 2026/1</title>
+        <title>APS 2 - Otimizações em GPU - SuperComputação - 2026/1</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.8608ea7d.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.8608ea7d.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -44,19 +46,19 @@
       
     
     
-      <link rel="stylesheet" href="../../css/printing.css">
+      <link rel="stylesheet" href="../../../css/printing.css">
     
-      <link rel="stylesheet" href="../../css/extra.css">
+      <link rel="stylesheet" href="../../../css/extra.css">
     
-      <link rel="stylesheet" href="../../css/equipe.css">
+      <link rel="stylesheet" href="../../../css/equipe.css">
     
-      <link rel="stylesheet" href="../../css/ansi-colours.css">
+      <link rel="stylesheet" href="../../../css/ansi-colours.css">
     
-      <link rel="stylesheet" href="../../css/jupyter-cells.css">
+      <link rel="stylesheet" href="../../../css/jupyter-cells.css">
     
-      <link rel="stylesheet" href="../../css/pandas-dataframe.css">
+      <link rel="stylesheet" href="../../../css/pandas-dataframe.css">
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -80,7 +82,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#relatorio-parcial" class="md-skip">
+        <a href="#aps-2-otimizacoes-e-paralelismo-em-gpu" class="md-skip">
           Skip to content
         </a>
       
@@ -94,7 +96,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="SuperComputação - 2026/1" class="md-header__button md-logo" aria-label="SuperComputação - 2026/1" data-md-component="logo">
+    <a href="../../.." title="SuperComputação - 2026/1" class="md-header__button md-logo" aria-label="SuperComputação - 2026/1" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -114,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Relatório Parcial
+              APS 2 - Otimizações em GPU
             
           </span>
         </div>
@@ -195,7 +197,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../.." class="md-tabs__link">
+      <a href="../../.." class="md-tabs__link">
         
   
     
@@ -212,7 +214,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../sobre/" class="md-tabs__link">
+      <a href="../../../sobre/" class="md-tabs__link">
         
   
     
@@ -231,7 +233,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../aulas/aula01/" class="md-tabs__link">
+        <a href="../../../aulas/aula01/" class="md-tabs__link">
           
   
   Aulas
@@ -249,7 +251,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../teoria/slides/" class="md-tabs__link">
+        <a href="../../../teoria/slides/" class="md-tabs__link">
           
   
   Suporte
@@ -263,11 +265,13 @@
         
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../2026-1/APS1/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../APS1/" class="md-tabs__link">
           
   
   APS's
@@ -300,7 +304,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="SuperComputação - 2026/1" class="md-nav__button md-logo" aria-label="SuperComputação - 2026/1" data-md-component="logo">
+    <a href="../../.." title="SuperComputação - 2026/1" class="md-nav__button md-logo" aria-label="SuperComputação - 2026/1" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -330,7 +334,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -351,7 +355,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../sobre/" class="md-nav__link">
+      <a href="../../../sobre/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -411,7 +415,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../aulas/aula01/" class="md-nav__link">
+      <a href="../../../aulas/aula01/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -433,7 +437,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../aulas/aula02/" class="md-nav__link">
+      <a href="../../../aulas/aula02/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -455,7 +459,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../aulas/aula03/" class="md-nav__link">
+      <a href="../../../aulas/aula03/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -477,7 +481,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../aulas/aula04/" class="md-nav__link">
+      <a href="../../../aulas/aula04/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -499,7 +503,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../aulas/aula05/" class="md-nav__link">
+      <a href="../../../aulas/aula05/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -521,7 +525,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../aulas/aula06/" class="md-nav__link">
+      <a href="../../../aulas/aula06/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -543,7 +547,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../aulas/aula07/" class="md-nav__link">
+      <a href="../../../aulas/aula07/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -565,7 +569,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../aulas/aula08/" class="md-nav__link">
+      <a href="../../../aulas/aula08/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -587,7 +591,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../aulas/aula09/" class="md-nav__link">
+      <a href="../../../aulas/aula09/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -609,7 +613,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../aulas/aula10/" class="md-nav__link">
+      <a href="../../../aulas/aula10/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -631,7 +635,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../aulas/aula11/" class="md-nav__link">
+      <a href="../../../aulas/aula11/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -653,7 +657,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../aulas/aula12/" class="md-nav__link">
+      <a href="../../../aulas/aula12/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -675,7 +679,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../aulas/aula13/" class="md-nav__link">
+      <a href="../../../aulas/aula13/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -697,7 +701,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../aulas/aula14/" class="md-nav__link">
+      <a href="../../../aulas/aula14/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -719,7 +723,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../aulas/aula15/" class="md-nav__link">
+      <a href="../../../aulas/aula15/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -741,7 +745,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../aulas/aula16/" class="md-nav__link">
+      <a href="../../../aulas/aula16/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -763,7 +767,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../aulas/aula17/" class="md-nav__link">
+      <a href="../../../aulas/aula17/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -831,7 +835,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../teoria/slides/" class="md-nav__link">
+      <a href="../../../teoria/slides/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -853,7 +857,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../teoria/aula01/compilar-executar-C%2B%2B/" class="md-nav__link">
+      <a href="../../../teoria/aula01/compilar-executar-C%2B%2B/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -875,7 +879,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../teoria/aula02/" class="md-nav__link">
+      <a href="../../../teoria/aula02/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -897,7 +901,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../teoria/aula03/" class="md-nav__link">
+      <a href="../../../teoria/aula03/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -919,7 +923,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../teoria/aula04/index.md" class="md-nav__link">
+      <a href="../../../teoria/aula04/index.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -941,7 +945,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../teoria/comandos/" class="md-nav__link">
+      <a href="../../../teoria/comandos/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -963,7 +967,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../teoria/permissoes/" class="md-nav__link">
+      <a href="../../../teoria/permissoes/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -985,7 +989,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Exercicios/simulado_ai/" class="md-nav__link">
+      <a href="../../../Exercicios/simulado_ai/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1011,23 +1015,28 @@
       
   
   
+    
   
   
+  
     
     
     
-      
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
         
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
             
   
   <span class="md-ellipsis">
@@ -1039,7 +1048,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             APS's
@@ -1053,7 +1062,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../2026-1/APS1/" class="md-nav__link">
+      <a href="../APS1/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1072,10 +1081,19 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../2026-1/APS2/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -1085,6 +1103,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -1134,30 +1153,167 @@
   
 
 
-<h1 id="relatorio-parcial">Relatório Parcial<a class="headerlink" href="#relatorio-parcial" title="Permanent link">&para;</a></h1>
-<p>O relatório parcial é a entrega intermediária do projeto, a qual deve ser feita pelo <strong>blackboard</strong> até a data da <strong>prova intermediária</strong>.</p>
-<p><strong>Seu relatório deverá conter as implementações gulosa e aleatória</strong>. </p>
-<p>O que você deverá fazer:</p>
+<h1 id="aps-2-otimizacoes-e-paralelismo-em-gpu">APS 2 - Otimizações e Paralelismo em GPU<a class="headerlink" href="#aps-2-otimizacoes-e-paralelismo-em-gpu" title="Permanent link">&para;</a></h1>
+<p>Um cliente precisa tomar decisões rápidas no mercado de ações. Para isso, ele utiliza simulações estocásticas para prever o comportamento futuro de um ativo com base em dados históricos.</p>
+<p>O modelo utilizado pelo cliente é baseado no movimento browniano geométrico, implementado através da equação de Black-Scholes. A partir de um preço inicial e da volatilidade do mercado, ele simula milhares de cenários possíveis para o preço da ação ao longo do tempo.</p>
+<p>Cada linha gerada representa um possível “caminho” do preço do ativo, enquanto a linha final média representa o comportamento mais provável segundo o método de Monte Carlo.</p>
+<p>No entanto, o sistema atual é extremamente lento, dificultando a tomada de decisões em tempo hábil, especialmente em um ambiente onde o tempo de resposta é decisivo.</p>
+<p>Seu trabalho será melhorar esse sistema.</p>
+<p><a href="https://classroom.github.com/a/h9hTmdSW">Acesse o seu repositório peli link do Classroom</a> </p>
+<h1 id="a-data-limite-de-entrega-e-25052026-as-23h59"><strong>A data limite de entrega é 25/05/2026 ás 23h59</strong><a class="headerlink" href="#a-data-limite-de-entrega-e-25052026-as-23h59" title="Permanent link">&para;</a></h1>
+<p>A APS será avaliada em dois aspectos principais:</p>
+<ul>
+<li><strong>Implementação (código)</strong> → 4 pontos</li>
+<li><strong>Relatório (.ipynb)</strong> → 6 pontos</li>
+</ul>
+<h1 id="implementacao-4-pontos">Implementação (4 pontos)<a class="headerlink" href="#implementacao-4-pontos" title="Permanent link">&para;</a></h1>
+<p>A nota da implementação será atribuída de acordo com o nível máximo atingido.
+<strong>Os requisitos são cumulativos.</strong></p>
+<h2 id="2-pontos">2 pontos<a class="headerlink" href="#2-pontos" title="Permanent link">&para;</a></h2>
+<h3 id="requisitos-de-codigo">Requisitos de código:<a class="headerlink" href="#requisitos-de-codigo" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Pelo menos <strong>uma função portada para GPU</strong></li>
+<li>Uso de <strong>pelo menos uma técnica de otimização</strong></li>
+</ul>
+<h3 id="requisitos-de-execucao">Requisitos de execução:<a class="headerlink" href="#requisitos-de-execucao" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Arquivo SLURM corretamente configurado para submissão dos testes no <strong>Cluster Franky</strong></li>
+</ul>
+<h3 id="configuracao-obrigatoria-nos-testes">Configuração obrigatória nos testes:<a class="headerlink" href="#configuracao-obrigatoria-nos-testes" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Laços Internos: 100</li>
+<li>Laços Externos: 50000</li>
+<li>Histórico (dias): 948</li>
+<li>Previsão (dias): 948</li>
+<li>Preço Inicial: 0.5</li>
+<li>Taxa de Risco: 0.5</li>
+</ul>
+<h3 id="observacao">Observação:<a class="headerlink" href="#observacao" title="Permanent link">&para;</a></h3>
+<p>Sem execução comprovada nessa configuração, <strong>a pontuação não será atribuída</strong>.</p>
+<h2 id="3-pontos">3 pontos<a class="headerlink" href="#3-pontos" title="Permanent link">&para;</a></h2>
+<h3 id="requisitos-de-codigo_1">Requisitos de código:<a class="headerlink" href="#requisitos-de-codigo_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Pelo menos <strong>uma função portada para GPU</strong></li>
+<li>Uso de <strong>pelo menos uma técnica de otimização</strong></li>
+</ul>
+<h3 id="requisitos-de-execucao_1">Requisitos de execução:<a class="headerlink" href="#requisitos-de-execucao_1" title="Permanent link">&para;</a></h3>
 <ul>
 <li>
-<p>No blackboard, você deve fazer upload de todos os <em>códigos-fonte</em>, <em>arquivos de input</em>, <em>arquivos de output</em> para cada heurítica. Caso opte por enviar um link do github com o repositório completo, também poderá faze-lo, desde que garanta que teremos acesso aos arquivos no seu repositório;</p>
+<p>Arquivos SLURM corretamente configurados para submissão dos testes nos dois clusters:</p>
 </li>
 <li>
-<p>Você deve elaborar um relatório parcial contendo as seguintes seções:</p>
+<p><strong>Cluster Franky</strong></p>
+</li>
+<li><strong>Cluster Santos Dumont</strong></li>
+<li>Comparação de desempenho entre os dois ambientes</li>
+</ul>
+<h3 id="requisitos-de-analise">Requisitos de análise:<a class="headerlink" href="#requisitos-de-analise" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Deve evidenciar diferenças de desempenho entre as arquiteturas</li>
+</ul>
+<h3 id="configuracao-obrigatoria">Configuração obrigatória:<a class="headerlink" href="#configuracao-obrigatoria" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Laços Internos: 100</li>
+<li>Laços Externos: 80000</li>
+<li>Histórico (dias): 1422</li>
+<li>Previsão (dias): 1422</li>
+<li>Preço Inicial: 0.5</li>
+<li>Taxa de Risco: 0.5</li>
+</ul>
+<h3 id="observacao_1">Observação:<a class="headerlink" href="#observacao_1" title="Permanent link">&para;</a></h3>
+<p>Sem execução comprovada nessa configuração, <strong>a pontuação não será atribuída</strong>.</p>
+<h2 id="4-pontos">4 pontos<a class="headerlink" href="#4-pontos" title="Permanent link">&para;</a></h2>
+<h3 id="requisitos-de-codigo_2">Requisitos de código:<a class="headerlink" href="#requisitos-de-codigo_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Pelo menos <strong>duas funções portadas para GPU</strong></li>
+<li>Uso de <strong>duas ou mais técnicas de otimização</strong></li>
+</ul>
+<h3 id="requisitos-de-execucao_2">Requisitos de execução:<a class="headerlink" href="#requisitos-de-execucao_2" title="Permanent link">&para;</a></h3>
 <ul>
 <li>
-<p>Para cada heurística você deve explicar como implementou a heurística (detalhe como você tratou o input, qual a lógica do seu output, quais invariantes existem em suas heurísticas), apresentar (i) o código-fonte comentado, (ii) fazer considerações sobre o profiling (valgrind) do código-fonte (use apenas 1 arquivo de input para isso, não há necessidade de fazer esse profiling para vários inputs), (iii) o resultado compartivo entre as heurísticas quando você varia o input (o input deve variar na quantidade de filmes e de categorias).</p>
+<p>Arquivos SLURM corretamente configurados para submissão dos testes nos dois clusters:</p>
 </li>
 <li>
-<p>Seu relatório deve ser gráficos e tabelas que subsidem as suas considerações</p>
+<p><strong>Cluster Franky</strong></p>
+</li>
+<li><strong>Cluster Santos Dumont</strong></li>
+</ul>
+<h3 id="requisitos-de-analise_1">Requisitos de análise:<a class="headerlink" href="#requisitos-de-analise_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>Deve demonstrar entendimento do impacto de:</p>
 </li>
 <li>
-<p>É permitido criar um programa em python ou outra linguagem que automatize a geração de seus resultados, isto é, que execute seus códigos C++ em função dos diferentes inputs.</p>
+<p>arquitetura da GPU</p>
 </li>
+<li>memória</li>
+<li>paralelismo</li>
+<li>escalabilidade</li>
 </ul>
+<h3 id="configuracao-obrigatoria_1">Configuração obrigatória:<a class="headerlink" href="#configuracao-obrigatoria_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Laços Internos: 100</li>
+<li>Laços Externos: 100000</li>
+<li>Histórico (dias): 2370</li>
+<li>Previsão (dias): 2370</li>
+<li>Preço Inicial: 0.5</li>
+<li>Taxa de Risco: 0.5</li>
+</ul>
+<h3 id="observacao_2">Observação:<a class="headerlink" href="#observacao_2" title="Permanent link">&para;</a></h3>
+<p>Sem execução comprovada nessa configuração, <strong>a pontuação não será atribuída</strong>.</p>
+<h1 id="relatorio-ipynb-6-pontos">Relatório (.ipynb) (6 pontos)<a class="headerlink" href="#relatorio-ipynb-6-pontos" title="Permanent link">&para;</a></h1>
+<p>O relatório deve conter <strong>os logs de execução, análise e explicação dos resultados</strong>.</p>
+<h2 id="criterios-de-avaliacao">Critérios de avaliação<a class="headerlink" href="#criterios-de-avaliacao" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Conceito</th>
+<th style="text-align: left;">Estrutura</th>
+<th style="text-align: left;">Integração e Visualização</th>
+<th style="text-align: left;">Profundidade da Análise</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Até 2 pts</strong></td>
+<td style="text-align: left;">Estrutura desorganizada ou fragmentada</td>
+<td style="text-align: left;">Gráficos/tabelas sem conexão com o texto</td>
+<td style="text-align: left;">Descrição superficial</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Até 4 pts</strong></td>
+<td style="text-align: left;">Organização clara e técnica</td>
+<td style="text-align: left;">Visualizações próximas das explicações</td>
+<td style="text-align: left;">Relaciona resultados com conceitos básicos</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Até 6 pts</strong></td>
+<td style="text-align: left;">Estrutura integrada (nível científico)</td>
+<td style="text-align: left;">Narrativa fluida com dados sustentando argumentos</td>
+<td style="text-align: left;">Explica desempenho com base em arquitetura (CPU vs GPU, memória, paralelismo, escalabilidade)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="requisitos-minimos-do-relatorio">Requisitos mínimos do relatório<a class="headerlink" href="#requisitos-minimos-do-relatorio" title="Permanent link">&para;</a></h2>
+<p>Para qualquer nota diferente de zero, o relatório deve conter:</p>
+<ul>
+<li>Descrição dos experimentos realizados</li>
+<li>Parâmetros utilizados (loops, tempo, etc.)</li>
+<li>Evidência de execução (prints, logs ou tabelas)</li>
+<li>
+<p>Pelo menos:</p>
 </li>
+<li>
+<p><strong>1 tabela</strong></p>
+</li>
+<li><strong>1 gráfico</strong></li>
 </ul>
-<p>Preferencialmente o relatório deve ser apresentado em formato <em>html</em>. </p>
+<h2 id="observacoes-importantes">Observações importantes<a class="headerlink" href="#observacoes-importantes" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Resultados sem evidência de execução <strong>não serão considerados</strong></li>
+<li>Execuções fora das configurações obrigatórias <strong>não pontuam</strong></li>
+<li>Análises inconsistentes com os dados <strong>não serão considerados</strong></li>
+</ul>
 
 
 
@@ -1204,18 +1360,18 @@
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "content.code.copy"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.c8b220af.min.js"></script>
       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.0.0/js-yaml.min.js"></script>
       
-        <script src="../../js/markdown-enhancer.js"></script>
+        <script src="../../../js/markdown-enhancer.js"></script>
       
-        <script src="../../js/slides.js"></script>
+        <script src="../../../js/slides.js"></script>
       
     
   </body>
