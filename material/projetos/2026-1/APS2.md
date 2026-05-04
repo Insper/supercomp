@@ -10,7 +10,7 @@ No entanto, o sistema atual é extremamente lento, dificultando a tomada de deci
 
 Seu trabalho será melhorar esse sistema.
 
-[Acesse o seu repositório peli link do Classroom](https://classroom.github.com/a/h9hTmdSW) 
+[Acesse o seu repositório pelo link do Classroom](https://classroom.github.com/a/h9hTmdSW) 
 # **A data limite de entrega é 25/05/2026 ás 23h59**
 
 

@@ -49,7 +49,7 @@ nav:
         - "Aula 15 - Redução e Scan com CUDA": aulas/aula15/index.md
         - "Aula 16 - Detecção de Bordas em GPU": aulas/aula16/index.md
         - "Aula 17 - Projeto GPU": aulas/aula17/index.md
-#        - "Aula 17 - Matriz esparsa e Computação Assíncrona" : aulas/aula17/index.md
+        - "Aula 18 - Detecção de objetos em video" : aulas/aula18/index.md
 #        - "Aula 19 - Exercícios preparatórios Prova Final" : aulas/aula19/index.md
 #        - "Aula 20 - Exercícios preparatórios Prova Final" : aulas/aula20/index.md
 #        - "Aula 21 - Revisão" : aulas/aula21/index.md
