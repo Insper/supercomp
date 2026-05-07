@@ -473,16 +473,15 @@ runCPU:
         ./$(CPU_EXE)  100 100 100 100 0.5 0.5
 
 ```
+
 significa:
 
-```text id=
 - Executar 100 simulações
 - Executar o Monte Carlo 100 vezes
 - Utilizar 100 amostras históricas do mercado
 - Projetar 100 passos temporais futuros
 - Considerar um preço inicial da ação igual a 0.5
 - Utilizar taxa de risco de 0.5
-```
 
 
 Lembrando que para a entrega da [APS2](../../projetos/2026-1/APS2.md) a configuração dos testes muda de acordo com a rúbrica, para validar a pontuação inicial, você deve cumprir os seguintes critérios:
