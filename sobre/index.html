@@ -1493,7 +1493,149 @@ Esses resultados devem ser apresentados em formas de tabela e gráficos.</p>
 </details>
 <details class="note">
 <summary>APS 2 20%</summary>
-<p>Em construção</p>
+<h1 id="aps-2-otimizacoes-e-paralelismo-em-gpu">APS 2 - Otimizações e Paralelismo em GPU<a class="headerlink" href="#aps-2-otimizacoes-e-paralelismo-em-gpu" title="Permanent link">&para;</a></h1>
+<p>Um cliente precisa tomar decisões rápidas no mercado de ações. Para isso, ele utiliza simulações estocásticas para prever o comportamento futuro de um ativo com base em dados históricos.</p>
+<p>O modelo utilizado pelo cliente é baseado no <a href="https://fiscomp.if.ufrgs.br/index.php/Movimento_Browniano_Geom%C3%A9trico_para_Previs%C3%A3o_no_Mercado_de_A%C3%A7%C3%B5es">movimento browniano geométrico</a>, implementado através da <a href="https://www.investopedia.com/terms/b/blackscholes.asp">equação de Black-Scholes</a>. A partir de um preço inicial e da volatilidade do mercado, ele simula milhares de cenários possíveis para o preço da ação ao longo do tempo.</p>
+<p>Cada linha gerada representa um possível “caminho” do preço do ativo, enquanto a linha final média representa o comportamento mais provável segundo o <a href="https://pt.wikipedia.org/wiki/M%C3%A9todo_de_Monte_Carlo">método de Monte Carlo</a>.</p>
+<p>No entanto, o sistema atual é extremamente lento, dificultando a tomada de decisões, especialmente em um ambiente onde o tempo de resposta é decisivo.</p>
+<p>Seu trabalho será melhorar esse sistema.</p>
+<p><a href="https://classroom.github.com/a/h9hTmdSW">Acesse o seu repositório pelo link do Classroom</a> </p>
+<h1 id="a-data-limite-de-entrega-e-25052026-as-23h59"><strong>A data limite de entrega é 25/05/2026 ás 23h59</strong><a class="headerlink" href="#a-data-limite-de-entrega-e-25052026-as-23h59" title="Permanent link">&para;</a></h1>
+<p>A APS será avaliada em dois aspectos principais:</p>
+<ul>
+<li><strong>Implementação (código)</strong> → 4 pontos</li>
+<li><strong>Relatório (.ipynb)</strong> → 6 pontos</li>
+</ul>
+<h1 id="implementacao-4-pontos_1">Implementação (4 pontos)<a class="headerlink" href="#implementacao-4-pontos_1" title="Permanent link">&para;</a></h1>
+<p>A nota da implementação será atribuída de acordo com o nível máximo atingido.</p>
+<h2 id="2-pontos">2 pontos<a class="headerlink" href="#2-pontos" title="Permanent link">&para;</a></h2>
+<h3 id="requisitos-de-codigo">Requisitos de código:<a class="headerlink" href="#requisitos-de-codigo" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Pelo menos <strong>uma função portada para GPU</strong></li>
+<li>Uso de <strong>pelo menos uma técnica de otimização</strong></li>
+</ul>
+<h3 id="requisitos-de-execucao">Requisitos de execução:<a class="headerlink" href="#requisitos-de-execucao" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Arquivo SLURM corretamente configurado para submissão dos testes no <strong>Cluster Franky</strong></li>
+</ul>
+<h3 id="configuracao-obrigatoria-nos-testes">Configuração obrigatória nos testes:<a class="headerlink" href="#configuracao-obrigatoria-nos-testes" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Laços Internos: 100</li>
+<li>Laços Externos: 50000</li>
+<li>Histórico (dias): 948</li>
+<li>Previsão (dias): 948</li>
+<li>Preço Inicial: 0.5</li>
+<li>Taxa de Risco: 0.5</li>
+</ul>
+<h3 id="observacao">Observação:<a class="headerlink" href="#observacao" title="Permanent link">&para;</a></h3>
+<p>Sem execução comprovada nessa configuração, <strong>a pontuação não será atribuída</strong>.</p>
+<h2 id="3-pontos">3 pontos<a class="headerlink" href="#3-pontos" title="Permanent link">&para;</a></h2>
+<h3 id="requisitos-de-codigo_1">Requisitos de código:<a class="headerlink" href="#requisitos-de-codigo_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Pelo menos <strong>uma função portada para GPU</strong></li>
+<li>Uso de <strong>pelo menos duas técnicas de otimização</strong></li>
+</ul>
+<h3 id="requisitos-de-execucao_1">Requisitos de execução:<a class="headerlink" href="#requisitos-de-execucao_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Arquivos SLURM corretamente configurados para submissão dos testes </li>
+</ul>
+<h3 id="configuracao-obrigatoria">Configuração obrigatória:<a class="headerlink" href="#configuracao-obrigatoria" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Laços Internos: 100</li>
+<li>Laços Externos: 80000</li>
+<li>Histórico (dias): 1422</li>
+<li>Previsão (dias): 1422</li>
+<li>Preço Inicial: 0.5</li>
+<li>Taxa de Risco: 0.5</li>
+</ul>
+<h3 id="observacao_1">Observação:<a class="headerlink" href="#observacao_1" title="Permanent link">&para;</a></h3>
+<p>Sem execução comprovada nessa configuração, <strong>a pontuação não será atribuída</strong>.</p>
+<h2 id="4-pontos">4 pontos<a class="headerlink" href="#4-pontos" title="Permanent link">&para;</a></h2>
+<h3 id="requisitos-de-codigo_2">Requisitos de código:<a class="headerlink" href="#requisitos-de-codigo_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Pelo menos <strong>duas funções portadas para GPU</strong></li>
+<li>Uso de <strong>duas ou mais técnicas de otimização</strong></li>
+</ul>
+<h3 id="requisitos-de-execucao_2">Requisitos de execução:<a class="headerlink" href="#requisitos-de-execucao_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Arquivos SLURM corretamente configurados para submissão dos testes </li>
+</ul>
+<h3 id="requisitos-de-analise">Requisitos de análise:<a class="headerlink" href="#requisitos-de-analise" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>Deve demonstrar entendimento do impacto de:</p>
+</li>
+<li>
+<p>arquitetura da GPU</p>
+</li>
+<li>memória</li>
+<li>paralelismo</li>
+<li>escalabilidade</li>
+</ul>
+<h3 id="configuracao-obrigatoria_1">Configuração obrigatória:<a class="headerlink" href="#configuracao-obrigatoria_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Laços Internos: 100</li>
+<li>Laços Externos: 100000</li>
+<li>Histórico (dias): 2370</li>
+<li>Previsão (dias): 2370</li>
+<li>Preço Inicial: 0.5</li>
+<li>Taxa de Risco: 0.5</li>
+</ul>
+<h3 id="observacao_2">Observação:<a class="headerlink" href="#observacao_2" title="Permanent link">&para;</a></h3>
+<p>Sem execução comprovada nessa configuração, <strong>a pontuação não será atribuída</strong>.</p>
+<h1 id="relatorio-ipynb-6-pontos">Relatório (.ipynb) (6 pontos)<a class="headerlink" href="#relatorio-ipynb-6-pontos" title="Permanent link">&para;</a></h1>
+<p>O relatório deve conter <strong>os logs de execução, análise e explicação dos resultados</strong>.</p>
+<h2 id="criterios-de-avaliacao">Critérios de avaliação<a class="headerlink" href="#criterios-de-avaliacao" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Conceito</th>
+<th style="text-align: left;">Estrutura</th>
+<th style="text-align: left;">Integração e Visualização</th>
+<th style="text-align: left;">Profundidade da Análise</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Até 2 pts</strong></td>
+<td style="text-align: left;">Estrutura desorganizada ou fragmentada</td>
+<td style="text-align: left;">Gráficos/tabelas sem conexão com o texto</td>
+<td style="text-align: left;">Descrição superficial</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Até 4 pts</strong></td>
+<td style="text-align: left;">Organização clara e técnica</td>
+<td style="text-align: left;">Visualizações próximas das explicações</td>
+<td style="text-align: left;">Relaciona resultados com conceitos básicos</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Até 6 pts</strong></td>
+<td style="text-align: left;">Estrutura integrada (nível científico)</td>
+<td style="text-align: left;">Narrativa fluida com dados sustentando argumentos</td>
+<td style="text-align: left;">Explica desempenho com base em arquitetura (CPU vs GPU, memória, paralelismo, escalabilidade)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="requisitos-minimos-do-relatorio">Requisitos mínimos do relatório<a class="headerlink" href="#requisitos-minimos-do-relatorio" title="Permanent link">&para;</a></h2>
+<p>Para qualquer nota diferente de zero, o relatório deve conter:</p>
+<ul>
+<li>Descrição dos experimentos realizados</li>
+<li>Parâmetros utilizados (loops, tempo, etc.)</li>
+<li>Evidência de execução (prints, logs ou tabelas)</li>
+<li>
+<p>Pelo menos:</p>
+</li>
+<li>
+<p><strong>1 tabela</strong></p>
+</li>
+<li><strong>1 gráfico</strong></li>
+</ul>
+<h2 id="observacoes-importantes">Observações importantes<a class="headerlink" href="#observacoes-importantes" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Resultados sem evidência de execução <strong>não serão considerados</strong></li>
+<li>Execuções fora das configurações obrigatórias <strong>não pontuam</strong></li>
+<li>Análises inconsistentes com os dados <strong>não serão considerados</strong></li>
+</ul>
 </details>
 
 

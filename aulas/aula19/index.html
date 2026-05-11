@@ -1611,9 +1611,9 @@ module<span class="w"> </span>load<span class="w"> </span>cuda/12.8.1<span class
 <p>Para passa esse código para a GPU, primeiro, precisa transformar a função <strong>compute</strong> em uma função que a GPU pode executar, chamada de <em>kernel</em> em CUDA. Para fazer isso, é preciso adicionar o especificador <strong>global</strong> à função, o que diz ao compilador CUDA C++ que essa é uma função que roda na GPU e pode ser chamada a partir de código da CPU.</p>
 <div class="highlight"><pre><span></span><code><span class="n">__global__</span>
 <span class="kt">void</span><span class="w"> </span><span class="n">computeGPU</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">,</span>
-<span class="w">                </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">out</span><span class="p">,</span>
-<span class="w">                </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">x</span><span class="p">,</span>
-<span class="w">                </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">y</span><span class="p">)</span>
+<span class="w">                </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">d_out</span><span class="p">,</span>
+<span class="w">                </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">d_x</span><span class="p">,</span>
+<span class="w">                </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">d_y</span><span class="p">)</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="c1">// índice global da thread</span>
 <span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">blockIdx</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">blockDim</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w">   </span><span class="n">threadIdx</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
@@ -1800,11 +1800,11 @@ blocksPerGrid = \frac{N + threadsPerBlock - 1}{threadsPerBlock}
 <div class="highlight"><pre><span></span><code><span class="n">kernel</span><span class="o">&lt;&lt;&lt;</span><span class="n">n_blocos</span><span class="p">,</span><span class="w"> </span><span class="n">n_threads</span><span class="o">&gt;&gt;&gt;</span><span class="p">();</span>
 </code></pre></div>
 <p>No nosso caso:</p>
-<div class="highlight"><pre><span></span><code><span class="n">add</span><span class="o">&lt;&lt;&lt;</span><span class="n">blocksPerGrid</span><span class="p">,</span><span class="w"> </span><span class="n">threadsPerBlock</span><span class="o">&gt;&gt;&gt;</span><span class="p">(</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">d_sum</span><span class="p">,</span><span class="w"> </span><span class="n">d_x</span><span class="p">,</span><span class="w"> </span><span class="n">d_y</span><span class="w"> </span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="n">compute</span><span class="o">&lt;&lt;&lt;</span><span class="n">blocksPerGrid</span><span class="p">,</span><span class="w"> </span><span class="n">threadsPerBlock</span><span class="o">&gt;&gt;&gt;</span><span class="p">(</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">d_sum</span><span class="p">,</span><span class="w"> </span><span class="n">d_x</span><span class="p">,</span><span class="w"> </span><span class="n">d_y</span><span class="w"> </span><span class="p">);</span>
 </code></pre></div>
 <p>Se:</p>
-<div class="highlight"><pre><span></span><code><span class="n">threadsPerBlock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">256</span>
-<span class="n">blocksPerGrid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3907</span>
+<div class="highlight"><pre><span></span><code><span class="n">blocksPerGrid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">256</span>
+<span class="n">threadsPerBlock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3907</span>
 </code></pre></div>
 <p>Então a GPU criará:</p>
 <div class="arithmatex">
@@ -1848,9 +1848,9 @@ blocksPerGrid = \frac{N + threadsPerBlock - 1}{threadsPerBlock}
 
 <span class="n">__global__</span>
 <span class="kt">void</span><span class="w"> </span><span class="n">computeGPU</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">,</span>
-<span class="w">                </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">out</span><span class="p">,</span>
-<span class="w">                </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">x</span><span class="p">,</span>
-<span class="w">                </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">y</span><span class="p">)</span>
+<span class="w">                </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">d_out</span><span class="p">,</span>
+<span class="w">                </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">d_x</span><span class="p">,</span>
+<span class="w">                </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">d_y</span><span class="p">)</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="c1">// índice global da thread</span>
 <span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">blockIdx</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">blockDim</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">threadIdx</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
