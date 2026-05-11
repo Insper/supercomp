@@ -205,9 +205,9 @@ Para passa esse código para a GPU, primeiro, precisa transformar a função **c
 ```cpp
 __global__
 void computeGPU(int n,
-                float *out,
-                float *x,
-                float *y)
+                float *d_out,
+                float *d_x,
+                float *d_y)
 {
     // índice global da thread
     int i = blockIdx.x * blockDim.x +   threadIdx.x;
@@ -405,14 +405,14 @@ kernel<<<n_blocos, n_threads>>>();
 No nosso caso:
 
 ```cpp 
-add<<<blocksPerGrid, threadsPerBlock>>>( N, d_sum, d_x, d_y );
+compute<<<blocksPerGrid, threadsPerBlock>>>( N, d_sum, d_x, d_y );
 ```
 
 Se:
 
 ```cpp 
-threadsPerBlock = 256
-blocksPerGrid = 3907
+blocksPerGrid = 256
+threadsPerBlock = 3907
 ```
 
 Então a GPU criará:
@@ -466,9 +466,9 @@ using namespace std::chrono;
 
 __global__
 void computeGPU(int n,
-                float *out,
-                float *x,
-                float *y)
+                float *d_out,
+                float *d_x,
+                float *d_y)
 {
     // índice global da thread
     int i = blockIdx.x * blockDim.x + threadIdx.x;

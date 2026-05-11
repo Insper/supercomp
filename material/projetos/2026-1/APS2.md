@@ -53,19 +53,11 @@ Sem execução comprovada nessa configuração, **a pontuação não será atrib
 ### Requisitos de código:
 
 * Pelo menos **uma função portada para GPU**
-* Uso de **pelo menos uma técnica de otimização**
+* Uso de **pelo menos duas técnicas de otimização**
 
 ### Requisitos de execução:
 
-* Arquivos SLURM corretamente configurados para submissão dos testes nos dois clusters:
-
-  * **Cluster Franky**
-  * **Cluster Santos Dumont**
-* Comparação de desempenho entre os dois ambientes
-
-### Requisitos de análise:
-
-* Deve evidenciar diferenças de desempenho entre as arquiteturas
+* Arquivos SLURM corretamente configurados para submissão dos testes 
 
 ### Configuração obrigatória:
 
@@ -90,11 +82,7 @@ Sem execução comprovada nessa configuração, **a pontuação não será atrib
 
 ### Requisitos de execução:
 
-* Arquivos SLURM corretamente configurados para submissão dos testes nos dois clusters:
-
-  * **Cluster Franky**
-  * **Cluster Santos Dumont**
-
+* Arquivos SLURM corretamente configurados para submissão dos testes 
 
 ### Requisitos de análise:
 
