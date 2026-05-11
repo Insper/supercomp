@@ -1,492 +1,838 @@
-# Acessando o Cluster Santos Dumont
+# Revisão I - Passando o código da CPU para GPU
 
-Você deve ter recebido um e-mail do LNCC com instruções para configurar a VPN e criar sua senha de acesso ao Santos Dumont.
+## Sistemas de HPC
 
-Após concluir a configuração da VPN, será possível acessar o Santos Dumont via SSH.
+O paralelismo em GPU se diferencia do paralelismo em CPU de várias formas, uma delas está na maneira como solicitamos recursos para o SLURM, primeiro de tudo é importante considerar que não é possível compartilhar o hardware da GPU com outros usuários, uma vez que a GPU é alocada para o seu job, só você terá acesso a GPU, desta forma, você pode alocar completamente a GPU, e esta é um boa prática, aproveitar o máximo possível o potencial da GPU. Para fazer a solicitação de GPU via slurm você precisa:
 
-Em um terminal novo utilize o comando;
+### Carregar os modulos
 
-```bash
-ssh -o MACs=hmac-sha2-256 seu-login-de-acesso@login.sdumont.lncc.br
-```
-ou 
-
-```bash
-ssh seu-login-de-acesso@login.sdumont.lncc.br
-```
-Ao se conectar via SSH você verá algo como:
-
-![alt text](image.png)
-
-Note que sua "home" é a pasta de projeto, chamada "/prj/insperhpc/seu-login", não submeta jobs desta pasta. Para executar e testar seus códigos, utilize a pasta `SCRATCH`, que é o ambiente apropriado para processamento e armazenamento temporário de arquivos.
-
-```bash
-cd /scratch/insperhpc/seu-login
-```
-
-### Configurando Acesso SSH ao GitHub dentro do Santos Dumont
-
-É importante configurar o GitHub para que você possa realizar clones e commits em repositórios privados. 
-
-## Gerar uma nova chave SSH
-
-No terminal já autenticado no cluster, execute o seguinte comando:
-
-```bash
-ssh-keygen -t ed25519 -C "seu_email_do_github"
-```
-
-Pressione **Enter** eternamente até que apareça algo como:
-
-```
-...bla bla bla, criamos as chaves nos diretórios
-/prj/insperhpc/seu-login/.ssh/id_ed25519        ← chave privada
-/prj/insperhpc/seu-login/.ssh/id_ed25519.pub    ← chave pública
-```
-
-Copie a chave pública usando o comando:
-
-```bash
-cat /prj/insperhpc/>>>>>>>>seu-login<<<<<<</.ssh/id_ed25519.pub
-```
-
-Copie **toda a linha exibida**, começa com `ssh-ed25519`, e termina com o seu email.
-
-
-Adicione a chave no seu GitHub
-
-
-1. Acesse GitHub
-
-2. Vá em **Settings**
-
-![settings](imgs/settings.png)
-
-3. Clique em **SSH and GPG keys**
-
-![ssh](imgs/ssh.png)
-
-4. Clique em **New SSH key**
-
-![ssh](imgs/new_ssh.png)
-
-5. Cole a chave pública e depois clique em "Add SSH key"
-
-![add](imgs/add.png)
-
-
-### Teste a conexão
-
-```bash
-ssh -T git@github.com
-```
-
-Se estiver correto, aparecerá:
-
-```
-Hi usuario! You've successfully authenticated...
-```
-
-
-### Ambientação no Santos Dumont
-
-Antes de começar a fazer pedidos de recursos pro SLURM, vamos conhecer as filas que temos acesso e o hardware que temos disponível em cada fila.
-
-```bash
-sacctmgr list user $USER -s format=partition%20,MaxJobs,MaxSubmit,MaxNodes,MaxCPUs,MaxWall
-```
-
-![alt text](image-1.png)
-
-
-As filas que temos acesso tem essas características:
-
-
-## Fila sequana_cpu_dev
-
-A fila sequana_cpu_dev pode ser usada para testes em CPU, permitindo a execução de apenas 1 job por vez,  utilizando até 4 nós e 192 CPUs por job, com tempo limite de 20 minutos. A infraestrutura disponível conta com 166 nós e 7968 CPUs no total, com 8 GB de memória por CPU, somando aproximadamente 62 TB de memória. 
-
-## Fila sequana_gpu_dev
-
-A fila sequana_gpu_dev pode ser usada para testes com uso de GPU, também limitada a 1 job por vez, podendo utilizar até 4 nós e 192 CPUs por job, com tempo máximo de 20 minutos. Disponibiliza 61 nós, 2928 CPUs e 244 GPUs, com configuração padrão de 12 núcleos de CPUs por GPU e 94 GB de memória por GPU. A memória por CPU é de 8 GB. 
-
-## Fila sequana_gpu
-
-A fila sequana_gpu é a principal fila utilizada para execução de jobs em GPU, permitindo até 4 jobs simultâneos e 24 submissões, com uso de até 24 nós e 1152 CPUs por job, e **tempo máximo de execução de até 4 dias**. Possui 87 nós, 4176 CPUs e 348 GPUs, mantendo a proporção padrão de 12 CPUs por GPU e 94 GB de memória por GPU. A memória por CPU é de 8 GB, totalizando aproximadamente 32 TB. 
-
-
-### Explorando com o SRUN
-Vale lembrar que podemos pedir via SRUN um terminal dentro do nó de computação, para, de forma livre, executar qualquer comando:
-
-```bash
-srun --partition=sequana_gpu_dev --gres=gpu:1 --pty bash
-```
-
-Para sair, basta digitar no terminal:
-```bash
-exit
-```
-
-Ou, podemos usar o SRUN com um comando definido que será executado no nó de computação de forma direta pelo terminal:
-
-
-```bash
-srun --partition=sequana_gpu_dev --gres=gpu:1 --ntasks=1 --pty bash -c \
-"echo '=== HOSTNAME ==='; hostname; echo; \
- echo '=== MEMORIA (GB) ==='; \
- cat /proc/meminfo | grep -E 'MemTotal|MemFree|MemAvailable|Swap' | \
- awk '{printf \"%s %.2f GB\\n\", \$1, \$2 / 1048576}'; \
- echo; \
- echo '=== CPU INFO ==='; \
- lscpu | grep -E 'Model name|Socket|Core|Thread|CPU\\(s\\)|cache'
- echo '=== GPU INFO ==='; \
- if command -v nvidia-smi &> /dev/null; then nvidia-smi; else echo 'nvidia-smi não disponível'; fi"
-```
-
-
-```bash
-srun --partition=sequana_cpu_dev --ntasks=1 --pty bash -c \
-"echo '=== HOSTNAME ==='; hostname; echo; \
- echo '=== MEMORIA (GB) ==='; \
- cat /proc/meminfo | grep -E 'MemTotal|MemFree|MemAvailable|Swap' | \
- awk '{printf \"%s %.2f GB\\n\", \$1, \$2 / 1048576}'; \
- echo; \
- echo '=== CPU INFO ==='; \
- lscpu | grep -E 'Model name|Socket|Core|Thread|CPU\\(s\\)|cache'
- echo '=== GPU INFO ==='; \
- if command -v nvidia-smi &> /dev/null; then nvidia-smi; else echo 'nvidia-smi não disponível'; fi"
-```
-
-O comando `sinfo` mostra quais são as filas e quais são os status dos nós 
-
-```bash
-sinfo
-```
-Como o Santos Dumont é utilizado por pessoas de todo o país, a quantidade de informações exibidas pode ser muito grande. Por isso, vamos aplicar alguns filtros para visualizar apenas o que é relevante para nós:
-
-
-Este comando filtra por projeto, então só veremos os jobs relacionados aos alunos do Insper
-
-```bash
-squeue -A insperhpc
-```
-Se quiser filtrar apenas o seu usuário:
-
-```bash
-squeue -u $USER
-```
-
-Este filtra pela fila
-
-```bash
-sinfo -p sequana_gpu_dev
-```
-
-```bash
-sinfo -p sequana_cpu_dev
-```
-
-```bash
-sinfo -p sequana_gpu
-```
-
-## Carregando módulos no sistema
-
-No Cluster Franky precisamos carregar o módulo da GPU para conseguir compilar os códigos em CUDA e executar os binários na GPU. No Santos Dumont, não é diferente, porém, temos mais módulos disponíveis:
-
-Com o comando:
+Um sistema de HPC pode ter várias versões de drivers e módulos, é importante prestar atenção em qual versão do modulo você precisa trabalhar para garantir compatibilidade de drivers, para verificar a lista de módulos e drivers disponíveis para uma determinada instalação, utilize o comando:
 
 ```bash
 module avail cuda
 ```
+Neste exemplo, filtramos a busca por `cuda`, desta forma, podemos visualizar todos os módulos e drivers disponíveis com esta interface
 
-Você pode ver a lista de módulos cuda disponíveis:
+Cluster SDumont
+![Cluster SDumont](image.png)
 
-![alt text](image-2.png)
+Cluster Franky
+![Cluster Franky](image-9.png)
 
-Eu costumo usar o modulo mais próximo ao que temos no Cluster Franky para garantir portabilidade de código, mas fique a vontade para escolher e testar a versão que quiser:
+Observando as opções disponíveis do cuda, verificamos que a instalação mais atualizada é a `cuda/12.6_sequana`, no caso do SDumont, no Franky temos apenas a opção `cuda/12.8.1`.
 
-Para carregar o módulo:
+No Franky use:
+```bash
+module load cuda/12.8.1 
+```
+
+No SDumont use:
+```bash
+module load cuda/12.6_sequana 
+```
+
+
+Uma vez carregado o módulo, é possível utilizar as ferramentas desta instalação em todo o ambiente, inclusive nos nós de computação.
+
+### Submetendo um job com suporte a GPU
+
+Com o srun, você pode solicitar um terminal para executar o seu job de forma rápida, você pode ou não, salvar o output desta execução, se quiser salvar o output, faça a submissão do job desta forma:
 
 ```bash
-module load cuda/12.6_sequana
+srun --partition=gpu --gres=gpu:1 --output=saida.txt ./seu_binario
 ```
 
-Crie o arquivo 
-
-`hello.cu`
-```cpp 
-#include <iostream>
-#include <iomanip>
-#include <cuda_runtime.h>
-
-// KERNEL CUDA
-__global__ void helloGPU()
-{
-    // ID global da thread
-    int global_id =
-        blockIdx.x * blockDim.x + threadIdx.x;
-
-    // Warp ao qual a thread pertence
-    int warp_id = threadIdx.x / warpSize;
-
-    // blockIdx.x  -> bloco atual
-    // threadIdx.x -> thread dentro do bloco
-    // global_id   -> thread global no grid
-    // warp_id     -> warp da thread
-    //
-    printf(
-        "[Bloco %02d] "
-        "[Thread %02d] "
-        "[Global ID %03d] "
-        "[Warp %02d]\n",
-
-        blockIdx.x,
-        threadIdx.x,
-        global_id,
-        warp_id
-    );
-
-}
-
-int main()
-{
-    cudaDeviceProp hw;
-
-    // Obtém informações da GPU
-    cudaGetDeviceProperties(&hw, 0);
-
-    // Configuração do kernel
-    int blocks = 1;
-    int threads = 40;
+Esse comando pede ao SLURM que execute imediatamente um programa dentro da partição `gpu`, reservando uma GPU, e salvando todo o output em `saida.txt`.
 
 
-    std::cout << "GPU: "
-              << hw.name << "\n";
+Se você precisa executar um código que vai ficar rodando sem a sua supervisão, é melhor usar o sbatch, pois o sbatch executa em background.
 
-    std::cout << "Memoria Global: "
-              << std::fixed
-              << std::setprecision(2)
-              << hw.totalGlobalMem /
-                 (1024.0 * 1024.0 * 1024.0)
-              << " GB\n";
+Um sbatch com suporte a GPU seria assim:
 
-    std::cout << "SMs: "
-              << hw.multiProcessorCount << "\n";
-
-    std::cout << "Warp: "
-              << hw.warpSize << "\n";
-
-    std::cout << "Max Threads/Bloco: "
-              << hw.maxThreadsPerBlock << "\n";
-
-    std::cout << "\n";
-
-    // ==================================================
-    // CONFIGURAÇÃO DO GRID
-    // ==================================================
-
-    std::cout << "Blocos: "
-              << blocks << "\n";
-
-    std::cout << "Threads por bloco: "
-              << threads << "\n";
-
-    std::cout << "Total de threads: "
-              << blocks * threads << "\n";
-
-    std::cout << "Warps por bloco: "
-              << (threads + hw.warpSize - 1)
-                 / hw.warpSize
-              << "\n";
-
-    std::cout << "========================================\n\n";
-
-    // EXECUTA O KERNEL
-    helloGPU<<<blocks, threads>>>();
-
-    // Espera a GPU terminar
-    cudaDeviceSynchronize();
-
-    return 0;
-}
-```
-
-Para compilar use
-
-```bash
-nvcc -O3 hello.cu -o hello
-```
-
-Para executar use:
-
-```bash
-srun --partition=sequana_gpu_dev --gres=gpu:1 ./hello
-```
-
-Se quiser submeter um job com sbatch:
-
-run.slurm
 ```bash
 #!/bin/bash
 #SBATCH --job-name=exemplo_gpu
 #SBATCH --output=saida_%j.txt
 #SBATCH --time=00:10:00
 #SBATCH --gres=gpu:1
-#SBATCH --partition=sequana_gpu_dev
-#SBATCH --mem=1G                  # 1 GiB por nó
+#SBATCH --partition=gpu
+#SBATCH --mem=1G                  
 
 
-module load cuda/12.6_sequana
+module load cuda/12.8.1 
 
-./hello
-
+./seu_binario
 ```
 
-```bash
-sbatch run.slurm
-```
+## Passando um código sequencial em CPU para GPU usando CUDA
 
-Sugiro que troque o valor de 'blocos' e de 'threads' para ver como diferentes configurações são alocadas na GPU
-
-![alt text](image-3.png)
-
-Agora que já aprendemos a acessar a pasta `SCRATCH`, configurar o GitHub, carregar módulos e submeter jobs com GPU alocada, vamos colocar tudo isso em prática:
-
-### Testando a APS2 no SDumont
-
-Para realizar testes da APS2 é importante clonar o repositório na pasta `SCRATCH`
-
-lembrando, para estar na pasta `SCRATCH` utilize o comando:
-
-```bash
-cd /scratch/insperhpc/seu-login
-```
-
-faça o clone do repositório:
-
-```bash
-git clone git@github.com:insper-classroom/>>>>>>>>>aps2-seu-login<<<<<<<<<<<.git
-```
-
-Se você apenas der `make` vamos ter alguns problemas...
-
-É importante garantir que você tem os arquivos `main_cpu.cpp` e `main_gpu.cu` para compilar corretamente usando o Makefile disponibilizado.
-
-É importante também que você carregue o módulo do gcc antes de fazer as compilações, temos várias opções disponíveis, eu vou utilizar esta para garantir compatibilidade com o modulo cuda.
-
-![alt text](image-4.png)
-
-```bash
-module load gcc/12.4.0_sequana
-```
-
-```bash
-module load cuda/12.6_sequana
-```
-
-O Emil usou um compilador gcc mais novo no desenvolvimento do código base, se você compilar o código sem fazer uma pequena alteração, vai aparecer um erro como este:
-![alt text](image-5.png)
-
-basta trocar `powf` por `pow` e `sqrtf` por `sqrt` no seu código que vai compilar sem erros.
-
-Seu arquivo `Makefile` deve definir os parâmetros de complexidade computacional utilizados nos testes.
-
-Para os primeiros experimentos, vamos utilizar uma configuração mais simples, garantindo que a execução seja rápida e fácil de validar;
+Vamos começar com um programa C++ simples que soma os elementos de dois arrays.
 
 ```cpp
-# Execuções
-runCPU:
-        ./$(CPU_EXE)  100 100 100 100 0.5 0.5
+#include <iostream>
+#include <cmath>
+#include <chrono>
+
+using namespace std;
+using namespace std::chrono;
+
+
+// ==========================================================
+// FUNÇÃO CPU
+// ==========================================================
+
+void compute(int n,
+             float *out,
+             float *x,
+             float *y)
+{
+    for (int i = 0; i < n; i++)
+    {
+        float v = x[i] + y[i];
+
+        // carga computacional 
+        for (int k = 0; k < 1000; k++)
+        {
+            v =
+                v * 1.00001f +
+                sqrt(v) +
+                sin(v);
+        }
+
+        out[i] = v;
+    }
+}
+
+
+// ==========================================================
+// MAIN
+// ==========================================================
+
+int main()
+{
+    // ------------------------------------------------------
+    // TAMANHO DO VETOR
+    // ------------------------------------------------------
+
+    int N = 10'000'000;
+
+    // ------------------------------------------------------
+    // ALOCA MEMÓRIA
+    // ------------------------------------------------------
+
+    float *x   = new float[N];
+    float *y   = new float[N];
+    float *out = new float[N];
+
+    // ------------------------------------------------------
+    // INICIALIZA DADOS
+    // ------------------------------------------------------
+
+    for (int i = 0; i < N; i++)
+    {
+        x[i] = 1.0f + i * 0.000001f;
+        y[i] = 2.0f + i * 0.000001f;
+    }
+
+    // ------------------------------------------------------
+    // INÍCIO DA MEDIÇÃO
+    // ------------------------------------------------------
+
+    auto start =
+        high_resolution_clock::now();
+
+    // ------------------------------------------------------
+    // EXECUTA COMPUTAÇÃO
+    // ------------------------------------------------------
+
+    compute(N, out, x, y);
+
+    // ------------------------------------------------------
+    // FIM DA MEDIÇÃO
+    // ------------------------------------------------------
+
+    auto stop =
+        high_resolution_clock::now();
+
+    double elapsed =
+        duration<double, milli>(
+            stop - start
+        ).count();
+
+    // ------------------------------------------------------
+    // OUTPUT
+    // ------------------------------------------------------
+
+    cout << "Tempo CPU: "
+         << elapsed
+         << " ms"
+         << endl;
+
+    cout << "out[0] = "
+         << out[0]
+         << endl;
+
+    cout << "out[N-1] = "
+         << out[N - 1]
+         << endl;
+
+    // ------------------------------------------------------
+    // LIBERA MEMÓRIA
+    // ------------------------------------------------------
+
+    delete[] x;
+    delete[] y;
+    delete[] out;
+
+    return 0;
+}
+```
+
+Primeiro, compile e execute esse programa C++. Coloque o código acima em um arquivo e salve como **compute.cpp**, e então compile com o compilador C++. 
+```
+g++ compute.cpp -o comp_cpu
+```
+
+Depois execute:
+
+```
+srun --partition=gpu ./comp_cpu
 
 ```
 
-
-Após estes ajustes execute o comando:
-
-```bash
-make buildCPU
-```
-
-Depois de gerar os binários, teste o código:
-
-```bash
-srun --partition=sequana_cpu_dev make runCPU
-```
-
-![alt text](image-6.png)
-
-Ou use o sbatch 
-
-```bash
-#!/bin/bash
-#SBATCH --job-name=exemplo_gpu
-#SBATCH --output=saida.txt
-#SBATCH --time=00:10:00
-#SBATCH --gres=gpu:1
-#SBATCH --partition=sequana_gpu_dev
-#SBATCH --mem=1G
-
-#carregue os modulos
-module load gcc/12.4.0_sequana
-module load cuda/12.6_sequana
-
-#Execute o binario
-make runCPU
-```
-
-![alt text](image-7.png)
-
-Desta forma testamos a versão CPU sequencial do código.
-
-### Entendendo o código base
-
-O código base da APS2 implementa uma simulação do comportamento das ações da NVIDIA utilizando o modelo de Black-Scholes aliado ao Método de Monte Carlo.
-
-A aplicação utiliza dados históricos de fechamento das ações para calcular a volatilidade do mercado e, a partir disso, gerar múltiplas projeções probabilísticas para o preço futuro do ativo.
-
-Quando você configura os parâmetros desta forma, como no exemplo:
+Para passa esse código para a GPU, primeiro, precisa transformar a função **compute** em uma função que a GPU pode executar, chamada de *kernel* em CUDA. Para fazer isso, é preciso adicionar o especificador **global** à função, o que diz ao compilador CUDA C++ que essa é uma função que roda na GPU e pode ser chamada a partir de código da CPU.
 
 ```cpp
-# Execuções
-runCPU:
-        ./$(CPU_EXE)  100 100 100 100 0.5 0.5
+__global__
+void computeGPU(int n,
+                float *out,
+                float *x,
+                float *y)
+{
+    // índice global da thread
+    int i = blockIdx.x * blockDim.x +   threadIdx.x;
+
+    // evita acessar posições inválidas
+    if (i < n)
+    {
+        float v = x[i] + y[i];
+
+        // carga computacional 
+        for (int k = 0; k < 1000; k++)
+        {
+            v =
+                v * 1.00001f +
+                sqrtf(v) +
+                sinf(v);
+        }
+
+        out[i] = v;
+    }
+}
 
 ```
-Você está configurando:
 
-| Parâmetro           | Valor | Significado                                                            |
-| ------------------- | ----- | ---------------------------------------------------------------------- |
-| `inLoops`           | `100` | Quantidade de simulações |
-| `outLoops`          | `100` | Quantidade total de execuções do método de Monte Carlo                 |
-| `timeStepsHistory`  | `100` | Janela de dados históricos utilizados para calcular a volatilidade |
-| `timeStepsForecast` | `100` | Janela de tempo para a previsão futura                      |
-| `spotPrice`         | `0.5` | Preço inicial da ação no instante inicial                       |
-| `riskRate`          | `0.5` | Taxa livre de risco utilizada no modelo matemático                     |
+Essa função **__global__** é conhecida como kernel CUDA e roda na GPU. Código que roda na GPU é frequentemente chamado de *device code*, enquanto código que roda na CPU é chamado de *host code*.
 
 
-Na prática, configurar:
+Até agora, os arrays `x`, `y` e `sum` existem apenas na memória da CPU (host).
+
+A GPU possui sua própria memória, chamada de **device memory**, separada da RAM principal do computador.
+
+Por isso, antes de executar o kernel, precisamos:
+
+1. alocar memória na GPU;
+2. copiar os dados da CPU para a GPU.
+
+
+Primeiro criamos ponteiros que irão apontar para memória no device (GPU):
 
 ```cpp
-# Execuções
-runCPU:
-        ./$(CPU_EXE)  100 100 100 100 0.5 0.5
-
+float *d_x;
+float *d_y;
+float *d_out;
 ```
 
-significa:
+Agora usamos `cudaMalloc`, que funciona de forma parecida com `malloc` em C.
 
-- Executar 100 simulações
-- Executar o Monte Carlo 100 vezes
-- Utilizar 100 amostras históricas do mercado
-- Projetar 100 passos temporais futuros
-- Considerar um preço inicial da ação igual a 0.5
-- Utilizar taxa de risco de 0.5
+A sintaxe é:
+
+```cpp
+cudaMalloc(&ponteiro, tamanho_em_bytes);
+```
+
+Então fica:
+
+```cpp
+cudaMalloc(&d_x,   N * sizeof(float));
+cudaMalloc(&d_y,   N * sizeof(float));
+cudaMalloc(&d_out, N * sizeof(float));
+```
+
+Com este comando, a GPU reserva espaço na VRAM, mas esses dados ainda estão vazios.
+
+Agora precisamos copiar os arrays da CPU (`x` e `y`) para a memória da GPU (`d_x` e `d_y`).
+
+Isso é feito com `cudaMemcpy`. A Sintaxe é:
+
+```cpp
+cudaMemcpy(destino, origem, bytes, direção);
+```
+
+Então fica:
+
+```cpp
+cudaMemcpy(d_x, x, N * sizeof(float),
+           cudaMemcpyHostToDevice);
+
+cudaMemcpy(d_y, y, N * sizeof(float),
+           cudaMemcpyHostToDevice);
+```
+
+| Parâmetro                | Significado         |
+| ------------------------ | ------------------- |
+| `d_x`                    | destino na GPU      |
+| `x`                      | origem na CPU       |
+| `N * sizeof(float)`      | quantidade de bytes |
+| `cudaMemcpyHostToDevice` | direção da cópia    |
 
 
-Lembrando que para a entrega da [APS2](../../projetos/2026-1/APS2.md) a configuração dos testes muda de acordo com a rúbrica, para validar a pontuação inicial, você deve cumprir os seguintes critérios:
+Agora que os dados já estão na GPU, precisamos dizer:
 
-![alt text](image-8.png)
+1. quantas threads serão criadas;
+2. como essas threads serão organizadas;
+3. quantos elementos cada thread irá processar.
+
+Em CUDA, as threads são organizadas em:
+
+```text 
+THREADS → dentro de BLOCOS
+BLOCOS  → dentro de uma GRID
+```
+
+A hierarquia fica assim:
+
+```text 
+GRID
+ ├── BLOCO 0
+ │     ├── thread 0
+ │     ├── thread 1
+ │     ├── thread 2
+ │     └── ...
+ │
+ ├── BLOCO 1
+ │     ├── thread 0
+ │     ├── thread 1
+ │     └── ...
+ │
+ └── ...
+```
+![alt text](image-10.png)
+
+Se quisermos que, por exemplo, 1 thread fique responsável por 1 posição do vetor
+
+Por exemplo:
+
+| Thread   | Elemento processado |
+| -------- | ------------------- |
+| thread 0 | soma posição 0      |
+| thread 1 | soma posição 1      |
+| thread 2 | soma posição 2      |
+| ...      | ...                 |
+
+Podemos adotar esta configuração muito comum em CUDA:
+
+```cpp 
+int threadsPerBlock = 256;
+```
+
+Isso significa:
+
+```text
+cada bloco terá 256 threads
+```
+Como as GPUs funcionam melhor com grupos de threads múltiplos de 32.
+
+Então valores como:
+
+* 128
+* 256
+* 512
+
+costumam funcionar muito bem.
 
 
-É a sua vez, use as ferramentas de otimização que aprendemos até aqui para melhorar o código base e resolver o primeiro desafio da APS2. 
+Agora precisamos descobrir quantos blocos são necessários para cobrir todo o vetor
+
+
+Se temos `N = 1.000.000` elementos e 256 threads por bloco, então precisamos dividir:
+
+$$
+\frac{1,000,000}{256}
+$$
+
+Mas precisamos tomar cuidado:
+
+* a divisão pode não ser exata;
+* podemos precisar de um bloco extra.
+
+Por isso usamos:
+
+```cpp 
+int blocksPerGrid =
+    (N + threadsPerBlock - 1)
+    / threadsPerBlock;
+```
+
+A fórmula:
+
+$$
+blocksPerGrid = \frac{N + threadsPerBlock - 1}{threadsPerBlock}
+$$
+
+faz um arredondamento para cima.
+
+Isso garante que sempre haverá threads suficientes
+
+Agora precisamos lançar o kernel.
+
+A sintaxe é:
+
+```cpp 
+kernel<<<n_blocos, n_threads>>>();
+```
+
+No nosso caso:
+
+```cpp 
+add<<<blocksPerGrid, threadsPerBlock>>>( N, d_sum, d_x, d_y );
+```
+
+Se:
+
+```cpp 
+threadsPerBlock = 256
+blocksPerGrid = 3907
+```
+
+Então a GPU criará:
+
+$$
+3907 \times 256 \approx 1,000,000\ \text{threads}
+$$
+
+Cada thread:
+
+1. calcula seu índice `i`;
+2. lê `d_x[i]`;
+3. lê `d_y[i]`;
+4. soma os valores;
+5. escreve em `d_sum[i]`.
+
+
+Só falta mais uma coisa: preciso que a CPU espere até que o kernel esteja terminado antes de acessar os resultados (porque lançamentos de kernel CUDA não bloqueiam a thread da CPU que o chamou). Para isso, basta chamar **cudaDeviceSynchronize()** antes visualizar os resultados.
+
+Depois do kernel terminar, precisamos trazer o resultado para a CPU.
+
+```cpp
+cudaMemcpy(out, d_out, N * sizeof(float), cudaMemcpyDeviceToHost);
+```
+
+Assim como usamos `delete` ou `free` na CPU, precisamos liberar a memória da GPU usando `cudaFree`.
+
+```cpp
+cudaFree(d_x);
+cudaFree(d_y);
+cudaFree(d_out);
+```
+
+
+Arquivos CUDA têm a extensão **.cu**. Então salve esse código em um arquivo chamado **compute.cu**
+
+
+O código completo:
+```cpp
+#include <iostream>
+#include <cmath>
+#include <chrono>
+
+using namespace std;
+using namespace std::chrono;
+
+
+// ==========================================================
+// KERNEL CUDA
+// ==========================================================
+
+__global__
+void computeGPU(int n,
+                float *out,
+                float *x,
+                float *y)
+{
+    // índice global da thread
+    int i = blockIdx.x * blockDim.x + threadIdx.x;
+
+    // evita acessar posições inválidas
+    if (i < n)
+    {
+        float v = x[i] + y[i];
+
+        // carga computacional
+        for (int k = 0; k < 1000; k++)
+        {
+            v =
+                v * 1.00001f +
+                sqrtf(v) +
+                sinf(v);
+        }
+
+        out[i] = v;
+    }
+}
+
+
+// ==========================================================
+// MAIN
+// ==========================================================
+
+int main()
+{
+    // ------------------------------------------------------
+    // TAMANHO DO VETOR
+    // ------------------------------------------------------
+
+    int N = 10'000'000;
+
+    size_t size = N * sizeof(float);
+
+    // ------------------------------------------------------
+    // DADOS CPU
+    // ------------------------------------------------------
+
+    float *x   = new float[N];
+    float *y   = new float[N];
+    float *out = new float[N];
+
+    // ------------------------------------------------------
+    // INICIALIZA DADOS
+    // ------------------------------------------------------
+
+    for (int i = 0; i < N; i++)
+    {
+        x[i] = 1.0f + i * 0.000001f;
+        y[i] = 2.0f + i * 0.000001f;
+    }
+
+    // ------------------------------------------------------
+    // DADOS GPU
+    // ------------------------------------------------------
+
+    float *d_x;
+    float *d_y;
+    float *d_out;
+
+    cudaMalloc(&d_x, size);
+    cudaMalloc(&d_y, size);
+    cudaMalloc(&d_out, size);
+
+    // ------------------------------------------------------
+    // COPIA CPU -> GPU
+    // ------------------------------------------------------
+
+    cudaMemcpy(d_x,
+               x,
+               size,
+               cudaMemcpyHostToDevice);
+
+    cudaMemcpy(d_y,
+               y,
+               size,
+               cudaMemcpyHostToDevice);
+
+    // ------------------------------------------------------
+    // CONFIGURA KERNEL
+    // ------------------------------------------------------
+
+    int threadsPerBlock = 256;
+
+    int blocks =
+        (N + threadsPerBlock - 1)
+        / threadsPerBlock;
+
+    // ------------------------------------------------------
+    // INÍCIO DA MEDIÇÃO
+    // ------------------------------------------------------
+
+    auto start =
+        high_resolution_clock::now();
+
+    // ------------------------------------------------------
+    // EXECUTA KERNEL
+    // ------------------------------------------------------
+
+    computeGPU<<<blocks, threadsPerBlock>>>(
+        N,
+        d_out,
+        d_x,
+        d_y
+    );
+
+    // espera GPU terminar
+    cudaDeviceSynchronize();
+
+    // ------------------------------------------------------
+    // FIM DA MEDIÇÃO
+    // ------------------------------------------------------
+
+    auto stop =
+        high_resolution_clock::now();
+
+    double elapsed =
+        duration<double, milli>(
+            stop - start
+        ).count();
+
+    // ------------------------------------------------------
+    // COPIA GPU -> CPU
+    // ------------------------------------------------------
+
+    cudaMemcpy(out,
+               d_out,
+               size,
+               cudaMemcpyDeviceToHost);
+
+    // ------------------------------------------------------
+    // OUTPUT
+    // ------------------------------------------------------
+
+    cout << "Tempo GPU: "
+         << elapsed
+         << " ms"
+         << endl;
+
+    cout << "out[0] = "
+         << out[0]
+         << endl;
+
+    // ------------------------------------------------------
+    // LIBERA MEMÓRIA GPU
+    // ------------------------------------------------------
+
+    cudaFree(d_x);
+    cudaFree(d_y);
+    cudaFree(d_out);
+
+    // ------------------------------------------------------
+    // LIBERA MEMÓRIA CPU
+    // ------------------------------------------------------
+
+    delete[] x;
+    delete[] y;
+    delete[] out;
+
+    return 0;
+}
+    
+```
+
+Compile com o **nvcc**, o compilador CUDA C++.
+
+```
+nvcc compute.cu -o comp_gpu
+srun --partition=gpu --gres=gpu:1 ./comp_gpu
+```
+
+Isso é apenas o primeiro passo, com o código em GPU podemos usar técnicas de otimização para melhorar ainda mais o desempenho do código, porém, iremos veremos sobre isso na próxima revisão.
+
+## Exercícios — Passando Código Sequencial da CPU para GPU com CUDA
+
+A ideia desses exercícios é praticar:
+
+* criação de kernels CUDA;
+* paralelismo com threads;
+* `cudaMalloc`;
+* `cudaMemcpy`;
+* configuração de grids e blocos;
+* execução de kernels.
+
+### Exercício 1 — Multiplicação de Vetores
+
+Passe a função `multiply` para um kernel CUDA, faça a alocação e a cópia dos dados para a GPU corretamente, e crie o lançador do kernel `multiply`: 
+
+Código base:
+```cpp
+#include <iostream>
+
+void multiply(int n, float *a, float *b, float *out)
+{
+    for(int i = 0; i < n; i++)
+        out[i] = a[i] * b[i];
+}
+
+int main()
+{
+    int N = 1'000'000;
+
+    float *a   = new float[N];
+    float *b   = new float[N];
+    float *out = new float[N];
+
+    for(int i = 0; i < N; i++) {
+        a[i] = 2.0f;
+        b[i] = 4.0f;
+    }
+
+    multiply(N, a, b, out);
+
+    std::cout << out[0] << std::endl;
+
+    delete[] a;
+    delete[] b;
+    delete[] out;
+}
+```
+### Exercício 2 — Soma de Matrizes
+
+Paralelize a soma de matrizes em GPU passando a função `matrixAdd` para um kernel Cuda, faça a alocação, a cópia dos dados para a GPU corretamente, e crie o lançador do kernel.
+
+```cpp 
+#include <iostream>
+
+void matrixAdd(int n, float *A, float *B, float *C)
+{
+    for(int i = 0; i < n*n; i++)
+        C[i] = A[i] + B[i];
+}
+
+int main()
+{
+    int N = 1024;
+
+    float *A = new float[N*N];
+    float *B = new float[N*N];
+    float *C = new float[N*N];
+
+    for(int i = 0; i < N*N; i++) {
+        A[i] = 1.0f;
+        B[i] = 2.0f;
+    }
+
+    matrixAdd(N, A, B, C);
+
+    std::cout << C[0] << std::endl;
+
+    delete[] A;
+    delete[] B;
+    delete[] C;
+}
+```
+
+### Exercício 3 — Threshold em Imagem
+
+Paralelize a operação `threshold` em GPU passando a função para um kernel Cuda, faça a alocação, a cópia dos dados para a GPU corretamente, e crie o lançador do kernel.
+
+```cpp 
+#include <iostream>
+
+void threshold(unsigned char *in,
+               unsigned char *out,
+               int n,
+               int T)
+{
+    for(int i = 0; i < n; i++)
+    {
+        out[i] =
+            (in[i] > T) ? 255 : 0;
+    }
+}
+
+int main()
+{
+    int N = 1920 * 1080;
+
+    unsigned char *img =
+        new unsigned char[N];
+
+    unsigned char *out =
+        new unsigned char[N];
+
+    for(int i = 0; i < N; i++)
+        img[i] = rand() % 256;
+
+    threshold(img, out, N, 128);
+
+    std::cout << (int)out[0]
+              << std::endl;
+
+    delete[] img;
+    delete[] out;
+}
+```
+
+### Exercício 4 — Conversão RGB para Escala de Cinza
+
+Paralelize a operação `rgb2gray` em GPU passando a função para um kernel cuda, faça a alocação, a cópia dos dados para a GPU corretamente, e crie o lançador do kernel.
+
+
+```cpp 
+#include <iostream>
+
+void rgb2gray(unsigned char *rgb,
+              unsigned char *gray,
+              int n)
+{
+    for(int i = 0; i < n; i++)
+    {
+        int idx = i * 3;
+
+        float r = rgb[idx];
+        float g = rgb[idx + 1];
+        float b = rgb[idx + 2];
+
+        gray[i] =
+            0.299f * r +
+            0.587f * g +
+            0.114f * b;
+    }
+}
+
+int main()
+{
+    int N = 1920 * 1080;
+
+    unsigned char *rgb =
+        new unsigned char[N * 3];
+
+    unsigned char *gray =
+        new unsigned char[N];
+
+    for(int i = 0; i < N*3; i++)
+        rgb[i] = rand() % 256;
+
+    rgb2gray(rgb, gray, N);
+
+    std::cout
+        << (int)gray[0]
+        << std::endl;
+
+    delete[] rgb;
+    delete[] gray;
+}
+```
+### Desafio Extra
+
+Depois de terminar os exercícios:
+
+1. compare tempo CPU vs GPU;
+2. teste:
+
+   * 128 threads;
+   * 256 threads;
+   * 512 threads;
+3. descubra qual configuração é mais rápida.
+
+
+
+Referência:
+https://developer.nvidia.com/blog/even-easier-introduction-cuda/
