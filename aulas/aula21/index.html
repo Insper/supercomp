@@ -18,7 +18,7 @@
     
     
       
-        <title>Revisão - SuperComputação - 2026/1</title>
+        <title>Index - SuperComputação - 2026/1</title>
       
     
     
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#revisao" class="md-skip">
+        <a href="#2-acesso-irregular-a-memoria" class="md-skip">
           Skip to content
         </a>
       
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Revisão
+              Index
             
           </span>
         </div>
@@ -822,6 +822,28 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aula20/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aula 20 - Revisão II - Estratégias de otimização em GPU
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1158,8 +1180,6 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -1168,37 +1188,92 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#sistemas-de-hpc" class="md-nav__link">
+  <a href="#2-acesso-irregular-a-memoria" class="md-nav__link">
     <span class="md-ellipsis">
-      Sistemas de HPC
+      2. Acesso Irregular à Memória
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Sistemas de HPC">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compactacao-de-dados" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compactação de dados
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#processamento-por-tilesregioes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Processamento por tiles/regiões
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#observacao-importante" class="md-nav__link">
+    <span class="md-ellipsis">
+      Observação Importante
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-divergencia-de-threads" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Divergência de Threads
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Divergência de Threads">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#carregar-os-modulos" class="md-nav__link">
+  <a href="#problema" class="md-nav__link">
     <span class="md-ellipsis">
-      Carregar os modulos
+      Problema
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#diretorio-scratch" class="md-nav__link">
+  <a href="#otimizacoes-possiveis" class="md-nav__link">
     <span class="md-ellipsis">
-      Diretório Scratch
+      Otimizações Possíveis
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Otimizações Possíveis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reduzir-condicionais" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reduzir condicionais
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#informacoes-uteis-sobre-os-recursos-do-sistema" class="md-nav__link">
+  <a href="#separar-kernels" class="md-nav__link">
     <span class="md-ellipsis">
-      Informações úteis sobre os recursos do sistema
+      Separar kernels
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reorganizar-dados" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reorganizar dados
     </span>
   </a>
   
@@ -1206,6 +1281,29 @@
         
       </ul>
     </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resultado-esperado" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resultado Esperado
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-conclusao" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Conclusão
+    </span>
+  </a>
   
 </li>
       
@@ -1228,314 +1326,117 @@
   
 
 
-<h1 id="revisao">Revisão<a class="headerlink" href="#revisao" title="Permanent link">&para;</a></h1>
-<h2 id="sistemas-de-hpc">Sistemas de HPC<a class="headerlink" href="#sistemas-de-hpc" title="Permanent link">&para;</a></h2>
-<p>O paralelismo em GPU se diferencia do paralelismo em CPU de várias formas, uma delas está na maneira como solicitamos recursos para o SLURM, primeiro de tudo é importante considerar que não é possível compartilhar o hardware da GPU com outros usuários, uma vez que a GPU é alocada para o seu job, só você terá acesso a GPU, desta forma, você pode alocar completamente a GPU, e esta é um boa prática, aproveitar o máximo possível o potencial da GPU. Para fazer a solicitação de GPU via slurm você precisa:</p>
-<h3 id="carregar-os-modulos">Carregar os modulos<a class="headerlink" href="#carregar-os-modulos" title="Permanent link">&para;</a></h3>
-<p>Um sistema de HPC pode ter várias versões de drivers e módulos, é importante prestar atenção em qual versão do modulo você precisa trabalhar para garantir compatibilidade de drivers, para verificar a lista de módulos e drivers disponíveis para uma determinada instalação, utilize o comando:</p>
-<p><div class="highlight"><pre><span></span><code>module<span class="w"> </span>avail<span class="w"> </span>cuda
+<h3 id="2-acesso-irregular-a-memoria">2. Acesso Irregular à Memória<a class="headerlink" href="#2-acesso-irregular-a-memoria" title="Permanent link">&para;</a></h3>
+<p>O melhor exemplo desse problema aparece na função <code>findComponents()</code>. Um dos problemas dessa função é que os acessos à memória ocorrem em posições imprevisíveis.</p>
+<p>Trechos como:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">nidx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ny</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">w</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">nx</span><span class="p">;</span>
 </code></pre></div>
-Neste exemplo, filtramos a busca por <code>cuda</code>, desta forma, podemos visualizar todos os módulos e drivers disponíveis com esta interface</p>
-<p><img alt="alt text" src="image.png" /></p>
-<p>Observando as opções disponíveis do cuda, verificamos que a instalação mais atualizada é a <code>cuda/12.6_sequana</code>, então vamos carregar ela no ambiente</p>
-<div class="highlight"><pre><span></span><code>module<span class="w"> </span>load<span class="w"> </span>cuda/12.6_sequana<span class="w"> </span>
-</code></pre></div>
-<p>Uma vez carregado o módulo, é possível utilizar as ferramentas desta instalação em todo o ambiente, inclusive nos nós de computação.</p>
-<h3 id="diretorio-scratch">Diretório Scratch<a class="headerlink" href="#diretorio-scratch" title="Permanent link">&para;</a></h3>
-<p>Assim que você conecta no Santos Dumont via SSH, usando algo como:</p>
-<div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>-o<span class="w"> </span><span class="nv">MACs</span><span class="o">=</span>hmac-sha2-256<span class="w"> </span>seu_usuario@login.sdumont.lncc.br
-</code></pre></div>
-<p>Você cairá na pasta de projeto dentro do nó de login do Santos Dumont, com o comando <code>pwd</code>, é possível verificar o caminho do diretório que você está, que deverá ser algo como:</p>
-<div class="highlight"><pre><span></span><code>/prj/insperhpc/seu_usuario
-</code></pre></div>
-<p>O diretório de trabalho é o <code>SCRATCH</code>, somente neste ambiente os nós de computação terão acesso aos seus códigos e aos seus binários, então, logo que carregar os módulos necessários, troque para o diretório de trabalho:</p>
-<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/scratch/insperhpc/seu_usuario<span class="w">    </span>
-</code></pre></div>
-<p>Neste ambiente você pode clonar seus repositórios, organizar suas pastas, submeter seus jobs...</p>
-<h3 id="informacoes-uteis-sobre-os-recursos-do-sistema">Informações úteis sobre os recursos do sistema<a class="headerlink" href="#informacoes-uteis-sobre-os-recursos-do-sistema" title="Permanent link">&para;</a></h3>
-<p>Para saber quais são as filas disponíveis para o seu usuário em um ambiente de HPC, você pode usar o seguinte comando:</p>
-<div class="highlight"><pre><span></span><code>sacctmgr<span class="w"> </span>list<span class="w"> </span>user<span class="w"> </span><span class="nv">$USER</span><span class="w"> </span>-s<span class="w"> </span><span class="nv">format</span><span class="o">=</span>partition%20,MaxJobs,MaxSubmit,MaxNodes,MaxCPUs,MaxWall
-</code></pre></div>
-<p>No caso do Santos Dumont, você deve ver algo como:
-<div class="highlight"><pre><span></span><code><span class="w">           </span>Partition<span class="w"> </span>MaxJobs<span class="w"> </span>MaxSubmit<span class="w"> </span>MaxNodes<span class="w">  </span>MaxCPUs<span class="w">     </span>MaxWall
---------------------<span class="w"> </span>-------<span class="w"> </span>---------<span class="w"> </span>--------<span class="w"> </span>--------<span class="w"> </span>-----------
-<span class="w">     </span>sequana_cpu_dev<span class="w">       </span><span class="m">1</span><span class="w">         </span><span class="m">1</span><span class="w">        </span><span class="m">4</span><span class="w">      </span><span class="m">192</span><span class="w">    </span><span class="m">00</span>:20:00
-<span class="w">         </span>sequana_gpu<span class="w">       </span><span class="m">4</span><span class="w">        </span><span class="m">24</span><span class="w">       </span><span class="m">24</span><span class="w">     </span><span class="m">1152</span><span class="w">  </span><span class="m">4</span>-00:00:00
-<span class="w">     </span>sequana_gpu_dev<span class="w">       </span><span class="m">1</span><span class="w">         </span><span class="m">1</span><span class="w">        </span><span class="m">4</span><span class="w">      </span><span class="m">192</span><span class="w">    </span><span class="m">00</span>:20:00
-</code></pre></div></p>
-<p><strong>Partition</strong></p>
-<p>É a “fila” do SLURM, o espaço do cluster onde seu job vai rodar.
-Cada partição tem características próprias: hardware específico, limites, prioridades.</p>
-<p>No Santos Dumont:</p>
+<p>fazem com que threads diferentes acessem regiões distantes da memória.</p>
+<p>Isso prejudica a localidade espacial, o aproveitamento da cache, e a eficiência da GPU.</p>
+<p>Nesse caso, precisamos reorganizar os dados, transformar as estruturas em formatos mais lineares e contínuos.</p>
+<h3 id="compactacao-de-dados">Compactação de dados<a class="headerlink" href="#compactacao-de-dados" title="Permanent link">&para;</a></h3>
+<p>Como a imagem binária possui muitos zeros:</p>
 <ul>
-<li><strong>sequana_cpu_dev</strong>: CPUs para desenvolvimento rápido (jobs curtos).</li>
-<li><strong>sequana_gpu</strong>: GPUs para produção (jobs longos, pesados).</li>
-<li><strong>sequana_gpu_dev</strong>: GPUs para desenvolvimento (jobs curtos).</li>
+<li>armazenar apenas pixels relevantes;</li>
+<li>utilizar estruturas compactas;</li>
+<li>aplicar conceitos similares a CSR (<em>Compressed Sparse Row</em>).</li>
 </ul>
-<h1 id="maxjobs"><strong>MaxJobs</strong><a class="headerlink" href="#maxjobs" title="Permanent link">&para;</a></h1>
-<p>Número máximo de <strong>jobs simultâneos em execução</strong> que você, pode ter naquela partição.</p>
+<h3 id="processamento-por-tilesregioes">Processamento por tiles/regiões<a class="headerlink" href="#processamento-por-tilesregioes" title="Permanent link">&para;</a></h3>
+<p>Dividir a imagem em regiões menores para melhorar localidade espacial.</p>
+<hr />
+<h2 id="observacao-importante">Observação Importante<a class="headerlink" href="#observacao-importante" title="Permanent link">&para;</a></h2>
+<p>Essa etapa é excelente para mostrar que nem todo algoritmo é naturalmente eficiente em GPU. O handout pode discutir:</p>
 <ul>
-<li><code>1</code> significa que você só pode rodar um job por vez na partição. </li>
-<li><code>4</code> significa que você pode ter até quatro jobs rodando ao mesmo tempo.</li>
+<li>diferenças entre problemas regulares e irregulares;</li>
+<li>limitações do paralelismo massivo;</li>
+<li>impacto da organização dos dados.</li>
 </ul>
-<p><strong>Exemplo:</strong>
-Em <code>sequana_gpu_dev</code>, se você tentar rodar dois jobs simultâneos, o segundo fica na fila como <em>pending</em> esperando o primeiro terminar.</p>
-<p><strong>MaxSubmit</strong></p>
-<p>Número máximo de <strong>jobs pendentes ou rodando</strong> que você pode <strong>enviar</strong> para uma fila.</p>
-<p>É o limite de quantas submissões o SLURM aceita de você.</p>
-<ul>
-<li>Em dev (<code>sequana_cpu_dev</code>): <code>1</code>
-  Só um job enviado por vez.</li>
-<li>Em produção (<code>sequana_gpu</code>): <code>24</code>
-  Você pode enviar 24 jobs para a fila se quiser.</li>
-</ul>
-<p><strong>MaxNodes</strong></p>
-<p>Quantos nós você pode reservar <strong>por job</strong> nessa partição.</p>
-<ul>
-<li><code>4</code> significa que seu job pode ocupar até 4 nós simultâneos.</li>
-<li>Se você tentar usar <code>--nodes=8</code> dentro dessa partição, o SLURM rejeita.</li>
-</ul>
-<p><strong>MaxCPUs</strong></p>
-<p>Número máximo de CPUs que você pode alocar <strong>por job</strong>.</p>
-<p>Essa conta geralmente é:</p>
-<div class="highlight"><pre><span></span><code>MaxNodes × CPUs_por_nó = MaxCPUs
+<p>Isso enriquece bastante o material didático.</p>
+<hr />
+<h1 id="3-divergencia-de-threads">3. Divergência de Threads<a class="headerlink" href="#3-divergencia-de-threads" title="Permanent link">&para;</a></h1>
+<p>O código possui vários pontos com condicionais que podem causar divergência.</p>
+<p>Um exemplo simples aparece em:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">mag</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">255</span><span class="p">)</span><span class="w"> </span><span class="n">mag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">255</span><span class="p">;</span>
 </code></pre></div>
-<ul>
-<li><code>sequana_cpu_dev</code>: 4 nós × 48 CPUs = 192 CPUs</li>
-<li><code>sequana_gpu_dev</code>: 4 nós × 48 CPUs = 192 CPUs</li>
-<li><code>sequana_gpu</code>: 24 nós × 48 CPUs = 1152 CPUs</li>
-</ul>
-<p>Isso não significa que você <em>vai</em> usar tudo, mas esse é o limite superior permitido para sua submissão.</p>
-<p><strong>MaxWall</strong></p>
-<p>O tempo máximo de <strong>duração</strong> que um job pode ter antes de ser morto.</p>
-<p>Valores:</p>
-<ul>
-<li><code>00:20:00</code> significa 20 minutos.</li>
-<li><code>4-00:00:00</code> significa 4 dias.</li>
-</ul>
-<h3 id="para-saber-detalhes-sobre-o-hardware-disponivel-em-cada-fila">Para saber detalhes sobre o hardware disponível em cada fila<a class="headerlink" href="#para-saber-detalhes-sobre-o-hardware-disponivel-em-cada-fila" title="Permanent link">&para;</a></h3>
-<p>Usamos o comando</p>
-<div class="highlight"><pre><span></span><code>scontrol<span class="w"> </span>show<span class="w"> </span>partition<span class="w"> </span>sequana_gpu_dev
+<p>e principalmente em:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">bin</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">255</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">visited</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
 </code></pre></div>
-<p>Para saber informações detalhadas sobre o hardware disponível em determinada fila</p>
-<div class="highlight"><pre><span></span><code><span class="nv">PartitionName</span><span class="o">=</span>sequana_gpu_dev
-<span class="w">   </span><span class="nv">AllowGroups</span><span class="o">=</span>ALL<span class="w"> </span><span class="nv">AllowAccounts</span><span class="o">=</span>ALL<span class="w"> </span><span class="nv">AllowQos</span><span class="o">=</span>ALL
-<span class="w">   </span><span class="nv">AllocNodes</span><span class="o">=</span>ALL<span class="w"> </span><span class="nv">Default</span><span class="o">=</span>NO<span class="w"> </span><span class="nv">QoS</span><span class="o">=</span>defaultgpu
-<span class="w">   </span><span class="nv">DefaultTime</span><span class="o">=</span><span class="m">00</span>:20:00<span class="w"> </span><span class="nv">DisableRootJobs</span><span class="o">=</span>NO<span class="w"> </span><span class="nv">ExclusiveUser</span><span class="o">=</span>NO<span class="w"> </span><span class="nv">GraceTime</span><span class="o">=</span><span class="m">0</span><span class="w"> </span><span class="nv">Hidden</span><span class="o">=</span>NO
-<span class="w">   </span><span class="nv">MaxNodes</span><span class="o">=</span>UNLIMITED<span class="w"> </span><span class="nv">MaxTime</span><span class="o">=</span>UNLIMITED<span class="w"> </span><span class="nv">MinNodes</span><span class="o">=</span><span class="m">0</span><span class="w"> </span><span class="nv">LLN</span><span class="o">=</span>NO<span class="w"> </span><span class="nv">MaxCPUsPerNode</span><span class="o">=</span>UNLIMITED<span class="w"> </span><span class="nv">MaxCPUsPerSocket</span><span class="o">=</span>UNLIMITED
-<span class="w">   </span><span class="nv">Nodes</span><span class="o">=</span>sdumont<span class="o">[</span><span class="m">8029</span>-8055,8060-8083,8085-8091,8093-8095<span class="o">]</span>
-<span class="w">   </span><span class="nv">PriorityJobFactor</span><span class="o">=</span><span class="m">40</span><span class="w"> </span><span class="nv">PriorityTier</span><span class="o">=</span><span class="m">40</span><span class="w"> </span><span class="nv">RootOnly</span><span class="o">=</span>NO<span class="w"> </span><span class="nv">ReqResv</span><span class="o">=</span>NO<span class="w"> </span><span class="nv">OverSubscribe</span><span class="o">=</span>NO
-<span class="w">   </span><span class="nv">OverTimeLimit</span><span class="o">=</span>NONE<span class="w"> </span><span class="nv">PreemptMode</span><span class="o">=</span>OFF
-<span class="w">   </span><span class="nv">State</span><span class="o">=</span>UP<span class="w"> </span><span class="nv">TotalCPUs</span><span class="o">=</span><span class="m">2928</span><span class="w"> </span><span class="nv">TotalNodes</span><span class="o">=</span><span class="m">61</span><span class="w"> </span><span class="nv">SelectTypeParameters</span><span class="o">=</span>NONE
-<span class="w">   </span><span class="nv">JobDefaults</span><span class="o">=</span><span class="nv">DefCpuPerGPU</span><span class="o">=</span><span class="m">12</span>,DefMemPerGPU<span class="o">=</span><span class="m">94000</span>
-<span class="w">   </span><span class="nv">DefMemPerCPU</span><span class="o">=</span><span class="m">8000</span><span class="w"> </span><span class="nv">MaxMemPerNode</span><span class="o">=</span>UNLIMITED
-<span class="w">   </span><span class="nv">TRES</span><span class="o">=</span><span class="nv">cpu</span><span class="o">=</span><span class="m">2928</span>,mem<span class="o">=</span>22875G,node<span class="o">=</span><span class="m">61</span>,billing<span class="o">=</span><span class="m">2928</span>,gres/gpu<span class="o">=</span><span class="m">244</span>
+<hr />
+<h2 id="problema">Problema<a class="headerlink" href="#problema" title="Permanent link">&para;</a></h2>
+<p>Quando threads do mesmo warp seguem caminhos diferentes:</p>
+<ul>
+<li>parte das threads fica ociosa;</li>
+<li>a execução torna-se serializada;</li>
+<li>o paralelismo efetivo diminui.</li>
+</ul>
+<p>Esse problema é muito comum em visão computacional.</p>
+<hr />
+<h2 id="otimizacoes-possiveis">Otimizações Possíveis<a class="headerlink" href="#otimizacoes-possiveis" title="Permanent link">&para;</a></h2>
+<h3 id="reduzir-condicionais">Reduzir condicionais<a class="headerlink" href="#reduzir-condicionais" title="Permanent link">&para;</a></h3>
+<p>Substituir operações simples por versões matemáticas.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="n">mag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">min</span><span class="p">(</span><span class="n">mag</span><span class="p">,</span><span class="w"> </span><span class="mi">255</span><span class="p">);</span>
 </code></pre></div>
-<p>De forma resumida, a sequana_gpu e a sequana_gpu_dev tem essas características:</p>
+<hr />
+<h3 id="separar-kernels">Separar kernels<a class="headerlink" href="#separar-kernels" title="Permanent link">&para;</a></h3>
+<p>Executar diferentes comportamentos em kernels distintos.</p>
+<hr />
+<h3 id="reorganizar-dados">Reorganizar dados<a class="headerlink" href="#reorganizar-dados" title="Permanent link">&para;</a></h3>
+<p>Agrupar regiões semelhantes para que threads vizinhas executem o mesmo fluxo.</p>
+<hr />
+<h2 id="resultado-esperado">Resultado Esperado<a class="headerlink" href="#resultado-esperado" title="Permanent link">&para;</a></h2>
+<p>As melhorias reduzem:</p>
+<ul>
+<li>serialização interna dos warps;</li>
+<li>desperdício de ciclos;</li>
+<li>ociosidade das threads.</li>
+</ul>
+<hr />
+<h1 id="4-conclusao">4. Conclusão<a class="headerlink" href="#4-conclusao" title="Permanent link">&para;</a></h1>
+<p>Esse código é extremamente adequado para um handout didático porque permite mostrar:</p>
 <table>
 <thead>
 <tr>
-<th>Fila</th>
-<th>Nós</th>
-<th>CPUs Totais</th>
-<th>GPUs Totais</th>
-<th>Memória Total</th>
-<th>CPUs por GPU (default)</th>
-<th>Memória por GPU (default)</th>
+<th>Problema</th>
+<th>Melhor Exemplo</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>sequana_gpu_dev</strong></td>
-<td>61</td>
-<td>2928</td>
-<td>244</td>
-<td>22.8 TB</td>
-<td>12 CPUs/GPU</td>
-<td>94 GB/GPU</td>
+<td>Data Reuse</td>
+<td>Sobel</td>
 </tr>
 <tr>
-<td><strong>sequana_gpu</strong></td>
-<td>87</td>
-<td>4176</td>
-<td>348</td>
-<td>32.6 TB</td>
-<td>12 CPUs/GPU</td>
-<td>94 GB/GPU</td>
+<td>Shared Memory</td>
+<td>Sobel</td>
+</tr>
+<tr>
+<td>Tiling</td>
+<td>Sobel</td>
+</tr>
+<tr>
+<td>Divergência</td>
+<td>Threshold / BFS</td>
+</tr>
+<tr>
+<td>Acesso Irregular</td>
+<td>BFS</td>
+</tr>
+<tr>
+<td>Sparse Data</td>
+<td>Imagem binária</td>
+</tr>
+<tr>
+<td>Gargalo de Memória</td>
+<td>Sobel</td>
+</tr>
+<tr>
+<td>Limitações da GPU</td>
+<td>Connected Components</td>
 </tr>
 </tbody>
 </table>
-<p>Ambas as filas são de GPU's V100 com 32 GB de VRAM.</p>
-<h3 id="submetendo-um-job-com-suporte-a-gpu">Submetendo um job com suporte a GPU<a class="headerlink" href="#submetendo-um-job-com-suporte-a-gpu" title="Permanent link">&para;</a></h3>
-<p>Considerando as informações sobre filas disponíveis e as configurações de hardware de cada fila, você pode submeter o seu job de duas formas diferentes:</p>
-<h3 id="comando-srun">Comando srun<a class="headerlink" href="#comando-srun" title="Permanent link">&para;</a></h3>
-<p>Com o srun, você pode solicitar um terminal para executar o seu job de forma rápida, você pode ou não, salvar o output desta execução, se quiser salvar o output, faça a submissão do job desta forma:</p>
-<div class="highlight"><pre><span></span><code>srun<span class="w"> </span>--partition<span class="o">=</span>sequana_gpu_dev<span class="w"> </span>--gres<span class="o">=</span>gpu:1<span class="w"> </span>--output<span class="o">=</span>saida.txt<span class="w"> </span>./seu_binario
-</code></pre></div>
-<p>Esse comando pede ao SLURM que execute imediatamente um programa dentro da partição <code>sequana_gpu_dev</code>, reservando uma GPU, e salvando todo o output em <code>saida.txt</code>.</p>
-<p><strong><code>srun</code></strong></p>
-<p>É o comando do SLURM usado para executar jobs interativos ou iniciar processos paralelos dentro de alocações já existentes.</p>
-<ul>
-<li>Se a partição tiver recurso livre, ele roda agora.</li>
-<li>Se não tiver, seu comando fica <em>pending</em> até conseguir GPU.</li>
-</ul>
-<p><strong><code>--partition=sequana_gpu_dev</code></strong></p>
-<p>Define em qual fila você quer rodar.</p>
-<p><code>sequana_gpu_dev</code> é a fila de GPUs, com tempo máximo de 20 minutos.</p>
-<p>Se você rodasse na <code>sequana_gpu</code>, poderia usar jobs longos, mas com maior concorrência.</p>
-<p><strong><code>--gres=gpu:1</code></strong></p>
-<p>Aqui você está dizendo:</p>
-<p>“Reserve <strong>1 GPU</strong> para mim”.</p>
-<p>Se você colocar <code>--gres=gpu:4</code>, estaria pedindo quatro GPUs.</p>
-<p><strong><code>--output=saida.txt</code></strong></p>
-<p>Tudo o que normalmente apareceria no seu terminal é redirecionado para um arquivo.</p>
-<p>Se não colocar esse parâmetro, o output aparece diretamente no terminal.</p>
-<h3 id="comando-sbatch">Comando sbatch<a class="headerlink" href="#comando-sbatch" title="Permanent link">&para;</a></h3>
-<p>Se você precisa executar um código que vai ficar rodando sem a sua supervisão, é melhor usar o sbatch, pois o sbatch executa em background.</p>
-<p>Um sbatch direto ao ponto para executar um código em GPU seria assim:</p>
-<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
-<span class="c1">#SBATCH --job-name=exemplo_gpu</span>
-<span class="c1">#SBATCH --output=saida_%j.txt</span>
-<span class="c1">#SBATCH --time=00:10:00</span>
-<span class="c1">#SBATCH --gres=gpu:1</span>
-<span class="c1">#SBATCH --partition=sequana_gpu_dev</span>
-<span class="c1">#SBATCH --mem=1G                  </span>
-
-
-module<span class="w"> </span>load<span class="w"> </span>cuda/12.6_sequana
-
-./seu_binario
-</code></pre></div>
-<h2 id="passando-um-codigo-sequencial-em-cpu-para-gpu-usando-cuda">Passando um código sequencial em CPU para GPU usando CUDA<a class="headerlink" href="#passando-um-codigo-sequencial-em-cpu-para-gpu-usando-cuda" title="Permanent link">&para;</a></h2>
-<p>Vamos começar com um programa C++ simples que soma os elementos de dois arrays, cada um com um milhão de elementos.</p>
-<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;math.h&gt;</span>
-
-<span class="c1">// function to add the elements of two arrays</span>
-<span class="kt">void</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">y</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
-<span class="w">      </span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-<span class="p">}</span>
-
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="mi">20</span><span class="p">;</span><span class="w"> </span><span class="c1">// 1M elements</span>
-
-<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">float</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>
-<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">float</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>
-
-<span class="w">  </span><span class="c1">// initialize x and y arrays on the host</span>
-<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">;</span>
-<span class="w">    </span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.0f</span><span class="p">;</span>
-<span class="w">  </span><span class="p">}</span>
-
-<span class="w">  </span><span class="c1">// Run kernel on 1M elements on the CPU</span>
-<span class="w">  </span><span class="n">add</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
-
-<span class="w">  </span><span class="c1">// Check for errors (all values should be 3.0f)</span>
-<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">maxError</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span>
-<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
-<span class="w">    </span><span class="n">maxError</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fmax</span><span class="p">(</span><span class="n">maxError</span><span class="p">,</span><span class="w"> </span><span class="n">fabs</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="mf">-3.0f</span><span class="p">));</span>
-<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Max error: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">maxError</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-
-<span class="w">  </span><span class="c1">// Free memory</span>
-<span class="w">  </span><span class="k">delete</span><span class="w"> </span><span class="p">[]</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
-<span class="w">  </span><span class="k">delete</span><span class="w"> </span><span class="p">[]</span><span class="w"> </span><span class="n">y</span><span class="p">;</span>
-
-<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div>
-<p>Primeiro, compile e execute esse programa C++. Coloque o código acima em um arquivo e salve como <strong>add.cpp</strong>, e então compile com o compilador C++. 
-<div class="highlight"><pre><span></span><code>g++ add.cpp -o add
-</code></pre></div></p>
-<p>Depois execute:</p>
-<div class="highlight"><pre><span></span><code>./add
-Max error: 0.000000
-</code></pre></div>
-<p>Para passa esse código para a GPU, primeiro, precisa transformar a função <strong>add</strong> em uma função que a GPU pode executar, chamada de <em>kernel</em> em CUDA. Para fazer isso, é preciso adicionar o especificador <strong>global</strong> à função, o que diz ao compilador CUDA C++ que essa é uma função que roda na GPU e pode ser chamada a partir de código da CPU.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">// Kernel function to add the elements of two arrays</span>
-<span class="n">__global__</span>
-<span class="kt">void</span><span class="w"> </span><span class="n">add</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">sum</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">y</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
-<span class="w">    </span><span class="n">sum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-<span class="p">}</span>
-</code></pre></div>
-<p>Essa função <strong><strong>global</strong></strong> é conhecida como kernel CUDA e roda na GPU. Código que roda na GPU é frequentemente chamado de <em>device code</em>, enquanto código que roda na CPU é chamado de <em>host code</em>.</p>
-<p>Para computar na GPU, precisa alocar memória acessível pela GPU. <strong>Unified Memory</strong> (Memória Unificada) no CUDA facilita isso ao fornecer um único espaço de memória acessível por todas as GPUs e CPUs do sistema. Para alocar dados em memória unificada, da pra usar o <strong>cudaMallocManaged()</strong>, que retorna um ponteiro acessível tanto pelo host (CPU) quanto pelo device (GPU). Para liberar os dados, basta passar o ponteiro para <strong>cudaFree()</strong>.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">// Allocate Unified Memory -- accessible from CPU or GPU</span>
-<span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">sum</span><span class="p">;</span>
-<span class="n">cudaMallocManaged</span><span class="p">(</span><span class="o">&amp;</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="o">*</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
-<span class="n">cudaMallocManaged</span><span class="p">(</span><span class="o">&amp;</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="o">*</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
-
-<span class="p">...</span>
-
-<span class="c1">// Free memory</span>
-<span class="n">cudaFree</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
-<span class="n">cudaFree</span><span class="p">(</span><span class="n">y</span><span class="p">);</span>
-</code></pre></div>
-<p>Lançamentos de kernel CUDA são especificados usando a sintaxe com três sinais de maior: <strong>&lt;&lt;&lt; &gt;&gt;&gt;</strong>. Só preciso adicioná-la na chamada de <strong>add</strong> antes da lista de parâmetros.</p>
-<div class="highlight"><pre><span></span><code>add&lt;&lt;&lt;1, 1&gt;&gt;&gt;(N, sum, x, y);
-</code></pre></div>
-<p>Essa linha lança <strong>uma thread</strong> da GPU para executar <strong>add()</strong>.</p>
-<p>Só falta mais uma coisa: preciso que a CPU espere até que o kernel esteja terminado antes de acessar os resultados (porque lançamentos de kernel CUDA não bloqueiam a thread da CPU que o chamou). Para isso, basta chamar <strong>cudaDeviceSynchronize()</strong> antes de fazer a verificação final de erro na CPU.</p>
-<p>O código completo:
-<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;math.h&gt;</span>
-
-<span class="c1">// Kernel function to add the elements of two arrays</span>
-<span class="n">__global__</span>
-<span class="kt">void</span><span class="w"> </span><span class="n">add</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">y</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
-<span class="w">    </span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-<span class="p">}</span>
-
-<span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="mi">20</span><span class="p">;</span>
-<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">y</span><span class="p">;</span>
-
-<span class="w">  </span><span class="c1">// Allocate Unified Memory – accessible from CPU or GPU</span>
-<span class="w">  </span><span class="n">cudaMallocManaged</span><span class="p">(</span><span class="o">&amp;</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="o">*</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
-<span class="w">  </span><span class="n">cudaMallocManaged</span><span class="p">(</span><span class="o">&amp;</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="o">*</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
-
-<span class="w">  </span><span class="c1">// initialize x and y arrays on the host</span>
-<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">;</span>
-<span class="w">    </span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.0f</span><span class="p">;</span>
-<span class="w">  </span><span class="p">}</span>
-
-<span class="w">  </span><span class="c1">// Run kernel on 1M elements on the GPU</span>
-<span class="w">  </span><span class="n">add</span><span class="o">&lt;&lt;&lt;</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="o">&gt;&gt;&gt;</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
-
-<span class="w">  </span><span class="c1">// Wait for GPU to finish before accessing on host</span>
-<span class="w">  </span><span class="n">cudaDeviceSynchronize</span><span class="p">();</span>
-
-<span class="w">  </span><span class="c1">// Check for errors (all values should be 3.0f)</span>
-<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">maxError</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span>
-<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">maxError</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fmax</span><span class="p">(</span><span class="n">maxError</span><span class="p">,</span><span class="w"> </span><span class="n">fabs</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="mf">-3.0f</span><span class="p">));</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Max error: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">maxError</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-
-<span class="w">  </span><span class="c1">// Free memory</span>
-<span class="w">  </span><span class="n">cudaFree</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
-<span class="w">  </span><span class="n">cudaFree</span><span class="p">(</span><span class="n">y</span><span class="p">);</span>
-<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></p>
-<p>Arquivos CUDA têm a extensão <strong>.cu</strong>. Então salve esse código em um arquivo chamado <strong>add.cu</strong> e compile com o <strong>nvcc</strong>, o compilador CUDA C++.</p>
-<div class="highlight"><pre><span></span><code>nvcc add.cu -o add_cuda
-./add_cuda
-Max error: 0.000000
-</code></pre></div>
-<p>Isso é apenas o primeiro passo, porque da forma como está, esse kernel só funciona para <strong>uma única thread</strong>. </p>
-<p>Nos próximos passos é importante entender como gerenciar memória adequadamente, como funciona a divisão lógica dentro da GPU e, para implementações mais complexas, é legal entender como programar de forma assíncrona. O material sobre os próximos passos estão disponíveis nas aulas anteriores.</p>
-<p>Referência:
-<a href="https://developer.nvidia.com/blog/even-easier-introduction-cuda/">https://developer.nvidia.com/blog/even-easier-introduction-cuda/</a></p>
+<p>Além disso, o fato de processar aproximadamente 3000 imagens torna os ganhos de desempenho perceptíveis, o que é ótimo para análises experimentais e comparação de benchmarks.</p>
 
 
 
