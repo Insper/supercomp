@@ -234,8 +234,7 @@ Isso reduz o overhead de carregamento das máscaras.
 Se quiser olhar como ficou o código com as otimizações descritas aqui:
 
 ??? note "Ver o código"
-        ```cpp
-
+        
             // Biblioteca utilizada para carregar imagens PNG/JPG.
             #define STB_IMAGE_IMPLEMENTATION
             #include "stb_image.h"
@@ -877,7 +876,7 @@ Se quiser olhar como ficou o código com as otimizações descritas aqui:
 
                 return 0;
             }
-        ```
+      
 
 
 Com essas otimizações e ajustes o código com o sobel otimizado teve uma melhora significativa em relação ao base puro:
