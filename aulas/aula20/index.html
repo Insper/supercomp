@@ -915,6 +915,66 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#conclusao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusão
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercicios" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercícios
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Exercícios">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exercicio-1-blur-gaussiano" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercício 1 - Blur Gaussiano
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercicio-2-multiplicacao-de-matrizes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercício 2 — Multiplicação de Matrizes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercicio-3-convolucao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercício 3 — Convolução
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercicio-4-transposicao-de-matriz" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercício 4 — Transposição de Matriz
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1302,6 +1362,66 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#conclusao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusão
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercicios" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercícios
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Exercícios">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exercicio-1-blur-gaussiano" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercício 1 - Blur Gaussiano
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercicio-2-multiplicacao-de-matrizes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercício 2 — Multiplicação de Matrizes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercicio-3-convolucao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercício 3 — Convolução
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercicio-4-transposicao-de-matriz" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercício 4 — Transposição de Matriz
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1471,635 +1591,652 @@ Isso reduz o overhead de carregamento das máscaras.</p>
 <p>Se quiser olhar como ficou o código com as otimizações descritas aqui:</p>
 <details class="note">
 <summary>Ver o código</summary>
-<p>// ============================================================
-// STB IMAGE
-// ============================================================</p>
-<p>// Biblioteca utilizada para carregar imagens PNG/JPG.</p>
-<h1 id="define-stb_image_implementation">define STB_IMAGE_IMPLEMENTATION<a class="headerlink" href="#define-stb_image_implementation" title="Permanent link">&para;</a></h1>
-<h1 id="include-stb_imageh">include "stb_image.h"<a class="headerlink" href="#include-stb_imageh" title="Permanent link">&para;</a></h1>
-<p>// Biblioteca utilizada para salvar imagens.</p>
-<h1 id="define-stb_image_write_implementation">define STB_IMAGE_WRITE_IMPLEMENTATION<a class="headerlink" href="#define-stb_image_write_implementation" title="Permanent link">&para;</a></h1>
-<h1 id="include-stb_image_writeh">include "stb_image_write.h"<a class="headerlink" href="#include-stb_image_writeh" title="Permanent link">&para;</a></h1>
-<p>// ============================================================
-// BIBLIOTECAS
-// ============================================================</p>
-<h1 id="include">include <iostream><a class="headerlink" href="#include" title="Permanent link">&para;</a></h1>
-<h1 id="include_1">include <vector><a class="headerlink" href="#include_1" title="Permanent link">&para;</a></h1>
-<h1 id="include_2">include <queue><a class="headerlink" href="#include_2" title="Permanent link">&para;</a></h1>
-<h1 id="include_3">include <cmath><a class="headerlink" href="#include_3" title="Permanent link">&para;</a></h1>
-<h1 id="include_4">include <cstdio><a class="headerlink" href="#include_4" title="Permanent link">&para;</a></h1>
-<h1 id="include_5">include <filesystem><a class="headerlink" href="#include_5" title="Permanent link">&para;</a></h1>
-<h1 id="include_6">include <chrono><a class="headerlink" href="#include_6" title="Permanent link">&para;</a></h1>
-<h1 id="include_7">include <algorithm><a class="headerlink" href="#include_7" title="Permanent link">&para;</a></h1>
-<p>// Biblioteca principal do CUDA.</p>
-<h1 id="include_8">include <cuda_runtime.h><a class="headerlink" href="#include_8" title="Permanent link">&para;</a></h1>
-<p>using namespace std;</p>
-<p>// Alias para facilitar uso do filesystem.
-namespace fs = std::filesystem;</p>
-<p>// Alias para medição de tempo.
-using namespace std::chrono;</p>
-<p>// ============================================================
-// CONFIGURAÇÃO DO BLOCO CUDA
-// ============================================================</p>
-<p>// Define o tamanho do bloco CUDA.
-//
-// Nesse caso:
-// 32 x 32 = 1024 threads por bloco.
-//
-// Cada bloco processará uma região
-// da imagem.</p>
-<h1 id="define-block_size-32">define BLOCK_SIZE 32<a class="headerlink" href="#define-block_size-32" title="Permanent link">&para;</a></h1>
-<p>// ============================================================
-// ESTRUTURA DE BOUNDING BOX
-// ============================================================</p>
-<p>// Estrutura utilizada para representar
-// caixas delimitadoras.
-struct Box {</p>
-<div class="codehilite"><pre><span></span><code>// Coordenadas mínimas e máximas.
-int minx, miny, maxx, maxy;
-</code></pre></div>
+<div class="codehilite"><pre><span></span><code>```cpp
 
-<p>};</p>
-<p>// ============================================================
-// MÁSCARAS SOBEL EM CONSTANT MEMORY
-// ============================================================</p>
-<p>// Constant Memory é uma memória otimizada
-// para leitura.
-//
-// Como TODAS as threads usam as mesmas
-// máscaras Sobel, faz sentido armazená-las
-// aqui para reduzir acessos repetidos.</p>
-<p>// Sobel horizontal.
-<strong>constant</strong> int SOBEL_X[3][3] = {</p>
-<div class="codehilite"><pre><span></span><code>{-1, 0, 1},
-{-2, 0, 2},
-{-1, 0, 1}
-</code></pre></div>
+    // Biblioteca utilizada para carregar imagens PNG/JPG.
+    #define STB_IMAGE_IMPLEMENTATION
+    #include &quot;stb_image.h&quot;
 
-<p>};</p>
-<p>// Sobel vertical.
-<strong>constant</strong> int SOBEL_Y[3][3] = {</p>
-<div class="codehilite"><pre><span></span><code>{-1,-2,-1},
-{ 0, 0, 0},
-{ 1, 2, 1}
-</code></pre></div>
+    // Biblioteca utilizada para salvar imagens.
+    #define STB_IMAGE_WRITE_IMPLEMENTATION
+    #include &quot;stb_image_write.h&quot;
 
-<p>};</p>
-<p>// ============================================================
-// KERNEL CUDA FUSIONADO
-//
-// O kernel realiza:
-//
-// RGB -&gt; Grayscale -&gt; Sobel -&gt; Threshold
-//
-// Tudo em UMA única execução.
-// ============================================================</p>
-<p><strong>global</strong>
-void pipeline_kernel(</p>
-<div class="codehilite"><pre><span></span><code>// Imagem RGB original.
-unsigned char* rgb,
+    // ============================================================
+    // BIBLIOTECAS
+    // ============================================================
 
-// Saída binária final.
-unsigned char* bin,
+    #include &lt;iostream&gt;
+    #include &lt;vector&gt;
+    #include &lt;queue&gt;
+    #include &lt;cmath&gt;
+    #include &lt;cstdio&gt;
+    #include &lt;filesystem&gt;
+    #include &lt;chrono&gt;
+    #include &lt;algorithm&gt;
 
-// Largura da imagem.
-int w,
+    // Biblioteca principal do CUDA.
+    #include &lt;cuda_runtime.h&gt;
 
-// Altura da imagem.
-int h,
+    using namespace std;
 
-// Valor do threshold.
-int threshold)
-</code></pre></div>
+    // Alias para facilitar uso do filesystem.
+    namespace fs = std::filesystem;
 
-<p>{
-    // ========================================================
-    // SHARED MEMORY
-    // ========================================================</p>
-<div class="codehilite"><pre><span></span><code>// Shared Memory utilizada para armazenar
-// um tile da imagem.
-//
-// Shared Memory é MUITO mais rápida
-// que memória global.
-//
-// O tile será reutilizado pelas threads
-// do bloco durante o Sobel.
-__shared__
-unsigned char tile[BLOCK_SIZE][BLOCK_SIZE];
+    // Alias para medição de tempo.
+    using namespace std::chrono;
 
-// ========================================================
-// THREAD IDS
-// ========================================================
+    // ============================================================
+    // CONFIGURAÇÃO DO BLOCO CUDA
+    // ============================================================
 
-// Posição da thread dentro do bloco.
-int tx = threadIdx.x;
-int ty = threadIdx.y;
-
-// Coordenada global da thread na imagem.
-int x = blockIdx.x * BLOCK_SIZE + tx;
-int y = blockIdx.y * BLOCK_SIZE + ty;
-
-// Coordenadas dentro do tile.
-//
-// O +1 existe porque as bordas do tile
-// serão utilizadas pelo halo.
-int sx = tx + 1;
-int sy = ty + 1;
-
-// ========================================================
-// CARREGAMENTO DO PIXEL CENTRAL
-// ========================================================
-
-// Verifica se a thread está dentro
-// da imagem.
-if (x &lt; w &amp;&amp; y &lt; h)
-{
-    // Índice do pixel RGB.
-    int idx = (y * w + x) * 3;
-
-    // Carrega canais RGB.
-    unsigned char r = rgb[idx];
-    unsigned char g = rgb[idx + 1];
-    unsigned char b = rgb[idx + 2];
-
-    // Conversão RGB -&gt; grayscale.
+    // Define o tamanho do bloco CUDA.
     //
-    // Fórmula padrão de luminância.
-    tile[sy][sx] =
-        (unsigned char)(
-            0.299f * r +
-            0.587f * g +
-            0.114f * b
-        );
-}
+    // Nesse caso:
+    // 32 x 32 = 1024 threads por bloco.
+    //
+    // Cada bloco processará uma região
+    // da imagem.
+    #define BLOCK_SIZE 32
 
-// ========================================================
-// HALO ESQUERDO
-// ========================================================
+    // ============================================================
+    // ESTRUTURA DE BOUNDING BOX
+    // ============================================================
 
-// Threads da primeira coluna carregam
-// pixels extras da esquerda.
-//
-// Esses pixels são necessários para
-// o Sobel 3x3.
-if (tx == 0 &amp;&amp; x &gt; 0 &amp;&amp; y &lt; h)
-{
-    int idx = (y * w + (x - 1)) * 3;
+    // Estrutura utilizada para representar
+    // caixas delimitadoras.
+    struct Box {
 
-    unsigned char r = rgb[idx];
-    unsigned char g = rgb[idx + 1];
-    unsigned char b = rgb[idx + 2];
+        // Coordenadas mínimas e máximas.
+        int minx, miny, maxx, maxy;
+    };
 
-    tile[sy][0] =
-        (unsigned char)(
-            0.299f * r +
-            0.587f * g +
-            0.114f * b
-        );
-}
+    // ============================================================
+    // MÁSCARAS SOBEL EM CONSTANT MEMORY
+    // ============================================================
 
-// ========================================================
-// HALO DIREITO
-// ========================================================
+    // Constant Memory é uma memória otimizada
+    // para leitura.
+    //
+    // Como TODAS as threads usam as mesmas
+    // máscaras Sobel, faz sentido armazená-las
+    // aqui para reduzir acessos repetidos.
 
-// Threads da última coluna carregam
-// os pixels da direita.
-if (tx == BLOCK_SIZE - 1 &amp;&amp;
-    x &lt; w - 1 &amp;&amp;
-    y &lt; h)
-{
-    int idx = (y * w + (x + 1)) * 3;
+    // Sobel horizontal.
+    __constant__ int SOBEL_X[3][3] = {
 
-    unsigned char r = rgb[idx];
-    unsigned char g = rgb[idx + 1];
-    unsigned char b = rgb[idx + 2];
+        {-1, 0, 1},
+        {-2, 0, 2},
+        {-1, 0, 1}
+    };
 
-    tile[sy][BLOCK_SIZE + 1] =
-        (unsigned char)(
-            0.299f * r +
-            0.587f * g +
-            0.114f * b
-        );
-}
+    // Sobel vertical.
+    __constant__ int SOBEL_Y[3][3] = {
 
-// ========================================================
-// HALO SUPERIOR
-// ========================================================
+        {-1,-2,-1},
+        { 0, 0, 0},
+        { 1, 2, 1}
+    };
 
-// Threads da primeira linha carregam
-// pixels acima.
-if (ty == 0 &amp;&amp; y &gt; 0 &amp;&amp; x &lt; w)
-{
-    int idx = ((y - 1) * w + x) * 3;
+    // ============================================================
+    // KERNEL CUDA FUSIONADO
+    //
+    // O kernel realiza:
+    //
+    // RGB -&gt; Grayscale -&gt; Sobel -&gt; Threshold
+    //
+    // Tudo em UMA única execução.
+    // ============================================================
 
-    unsigned char r = rgb[idx];
-    unsigned char g = rgb[idx + 1];
-    unsigned char b = rgb[idx + 2];
+    __global__
+    void pipeline_kernel(
 
-    tile[0][sx] =
-        (unsigned char)(
-            0.299f * r +
-            0.587f * g +
-            0.114f * b
-        );
-}
+        // Imagem RGB original.
+        unsigned char* rgb,
 
-// ========================================================
-// HALO INFERIOR
-// ========================================================
+        // Saída binária final.
+        unsigned char* bin,
 
-// Threads da última linha carregam
-// pixels abaixo.
-if (ty == BLOCK_SIZE - 1 &amp;&amp;
-    y &lt; h - 1 &amp;&amp;
-    x &lt; w)
-{
-    int idx = ((y + 1) * w + x) * 3;
+        // Largura da imagem.
+        int w,
 
-    unsigned char r = rgb[idx];
-    unsigned char g = rgb[idx + 1];
-    unsigned char b = rgb[idx + 2];
+        // Altura da imagem.
+        int h,
 
-    tile[BLOCK_SIZE + 1][sx] =
-        (unsigned char)(
-            0.299f * r +
-            0.587f * g +
-            0.114f * b
-        );
-}
-
-// ========================================================
-// HALOS DIAGONAIS
-// ========================================================
-
-// Também precisamos carregar os
-// cantos diagonais do tile.
-//
-// Isso acontece porque o Sobel usa
-// TODA a vizinhança 3x3.
-
-// Canto superior esquerdo.
-if (tx == 0 &amp;&amp; ty == 0 &amp;&amp;
-    x &gt; 0 &amp;&amp; y &gt; 0)
-{
-    int idx =
-        ((y - 1) * w + (x - 1)) * 3;
-
-    unsigned char r = rgb[idx];
-    unsigned char g = rgb[idx + 1];
-    unsigned char b = rgb[idx + 2];
-
-    tile[0][0] =
-        (unsigned char)(
-            0.299f * r +
-            0.587f * g +
-            0.114f * b
-        );
-}
-
-// Canto superior direito.
-if (tx == BLOCK_SIZE - 1 &amp;&amp;
-    ty == 0 &amp;&amp;
-    x &lt; w - 1 &amp;&amp;
-    y &gt; 0)
-{
-    int idx =
-        ((y - 1) * w + (x + 1)) * 3;
-
-    unsigned char r = rgb[idx];
-    unsigned char g = rgb[idx + 1];
-    unsigned char b = rgb[idx + 2];
-
-    tile[0][BLOCK_SIZE + 1] =
-        (unsigned char)(
-            0.299f * r +
-            0.587f * g +
-            0.114f * b
-        );
-}
-
-// Canto inferior esquerdo.
-if (tx == 0 &amp;&amp;
-    ty == BLOCK_SIZE - 1 &amp;&amp;
-    x &gt; 0 &amp;&amp;
-    y &lt; h - 1)
-{
-    int idx =
-        ((y + 1) * w + (x - 1)) * 3;
-
-    unsigned char r = rgb[idx];
-    unsigned char g = rgb[idx + 1];
-    unsigned char b = rgb[idx + 2];
-
-    tile[BLOCK_SIZE + 1][0] =
-        (unsigned char)(
-            0.299f * r +
-            0.587f * g +
-            0.114f * b
-        );
-}
-
-// Canto inferior direito.
-if (tx == BLOCK_SIZE - 1 &amp;&amp;
-    ty == BLOCK_SIZE - 1 &amp;&amp;
-    x &lt; w - 1 &amp;&amp;
-    y &lt; h - 1)
-{
-    int idx =
-        ((y + 1) * w + (x + 1)) * 3;
-
-    unsigned char r = rgb[idx];
-    unsigned char g = rgb[idx + 1];
-    unsigned char b = rgb[idx + 2];
-
-    tile[BLOCK_SIZE + 1][BLOCK_SIZE + 1] =
-        (unsigned char)(
-            0.299f * r +
-            0.587f * g +
-            0.114f * b
-        );
-}
-
-// ========================================================
-// SINCRONIZAÇÃO
-// ========================================================
-
-// Espera TODAS as threads terminarem
-// de carregar o tile antes do Sobel.
-__syncthreads();
-
-// ========================================================
-// SOBEL
-// ========================================================
-
-// Evita processar bordas externas
-// da imagem.
-if (x &gt; 0 &amp;&amp;
-    x &lt; w - 1 &amp;&amp;
-    y &gt; 0 &amp;&amp;
-    y &lt; h - 1)
-{
-    int sumX = 0;
-    int sumY = 0;
-
-    for (int ky = -1; ky &lt;= 1; ky++)
+        // Valor do threshold.
+        int threshold)
     {
+        // ========================================================
+        // SHARED MEMORY
+        // ========================================================
 
-        for (int kx = -1; kx &lt;= 1; kx++)
+        // Shared Memory utilizada para armazenar
+        // um tile da imagem.
+        //
+        // Shared Memory é MUITO mais rápida
+        // que memória global.
+        //
+        // O tile será reutilizado pelas threads
+        // do bloco durante o Sobel.
+        __shared__
+        unsigned char tile[BLOCK_SIZE][BLOCK_SIZE];
+
+        // ========================================================
+        // THREAD IDS
+        // ========================================================
+
+        // Posição da thread dentro do bloco.
+        int tx = threadIdx.x;
+        int ty = threadIdx.y;
+
+        // Coordenada global da thread na imagem.
+        int x = blockIdx.x * BLOCK_SIZE + tx;
+        int y = blockIdx.y * BLOCK_SIZE + ty;
+
+        // Coordenadas dentro do tile.
+        //
+        // O +1 existe porque as bordas do tile
+        // serão utilizadas pelo halo.
+        int sx = tx + 1;
+        int sy = ty + 1;
+
+        // ========================================================
+        // CARREGAMENTO DO PIXEL CENTRAL
+        // ========================================================
+
+        // Verifica se a thread está dentro
+        // da imagem.
+        if (x &lt; w &amp;&amp; y &lt; h)
         {
-            // Agora acessamos Shared Memory,
-            // NÃO memória global.
-            int pixel =
-                tile[sy + ky][sx + kx];
+            // Índice do pixel RGB.
+            int idx = (y * w + x) * 3;
 
-            // Convolução horizontal.
-            sumX +=
-                pixel *
-                SOBEL_X[ky + 1][kx + 1];
+            // Carrega canais RGB.
+            unsigned char r = rgb[idx];
+            unsigned char g = rgb[idx + 1];
+            unsigned char b = rgb[idx + 2];
 
-            // Convolução vertical.
-            sumY +=
-                pixel *
-                SOBEL_Y[ky + 1][kx + 1];
+            // Conversão RGB -&gt; grayscale.
+            //
+            // Fórmula padrão de luminância.
+            tile[sy][sx] =
+                (unsigned char)(
+                    0.299f * r +
+                    0.587f * g +
+                    0.114f * b
+                );
+        }
+
+        // ========================================================
+        // HALO ESQUERDO
+        // ========================================================
+
+        // Threads da primeira coluna carregam
+        // pixels extras da esquerda.
+        //
+        // Esses pixels são necessários para
+        // o Sobel 3x3.
+        if (tx == 0 &amp;&amp; x &gt; 0 &amp;&amp; y &lt; h)
+        {
+            int idx = (y * w + (x - 1)) * 3;
+
+            unsigned char r = rgb[idx];
+            unsigned char g = rgb[idx + 1];
+            unsigned char b = rgb[idx + 2];
+
+            tile[sy][0] =
+                (unsigned char)(
+                    0.299f * r +
+                    0.587f * g +
+                    0.114f * b
+                );
+        }
+
+        // ========================================================
+        // HALO DIREITO
+        // ========================================================
+
+        // Threads da última coluna carregam
+        // os pixels da direita.
+        if (tx == BLOCK_SIZE - 1 &amp;&amp;
+            x &lt; w - 1 &amp;&amp;
+            y &lt; h)
+        {
+            int idx = (y * w + (x + 1)) * 3;
+
+            unsigned char r = rgb[idx];
+            unsigned char g = rgb[idx + 1];
+            unsigned char b = rgb[idx + 2];
+
+            tile[sy][BLOCK_SIZE + 1] =
+                (unsigned char)(
+                    0.299f * r +
+                    0.587f * g +
+                    0.114f * b
+                );
+        }
+
+        // ========================================================
+        // HALO SUPERIOR
+        // ========================================================
+
+        // Threads da primeira linha carregam
+        // pixels acima.
+        if (ty == 0 &amp;&amp; y &gt; 0 &amp;&amp; x &lt; w)
+        {
+            int idx = ((y - 1) * w + x) * 3;
+
+            unsigned char r = rgb[idx];
+            unsigned char g = rgb[idx + 1];
+            unsigned char b = rgb[idx + 2];
+
+            tile[0][sx] =
+                (unsigned char)(
+                    0.299f * r +
+                    0.587f * g +
+                    0.114f * b
+                );
+        }
+
+        // ========================================================
+        // HALO INFERIOR
+        // ========================================================
+
+        // Threads da última linha carregam
+        // pixels abaixo.
+        if (ty == BLOCK_SIZE - 1 &amp;&amp;
+            y &lt; h - 1 &amp;&amp;
+            x &lt; w)
+        {
+            int idx = ((y + 1) * w + x) * 3;
+
+            unsigned char r = rgb[idx];
+            unsigned char g = rgb[idx + 1];
+            unsigned char b = rgb[idx + 2];
+
+            tile[BLOCK_SIZE + 1][sx] =
+                (unsigned char)(
+                    0.299f * r +
+                    0.587f * g +
+                    0.114f * b
+                );
+        }
+
+        // ========================================================
+        // HALOS DIAGONAIS
+        // ========================================================
+
+        // Também precisamos carregar os
+        // cantos diagonais do tile.
+        //
+        // Isso acontece porque o Sobel usa
+        // TODA a vizinhança 3x3.
+
+        // Canto superior esquerdo.
+        if (tx == 0 &amp;&amp; ty == 0 &amp;&amp;
+            x &gt; 0 &amp;&amp; y &gt; 0)
+        {
+            int idx =
+                ((y - 1) * w + (x - 1)) * 3;
+
+            unsigned char r = rgb[idx];
+            unsigned char g = rgb[idx + 1];
+            unsigned char b = rgb[idx + 2];
+
+            tile[0][0] =
+                (unsigned char)(
+                    0.299f * r +
+                    0.587f * g +
+                    0.114f * b
+                );
+        }
+
+        // Canto superior direito.
+        if (tx == BLOCK_SIZE - 1 &amp;&amp;
+            ty == 0 &amp;&amp;
+            x &lt; w - 1 &amp;&amp;
+            y &gt; 0)
+        {
+            int idx =
+                ((y - 1) * w + (x + 1)) * 3;
+
+            unsigned char r = rgb[idx];
+            unsigned char g = rgb[idx + 1];
+            unsigned char b = rgb[idx + 2];
+
+            tile[0][BLOCK_SIZE + 1] =
+                (unsigned char)(
+                    0.299f * r +
+                    0.587f * g +
+                    0.114f * b
+                );
+        }
+
+        // Canto inferior esquerdo.
+        if (tx == 0 &amp;&amp;
+            ty == BLOCK_SIZE - 1 &amp;&amp;
+            x &gt; 0 &amp;&amp;
+            y &lt; h - 1)
+        {
+            int idx =
+                ((y + 1) * w + (x - 1)) * 3;
+
+            unsigned char r = rgb[idx];
+            unsigned char g = rgb[idx + 1];
+            unsigned char b = rgb[idx + 2];
+
+            tile[BLOCK_SIZE + 1][0] =
+                (unsigned char)(
+                    0.299f * r +
+                    0.587f * g +
+                    0.114f * b
+                );
+        }
+
+        // Canto inferior direito.
+        if (tx == BLOCK_SIZE - 1 &amp;&amp;
+            ty == BLOCK_SIZE - 1 &amp;&amp;
+            x &lt; w - 1 &amp;&amp;
+            y &lt; h - 1)
+        {
+            int idx =
+                ((y + 1) * w + (x + 1)) * 3;
+
+            unsigned char r = rgb[idx];
+            unsigned char g = rgb[idx + 1];
+            unsigned char b = rgb[idx + 2];
+
+            tile[BLOCK_SIZE + 1][BLOCK_SIZE + 1] =
+                (unsigned char)(
+                    0.299f * r +
+                    0.587f * g +
+                    0.114f * b
+                );
+        }
+
+        // ========================================================
+        // SINCRONIZAÇÃO
+        // ========================================================
+
+        // Espera TODAS as threads terminarem
+        // de carregar o tile antes do Sobel.
+        __syncthreads();
+
+        // ========================================================
+        // SOBEL
+        // ========================================================
+
+        // Evita processar bordas externas
+        // da imagem.
+        if (x &gt; 0 &amp;&amp;
+            x &lt; w - 1 &amp;&amp;
+            y &gt; 0 &amp;&amp;
+            y &lt; h - 1)
+        {
+            int sumX = 0;
+            int sumY = 0;
+
+
+            for (int ky = -1; ky &lt;= 1; ky++)
+            {
+
+                for (int kx = -1; kx &lt;= 1; kx++)
+                {
+                    // Agora acessamos Shared Memory,
+                    // NÃO memória global.
+                    int pixel =
+                        tile[sy + ky][sx + kx];
+
+                    // Convolução horizontal.
+                    sumX +=
+                        pixel *
+                        SOBEL_X[ky + 1][kx + 1];
+
+                    // Convolução vertical.
+                    sumY +=
+                        pixel *
+                        SOBEL_Y[ky + 1][kx + 1];
+                }
+            }
+
+
+            int mag =
+                abs(sumX) +
+                abs(sumY);
+
+            // Limita valor máximo.
+            if (mag &gt; 255)
+                mag = 255;
+
+            // ====================================================
+            // THRESHOLD
+            // ====================================================
+
+            // Gera imagem binária.
+            //
+            // Pixels fortes viram branco.
+            // Pixels fracos viram preto.
+            bin[y * w + x] =
+                (mag &gt; threshold)
+                ? 255
+                : 0;
         }
     }
 
-    int mag =
-        abs(sumX) +
-        abs(sumY);
+    // ============================================================
+    // MAIN
+    // ============================================================
 
-    // Limita valor máximo.
-    if (mag &gt; 255)
-        mag = 255;
-
-    // ====================================================
-    // THRESHOLD
-    // ====================================================
-
-    // Gera imagem binária.
-    //
-    // Pixels fortes viram branco.
-    // Pixels fracos viram preto.
-    bin[y * w + x] =
-        (mag &gt; threshold)
-        ? 255
-        : 0;
-}
-</code></pre></div>
-
-<p>}</p>
-<p>// ============================================================
-// MAIN
-// ============================================================</p>
-<p>int main(int argc, char* argv[])
-{
-    // Quantidade máxima de frames.
-    int max_frames = -1;</p>
-<div class="codehilite"><pre><span></span><code>// Modo teste via terminal.
-if (argc &gt; 1)
-{
-    max_frames = atoi(argv[1]);
-
-    cout &lt;&lt; &quot;Modo teste: &quot;
-        &lt;&lt; max_frames
-        &lt;&lt; &quot; frames\n&quot;;
-}
-
-// Cria pasta de saída.
-fs::create_directory(&quot;out&quot;);
-
-// Início da medição.
-auto t0 = high_resolution_clock::now();
-
-int frame = 1;
-
-// ========================================================
-// LOOP DOS FRAMES
-// ========================================================
-
-while (true)
-{
-    // Interrompe no modo teste.
-    if (max_frames != -1 &amp;&amp;
-        frame &gt; max_frames)
-        break;
-
-    char filename[256];
-
-    // Nome do frame atual.
-    sprintf(
-        filename,
-        &quot;frames/frame_%04d.png&quot;,
-        frame
-    );
-
-    int w, h, c;
-
-    // Carrega imagem.
-    unsigned char* input =
-        stbi_load(
-            filename,
-            &amp;w,
-            &amp;h,
-            &amp;c,
-            3
-        );
-
-    // Se não conseguiu carregar,
-    // encerra execução.
-    if (!input)
+    int main(int argc, char* argv[])
     {
-        cout &lt;&lt; &quot;\nFim ou erro: &quot;
-            &lt;&lt; filename
+        // Quantidade máxima de frames.
+        int max_frames = -1;
+
+        // Modo teste via terminal.
+        if (argc &gt; 1)
+        {
+            max_frames = atoi(argv[1]);
+
+            cout &lt;&lt; &quot;Modo teste: &quot;
+                &lt;&lt; max_frames
+                &lt;&lt; &quot; frames\n&quot;;
+        }
+
+        // Cria pasta de saída.
+        fs::create_directory(&quot;out&quot;);
+
+        // Início da medição.
+        auto t0 = high_resolution_clock::now();
+
+        int frame = 1;
+
+        // ========================================================
+        // LOOP DOS FRAMES
+        // ========================================================
+
+        while (true)
+        {
+            // Interrompe no modo teste.
+            if (max_frames != -1 &amp;&amp;
+                frame &gt; max_frames)
+                break;
+
+            char filename[256];
+
+            // Nome do frame atual.
+            sprintf(
+                filename,
+                &quot;frames/frame_%04d.png&quot;,
+                frame
+            );
+
+            int w, h, c;
+
+            // Carrega imagem.
+            unsigned char* input =
+                stbi_load(
+                    filename,
+                    &amp;w,
+                    &amp;h,
+                    &amp;c,
+                    3
+                );
+
+            // Se não conseguiu carregar,
+            // encerra execução.
+            if (!input)
+            {
+                cout &lt;&lt; &quot;\nFim ou erro: &quot;
+                    &lt;&lt; filename
+                    &lt;&lt; endl;
+                break;
+            }
+
+            // ====================================================
+            // MEMÓRIA CPU
+            // ====================================================
+
+            // Imagem binária final.
+            unsigned char* bin =
+                new unsigned char[w * h];
+
+            // ====================================================
+            // MEMÓRIA GPU
+            // ====================================================
+
+            unsigned char* d_rgb;
+            unsigned char* d_bin;
+
+            // Tamanho da imagem RGB.
+            size_t rgbSize =
+                w * h * 3 *
+                sizeof(unsigned char);
+
+            // Tamanho da imagem grayscale/binária.
+            size_t graySize =
+                w * h *
+                sizeof(unsigned char);
+
+            // Aloca memória na GPU.
+            cudaMalloc(&amp;d_rgb, rgbSize);
+            cudaMalloc(&amp;d_bin, graySize);
+
+            // Copia RGB CPU -&gt; GPU.
+            cudaMemcpy(
+                d_rgb,
+                input,
+                rgbSize,
+                cudaMemcpyHostToDevice
+            );
+
+            // ====================================================
+            // CONFIGURAÇÃO CUDA
+            // ====================================================
+
+            // Bloco CUDA.
+            dim3 block(
+                BLOCK_SIZE,
+                BLOCK_SIZE
+            );
+
+            // Grade CUDA.
+            dim3 grid(
+                (w + BLOCK_SIZE - 1) / BLOCK_SIZE,
+                (h + BLOCK_SIZE - 1) / BLOCK_SIZE
+            );
+
+            // ====================================================
+            // EXECUÇÃO DO KERNEL
+            // ====================================================
+
+            pipeline_kernel&lt;&lt;&lt;grid, block&gt;&gt;&gt;(
+                d_rgb,
+                d_bin,
+                w,
+                h,
+                100
+            );
+
+            // Espera GPU finalizar.
+            cudaDeviceSynchronize();
+
+            // ====================================================
+            // CÓPIA GPU -&gt; CPU
+            // ====================================================
+
+            cudaMemcpy(
+                bin,
+                d_bin,
+                graySize,
+                cudaMemcpyDeviceToHost
+            );
+
+            // ====================================================
+            // OUTPUT
+            // ====================================================
+
+            char outname[256];
+
+            sprintf(
+                outname,
+                &quot;out/frame_%04d.png&quot;,
+                frame
+            );
+
+            // Salva imagem binária.
+            stbi_write_png(
+                outname,
+                w,
+                h,
+                1,
+                bin,
+                w * 1
+            );
+
+            // Mostra progresso.
+            cout &lt;&lt; &quot;\rProcessando: &quot;
+                &lt;&lt; frame
+                &lt;&lt; flush;
+
+            // ====================================================
+            // LIMPEZA DE MEMÓRIA
+            // ====================================================
+
+            cudaFree(d_rgb);
+            cudaFree(d_bin);
+
+            delete[] bin;
+
+            stbi_image_free(input);
+
+            frame++;
+        }
+
+        // Final da medição.
+        auto t1 = high_resolution_clock::now();
+
+        // Tempo total.
+        double total_time =
+            duration&lt;double&gt;(t1 - t0).count();
+
+        // ========================================================
+        // RESULTADO FINAL
+        // ========================================================
+
+        cout &lt;&lt; &quot;\n\n===== FINAL =====\n&quot;;
+
+        cout &lt;&lt; &quot;Frames processados: &quot;
+            &lt;&lt; frame - 1
             &lt;&lt; endl;
-        break;
+
+        cout &lt;&lt; &quot;Tempo total: &quot;
+            &lt;&lt; total_time
+            &lt;&lt; &quot; s\n&quot;;
+
+        return 0;
     }
-
-    // ====================================================
-    // MEMÓRIA CPU
-    // ====================================================
-
-    // Imagem binária final.
-    unsigned char* bin =
-        new unsigned char[w * h];
-
-    // ====================================================
-    // MEMÓRIA GPU
-    // ====================================================
-
-    unsigned char* d_rgb;
-    unsigned char* d_bin;
-
-    // Tamanho da imagem RGB.
-    size_t rgbSize =
-        w * h * 3 *
-        sizeof(unsigned char);
-
-    // Tamanho da imagem grayscale/binária.
-    size_t graySize =
-        w * h *
-        sizeof(unsigned char);
-
-    // Aloca memória na GPU.
-    cudaMalloc(&amp;d_rgb, rgbSize);
-    cudaMalloc(&amp;d_bin, graySize);
-
-    // Copia RGB CPU -&gt; GPU.
-    cudaMemcpy(
-        d_rgb,
-        input,
-        rgbSize,
-        cudaMemcpyHostToDevice
-    );
-
-    // ====================================================
-    // CONFIGURAÇÃO CUDA
-    // ====================================================
-
-    // Bloco CUDA.
-    dim3 block(
-        BLOCK_SIZE,
-        BLOCK_SIZE
-    );
-
-    // Grade CUDA.
-    dim3 grid(
-        (w + BLOCK_SIZE - 1) / BLOCK_SIZE,
-        (h + BLOCK_SIZE - 1) / BLOCK_SIZE
-    );
-
-    // ====================================================
-    // EXECUÇÃO DO KERNEL
-    // ====================================================
-
-    pipeline_kernel&lt;&lt;&lt;grid, block&gt;&gt;&gt;(
-        d_rgb,
-        d_bin,
-        w,
-        h,
-        100
-    );
-
-    // Espera GPU finalizar.
-    cudaDeviceSynchronize();
-
-    // ====================================================
-    // CÓPIA GPU -&gt; CPU
-    // ====================================================
-
-    cudaMemcpy(
-        bin,
-        d_bin,
-        graySize,
-        cudaMemcpyDeviceToHost
-    );
-
-    // ====================================================
-    // OUTPUT
-    // ====================================================
-
-    char outname[256];
-
-    sprintf(
-        outname,
-        &quot;out/frame_%04d.png&quot;,
-        frame
-    );
-
-    // Salva imagem binária.
-    stbi_write_png(
-        outname,
-        w,
-        h,
-        1,
-        bin,
-        w * 1
-    );
-
-    // Mostra progresso.
-    cout &lt;&lt; &quot;\rProcessando: &quot;
-        &lt;&lt; frame
-        &lt;&lt; flush;
-
-    // ====================================================
-    // LIMPEZA DE MEMÓRIA
-    // ====================================================
-
-    cudaFree(d_rgb);
-    cudaFree(d_bin);
-
-    delete[] bin;
-
-    stbi_image_free(input);
-
-    frame++;
-}
-
-// Final da medição.
-auto t1 = high_resolution_clock::now();
-
-// Tempo total.
-double total_time =
-    duration&lt;double&gt;(t1 - t0).count();
-
-// ========================================================
-// RESULTADO FINAL
-// ========================================================
-
-cout &lt;&lt; &quot;\n\n===== FINAL =====\n&quot;;
-
-cout &lt;&lt; &quot;Frames processados: &quot;
-    &lt;&lt; frame - 1
-    &lt;&lt; endl;
-
-cout &lt;&lt; &quot;Tempo total: &quot;
-    &lt;&lt; total_time
-    &lt;&lt; &quot; s\n&quot;;
-
-return 0;
+```
 </code></pre></div>
 
-<p>}</p>
 </details>
 <p>Com essas otimizações e ajustes o código com o sobel otimizado teve uma melhora significativa em relação ao base puro:</p>
 <p><img alt="alt text" src="image.png" /></p>
