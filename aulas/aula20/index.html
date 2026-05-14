@@ -1591,9 +1591,7 @@ Isso reduz o overhead de carregamento das máscaras.</p>
 <p>Se quiser olhar como ficou o código com as otimizações descritas aqui:</p>
 <details class="note">
 <summary>Ver o código</summary>
-<div class="codehilite"><pre><span></span><code>```cpp
-
-    // Biblioteca utilizada para carregar imagens PNG/JPG.
+<div class="codehilite"><pre><span></span><code>    // Biblioteca utilizada para carregar imagens PNG/JPG.
     #define STB_IMAGE_IMPLEMENTATION
     #include &quot;stb_image.h&quot;
 
@@ -1975,7 +1973,6 @@ Isso reduz o overhead de carregamento das máscaras.</p>
             int sumX = 0;
             int sumY = 0;
 
-
             for (int ky = -1; ky &lt;= 1; ky++)
             {
 
@@ -1997,7 +1994,6 @@ Isso reduz o overhead de carregamento das máscaras.</p>
                         SOBEL_Y[ky + 1][kx + 1];
                 }
             }
-
 
             int mag =
                 abs(sumX) +
@@ -2234,7 +2230,6 @@ Isso reduz o overhead de carregamento das máscaras.</p>
 
         return 0;
     }
-```
 </code></pre></div>
 
 </details>
