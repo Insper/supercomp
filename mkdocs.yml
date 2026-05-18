@@ -53,7 +53,7 @@ nav:
         - "Aula 19 - Revisão I - Passando o código da CPU para GPU" : aulas/aula19/index.md
         - "Aula 20 - Revisão II - Estratégias de otimização em GPU" : aulas/aula20/index.md
         - "Aula 21 - APS2 no Cluster Santos Dumont" : aulas/aula21/index.md
-        - "Aula 22 - Exercícios preparatórios Prova Final" : aulas/aula20/index.md
+        - "Aula 22 - Exercícios preparatórios Prova Final" : aulas/aula22/index.md
 #        - "Aula 21 - Revisão" : aulas/aula21/index.md
     - Suporte:
         - "Slides das aulas" : teoria/slides.md
