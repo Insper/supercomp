@@ -87,6 +87,7 @@ nav:
         #- "Paralelismo com Python": complementar/aula03/index.md
   #      - "Paralelismo com Numba": complementar/aula04/index.md
 
+
         
 extra_javascript:
     - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML

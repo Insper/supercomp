@@ -502,3 +502,4 @@ Disponibilizar arquivos SLURM corretamente configurados para submissão e execu�
 Apresentar gráficos e tabelas comparando o desempenho obtido em cada ambiente.
 
 As análises dos resultados devem considerar os impactos da arquitetura da GPU em cada ambiente.
+
