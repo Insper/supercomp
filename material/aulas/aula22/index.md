@@ -176,8 +176,8 @@ Um sistema de monitoramento urbano precisa detectar bordas em imagens aéreas de
 | Rúbrica               | Peso    |
 | --------------------- | ------- |
 | O kernel CUDA foi corretamente implementado, o gerenciamento dos dados entre CPU e GPU foi realizado de forma adequada   | 1.5 |     
-| Arquivo `run.slurm` configurado corretamente para execução no Cluster Franky, incluindo solicitação adequada de recursos e carregamento dos módulos necessários. | 0.2 |
-| Arquivo `run.slurm` configurado corretamente para execução no Cluster Santos Dumont, incluindo solicitação adequada de recursos e carregamento dos módulos necessários. | 0.3 |
+| Arquivo `runFranky.slurm` configurado corretamente para execução no Cluster Franky, incluindo solicitação adequada de recursos e carregamento dos módulos necessários. | 0.2 |
+| Arquivo `runSDumont.slurm` configurado corretamente para execução no Cluster Santos Dumont, incluindo solicitação adequada de recursos e carregamento dos módulos necessários. | 0.3 |
 | **Total**             | **2.0** |
 
 
@@ -195,8 +195,8 @@ O objetivo agora é reduzir acessos à memória global utilizando memória compa
 | Rúbrica                       | Peso    |
 | ----------------------------- | ------- |
 | A versão otimizada com Tilling em GPU apresenta um desempenho melhor do que a versão base sequencial em CPU | 3.0 |
-| Arquivo `run.slurm` configurado corretamente para execução no Cluster Franky, incluindo solicitação adequada de recursos e carregamento dos módulos necessários. | 0.2 |
-| Arquivo `run.slurm` configurado corretamente para execução no Cluster Santos Dumont, incluindo solicitação adequada de recursos e carregamento dos módulos necessários. | 0.3 |
+| Arquivo `runFranky.slurm` configurado corretamente para execução no Cluster Franky, incluindo solicitação adequada de recursos e carregamento dos módulos necessários. | 0.2 |
+| Arquivo `runSDumont.slurm` configurado corretamente para execução no Cluster Santos Dumont, incluindo solicitação adequada de recursos e carregamento dos módulos necessários. | 0.3 |
 | **Total**                     | **3.5** |
 
 ### Exercício 3 — Processamento Assíncrono com CUDA Streams
@@ -215,6 +215,6 @@ Implemente uma pipeline que executa o código de forma assíncrona sobrepondo as
 | -------------------------------- | ------- |
 | Pipeline assíncrono corretamente implementado e funcionando  | 3.5     |
 | Comparação de desempenho e análise dos resultados obtidos | 1.0  |
-| Arquivo `run.slurm` configurado corretamente para execução no Cluster Franky, incluindo solicitação adequada de recursos e carregamento dos módulos necessários. | 0.2 |
-| Arquivo `run.slurm` configurado corretamente para execução no Cluster Santos Dumont, incluindo solicitação adequada de recursos e carregamento dos módulos necessários. | 0.3 |
+| Arquivo `runFranky.slurm` configurado corretamente para execução no Cluster Franky, incluindo solicitação adequada de recursos e carregamento dos módulos necessários. | 0.2 |
+| Arquivo `runSDumont.slurm` configurado corretamente para execução no Cluster Santos Dumont, incluindo solicitação adequada de recursos e carregamento dos módulos necessários. | 0.3 |
 | **Total**                        | **4.5** |
