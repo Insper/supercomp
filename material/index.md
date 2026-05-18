@@ -1,35 +1,41 @@
+---
+title: Insper - SuperComputação 
+description: Página oficial da disciplina SuperComputação do Insper – materiais, projetos, horários de aula e objetivos de aprendizagem.
+author: Lícia Sales
+robots: index, follow
+---
+
 # SuperComputação
+Bem-vindo ao curso de SuperComputação 2026/1!
 
-Bem vindo ao curso de SuperComputação 2023/2 
+Essa página contém os materiais de apoio para o curso de SuperComputação do Insper.
 
-* **Professores**: 
-    * André Filipe M. Batista
-    * Michel Fornaciali
-
-* **Horário das aulas**:
-    * Turma 1 - Prof. Michel Fornaciali:  Terça - 09h45, Sexta - 13h30
-     * Turma 2 - Prof. André Batista: Quarta - 13h30, Sexta - 07h30
+!!! info "Horários das Aulas"
+    **Aulas:**
     
+    Segunda -> 16h30 -- 18h30
+    
+    Sexta -> 14h15 -- 16h15
 
+    **Atendimento:**
+    **Início 27/02/26**
+    Sexta -> 12:30 às 14:00
 
-## Avaliação
+## Objetivos de aprendizagem
+No Insper, cada disciplina é guiada por **objetivos de aprendizagem**. Para evoluir na matéria e ser aprovado, é essencial que você atinja esses objetivos. Todos os conteúdos, atividades e projetos estão conectados diretamente a esses objetivos. 
+Você pode consultar o detalhamento completo do curso [neste link](sobre.md).
 
-A avaliação da disciplina será composta por provas, projetos e atividades de acompanhamentos:
+!!!example "Notas"
+    - **Atividades - 15%**.
+    - **APS 1 - 10%**
+    - **Avaliação Intermediária - 25%**
+    - **APS 2 - 20%**
+    - **Avaliação Final - 30%**
 
-* Provas Intermediária (PI) e Final (PF) serão compostas por exercícios práticos a serem feitos durante o tempo de prova;
-* O projeto da disciplina será composto por múltiplas partes. 
-<!-- [Mais detalhes na página de projetos](projetos) -->
+## Equipe
 
-A média final é dada por 
-
-* 55% Projeto
-* 45% média de Provas
-
-!!! warning "Condições de barreira"
-    * Média de provas >= 4,5
-    * PI, PF >= 4,0
-    * Projeto >= 5 (não serão aceitos projetos atrasados)
-
-    Caso estas condições não sejam cumpridas ver detalhes na [aula 01](aulas/01-introducao/slides.pdf)
-
-!!! failure "Mesmo que todas as condições acima sejam satisfeitas é possível reprovar. Um desempenho abaixo do esperado em uma atividade precisa ser compensado com um desempenho melhor em outra atividade."
+!!! people "Equipe atual"
+    - ![Lícia](equipe/licia.jpeg) **Lícia Sales** *Professora*
+    - ![Emil](equipe/Emil.png) **Emil Freme** *Prof. Assistente*
+    - ![Victor](equipe/victor.jpg) **Victor Cordeiro** *Técnico do lab.*
+  

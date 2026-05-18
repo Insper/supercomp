@@ -12,4 +12,6 @@ callgrind.*
 gmon.out
 Icon?
 material/aulas/01-introducao/legenda*
-Icon
+Icon
+venv/
+gabarito/

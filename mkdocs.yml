@@ -1,24 +1,24 @@
-site_name: SuperComputação - 2023/2
+site_name: SuperComputação - 2026/1
 site_author: 
 
 extra:
     materia: SuperComputação
-    professor: Andre Filipe de M. Batista, Michel Fornaciali 
-    semestre: 2023/2
+    professor: Lícia Sales  
+    semestre: 2026/1
     url_acompanhamentos: http://localhost:8081
     id_curso: 1
 
 theme:
-  feature:
-    tabs: true
-  name: 'material'
-  palette:
-      primary: 'grey'
-      accent: 'red'
-  font:
-    text: Roboto
-    code: Roboto Mono
-#  custom_dir: 'custom_theme'
+    name: material
+    features:
+        - navigation.tabs
+        - content.code.copy
+    palette:
+        primary: blue gray
+        accent: red
+    font:
+        text: Roboto
+        code: Roboto Mono
 
 docs_dir: material
 site_dir: docs
@@ -30,49 +30,64 @@ site_url: https://insper.github.io/supercomp/
 
 nav:
     - Home: index.md
-    #- Burocracias: sobre.md
-
+    - Burocracias: sobre.md
     - Aulas:
-        - "01 - Introdução": aulas/01-introducao/index.ipynb
-        - "02 e 03 - C++": aulas/02-03-implementacao-c++/index.md
-        - "04 - Profiling": aulas/04-profiling/index.md
-        - "05 - Heurísticas": aulas/05-heuristicas/index.md
-        - "06 - Aleatorização": aulas/06-aleatorizacao/index.md
-        - "07 - Busca Local": aulas/07-busca-local/index.md
-        - "08 - Busca Exaustiva": aulas/08-busca-global/index.md
-        # - "09 - Comparação de desempenho": aulas/09-busca-global-II/index.md
-        # # - "10 - Branch and Bound": aulas/10-branch-and-bound/index.md
-        # # - "Revisão para P1": aulas/10-branch-and-bound/revisao.md
-        - "09 - Paralelismo": aulas/11-paralelismo/index.md
-        - "10 - Paralelismo - Exercício / Efeitos Colaterais" : aulas/12-efeitos-colaterais/index.md
-        - "12 - Paralelismo - Efeitos Colaterais II":  aulas/13-efeitos-colaterais-II/index.md
-        - "13 - GPU - Introdução":  aulas/14-intro-gpu/index.md
-        - "14 - GPU - Iteradores": aulas/15-gpu-iteradores/index.md
-        - "15 - GPU - Customização": aulas/16-gpu-customizacao/index.md
-        - "16 - Clusters - Slurm" : aulas/21-SLURM/index.md
-        - "17 - MPI": aulas/MPI/index.md
-        - "18 - MPI e OpenMP": aulas/MPI-OpenMP/index.md
-        # - "18 - MPI - Broadcasting": aulas/20 - Broadcasting-mpi/index.md
-       
-       
-       # - "17 - GPU - Aleatoriedade": aulas/17-gpu-aleatoriedade/index.md
-        # - aulas/13-paralelismo-tarefas-dados/index.md
-        # - aulas/14-exercicios/index.md
-        # - aulas/15-efeitos-colaterais/index.md
-        # - aulas/16-efeitos-colaterais-II/index.md
+        - "Aula 01 - Introdução e Overview": aulas/aula01/index.md
+        - "Aula 02 - Cluster Franky": aulas/aula02/index.md
+        - "Aula 03 - STD, Vector e Tiling": aulas/aula03/index.md
+        - "Aula 04 - Algoritmo Busca exaustiva": aulas/aula04/index.md
+        - "Aula 05 - Heurísticas e Aleatoriedade": aulas/aula05/index.md
+        - "Aula 06 - Paralelismo em CPU": aulas/aula06/index.md
+        - "Aula 07 - Efeitos colaterias do paralelismo": aulas/aula07/index.md
+        - "Aula 08 - Sincronização em CPU com OpenMP": aulas/aula08/index.md
+        - "Aula 09 - Programação Distribuída com MPI": aulas/aula09/index.md
+        - "Aula 10 - Tipos de comunicação MPI": aulas/aula10/index.md
+        - "Aula 11 - Exercícios preparatórios para AI": aulas/aula11/index.md
+        - "Aula 12 - Acesso ao Supercomputador SDumont": aulas/aula12/index.md
+        - "Aula 13 - Paralelismo em GPU com CUDA": aulas/aula13/index.md
+        - "Aula 14 - Otimização de memória em GPU": aulas/aula14/index.md
+        - "Aula 15 - Redução e Scan com CUDA": aulas/aula15/index.md
+        - "Aula 16 - Detecção de Bordas em GPU": aulas/aula16/index.md
+        - "Aula 17 - Projeto GPU": aulas/aula17/index.md
+        - "Aula 18 - Detecção de objetos em video" : aulas/aula18/index.md
+        - "Aula 19 - Revisão I - Passando o código da CPU para GPU" : aulas/aula19/index.md
+        - "Aula 20 - Revisão II - Estratégias de otimização em GPU" : aulas/aula20/index.md
+        - "Aula 21 - APS2 no Cluster Santos Dumont" : aulas/aula21/index.md
+        - "Aula 22 - Exercícios preparatórios Prova Final" : aulas/aula20/index.md
+#        - "Aula 21 - Revisão" : aulas/aula21/index.md
+    - Suporte:
+        - "Slides das aulas" : teoria/slides.md
+        - "Aula 01" : teoria/aula01/compilar-executar-C++.md
+        - "Aula 02" : teoria/aula02/index.md
+        - "Aula 03" : teoria/aula03/index.md
+        - "Aula 04" : teoria/aula04/index.md
+        - "Útil" : teoria/comandos.md
+        - "Permissões" : teoria/permissoes.md
+        - "Simulado AI": Exercicios/simulado_ai/index.md
+ #       - "Gabarito AI": Exercicios/ai/index.md
+ #       - "Heurísticas" : teoria/heuristicas.md
+ #       - "OpenMP" : teoria/openmp.md
+ #       - "MPI" : teoria/MPI.md
+        
+ #   - Exercícios: 
+ #       - "Aula 01 Otimizações basicas": Exercicios/aula01/aula01.md
+ #       - "Aula 03 Otimizações no uso da memória": Exercicios/aula03/aula03.md
+ #       - "Aula 04 Otimização de Estratégias e Heurísticas ": Exercicios/aula04/aula04.md
+ #       - "Aula 05 Otimizações usando paralelismo de memória local": Exercicios/aula05/aula05.md
+ #       - "Aula 06 lidando com efeitos colaterais do paralelismo": Exercicios/aula06/aula06.md
+ #       - "Aula 07 Otimizações usando paralelismo de memória Distribuída": Exercicios/aula07/aula07.md
+ #       - "Aula 08 Otimizações usando paralelismo de memória local e distribuída": Exercicios/aula08/aula08.md
 
-    - Projeto:
-         - projetos/index.md
-    #     - projetos/heuristico.md
-    #     - projetos/local.md
-    #     - projetos/relatorio_parcial.md
-    #     - projetos/openmp.md
-    #     - projetos/gpu.md 
-        # - projetos/relatorio-1.md        
-        # - projetos/paralelismo-multicore.md
-        # - projetos/paralelismo-gpu.md
+    - APS's:
+        - "APS 1 - Otimizações em CPU" : projetos/2026-1/APS1.md
+        - "APS 2 - Otimizações em GPU" : projetos/2026-1/APS2.md
 
+ #   - Bonus:
+        #- "Conectando ao Cluster Franky": complementar/aula02/index.md
+        #- "Paralelismo com Python": complementar/aula03/index.md
+  #      - "Paralelismo com Numba": complementar/aula04/index.md
 
+        
 extra_javascript:
     - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML
     - https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.0.0/js-yaml.min.js
@@ -82,6 +97,7 @@ extra_javascript:
 extra_css:
     - css/printing.css
     - css/extra.css
+    - css/equipe.css
 
 markdown_extensions:
   - markdown.extensions.tables
@@ -120,3 +136,4 @@ markdown_extensions:
 plugins:
     - search
     - mknotebooks
+

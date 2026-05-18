@@ -2,82 +2,281 @@
 
 # Burocracias 
 
+!!! info "Horários"
+    **Aulas:**
+    
+    Segunda -> 16h30 -- 18h30
+    
+    Sexta -> 14h15 -- 16h15
 
-* Horários: 
-    * Turma A - Prof. André Filipe:  Quarta - 13h30, Sexta - 07h30
-    * Turma B - Prof. Luciano Silva:  Terça - 09h45, Sexta - 13h30
-
-
-??? note "Plano de aulas - Turma A"
-    | Data       | Questão/Problema                                                     | Conteúdo/Atividade                                                                                                              |
-    |------------|----------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------|
-    | 08/02/23 | Introdução ao curso e a tecnologias de alto desempenho               | Introdução ao curso; Princípios de C++                                                                                          |
-    | 10/02/23 | Introdução ao curso e a tecnologias de alto desempenho               | Implementação de algoritmos simples; Passagem de argumentos por referência e valor; Recursos de C++                             |
-    | 15/02/23 | Considerações na implementação de programas de alto desempenho       | C++, Vectors                                                                                                                    |
-    | 17/02/23 | Considerações na implementação de programas de alto desempenho       | Utilização de ferramentas de profiling para identificar pontos quentes em um programa                                           |
-    | 24/02/23 | Estratégias para solução de problemas difíceis                       | Apresentação do projeto da disciplina; Heurística, busca local e global                                                         |
-    | 01/03/23 | Soluções sub-ótimas usando a busca local                             | Propriedades da solução ótima; vizinhança de soluções                                                                           |
-    | 03/03/23 | Soluções sub-ótimas usando a busca local                             | Propriedades de geradores de números pseudo-aleatórios; Algoritmos baseados em sorteios aleatórios; Exploration vs Exploitation |
-    | 08/03/23 | Aula estúdio para projeto                                            | Aula estúdio para projeto                                                                                                       |
-    | 10/03/23 | Aula estúdio para projeto                                            | Aula estúdio para projeto                                                                                                       |
-    | 15/03/23 | Buscando uma solução globalmente ótima                               | Busca global vs Busca local; Enumeração exaustiva e sua classe de problemas computacionais; Backtracking                        |
-    | 17/03/23   | Buscando uma solução globalmente ótima                               | gap de otimalidade; Simetrias; Comunicação de resultados de desempenho                                                          |
-    | 22/03/23 | Aula estúdio para projeto                                            | Aula estúdio para projeto                                                                                                       |
-    | 29/03/23   | Prova intermediária                                                  | Prova intermediária                                                                                                             |
-    | 31/03/23   | Prova intermediária                                                  | Prova intermediária                                                                                                             |
-    | 05/04/23   | Programação multi-core: como dividir tarefas e ganhar tempo          | Introdução a OpenMP                                                                                                             |
-    | 12/04/23   | Programação multi-core: como dividir tarefas e ganhar tempo          | Código thread-safe e reentrância                                                                                                |
-    | 14/04/23   | Programação multi-core: como dividir tarefas e ganhar tempo          | Introdução a problemas IO bound; Construções de alto nível do OpenMP; Sincronização usando mutex e semáforos                    |
-    | 19/04/23   | Programação multi-core: como dividir tarefas e ganhar tempo          | Introdução a problemas IO bound; Construções de alto nível do OpenMP; Sincronização usando mutex e semáforos                    |
-    | 26/04/23   | Programação multi-core: como dividir tarefas e ganhar tempo          | Aula estúdio para projeto                                                                                                       |
-    | 28/04/23   | Programação em GPU e quais problemas são massivamente paralelizáveis | Introdução a GPGPU                                                                                                              |
-    | 03/05/23   | Programação em GPU e quais problemas são massivamente paralelizáveis | Introdução a GPGPU                                                                                                              |
-    | 05/05/23   | Programação em GPU e quais problemas são massivamente paralelizáveis | Programando para GPU, Nvidia Thrust                                                                                             |
-    | 10/05/23   | Programação em GPU e quais problemas são massivamente paralelizáveis | Programando para GPU, Nvidia Thrust                                                                                             |
-    | 12/05/23   | Programação Distribuída com MPI | Exercícios de programação em MPI                                                                                             |
-    | 17/05/23   | Programação Distribuída com MPI | Exercícios de programação em MPI                                                                                             |
-    | 19/05/23   | Programação Distribuída com MPI | Exercícios de programação em MPI  |
-    | 24/05/23   | Aula estúdio para projeto                                            | Aula estúdio para projeto                                                                                                       |
-    | 02/06/23   | Prova Final                                                          | Prova Final                                                                                                          |
-    | 07/06/23   | Prova Final                                                          | Prova Final     
+    **Atendimento -> Início 27/02/26**
+    
+    Sexta -> 12:30 às 14:00
 
 
+??? info "Objetivos de Aprendizagem"
 
-??? note "Plano de aulas - Turma B"
-    | Data       | Questão/Problema                                                     | Conteúdo/Atividade                                                                                                              |
-    |------------|----------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------|
-    | 07/02/23 | Introdução ao curso e a tecnologias de alto desempenho               | Introdução ao curso; Princípios de C++                                                                                          |
-    | 10/02/23 | Introdução ao curso e a tecnologias de alto desempenho               | Implementação de algoritmos simples; Passagem de argumentos por referência e valor; Recursos de C++                             |
-    | 14/02/23 | Considerações na implementação de programas de alto desempenho       | C++, Vectors                                                                                                                    |
-    | 17/02/23 | Considerações na implementação de programas de alto desempenho       | Utilização de ferramentas de profiling para identificar pontos quentes em um programa                                           |
-    | 24/02/23 | Estratégias para solução de problemas difíceis                       | Apresentação do projeto da disciplina; Heurística, busca local e global                                                         |
-    | 28/02/23 | Soluções sub-ótimas usando a busca local                             | Propriedades da solução ótima; vizinhança de soluções                                                                           |
-    | 03/03/23 | Soluções sub-ótimas usando a busca local                             | Propriedades de geradores de números pseudo-aleatórios; Algoritmos baseados em sorteios aleatórios; Exploration vs Exploitation |
-    | 07/03/23 | Aula estúdio para projeto                                            | Aula estúdio para projeto                                                                                                       |
-    | 10/03/23 | Aula estúdio para projeto                                            | Aula estúdio para projeto      
-    | 14/03/23 | Buscando uma solução globalmente ótima                               | Busca global vs Busca local; Enumeração exaustiva e sua classe de problemas computacionais; Backtracking                        |
-    | 17/03/23   | Buscando uma solução globalmente ótima                               | gap de otimalidade; Simetrias; Comunicação de resultados de desempenho                                                          |
-    | 21/03/23 | Aula estúdio para projeto                                            | Aula estúdio para projeto                                                                                                       |
-    | 31/03/23   | Prova intermediária                                                  | Prova intermediária                                                                                                             |
-    | 04/04/23   | Prova intermediária                                                  | Prova intermediária                                                                                                             |
-    | 11/04/23   | Programação multi-core: como dividir tarefas e ganhar tempo          | Introdução a OpenMP                                                                                                             |
-    | 14/04/23   | Programação multi-core: como dividir tarefas e ganhar tempo          | Código thread-safe e reentrância                                                                                                |
-    | 18/04/23   | Programação multi-core: como dividir tarefas e ganhar tempo          | Introdução a problemas IO bound; Construções de alto nível do OpenMP; Sincronização usando mutex e semáforos                    |
-    | 25/04/23   | Programação multi-core: como dividir tarefas e ganhar tempo          | Introdução a problemas IO bound; Construções de alto nível do OpenMP; Sincronização usando mutex e semáforos                    |
-    | 28/04/23   | Programação multi-core: como dividir tarefas e ganhar tempo          | Aula estúdio para projeto                                                                                                       |
-    | 02/05/23   | Programação em GPU e quais problemas são massivamente paralelizáveis | Introdução a GPGPU                                                                                                              |
-    | 05/05/23   | Programação em GPU e quais problemas são massivamente paralelizáveis | Introdução a GPGPU                                                                                                              |
-    | 10/05/23   | Programação em GPU e quais problemas são massivamente paralelizáveis | Programando para GPU, Nvidia Thrust                                                                                             |
-    | 12/05/23   | Programação em GPU e quais problemas são massivamente paralelizáveis | Programando para GPU, Nvidia Thrust                                                                                             |
-    | 17/05/23   | Programação Distribuída com MPI | Exercícios de programação em MPI                                                                                             |
-    | 19/05/23   | Programação Distribuída com MPI | Exercícios de programação em MPI                                                                                             |
-    | 23/05/23   | Aula estúdio para projeto                                            | Aula estúdio para projeto                                                                                                       |
-    | 02/06/23   | Prova Final                                                          | Prova Final                                                                                                          |
-    | 07/06/23   | Prova Final                                                          | Prova Final     
+    Ao final da disciplina, o estudante será capaz de:
+
+    **Obj 1.** Desenvolver algoritmos usando recursos de computação paralela e distribuída para obter ganhos de desempenho na aplicação final.
+
+    **Obj 2.** Aplicar estruturas lógicas de computação distribuída no desenvolvimento de algoritmos multitarefa.
+
+    **Obj 3.** Usar GPGPU (General-Purpose computing on Graphics Processing Units) para computação numérica e comparar seu desempenho com soluções baseadas em CPU.
+
+    **Obj 4.** Planejar e projetar sistemas de computação de alto desempenho, considerando aspectos de hardware, escalabilidade, e alocação de recursos.
+
+    **Obj 5.** Analisar a complexidade de algoritmos paralelos e a eficiência de implementações específicas, identificando as métricas de desempenho mais adequadas para essa análise.
+
+    **Obj 6.** Aplicar recursos específicos de sistemas operacionais (como escalonadores, controle de threads e gerenciamento de memória) para melhorar o desempenho de algoritmos.
+
+    **Obj 7.** Desenvolver aplicações que utilizam protocolos otimizados para paralelização, como MPI, OpenMP e CUDA.
 
 
+??? tip "Plano de Aulas - Supercomputação (2026.1)"
+    | Data          | Aula | Tópicos Abordados                                                                                                                                 | Atividades                                                                                                   |
+    |---------------|------|---------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|
+    | 09/fev (seg)  | 01   | Introdução à disciplina; conceitos de HPC; plataforma de HPC; acesso remoto (SSH); políticas de uso do Cluster Franky                             | Criação de conta no cluster; configuração do ambiente; primeiro código em C++; uso da IDE                   |
+    | 13/fev (sex)  | 02   | Sistemas de HPC; arquitetura de clusters; rede e hardware; filas e jobs; SLURM; clusters no Brasil e no mundo                                     | Atividade prática com SLURM no Cluster Franky; submissão de jobs via SLURM                     |
+    | 20/fev (sex)  | 03   | C++ para HPC: vetores; gerenciamento de memória; STL; alocação dinâmica; acesso cache-friendly                                                    | Exercícios de fixação em C++; análise de desempenho                                                          |
+    | 23/fev (seg)  | 04   | C++ para HPC: matrizes; layout de memória (row-major); acesso sequencial vs aleatório; custo computacional                                         | Exercícios de fixação; comparação de padrões de acesso à memória                                             |
+    | 27/fev (sex)  | 05   | Otimizações em CPU; hierarquia de memória; caches; prefetching; localidade temporal e espacial; loop unrolling                                    | Exercícios de otimização em CPU; medição de desempenho                                                       |
+    | 02/mar (seg)  | 06   | Estratégias e algoritmos de otimização; BLAS; Roofline Model; limites computacionais vs memória                                                    | Exercícios de fixação; análise comparativa de desempenho e relatório técnico                                 |
+    | 06/mar (sex)  | 07   | Algoritmos avançados de otimização; algoritmo de Strassen; matrizes esparsas; estruturas CSR e CSC                                                | Exercícios de fixação; análise de custo computacional                                                         |
+    | 09/mar (seg)  | 08   | Concorrência e paralelismo; modelo fork-join; speedup; eficiência; Leis de Amdahl e Gustafson                                                     | Exercícios de paralelização; análise de escalabilidade                                                       |
+    | 13/mar (sex)  | 09   | Otimizações de memória em estratégias paralelas; false sharing; alinhamento; afinidade de memória                                                  | Exercícios de fixação; comparação de desempenho antes e depois da otimização                                 |
+    | 16/mar (seg)  | 10   | Gerenciamento de threads; thread pools; sincronização; barreiras; mutexes                                                                         | Exercícios de fixação; implementação correta sem condições de corrida                                        |
+    | 20/mar (sex)  | 11   | Aula Estúdio: resolução orientada de problemas reais em HPC                                                                                       | Desenvolvimento incremental da APS 1; acompanhamento em sala                                                |
+    | 23/mar (seg)  | 12   | Aula Estúdio: continuação da APS 1                                                                                                                 | Desenvolvimento incremental da APS 1                                                                        |
+    | 27/mar (sex)  | 13   | Avaliação Intermediária                                                                                                                             | Avaliação prática e teórica                                                                                 |
+    | 30/mar (seg)  | 14   | Avaliação Intermediária                                                                                                                             | Avaliação prática e teórica                                                                                 |
+    | 06/abr (seg)  | 15   | Paralelismo com OpenMP; compartilhamento entre threads; efeitos do scheduler; escalonamento estático e dinâmico                                   | Exercícios de fixação com OpenMP                                                                             |
+    | 10/abr (sex)  | 16   | Efeitos colaterais do paralelismo; race conditions; dependências de dados; recursão                                                               | Exercícios de fixação; correção de erros concorrentes                                                        |
+    | 13/abr (seg)  | 17   | Memória distribuída; MPI ponto a ponto; Send/Recv; latência e topologias de comunicação                                                           | Exercícios de fixação; implementação MPI no cluster                                                          |
+    | 17/abr (sex)  | 18   | MPI comunicação coletiva; Broadcast; Scatter; Gather; Reduce                                                                                       | Exercícios de fixação; análise de eficiência de comunicação                                                  |
+    | 24/abr (sex)  | 19   | Grupos e comunicadores; programação híbrida MPI + OpenMP                                                                                           | Exercícios de fixação; implementação híbrida                                                                 |
+    | 27/abr (seg)  | 20   | Introdução à programação paralela em GPU; arquitetura de GPUs; modelo SIMT; hierarquia de memória                                                 | Exercícios de fixação; primeiro código CUDA                                                                 |
+    | 04/mai (seg)  | 21   | Programação em CUDA; kernels; grids e blocks; memória global e compartilhada                                                                       | Exercícios de fixação; implementação de kernels                                                              |
+    | 08/mai (sex)  | 22   | CUDA avançado: stencil, tiling e agendamento de threads                                                                                            | Exercícios de fixação; comparação entre versões otimizadas                                                   |
+    | 11/mai (seg)  | 23   | Redução e scan em CUDA; algoritmos paralelos clássicos; uso de memória compartilhada                                                              | Exercícios de fixação; medição de speedup                                                                    |
+    | 15/mai (sex)  | 24   | Matrizes esparsas em GPU; SpMV; computação assíncrona; streams; sobreposição comunicação–cálculo                                                  | Exercícios de fixação; análise de desempenho                                                                 |
+    | 18/mai (seg)  | 25   | Código síncrono vs assíncrono em CUDA; streams; eventos; latência e throughput                                                                    | Exercícios de fixação; comparação quantitativa entre abordagens                                              |
+    | 22/mai (sex)  | 26   | Revisão geral do conteúdo; exercícios preparatórios para Avaliação Final                                                                          | Lista de exercícios preparatórios                                                                            |
+    | 25/mai (seg)  | 27   | Simulado da Avaliação Final                                                                                                                         | Resolução comentada do simulado                                                                              |
+    | 29/mai (sex)  | 28   | Avaliação Final                                                                                                                                     | Avaliação Final                                                                                              |
+    | 01/jun (seg)  | 29   | Avaliação Final                                                                                                                                     | Avaliação Final                                                                                              |
 
 
-               
-                                                                                                              
-   
+??? note "Atividades (Individual) 15%"
+    | Percentual de Atividades | Conceito |
+    |--------------------------|----------|
+    | 50%                      | C        |
+    | 70%                      | B        |
+    | 90%                      | A        |
+    | 100%                     | A +      |
+
+
+
+
+??? note "APS 1 - Otimizações e Paralelismo em CPU (Individual 10%)"
+    [Detalhes em APS 1 - Otimizações e Paralelismo em CPU](projetos/2026-1/APS1.md)
+    # Avaliação
+
+    A APS será avaliada em 2 aspectos principais; 
+
+    * **A implementação (4 pontos)**
+    * **O relatório (6 pontos)**
+
+    ## Implementação (4 pontos)
+
+    A implementação seguirá a seguinte rubrica. 
+
+    * **0** - Não compila, não é possível testar a implementação. 
+    * **+1** - Implementou alguma otimização que melhora o algoritmo exaustivo sequencial, mas ainda leva muito tempo para chegar na solução. 
+    * **+1** - Otimizou a heurísitca e conseguiu chegar na solução, mas ainda tem uma implementação sequencial. 
+    * **+2** - Paralelizou o algorítimo e conseguiu chegar na melhor solução no menor tempo possível.
+        
+    ## Relatório
+
+    O relatório deve apresentar evidências de que os experimentos foram executados e analisados pelo aluno.
+    A avaliação será feita de acordo com os critérios abaixo:
+
+
+    ### 1. Reprodutibilidade dos experimentos (1 ponto)
+
+    O relatório deve permitir que qualquer pessoa entenda exatamente como os experimentos foram realizados e o como reproduzir os testes.
+
+    * **0** - Não é possível entender como realizar os testes nem como eles foram executados.
+
+    * **+1** - O repositório disponibiliza os arquivos SLURM utilizados e todos os arquivos necessários para realizar os testes, há uma descrição clara dos testes realizados e como reproduzir os experimentos.
+
+
+    ### 2. Evidência de execução dos experimentos (2 pontos)
+
+    O relatório deve apresentar resultados obtidos a partir da execução do código.
+    Esses resultados devem ser apresentados em formas de tabela e gráficos.
+
+    * **0 pontos** - O relatório não apresenta resultados em forma de tabelas e gráficos.
+
+    * **+0.5 ponto** - Existe a apresentação dos dados em tabela **ou** gráfico.
+
+    * **+1.5 ponto** - O relatório apresenta tabela **e** gráfico contendo os principais parâmetros de execução dos experimento.
+
+    ### 3. Qualidade da análise dos resultados (3 pontos)
+
+    A análise deve mostrar que o aluno entendeu as otimizações que realizou e como elas impactaram os resultados obtidos.
+
+    * **0 pontos** - Texto do relatório genérico, análises claramente geradas por ferramentas de IA ou explicações inconsistentes com os resultados apresentados.
+
+    * **+1 ponto** - O relatório menciona resultados, mas a interpretação ainda é superficial.
+
+    * **+2 pontos** - O relatório relaciona as otimizações implementadas com os dados obtidos de forma clara e objetiva.
+
+
+    # A entrega da APS 1 deverá ser realizada até o dia 20/03 as 23h59 pelo [Github Classroom](https://classroom.github.com/a/YdsvpTBm) 
+    
+
+??? note "APS 2 20%"
+    # APS 2 - Otimizações e Paralelismo em GPU
+
+    Um cliente precisa tomar decisões rápidas no mercado de ações. Para isso, ele utiliza simulações estocásticas para prever o comportamento futuro de um ativo com base em dados históricos.
+
+    O modelo utilizado pelo cliente é baseado no [movimento browniano geométrico](https://fiscomp.if.ufrgs.br/index.php/Movimento_Browniano_Geom%C3%A9trico_para_Previs%C3%A3o_no_Mercado_de_A%C3%A7%C3%B5es), implementado através da [equação de Black-Scholes](https://www.investopedia.com/terms/b/blackscholes.asp). A partir de um preço inicial e da volatilidade do mercado, ele simula milhares de cenários possíveis para o preço da ação ao longo do tempo.
+
+    Cada linha gerada representa um possível “caminho” do preço do ativo, enquanto a linha final média representa o comportamento mais provável segundo o [método de Monte Carlo](https://pt.wikipedia.org/wiki/M%C3%A9todo_de_Monte_Carlo).
+
+    No entanto, o sistema atual é extremamente lento, dificultando a tomada de decisões, especialmente em um ambiente onde o tempo de resposta é decisivo.
+
+    Seu trabalho será melhorar esse sistema.
+
+    [Acesse o seu repositório pelo link do Classroom](https://classroom.github.com/a/h9hTmdSW) 
+    # **A data limite de entrega é 25/05/2026 ás 23h59**
+
+
+    A APS será avaliada em dois aspectos principais:
+
+    * **Implementação (código)** → 4 pontos
+    * **Relatório (.ipynb)** → 6 pontos
+
+
+    # Implementação (4 pontos)
+
+    A nota da implementação será atribuída de acordo com o nível máximo atingido.
+
+    ## 2 pontos
+
+    ### Requisitos de código:
+
+    * Pelo menos **uma função portada para GPU**
+    * Uso de **pelo menos uma técnica de otimização**
+
+    ### Requisitos de execução:
+
+    * Arquivo SLURM corretamente configurado para submissão dos testes no **Cluster Franky**
+
+    ### Configuração obrigatória nos testes:
+
+    * Laços Internos: 100
+    * Laços Externos: 50000
+    * Histórico (dias): 948
+    * Previsão (dias): 948
+    * Preço Inicial: 0.5
+    * Taxa de Risco: 0.5
+
+    ### Observação:
+
+    Sem execução comprovada nessa configuração, **a pontuação não será atribuída**.
+
+    ## 3 pontos
+
+    ### Requisitos de código:
+
+    * Pelo menos **uma função portada para GPU**
+    * Uso de **pelo menos duas técnicas de otimização**
+
+    ### Requisitos de execução:
+
+    * Arquivos SLURM corretamente configurados para submissão dos testes 
+
+    ### Configuração obrigatória:
+
+    * Laços Internos: 100
+    * Laços Externos: 80000
+    * Histórico (dias): 1422
+    * Previsão (dias): 1422
+    * Preço Inicial: 0.5
+    * Taxa de Risco: 0.5
+
+    ### Observação:
+
+    Sem execução comprovada nessa configuração, **a pontuação não será atribuída**.
+
+
+    ## 4 pontos
+
+    ### Requisitos de código:
+
+    * Pelo menos **duas funções portadas para GPU**
+    * Uso de **duas ou mais técnicas de otimização**
+
+    ### Requisitos de execução:
+
+    * Arquivos SLURM corretamente configurados para submissão dos testes 
+
+    ### Requisitos de análise:
+
+    * Deve demonstrar entendimento do impacto de:
+
+    * arquitetura da GPU
+    * memória
+    * paralelismo
+    * escalabilidade
+
+    ### Configuração obrigatória:
+
+    * Laços Internos: 100
+    * Laços Externos: 100000
+    * Histórico (dias): 2370
+    * Previsão (dias): 2370
+    * Preço Inicial: 0.5
+    * Taxa de Risco: 0.5
+
+    ### Observação:
+
+    Sem execução comprovada nessa configuração, **a pontuação não será atribuída**.
+
+
+
+    # Relatório (.ipynb) (6 pontos)
+
+    O relatório deve conter **os logs de execução, análise e explicação dos resultados**.
+
+    ## Critérios de avaliação
+
+    | Conceito          | Estrutura                              | Integração e Visualização                         | Profundidade da Análise                                                                       |
+    | :---------------- | :------------------------------------- | :------------------------------------------------ | :-------------------------------------------------------------------------------------------- |
+    | **Até 2 pts** | Estrutura desorganizada ou fragmentada | Gráficos/tabelas sem conexão com o texto          | Descrição superficial                                                                         |
+    | **Até 4 pts** | Organização clara e técnica            | Visualizações próximas das explicações            | Relaciona resultados com conceitos básicos                                                    |
+    | **Até 6 pts** | Estrutura integrada (nível científico) | Narrativa fluida com dados sustentando argumentos | Explica desempenho com base em arquitetura (CPU vs GPU, memória, paralelismo, escalabilidade) |
+
+
+    ## Requisitos mínimos do relatório
+
+    Para qualquer nota diferente de zero, o relatório deve conter:
+
+    * Descrição dos experimentos realizados
+    * Parâmetros utilizados (loops, tempo, etc.)
+    * Evidência de execução (prints, logs ou tabelas)
+    * Pelo menos:
+
+    * **1 tabela**
+    * **1 gráfico**
+
+    ## Observações importantes
+
+    * Resultados sem evidência de execução **não serão considerados**
+    * Execuções fora das configurações obrigatórias **não pontuam**
+    * Análises inconsistentes com os dados **não serão considerados**
+
+
+    

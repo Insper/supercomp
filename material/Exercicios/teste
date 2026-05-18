@@ -1,0 +1,68 @@
+import time
+import random
+import multiprocessing as mp
+
+# N = 100 milhões de leituras
+N = 100_000_000
+
+# Janela K = 10
+K = 10
+
+
+def calculo(dados):
+    # Calcula média móvel
+    media = []
+    soma = sum(dados[:K])
+    media.append(soma / K)
+
+    for i in range(1, N - K):
+        soma = soma - dados[i - 1] + dados[i + K - 1]
+        media.append(soma / K)
+
+    return media
+
+
+# --- Função que executa um teste com N processos ---
+def run_test(nproc, N):
+    """Executa o cálculo com nproc processos e retorna o tempo e o score médio."""
+    data = [random.uniform(0, 1000) for _ in range(N)]
+    start = time.time()
+    with mp.Pool(processes=20) as pool:
+        results = pool.map(calculo, data)
+    end = time.time()
+    total_time = end - start
+    avg_score = sum(results) / len(results)
+    return total_time, avg_score
+
+
+
+# --- Execução principal ---
+if __name__ == "__main__":
+    test_procs = [1, 2, 4, 8, 16]
+    results = []
+
+    print("\n=== Teste de Speedup ===")
+    print(f"[INFO] CPUs detectadas: {mp.cpu_count()}")
+    print(f"[INFO] Dataset: 10 milhões de amostras\n")
+
+    # --- Rodar o caso base (1 CPU) ---
+    print("[INFO] Medindo tempo base (1 CPU)...")
+    base_time, base_score = run_test(1, N)
+    print(f"[BASE] Tempo com 1 CPU: {base_time:.2f}s | Score médio: {base_score:.4f}")
+    print("-" * 50)
+
+    # --- Testes com múltiplos processos ---
+    for n in test_procs[1:]:  # começa a partir de 2
+        t, s = run_test(n, N)
+        speedup = base_time / t
+        results.append((n, t, speedup))
+        print(f"{n:2d} CPUs → {t:7.2f}s | Speedup={speedup:6.2f}×")
+
+    # --- Resumo final ---
+    print("\n=== Resumo ===")
+    print(f"{'Nproc':>5} | {'Tempo (s)':>10} | {'Speedup':>8}")
+    print("-" * 30)
+    print(f"{1:5d} | {base_time:10.2f} | {1.00:8.2f}")
+    for n, t, sp in results:
+        print(f"{n:5d} | {t:10.2f} | {sp:8.2f}")
+

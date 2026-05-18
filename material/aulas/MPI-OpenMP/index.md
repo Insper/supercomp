@@ -1,1 +1,0 @@
-# MPI e OpenMP

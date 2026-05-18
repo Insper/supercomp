@@ -1,0 +1,30 @@
+.admonition.people ul {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.admonition.people ul li {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza o conteúdo no centro do li */
+    width: 10em; /* Ajuste conforme necessário */
+    text-align: center;
+    margin-bottom: 1em;
+}
+
+.admonition.people ul li em, 
+.admonition.people ul li strong {
+    display: block;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 120%;
+}
+
+.admonition.people ul li img {
+    border-radius: 50%; /* Torna as imagens circulares */
+    border: 1px solid black; /* Ajuste a cor e a espessura conforme necessário */
+    width: 6em; /* Aumenta o tamanho da imagem */
+    height: 6em; /* Aumenta o tamanho da imagem */
+    margin-bottom: 0.5em;
+}
