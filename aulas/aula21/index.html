@@ -11,6 +11,10 @@
         <link rel="canonical" href="https://insper.github.io/supercomp/aulas/aula21/">
       
       
+        <link rel="prev" href="../aula20/">
+      
+      
+        <link rel="next" href="../aula20/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -18,7 +22,7 @@
     
     
       
-        <title>Index - SuperComputação - 2026/1</title>
+        <title>Aula 21 - APS2 no Cluster Santos Dumont - SuperComputação - 2026/1</title>
       
     
     
@@ -80,7 +84,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#2-acesso-irregular-a-memoria" class="md-skip">
+        <a href="#cluster-santos-dumont" class="md-skip">
           Skip to content
         </a>
       
@@ -114,7 +118,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Index
+              Aula 21 - APS2 no Cluster Santos Dumont
             
           </span>
         </div>
@@ -227,10 +231,12 @@
         
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
+      <li class="md-tabs__item md-tabs__item--active">
         <a href="../aula01/" class="md-tabs__link">
           
   
@@ -369,23 +375,28 @@
       
   
   
+    
   
   
+  
     
     
     
-      
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
             
   
   <span class="md-ellipsis">
@@ -397,7 +408,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             Aulas
@@ -844,6 +855,241 @@
 
               
             
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Aula 21 - APS2 no Cluster Santos Dumont
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Aula 21 - APS2 no Cluster Santos Dumont
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#configurando-acesso-ssh-ao-github-dentro-do-santos-dumont" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configurando Acesso SSH ao GitHub dentro do Santos Dumont
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gerar-uma-nova-chave-ssh" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gerar uma nova chave SSH
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Gerar uma nova chave SSH">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#teste-a-conexao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Teste a conexão
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ambientacao-no-santos-dumont" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ambientação no Santos Dumont
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fila-sequana_cpu_dev" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fila sequana_cpu_dev
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fila-sequana_gpu_dev" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fila sequana_gpu_dev
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fila-sequana_gpu" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fila sequana_gpu
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Fila sequana_gpu">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#explorando-com-o-srun" class="md-nav__link">
+    <span class="md-ellipsis">
+      Explorando com o SRUN
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#carregando-modulos-no-sistema" class="md-nav__link">
+    <span class="md-ellipsis">
+      Carregando módulos no sistema
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Carregando módulos no sistema">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#testando-a-aps2-no-sdumont" class="md-nav__link">
+    <span class="md-ellipsis">
+      Testando a APS2 no SDumont
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#entendendo-o-codigo-base" class="md-nav__link">
+    <span class="md-ellipsis">
+      Entendendo o código base
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pontuacao-bonus-na-aps2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pontuação Bônus na APS2
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pontuação Bônus na APS2">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#requisitos-de-testes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Requisitos de testes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#requisitos-de-analise" class="md-nav__link">
+    <span class="md-ellipsis">
+      Requisitos de análise
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aula20/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aula 20 - Revisão II - Estratégias de otimização em GPU
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1180,6 +1426,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -1188,106 +1436,37 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#2-acesso-irregular-a-memoria" class="md-nav__link">
+  <a href="#configurando-acesso-ssh-ao-github-dentro-do-santos-dumont" class="md-nav__link">
     <span class="md-ellipsis">
-      2. Acesso Irregular à Memória
+      Configurando Acesso SSH ao GitHub dentro do Santos Dumont
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#compactacao-de-dados" class="md-nav__link">
+  <a href="#gerar-uma-nova-chave-ssh" class="md-nav__link">
     <span class="md-ellipsis">
-      Compactação de dados
+      Gerar uma nova chave SSH
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#processamento-por-tilesregioes" class="md-nav__link">
-    <span class="md-ellipsis">
-      Processamento por tiles/regiões
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#observacao-importante" class="md-nav__link">
-    <span class="md-ellipsis">
-      Observação Importante
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-divergencia-de-threads" class="md-nav__link">
-    <span class="md-ellipsis">
-      3. Divergência de Threads
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="3. Divergência de Threads">
+    <nav class="md-nav" aria-label="Gerar uma nova chave SSH">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#problema" class="md-nav__link">
+  <a href="#teste-a-conexao" class="md-nav__link">
     <span class="md-ellipsis">
-      Problema
+      Teste a conexão
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#otimizacoes-possiveis" class="md-nav__link">
+  <a href="#ambientacao-no-santos-dumont" class="md-nav__link">
     <span class="md-ellipsis">
-      Otimizações Possíveis
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Otimizações Possíveis">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#reduzir-condicionais" class="md-nav__link">
-    <span class="md-ellipsis">
-      Reduzir condicionais
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#separar-kernels" class="md-nav__link">
-    <span class="md-ellipsis">
-      Separar kernels
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#reorganizar-dados" class="md-nav__link">
-    <span class="md-ellipsis">
-      Reorganizar dados
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#resultado-esperado" class="md-nav__link">
-    <span class="md-ellipsis">
-      Resultado Esperado
+      Ambientação no Santos Dumont
     </span>
   </a>
   
@@ -1299,11 +1478,110 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-conclusao" class="md-nav__link">
+  <a href="#fila-sequana_cpu_dev" class="md-nav__link">
     <span class="md-ellipsis">
-      4. Conclusão
+      Fila sequana_cpu_dev
     </span>
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fila-sequana_gpu_dev" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fila sequana_gpu_dev
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fila-sequana_gpu" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fila sequana_gpu
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Fila sequana_gpu">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#explorando-com-o-srun" class="md-nav__link">
+    <span class="md-ellipsis">
+      Explorando com o SRUN
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#carregando-modulos-no-sistema" class="md-nav__link">
+    <span class="md-ellipsis">
+      Carregando módulos no sistema
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Carregando módulos no sistema">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#testando-a-aps2-no-sdumont" class="md-nav__link">
+    <span class="md-ellipsis">
+      Testando a APS2 no SDumont
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#entendendo-o-codigo-base" class="md-nav__link">
+    <span class="md-ellipsis">
+      Entendendo o código base
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pontuacao-bonus-na-aps2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pontuação Bônus na APS2
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pontuação Bônus na APS2">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#requisitos-de-testes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Requisitos de testes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#requisitos-de-analise" class="md-nav__link">
+    <span class="md-ellipsis">
+      Requisitos de análise
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1326,117 +1604,382 @@
   
 
 
-<h3 id="2-acesso-irregular-a-memoria">2. Acesso Irregular à Memória<a class="headerlink" href="#2-acesso-irregular-a-memoria" title="Permanent link">&para;</a></h3>
-<p>O melhor exemplo desse problema aparece na função <code>findComponents()</code>. Um dos problemas dessa função é que os acessos à memória ocorrem em posições imprevisíveis.</p>
-<p>Trechos como:</p>
-<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">nidx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ny</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">w</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">nx</span><span class="p">;</span>
+<h1 id="cluster-santos-dumont">Cluster Santos Dumont<a class="headerlink" href="#cluster-santos-dumont" title="Permanent link">&para;</a></h1>
+<p>Após concluir a configuração da VPN, ative a VPN para ser possível acessar o Santos Dumont via SSH.</p>
+<p>Em um terminal novo utilize o comando;</p>
+<p><div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>-o<span class="w"> </span><span class="nv">MACs</span><span class="o">=</span>hmac-sha2-256<span class="w"> </span>seu-login-de-acesso@login.sdumont.lncc.br
 </code></pre></div>
-<p>fazem com que threads diferentes acessem regiões distantes da memória.</p>
-<p>Isso prejudica a localidade espacial, o aproveitamento da cache, e a eficiência da GPU.</p>
-<p>Nesse caso, precisamos reorganizar os dados, transformar as estruturas em formatos mais lineares e contínuos.</p>
-<h3 id="compactacao-de-dados">Compactação de dados<a class="headerlink" href="#compactacao-de-dados" title="Permanent link">&para;</a></h3>
-<p>Como a imagem binária possui muitos zeros:</p>
-<ul>
-<li>armazenar apenas pixels relevantes;</li>
-<li>utilizar estruturas compactas;</li>
-<li>aplicar conceitos similares a CSR (<em>Compressed Sparse Row</em>).</li>
-</ul>
-<h3 id="processamento-por-tilesregioes">Processamento por tiles/regiões<a class="headerlink" href="#processamento-por-tilesregioes" title="Permanent link">&para;</a></h3>
-<p>Dividir a imagem em regiões menores para melhorar localidade espacial.</p>
-<hr />
-<h2 id="observacao-importante">Observação Importante<a class="headerlink" href="#observacao-importante" title="Permanent link">&para;</a></h2>
-<p>Essa etapa é excelente para mostrar que nem todo algoritmo é naturalmente eficiente em GPU. O handout pode discutir:</p>
-<ul>
-<li>diferenças entre problemas regulares e irregulares;</li>
-<li>limitações do paralelismo massivo;</li>
-<li>impacto da organização dos dados.</li>
-</ul>
-<p>Isso enriquece bastante o material didático.</p>
-<hr />
-<h1 id="3-divergencia-de-threads">3. Divergência de Threads<a class="headerlink" href="#3-divergencia-de-threads" title="Permanent link">&para;</a></h1>
-<p>O código possui vários pontos com condicionais que podem causar divergência.</p>
-<p>Um exemplo simples aparece em:</p>
-<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">mag</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">255</span><span class="p">)</span><span class="w"> </span><span class="n">mag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">255</span><span class="p">;</span>
+ou </p>
+<p><div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>seu-login-de-acesso@login.sdumont.lncc.br
 </code></pre></div>
-<p>e principalmente em:</p>
-<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">bin</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">255</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">visited</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+Ao se conectar via SSH você verá algo como:</p>
+<p><img alt="alt text" src="image.png" /></p>
+<p>Note que sua "home" é a pasta de projeto, chamada "/prj/insperhpc/seu-login", não submeta jobs desta pasta. Para executar e testar seus códigos, utilize a pasta <code>SCRATCH</code>, que é o ambiente apropriado para processamento e armazenamento temporário de arquivos.</p>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/scratch/insperhpc/seu-login
 </code></pre></div>
-<hr />
-<h2 id="problema">Problema<a class="headerlink" href="#problema" title="Permanent link">&para;</a></h2>
-<p>Quando threads do mesmo warp seguem caminhos diferentes:</p>
-<ul>
-<li>parte das threads fica ociosa;</li>
-<li>a execução torna-se serializada;</li>
-<li>o paralelismo efetivo diminui.</li>
-</ul>
-<p>Esse problema é muito comum em visão computacional.</p>
-<hr />
-<h2 id="otimizacoes-possiveis">Otimizações Possíveis<a class="headerlink" href="#otimizacoes-possiveis" title="Permanent link">&para;</a></h2>
-<h3 id="reduzir-condicionais">Reduzir condicionais<a class="headerlink" href="#reduzir-condicionais" title="Permanent link">&para;</a></h3>
-<p>Substituir operações simples por versões matemáticas.</p>
-<p>Exemplo:</p>
-<div class="highlight"><pre><span></span><code><span class="n">mag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">min</span><span class="p">(</span><span class="n">mag</span><span class="p">,</span><span class="w"> </span><span class="mi">255</span><span class="p">);</span>
+<h3 id="configurando-acesso-ssh-ao-github-dentro-do-santos-dumont">Configurando Acesso SSH ao GitHub dentro do Santos Dumont<a class="headerlink" href="#configurando-acesso-ssh-ao-github-dentro-do-santos-dumont" title="Permanent link">&para;</a></h3>
+<p>É importante configurar o GitHub para que você possa realizar clones e commits em repositórios privados. </p>
+<h2 id="gerar-uma-nova-chave-ssh">Gerar uma nova chave SSH<a class="headerlink" href="#gerar-uma-nova-chave-ssh" title="Permanent link">&para;</a></h2>
+<p>No terminal já autenticado no cluster, execute o seguinte comando:</p>
+<div class="highlight"><pre><span></span><code>ssh-keygen<span class="w"> </span>-t<span class="w"> </span>ed25519<span class="w"> </span>-C<span class="w"> </span><span class="s2">&quot;seu_email_do_github&quot;</span>
 </code></pre></div>
-<hr />
-<h3 id="separar-kernels">Separar kernels<a class="headerlink" href="#separar-kernels" title="Permanent link">&para;</a></h3>
-<p>Executar diferentes comportamentos em kernels distintos.</p>
-<hr />
-<h3 id="reorganizar-dados">Reorganizar dados<a class="headerlink" href="#reorganizar-dados" title="Permanent link">&para;</a></h3>
-<p>Agrupar regiões semelhantes para que threads vizinhas executem o mesmo fluxo.</p>
-<hr />
-<h2 id="resultado-esperado">Resultado Esperado<a class="headerlink" href="#resultado-esperado" title="Permanent link">&para;</a></h2>
-<p>As melhorias reduzem:</p>
-<ul>
-<li>serialização interna dos warps;</li>
-<li>desperdício de ciclos;</li>
-<li>ociosidade das threads.</li>
-</ul>
-<hr />
-<h1 id="4-conclusao">4. Conclusão<a class="headerlink" href="#4-conclusao" title="Permanent link">&para;</a></h1>
-<p>Esse código é extremamente adequado para um handout didático porque permite mostrar:</p>
+<p>Pressione <strong>Enter</strong> eternamente até que apareça algo como:</p>
+<div class="highlight"><pre><span></span><code>...bla bla bla, criamos as chaves nos diretórios
+/prj/insperhpc/seu-login/.ssh/id_ed25519        ← chave privada
+/prj/insperhpc/seu-login/.ssh/id_ed25519.pub    ← chave pública
+</code></pre></div>
+<p>Copie a chave pública usando o comando:</p>
+<div class="highlight"><pre><span></span><code>cat<span class="w"> </span>/prj/insperhpc/&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;seu-login<span class="o">&lt;&lt;&lt;&lt;&lt;&lt;</span>&lt;/.ssh/id_ed25519.pub
+</code></pre></div>
+<p>Copie <strong>toda a linha exibida</strong>, começa com <code>ssh-ed25519</code>, e termina com o seu email.</p>
+<p>Adicione a chave no seu GitHub</p>
+<ol>
+<li>
+<p>Acesse GitHub</p>
+</li>
+<li>
+<p>Vá em <strong>Settings</strong></p>
+</li>
+</ol>
+<p><img alt="settings" src="../aula02/imgs/settings.png" /></p>
+<ol>
+<li>Clique em <strong>SSH and GPG keys</strong></li>
+</ol>
+<p><img alt="ssh" src="../aula02/imgs/ssh.png" /></p>
+<ol>
+<li>Clique em <strong>New SSH key</strong></li>
+</ol>
+<p><img alt="ssh" src="../aula02/imgs/new_ssh.png" /></p>
+<ol>
+<li>Cole a chave pública e depois clique em "Add SSH key"</li>
+</ol>
+<p><img alt="add" src="../aula02/imgs/add.png" /></p>
+<h3 id="teste-a-conexao">Teste a conexão<a class="headerlink" href="#teste-a-conexao" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>-T<span class="w"> </span>git@github.com
+</code></pre></div>
+<p>Se estiver correto, aparecerá:</p>
+<div class="highlight"><pre><span></span><code>Hi usuario! You&#39;ve successfully authenticated...
+</code></pre></div>
+<h3 id="ambientacao-no-santos-dumont">Ambientação no Santos Dumont<a class="headerlink" href="#ambientacao-no-santos-dumont" title="Permanent link">&para;</a></h3>
+<p>Antes de começar a fazer pedidos de recursos pro SLURM, vamos conhecer as filas que temos acesso e o hardware que temos disponível em cada fila.</p>
+<div class="highlight"><pre><span></span><code>sacctmgr<span class="w"> </span>list<span class="w"> </span>user<span class="w"> </span><span class="nv">$USER</span><span class="w"> </span>-s<span class="w"> </span><span class="nv">format</span><span class="o">=</span>partition%20,MaxJobs,MaxSubmit,MaxNodes,MaxCPUs,MaxWall
+</code></pre></div>
+<p><img alt="alt text" src="image-1.png" /></p>
+<p>As filas que temos acesso tem essas características:</p>
+<h2 id="fila-sequana_cpu_dev">Fila sequana_cpu_dev<a class="headerlink" href="#fila-sequana_cpu_dev" title="Permanent link">&para;</a></h2>
+<p>A fila sequana_cpu_dev pode ser usada para testes em CPU, permitindo a execução de apenas 1 job por vez,  utilizando até 4 nós e 192 CPUs por job, com tempo limite de 20 minutos. A infraestrutura disponível conta com 166 nós e 7968 CPUs no total, com 8 GB de memória por CPU, somando aproximadamente 62 TB de memória. </p>
+<h2 id="fila-sequana_gpu_dev">Fila sequana_gpu_dev<a class="headerlink" href="#fila-sequana_gpu_dev" title="Permanent link">&para;</a></h2>
+<p>A fila sequana_gpu_dev pode ser usada para testes com uso de GPU, também limitada a 1 job por vez, podendo utilizar até 4 nós e 192 CPUs por job, com tempo máximo de 20 minutos. Disponibiliza 61 nós, 2928 CPUs e 244 GPUs, com configuração padrão de 12 núcleos de CPUs por GPU e 94 GB de memória por GPU. A memória por CPU é de 8 GB. </p>
+<h2 id="fila-sequana_gpu">Fila sequana_gpu<a class="headerlink" href="#fila-sequana_gpu" title="Permanent link">&para;</a></h2>
+<p>A fila sequana_gpu é a principal fila utilizada para execução de jobs em GPU, permitindo até 4 jobs simultâneos e 24 submissões, com uso de até 24 nós e 1152 CPUs por job, e <strong>tempo máximo de execução de até 4 dias</strong>. Possui 87 nós, 4176 CPUs e 348 GPUs, mantendo a proporção padrão de 12 CPUs por GPU e 94 GB de memória por GPU. A memória por CPU é de 8 GB, totalizando aproximadamente 32 TB. </p>
+<h3 id="explorando-com-o-srun">Explorando com o SRUN<a class="headerlink" href="#explorando-com-o-srun" title="Permanent link">&para;</a></h3>
+<p>Vale lembrar que podemos pedir via SRUN um terminal dentro do nó de computação, para, de forma livre, executar qualquer comando:</p>
+<div class="highlight"><pre><span></span><code>srun<span class="w"> </span>--partition<span class="o">=</span>sequana_gpu_dev<span class="w"> </span>--gres<span class="o">=</span>gpu:1<span class="w"> </span>--pty<span class="w"> </span>bash
+</code></pre></div>
+<p>Para sair, basta digitar no terminal:
+<div class="highlight"><pre><span></span><code><span class="nb">exit</span>
+</code></pre></div></p>
+<p>Ou, podemos usar o SRUN com um comando definido que será executado no nó de computação de forma direta pelo terminal:</p>
+<div class="highlight"><pre><span></span><code>srun<span class="w"> </span>--partition<span class="o">=</span>sequana_gpu_dev<span class="w"> </span>--gres<span class="o">=</span>gpu:1<span class="w"> </span>--ntasks<span class="o">=</span><span class="m">1</span><span class="w"> </span>--pty<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="se">\</span>
+<span class="s2">&quot;echo &#39;=== HOSTNAME ===&#39;; hostname; echo; \</span>
+<span class="s2"> echo &#39;=== MEMORIA (GB) ===&#39;; \</span>
+<span class="s2"> cat /proc/meminfo | grep -E &#39;MemTotal|MemFree|MemAvailable|Swap&#39; | \</span>
+<span class="s2"> awk &#39;{printf \&quot;%s %.2f GB\\n\&quot;, \$1, \$2 / 1048576}&#39;; \</span>
+<span class="s2"> echo; \</span>
+<span class="s2"> echo &#39;=== CPU INFO ===&#39;; \</span>
+<span class="s2"> lscpu | grep -E &#39;Model name|Socket|Core|Thread|CPU\\(s\\)|cache&#39;</span>
+<span class="s2"> echo &#39;=== GPU INFO ===&#39;; \</span>
+<span class="s2"> if command -v nvidia-smi &amp;&gt; /dev/null; then nvidia-smi; else echo &#39;nvidia-smi não disponível&#39;; fi&quot;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>srun<span class="w"> </span>--partition<span class="o">=</span>sequana_cpu_dev<span class="w"> </span>--ntasks<span class="o">=</span><span class="m">1</span><span class="w"> </span>--pty<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="se">\</span>
+<span class="s2">&quot;echo &#39;=== HOSTNAME ===&#39;; hostname; echo; \</span>
+<span class="s2"> echo &#39;=== MEMORIA (GB) ===&#39;; \</span>
+<span class="s2"> cat /proc/meminfo | grep -E &#39;MemTotal|MemFree|MemAvailable|Swap&#39; | \</span>
+<span class="s2"> awk &#39;{printf \&quot;%s %.2f GB\\n\&quot;, \$1, \$2 / 1048576}&#39;; \</span>
+<span class="s2"> echo; \</span>
+<span class="s2"> echo &#39;=== CPU INFO ===&#39;; \</span>
+<span class="s2"> lscpu | grep -E &#39;Model name|Socket|Core|Thread|CPU\\(s\\)|cache&#39;</span>
+<span class="s2"> echo &#39;=== GPU INFO ===&#39;; \</span>
+<span class="s2"> if command -v nvidia-smi &amp;&gt; /dev/null; then nvidia-smi; else echo &#39;nvidia-smi não disponível&#39;; fi&quot;</span>
+</code></pre></div>
+<p>O comando <code>sinfo</code> mostra quais são as filas e quais são os status dos nós </p>
+<p><div class="highlight"><pre><span></span><code>sinfo
+</code></pre></div>
+Como o Santos Dumont é utilizado por pessoas de todo o país, a quantidade de informações exibidas pode ser muito grande. Por isso, vamos aplicar alguns filtros para visualizar apenas o que é relevante para nós:</p>
+<p>Este comando filtra por projeto, então só veremos os jobs relacionados aos alunos do Insper</p>
+<p><div class="highlight"><pre><span></span><code>squeue<span class="w"> </span>-A<span class="w"> </span>insperhpc
+</code></pre></div>
+Se quiser filtrar apenas o seu usuário:</p>
+<div class="highlight"><pre><span></span><code>squeue<span class="w"> </span>-u<span class="w"> </span><span class="nv">$USER</span>
+</code></pre></div>
+<p>Este filtra pela fila</p>
+<div class="highlight"><pre><span></span><code>sinfo<span class="w"> </span>-p<span class="w"> </span>sequana_gpu_dev
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>sinfo<span class="w"> </span>-p<span class="w"> </span>sequana_cpu_dev
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>sinfo<span class="w"> </span>-p<span class="w"> </span>sequana_gpu
+</code></pre></div>
+<h2 id="carregando-modulos-no-sistema">Carregando módulos no sistema<a class="headerlink" href="#carregando-modulos-no-sistema" title="Permanent link">&para;</a></h2>
+<p>No Cluster Franky precisamos carregar o módulo da GPU para conseguir compilar os códigos em CUDA e executar os binários na GPU. No Santos Dumont, não é diferente, porém, temos mais módulos disponíveis:</p>
+<p>Com o comando:</p>
+<div class="highlight"><pre><span></span><code>module<span class="w"> </span>avail<span class="w"> </span>cuda
+</code></pre></div>
+<p>Você pode ver a lista de módulos cuda disponíveis:</p>
+<p><img alt="alt text" src="image-2.png" /></p>
+<p>Eu costumo usar o modulo mais próximo ao que temos no Cluster Franky para garantir portabilidade de código, mas fique a vontade para escolher e testar a versão que quiser:</p>
+<p>Para carregar o módulo:</p>
+<div class="highlight"><pre><span></span><code>module<span class="w"> </span>load<span class="w"> </span>cuda/12.6_sequana
+</code></pre></div>
+<p>Crie o arquivo </p>
+<p><code>hello.cu</code>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iomanip&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cuda_runtime.h&gt;</span>
+
+<span class="c1">// KERNEL CUDA</span>
+<span class="n">__global__</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">helloGPU</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// ID global da thread</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">global_id</span><span class="w"> </span><span class="o">=</span>
+<span class="w">        </span><span class="n">blockIdx</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">blockDim</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">threadIdx</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Warp ao qual a thread pertence</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">warp_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">threadIdx</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">warpSize</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// blockIdx.x  -&gt; bloco atual</span>
+<span class="w">    </span><span class="c1">// threadIdx.x -&gt; thread dentro do bloco</span>
+<span class="w">    </span><span class="c1">// global_id   -&gt; thread global no grid</span>
+<span class="w">    </span><span class="c1">// warp_id     -&gt; warp da thread</span>
+<span class="w">    </span><span class="c1">//</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span>
+<span class="w">        </span><span class="s">&quot;[Bloco %02d] &quot;</span>
+<span class="w">        </span><span class="s">&quot;[Thread %02d] &quot;</span>
+<span class="w">        </span><span class="s">&quot;[Global ID %03d] &quot;</span>
+<span class="w">        </span><span class="s">&quot;[Warp %02d]</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
+
+<span class="w">        </span><span class="n">blockIdx</span><span class="p">.</span><span class="n">x</span><span class="p">,</span>
+<span class="w">        </span><span class="n">threadIdx</span><span class="p">.</span><span class="n">x</span><span class="p">,</span>
+<span class="w">        </span><span class="n">global_id</span><span class="p">,</span>
+<span class="w">        </span><span class="n">warp_id</span>
+<span class="w">    </span><span class="p">);</span>
+
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">cudaDeviceProp</span><span class="w"> </span><span class="n">hw</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Obtém informações da GPU</span>
+<span class="w">    </span><span class="n">cudaGetDeviceProperties</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hw</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Configuração do kernel</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">blocks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">threads</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">40</span><span class="p">;</span>
+
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;GPU: &quot;</span>
+<span class="w">              </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">hw</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Memoria Global: &quot;</span>
+<span class="w">              </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">fixed</span>
+<span class="w">              </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">setprecision</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="w">              </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">hw</span><span class="p">.</span><span class="n">totalGlobalMem</span><span class="w"> </span><span class="o">/</span>
+<span class="w">                 </span><span class="p">(</span><span class="mf">1024.0</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">1024.0</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">1024.0</span><span class="p">)</span>
+<span class="w">              </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; GB</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;SMs: &quot;</span>
+<span class="w">              </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">hw</span><span class="p">.</span><span class="n">multiProcessorCount</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Warp: &quot;</span>
+<span class="w">              </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">hw</span><span class="p">.</span><span class="n">warpSize</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Max Threads/Bloco: &quot;</span>
+<span class="w">              </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">hw</span><span class="p">.</span><span class="n">maxThreadsPerBlock</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// ==================================================</span>
+<span class="w">    </span><span class="c1">// CONFIGURAÇÃO DO GRID</span>
+<span class="w">    </span><span class="c1">// ==================================================</span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Blocos: &quot;</span>
+<span class="w">              </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">blocks</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Threads por bloco: &quot;</span>
+<span class="w">              </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">threads</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Total de threads: &quot;</span>
+<span class="w">              </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">blocks</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">threads</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Warps por bloco: &quot;</span>
+<span class="w">              </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="p">(</span><span class="n">threads</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">hw</span><span class="p">.</span><span class="n">warpSize</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="w">                 </span><span class="o">/</span><span class="w"> </span><span class="n">hw</span><span class="p">.</span><span class="n">warpSize</span>
+<span class="w">              </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;========================================</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// EXECUTA O KERNEL</span>
+<span class="w">    </span><span class="n">helloGPU</span><span class="o">&lt;&lt;&lt;</span><span class="n">blocks</span><span class="p">,</span><span class="w"> </span><span class="n">threads</span><span class="o">&gt;&gt;&gt;</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// Espera a GPU terminar</span>
+<span class="w">    </span><span class="n">cudaDeviceSynchronize</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<p>Para compilar use</p>
+<div class="highlight"><pre><span></span><code>nvcc<span class="w"> </span>-O3<span class="w"> </span>hello.cu<span class="w"> </span>-o<span class="w"> </span>hello
+</code></pre></div>
+<p>Para executar use:</p>
+<div class="highlight"><pre><span></span><code>srun<span class="w"> </span>--partition<span class="o">=</span>sequana_gpu_dev<span class="w"> </span>--gres<span class="o">=</span>gpu:1<span class="w"> </span>./hello
+</code></pre></div>
+<p>Se quiser submeter um job com sbatch:</p>
+<p>run.slurm
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="c1">#SBATCH --job-name=exemplo_gpu</span>
+<span class="c1">#SBATCH --output=saida_%j.txt</span>
+<span class="c1">#SBATCH --time=00:10:00</span>
+<span class="c1">#SBATCH --gres=gpu:1</span>
+<span class="c1">#SBATCH --partition=sequana_gpu_dev</span>
+<span class="c1">#SBATCH --mem=1G                  # 1 GiB por nó</span>
+
+
+module<span class="w"> </span>load<span class="w"> </span>cuda/12.6_sequana
+
+./hello
+</code></pre></div></p>
+<div class="highlight"><pre><span></span><code>sbatch<span class="w"> </span>run.slurm
+</code></pre></div>
+<p>Sugiro que troque o valor de 'blocos' e de 'threads' para ver como diferentes configurações são alocadas na GPU</p>
+<p><img alt="alt text" src="image-3.png" /></p>
+<p>Agora que já aprendemos a acessar a pasta <code>SCRATCH</code>, configurar o GitHub, carregar módulos e submeter jobs com GPU alocada, vamos colocar tudo isso em prática:</p>
+<h3 id="testando-a-aps2-no-sdumont">Testando a APS2 no SDumont<a class="headerlink" href="#testando-a-aps2-no-sdumont" title="Permanent link">&para;</a></h3>
+<p>Para realizar testes da APS2 é importante clonar o repositório na pasta <code>SCRATCH</code></p>
+<p>lembrando, para estar na pasta <code>SCRATCH</code> utilize o comando:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/scratch/insperhpc/seu-login
+</code></pre></div>
+<p>faça o clone do repositório:</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>git@github.com:insper-classroom/&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;aps2-seu-login<span class="o">&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;</span>&lt;&lt;.git
+</code></pre></div>
+<p>Se você apenas der <code>make</code> vamos ter alguns problemas...</p>
+<p>É importante garantir que você tem os arquivos <code>main_cpu.cpp</code> e <code>main_gpu.cu</code> para compilar corretamente usando o Makefile disponibilizado.</p>
+<p>É importante também que você carregue o módulo do gcc antes de fazer as compilações, temos várias opções disponíveis, eu vou utilizar esta para garantir compatibilidade com o modulo cuda.</p>
+<p><img alt="alt text" src="image-4.png" /></p>
+<div class="highlight"><pre><span></span><code>module<span class="w"> </span>load<span class="w"> </span>gcc/12.4.0_sequana
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>module<span class="w"> </span>load<span class="w"> </span>cuda/12.6_sequana
+</code></pre></div>
+<p>O Emil usou um compilador gcc mais novo no desenvolvimento do código base, se você compilar o código sem fazer uma pequena alteração, vai aparecer um erro como este:
+<img alt="alt text" src="image-5.png" /></p>
+<p>basta trocar <code>powf</code> por <code>pow</code> e <code>sqrtf</code> por <code>sqrt</code> no seu código que vai compilar sem erros.</p>
+<p>Seu arquivo <code>Makefile</code> deve definir os parâmetros de complexidade computacional utilizados nos testes.</p>
+<p>Para os primeiros experimentos, vamos utilizar uma configuração mais simples, garantindo que a execução seja rápida e fácil de validar;</p>
+<div class="highlight"><pre><span></span><code><span class="cp"># Execuções</span>
+<span class="nl">runCPU</span><span class="p">:</span>
+<span class="w">        </span><span class="p">.</span><span class="o">/</span><span class="n">$</span><span class="p">(</span><span class="n">CPU_EXE</span><span class="p">)</span><span class="w">  </span><span class="mi">100</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="mf">0.5</span><span class="w"> </span><span class="mf">0.5</span>
+</code></pre></div>
+<p>Após estes ajustes execute o comando:</p>
+<div class="highlight"><pre><span></span><code>make<span class="w"> </span>buildCPU
+</code></pre></div>
+<p>Depois de gerar os binários, teste o código:</p>
+<div class="highlight"><pre><span></span><code>srun<span class="w"> </span>--partition<span class="o">=</span>sequana_cpu_dev<span class="w"> </span>make<span class="w"> </span>runCPU
+</code></pre></div>
+<p><img alt="alt text" src="image-6.png" /></p>
+<p>Ou use o sbatch </p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="c1">#SBATCH --job-name=exemplo_gpu</span>
+<span class="c1">#SBATCH --output=saida.txt</span>
+<span class="c1">#SBATCH --time=00:10:00</span>
+<span class="c1">#SBATCH --gres=gpu:1</span>
+<span class="c1">#SBATCH --partition=sequana_gpu_dev</span>
+<span class="c1">#SBATCH --mem=1G</span>
+
+<span class="c1">#carregue os modulos</span>
+module<span class="w"> </span>load<span class="w"> </span>gcc/12.4.0_sequana
+module<span class="w"> </span>load<span class="w"> </span>cuda/12.6_sequana
+
+<span class="c1">#Execute o binario</span>
+make<span class="w"> </span>runCPU
+</code></pre></div>
+<p><img alt="alt text" src="image-7.png" /></p>
+<p>Desta forma testamos a versão CPU sequencial do código.</p>
+<h3 id="entendendo-o-codigo-base">Entendendo o código base<a class="headerlink" href="#entendendo-o-codigo-base" title="Permanent link">&para;</a></h3>
+<p>O código base da APS2 implementa uma simulação do comportamento das ações da NVIDIA utilizando o modelo de Black-Scholes aliado ao Método de Monte Carlo.</p>
+<p>A aplicação utiliza dados históricos de fechamento das ações para calcular a volatilidade do mercado e, a partir disso, gerar múltiplas projeções probabilísticas para o preço futuro do ativo.</p>
+<p>Quando você configura os parâmetros desta forma, como no exemplo:</p>
+<p><div class="highlight"><pre><span></span><code><span class="cp"># Execuções</span>
+<span class="nl">runCPU</span><span class="p">:</span>
+<span class="w">        </span><span class="p">.</span><span class="o">/</span><span class="n">$</span><span class="p">(</span><span class="n">CPU_EXE</span><span class="p">)</span><span class="w">  </span><span class="mi">100</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="mf">0.5</span><span class="w"> </span><span class="mf">0.5</span>
+</code></pre></div>
+Você está configurando:</p>
 <table>
 <thead>
 <tr>
-<th>Problema</th>
-<th>Melhor Exemplo</th>
+<th>Parâmetro</th>
+<th>Valor</th>
+<th>Significado</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Data Reuse</td>
-<td>Sobel</td>
+<td><code>inLoops</code></td>
+<td><code>100</code></td>
+<td>Quantidade de simulações</td>
 </tr>
 <tr>
-<td>Shared Memory</td>
-<td>Sobel</td>
+<td><code>outLoops</code></td>
+<td><code>100</code></td>
+<td>Quantidade total de execuções do método de Monte Carlo</td>
 </tr>
 <tr>
-<td>Tiling</td>
-<td>Sobel</td>
+<td><code>timeStepsHistory</code></td>
+<td><code>100</code></td>
+<td>Janela de dados históricos utilizados para calcular a volatilidade</td>
 </tr>
 <tr>
-<td>Divergência</td>
-<td>Threshold / BFS</td>
+<td><code>timeStepsForecast</code></td>
+<td><code>100</code></td>
+<td>Janela de tempo para a previsão futura</td>
 </tr>
 <tr>
-<td>Acesso Irregular</td>
-<td>BFS</td>
+<td><code>spotPrice</code></td>
+<td><code>0.5</code></td>
+<td>Preço inicial da ação no instante inicial</td>
 </tr>
 <tr>
-<td>Sparse Data</td>
-<td>Imagem binária</td>
-</tr>
-<tr>
-<td>Gargalo de Memória</td>
-<td>Sobel</td>
-</tr>
-<tr>
-<td>Limitações da GPU</td>
-<td>Connected Components</td>
+<td><code>riskRate</code></td>
+<td><code>0.5</code></td>
+<td>Taxa livre de risco utilizada no modelo matemático</td>
 </tr>
 </tbody>
 </table>
-<p>Além disso, o fato de processar aproximadamente 3000 imagens torna os ganhos de desempenho perceptíveis, o que é ótimo para análises experimentais e comparação de benchmarks.</p>
+<p>Na prática, configurar:</p>
+<div class="highlight"><pre><span></span><code><span class="cp"># Execuções</span>
+<span class="nl">runCPU</span><span class="p">:</span>
+<span class="w">        </span><span class="p">.</span><span class="o">/</span><span class="n">$</span><span class="p">(</span><span class="n">CPU_EXE</span><span class="p">)</span><span class="w">  </span><span class="mi">100</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="mf">0.5</span><span class="w"> </span><span class="mf">0.5</span>
+</code></pre></div>
+<p>significa:</p>
+<ul>
+<li>Executar 100 simulações</li>
+<li>Executar o Monte Carlo 100 vezes</li>
+<li>Utilizar 100 amostras históricas do mercado</li>
+<li>Projetar 100 passos temporais futuros</li>
+<li>Considerar um preço inicial da ação igual a 0.5</li>
+<li>Utilizar taxa de risco de 0.5</li>
+</ul>
+<p>Lembrando que para a entrega da <a href="../../projetos/2026-1/APS2/">APS2</a> a configuração dos testes muda de acordo com a rúbrica, para validar <strong>a pontuação inicial</strong>, você deve cumprir os seguintes critérios:</p>
+<p><img alt="alt text" src="image-8.png" /></p>
+<h3 id="pontuacao-bonus-na-aps2">Pontuação Bônus na APS2<a class="headerlink" href="#pontuacao-bonus-na-aps2" title="Permanent link">&para;</a></h3>
+<p>Para validar a pontuação bônus na APS2, devem ser atendidos os seguintes requisitos:</p>
+<h4 id="requisitos-de-testes"><strong>Requisitos de testes</strong><a class="headerlink" href="#requisitos-de-testes" title="Permanent link">&para;</a></h4>
+<p>Disponibilizar arquivos SLURM corretamente configurados para submissão e execução dos testes nos dois clusters:</p>
+<ul>
+<li><strong>Cluster Franky</strong></li>
+<li><strong>Cluster Santos Dumont</strong></li>
+</ul>
+<h4 id="requisitos-de-analise"><strong>Requisitos de análise</strong><a class="headerlink" href="#requisitos-de-analise" title="Permanent link">&para;</a></h4>
+<p>Apresentar gráficos e tabelas comparando o desempenho obtido em cada ambiente.</p>
+<p>As análises dos resultados devem considerar os impactos da arquitetura da GPU em cada ambiente.</p>
 
 
 

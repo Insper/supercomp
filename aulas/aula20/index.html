@@ -11,7 +11,7 @@
         <link rel="canonical" href="https://insper.github.io/supercomp/aulas/aula20/">
       
       
-        <link rel="prev" href="../aula19/">
+        <link rel="prev" href="../aula21/">
       
       
         <link rel="next" href="../../teoria/slides/">
@@ -823,6 +823,184 @@
   
   <span class="md-ellipsis">
     Aula 19 - Revisão I - Passando o código da CPU para GPU
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Aula 20 - Revisão II - Estratégias de otimização em GPU
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Aula 20 - Revisão II - Estratégias de otimização em GPU
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#em-relacao-aos-gargalos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Em relação aos gargalos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#otimizando-o-codigo-da-atividade-trata-video" class="md-nav__link">
+    <span class="md-ellipsis">
+      Otimizando o código da atividade Trata Vídeo
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Otimizando o código da atividade Trata Vídeo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reaproveitamento-de-dados" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reaproveitamento de Dados
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conclusao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusão
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercicios" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercícios
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Exercícios">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exercicio-1-blur-gaussiano" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercício 1 - Blur Gaussiano
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercicio-2-multiplicacao-de-matrizes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercício 2 — Multiplicação de Matrizes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercicio-3-convolucao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercício 3 — Convolução
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercicio-4-transposicao-de-matriz" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercício 4 — Transposição de Matriz
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aula21/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Aula 21 - APS2 no Cluster Santos Dumont
     
   </span>
   
