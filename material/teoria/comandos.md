@@ -111,8 +111,7 @@ export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
 
 ## Diretório de trabalho
 
-!!! warning "Importante"
-Trabalhe na sua pasta `SCRATCH`.
+!!! warning "Trabalhe na sua pasta `SCRATCH`."
 
 ```bash
 cd /scratch/insperhpc/$USER
