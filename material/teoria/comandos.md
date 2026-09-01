@@ -33,7 +33,7 @@ srun --nodelist=compute10 \
      --partition=merry_cpu \
      --mem=1G \
      --pty bash
-````
+```
 
 ## Executar programa sequencial
 
