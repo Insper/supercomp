@@ -1411,14 +1411,10 @@
 <span class="w">     </span>--partition<span class="o">=</span>merry_cpu<span class="w"> </span><span class="se">\</span>
 <span class="w">     </span>--mem<span class="o">=</span>1G<span class="w"> </span><span class="se">\</span>
 <span class="w">     </span>--pty<span class="w"> </span>bash
-<span class="sb">````</span>
-
-<span class="c1">## Executar programa sequencial</span>
-
-<span class="c1">### CPU</span>
-
-<span class="sb">```</span>bash
-srun<span class="w"> </span>--partition<span class="o">=</span>pluton_cpu<span class="w"> </span><span class="se">\</span>
+</code></pre></div>
+<h2 id="executar-programa-sequencial">Executar programa sequencial<a class="headerlink" href="#executar-programa-sequencial" title="Permanent link">&para;</a></h2>
+<h3 id="cpu">CPU<a class="headerlink" href="#cpu" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>srun<span class="w"> </span>--partition<span class="o">=</span>pluton_cpu<span class="w"> </span><span class="se">\</span>
 <span class="w">     </span>--mem<span class="o">=</span>1G<span class="w"> </span><span class="se">\</span>
 <span class="w">     </span>./meu_binario
 </code></pre></div>
@@ -1498,7 +1494,7 @@ srun<span class="w"> </span>--partition<span class="o">=</span>merry_cpu<span cl
 </tbody>
 </table>
 <h2 id="ver-nos">Ver nós<a class="headerlink" href="#ver-nos" title="Permanent link">&para;</a></h2>
-<h3 id="cpu">CPU<a class="headerlink" href="#cpu" title="Permanent link">&para;</a></h3>
+<h3 id="cpu_1">CPU<a class="headerlink" href="#cpu_1" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>sinfo<span class="w"> </span>-p<span class="w"> </span>sequana_cpu_dev
 </code></pre></div>
 <h3 id="gpu">GPU<a class="headerlink" href="#gpu" title="Permanent link">&para;</a></h3>
@@ -1511,8 +1507,8 @@ srun<span class="w"> </span>--partition<span class="o">=</span>merry_cpu<span cl
 <h3 id="jobs-do-projeto-insper">Jobs do projeto Insper<a class="headerlink" href="#jobs-do-projeto-insper" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>squeue<span class="w"> </span>-A<span class="w"> </span>insperhpc
 </code></pre></div>
-<h2 id="executar-programa-sequencial">Executar programa sequencial<a class="headerlink" href="#executar-programa-sequencial" title="Permanent link">&para;</a></h2>
-<h3 id="cpu_1">CPU<a class="headerlink" href="#cpu_1" title="Permanent link">&para;</a></h3>
+<h2 id="executar-programa-sequencial_1">Executar programa sequencial<a class="headerlink" href="#executar-programa-sequencial_1" title="Permanent link">&para;</a></h2>
+<h3 id="cpu_2">CPU<a class="headerlink" href="#cpu_2" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>srun<span class="w"> </span>--partition<span class="o">=</span>sequana_cpu_dev<span class="w"> </span><span class="se">\</span>
 <span class="w">     </span>--mem<span class="o">=</span>1G<span class="w"> </span><span class="se">\</span>
 <span class="w">     </span>./meu_binario
@@ -1572,7 +1568,7 @@ module<span class="w"> </span>load<span class="w"> </span>cuda/12.6_sequana
 <blockquote>
 <p>Execute estes comandos <strong>dentro do nó de computação alocado</strong>.</p>
 </blockquote>
-<h2 id="cpu_2">CPU<a class="headerlink" href="#cpu_2" title="Permanent link">&para;</a></h2>
+<h2 id="cpu_3">CPU<a class="headerlink" href="#cpu_3" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code>lscpu
 </code></pre></div>
 <p>Número de CPUs disponíveis:</p>
