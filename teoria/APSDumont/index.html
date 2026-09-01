@@ -1647,6 +1647,12 @@ Se quiser filtrar apenas o seu usuário:</p>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>sinfo<span class="w"> </span>-p<span class="w"> </span>sequana_cpu_dev
 </code></pre></div>
+<p>Se algo deu errado e você ficou com job preso na fila, pode cancelar todos os seus jobs com o comando:</p>
+<div class="highlight"><pre><span></span><code>scancel<span class="w"> </span>-u<span class="w"> </span><span class="nv">$USER</span>
+</code></pre></div>
+<p>Ou um job especifico com o comando:</p>
+<div class="highlight"><pre><span></span><code>scancel<span class="w"> </span>id_do_job
+</code></pre></div>
 <h3 id="testando-a-aps1-no-sdumont">Testando a APS1 no SDumont<a class="headerlink" href="#testando-a-aps1-no-sdumont" title="Permanent link">&para;</a></h3>
 <p>lembrando, para estar na pasta <code>SCRATCH</code> utilize o comando:</p>
 <div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/scratch/insperhpc/seu-login

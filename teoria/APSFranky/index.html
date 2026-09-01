@@ -1544,7 +1544,16 @@ ou</p>
 <p><div class="highlight"><pre><span></span><code>sinfo
 </code></pre></div>
 O comando abaixo mostra detalhes sobre os recursos de cada fila</p>
-<div class="highlight"><pre><span></span><code>scontrol<span class="w"> </span>show<span class="w"> </span>partition<span class="w"> </span>
+<p><div class="highlight"><pre><span></span><code>scontrol<span class="w"> </span>show<span class="w"> </span>partition<span class="w"> </span>
+</code></pre></div>
+O comando <code>squeue</code> mostra a fila do Cluster, você pode verificar informações sobre os jobs lançaos para o SLURM como este comando:</p>
+<div class="highlight"><pre><span></span><code>squeue
+</code></pre></div>
+<p>Se algo deu errado e você ficou com job preso na fila, pode cancelar todos os seus jobs com o comando:</p>
+<div class="highlight"><pre><span></span><code>scancel<span class="w"> </span>-u<span class="w"> </span><span class="nv">$USER</span>
+</code></pre></div>
+<p>Ou um job especifico com o comando:</p>
+<div class="highlight"><pre><span></span><code>scancel<span class="w"> </span>id_do_job
 </code></pre></div>
 <h3 id="sbatch-submissao-de-jobs-no-slurm">SBATCH — Submissão de Jobs no SLURM<a class="headerlink" href="#sbatch-submissao-de-jobs-no-slurm" title="Permanent link">&para;</a></h3>
 <p><code>sbatch</code> é o comando usado para <strong>enviar um job para a fila do cluster</strong>.</p>
