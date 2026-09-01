@@ -16,28 +16,80 @@
 | Partição (fila)               | `--partition` ou `-p`          | `--partition=gpu`                |
 | Sessão interativa             | `--pty bash`                   | `--pty bash`                     |
 
-**Exemplos**
-
-Pedido simples de execução de tarefa para o SLURM
+## Submissões com srun no Cluster Franky
+### Pedido simples de execução de tarefa com srun no Cluster Franky
 ```bash
-srun --nodelist=compute10 --partition=normal --ntasks=1 --pty bash
+srun --nodelist=compute10 --partition=merry_cpu --mem=1G --pty bash
 ```
 --srun: Comando SLURM para executar tarefas 
 --nodelist=compute10: força o SLURM a alocar exatamente esse nó.
---partition=normal: indica a partição à qual o nó pertence.
---ntasks=1: pede uma tarefa.
+--partition=merry_cpu: indica a partição à qual o nó pertence.
+--mem=1G: Aloca 1 giga de memória RAM.
 --pty bash: pede um terminal dentro do nó.
 
 
-Pedido sem especificar o nó exato:
+### Pedido mais simples possível com srun no Cluster Franky:
 ```bash
-srun --partition=normal --ntasks=1 --pty bash
+srun --partition=pluton_cpu --mem=1G ./meu_binario
 ```
 
-Pedido com varias tasks para executar seu programa direto:
+Se você quiser usar a CPU da fila de GPU você pode:
+
 ```bash
-srun --partition=normal --ntasks=4 ./meu_programa_paralelo
+srun --partition=pluton_gpu --mem=1G ./meu_binario
 ```
+
+### Pedido com varias threads para executar seu programa paralelo no Cluster Franky:
+```bash
+srun --partition=merry_cpu --mem=1G --cpus-per-task=4 ./meu_programa_paralelo
+```
+
+```bash
+srun --partition=pluton_gpu --mem=1G --cpus-per-task=4 ./meu_programa_paralelo
+```
+
+
+## Submissões com srun no Cluster SDumont
+
+
+### Pedido simples de execução de tarefa com srun no Cluster SDumont
+```bash
+srun --nodelist=compute10 --partition=merry_cpu --mem=1G --pty bash
+```
+--srun: Comando SLURM para executar tarefas 
+--nodelist=compute10: força o SLURM a alocar exatamente esse nó.
+--partition=merry_cpu: indica a partição à qual o nó pertence.
+--mem=1G: Aloca 1 giga de memória RAM.
+--pty bash: pede um terminal dentro do nó.
+
+
+### Pedido mais simples possível com srun no Cluster SDumont:
+
+```bash
+srun --partition=sequana_cpu_dev --mem=1G  ./meu_binario
+```
+
+Se você quiser usar a CPU da fila de GPU você pode, mas no SDumont você é obrigado a alocar a GPU, mesmo que não use, então o comando muda um pouquinho:
+
+```bash
+srun --partition=sequana_gpu_dev --gres=gpu:1 --mem=1G  ./meu_binario
+```
+
+
+### Pedido com varias threads para executar seu programa paralelo no Cluster SDumont:
+
+Usando a fila de CPU
+
+```bash
+srun --partition=sequana_cpu_dev --mem=1G --cpus-per-task=4 ./meu_programa_paralelo
+```
+
+Usando a fila de GPU
+
+```bash
+srun --partition=sequana_gpu_dev --mem=1G --gres=gpu:1 --cpus-per-task=4 ./meu_programa_paralelo
+```
+
 
 ### Principais recursos que você pode pedir com `sbatch`
 
@@ -57,13 +109,15 @@ srun --partition=normal --ntasks=4 ./meu_programa_paralelo
 
 **Exemplos**
 
+## Arquivo `.slurm` simples para o Cluster Franky:
+
 **Arquivo:** `job1.slurm`
 
 ```bash
 #!/bin/bash
 #SBATCH --job-name=teste%j
-#SBATCH --partition=normal
-#SBATCH --ntasks=1
+#SBATCH --partition=merry_cpu
+#SBATCH --mem=1G
 #SBATCH --time=00:10:00
 #SBATCH --output=saida%j.txt
 
@@ -75,6 +129,31 @@ Submeter com:
 ```bash
 sbatch job1.slurm
 ```
+
+
+## Arquivo `.slurm` com suporte a paralelismo em CPU para o Cluster Franky:
+**Arquivo:** `job2.slurm`
+
+```bash
+#!/bin/bash
+#SBATCH --job-name=teste%j
+#SBATCH --partition=pluton_cpu
+#SBATCH --mem=1G
+#SBATCH --cpus-per-task=16
+#SBATCH --time=00:10:00
+#SBATCH --output=saida%j.txt
+
+export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
+
+./meu_programa_paralelo
+```
+
+Submeter com:
+
+```bash
+sbatch job2.slurm
+```
+
 
 
 ## Comandos gerais do SLURM
@@ -109,7 +188,7 @@ Mostra: memória total e usada, CPUs alocadas, jobs em execução, estado (`IDLE
 ### Ver configurações de uma partição especifica
 
 ```bash
-scontrol show partition normal
+scontrol show partition pluton_gpu
 ```
 Mostra: tempo máximo de job, número de nós, limites de memória/CPU, GPUs, estado da fila.
 
@@ -153,7 +232,92 @@ Cancela em lote — ótimo em caso de erro em scripts ou submissões mal feitas.
 
 Para mais consulte a documentação oficial em https://slurm.schedmd.com/documentation.html
 
-## Pra verificar Hardware
+
+## Comandos úteis para o SDumont
+
+Não se esqueça de trabalhar sempre na sua pasta `SCRATCH`
+
+```bash
+cd /scratch/insperhpc/seu-login
+```
+
+Para ver as filas que tem acesso no SDumont:
+
+```bash
+sacctmgr list user $USER -s format=partition%20,MaxJobs,MaxSubmit,MaxNodes,MaxCPUs,MaxWall
+```
+
+O comando `sinfo` mostra quais são as filas e quais são os status dos nós 
+
+```bash
+sinfo
+```
+Como o Santos Dumont é utilizado por pessoas de todo o país, a quantidade de informações exibidas pode ser muito grande. Por isso, vamos aplicar alguns filtros para visualizar apenas o que é relevante para nós:
+
+Este comando filtra por projeto, então só veremos os jobs relacionados aos alunos do Insper
+
+```bash
+squeue -A insperhpc
+```
+Se quiser filtrar apenas o seu usuário:
+
+```bash
+squeue -u $USER
+```
+
+Este filtra pela fila
+
+```bash
+sinfo -p sequana_gpu_dev
+```
+
+```bash
+sinfo -p sequana_cpu_dev
+```
+
+
+Se quiser submeter um job com sbatch na fila CPU com suporte a paralelismo:
+
+run.slurm
+```bash
+#!/bin/bash
+#SBATCH --job-name=exemplo_paralelo_cpu
+#SBATCH --output=saida_%j.txt
+#SBATCH --time=00:10:00
+#SBATCH --cpus-per-task=16
+#SBATCH --partition=sequana_cpu_dev
+#SBATCH --mem=1G                  # 1 GiB por nó
+
+export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
+./meu_binario
+
+```
+
+Se quiser submeter um job com sbatch na fila com suporte a GPU:
+
+run.slurm
+```bash
+#!/bin/bash
+#SBATCH --job-name=exemplo
+#SBATCH --output=saida_%j.txt
+#SBATCH --time=00:10:00
+#SBATCH --gres=gpu:1
+#SBATCH --partition=sequana_gpu_dev
+#SBATCH --mem=1G                  # 1 GiB por nó
+
+module load cuda/12.6_sequana
+
+./meu_binario
+
+```
+
+```bash
+sbatch run.slurm
+```
+
+
+
+## Comandos para verificar detalhes de Hardware do nó de computação
 
 ##  **CPU**
 
@@ -243,7 +407,7 @@ echo '=== HOSTNAME ==='; hostname; echo; \
 Para executar dentro de um nó de computação:
 
 ```bash
-srun --partition=normal --ntasks=1 --pty bash -c \
+srun --partition=pluton_gpu --mem=1G --pty bash -c \
 "echo '=== HOSTNAME ==='; hostname; echo; \
  echo '=== MEMORIA (GB) ==='; \
  cat /proc/meminfo | grep -E 'MemTotal|MemFree|MemAvailable|Swap' | \

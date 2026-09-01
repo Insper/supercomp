@@ -55,6 +55,7 @@ nav:
         - "Aula 21 - APS2 no Cluster Santos Dumont" : aulas/aula21/index.md
         - "Aula 22 - Exercícios preparatórios Prova Final" : aulas/aula22/index.md
         - "Aula 23 - Exercícios preparatórios" : aulas/aula23/index.md
+ 
     - Suporte:
         - "Slides das aulas" : teoria/slides.md
         - "Aula 01" : teoria/aula01/compilar-executar-C++.md
@@ -62,8 +63,11 @@ nav:
         - "Aula 03" : teoria/aula03/index.md
         - "Aula 04" : teoria/aula04/index.md
         - "Útil" : teoria/comandos.md
+        - "APS1 - Cluster Franky" : teoria/APSFranky.md
+        - "APS1 - Cluster SDumont" : teoria/APSDumont.md
         - "Permissões" : teoria/permissoes.md
-        - "Simulado AI": Exercicios/simulado_ai/index.md
+#        - "Simulado AI": Exercicios/simulado_ai/index.md
+ 
  #       - "Gabarito AI": Exercicios/ai/index.md
  #       - "Heurísticas" : teoria/heuristicas.md
  #       - "OpenMP" : teoria/openmp.md
@@ -80,7 +84,7 @@ nav:
 
     - APS's:
         - "APS 1 - Otimizações em CPU" : projetos/2026-1/APS1.md
-        - "APS 2 - Otimizações em GPU" : projetos/2026-1/APS2.md
+#        - "APS 2 - Otimizações em GPU" : projetos/2026-1/APS2.md
 
  #   - Bonus:
         #- "Conectando ao Cluster Franky": complementar/aula02/index.md
