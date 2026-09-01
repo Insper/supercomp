@@ -199,6 +199,18 @@ sinfo -p sequana_gpu_dev
 sinfo -p sequana_cpu_dev
 ```
 
+Se algo deu errado e você ficou com job preso na fila, pode cancelar todos os seus jobs com o comando:
+
+```bash
+scancel -u $USER
+```
+
+Ou um job especifico com o comando:
+
+```bash
+scancel id_do_job
+```
+
 ### Testando a APS1 no SDumont
 
 lembrando, para estar na pasta `SCRATCH` utilize o comando:

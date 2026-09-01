@@ -88,6 +88,25 @@ O comando abaixo mostra detalhes sobre os recursos de cada fila
 ```bash
 scontrol show partition 
 ```
+O comando `squeue` mostra a fila do Cluster, você pode verificar informações sobre os jobs lançaos para o SLURM como este comando:
+
+```bash
+squeue
+```
+
+Se algo deu errado e você ficou com job preso na fila, pode cancelar todos os seus jobs com o comando:
+
+```bash
+scancel -u $USER
+```
+
+Ou um job especifico com o comando:
+
+```bash
+scancel id_do_job
+```
+
+
 ### SBATCH — Submissão de Jobs no SLURM
 
 `sbatch` é o comando usado para **enviar um job para a fila do cluster**.
