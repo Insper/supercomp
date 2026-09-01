@@ -647,12 +647,12 @@ Se quiser automatizar os testes variando o número de threads você pode usar al
         return 0;
     }
 
+    ```
 
     Para compilar:
 
     ```
     g++ -fopenmp demo.cpp -o demo
-    ```
     ```
 
 
