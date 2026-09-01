@@ -1204,15 +1204,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#pedido-simples-de-execucao-de-tarefa-com-srun-no-cluster-sdumont" class="md-nav__link">
-    <span class="md-ellipsis">
-      Pedido simples de execução de tarefa com srun no Cluster SDumont
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#pedido-mais-simples-possivel-com-srun-no-cluster-sdumont" class="md-nav__link">
     <span class="md-ellipsis">
       Pedido mais simples possível com srun no Cluster SDumont:
@@ -1654,15 +1645,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#pedido-simples-de-execucao-de-tarefa-com-srun-no-cluster-sdumont" class="md-nav__link">
-    <span class="md-ellipsis">
-      Pedido simples de execução de tarefa com srun no Cluster SDumont
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#pedido-mais-simples-possivel-com-srun-no-cluster-sdumont" class="md-nav__link">
     <span class="md-ellipsis">
       Pedido mais simples possível com srun no Cluster SDumont:
@@ -1934,13 +1916,8 @@
 </table>
 <h2 id="submissoes-com-srun-no-cluster-franky">Submissões com srun no Cluster Franky<a class="headerlink" href="#submissoes-com-srun-no-cluster-franky" title="Permanent link">&para;</a></h2>
 <h3 id="pedido-simples-de-execucao-de-tarefa-com-srun-no-cluster-franky">Pedido simples de execução de tarefa com srun no Cluster Franky<a class="headerlink" href="#pedido-simples-de-execucao-de-tarefa-com-srun-no-cluster-franky" title="Permanent link">&para;</a></h3>
-<p><div class="highlight"><pre><span></span><code>srun<span class="w"> </span>--nodelist<span class="o">=</span>compute10<span class="w"> </span>--partition<span class="o">=</span>merry_cpu<span class="w"> </span>--mem<span class="o">=</span>1G<span class="w"> </span>--pty<span class="w"> </span>bash
+<div class="highlight"><pre><span></span><code>srun<span class="w"> </span>--nodelist<span class="o">=</span>compute10<span class="w"> </span>--partition<span class="o">=</span>merry_cpu<span class="w"> </span>--mem<span class="o">=</span>1G<span class="w"> </span>--pty<span class="w"> </span>bash
 </code></pre></div>
---srun: Comando SLURM para executar tarefas 
---nodelist=compute10: força o SLURM a alocar exatamente esse nó.
---partition=merry_cpu: indica a partição à qual o nó pertence.
---mem=1G: Aloca 1 giga de memória RAM.
---pty bash: pede um terminal dentro do nó.</p>
 <h3 id="pedido-mais-simples-possivel-com-srun-no-cluster-franky">Pedido mais simples possível com srun no Cluster Franky:<a class="headerlink" href="#pedido-mais-simples-possivel-com-srun-no-cluster-franky" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>srun<span class="w"> </span>--partition<span class="o">=</span>pluton_cpu<span class="w"> </span>--mem<span class="o">=</span>1G<span class="w"> </span>./meu_binario
 </code></pre></div>
@@ -1953,14 +1930,6 @@
 <div class="highlight"><pre><span></span><code>srun<span class="w"> </span>--partition<span class="o">=</span>pluton_gpu<span class="w"> </span>--mem<span class="o">=</span>1G<span class="w"> </span>--cpus-per-task<span class="o">=</span><span class="m">4</span><span class="w"> </span>./meu_programa_paralelo
 </code></pre></div>
 <h2 id="submissoes-com-srun-no-cluster-sdumont">Submissões com srun no Cluster SDumont<a class="headerlink" href="#submissoes-com-srun-no-cluster-sdumont" title="Permanent link">&para;</a></h2>
-<h3 id="pedido-simples-de-execucao-de-tarefa-com-srun-no-cluster-sdumont">Pedido simples de execução de tarefa com srun no Cluster SDumont<a class="headerlink" href="#pedido-simples-de-execucao-de-tarefa-com-srun-no-cluster-sdumont" title="Permanent link">&para;</a></h3>
-<p><div class="highlight"><pre><span></span><code>srun<span class="w"> </span>--nodelist<span class="o">=</span>compute10<span class="w"> </span>--partition<span class="o">=</span>merry_cpu<span class="w"> </span>--mem<span class="o">=</span>1G<span class="w"> </span>--pty<span class="w"> </span>bash
-</code></pre></div>
---srun: Comando SLURM para executar tarefas 
---nodelist=compute10: força o SLURM a alocar exatamente esse nó.
---partition=merry_cpu: indica a partição à qual o nó pertence.
---mem=1G: Aloca 1 giga de memória RAM.
---pty bash: pede um terminal dentro do nó.</p>
 <h3 id="pedido-mais-simples-possivel-com-srun-no-cluster-sdumont">Pedido mais simples possível com srun no Cluster SDumont:<a class="headerlink" href="#pedido-mais-simples-possivel-com-srun-no-cluster-sdumont" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>srun<span class="w"> </span>--partition<span class="o">=</span>sequana_cpu_dev<span class="w"> </span>--mem<span class="o">=</span>1G<span class="w">  </span>./meu_binario
 </code></pre></div>
@@ -2179,6 +2148,12 @@ Se quiser filtrar apenas o seu usuário:</p>
 <div class="highlight"><pre><span></span><code>sinfo<span class="w"> </span>-p<span class="w"> </span>sequana_gpu_dev
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>sinfo<span class="w"> </span>-p<span class="w"> </span>sequana_cpu_dev
+</code></pre></div>
+<p>Usando a fila de CPU</p>
+<div class="highlight"><pre><span></span><code>srun<span class="w"> </span>--partition<span class="o">=</span>sequana_cpu_dev<span class="w"> </span>--mem<span class="o">=</span>1G<span class="w"> </span>--cpus-per-task<span class="o">=</span><span class="m">4</span><span class="w"> </span>./meu_programa_paralelo
+</code></pre></div>
+<p>Usando a fila de GPU</p>
+<div class="highlight"><pre><span></span><code>srun<span class="w"> </span>--partition<span class="o">=</span>sequana_gpu_dev<span class="w"> </span>--mem<span class="o">=</span>1G<span class="w"> </span>--gres<span class="o">=</span>gpu:1<span class="w"> </span>--cpus-per-task<span class="o">=</span><span class="m">4</span><span class="w"> </span>./meu_programa_paralelo
 </code></pre></div>
 <p>Se quiser submeter um job com sbatch na fila CPU com suporte a paralelismo:</p>
 <p>run.slurm
