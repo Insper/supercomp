@@ -21,12 +21,6 @@
 ```bash
 srun --nodelist=compute10 --partition=merry_cpu --mem=1G --pty bash
 ```
---srun: Comando SLURM para executar tarefas 
---nodelist=compute10: força o SLURM a alocar exatamente esse nó.
---partition=merry_cpu: indica a partição à qual o nó pertence.
---mem=1G: Aloca 1 giga de memória RAM.
---pty bash: pede um terminal dentro do nó.
-
 
 ### Pedido mais simples possível com srun no Cluster Franky:
 ```bash
@@ -50,17 +44,6 @@ srun --partition=pluton_gpu --mem=1G --cpus-per-task=4 ./meu_programa_paralelo
 
 
 ## Submissões com srun no Cluster SDumont
-
-
-### Pedido simples de execução de tarefa com srun no Cluster SDumont
-```bash
-srun --nodelist=compute10 --partition=merry_cpu --mem=1G --pty bash
-```
---srun: Comando SLURM para executar tarefas 
---nodelist=compute10: força o SLURM a alocar exatamente esse nó.
---partition=merry_cpu: indica a partição à qual o nó pertence.
---mem=1G: Aloca 1 giga de memória RAM.
---pty bash: pede um terminal dentro do nó.
 
 
 ### Pedido mais simples possível com srun no Cluster SDumont:
@@ -273,6 +256,18 @@ sinfo -p sequana_gpu_dev
 
 ```bash
 sinfo -p sequana_cpu_dev
+```
+
+Usando a fila de CPU
+
+```bash
+srun --partition=sequana_cpu_dev --mem=1G --cpus-per-task=4 ./meu_programa_paralelo
+```
+
+Usando a fila de GPU
+
+```bash
+srun --partition=sequana_gpu_dev --mem=1G --gres=gpu:1 --cpus-per-task=4 ./meu_programa_paralelo
 ```
 
 
