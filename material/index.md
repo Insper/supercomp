@@ -6,7 +6,7 @@ robots: index, follow
 ---
 
 # SuperComputação
-Bem-vindo ao curso de SuperComputação 2026/1!
+Bem-vindo ao curso de SuperComputação 2026/2!
 
 Essa página contém os materiais de apoio para o curso de SuperComputação do Insper.
 
@@ -15,11 +15,10 @@ Essa página contém os materiais de apoio para o curso de SuperComputação do 
     
     Segunda -> 16h30 -- 18h30
     
-    Sexta -> 14h15 -- 16h15
+    Quarta -> 16h30 -- 18h30
 
     **Atendimento:**
-    **Início 27/02/26**
-    Sexta -> 12:30 às 14:00
+    Quarta -> 18h30 ás 20h
 
 ## Objetivos de aprendizagem
 No Insper, cada disciplina é guiada por **objetivos de aprendizagem**. Para evoluir na matéria e ser aprovado, é essencial que você atinja esses objetivos. Todos os conteúdos, atividades e projetos estão conectados diretamente a esses objetivos. 

@@ -1,10 +1,10 @@
-site_name: SuperComputação - 2026/1
+site_name: SuperComputação - 2026/2
 site_author: 
 
 extra:
     materia: SuperComputação
     professor: Lícia Sales  
-    semestre: 2026/1
+    semestre: 2026/2
     url_acompanhamentos: http://localhost:8081
     id_curso: 1
 
@@ -30,7 +30,7 @@ site_url: https://insper.github.io/supercomp/
 
 nav:
     - Home: index.md
-    - Burocracias: sobre.md
+#    - Burocracias: sobre.md
     - Aulas:
         - "Aula 01 - Introdução e Overview": aulas/aula01/index.md
         - "Aula 02 - Cluster Franky": aulas/aula02/index.md

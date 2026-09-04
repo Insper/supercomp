@@ -7,12 +7,9 @@
     
     Segunda -> 16h30 -- 18h30
     
-    Sexta -> 14h15 -- 16h15
+    Quarta -> 16h30 -- 18h30
 
-    **Atendimento -> Início 27/02/26**
-    
-    Sexta -> 12:30 às 14:00
-
+    Atendimento -> 18h30 ás 20h
 
 ??? info "Objetivos de Aprendizagem"
 
