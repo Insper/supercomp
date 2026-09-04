@@ -56,7 +56,7 @@ int main() {
 **Rodar no cluster com SLURM** definindo o número de threads:
 
 ```bash
-srun --partition=normal --cpus-per-task=4 ./meu_binario
+srun --partition=sunny_cpu --mem=1G --cpus-per-task=4 ./meu_binario
 ```
 
 ou
@@ -593,7 +593,7 @@ g++ -fopenmp omp_schedulers.cpp -o omp_schedulers
 **Rodar no cluster com SLURM** definindo o número de threads:
 
 ```bash
-srun --partition=normal --cpus-per-task=4 ./omp_schedulers
+srun --partition=sunny_cpu --mem=1G --cpus-per-task=4 ./omp_schedulers
 ```
 
 ou
@@ -803,7 +803,7 @@ Para Executar:
 #SBATCH --cpus-per-task=4             # Esse processo tem 4 threads disponíveis para usar
 #SBATCH --mem=2G                      # Memória solicitada
 #SBATCH --time=00:05:00               # Tempo solicitado (hh:mm:ss)
-#SBATCH --partition=normal            # fila
+#SBATCH --partition=sunny_cpu            # fila
 
 # ------------------------------
 # Configurações OpenMP

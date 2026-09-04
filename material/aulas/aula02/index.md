@@ -156,7 +156,7 @@ exit
 Ou, podemos usar o SRUN com um comando definido que será executado no nó de computação de forma direta pelo terminal:
 
 ```bash
-srun --partition=normal --ntasks=1 --cpus-per-task=1 --mem=1G --time=00:05:00 \
+srun --partition=sunny_cpu --ntasks=1 --cpus-per-task=1 --mem=1G --time=00:05:00 \
 --pty bash -c "hostname && \
 cat /proc/meminfo | grep -E 'MemTotal|MemFree|MemAvailable|Swap' && \
 lscpu | grep -E 'Model name|Socket|Core|Thread|CPU\\(s\\)|cache' && \
@@ -223,7 +223,7 @@ Você deve ver algo como:
 O comando abaixo faz exatamente a mesma coisa, mas eu coloquei ele dentro de um shell script para ter uma formatação melhor no display:
 
 ```bash
-srun --partition=normal --ntasks=1 --pty bash -c \
+srun --partition=pluton_gpu --ntasks=1 --pty bash -c \
 "echo '=== HOSTNAME ==='; hostname; echo; \
  echo '=== MEMORIA (GB) ==='; \
  cat /proc/meminfo | grep -E 'MemTotal|MemFree|MemAvailable|Swap' | \
@@ -251,7 +251,7 @@ scontrol show partition
 Recomendo que você mude o nome da fila (partition) no comando abaixo para se ambientar no Cluster Franky e desconrir quais são as diferenças entre as filas
 
 ```bash
-srun --partition=normal --ntasks=1 --pty bash -c \
+srun --partition=pluton_cpu --ntasks=1 --pty bash -c \
 "echo '=== HOSTNAME ==='; hostname; echo; \
  echo '=== MEMORIA (GB) ==='; \
  cat /proc/meminfo | grep -E 'MemTotal|MemFree|MemAvailable|Swap' | \
@@ -285,7 +285,7 @@ Cole o conteúdo abaixo:
 #!/bin/bash
 
 #SBATCH --job-name=sbatch_belezinha        # Nome do job (aparece no squeue)
-#SBATCH --partition=gpu           # Fila (partition) onde o job será executado
+#SBATCH --partition=pluton_gpu           # Fila (partition) onde o job será executado
 #SBATCH --ntasks=1                   # Número de tarefas (processos)
 #SBATCH --cpus-per-task=1            # Número de CPUs (cores) por tarefa
 #SBATCH --mem=1G                     # Memória RAM solicitada
@@ -398,7 +398,7 @@ media_py.slurm
 #SBATCH --time=00:10:00
 # Define o tempo máximo de execução para o job. Neste caso, o job tem um tempo limite de 10 minutos. Se o job exceder esse tempo, ele será automaticamente encerrado.
 
-#SBATCH --partition=normal
+#SBATCH --partition=merry_cpu
 # Especifica a partição (ou fila) onde o job será submetido. Aqui.
 
 time python3 media_movel.py
@@ -434,7 +434,7 @@ media_cpp.slurm
 #SBATCH --time=00:10:00
 # Define o tempo máximo de execução para o job. Neste caso, o job tem um tempo limite de 10 minutos. Se o job exceder esse tempo, ele será automaticamente encerrado.
 
-#SBATCH --partition=normal
+#SBATCH --partition=pluton_cpu
 # Especifica a partição (ou fila) onde o job será submetido. Aqui, o job será submetido a fila "normal".
 
 

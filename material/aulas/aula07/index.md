@@ -139,7 +139,7 @@ g++ -fopenmp -O3 fib_seq.cpp -o fib_seq
 
 Para testar no Cluster Franky
 ```bash
-srun --partition=normal fib_seq
+srun --partition=merry_cpu --mem=1G fib_seq
 ```
 
 
@@ -208,7 +208,7 @@ g++ -fopenmp -O3 fib_paralelo.cpp -o fib_paralelo
 
 Para testar no Cluster Franky
 ```bash
-srun --partition=normal --cpus-per-task=4 fib_paralelo
+srun --partition=merry_cpu --cpus-per-task=4 fib_paralelo
 ```
 
 Nesta versão eu coloquei os `#pragmas` no código procurando evitar problemas, tomei cuidado para não estourar o número de tasks na implementação mas não melhorei a estratégia do código.
@@ -282,7 +282,7 @@ g++ -fopenmp -O3 fib_sagaz.cpp -o fib_sagaz
 
 Para testar no Cluster Franky
 ```bash
-srun --partition=normal fib_sagaz
+srun --partition=merry_cpu --mem=1G fib_sagaz
 ```
 O resultado foi:
 ```bash
@@ -361,7 +361,7 @@ g++ -fopenmp -O3 fib_sagaz_paralelo.cpp -o sagaz_paralelo
 ```
 Para testar no Cluster Franky
 ```bash
-srun --partition=normal --cpus-per-task=4 sagaz_paralelo
+srun --partition=sunny_cpu --mem=1G --cpus-per-task=4 sagaz_paralelo
 ```
 
 O resultado foi:

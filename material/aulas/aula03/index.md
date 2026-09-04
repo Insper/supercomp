@@ -409,7 +409,7 @@ Crie o lançador do SLURM como em `tiling.slurm`:
 #SBATCH --job-name=monstrao_tiling
 #SBATCH --output=monstrao_tiling%j.out
 #SBATCH --error=monstrao_tiling%j.err
-#SBATCH --partition=monstrao
+#SBATCH --partition=merry_cpu
 #SBATCH --ntasks=1
 #SBATCH --time=00:05:00
 #SBATCH --mem=2G
