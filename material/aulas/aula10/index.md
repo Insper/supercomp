@@ -1,538 +1,182 @@
+# Programação distribuída com MPI
 
-Na aula anterior vimos a comunicação ponto-a-ponto, utilizando operações como `MPI_Send` e `MPI_Recv`, e analisamos como o custo de comunicação depende da **latência** e da **largura de banda** da rede por meio do experimento de *ping-pong*.
+Na programação com memória compartilhada, threads de um mesmo processo podem acessar as mesmas variáveis. OpenMP é uma ferramenta comum para esse modelo.
 
-Nesta aula vamos dar mais um passo no uso do MPI. Em vez de trabalhar apenas com comunicação **ponto-a-ponto**, vamos ver alguns **padrões de comunicação** e também as **operações coletivas**, onde vários processos participam da troca de dados ao mesmo tempo.
+Com MPI, cada processo tem seu próprio espaço de memória. Uma variável criada no rank 0 não se torna automaticamente disponível no rank 1: para compartilhar seu conteúdo, o programa precisa usar uma operação de comunicação.
 
-Para isso, vamos implementar alguns exemplos e observar como as mensagens circulam entre os processos.
+MPI é um padrão; Open MPI e MPICH são implementações. A implementação escolhe os mecanismos disponíveis para trocar mensagens, como memória compartilhada dentro do nó e rede entre nós. 
+
+### Primeiro programa: quem sou eu e onde estou?
+
+Todos os processos executam o mesmo binário. O rank permite que cada processo escolha uma ação diferente. Neste primeiro exemplo, o rank 0 apresenta a tarefa e os demais calculam o quadrado do próprio ID.
 
 
-## **Ping-pong**
-
-Código base:
 ```cpp
-#include <mpi.h>        // Biblioteca principal do MPI para comunicação entre processos
-#include <iostream>    
-#include <cstring>      
+#include <mpi.h>
+#include <iostream>
 
 int main(int argc, char** argv) {
-    int rank;               // Variável que armazenará o "rank" (identificador) do processo
-    MPI_Status status;      // Estrutura que armazenará o status da comunicação MPI
-    char mensagem[100];     // Vetor de caracteres para armazenar a mensagem a ser enviada/recebida
-
-    // Inicializa o ambiente MPI (todos os processos são iniciados)
+    // Inicializa o MPI.
     MPI_Init(&argc, &argv);
 
-    // Descobre o "rank" do processo atual dentro do comunicador global (MPI_COMM_WORLD)
+    char nome[MPI_MAX_PROCESSOR_NAME];
+    int tamanho, rank, total;
+    // Pega informações relevantes do ecossistema MPI
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+    MPI_Comm_size(MPI_COMM_WORLD, &total);
+    MPI_Get_processor_name(nome, &tamanho);
 
-    // Se este for o processo de rank 0 (emissor inicial)
+    std::cout << "Rank " << rank << " | Nó: " << nome << std::endl;
+
     if (rank == 0) {
-        // Copia a string "Olá" para a variável mensagem
-        std::strcpy(mensagem, "Olá");
+        // O rank 0 apresenta a tarefa.
+        std::cout << "Tarefa: calcular o quadrado de cada ID.\n"
+                  << "Temos " << total << " nós.\n";
+    } else {
+        // Cada nó calcula usando seu próprio ID.
+        int resultado = rank * rank;
 
-        // Envia a mensagem para o processo de rank 1
-        // Parâmetros: buffer, tamanho, tipo, destino, tag, comunicador
-        MPI_Send(mensagem, std::strlen(mensagem) + 1, MPI_CHAR, 1, 0, MPI_COMM_WORLD);
-
-        // Imprime no terminal que a mensagem foi enviada
-        std::cout << "Processo 0 enviou: " << mensagem << std::endl;
-
-        // Aguarda a resposta do processo 1
-        // Parâmetros: buffer, tamanho máximo, tipo, origem, tag, comunicador, status
-        MPI_Recv(mensagem, 100, MPI_CHAR, 1, 0, MPI_COMM_WORLD, &status);
-
-        // Imprime a mensagem recebida
-        std::cout << "Processo 0 recebeu: " << mensagem << std::endl;
+        std::cout << ": Minha computação é = " << resultado << std::endl;
     }
 
-    // Se este for o processo de rank 1 (receptor inicial)
-    else if (rank == 1) {
-        // Recebe a mensagem enviada pelo processo 0
-        MPI_Recv(mensagem, 100, MPI_CHAR, 0, 0, MPI_COMM_WORLD, &status);
-
-        // Imprime a mensagem recebida
-        std::cout << "Processo 1 recebeu: " << mensagem << std::endl;
-
-        // Prepara a resposta "Oi"
-        std::strcpy(mensagem, "Oi");
-
-        // Envia a resposta de volta ao processo 0
-        MPI_Send(mensagem, std::strlen(mensagem) + 1, MPI_CHAR, 0, 0, MPI_COMM_WORLD);
-
-        // Imprime que a mensagem foi enviada
-        std::cout << "Processo 1 enviou: " << mensagem << std::endl;
-    }
-
-    else {
-        // Todos os outros processos apenas informam que estão ociosos
-        std::cout << "Processo " << rank << " está ocioso neste exercício." << std::endl;
-    }
-
-    // Finaliza o ambiente MPI (todos os processos encerram)
+    // Finaliza o MPI.
     MPI_Finalize();
-
     return 0;
 }
 ```
 
-### Compile o programa:
+### Entendendo as chamadas
+
+| Conceito | Significado | Exemplo |
+| --- | --- | --- |
+| Nó | Um computador do cluster | `compute10` |
+| Núcleo (core) | Unidade de processamento da CPU | Um nó pode ter vários núcleos (cores) |
+| Processo | Uma instância do programa com seu próprio espaço de memória | Uma cópia do binário |
+| Thread | Um fluxo de execução dentro de um processo | Threads de um programa OpenMP |
+| Rank | Identificador do processo dentro de um comunicador MPI | 0, 1, 2 e 3 |
+| Comunicador | Grupo de processos e contexto de comunicação | `MPI_COMM_WORLD` |
+
+| Chamada | Para que serve |
+| --- | --- |
+| `MPI_Init` | Inicializa o MPI antes das operações do programa |
+| `MPI_Comm_rank` | Obtém o ID deste processo no comunicador |
+| `MPI_Comm_size` | Obtém o total de processos no comunicador |
+| `MPI_Get_processor_name` | Obtém o nome do processador/nó informado pela implementação |
+| `MPI_Finalize` | Finaliza o uso do MPI |
+
+
+
+
+### Compilação
+
+No head-node, dentro da pasta `SCRATCH`:
+
 ```bash
-mpic++ -FlagdeOtimização seu_codigo.cpp -o seu_binario
+mpic++ -O2 hello.cpp -o hello
 ```
 
+`mpic++` é um wrapper: chama o compilador C++ com as opções necessárias para incluir e vincular o MPI. Sempre recompile após alterar o código.
 
-### Script SLURM
+
+### Executando pelo Slurm
+
+O Slurm reserva recursos e inicia tarefas nos nós de computação. `sbatch` submete um script; `srun` inicia as tarefas. Reservar quatro tarefas não significa que executar `./hello_mpi` sozinho criará quatro processos.
 
 ```bash
-#!/bin/bash
-#SBATCH --job-name=mpi_hello
-#SBATCH --output=saida%j.txt
-#SBATCH --partition=express
-#SBATCH --mem=1GB
-#SBATCH --nodes=2
-#SBATCH --ntasks=5
-#SBATCH --cpus-per-task=1
-#SBATCH --time=00:02:00
-#SBATCH --export=ALL
-
-# Execute o seu binário com o MPI
-mpirun -np $SLURM_NTASKS ./seu_binario
-
-```
-
-### Submeta o job com SLURM:
-```bash
-sbatch SeuSlurm.slurm
-```
-
-### Você deve ver algo como isso:
-```bash
-[liciascl@head-node mpi]$ cat saida.txt
-Processo 2 está ocioso neste exercício.
-Processo 3 está ocioso neste exercício.
-Processo 0 enviou: Olá
-Processo 0 recebeu: Oi
-Processo 1 recebeu: Olá
-Processo 1 enviou: Oi
-Processo 4 está ocioso neste exercício.
+srun --partition=merry_cpu --mpi=pmix --mem=1G --nodes=2 --ntasks=2 --ntasks-per-node=1 --cpus-per-task=1 ./hello
 ```
 
 
-## **Token em anel**
+| Opção | Significado |
+| --- | --- |
+| `--partition=merry_cpu` | Partição/fila em que o job será executado |
+| `--nodes=2` | Quantidade de nós solicitados |
+| `--ntasks=2` | Total de tarefas; aqui, processos MPI |
+| `--ntasks-per-node=1` | Distribuição de tarefas por nó |
+| `--cpus-per-task=1` | Uma CPU Slurm por tarefa; não cria várias threads |
+| `--mem=1G` | 1 GiB de memória solicitada por nó, não por processo |
+| `--time=00:01:00` | Tempo máximo do job |
+| `--mpi=pmix` | Integração usada pelo `srun` para iniciar o MPI |
 
-A ideia é perceber o custo de **coletar informações sequencialmente**.
-
-teste o token em anel: cada rank adiciona uma informação nova ao vetor e passa adiante.
-Execute em 2, 3 e 4 nós .
-Compare com o mesmo problema usando `MPI_Gather`.
 
 
-## Token em anel (comunicação sequencial)
+Saída ilustrativa:
 
-A ideia é que cada processo **adicione seu rank em um vetor** e passe esse vetor para o próximo processo. O último processo devolve o vetor ao `rank 0`.
-
-Isso cria uma comunicação **sequencial**, passando por todos os processos.
-
-## Código
-
-```cpp
-#include <mpi.h>      // Biblioteca principal do MPI (Message Passing Interface)
-#include <iostream>   // Biblioteca para entrada e saída (cout)
-#include <vector>     // Biblioteca para usar std::vector
-
-int main(int argc, char** argv) {
-
-    // Inicializa o ambiente MPI
-    // Todos os processos começam a execução aqui
-    MPI_Init(&argc, &argv);
-
-    int rank, size;
-
-    // Descobre o identificador único (rank) do processo atual
-    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-
-    // Descobre quantos processos estão participando do comunicador
-    MPI_Comm_size(MPI_COMM_WORLD, &size);
-
-    // Vetor que representará o "token" que circula entre os processos
-    // Cada posição será preenchida por um processo diferente
-    std::vector<int> token(size);
-
-    // Processo inicial do anel
-    if(rank == 0){
-
-        // O primeiro processo adiciona seu rank na primeira posição do vetor
-        token[0] = rank;
-
-        // Envia o vetor para o próximo processo (rank 1)
-        MPI_Send(token.data(), size, MPI_INT, 1, 0, MPI_COMM_WORLD);
-
-        // Aguarda o retorno do vetor vindo do último processo do anel
-        MPI_Recv(token.data(), size, MPI_INT, size-1, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-
-        // Após percorrer todos os processos, o vetor estará completo
-        std::cout << "Token final: ";
-
-        // Imprime o conteúdo final do vetor
-        for(int i=0;i<size;i++)
-            std::cout << token[i] << " ";
-
-        std::cout << std::endl;
-    }
-
-    else{
-
-        // Recebe o vetor do processo anterior no anel
-        MPI_Recv(token.data(), size, MPI_INT, rank-1, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-
-        // Adiciona seu próprio rank no vetor
-        token[rank] = rank;
-
-        // Calcula qual será o próximo processo do anel
-        // O operador % garante que o último processo envie de volta ao rank 0
-        int next = (rank + 1) % size;
-
-        // Envia o vetor atualizado para o próximo processo
-        MPI_Send(token.data(), size, MPI_INT, next, 0, MPI_COMM_WORLD);
-    }
-
-    // Finaliza o ambiente MPI
-    // Todos os processos encerram a execução aqui
-    MPI_Finalize();
-
-    return 0;
-}
-
+```text
+Rank 1 | Nó: compute11
+Minha computação é = 1
+Rank 0 | Nó: compute10
+Tarefa: calcular o quadrado de cada ID.
+Temos 2 nós.
 ```
 
-### Compile o programa:
-```bash
-mpic++ -FlagdeOtimização seu_codigo.cpp -o seu_binario
-```
+Os nós escolhidos e a ordem das mensagens podem variar, o rank não determina a ordem de execução das aplicações.
 
-
-### Script SLURM
+### Execução em lote: script `run.slurm`
 
 ```bash
 #!/bin/bash
-#SBATCH --job-name=mpi_hello
-#SBATCH --output=saida%j.txt
-#SBATCH --partition=express
-#SBATCH --mem=1GB
+#SBATCH --job-name=hello-mpi
+#SBATCH --partition=merry_cpu
 #SBATCH --nodes=2
-#SBATCH --ntasks=5
+#SBATCH --ntasks=2
+#SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=1
-#SBATCH --time=00:02:00
-#SBATCH --export=ALL
+#SBATCH --mem=1G
+#SBATCH --time=00:01:00
+#SBATCH --output=mpi.out
 
-# Execute o seu binário com o MPI
-mpirun -np $SLURM_NTASKS ./seu_binario
+echo "Job: $SLURM_JOB_ID"
+echo "Nós alocados: $SLURM_JOB_NODELIST"
+echo "Tarefas: $SLURM_NTASKS"
 
+# Usa os recursos solicitados acima para iniciar os processos MPI.
+srun --mpi=pmix ./hello
 ```
 
-### Submeta o job com SLURM:
-```bash
-sbatch SeuSlurm.slurm
-```
-
-### Versão usando MPI_Gather
-
-Agora cada processo simplesmente envia seu valor para o processo `rank 0`, e o MPI faz a coleta automaticamente.
-
-Essa comunicação é **coletiva**, e a biblioteca MPI normalmente usa algoritmos **otimizados em árvore**.
-
-## Código
-
-```cpp
-#include <mpi.h>      
-#include <iostream>   
-#include <vector>     
-
-int main(int argc, char** argv) {
-
-    // Inicializa o ambiente MPI
-    // Todos os processos começam a execução aqui
-    MPI_Init(&argc, &argv);
-
-    int rank, size;
-
-    // Obtém o identificador único (rank) do processo atual
-    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-
-    // Obtém o número total de processos no comunicador
-    MPI_Comm_size(MPI_COMM_WORLD, &size);
-
-    // Cada processo cria um valor local.
-    // Aqui usamos o próprio rank apenas como exemplo
-    int valor = rank;
-
-    // Vetor que armazenará os resultados coletados
-    // Apenas o processo 0 precisa desse vetor
-    std::vector<int> resultado;
-
-    // Se este for o processo root (rank 0),
-    // ele aloca espaço para armazenar um valor de cada processo
-    if(rank == 0)
-        resultado.resize(size);
-
-    // Operação coletiva que coleta dados de todos os processos
-    // Cada processo envia 1 inteiro (valor)
-    // O processo root recebe todos os valores no vetor "resultado"
-    MPI_Gather(&valor,          // endereço do dado local que será enviado
-               1,               // quantidade de elementos enviados
-               MPI_INT,         // tipo de dado enviado
-               resultado.data(),// buffer onde o root armazenará os dados
-               1,               // quantidade de elementos recebidos de cada processo
-               MPI_INT,         // tipo de dado recebido
-               0,               // rank do processo root (destino final)
-               MPI_COMM_WORLD); // comunicador utilizado
-
-    // Apenas o processo root imprime os resultados
-    if(rank == 0){
-
-        std::cout << "Valores coletados: ";
-
-        // Imprime todos os valores recebidos
-        for(int i=0;i<size;i++)
-            std::cout << resultado[i] << " ";
-
-        std::cout << std::endl;
-    }
-
-    // Finaliza o ambiente MPI
-    MPI_Finalize();
-
-    return 0;
-}
-```
-
-### Compile o programa:
-```bash
-mpic++ -FlagdeOtimização seu_codigo.cpp -o seu_binario
-```
-
-
-### Script SLURM
+Submeta o job com o comando:
 
 ```bash
-#!/bin/bash
-#SBATCH --job-name=mpi_hello
-#SBATCH --output=saida%j.txt
-#SBATCH --partition=express
-#SBATCH --mem=1GB
-#SBATCH --nodes=2
-#SBATCH --ntasks=5
-#SBATCH --cpus-per-task=1
-#SBATCH --time=00:02:00
-#SBATCH --export=ALL
-
-# Execute o seu binário com o MPI
-mpirun -np $SLURM_NTASKS ./seu_binario
-
+sbatch run.slurm
 ```
 
-### Submeta o job com SLURM:
-```bash
-sbatch SeuSlurm.slurm
-```
-
-
-## Distribuição de dados com `MPI_Scatter`
-
-Neste exemplo, um vetor grande é criado no **processo 0** e distribuído entre todos os processos.
-Cada processo recebe uma parte do vetor e calcula a soma local.
-
-## Ideia
-
-1. `rank 0` cria um vetor grande.
-2. O vetor é dividido entre os processos com `MPI_Scatter`.
-3. Cada processo calcula uma soma parcial da sua parte.
-
-
-
-
-```cpp
-#include <mpi.h>
-#include <iostream>
-#include <vector>
-
-int main(int argc, char** argv) {
-
-    MPI_Init(&argc, &argv);
-
-    int rank, size;
-
-    // Descobre o rank do processo e o número total de processos
-    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-    MPI_Comm_size(MPI_COMM_WORLD, &size);
-
-    const int N = 1000000; // tamanho total do vetor global
-
-    std::vector<int> dados;
-
-    // Apenas o processo 0 cria o vetor completo
-    if(rank == 0){
-        dados.resize(N);
-
-        // Preenche o vetor com valores crescentes
-        // Isso facilita visualizar os intervalos distribuídos
-        for(int i=0;i<N;i++)
-            dados[i] = i;
-    }
-
-    // Cada processo receberá uma fração do vetor
-    int local_size = N / size;
-
-    std::vector<int> local(local_size);
-
-    // Distribui partes do vetor para todos os processos
-    MPI_Scatter(dados.data(),
-                local_size,
-                MPI_INT,
-                local.data(),
-                local_size,
-                MPI_INT,
-                0,
-                MPI_COMM_WORLD);
-
-    // Calcula soma local
-    int soma_local = 0;
-
-    for(int i=0;i<local_size;i++)
-        soma_local += local[i];
-
-    // Mostra qual intervalo foi recebido
-    std::cout << "Processo " << rank
-              << " recebeu intervalo ["
-              << local.front() << ", "
-              << local.back() << "]"
-              << " | soma local = "
-              << soma_local
-              << std::endl;
-
-    MPI_Finalize();
-}
-```
-
-
-### Compile o programa:
-```bash
-mpic++ -FlagdeOtimização seu_codigo.cpp -o seu_binario
-```
-
-
-### Script SLURM
+Se abrir o arquivo de saída, deve visualizar algo como:
 
 ```bash
-#!/bin/bash
-#SBATCH --job-name=mpi_hello
-#SBATCH --output=saida%j.txt
-#SBATCH --partition=express
-#SBATCH --mem=1GB
-#SBATCH --nodes=2
-#SBATCH --ntasks=5
-#SBATCH --cpus-per-task=1
-#SBATCH --time=00:02:00
-#SBATCH --export=ALL
-
-# Execute o seu binário com o MPI
-mpirun -np $SLURM_NTASKS ./seu_binario
-
+Job: 29791
+Nós alocados: compute[10-11]
+Tarefas: 2
+Rank 0 | Nó: compute10
+Rank 1 | Nó: compute11
+: Minha computação é = 1
+Tarefa: calcular o quadrado de cada ID.
+Temos 2 nós.
 ```
+### Para entender se você entendeu: processos não são nós
 
-### Submeta o job com SLURM:
-```bash
-sbatch SeuSlurm.slurm
-```
+Nesta missão, você vai observar como o Slurm distribui os processos MPI entre os nós do cluster.
 
-## Combinação de resultados com `MPI_Reduce`
+Para cada experimento da tabela:
 
-Agora cada processo possui um valor (ou resultado parcial) e queremos combinar esses valores em um único resultado final.
+1. **Tente imaginar:** quantos processos serão executados? Quantos nós diferentes vão aparecer no print da saída?
+2. **Ajuste o script:** altere `--nodes`, `--ntasks` e `--ntasks-per-node` para os valores indicados na tabela.
+3. **Execute e confira:** compare os ranks e os nomes dos nós impressos pelo programa com o que você imaginou que aconteceria.
 
-Aqui usamos `MPI_Reduce` para calcular a soma total das somas locais.
+Lembre-se: **`--nodes` indica quantos nós de computação serão usados; `--ntasks` indica o total de processos MPI; e `--ntasks-per-node` indica quantos processos executarão em cada nó de computação.**
 
-1. Cada processo possui uma soma parcial.
-2. `MPI_Reduce` combina todas as somas.
-3. O resultado final aparece no **processo 0**.
+| Experimento | `--nodes` | `--ntasks` | `--ntasks-per-node` | Distribuição esperada |
+| --- | ---: | ---: | ---: | --- |
+| A | 1 | 4 | 4 | ????????????????????????????????????? |
+| B | 2 | 2 | 1 | ????????????????????????????????????? |
+| C | 2 | 4 | 2 | ????????????????????????????????????? |
+| D | 3 | 6 | 2 | ????????????????????????????????????? |
 
+No experimento A, por exemplo, você deverá encontrar **quatro ranks diferentes**, mas **apenas um nó de computação**, pois todos os processos executarão no mesmo computador.
 
-```cpp
-#include <mpi.h>
-#include <iostream>
+Perguntas para discutir:
 
-int main(int argc, char** argv) {
+1. Quatro processos sempre exigem quatro computadores?
+2. O que aconteceria se a última linha do script fosse apenas `./hello_mpi`?
+3. Por que a ordem dos prints muda entre execuções?
 
-    // Inicializa o ambiente MPI
-    MPI_Init(&argc, &argv);
-
-    int rank, size;
-
-    // Descobre o identificador do processo
-    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-
-    // Descobre quantos processos existem
-    MPI_Comm_size(MPI_COMM_WORLD, &size);
-
-    // Cada processo cria um valor local
-    int valor_local = rank * 222 + 100;
-
-    // Mostra o valor local antes da redução
-    std::cout << "Processo " << rank 
-              << " possui valor local = "
-              << valor_local << std::endl;
-
-    int soma_total = 0;
-
-    // Operação coletiva: soma todos os valores locais
-    MPI_Reduce(&valor_local,
-               &soma_total,
-               1,
-               MPI_INT,
-               MPI_SUM,
-               0,
-               MPI_COMM_WORLD);
-
-    // Apenas o processo raiz recebe o resultado final
-    if(rank == 0){
-
-        std::cout << "\n---- Resultado da redução ----\n";
-
-        std::cout << "Todos os valores foram somados no processo 0\n";
-
-        std::cout << "Soma total = " << soma_total << std::endl;
-    }
-
-    MPI_Finalize();
-}
-```
-
-
-### Compile o programa:
-```bash
-mpic++ -FlagdeOtimização seu_codigo.cpp -o seu_binario
-```
-
-
-### Script SLURM
-
-```bash
-#!/bin/bash
-#SBATCH --job-name=mpi_hello
-#SBATCH --output=saida%j.txt
-#SBATCH --partition=express
-#SBATCH --mem=1GB
-#SBATCH --nodes=2
-#SBATCH --ntasks=5
-#SBATCH --cpus-per-task=1
-#SBATCH --time=00:02:00
-#SBATCH --export=ALL
-
-# Execute o seu binário com o MPI
-mpirun -np $SLURM_NTASKS ./seu_binario
-
-```
-
-### Submeta o job com SLURM:
-```bash
-sbatch SeuSlurm.slurm
-```
+**Esta atividade não precisa ser entregue.** Use as execuções e as perguntas para verificar seu entendimento e discutir os resultados em aula.

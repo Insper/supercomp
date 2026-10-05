@@ -32,29 +32,29 @@ nav:
     - Home: index.md
 #    - Burocracias: sobre.md
     - Aulas:
-        - "Aula 01 - Introdução e Overview": aulas/aula01/index.md
-        - "Aula 02 - Cluster Franky": aulas/aula02/index.md
-        - "Aula 03 - STD, Vector e Tiling": aulas/aula03/index.md
-        - "Aula 04 - Algoritmo Busca exaustiva": aulas/aula04/index.md
-        - "Aula 05 - Heurísticas e Aleatoriedade": aulas/aula05/index.md
-        - "Aula 06 - Paralelismo em CPU": aulas/aula06/index.md
-        - "Aula 07 - Efeitos colaterias do paralelismo": aulas/aula07/index.md
-        - "Aula 08 - Sincronização em CPU com OpenMP": aulas/aula08/index.md
-        - "Aula 09 - Programação Distribuída com MPI": aulas/aula09/index.md
-        - "Aula 10 - Tipos de comunicação MPI": aulas/aula10/index.md
-        - "Aula 11 - Exercícios preparatórios para AI": aulas/aula11/index.md
-        - "Aula 12 - Acesso ao Supercomputador SDumont": aulas/aula12/index.md
-        - "Aula 13 - Paralelismo em GPU com CUDA": aulas/aula13/index.md
-        - "Aula 14 - Otimização de memória em GPU": aulas/aula14/index.md
-        - "Aula 15 - Redução e Scan com CUDA": aulas/aula15/index.md
-        - "Aula 16 - Detecção de Bordas em GPU": aulas/aula16/index.md
-        - "Aula 17 - Projeto GPU": aulas/aula17/index.md
-        - "Aula 18 - Detecção de objetos em video" : aulas/aula18/index.md
-        - "Aula 19 - Revisão I - Passando o código da CPU para GPU" : aulas/aula19/index.md
-        - "Aula 20 - Revisão II - Estratégias de otimização em GPU" : aulas/aula20/index.md
-        - "Aula 21 - APS2 no Cluster Santos Dumont" : aulas/aula21/index.md
-        - "Aula 22 - Exercícios preparatórios Prova Final" : aulas/aula22/index.md
-        - "Aula 23 - Exercícios preparatórios" : aulas/aula23/index.md
+        - "Introdução e Overview": aulas/aula01/index.md
+        - "Cluster Franky": aulas/aula02/index.md
+        - "STD, Vector e Tiling": aulas/aula03/index.md
+        - "Algoritmo Busca exaustiva": aulas/aula04/index.md
+        - "Heurísticas e Aleatoriedade": aulas/aula05/index.md
+        - "Paralelismo em CPU": aulas/aula06/index.md
+        - "Efeitos colaterias do paralelismo": aulas/aula07/index.md
+        - "Sincronização em CPU com OpenMP": aulas/aula08/index.md
+        - "Programação Distribuída com MPI": aulas/aula10/index.md
+       # - "Aula 10 - Tipos de comunicação MPI": aulas/aula10/index.md
+       # - "Aula 11 - Exercícios preparatórios para AI": aulas/aula11/index.md
+       # - "Aula 12 - Acesso ao Supercomputador SDumont": aulas/aula12/index.md
+      #  - "Aula 13 - Paralelismo em GPU com CUDA": aulas/aula13/index.md
+      #  - "Aula 14 - Otimização de memória em GPU": aulas/aula14/index.md
+      #  - "Aula 15 - Redução e Scan com CUDA": aulas/aula15/index.md
+      #  - "Aula 16 - Detecção de Bordas em GPU": aulas/aula16/index.md
+      #  - "Aula 17 - Projeto GPU": aulas/aula17/index.md
+      #  - "Aula 18 - Detecção de objetos em video" : aulas/aula18/index.md
+      #  - "Aula 19 - Revisão I - Passando o código da CPU para GPU" : aulas/aula19/index.md
+      #  - "Aula 20 - Revisão II - Estratégias de otimização em GPU" : aulas/aula20/index.md
+      #  - "Aula 21 - APS2 no Cluster Santos Dumont" : aulas/aula21/index.md
+      #  - "Aula 22 - Exercícios preparatórios Prova Final" : aulas/aula22/index.md
+      #  - "Aula 23 - Exercícios preparatórios" : aulas/aula23/index.md
  
     - Suporte:
         - "Slides das aulas" : teoria/slides.md
