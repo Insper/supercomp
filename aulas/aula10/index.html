@@ -1127,6 +1127,16 @@
 <span class="p">}</span>
 </code></pre></div>
 <h3 id="entendendo-as-chamadas">Entendendo as chamadas<a class="headerlink" href="#entendendo-as-chamadas" title="Permanent link">&para;</a></h3>
+<p>Um cluster é formado por vários computadores conectados, chamados <strong>nós</strong>. Cada nó, como o <code>compute10</code>, possui memória RAM e uma ou mais CPUs. Essas CPUs têm <strong>núcleos</strong>, também chamados de <em>cores</em>, que executam as instruções dos programas. Assim, um único nó pode executar vários processos usando seus diferentes núcleos.</p>
+<p>Um <strong>processo</strong> é uma instância de um programa em execução, com seu próprio espaço de memória. Quando iniciamos um programa MPI com quatro processos, executamos quatro instâncias do mesmo binário. Cada uma possui suas próprias variáveis: alterar uma variável em um processo não altera automaticamente a variável correspondente nos demais, mesmo que eles estejam no mesmo nó.</p>
+<p>Dentro de um processo podem existir <strong>threads</strong>, que são fluxos de execução que compartilham a memória desse processo. Essa é uma diferença importante: threads de um mesmo processo podem acessar as mesmas variáveis; processos MPI precisam usar operações de comunicação para trocar dados. Também é possível combinar os dois modelos, usando MPI entre processos e OpenMP para criar threads dentro de cada processo.</p>
+<p>Para identificar os processos, o MPI atribui a cada um um <strong>rank</strong>, válido dentro de um <strong>comunicador</strong>. O comunicador define um grupo de processos e o contexto em que eles podem se comunicar. Nos exemplos da aula, usamos <code>MPI_COMM_WORLD</code>, que reúne os processos da execução MPI. Se esse grupo tiver quatro processos, seus ranks serão <strong>0, 1, 2 e 3</strong>.</p>
+<p><strong>Rank e nó são informações diferentes.</strong> O rank identifica o processo; o nome do nó identifica o computador onde ele executa. Por exemplo, os ranks 0 e 1 podem executar no <code>compute10</code>, enquanto os ranks 2 e 3 executam no <code>compute11</code>. Nesse caso, temos quatro processos MPI distribuídos entre dois nós.</p>
+<p>Para organizar essa execução, cada processo começa chamando <strong><code>MPI_Init</code></strong>, que inicializa o ambiente MPI. Em seguida, <strong><code>MPI_Comm_rank</code></strong> informa o rank daquele processo, e <strong><code>MPI_Comm_size</code></strong> informa quantos processos fazem parte do comunicador. Todos recebem o mesmo total, mas cada processo recebe seu próprio rank.</p>
+<p>Com essas informações, o programa pode atribuir comportamentos diferentes aos processos. Uma condição como <code>if (rank == 0)</code> permite que apenas o rank 0 apresente a tarefa, enquanto os demais realizam cálculos. O rank 0 não é automaticamente um coordenador: esse papel é definido pelo código.</p>
+<p>A chamada <strong><code>MPI_Get_processor_name</code></strong> permite obter o nome do nó onde cada processo executa. Ao imprimir o rank junto com esse nome, conseguimos verificar como os processos foram distribuídos pelo cluster. Já <strong><code>MPI_Finalize</code></strong>, chamada por todos os processos ao final do programa, encerra o uso do ambiente MPI.</p>
+<p>Portanto, ao ler a saída do programa, observe duas informações: <strong>quantos ranks diferentes aparecem e quantos nomes de nós diferentes aparecem</strong>. Elas mostram, respectivamente, quantos processos participaram da execução e em quantos computadores esses processos foram distribuídos.</p>
+<p>Resumindo...</p>
 <table>
 <thead>
 <tr>
@@ -1166,35 +1176,30 @@
 <td>Grupo de processos e contexto de comunicação</td>
 <td><code>MPI_COMM_WORLD</code></td>
 </tr>
-</tbody>
-</table>
-<table>
-<thead>
 <tr>
-<th>Chamada</th>
-<th>Para que serve</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>MPI_Init</code></td>
-<td>Inicializa o MPI antes das operações do programa</td>
+<td>Inicialização (<code>MPI_Init</code>)</td>
+<td>Inicializa o ambiente MPI em cada processo</td>
+<td><code>MPI_Init(&amp;argc, &amp;argv);</code></td>
 </tr>
 <tr>
-<td><code>MPI_Comm_rank</code></td>
-<td>Obtém o ID deste processo no comunicador</td>
+<td>Identificação do processo (<code>MPI_Comm_rank</code>)</td>
+<td>Obtém o rank deste processo no comunicador</td>
+<td><code>MPI_Comm_rank(MPI_COMM_WORLD, &amp;rank);</code> → <code>rank = 0</code></td>
 </tr>
 <tr>
-<td><code>MPI_Comm_size</code></td>
-<td>Obtém o total de processos no comunicador</td>
+<td>Total de processos (<code>MPI_Comm_size</code>)</td>
+<td>Obtém a quantidade de processos no comunicador</td>
+<td><code>MPI_Comm_size(MPI_COMM_WORLD, &amp;total);</code> → <code>total = 4</code></td>
 </tr>
 <tr>
-<td><code>MPI_Get_processor_name</code></td>
-<td>Obtém o nome do processador/nó informado pela implementação</td>
+<td>Identificação do nó (<code>MPI_Get_processor_name</code>)</td>
+<td>Obtém o nome do nó onde o processo executa</td>
+<td><code>MPI_Get_processor_name(nome, &amp;tamanho);</code> → <code>nome = "compute10"</code></td>
 </tr>
 <tr>
-<td><code>MPI_Finalize</code></td>
-<td>Finaliza o uso do MPI</td>
+<td>Finalização (<code>MPI_Finalize</code>)</td>
+<td>Finaliza o uso do ambiente MPI em cada processo</td>
+<td><code>MPI_Finalize();</code></td>
 </tr>
 </tbody>
 </table>
@@ -1205,7 +1210,8 @@
 <p><code>mpic++</code> é um wrapper: chama o compilador C++ com as opções necessárias para incluir e vincular o MPI. Sempre recompile após alterar o código.</p>
 <h3 id="executando-pelo-slurm">Executando pelo Slurm<a class="headerlink" href="#executando-pelo-slurm" title="Permanent link">&para;</a></h3>
 <p>O Slurm reserva recursos e inicia tarefas nos nós de computação. <code>sbatch</code> submete um script; <code>srun</code> inicia as tarefas. Reservar quatro tarefas não significa que executar <code>./hello_mpi</code> sozinho criará quatro processos.</p>
-<div class="highlight"><pre><span></span><code>srun<span class="w"> </span>--partition<span class="o">=</span>merry_cpu<span class="w"> </span>--mpi<span class="o">=</span>pmix<span class="w"> </span>--mem<span class="o">=</span>1G<span class="w"> </span>--nodes<span class="o">=</span><span class="m">2</span><span class="w"> </span>--ntasks<span class="o">=</span><span class="m">2</span><span class="w"> </span>--ntasks-per-node<span class="o">=</span><span class="m">1</span><span class="w"> </span>--cpus-per-task<span class="o">=</span><span class="m">1</span><span class="w"> </span>./hello
+<div class="highlight"><pre><span></span><code>srun<span class="w"> </span>--partition<span class="o">=</span>merry_cpu<span class="w"> </span>--mpi<span class="o">=</span>pmix<span class="w"> </span>--mem<span class="o">=</span>1G<span class="w"> </span>--nodes<span class="o">=</span><span class="m">2</span><span class="w"> </span><span class="se">\</span>
+<span class="w">     </span>--ntasks<span class="o">=</span><span class="m">2</span><span class="w"> </span>--ntasks-per-node<span class="o">=</span><span class="m">1</span><span class="w"> </span>--cpus-per-task<span class="o">=</span><span class="m">1</span><span class="w"> </span>./hello
 </code></pre></div>
 <table>
 <thead>
@@ -1297,7 +1303,10 @@ Temos<span class="w"> </span><span class="m">2</span><span class="w"> </span>nó
 <li><strong>Ajuste o script:</strong> altere <code>--nodes</code>, <code>--ntasks</code> e <code>--ntasks-per-node</code> para os valores indicados na tabela.</li>
 <li><strong>Execute e confira:</strong> compare os ranks e os nomes dos nós impressos pelo programa com o que você imaginou que aconteceria.</li>
 </ol>
-<p>Lembre-se: <strong><code>--nodes</code> indica quantos nós de computação serão usados; <code>--ntasks</code> indica o total de processos MPI; e <code>--ntasks-per-node</code> indica quantos processos executarão em cada nó de computação.</strong></p>
+<p>Lembre-se: </p>
+<p>**<code>--nodes</code> indica quantos nós de computação serão usados; </p>
+<p>*<code>--ntasks</code> indica o total de processos MPI; </p>
+<p>e <code>--ntasks-per-node</code> indica quantos processos executarão em cada nó de computação.**</p>
 <table>
 <thead>
 <tr>
