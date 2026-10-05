@@ -47,6 +47,26 @@ int main(int argc, char** argv) {
 
 ### Entendendo as chamadas
 
+Um cluster é formado por vários computadores conectados, chamados **nós**. Cada nó, como o `compute10`, possui memória RAM e uma ou mais CPUs. Essas CPUs têm **núcleos**, também chamados de *cores*, que executam as instruções dos programas. Assim, um único nó pode executar vários processos usando seus diferentes núcleos.
+
+Um **processo** é uma instância de um programa em execução, com seu próprio espaço de memória. Quando iniciamos um programa MPI com quatro processos, executamos quatro instâncias do mesmo binário. Cada uma possui suas próprias variáveis: alterar uma variável em um processo não altera automaticamente a variável correspondente nos demais, mesmo que eles estejam no mesmo nó.
+
+Dentro de um processo podem existir **threads**, que são fluxos de execução que compartilham a memória desse processo. Essa é uma diferença importante: threads de um mesmo processo podem acessar as mesmas variáveis; processos MPI precisam usar operações de comunicação para trocar dados. Também é possível combinar os dois modelos, usando MPI entre processos e OpenMP para criar threads dentro de cada processo.
+
+Para identificar os processos, o MPI atribui a cada um um **rank**, válido dentro de um **comunicador**. O comunicador define um grupo de processos e o contexto em que eles podem se comunicar. Nos exemplos da aula, usamos `MPI_COMM_WORLD`, que reúne os processos da execução MPI. Se esse grupo tiver quatro processos, seus ranks serão **0, 1, 2 e 3**.
+
+**Rank e nó são informações diferentes.** O rank identifica o processo; o nome do nó identifica o computador onde ele executa. Por exemplo, os ranks 0 e 1 podem executar no `compute10`, enquanto os ranks 2 e 3 executam no `compute11`. Nesse caso, temos quatro processos MPI distribuídos entre dois nós.
+
+Para organizar essa execução, cada processo começa chamando **`MPI_Init`**, que inicializa o ambiente MPI. Em seguida, **`MPI_Comm_rank`** informa o rank daquele processo, e **`MPI_Comm_size`** informa quantos processos fazem parte do comunicador. Todos recebem o mesmo total, mas cada processo recebe seu próprio rank.
+
+Com essas informações, o programa pode atribuir comportamentos diferentes aos processos. Uma condição como `if (rank == 0)` permite que apenas o rank 0 apresente a tarefa, enquanto os demais realizam cálculos. O rank 0 não é automaticamente um coordenador: esse papel é definido pelo código.
+
+A chamada **`MPI_Get_processor_name`** permite obter o nome do nó onde cada processo executa. Ao imprimir o rank junto com esse nome, conseguimos verificar como os processos foram distribuídos pelo cluster. Já **`MPI_Finalize`**, chamada por todos os processos ao final do programa, encerra o uso do ambiente MPI.
+
+Portanto, ao ler a saída do programa, observe duas informações: **quantos ranks diferentes aparecem e quantos nomes de nós diferentes aparecem**. Elas mostram, respectivamente, quantos processos participaram da execução e em quantos computadores esses processos foram distribuídos.
+
+Resumindo...
+
 | Conceito | Significado | Exemplo |
 | --- | --- | --- |
 | Nó | Um computador do cluster | `compute10` |
@@ -55,15 +75,11 @@ int main(int argc, char** argv) {
 | Thread | Um fluxo de execução dentro de um processo | Threads de um programa OpenMP |
 | Rank | Identificador do processo dentro de um comunicador MPI | 0, 1, 2 e 3 |
 | Comunicador | Grupo de processos e contexto de comunicação | `MPI_COMM_WORLD` |
-
-| Chamada | Para que serve |
-| --- | --- |
-| `MPI_Init` | Inicializa o MPI antes das operações do programa |
-| `MPI_Comm_rank` | Obtém o ID deste processo no comunicador |
-| `MPI_Comm_size` | Obtém o total de processos no comunicador |
-| `MPI_Get_processor_name` | Obtém o nome do processador/nó informado pela implementação |
-| `MPI_Finalize` | Finaliza o uso do MPI |
-
+| Inicialização (`MPI_Init`) | Inicializa o ambiente MPI em cada processo | `MPI_Init(&argc, &argv);` |
+| Identificação do processo (`MPI_Comm_rank`) | Obtém o rank deste processo no comunicador | `MPI_Comm_rank(MPI_COMM_WORLD, &rank);` → `rank = 0` |
+| Total de processos (`MPI_Comm_size`) | Obtém a quantidade de processos no comunicador | `MPI_Comm_size(MPI_COMM_WORLD, &total);` → `total = 4` |
+| Identificação do nó (`MPI_Get_processor_name`) | Obtém o nome do nó onde o processo executa | `MPI_Get_processor_name(nome, &tamanho);` → `nome = "compute10"` |
+| Finalização (`MPI_Finalize`) | Finaliza o uso do ambiente MPI em cada processo | `MPI_Finalize();` |
 
 
 
@@ -83,7 +99,8 @@ mpic++ -O2 hello.cpp -o hello
 O Slurm reserva recursos e inicia tarefas nos nós de computação. `sbatch` submete um script; `srun` inicia as tarefas. Reservar quatro tarefas não significa que executar `./hello_mpi` sozinho criará quatro processos.
 
 ```bash
-srun --partition=merry_cpu --mpi=pmix --mem=1G --nodes=2 --ntasks=2 --ntasks-per-node=1 --cpus-per-task=1 ./hello
+srun --partition=merry_cpu --mpi=pmix --mem=1G --nodes=2 \
+     --ntasks=2 --ntasks-per-node=1 --cpus-per-task=1 ./hello
 ```
 
 
@@ -162,7 +179,13 @@ Para cada experimento da tabela:
 2. **Ajuste o script:** altere `--nodes`, `--ntasks` e `--ntasks-per-node` para os valores indicados na tabela.
 3. **Execute e confira:** compare os ranks e os nomes dos nós impressos pelo programa com o que você imaginou que aconteceria.
 
-Lembre-se: **`--nodes` indica quantos nós de computação serão usados; `--ntasks` indica o total de processos MPI; e `--ntasks-per-node` indica quantos processos executarão em cada nó de computação.**
+Lembre-se: 
+
+**`--nodes` indica quantos nós de computação serão usados; 
+
+*`--ntasks` indica o total de processos MPI; 
+
+e `--ntasks-per-node` indica quantos processos executarão em cada nó de computação.**
 
 | Experimento | `--nodes` | `--ntasks` | `--ntasks-per-node` | Distribuição esperada |
 | --- | ---: | ---: | ---: | --- |
