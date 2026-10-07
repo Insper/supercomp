@@ -1,29 +1,263 @@
+# Comunicação bloqueante e não bloqueante em MPI
+Em um programa distribuído, vários processos trabalham juntos para resolver um problema. Eles podem executar no mesmo nó ou em nós diferentes de um cluster. Cada processo possui seu próprio espaço de memória: alterar uma variável em um processo não altera automaticamente a variável de outro.
 
-Esta etapa amplia a introdução da aula e prepara o desafio do handout. Na comunicação ponto-a-ponto, um processo envia dados e outro os recebe.
+Imagine que quatro processos calculam partes de um resultado. Para obter a resposta final, precisamos reunir essas partes. O MPI permite fazer isso por meio da troca de mensagens, que também pode ser usada para distribuir dados e coordenar o trabalho.
+
+Na **comunicação ponto a ponto**, uma mensagem é enviada por um processo e recebida por outro. Nesta aula, estudaremos quatro chamadas:
+
+| Forma de comunicação | Envio | Recebimento |
+| --- | --- | --- |
+| Bloqueante | `MPI_Send` | `MPI_Recv` |
+| Não bloqueante | `MPI_Isend` | `MPI_Irecv` |
+
+**Rank identifica um processo, não um nó.** Dois processos no mesmo nó têm ranks diferentes dentro de `MPI_COMM_WORLD`. Por exemplo, quatro processos distribuídos em dois nós continuam sendo quatro ranks.
+
+### Como uma mensagem é descrita?
+
+Podemos pensar na mensagem como uma correspondência: o **conteúdo** são os dados transmitidos; o **envelope** identifica a origem, o destino, a tag e o comunicador.
+
+No envio abaixo, o processo transmite um inteiro armazenado em `valor` para o rank 1:
 
 ```cpp
-MPI_Send(buffer, quantidade, tipo, destino, tag, comunicador);
-MPI_Recv(buffer, capacidade, tipo, origem, tag, comunicador, status);
+MPI_Send(&valor, 1, MPI_INT, 1, 10, MPI_COMM_WORLD);
 ```
 
-- **Buffer:** região de memória com os dados a enviar ou receber.
-- **Quantidade/capacidade:** número de elementos, não necessariamente bytes.
-- **Tipo:** por exemplo, `MPI_INT` para inteiros ou `MPI_BYTE` para bytes.
-- **Origem/destino:** rank do outro processo, não nome do computador.
-- **Tag:** identificador que ajuda a distinguir mensagens.
-- **Comunicador:** contexto no qual ocorre a troca, aqui `MPI_COMM_WORLD`.
+O recebimento correspondente, executado pelo rank 1, é:
 
-`MPI_Recv` espera até que a mensagem correspondente seja recebida. `MPI_Send` é bloqueante: ao retornar, o buffer de envio pode ser reutilizado, mas isso não garante que o destinatário já tenha concluído o recebimento. Portanto, não dependa de buffers internos para evitar travamentos; planeje a ordem de envio e recebimento.
+```cpp
+MPI_Recv(&recebido, 1, MPI_INT, 0, 10,
+         MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+```
 
-Comunicações coletivas envolvem todos os processos do comunicador. Exemplos são `MPI_Bcast`, `MPI_Scatter` e `MPI_Gather`; elas ficam como continuação do estudo.
+### Parâmetros e possibilidades
 
-### Coleta centralizada: cada trabalhador envia ao rank 0
+| Parâmetro | No envio | No recebimento | Exemplos e alternativas |
+| --- | --- | --- | --- |
+| Buffer | Endereço dos dados a enviar | Endereço onde armazenar os dados | `&valor` para uma variável; `vetor` para um array; `vetor.data()` para um `std::vector` |
+| Quantidade | Número de elementos enviados | Capacidade do buffer em elementos | `1`, `5` ou uma variável inteira. Não é a quantidade de bytes, exceto quando cada elemento tem um byte |
+| Tipo | Tipo dos elementos enviados | Tipo dos elementos esperados | `MPI_INT`, `MPI_DOUBLE`, `MPI_FLOAT`, `MPI_CHAR` |
+| Rank | Destino da mensagem | Origem esperada | Um rank válido no comunicador. No recebimento, `MPI_ANY_SOURCE` aceita qualquer origem |
+| Tag | Etiqueta da mensagem enviada | Etiqueta da mensagem esperada | `10`, `20` ou outra tag válida. No recebimento, `MPI_ANY_TAG` aceita qualquer tag |
+| Comunicador | Contexto em que ocorre o envio | Contexto em que ocorre o recebimento | `MPI_COMM_WORLD` ou um comunicador criado pelo programa |
+| Status | Não é parâmetro de `MPI_Send` | Informações sobre o recebimento | `MPI_STATUS_IGNORE` ou `&status`, após declarar `MPI_Status status;` |
 
-O código abaixo reúne blocos de inteiros usando envios e recebimentos individuais. É uma **coleta centralizada**, não um anel: todos os trabalhadores enviam diretamente ao rank 0.
+O símbolo `&` fornece o endereço de uma variável. Um array, como `double valores[5]`, pode ser passado usando apenas `valores`, que fornece acesso ao primeiro elemento. Em um `std::vector`, use `.data()` e garanta que o vetor tenha o tamanho necessário.
 
-Em um anel verdadeiro, o token passaria de um rank para o próximo e retornaria ao inicial. A quantidade e o caminho das mensagens seriam diferentes. Aqui há `total - 1` mensagens de dados.
+A tag ajuda a distinguir mensagens, mas **não é o conteúdo transmitido**. A origem é identificada automaticamente pelo MPI no envio. No recebimento, origem, tag e comunicador determinam qual mensagem pode ser aceita; quantidade e tipo descrevem como os dados serão armazenados.
 
-Salve como `coleta.cpp`:
+| Tipo em C++ | Tipo MPI correspondente |
+| --- | --- |
+| `int` | `MPI_INT` |
+| `float` | `MPI_FLOAT` |
+| `double` | `MPI_DOUBLE` |
+| `char` | `MPI_CHAR` |
+| `long` | `MPI_LONG` |
+| `long long` | `MPI_LONG_LONG_INT` |
+| `unsigned int` | `MPI_UNSIGNED` |
+
+O buffer de recebimento deve comportar a mensagem. Ele pode ter capacidade maior que a quantidade enviada, mas uma mensagem maior que sua capacidade causa erro de truncamento. Nos exemplos desta aula, utilize o mesmo tipo MPI no envio e no recebimento. Tags devem ser não negativas e não exceder o limite `MPI_TAG_UB`. Uma quantidade zero produz uma mensagem sem conteúdo, que ainda pode servir como sinal.
+
+### Comunicação bloqueante: receber antes de calcular
+
+Quando o próximo cálculo depende da mensagem, a comunicação bloqueante oferece um fluxo simples: **receber o dado, calcular e mostrar o resultado**.
+
+- `MPI_Send` retorna quando o buffer de envio pode ser alterado ou reutilizado. Isso não garante que o destinatário tenha concluído o recebimento: o MPI pode ter copiado os dados para um buffer interno.
+- `MPI_Recv` retorna quando o recebimento terminou e os dados estão disponíveis no buffer.
+
+
+`bloqueante.cpp`:
+
+```cpp
+#include <mpi.h>
+#include <iostream>
+
+int main(int argc, char** argv) {
+    // Inicializa o MPI em cada processo.
+    MPI_Init(&argc, &argv);
+
+    int rank, total;
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+    MPI_Comm_size(MPI_COMM_WORLD, &total);
+
+    // O exemplo exige exatamente dois processos.
+    if (total != 2) {
+        if (rank == 0)
+            std::cerr << "Execute com exatamente 2 processos.\n";
+        MPI_Finalize();
+        return 1;
+    }
+
+    if (rank == 0) {
+        int valor = 7;
+
+        // Envia um inteiro ao rank 1, com a tag 10.
+        MPI_Send(&valor, 1, MPI_INT, 1, 10, MPI_COMM_WORLD);
+    } else {
+        int recebido;
+
+        // Espera o valor necessário para realizar o cálculo.
+        MPI_Recv(&recebido, 1, MPI_INT, 0, 10,
+                 MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+
+        int quadrado = recebido * recebido;
+        std::cout << "Rank 1: quadrado = " << quadrado << '\n';
+    }
+
+    MPI_Finalize();
+    return 0;
+}
+```
+
+
+```bash
+mpic++ -O2 bloqueante.cpp -o bloq
+```
+
+
+```bash
+srun --partition=merry_cpu --mpi=pmix --mem=1G --nodes=2 \
+     --ntasks=2 --ntasks-per-node=1 ./bloq
+```
+
+
+O resultado esperado no rank 1 é `49`. Todos executam o mesmo programa, mas o `if` define a função de cada rank.
+
+### Cuidado com a ordem das chamadas
+
+Bloqueante não significa que todos os processos param juntos. Cada processo aguarda sua própria operação. Entretanto, uma ordem inadequada pode causar **deadlock**, uma situação em que os processos ficam esperando uns pelos outros sem conseguir avançar.
+
+Por exemplo, se dois processos chamarem `MPI_Send` um para o outro antes de chamar `MPI_Recv`, ambos poderão ficar esperando que o outro inicie o recebimento. Mensagens pequenas podem funcionar graças a buffers internos, mas isso não garante que o programa funcionará para mensagens maiores.
+
+Para uma troca de ida e volta, uma ordem segura é: o rank 0 envia e depois recebe; o rank 1 recebe e depois envia. Essa será a organização do desafio ping-pong.
+
+### Comunicação não bloqueante: calcular enquanto a operação está pendente
+
+Agora suponha que o rank 1 também precise somar um vetor local. Essa soma não depende do valor enviado pelo rank 0. Podemos iniciar o recebimento, fazer a soma e só então aguardar a mensagem.
+
+`MPI_Isend` e `MPI_Irecv` iniciam as operações e retornam um **pedido**, do tipo `MPI_Request`. Esse pedido permite acompanhar a operação. O retorno da chamada inicial não garante sua conclusão.
+
+As chamadas usam os mesmos parâmetros básicos de envio e recebimento, com um endereço de pedido ao final. `MPI_Irecv` recebe `&pedido` nessa posição, em vez do status usado em `MPI_Recv`:
+
+```cpp
+MPI_Isend(&valor, 1, MPI_INT, 1, 10, MPI_COMM_WORLD, &pedido);
+MPI_Irecv(&recebido, 1, MPI_INT, 0, 10, MPI_COMM_WORLD, &pedido);
+```
+
+Essas duas linhas ilustram as assinaturas; cada operação pendente deve ter seu próprio pedido. Nos exemplos abaixo, elas são executadas por processos diferentes.
+
+`nao_bloqueante.cpp`:
+
+```cpp
+#include <mpi.h>
+#include <iostream>
+
+int main(int argc, char** argv) {
+    MPI_Init(&argc, &argv);
+
+    int rank, total;
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+    MPI_Comm_size(MPI_COMM_WORLD, &total);
+
+    if (total != 2) {
+        if (rank == 0)
+            std::cerr << "Execute com exatamente 2 processos.\n";
+        MPI_Finalize();
+        return 1;
+    }
+
+    MPI_Request pedido;
+
+    if (rank == 0) {
+        int valor = 7;
+
+        // Inicia o envio e guarda seu identificador em "pedido".
+        MPI_Isend(&valor, 1, MPI_INT, 1, 10,
+                  MPI_COMM_WORLD, &pedido);
+
+        // Mantém "valor" válido até a conclusão do envio.
+        MPI_Wait(&pedido, MPI_STATUS_IGNORE);
+    } else {
+        int recebido;
+
+        // Inicia o recebimento sem exigir que ele termine agora.
+        MPI_Irecv(&recebido, 1, MPI_INT, 0, 10,
+                  MPI_COMM_WORLD, &pedido);
+
+        // Trabalho independente: não acessa o buffer "recebido".
+        int dados[] = {10, 20, 30, 40};
+        int soma = 0;
+        for (int numero : dados)
+            soma += numero;
+
+        // Confirma a conclusão antes de utilizar o dado recebido.
+        MPI_Wait(&pedido, MPI_STATUS_IGNORE);
+
+        int quadrado = recebido * recebido;
+        std::cout << "Rank 1: soma local = " << soma << '\n';
+        std::cout << "Rank 1: quadrado = " << quadrado << '\n';
+    }
+
+    MPI_Finalize();
+    return 0;
+}
+```
+
+
+```bash
+mpic++ -O2 nao_bloqueante.cpp -o nobloq
+```
+
+
+```bash
+srun --partition=merry_cpu --mpi=pmix --mem=1G --nodes=2 \
+     --ntasks=2 --ntasks-per-node=1 ./nobloq
+```
+
+
+O rank 1 imprime soma `100` e quadrado `49`. A oportunidade de sobreposição está entre `MPI_Irecv` e `MPI_Wait`. No rank 0, a espera imediata foi usada para manter o exemplo simples; ali não há trabalho sobreposto.
+
+### Quando podemos usar os buffers?
+
+Enquanto uma operação não bloqueante estiver pendente:
+
+| Buffer | Regra |
+| --- | --- |
+| Envio | Não altere o conteúdo nem libere a memória |
+| Recebimento | Não leia, altere ou libere a memória |
+
+
+Após a conclusão, o buffer correspondente pode ser utilizado normalmente.
+
+`MPI_Wait` aguarda a conclusão. Outra possibilidade é `MPI_Test`, que retorna uma flag indicando se a operação terminou:
+
+```cpp
+int terminou = 0;
+MPI_Test(&pedido, &terminou, MPI_STATUS_IGNORE);
+
+if (terminou) {
+    // A operação terminou: o buffer pode ser utilizado.
+} else {
+    // A operação continua pendente: mantenha os cuidados com o buffer.
+}
+```
+
+### Qual forma escolher?
+
+| Situação | Escolha e motivo |
+| --- | --- |
+| O próximo cálculo depende imediatamente da mensagem | Bloqueante: organiza um fluxo direto de receber e calcular |
+| Existe trabalho independente dos dados transferidos | Não bloqueante: permite tentar sobrepor comunicação e cálculo |
+| A chamada não bloqueante é seguida imediatamente por uma espera | Pode ser correta, mas não aproveita esse intervalo para computação |
+
+O vetor pequeno apenas ilustra a organização. Comunicação não bloqueante não é automaticamente mais rápida: o ganho depende da quantidade de trabalho independente e do progresso da comunicação na implementação MPI. Meça antes de concluir que houve melhoria.
+
+
+
+### Para entender se você entendeu: coleta centralizada de blocos
+
+Agora cada processo cria um bloco de inteiros. Os nós enviam seus blocos ao rank 0, que monta um vetor com todos os dados. Há `total - 1` mensagens: uma de cada nó para o coordenador, que é o rank 0.
+
+`coleta.cpp`:
 
 ```cpp
 #include <mpi.h>
@@ -41,39 +275,22 @@ int main(int argc, char** argv) {
     const int bloco = 2048;
     std::vector<int> local(bloco);
 
-    // Cada processo cria seu próprio bloco, com valores identificáveis.
+    // Os valores permitem identificar de qual rank veio cada bloco.
     for (int i = 0; i < bloco; ++i)
         local[i] = rank * 10000 + i;
 
-    // Apenas o coordenador precisa armazenar todos os blocos.
-    std::vector<int> reunidos;
-    if (rank == 0)
-        reunidos.resize(total * bloco);
-
-    // Aproxima o início da etapa nos processos participantes.
-    MPI_Barrier(MPI_COMM_WORLD);
-    double inicio = MPI_Wtime();
-
     if (rank == 0) {
-        // O bloco do rank 0 já está localmente disponível.
+        std::vector<int> reunidos(total * bloco);
+
+        // O bloco do coordenador já está disponível localmente.
         std::copy(local.begin(), local.end(), reunidos.begin());
 
-        // Recebe cada bloco na faixa correspondente ao rank de origem.
         for (int origem = 1; origem < total; ++origem) {
+            // Cada origem ocupa uma faixa diferente do vetor final.
             MPI_Recv(reunidos.data() + origem * bloco,
                      bloco, MPI_INT, origem, 0,
                      MPI_COMM_WORLD, MPI_STATUS_IGNORE);
         }
-    } else {
-        // Cada trabalhador envia seu bloco ao coordenador.
-        MPI_Send(local.data(), bloco, MPI_INT, 0, 0, MPI_COMM_WORLD);
-    }
-
-    double fim = MPI_Wtime();
-
-    if (rank == 0) {
-        std::cout << "Coleta com " << total << " processos: "
-                  << fim - inicio << " s\n";
 
         for (int p = 0; p < total; ++p) {
             std::cout << "Bloco do rank " << p << ": ";
@@ -81,6 +298,9 @@ int main(int argc, char** argv) {
                 std::cout << reunidos[p * bloco + i] << ' ';
             std::cout << "...\n";
         }
+    } else {
+        // Cada trabalhador envia seu bloco completo ao rank 0.
+        MPI_Send(local.data(), bloco, MPI_INT, 0, 0, MPI_COMM_WORLD);
     }
 
     MPI_Finalize();
@@ -88,148 +308,11 @@ int main(int argc, char** argv) {
 }
 ```
 
-Compile e execute com dois processos em dois nós:
+O primeiro bloco começa em `0`; o segundo, em `10000`; o terceiro, se houver, em `20000`. O deslocamento `origem * bloco` determina onde guardar cada bloco. O recebimento é feito por ordem de rank, mesmo que outro trabalhador já esteja pronto para enviar.
 
-```bash
-mpic++ -std=c++11 -O2 coleta.cpp -o coleta
-srun --partition=merry_cpu --mpi=pmix --mem=1G \
-     --nodes=2 --ntasks=2 --ntasks-per-node=1 \
-     --time=00:01:00 ./coleta
-```
+**Perguntas para discutir:**
 
-Também é possível reutilizar `run.slurm`, trocando o executável da última linha por `./coleta`.
-
-**Leitura do resultado:** o primeiro bloco começa em 0; o segundo, em 10000; o terceiro, se houver, em 20000. O deslocamento `origem * bloco` coloca cada bloco na posição correta do vetor final.
-
-`MPI_Barrier` é uma operação coletiva de sincronização: todos devem chamá-la. Ela foi introduzida aqui apenas para organizar a medição. O tempo impresso é o intervalo medido no rank 0, incluindo a cópia local e os recebimentos; não é uma medida isolada da latência da rede. Os prints ficam fora desse intervalo.
-
-## 7. Desafio ping-pong: latência e largura de banda
-
-Implemente `pingpong.cpp` usando **exatamente dois processos MPI**. A ideia é medir o tempo de uma mensagem de ida e de uma resposta com o mesmo tamanho.
-
-### Sequência de uma repetição
-
-| Rank 0 | Rank 1 |
-| --- | --- |
-| Envia o buffer ao rank 1 | Recebe o buffer do rank 0 |
-| Recebe o buffer de volta | Envia o buffer de volta ao rank 0 |
-
-Repita essa sequência várias vezes. O rank 0 envia primeiro; o rank 1 recebe primeiro. Isso evita que os dois esperem por uma mensagem que ninguém enviou.
-
-### Roteiro de implementação
-
-1. Inicialize o MPI e obtenha `rank` e `total`.
-2. Se `total != 2`, faça o rank 0 mostrar uma orientação, finalize o MPI em todos os processos e encerre o programa.
-3. Para cada tamanho da tabela abaixo, crie um buffer de bytes, como `std::vector<char>`.
-4. Faça 100 trocas de aquecimento, sem incluí-las no tempo medido.
-5. Faça todos os processos chamarem `MPI_Barrier` antes da medição.
-6. No rank 0, registre `inicio = MPI_Wtime()`.
-7. Execute 10000 repetições de ida e volta. Use `MPI_BYTE` e envie o número de bytes escolhido.
-8. No rank 0, registre `fim = MPI_Wtime()` e calcule as métricas.
-9. Imprima os resultados apenas depois de encerrar a medição. Não coloque prints dentro do laço.
-
-Use os tempos inicial e final do **mesmo rank**. Não subtraia um instante medido no rank 0 de outro medido no rank 1: os relógios MPI não precisam estar sincronizados.
-
-| Tamanho | Bytes por mensagem | Repetições medidas |
-| --- | ---: | ---: |
-| 8 B | 8 | 10000 |
-| 64 B | 64 | 10000 |
-| 512 B | 512 | 10000 |
-| 4 KiB | 4096 | 10000 |
-| 32 KiB | 32768 | 10000 |
-| 256 KiB | 262144 | 10000 |
-
-### Como calcular
-
-Seja `T` o tempo total medido em segundos, `R` o número de repetições e `B` o tamanho de uma mensagem em bytes. Cada repetição transfere duas mensagens de tamanho `B`.
-
-O tempo médio de ida e volta é:
-
-$$
-t_{ida\ e\ volta} = \frac{T}{R}
-$$
-
-Uma estimativa do tempo médio de transferência em um sentido é:
-
-$$
-t_{um\ sentido} \approx \frac{T}{2R}
-$$
-
-Para mensagens pequenas, essa estimativa é usada como aproximação de latência. Para mensagens maiores, inclui também o custo de transferir o conteúdo; não representa apenas a latência inicial.
-
-Para apresentar o valor em microssegundos:
-
-$$
-t_{\mu s} = \frac{T}{2R} \times 10^6
-$$
-
-A largura de banda efetiva do ping-pong, em MB/s, é:
-
-$$
-BW_{MB/s} = \frac{2BR}{T \times 10^6}
-$$
-
-Aqui, **1 MB = 1000000 bytes**. Se usar MiB/s, divida por `2^20` em vez de `10^6` e identifique a unidade. A medida é efetiva para esse experimento; não é necessariamente a capacidade máxima do enlace.
-
-**Exemplo de cálculo, com números fictícios:** para `B = 4096`, `R = 10000` e `T = 0,2 s`, o tempo estimado por sentido é `10 µs` e a largura de banda é `409,6 MB/s`.
-
-### Compare dentro do nó e entre nós
-
-Após compilar:
-
-```bash
-mpic++ -std=c++11 -O2 pingpong.cpp -o pingpong
-```
-
-Execute dois processos no mesmo nó:
-
-```bash
-srun --partition=merry_cpu --mpi=pmix --mem=1G \
-     --nodes=1 --ntasks=2 --ntasks-per-node=2 \
-     --time=00:05:00 ./pingpong
-```
-
-Depois, um processo em cada nó:
-
-```bash
-srun --partition=merry_cpu --mpi=pmix --mem=1G \
-     --nodes=2 --ntasks=2 --ntasks-per-node=1 \
-     --time=00:05:00 ./pingpong
-```
-
-Registre os nomes dos nós antes da medição, usando `MPI_Get_processor_name`. Repita cada configuração pelo menos três vezes e registre a mediana, mantendo as mesmas repetições e tamanhos. Assim você reduz o efeito de uma execução excepcional.
-
-| Configuração | Bytes | Repetições | Tempo total (s) | Tempo por sentido (µs) | Banda efetiva (MB/s) |
-| --- | ---: | ---: | ---: | ---: | ---: |
-| Mesmo nó | 8 | 10000 | | | |
-| Nós diferentes | 8 | 10000 | | | |
-| Mesmo nó | 4096 | 10000 | | | |
-| Nós diferentes | 4096 | 10000 | | | |
-
-Complete a tabela também para os demais tamanhos. Registre os valores de cada execução e indique quais valores da tabela representam a mediana.
-
-### Perguntas para análise
-
-1. Qual é a diferença entre latência e largura de banda?
-2. Por que o custo inicial pesa mais nas mensagens pequenas?
-3. A banda efetiva sempre aumenta com o tamanho da mensagem? O que os seus dados mostram?
-4. Por que repetir e aquecer o experimento antes de medir?
-5. Como os resultados mudam entre processos no mesmo nó e em nós diferentes?
-6. O ping-pong mede apenas a rede física? Que outros custos estão envolvidos?
-7. Por que aumentar o número de processos não garante reduzir o tempo de qualquer programa?
-
-## 8. Se algo não funcionar
-
-| Sintoma | O que verificar |
-| --- | --- |
-| Apenas rank 0 e `total = 1` | O programa foi chamado sozinho? Use `srun --mpi=pmix ./programa` no script |
-| Ranks repetidos e várias mensagens do coordenador | Verifique se você usou `srun ... mpirun ...`; use um único lançador |
-| Job pendente com `PartitionNodeLimit` | Consulte `scontrol show partition merry_cpu` e compare o pedido com os limites |
-| `command not found` | Confira o ambiente e peça orientação ao responsável pelo cluster |
-| `Stale file handle` | Há um problema de acesso ao sistema de arquivos compartilhado; informe ao administrador |
-| Binário não encontrado no nó | Use uma pasta compartilhada e confira nome, caminho e permissão do executável |
-| Código alterado, saída antiga | Recompile, submeta novamente e leia o arquivo do novo ID de job |
-| Prints fora de ordem | É esperado em processos concorrentes; não indica rank incorreto |
-| Aviso de versão de `libxml` | Informe ao responsável pelo ambiente; é distinto da quantidade de ranks ou nós |
-
-Use dois hífens comuns nas opções: `--mem=1G`, e não um travessão. As diretivas `#SBATCH` devem aparecer antes do primeiro comando do script. Não coloque variáveis de shell dentro dessas diretivas esperando expansão automática.
+1. Por que o rank 0 não precisa enviar uma mensagem para si mesmo?
+2. Por que apenas ele precisa do vetor `reunidos`?
+3. O que acontece se o rank 1 demorar, mas o rank 2 já estiver pronto?
+4. Como poderíamos iniciar todos os recebimentos com `MPI_Irecv`? Considere um pedido por nó, faixas separadas no vetor e a conclusão de todos os pedidos antes de imprimir.

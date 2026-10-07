@@ -41,7 +41,7 @@ nav:
         - "Efeitos colaterias do paralelismo": aulas/aula07/index.md
         - "Sincronização em CPU com OpenMP": aulas/aula08/index.md
         - "Programação Distribuída com MPI": aulas/aula10/index.md
-       # - "Aula 10 - Tipos de comunicação MPI": aulas/aula10/index.md
+        - "Comunicação Bloqueante e Não Bloqueante": aulas/aula11/index.md
        # - "Aula 11 - Exercícios preparatórios para AI": aulas/aula11/index.md
        # - "Aula 12 - Acesso ao Supercomputador SDumont": aulas/aula12/index.md
       #  - "Aula 13 - Paralelismo em GPU com CUDA": aulas/aula13/index.md
