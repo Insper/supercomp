@@ -11,6 +11,10 @@
         <link rel="canonical" href="https://insper.github.io/supercomp/aulas/aula11/">
       
       
+        <link rel="prev" href="../aula10/">
+      
+      
+        <link rel="next" href="../../teoria/slides/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -18,7 +22,7 @@
     
     
       
-        <title>Index - SuperComputação - 2026/2</title>
+        <title>Comunicação Bloqueante e Não Bloqueante - SuperComputação - 2026/2</title>
       
     
     
@@ -80,7 +84,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#coleta-centralizada-cada-trabalhador-envia-ao-rank-0" class="md-skip">
+        <a href="#comunicacao-bloqueante-e-nao-bloqueante-em-mpi" class="md-skip">
           Skip to content
         </a>
       
@@ -114,7 +118,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Index
+              Comunicação Bloqueante e Não Bloqueante
             
           </span>
         </div>
@@ -210,10 +214,12 @@
         
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
+      <li class="md-tabs__item md-tabs__item--active">
         <a href="../aula01/" class="md-tabs__link">
           
   
@@ -331,23 +337,28 @@
       
   
   
+    
   
   
+  
     
     
     
-      
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
             
   
   <span class="md-ellipsis">
@@ -359,7 +370,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             Aulas
@@ -559,6 +570,141 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Comunicação Bloqueante e Não Bloqueante
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Comunicação Bloqueante e Não Bloqueante
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#como-uma-mensagem-e-descrita" class="md-nav__link">
+    <span class="md-ellipsis">
+      Como uma mensagem é descrita?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parametros-e-possibilidades" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parâmetros e possibilidades
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comunicacao-bloqueante-receber-antes-de-calcular" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comunicação bloqueante: receber antes de calcular
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cuidado-com-a-ordem-das-chamadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cuidado com a ordem das chamadas
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comunicacao-nao-bloqueante-calcular-enquanto-a-operacao-esta-pendente" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comunicação não bloqueante: calcular enquanto a operação está pendente
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-podemos-usar-os-buffers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quando podemos usar os buffers?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#qual-forma-escolher" class="md-nav__link">
+    <span class="md-ellipsis">
+      Qual forma escolher?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#para-entender-se-voce-entendeu-coleta-centralizada-de-blocos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Para entender se você entendeu: coleta centralizada de blocos
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -900,6 +1046,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -908,78 +1056,72 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#coleta-centralizada-cada-trabalhador-envia-ao-rank-0" class="md-nav__link">
+  <a href="#como-uma-mensagem-e-descrita" class="md-nav__link">
     <span class="md-ellipsis">
-      Coleta centralizada: cada trabalhador envia ao rank 0
+      Como uma mensagem é descrita?
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#7-desafio-ping-pong-latencia-e-largura-de-banda" class="md-nav__link">
+  <a href="#parametros-e-possibilidades" class="md-nav__link">
     <span class="md-ellipsis">
-      7. Desafio ping-pong: latência e largura de banda
+      Parâmetros e possibilidades
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="7. Desafio ping-pong: latência e largura de banda">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#sequencia-de-uma-repeticao" class="md-nav__link">
-    <span class="md-ellipsis">
-      Sequência de uma repetição
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#roteiro-de-implementacao" class="md-nav__link">
-    <span class="md-ellipsis">
-      Roteiro de implementação
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#como-calcular" class="md-nav__link">
-    <span class="md-ellipsis">
-      Como calcular
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#compare-dentro-do-no-e-entre-nos" class="md-nav__link">
-    <span class="md-ellipsis">
-      Compare dentro do nó e entre nós
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#perguntas-para-analise" class="md-nav__link">
-    <span class="md-ellipsis">
-      Perguntas para análise
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#8-se-algo-nao-funcionar" class="md-nav__link">
+  <a href="#comunicacao-bloqueante-receber-antes-de-calcular" class="md-nav__link">
     <span class="md-ellipsis">
-      8. Se algo não funcionar
+      Comunicação bloqueante: receber antes de calcular
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cuidado-com-a-ordem-das-chamadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cuidado com a ordem das chamadas
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comunicacao-nao-bloqueante-calcular-enquanto-a-operacao-esta-pendente" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comunicação não bloqueante: calcular enquanto a operação está pendente
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-podemos-usar-os-buffers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quando podemos usar os buffers?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#qual-forma-escolher" class="md-nav__link">
+    <span class="md-ellipsis">
+      Qual forma escolher?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#para-entender-se-voce-entendeu-coleta-centralizada-de-blocos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Para entender se você entendeu: coleta centralizada de blocos
     </span>
   </a>
   
@@ -1004,26 +1146,319 @@
   
 
 
-  <h1>Index</h1>
-
-<p>Esta etapa amplia a introdução da aula e prepara o desafio do handout. Na comunicação ponto-a-ponto, um processo envia dados e outro os recebe.</p>
-<div class="highlight"><pre><span></span><code><span class="n">MPI_Send</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span><span class="w"> </span><span class="n">quantidade</span><span class="p">,</span><span class="w"> </span><span class="n">tipo</span><span class="p">,</span><span class="w"> </span><span class="n">destino</span><span class="p">,</span><span class="w"> </span><span class="n">tag</span><span class="p">,</span><span class="w"> </span><span class="n">comunicador</span><span class="p">);</span>
-<span class="n">MPI_Recv</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span><span class="w"> </span><span class="n">capacidade</span><span class="p">,</span><span class="w"> </span><span class="n">tipo</span><span class="p">,</span><span class="w"> </span><span class="n">origem</span><span class="p">,</span><span class="w"> </span><span class="n">tag</span><span class="p">,</span><span class="w"> </span><span class="n">comunicador</span><span class="p">,</span><span class="w"> </span><span class="n">status</span><span class="p">);</span>
+<h1 id="comunicacao-bloqueante-e-nao-bloqueante-em-mpi">Comunicação bloqueante e não bloqueante em MPI<a class="headerlink" href="#comunicacao-bloqueante-e-nao-bloqueante-em-mpi" title="Permanent link">&para;</a></h1>
+<p>Em um programa distribuído, vários processos trabalham juntos para resolver um problema. Eles podem executar no mesmo nó ou em nós diferentes de um cluster. Cada processo possui seu próprio espaço de memória: alterar uma variável em um processo não altera automaticamente a variável de outro.</p>
+<p>Imagine que quatro processos calculam partes de um resultado. Para obter a resposta final, precisamos reunir essas partes. O MPI permite fazer isso por meio da troca de mensagens, que também pode ser usada para distribuir dados e coordenar o trabalho.</p>
+<p>Na <strong>comunicação ponto a ponto</strong>, uma mensagem é enviada por um processo e recebida por outro. Nesta aula, estudaremos quatro chamadas:</p>
+<table>
+<thead>
+<tr>
+<th>Forma de comunicação</th>
+<th>Envio</th>
+<th>Recebimento</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bloqueante</td>
+<td><code>MPI_Send</code></td>
+<td><code>MPI_Recv</code></td>
+</tr>
+<tr>
+<td>Não bloqueante</td>
+<td><code>MPI_Isend</code></td>
+<td><code>MPI_Irecv</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Rank identifica um processo, não um nó.</strong> Dois processos no mesmo nó têm ranks diferentes dentro de <code>MPI_COMM_WORLD</code>. Por exemplo, quatro processos distribuídos em dois nós continuam sendo quatro ranks.</p>
+<h3 id="como-uma-mensagem-e-descrita">Como uma mensagem é descrita?<a class="headerlink" href="#como-uma-mensagem-e-descrita" title="Permanent link">&para;</a></h3>
+<p>Podemos pensar na mensagem como uma correspondência: o <strong>conteúdo</strong> são os dados transmitidos; o <strong>envelope</strong> identifica a origem, o destino, a tag e o comunicador.</p>
+<p>No envio abaixo, o processo transmite um inteiro armazenado em <code>valor</code> para o rank 1:</p>
+<div class="highlight"><pre><span></span><code><span class="n">MPI_Send</span><span class="p">(</span><span class="o">&amp;</span><span class="n">valor</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_INT</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_COMM_WORLD</span><span class="p">);</span>
 </code></pre></div>
+<p>O recebimento correspondente, executado pelo rank 1, é:</p>
+<div class="highlight"><pre><span></span><code><span class="n">MPI_Recv</span><span class="p">(</span><span class="o">&amp;</span><span class="n">recebido</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_INT</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span>
+<span class="w">         </span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_STATUS_IGNORE</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="parametros-e-possibilidades">Parâmetros e possibilidades<a class="headerlink" href="#parametros-e-possibilidades" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Parâmetro</th>
+<th>No envio</th>
+<th>No recebimento</th>
+<th>Exemplos e alternativas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Buffer</td>
+<td>Endereço dos dados a enviar</td>
+<td>Endereço onde armazenar os dados</td>
+<td><code>&amp;valor</code> para uma variável; <code>vetor</code> para um array; <code>vetor.data()</code> para um <code>std::vector</code></td>
+</tr>
+<tr>
+<td>Quantidade</td>
+<td>Número de elementos enviados</td>
+<td>Capacidade do buffer em elementos</td>
+<td><code>1</code>, <code>5</code> ou uma variável inteira. Não é a quantidade de bytes, exceto quando cada elemento tem um byte</td>
+</tr>
+<tr>
+<td>Tipo</td>
+<td>Tipo dos elementos enviados</td>
+<td>Tipo dos elementos esperados</td>
+<td><code>MPI_INT</code>, <code>MPI_DOUBLE</code>, <code>MPI_FLOAT</code>, <code>MPI_CHAR</code></td>
+</tr>
+<tr>
+<td>Rank</td>
+<td>Destino da mensagem</td>
+<td>Origem esperada</td>
+<td>Um rank válido no comunicador. No recebimento, <code>MPI_ANY_SOURCE</code> aceita qualquer origem</td>
+</tr>
+<tr>
+<td>Tag</td>
+<td>Etiqueta da mensagem enviada</td>
+<td>Etiqueta da mensagem esperada</td>
+<td><code>10</code>, <code>20</code> ou outra tag válida. No recebimento, <code>MPI_ANY_TAG</code> aceita qualquer tag</td>
+</tr>
+<tr>
+<td>Comunicador</td>
+<td>Contexto em que ocorre o envio</td>
+<td>Contexto em que ocorre o recebimento</td>
+<td><code>MPI_COMM_WORLD</code> ou um comunicador criado pelo programa</td>
+</tr>
+<tr>
+<td>Status</td>
+<td>Não é parâmetro de <code>MPI_Send</code></td>
+<td>Informações sobre o recebimento</td>
+<td><code>MPI_STATUS_IGNORE</code> ou <code>&amp;status</code>, após declarar <code>MPI_Status status;</code></td>
+</tr>
+</tbody>
+</table>
+<p>O símbolo <code>&amp;</code> fornece o endereço de uma variável. Um array, como <code>double valores[5]</code>, pode ser passado usando apenas <code>valores</code>, que fornece acesso ao primeiro elemento. Em um <code>std::vector</code>, use <code>.data()</code> e garanta que o vetor tenha o tamanho necessário.</p>
+<p>A tag ajuda a distinguir mensagens, mas <strong>não é o conteúdo transmitido</strong>. A origem é identificada automaticamente pelo MPI no envio. No recebimento, origem, tag e comunicador determinam qual mensagem pode ser aceita; quantidade e tipo descrevem como os dados serão armazenados.</p>
+<table>
+<thead>
+<tr>
+<th>Tipo em C++</th>
+<th>Tipo MPI correspondente</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>int</code></td>
+<td><code>MPI_INT</code></td>
+</tr>
+<tr>
+<td><code>float</code></td>
+<td><code>MPI_FLOAT</code></td>
+</tr>
+<tr>
+<td><code>double</code></td>
+<td><code>MPI_DOUBLE</code></td>
+</tr>
+<tr>
+<td><code>char</code></td>
+<td><code>MPI_CHAR</code></td>
+</tr>
+<tr>
+<td><code>long</code></td>
+<td><code>MPI_LONG</code></td>
+</tr>
+<tr>
+<td><code>long long</code></td>
+<td><code>MPI_LONG_LONG_INT</code></td>
+</tr>
+<tr>
+<td><code>unsigned int</code></td>
+<td><code>MPI_UNSIGNED</code></td>
+</tr>
+</tbody>
+</table>
+<p>O buffer de recebimento deve comportar a mensagem. Ele pode ter capacidade maior que a quantidade enviada, mas uma mensagem maior que sua capacidade causa erro de truncamento. Nos exemplos desta aula, utilize o mesmo tipo MPI no envio e no recebimento. Tags devem ser não negativas e não exceder o limite <code>MPI_TAG_UB</code>. Uma quantidade zero produz uma mensagem sem conteúdo, que ainda pode servir como sinal.</p>
+<h3 id="comunicacao-bloqueante-receber-antes-de-calcular">Comunicação bloqueante: receber antes de calcular<a class="headerlink" href="#comunicacao-bloqueante-receber-antes-de-calcular" title="Permanent link">&para;</a></h3>
+<p>Quando o próximo cálculo depende da mensagem, a comunicação bloqueante oferece um fluxo simples: <strong>receber o dado, calcular e mostrar o resultado</strong>.</p>
 <ul>
-<li><strong>Buffer:</strong> região de memória com os dados a enviar ou receber.</li>
-<li><strong>Quantidade/capacidade:</strong> número de elementos, não necessariamente bytes.</li>
-<li><strong>Tipo:</strong> por exemplo, <code>MPI_INT</code> para inteiros ou <code>MPI_BYTE</code> para bytes.</li>
-<li><strong>Origem/destino:</strong> rank do outro processo, não nome do computador.</li>
-<li><strong>Tag:</strong> identificador que ajuda a distinguir mensagens.</li>
-<li><strong>Comunicador:</strong> contexto no qual ocorre a troca, aqui <code>MPI_COMM_WORLD</code>.</li>
+<li><code>MPI_Send</code> retorna quando o buffer de envio pode ser alterado ou reutilizado. Isso não garante que o destinatário tenha concluído o recebimento: o MPI pode ter copiado os dados para um buffer interno.</li>
+<li><code>MPI_Recv</code> retorna quando o recebimento terminou e os dados estão disponíveis no buffer.</li>
 </ul>
-<p><code>MPI_Recv</code> espera até que a mensagem correspondente seja recebida. <code>MPI_Send</code> é bloqueante: ao retornar, o buffer de envio pode ser reutilizado, mas isso não garante que o destinatário já tenha concluído o recebimento. Portanto, não dependa de buffers internos para evitar travamentos; planeje a ordem de envio e recebimento.</p>
-<p>Comunicações coletivas envolvem todos os processos do comunicador. Exemplos são <code>MPI_Bcast</code>, <code>MPI_Scatter</code> e <code>MPI_Gather</code>; elas ficam como continuação do estudo.</p>
-<h3 id="coleta-centralizada-cada-trabalhador-envia-ao-rank-0">Coleta centralizada: cada trabalhador envia ao rank 0<a class="headerlink" href="#coleta-centralizada-cada-trabalhador-envia-ao-rank-0" title="Permanent link">&para;</a></h3>
-<p>O código abaixo reúne blocos de inteiros usando envios e recebimentos individuais. É uma <strong>coleta centralizada</strong>, não um anel: todos os trabalhadores enviam diretamente ao rank 0.</p>
-<p>Em um anel verdadeiro, o token passaria de um rank para o próximo e retornaria ao inicial. A quantidade e o caminho das mensagens seriam diferentes. Aqui há <code>total - 1</code> mensagens de dados.</p>
-<p>Salve como <code>coleta.cpp</code>:</p>
+<p><code>bloqueante.cpp</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;mpi.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">**</span><span class="w"> </span><span class="n">argv</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Inicializa o MPI em cada processo.</span>
+<span class="w">    </span><span class="n">MPI_Init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">argv</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">rank</span><span class="p">,</span><span class="w"> </span><span class="n">total</span><span class="p">;</span>
+<span class="w">    </span><span class="n">MPI_Comm_rank</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rank</span><span class="p">);</span>
+<span class="w">    </span><span class="n">MPI_Comm_size</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">total</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// O exemplo exige exatamente dois processos.</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">total</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rank</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">            </span><span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Execute com exatamente 2 processos.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">MPI_Finalize</span><span class="p">();</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rank</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">valor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7</span><span class="p">;</span>
+
+<span class="w">        </span><span class="c1">// Envia um inteiro ao rank 1, com a tag 10.</span>
+<span class="w">        </span><span class="n">MPI_Send</span><span class="p">(</span><span class="o">&amp;</span><span class="n">valor</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_INT</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_COMM_WORLD</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">recebido</span><span class="p">;</span>
+
+<span class="w">        </span><span class="c1">// Espera o valor necessário para realizar o cálculo.</span>
+<span class="w">        </span><span class="n">MPI_Recv</span><span class="p">(</span><span class="o">&amp;</span><span class="n">recebido</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_INT</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span>
+<span class="w">                 </span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_STATUS_IGNORE</span><span class="p">);</span>
+
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">quadrado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">recebido</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">recebido</span><span class="p">;</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Rank 1: quadrado = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">quadrado</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">MPI_Finalize</span><span class="p">();</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>mpic++<span class="w"> </span>-O2<span class="w"> </span>bloqueante.cpp<span class="w"> </span>-o<span class="w"> </span>bloq
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>srun<span class="w"> </span>--partition<span class="o">=</span>merry_cpu<span class="w"> </span>--mpi<span class="o">=</span>pmix<span class="w"> </span>--mem<span class="o">=</span>1G<span class="w"> </span>--nodes<span class="o">=</span><span class="m">2</span><span class="w"> </span><span class="se">\</span>
+<span class="w">     </span>--ntasks<span class="o">=</span><span class="m">2</span><span class="w"> </span>--ntasks-per-node<span class="o">=</span><span class="m">1</span><span class="w"> </span>./bloq
+</code></pre></div>
+<p>O resultado esperado no rank 1 é <code>49</code>. Todos executam o mesmo programa, mas o <code>if</code> define a função de cada rank.</p>
+<h3 id="cuidado-com-a-ordem-das-chamadas">Cuidado com a ordem das chamadas<a class="headerlink" href="#cuidado-com-a-ordem-das-chamadas" title="Permanent link">&para;</a></h3>
+<p>Bloqueante não significa que todos os processos param juntos. Cada processo aguarda sua própria operação. Entretanto, uma ordem inadequada pode causar <strong>deadlock</strong>, uma situação em que os processos ficam esperando uns pelos outros sem conseguir avançar.</p>
+<p>Por exemplo, se dois processos chamarem <code>MPI_Send</code> um para o outro antes de chamar <code>MPI_Recv</code>, ambos poderão ficar esperando que o outro inicie o recebimento. Mensagens pequenas podem funcionar graças a buffers internos, mas isso não garante que o programa funcionará para mensagens maiores.</p>
+<p>Para uma troca de ida e volta, uma ordem segura é: o rank 0 envia e depois recebe; o rank 1 recebe e depois envia. Essa será a organização do desafio ping-pong.</p>
+<h3 id="comunicacao-nao-bloqueante-calcular-enquanto-a-operacao-esta-pendente">Comunicação não bloqueante: calcular enquanto a operação está pendente<a class="headerlink" href="#comunicacao-nao-bloqueante-calcular-enquanto-a-operacao-esta-pendente" title="Permanent link">&para;</a></h3>
+<p>Agora suponha que o rank 1 também precise somar um vetor local. Essa soma não depende do valor enviado pelo rank 0. Podemos iniciar o recebimento, fazer a soma e só então aguardar a mensagem.</p>
+<p><code>MPI_Isend</code> e <code>MPI_Irecv</code> iniciam as operações e retornam um <strong>pedido</strong>, do tipo <code>MPI_Request</code>. Esse pedido permite acompanhar a operação. O retorno da chamada inicial não garante sua conclusão.</p>
+<p>As chamadas usam os mesmos parâmetros básicos de envio e recebimento, com um endereço de pedido ao final. <code>MPI_Irecv</code> recebe <code>&amp;pedido</code> nessa posição, em vez do status usado em <code>MPI_Recv</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">MPI_Isend</span><span class="p">(</span><span class="o">&amp;</span><span class="n">valor</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_INT</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">pedido</span><span class="p">);</span>
+<span class="n">MPI_Irecv</span><span class="p">(</span><span class="o">&amp;</span><span class="n">recebido</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_INT</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">pedido</span><span class="p">);</span>
+</code></pre></div>
+<p>Essas duas linhas ilustram as assinaturas; cada operação pendente deve ter seu próprio pedido. Nos exemplos abaixo, elas são executadas por processos diferentes.</p>
+<p><code>nao_bloqueante.cpp</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;mpi.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">**</span><span class="w"> </span><span class="n">argv</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">MPI_Init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">argv</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">rank</span><span class="p">,</span><span class="w"> </span><span class="n">total</span><span class="p">;</span>
+<span class="w">    </span><span class="n">MPI_Comm_rank</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rank</span><span class="p">);</span>
+<span class="w">    </span><span class="n">MPI_Comm_size</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">total</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">total</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rank</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">            </span><span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Execute com exatamente 2 processos.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">MPI_Finalize</span><span class="p">();</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">MPI_Request</span><span class="w"> </span><span class="n">pedido</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rank</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">valor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7</span><span class="p">;</span>
+
+<span class="w">        </span><span class="c1">// Inicia o envio e guarda seu identificador em &quot;pedido&quot;.</span>
+<span class="w">        </span><span class="n">MPI_Isend</span><span class="p">(</span><span class="o">&amp;</span><span class="n">valor</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_INT</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span>
+<span class="w">                  </span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">pedido</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// Mantém &quot;valor&quot; válido até a conclusão do envio.</span>
+<span class="w">        </span><span class="n">MPI_Wait</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pedido</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_STATUS_IGNORE</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">recebido</span><span class="p">;</span>
+
+<span class="w">        </span><span class="c1">// Inicia o recebimento sem exigir que ele termine agora.</span>
+<span class="w">        </span><span class="n">MPI_Irecv</span><span class="p">(</span><span class="o">&amp;</span><span class="n">recebido</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_INT</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span>
+<span class="w">                  </span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">pedido</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// Trabalho independente: não acessa o buffer &quot;recebido&quot;.</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">dados</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w"> </span><span class="mi">40</span><span class="p">};</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">soma</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">numero</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">dados</span><span class="p">)</span>
+<span class="w">            </span><span class="n">soma</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">numero</span><span class="p">;</span>
+
+<span class="w">        </span><span class="c1">// Confirma a conclusão antes de utilizar o dado recebido.</span>
+<span class="w">        </span><span class="n">MPI_Wait</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pedido</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_STATUS_IGNORE</span><span class="p">);</span>
+
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">quadrado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">recebido</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">recebido</span><span class="p">;</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Rank 1: soma local = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">soma</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Rank 1: quadrado = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">quadrado</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">MPI_Finalize</span><span class="p">();</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>mpic++<span class="w"> </span>-O2<span class="w"> </span>nao_bloqueante.cpp<span class="w"> </span>-o<span class="w"> </span>nobloq
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>srun<span class="w"> </span>--partition<span class="o">=</span>merry_cpu<span class="w"> </span>--mpi<span class="o">=</span>pmix<span class="w"> </span>--mem<span class="o">=</span>1G<span class="w"> </span>--nodes<span class="o">=</span><span class="m">2</span><span class="w"> </span><span class="se">\</span>
+<span class="w">     </span>--ntasks<span class="o">=</span><span class="m">2</span><span class="w"> </span>--ntasks-per-node<span class="o">=</span><span class="m">1</span><span class="w"> </span>./nobloq
+</code></pre></div>
+<p>O rank 1 imprime soma <code>100</code> e quadrado <code>49</code>. A oportunidade de sobreposição está entre <code>MPI_Irecv</code> e <code>MPI_Wait</code>. No rank 0, a espera imediata foi usada para manter o exemplo simples; ali não há trabalho sobreposto.</p>
+<h3 id="quando-podemos-usar-os-buffers">Quando podemos usar os buffers?<a class="headerlink" href="#quando-podemos-usar-os-buffers" title="Permanent link">&para;</a></h3>
+<p>Enquanto uma operação não bloqueante estiver pendente:</p>
+<table>
+<thead>
+<tr>
+<th>Buffer</th>
+<th>Regra</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Envio</td>
+<td>Não altere o conteúdo nem libere a memória</td>
+</tr>
+<tr>
+<td>Recebimento</td>
+<td>Não leia, altere ou libere a memória</td>
+</tr>
+</tbody>
+</table>
+<p>Após a conclusão, o buffer correspondente pode ser utilizado normalmente.</p>
+<p><code>MPI_Wait</code> aguarda a conclusão. Outra possibilidade é <code>MPI_Test</code>, que retorna uma flag indicando se a operação terminou:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">terminou</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="n">MPI_Test</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pedido</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">terminou</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_STATUS_IGNORE</span><span class="p">);</span>
+
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">terminou</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// A operação terminou: o buffer pode ser utilizado.</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// A operação continua pendente: mantenha os cuidados com o buffer.</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="qual-forma-escolher">Qual forma escolher?<a class="headerlink" href="#qual-forma-escolher" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Situação</th>
+<th>Escolha e motivo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>O próximo cálculo depende imediatamente da mensagem</td>
+<td>Bloqueante: organiza um fluxo direto de receber e calcular</td>
+</tr>
+<tr>
+<td>Existe trabalho independente dos dados transferidos</td>
+<td>Não bloqueante: permite tentar sobrepor comunicação e cálculo</td>
+</tr>
+<tr>
+<td>A chamada não bloqueante é seguida imediatamente por uma espera</td>
+<td>Pode ser correta, mas não aproveita esse intervalo para computação</td>
+</tr>
+</tbody>
+</table>
+<p>O vetor pequeno apenas ilustra a organização. Comunicação não bloqueante não é automaticamente mais rápida: o ganho depende da quantidade de trabalho independente e do progresso da comunicação na implementação MPI. Meça antes de concluir que houve melhoria.</p>
+<h3 id="para-entender-se-voce-entendeu-coleta-centralizada-de-blocos">Para entender se você entendeu: coleta centralizada de blocos<a class="headerlink" href="#para-entender-se-voce-entendeu-coleta-centralizada-de-blocos" title="Permanent link">&para;</a></h3>
+<p>Agora cada processo cria um bloco de inteiros. Os nós enviam seus blocos ao rank 0, que monta um vetor com todos os dados. Há <code>total - 1</code> mensagens: uma de cada nó para o coordenador, que é o rank 0.</p>
+<p><code>coleta.cpp</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;mpi.h&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;algorithm&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
@@ -1039,39 +1474,22 @@
 <span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">bloco</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2048</span><span class="p">;</span>
 <span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">local</span><span class="p">(</span><span class="n">bloco</span><span class="p">);</span>
 
-<span class="w">    </span><span class="c1">// Cada processo cria seu próprio bloco, com valores identificáveis.</span>
+<span class="w">    </span><span class="c1">// Os valores permitem identificar de qual rank veio cada bloco.</span>
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">bloco</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span>
 <span class="w">        </span><span class="n">local</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rank</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">10000</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
 
-<span class="w">    </span><span class="c1">// Apenas o coordenador precisa armazenar todos os blocos.</span>
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">reunidos</span><span class="p">;</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rank</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
-<span class="w">        </span><span class="n">reunidos</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">total</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">bloco</span><span class="p">);</span>
-
-<span class="w">    </span><span class="c1">// Aproxima o início da etapa nos processos participantes.</span>
-<span class="w">    </span><span class="n">MPI_Barrier</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">);</span>
-<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">inicio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI_Wtime</span><span class="p">();</span>
-
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rank</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="c1">// O bloco do rank 0 já está localmente disponível.</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">reunidos</span><span class="p">(</span><span class="n">total</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">bloco</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// O bloco do coordenador já está disponível localmente.</span>
 <span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">copy</span><span class="p">(</span><span class="n">local</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">local</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="w"> </span><span class="n">reunidos</span><span class="p">.</span><span class="n">begin</span><span class="p">());</span>
 
-<span class="w">        </span><span class="c1">// Recebe cada bloco na faixa correspondente ao rank de origem.</span>
 <span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">origem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">origem</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">total</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">origem</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// Cada origem ocupa uma faixa diferente do vetor final.</span>
 <span class="w">            </span><span class="n">MPI_Recv</span><span class="p">(</span><span class="n">reunidos</span><span class="p">.</span><span class="n">data</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">origem</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">bloco</span><span class="p">,</span>
 <span class="w">                     </span><span class="n">bloco</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_INT</span><span class="p">,</span><span class="w"> </span><span class="n">origem</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
 <span class="w">                     </span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_STATUS_IGNORE</span><span class="p">);</span>
 <span class="w">        </span><span class="p">}</span>
-<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="c1">// Cada trabalhador envia seu bloco ao coordenador.</span>
-<span class="w">        </span><span class="n">MPI_Send</span><span class="p">(</span><span class="n">local</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span><span class="w"> </span><span class="n">bloco</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_INT</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_COMM_WORLD</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">fim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI_Wtime</span><span class="p">();</span>
-
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rank</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Coleta com &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; processos: &quot;</span>
-<span class="w">                  </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">fim</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">inicio</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
 
 <span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">total</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">p</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Bloco do rank &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;: &quot;</span><span class="p">;</span>
@@ -1079,258 +1497,23 @@
 <span class="w">                </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">reunidos</span><span class="p">[</span><span class="n">p</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">bloco</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">&#39; &#39;</span><span class="p">;</span>
 <span class="w">            </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;...</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
 <span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Cada trabalhador envia seu bloco completo ao rank 0.</span>
+<span class="w">        </span><span class="n">MPI_Send</span><span class="p">(</span><span class="n">local</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span><span class="w"> </span><span class="n">bloco</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_INT</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_COMM_WORLD</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="n">MPI_Finalize</span><span class="p">();</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>Compile e execute com dois processos em dois nós:</p>
-<div class="highlight"><pre><span></span><code>mpic++<span class="w"> </span>-std<span class="o">=</span>c++11<span class="w"> </span>-O2<span class="w"> </span>coleta.cpp<span class="w"> </span>-o<span class="w"> </span>coleta
-srun<span class="w"> </span>--partition<span class="o">=</span>merry_cpu<span class="w"> </span>--mpi<span class="o">=</span>pmix<span class="w"> </span>--mem<span class="o">=</span>1G<span class="w"> </span><span class="se">\</span>
-<span class="w">     </span>--nodes<span class="o">=</span><span class="m">2</span><span class="w"> </span>--ntasks<span class="o">=</span><span class="m">2</span><span class="w"> </span>--ntasks-per-node<span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="se">\</span>
-<span class="w">     </span>--time<span class="o">=</span><span class="m">00</span>:01:00<span class="w"> </span>./coleta
-</code></pre></div>
-<p>Também é possível reutilizar <code>run.slurm</code>, trocando o executável da última linha por <code>./coleta</code>.</p>
-<p><strong>Leitura do resultado:</strong> o primeiro bloco começa em 0; o segundo, em 10000; o terceiro, se houver, em 20000. O deslocamento <code>origem * bloco</code> coloca cada bloco na posição correta do vetor final.</p>
-<p><code>MPI_Barrier</code> é uma operação coletiva de sincronização: todos devem chamá-la. Ela foi introduzida aqui apenas para organizar a medição. O tempo impresso é o intervalo medido no rank 0, incluindo a cópia local e os recebimentos; não é uma medida isolada da latência da rede. Os prints ficam fora desse intervalo.</p>
-<h2 id="7-desafio-ping-pong-latencia-e-largura-de-banda">7. Desafio ping-pong: latência e largura de banda<a class="headerlink" href="#7-desafio-ping-pong-latencia-e-largura-de-banda" title="Permanent link">&para;</a></h2>
-<p>Implemente <code>pingpong.cpp</code> usando <strong>exatamente dois processos MPI</strong>. A ideia é medir o tempo de uma mensagem de ida e de uma resposta com o mesmo tamanho.</p>
-<h3 id="sequencia-de-uma-repeticao">Sequência de uma repetição<a class="headerlink" href="#sequencia-de-uma-repeticao" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>Rank 0</th>
-<th>Rank 1</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Envia o buffer ao rank 1</td>
-<td>Recebe o buffer do rank 0</td>
-</tr>
-<tr>
-<td>Recebe o buffer de volta</td>
-<td>Envia o buffer de volta ao rank 0</td>
-</tr>
-</tbody>
-</table>
-<p>Repita essa sequência várias vezes. O rank 0 envia primeiro; o rank 1 recebe primeiro. Isso evita que os dois esperem por uma mensagem que ninguém enviou.</p>
-<h3 id="roteiro-de-implementacao">Roteiro de implementação<a class="headerlink" href="#roteiro-de-implementacao" title="Permanent link">&para;</a></h3>
+<p>O primeiro bloco começa em <code>0</code>; o segundo, em <code>10000</code>; o terceiro, se houver, em <code>20000</code>. O deslocamento <code>origem * bloco</code> determina onde guardar cada bloco. O recebimento é feito por ordem de rank, mesmo que outro trabalhador já esteja pronto para enviar.</p>
+<p><strong>Perguntas para discutir:</strong></p>
 <ol>
-<li>Inicialize o MPI e obtenha <code>rank</code> e <code>total</code>.</li>
-<li>Se <code>total != 2</code>, faça o rank 0 mostrar uma orientação, finalize o MPI em todos os processos e encerre o programa.</li>
-<li>Para cada tamanho da tabela abaixo, crie um buffer de bytes, como <code>std::vector&lt;char&gt;</code>.</li>
-<li>Faça 100 trocas de aquecimento, sem incluí-las no tempo medido.</li>
-<li>Faça todos os processos chamarem <code>MPI_Barrier</code> antes da medição.</li>
-<li>No rank 0, registre <code>inicio = MPI_Wtime()</code>.</li>
-<li>Execute 10000 repetições de ida e volta. Use <code>MPI_BYTE</code> e envie o número de bytes escolhido.</li>
-<li>No rank 0, registre <code>fim = MPI_Wtime()</code> e calcule as métricas.</li>
-<li>Imprima os resultados apenas depois de encerrar a medição. Não coloque prints dentro do laço.</li>
+<li>Por que o rank 0 não precisa enviar uma mensagem para si mesmo?</li>
+<li>Por que apenas ele precisa do vetor <code>reunidos</code>?</li>
+<li>O que acontece se o rank 1 demorar, mas o rank 2 já estiver pronto?</li>
+<li>Como poderíamos iniciar todos os recebimentos com <code>MPI_Irecv</code>? Considere um pedido por nó, faixas separadas no vetor e a conclusão de todos os pedidos antes de imprimir.</li>
 </ol>
-<p>Use os tempos inicial e final do <strong>mesmo rank</strong>. Não subtraia um instante medido no rank 0 de outro medido no rank 1: os relógios MPI não precisam estar sincronizados.</p>
-<table>
-<thead>
-<tr>
-<th>Tamanho</th>
-<th style="text-align: right;">Bytes por mensagem</th>
-<th style="text-align: right;">Repetições medidas</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>8 B</td>
-<td style="text-align: right;">8</td>
-<td style="text-align: right;">10000</td>
-</tr>
-<tr>
-<td>64 B</td>
-<td style="text-align: right;">64</td>
-<td style="text-align: right;">10000</td>
-</tr>
-<tr>
-<td>512 B</td>
-<td style="text-align: right;">512</td>
-<td style="text-align: right;">10000</td>
-</tr>
-<tr>
-<td>4 KiB</td>
-<td style="text-align: right;">4096</td>
-<td style="text-align: right;">10000</td>
-</tr>
-<tr>
-<td>32 KiB</td>
-<td style="text-align: right;">32768</td>
-<td style="text-align: right;">10000</td>
-</tr>
-<tr>
-<td>256 KiB</td>
-<td style="text-align: right;">262144</td>
-<td style="text-align: right;">10000</td>
-</tr>
-</tbody>
-</table>
-<h3 id="como-calcular">Como calcular<a class="headerlink" href="#como-calcular" title="Permanent link">&para;</a></h3>
-<p>Seja <code>T</code> o tempo total medido em segundos, <code>R</code> o número de repetições e <code>B</code> o tamanho de uma mensagem em bytes. Cada repetição transfere duas mensagens de tamanho <code>B</code>.</p>
-<p>O tempo médio de ida e volta é:</p>
-<div class="arithmatex">
-<div class="MathJax_Preview">
-t_{ida\ e\ volta} = \frac{T}{R}
-</div>
-<script type="math/tex; mode=display">
-t_{ida\ e\ volta} = \frac{T}{R}
-</script>
-</div>
-<p>Uma estimativa do tempo médio de transferência em um sentido é:</p>
-<div class="arithmatex">
-<div class="MathJax_Preview">
-t_{um\ sentido} \approx \frac{T}{2R}
-</div>
-<script type="math/tex; mode=display">
-t_{um\ sentido} \approx \frac{T}{2R}
-</script>
-</div>
-<p>Para mensagens pequenas, essa estimativa é usada como aproximação de latência. Para mensagens maiores, inclui também o custo de transferir o conteúdo; não representa apenas a latência inicial.</p>
-<p>Para apresentar o valor em microssegundos:</p>
-<div class="arithmatex">
-<div class="MathJax_Preview">
-t_{\mu s} = \frac{T}{2R} \times 10^6
-</div>
-<script type="math/tex; mode=display">
-t_{\mu s} = \frac{T}{2R} \times 10^6
-</script>
-</div>
-<p>A largura de banda efetiva do ping-pong, em MB/s, é:</p>
-<div class="arithmatex">
-<div class="MathJax_Preview">
-BW_{MB/s} = \frac{2BR}{T \times 10^6}
-</div>
-<script type="math/tex; mode=display">
-BW_{MB/s} = \frac{2BR}{T \times 10^6}
-</script>
-</div>
-<p>Aqui, <strong>1 MB = 1000000 bytes</strong>. Se usar MiB/s, divida por <code>2^20</code> em vez de <code>10^6</code> e identifique a unidade. A medida é efetiva para esse experimento; não é necessariamente a capacidade máxima do enlace.</p>
-<p><strong>Exemplo de cálculo, com números fictícios:</strong> para <code>B = 4096</code>, <code>R = 10000</code> e <code>T = 0,2 s</code>, o tempo estimado por sentido é <code>10 µs</code> e a largura de banda é <code>409,6 MB/s</code>.</p>
-<h3 id="compare-dentro-do-no-e-entre-nos">Compare dentro do nó e entre nós<a class="headerlink" href="#compare-dentro-do-no-e-entre-nos" title="Permanent link">&para;</a></h3>
-<p>Após compilar:</p>
-<div class="highlight"><pre><span></span><code>mpic++<span class="w"> </span>-std<span class="o">=</span>c++11<span class="w"> </span>-O2<span class="w"> </span>pingpong.cpp<span class="w"> </span>-o<span class="w"> </span>pingpong
-</code></pre></div>
-<p>Execute dois processos no mesmo nó:</p>
-<div class="highlight"><pre><span></span><code>srun<span class="w"> </span>--partition<span class="o">=</span>merry_cpu<span class="w"> </span>--mpi<span class="o">=</span>pmix<span class="w"> </span>--mem<span class="o">=</span>1G<span class="w"> </span><span class="se">\</span>
-<span class="w">     </span>--nodes<span class="o">=</span><span class="m">1</span><span class="w"> </span>--ntasks<span class="o">=</span><span class="m">2</span><span class="w"> </span>--ntasks-per-node<span class="o">=</span><span class="m">2</span><span class="w"> </span><span class="se">\</span>
-<span class="w">     </span>--time<span class="o">=</span><span class="m">00</span>:05:00<span class="w"> </span>./pingpong
-</code></pre></div>
-<p>Depois, um processo em cada nó:</p>
-<div class="highlight"><pre><span></span><code>srun<span class="w"> </span>--partition<span class="o">=</span>merry_cpu<span class="w"> </span>--mpi<span class="o">=</span>pmix<span class="w"> </span>--mem<span class="o">=</span>1G<span class="w"> </span><span class="se">\</span>
-<span class="w">     </span>--nodes<span class="o">=</span><span class="m">2</span><span class="w"> </span>--ntasks<span class="o">=</span><span class="m">2</span><span class="w"> </span>--ntasks-per-node<span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="se">\</span>
-<span class="w">     </span>--time<span class="o">=</span><span class="m">00</span>:05:00<span class="w"> </span>./pingpong
-</code></pre></div>
-<p>Registre os nomes dos nós antes da medição, usando <code>MPI_Get_processor_name</code>. Repita cada configuração pelo menos três vezes e registre a mediana, mantendo as mesmas repetições e tamanhos. Assim você reduz o efeito de uma execução excepcional.</p>
-<table>
-<thead>
-<tr>
-<th>Configuração</th>
-<th style="text-align: right;">Bytes</th>
-<th style="text-align: right;">Repetições</th>
-<th style="text-align: right;">Tempo total (s)</th>
-<th style="text-align: right;">Tempo por sentido (µs)</th>
-<th style="text-align: right;">Banda efetiva (MB/s)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Mesmo nó</td>
-<td style="text-align: right;">8</td>
-<td style="text-align: right;">10000</td>
-<td style="text-align: right;"></td>
-<td style="text-align: right;"></td>
-<td style="text-align: right;"></td>
-</tr>
-<tr>
-<td>Nós diferentes</td>
-<td style="text-align: right;">8</td>
-<td style="text-align: right;">10000</td>
-<td style="text-align: right;"></td>
-<td style="text-align: right;"></td>
-<td style="text-align: right;"></td>
-</tr>
-<tr>
-<td>Mesmo nó</td>
-<td style="text-align: right;">4096</td>
-<td style="text-align: right;">10000</td>
-<td style="text-align: right;"></td>
-<td style="text-align: right;"></td>
-<td style="text-align: right;"></td>
-</tr>
-<tr>
-<td>Nós diferentes</td>
-<td style="text-align: right;">4096</td>
-<td style="text-align: right;">10000</td>
-<td style="text-align: right;"></td>
-<td style="text-align: right;"></td>
-<td style="text-align: right;"></td>
-</tr>
-</tbody>
-</table>
-<p>Complete a tabela também para os demais tamanhos. Registre os valores de cada execução e indique quais valores da tabela representam a mediana.</p>
-<h3 id="perguntas-para-analise">Perguntas para análise<a class="headerlink" href="#perguntas-para-analise" title="Permanent link">&para;</a></h3>
-<ol>
-<li>Qual é a diferença entre latência e largura de banda?</li>
-<li>Por que o custo inicial pesa mais nas mensagens pequenas?</li>
-<li>A banda efetiva sempre aumenta com o tamanho da mensagem? O que os seus dados mostram?</li>
-<li>Por que repetir e aquecer o experimento antes de medir?</li>
-<li>Como os resultados mudam entre processos no mesmo nó e em nós diferentes?</li>
-<li>O ping-pong mede apenas a rede física? Que outros custos estão envolvidos?</li>
-<li>Por que aumentar o número de processos não garante reduzir o tempo de qualquer programa?</li>
-</ol>
-<h2 id="8-se-algo-nao-funcionar">8. Se algo não funcionar<a class="headerlink" href="#8-se-algo-nao-funcionar" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>Sintoma</th>
-<th>O que verificar</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Apenas rank 0 e <code>total = 1</code></td>
-<td>O programa foi chamado sozinho? Use <code>srun --mpi=pmix ./programa</code> no script</td>
-</tr>
-<tr>
-<td>Ranks repetidos e várias mensagens do coordenador</td>
-<td>Verifique se você usou <code>srun ... mpirun ...</code>; use um único lançador</td>
-</tr>
-<tr>
-<td>Job pendente com <code>PartitionNodeLimit</code></td>
-<td>Consulte <code>scontrol show partition merry_cpu</code> e compare o pedido com os limites</td>
-</tr>
-<tr>
-<td><code>command not found</code></td>
-<td>Confira o ambiente e peça orientação ao responsável pelo cluster</td>
-</tr>
-<tr>
-<td><code>Stale file handle</code></td>
-<td>Há um problema de acesso ao sistema de arquivos compartilhado; informe ao administrador</td>
-</tr>
-<tr>
-<td>Binário não encontrado no nó</td>
-<td>Use uma pasta compartilhada e confira nome, caminho e permissão do executável</td>
-</tr>
-<tr>
-<td>Código alterado, saída antiga</td>
-<td>Recompile, submeta novamente e leia o arquivo do novo ID de job</td>
-</tr>
-<tr>
-<td>Prints fora de ordem</td>
-<td>É esperado em processos concorrentes; não indica rank incorreto</td>
-</tr>
-<tr>
-<td>Aviso de versão de <code>libxml</code></td>
-<td>Informe ao responsável pelo ambiente; é distinto da quantidade de ranks ou nós</td>
-</tr>
-</tbody>
-</table>
-<p>Use dois hífens comuns nas opções: <code>--mem=1G</code>, e não um travessão. As diretivas <code>#SBATCH</code> devem aparecer antes do primeiro comando do script. Não coloque variáveis de shell dentro dessas diretivas esperando expansão automática.</p>
 
 
 
