@@ -263,44 +263,102 @@ Agora cada processo cria um bloco de inteiros. Os nós enviam seus blocos ao ran
 #include <mpi.h>
 #include <algorithm>
 #include <iostream>
+#include <sstream>
 #include <vector>
 
 int main(int argc, char** argv) {
     MPI_Init(&argc, &argv);
 
-    int rank, total;
+    int rank, total, tamanho;
+    char nome[MPI_MAX_PROCESSOR_NAME];
+
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     MPI_Comm_size(MPI_COMM_WORLD, &total);
+    MPI_Get_processor_name(nome, &tamanho);
+
+    if (total < 2) {
+        if (rank == 0)
+            std::cerr << "Execute com pelo menos 2 processos MPI.\n";
+
+        MPI_Finalize();
+        return 1;
+    }
 
     const int bloco = 2048;
-    std::vector<int> local(bloco);
-
-    // Os valores permitem identificar de qual rank veio cada bloco.
-    for (int i = 0; i < bloco; ++i)
-        local[i] = rank * 10000 + i;
+    const int TAG_TAREFA = 10;
+    const int TAG_RESULTADO = 20;
 
     if (rank == 0) {
-        std::vector<int> reunidos(total * bloco);
+        int trabalhadores = total - 1;
+        int quantidade = trabalhadores * bloco;
 
-        // O bloco do coordenador já está disponível localmente.
-        std::copy(local.begin(), local.end(), reunidos.begin());
+        std::vector<int> dados(quantidade);
+        std::vector<int> reunidos(quantidade);
 
-        for (int origem = 1; origem < total; ++origem) {
-            // Cada origem ocupa uma faixa diferente do vetor final.
-            MPI_Recv(reunidos.data() + origem * bloco,
-                     bloco, MPI_INT, origem, 0,
-                     MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+        // O coordenador prepara os números de 1 até "quantidade".
+        for (int i = 0; i < quantidade; ++i)
+            dados[i] = i + 1;
+
+        std::cout << "Rank 0 | Nó: " << nome
+                  << " | Distribuindo " << quantidade << " números entre "
+                  << trabalhadores << " trabalhadores.\n";
+
+        // Distribui blocos diferentes para os trabalhadores.
+        for (int destino = 1; destino < total; ++destino) {
+            int deslocamento = (destino - 1) * bloco;
+
+            MPI_Send(dados.data() + deslocamento,
+                     bloco, MPI_INT, destino,
+                     TAG_TAREFA, MPI_COMM_WORLD);
         }
 
-        for (int p = 0; p < total; ++p) {
-            std::cout << "Bloco do rank " << p << ": ";
+        // Recebe os blocos calculados nas posições correspondentes.
+        for (int origem = 1; origem < total; ++origem) {
+            int deslocamento = (origem - 1) * bloco;
+
+            MPI_Recv(reunidos.data() + deslocamento,
+                     bloco, MPI_INT, origem,
+                     TAG_RESULTADO, MPI_COMM_WORLD,
+                     MPI_STATUS_IGNORE);
+        }
+
+        // Mostra os primeiros resultados de cada trabalhador.
+        for (int origem = 1; origem < total; ++origem) {
+            int deslocamento = (origem - 1) * bloco;
+
+            std::cout << "Resultados do rank " << origem << ": ";
             for (int i = 0; i < 5; ++i)
-                std::cout << reunidos[p * bloco + i] << ' ';
+                std::cout << reunidos[deslocamento + i] << ' ';
             std::cout << "...\n";
         }
+
     } else {
-        // Cada trabalhador envia seu bloco completo ao rank 0.
-        MPI_Send(local.data(), bloco, MPI_INT, 0, 0, MPI_COMM_WORLD);
+        std::vector<int> local(bloco);
+
+        // Recebe o bloco atribuído pelo rank 0.
+        MPI_Recv(local.data(), bloco, MPI_INT, 0,
+                 TAG_TAREFA, MPI_COMM_WORLD,
+                 MPI_STATUS_IGNORE);
+
+        int primeiro = local.front();
+        int ultimo = local.back();
+
+        // Calcula o quadrado de cada número recebido.
+        std::transform(local.begin(), local.end(), local.begin(),
+                       [](int valor) { return valor * valor; });
+
+        // Identifica qual processo executou a tarefa e em qual nó.
+        std::ostringstream mensagem;
+        mensagem << "Rank " << rank
+                 << " | Nó: " << nome
+                 << " | Tarefa: elevar ao quadrado os números de "
+                 << primeiro << " a " << ultimo << '\n';
+
+        std::cout << mensagem.str() << std::flush;
+
+        // Devolve o bloco calculado ao coordenador.
+        MPI_Send(local.data(), bloco, MPI_INT, 0,
+                 TAG_RESULTADO, MPI_COMM_WORLD);
     }
 
     MPI_Finalize();
@@ -312,7 +370,7 @@ O primeiro bloco começa em `0`; o segundo, em `10000`; o terceiro, se houver, e
 
 **Perguntas para discutir:**
 
-1. Por que o rank 0 não precisa enviar uma mensagem para si mesmo?
+1. Por que o rank 0 não precisa enviar uma fatia de dados pra ele mesmo?
 2. Por que apenas ele precisa do vetor `reunidos`?
 3. O que acontece se o rank 1 demorar, mas o rank 2 já estiver pronto?
-4. Como poderíamos iniciar todos os recebimentos com `MPI_Irecv`? Considere um pedido por nó, faixas separadas no vetor e a conclusão de todos os pedidos antes de imprimir.
+4. Como poderíamos fazer essa aplicação de forma não bloqueante? Tem coragem de implementar a versão não bloqueante deste exemplo?
