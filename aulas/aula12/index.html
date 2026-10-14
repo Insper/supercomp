@@ -11,6 +11,10 @@
         <link rel="canonical" href="https://insper.github.io/supercomp/aulas/aula12/">
       
       
+        <link rel="prev" href="../aula11/">
+      
+      
+        <link rel="next" href="../../teoria/slides/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -18,7 +22,7 @@
     
     
       
-        <title>Acesso ao Supercomputador Santos Dumont (SDumont) - SuperComputação - 2026/2</title>
+        <title>Comunicação Coletiva: Broadcast e Reduce - SuperComputação - 2026/2</title>
       
     
     
@@ -80,7 +84,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#acesso-ao-supercomputador-santos-dumont-sdumont" class="md-skip">
+        <a href="#comunicacao-coletiva-mpi-broadcast-e-reduce" class="md-skip">
           Skip to content
         </a>
       
@@ -114,7 +118,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Acesso ao Supercomputador Santos Dumont (SDumont)
+              Comunicação Coletiva: Broadcast e Reduce
             
           </span>
         </div>
@@ -210,10 +214,12 @@
         
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
+      <li class="md-tabs__item md-tabs__item--active">
         <a href="../aula01/" class="md-tabs__link">
           
   
@@ -331,23 +337,28 @@
       
   
   
+    
   
   
+  
     
     
     
-      
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
             
   
   <span class="md-ellipsis">
@@ -359,7 +370,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             Aulas
@@ -581,6 +592,156 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Comunicação Coletiva: Broadcast e Reduce
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Comunicação Coletiva: Broadcast e Reduce
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#como-os-processos-participam" class="md-nav__link">
+    <span class="md-ellipsis">
+      Como os processos participam?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#broadcast-compartilhar-uma-informacao-com-todos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Broadcast: compartilhar uma informação com todos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-passar-o-buffer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Como passar o buffer?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tipos-de-dados-mais-usados" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tipos de dados mais usados
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reduce-transformar-contribuicoes-em-um-resultado" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reduce: transformar contribuições em um resultado
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tudo-junto-broadcast-computacao-local-e-reduce" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tudo junto: Broadcast, computação local e Reduce
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#para-entender-se-voce-entendeu" class="md-nav__link">
+    <span class="md-ellipsis">
+      Para entender se você entendeu
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Para entender se você entendeu">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#alteracoes-para-explorar" class="md-nav__link">
+    <span class="md-ellipsis">
+      Alterações para explorar
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#perguntas-para-discutir" class="md-nav__link">
+    <span class="md-ellipsis">
+      Perguntas para discutir
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -932,73 +1093,82 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#o-lncc" class="md-nav__link">
+  <a href="#como-os-processos-participam" class="md-nav__link">
     <span class="md-ellipsis">
-      O LNCC
+      Como os processos participam?
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#o-supercomputador-santos-dumont" class="md-nav__link">
+  <a href="#broadcast-compartilhar-uma-informacao-com-todos" class="md-nav__link">
     <span class="md-ellipsis">
-      O Supercomputador Santos Dumont
+      Broadcast: compartilhar uma informação com todos
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#fila-sequana_cpu_dev" class="md-nav__link">
+  <a href="#como-passar-o-buffer" class="md-nav__link">
     <span class="md-ellipsis">
-      Fila sequana_cpu_dev
+      Como passar o buffer?
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#fila-sequana_gpu_dev" class="md-nav__link">
+  <a href="#tipos-de-dados-mais-usados" class="md-nav__link">
     <span class="md-ellipsis">
-      Fila sequana_gpu_dev
+      Tipos de dados mais usados
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#fila-sequana_gpu" class="md-nav__link">
+  <a href="#reduce-transformar-contribuicoes-em-um-resultado" class="md-nav__link">
     <span class="md-ellipsis">
-      Fila sequana_gpu
+      Reduce: transformar contribuições em um resultado
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#como-obter-acesso-ao-sdumont" class="md-nav__link">
+  <a href="#tudo-junto-broadcast-computacao-local-e-reduce" class="md-nav__link">
     <span class="md-ellipsis">
-      Como obter acesso ao SDumont
+      Tudo junto: Broadcast, computação local e Reduce
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Como obter acesso ao SDumont">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#para-entender-se-voce-entendeu" class="md-nav__link">
+    <span class="md-ellipsis">
+      Para entender se você entendeu
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Para entender se você entendeu">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#dados-institucionais" class="md-nav__link">
+  <a href="#alteracoes-para-explorar" class="md-nav__link">
     <span class="md-ellipsis">
-      Dados Institucionais
+      Alterações para explorar
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#dados-do-projeto" class="md-nav__link">
+  <a href="#perguntas-para-discutir" class="md-nav__link">
     <span class="md-ellipsis">
-      Dados do Projeto
+      Perguntas para discutir
     </span>
   </a>
   
@@ -1006,24 +1176,6 @@
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#assine-o-documento" class="md-nav__link">
-    <span class="md-ellipsis">
-      Assine o documento
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#proximos-passos" class="md-nav__link">
-    <span class="md-ellipsis">
-      Próximos passos
-    </span>
-  </a>
   
 </li>
       
@@ -1046,61 +1198,535 @@
   
 
 
-<h1 id="acesso-ao-supercomputador-santos-dumont-sdumont">Acesso ao Supercomputador Santos Dumont (SDumont)<a class="headerlink" href="#acesso-ao-supercomputador-santos-dumont-sdumont" title="Permanent link">&para;</a></h1>
-<h2 id="o-lncc">O LNCC<a class="headerlink" href="#o-lncc" title="Permanent link">&para;</a></h2>
-<p>O <strong>Laboratório Nacional de Computação Científica (LNCC)</strong> é uma unidade de pesquisa do Ministério da Ciência, Tecnologia e Inovações (MCTI), especializada em computação científica de alto desempenho, modelagem matemática, simulação e ciência de dados. </p>
-<h2 id="o-supercomputador-santos-dumont">O Supercomputador Santos Dumont<a class="headerlink" href="#o-supercomputador-santos-dumont" title="Permanent link">&para;</a></h2>
-<p>O <strong>SDumont</strong> é o maior supercomputador da América Latina disponível para a comunidade como pesquisadores e instituições de todo o Brasil utilizar para projetos de alto impacto, como simulações climáticas, modelagem molecular, bioinformática, inteligência artificial, física computacional, e <strong>formação de profissionais capacitados para operar em sistemas de HPC.</strong></p>
-<p>A infraestrutura do SDumont permite:</p>
+<h1 id="comunicacao-coletiva-mpi-broadcast-e-reduce">Comunicação coletiva MPI: Broadcast e Reduce<a class="headerlink" href="#comunicacao-coletiva-mpi-broadcast-e-reduce" title="Permanent link">&para;</a></h1>
+<p>Em um programa distribuído, muitas tarefas contam com a participação de vários processos ao mesmo tempo. Antes de iniciar um cálculo, por exemplo, todos podem precisar conhecer uma configuração comum. Ao terminar, pode ser necessário combinar os resultados parciais para obter uma resposta final. A comunicação coletiva permite realizar essas trocas como operações de grupo, facilitando a organização do trabalho entre os processos.</p>
+<p>Vamos conhecer dois padrões. No um para muitos, um processo compartilha uma informação com os demais. No muitos para um, cada processo contribui com seu resultado local, e um processo escolhido recebe o resultado combinado.</p>
+<p>No MPI, usamos <strong><code>MPI_Bcast</code></strong> para compartilhar os mesmos dados com todos e <strong><code>MPI_Reduce</code></strong> para combinar contribuições. O processo que fornece os dados no broadcast ou recebe o resultado no reduce é chamado de <strong>raiz</strong>.</p>
+<p>Mesmo que os papéis sejam diferentes, todos os processos do comunicador precisam chamar a operação, inclusive a raiz. Assim, cada um participa da troca e o grupo consegue realizar a tarefa.</p>
+<h3 id="como-os-processos-participam">Como os processos participam?<a class="headerlink" href="#como-os-processos-participam" title="Permanent link">&para;</a></h3>
+<p>No <strong>broadcast</strong>, o processo raiz compartilha os mesmos dados com todos os demais processos. Na <strong>redução</strong>, cada processo fornece uma contribuição, inclusive a raiz. Essas contribuições são combinadas por uma operação, como soma ou máximo, e somente a raiz recebe o resultado final.</p>
+<p>As funções <strong><code>MPI_Bcast</code> e <code>MPI_Reduce</code> são bloqueantes</strong>: o processo que faz a chamada permanece dentro dela até que sua participação na operação esteja concluída. Só depois do retorno ele executa a próxima instrução.</p>
+<p>No <strong><code>MPI_Bcast</code></strong>, isso significa que, ao retornar, o processo já pode utilizar os dados recebidos para calcular seu intervalo de trabalho.</p>
+<p>No <strong><code>MPI_Reduce</code></strong>, após o retorno, cada processo pode reutilizar seu buffer de contribuição. Para o processos raiz, o retorno também garante que o resultado combinado está disponível para uso.</p>
+<p>Esse bloqueio é local: um processo pode retornar enquanto outro ainda está dentro da chamada. Portanto, ser bloqueante não significa que todos terminam ao mesmo tempo, e essas funções não devem ser tratadas como uma barreira de sincronização.</p>
+<h3 id="broadcast-compartilhar-uma-informacao-com-todos">Broadcast: compartilhar uma informação com todos<a class="headerlink" href="#broadcast-compartilhar-uma-informacao-com-todos" title="Permanent link">&para;</a></h3>
+<p>No broadcast, todos chamam a mesma função, mas o buffer tem um papel diferente na raiz e nos demais processos.</p>
+<table>
+<thead>
+<tr>
+<th>Parâmetro</th>
+<th>Na raiz</th>
+<th>Nos demais processos</th>
+<th>Exemplos e alternativas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Buffer</td>
+<td>Endereço dos dados que serão compartilhados</td>
+<td>Endereço onde os dados serão armazenados</td>
+<td><code>&amp;valor</code> para uma variável; <code>vetor</code> para um array; <code>vetor.data()</code> para um <code>std::vector</code></td>
+</tr>
+<tr>
+<td>Quantidade</td>
+<td>Número de elementos compartilhados</td>
+<td>Número de elementos que serão recebidos</td>
+<td><code>1</code>, <code>5</code> ou uma variável inteira. Conta elementos, e não necessariamente bytes</td>
+</tr>
+<tr>
+<td>Tipo</td>
+<td>Tipo dos elementos compartilhados</td>
+<td>Tipo dos elementos recebidos</td>
+<td><code>MPI_INT</code>, <code>MPI_DOUBLE</code>, <code>MPI_FLOAT</code>, <code>MPI_CHAR</code></td>
+</tr>
+<tr>
+<td>Raiz (<code>root</code>)</td>
+<td>Rank do próprio processo que fornece os dados</td>
+<td>Rank do processo que fornece os dados</td>
+<td><code>0</code>, <code>1</code> ou outro rank válido no comunicador. Todos devem indicar a mesma raiz</td>
+</tr>
+<tr>
+<td>Comunicador</td>
+<td>Grupo participante da operação</td>
+<td>O mesmo grupo participante</td>
+<td><code>MPI_COMM_WORLD</code> ou outro comunicador criado pelo programa</td>
+</tr>
+</tbody>
+</table>
+<h3 id="como-passar-o-buffer">Como passar o buffer?<a class="headerlink" href="#como-passar-o-buffer" title="Permanent link">&para;</a></h3>
+<p>O símbolo <strong><code>&amp;</code></strong> fornece o endereço de uma variável:</p>
+<div class="highlight"><pre><span></span><code><span class="n">MPI_Bcast</span><span class="p">(</span><span class="o">&amp;</span><span class="n">valor</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_INT</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_COMM_WORLD</span><span class="p">);</span>
+</code></pre></div>
+<p>Em um <code>std::vector</code>, usamos <code>.data()</code>. Todos os processos precisam ter espaço para os elementos:</p>
+<div class="highlight"><pre><span></span><code><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">valores</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+
+<span class="c1">// A raiz deve preencher o vetor antes da chamada.</span>
+<span class="n">MPI_Bcast</span><span class="p">(</span><span class="n">valores</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_INT</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_COMM_WORLD</span><span class="p">);</span>
+</code></pre></div>
+<p>Os endereços dos buffers podem ser diferentes entre os processos, pois cada um possui sua própria memória. O que precisa corresponder é a descrição dos dados</p>
+<h3 id="tipos-de-dados-mais-usados">Tipos de dados mais usados<a class="headerlink" href="#tipos-de-dados-mais-usados" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Tipo em C++</th>
+<th>Tipo MPI correspondente</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>int</code></td>
+<td><code>MPI_INT</code></td>
+</tr>
+<tr>
+<td><code>float</code></td>
+<td><code>MPI_FLOAT</code></td>
+</tr>
+<tr>
+<td><code>double</code></td>
+<td><code>MPI_DOUBLE</code></td>
+</tr>
+<tr>
+<td><code>char</code></td>
+<td><code>MPI_CHAR</code></td>
+</tr>
+<tr>
+<td><code>long</code></td>
+<td><code>MPI_LONG</code></td>
+</tr>
+<tr>
+<td><code>long long</code></td>
+<td><code>MPI_LONG_LONG_INT</code></td>
+</tr>
+<tr>
+<td><code>unsigned int</code></td>
+<td><code>MPI_UNSIGNED</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Exemplo completo: uma configuração comum</strong></p>
+<p>Salve como <code>broadcast.cpp</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;mpi.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;sstream&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">**</span><span class="w"> </span><span class="n">argv</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">MPI_Init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">argv</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">rank</span><span class="p">,</span><span class="w"> </span><span class="n">total</span><span class="p">,</span><span class="w"> </span><span class="n">tamanho</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">nome</span><span class="p">[</span><span class="n">MPI_MAX_PROCESSOR_NAME</span><span class="p">];</span>
+
+<span class="w">    </span><span class="n">MPI_Comm_rank</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rank</span><span class="p">);</span>
+<span class="w">    </span><span class="n">MPI_Comm_size</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">total</span><span class="p">);</span>
+<span class="w">    </span><span class="n">MPI_Get_processor_name</span><span class="p">(</span><span class="n">nome</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">tamanho</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">quantidade</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Somente a raiz define inicialmente a configuração.</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rank</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">        </span><span class="n">quantidade</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Todos participam, incluindo o rank 0.</span>
+<span class="w">    </span><span class="n">MPI_Bcast</span><span class="p">(</span><span class="o">&amp;</span><span class="n">quantidade</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_INT</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_COMM_WORLD</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Cada processo mostra sua cópia do valor compartilhado.</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">ostringstream</span><span class="w"> </span><span class="n">mensagem</span><span class="p">;</span>
+<span class="w">    </span><span class="n">mensagem</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Rank &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">rank</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; | Nó: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">nome</span>
+<span class="w">             </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; | Quantidade recebida: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">quantidade</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">mensagem</span><span class="p">.</span><span class="n">str</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">flush</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">MPI_Finalize</span><span class="p">();</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Compile e execute:</p>
+<div class="highlight"><pre><span></span><code>mpic++<span class="w">  </span>-O2<span class="w"> </span>broadcast.cpp<span class="w"> </span>-o<span class="w"> </span>broadcast
+
+srun<span class="w"> </span>--partition<span class="o">=</span>merry_cpu<span class="w"> </span>--mpi<span class="o">=</span>pmix<span class="w"> </span>--mem<span class="o">=</span>1G<span class="w"> </span><span class="se">\</span>
+<span class="w">     </span>--nodes<span class="o">=</span><span class="m">4</span><span class="w"> </span>--ntasks<span class="o">=</span><span class="m">4</span><span class="w"> </span>--ntasks-per-node<span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="se">\</span>
+<span class="w">     </span>--time<span class="o">=</span><span class="m">00</span>:05:00<span class="w"> </span>./broadcast
+</code></pre></div>
+<p>Os quatro ranks devem imprimir <code>100</code>. A ordem dos prints pode variar. </p>
+<h3 id="reduce-transformar-contribuicoes-em-um-resultado">Reduce: transformar contribuições em um resultado<a class="headerlink" href="#reduce-transformar-contribuicoes-em-um-resultado" title="Permanent link">&para;</a></h3>
+<p>Depois de dividir uma computação, cada processo pode ter um resultado parcial. <code>MPI_Reduce</code> combina essas contribuições usando uma operação e coloca o resultado final no buffer do processo raiz.</p>
+<p>Por exemplo, se quatro processos contribuírem com <code>1</code>, <code>2</code>, <code>3</code> e <code>4</code>, uma redução com <code>MPI_SUM</code> produz <code>10</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">local</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rank</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">resultado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="c1">// Todos contribuem com seu valor local.</span>
+<span class="n">MPI_Reduce</span><span class="p">(</span><span class="o">&amp;</span><span class="n">local</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">resultado</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_INT</span><span class="p">,</span>
+<span class="w">           </span><span class="n">MPI_SUM</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_COMM_WORLD</span><span class="p">);</span>
+
+<span class="c1">// Apenas a raiz recebe o resultado global.</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rank</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Soma = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">resultado</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">MPI_Reduce</span><span class="p">(</span>
+<span class="w">    </span><span class="o">&amp;</span><span class="n">local</span><span class="p">,</span><span class="w">          </span><span class="c1">// Endereço da contribuição deste processo.</span>
+<span class="w">    </span><span class="o">&amp;</span><span class="n">resultado</span><span class="p">,</span><span class="w">      </span><span class="c1">// Endereço do resultado, significativo na raiz.</span>
+<span class="w">    </span><span class="mi">1</span><span class="p">,</span><span class="w">               </span><span class="c1">// Quantidade de elementos por processo.</span>
+<span class="w">    </span><span class="n">MPI_INT</span><span class="p">,</span><span class="w">         </span><span class="c1">// Tipo dos elementos.</span>
+<span class="w">    </span><span class="n">MPI_SUM</span><span class="p">,</span><span class="w">         </span><span class="c1">// Operação que combina as contribuições.</span>
+<span class="w">    </span><span class="mi">0</span><span class="p">,</span><span class="w">               </span><span class="c1">// Rank da raiz que recebe o resultado.</span>
+<span class="w">    </span><span class="n">MPI_COMM_WORLD</span><span class="w">   </span><span class="c1">// Comunicador participante.</span>
+<span class="p">);</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Parâmetro</th>
+<th>Significado</th>
+<th>Exemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Buffer de contribuição</td>
+<td>Dados fornecidos por este processo</td>
+<td><code>&amp;local</code></td>
+</tr>
+<tr>
+<td>Buffer de resultado</td>
+<td>Local onde a raiz recebe o resultado global</td>
+<td><code>&amp;resultado</code></td>
+</tr>
+<tr>
+<td>Quantidade</td>
+<td>Número de elementos contribuídos por processo</td>
+<td><code>1</code></td>
+</tr>
+<tr>
+<td>Tipo</td>
+<td>Tipo dos elementos</td>
+<td><code>MPI_INT</code></td>
+</tr>
+<tr>
+<td>Operação</td>
+<td>Como combinar as contribuições</td>
+<td><code>MPI_SUM</code></td>
+</tr>
+<tr>
+<td>Raiz</td>
+<td>Rank que recebe o resultado global</td>
+<td><code>0</code></td>
+</tr>
+<tr>
+<td>Comunicador</td>
+<td>Grupo participante</td>
+<td><code>MPI_COMM_WORLD</code></td>
+</tr>
+</tbody>
+</table>
+<p>No exemplo, cada processo declara <code>resultado</code> para simplificar o código. Contudo, o buffer de resultado só é significativo na raiz: os demais processos não recebem o resultado global dessa chamada.</p>
+<p>A raiz também contribui com seu valor de <code>local</code>.</p>
+<p>Na coleta da aula anterior, o rank 0 guardava os blocos recebidos em faixas diferentes de um vetor. Uma redução tem outro objetivo: <strong>combinar contribuições</strong>.</p>
+<p>Se cada processo contribuir com um vetor, a operação combina posições correspondentes. Por exemplo:</p>
+<table>
+<thead>
+<tr>
+<th>Processo</th>
+<th style="text-align: right;">Posição 0</th>
+<th style="text-align: right;">Posição 1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Rank 0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">10</td>
+</tr>
+<tr>
+<td>Rank 1</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">20</td>
+</tr>
+<tr>
+<td>Resultado de <code>MPI_SUM</code> na raiz</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">30</td>
+</tr>
+</tbody>
+</table>
+<p>Nesse caso, <code>count = 2</code>. O resultado tem dois elementos. Para obter um único total dos elementos de todos os vetores, cada processo pode primeiro somar seu vetor localmente e depois reduzir essa soma usando <code>count = 1</code>.</p>
+<p><strong>Exemplo completo: somar uma contribuição por rank</strong></p>
+<p>Salve como <code>reduce.cpp</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;mpi.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;sstream&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">**</span><span class="w"> </span><span class="n">argv</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">MPI_Init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">argv</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">rank</span><span class="p">,</span><span class="w"> </span><span class="n">total</span><span class="p">,</span><span class="w"> </span><span class="n">tamanho</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">nome</span><span class="p">[</span><span class="n">MPI_MAX_PROCESSOR_NAME</span><span class="p">];</span>
+
+<span class="w">    </span><span class="n">MPI_Comm_rank</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rank</span><span class="p">);</span>
+<span class="w">    </span><span class="n">MPI_Comm_size</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">total</span><span class="p">);</span>
+<span class="w">    </span><span class="n">MPI_Get_processor_name</span><span class="p">(</span><span class="n">nome</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">tamanho</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">local</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rank</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">resultado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">ostringstream</span><span class="w"> </span><span class="n">mensagem</span><span class="p">;</span>
+<span class="w">    </span><span class="n">mensagem</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Rank &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">rank</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; | Nó: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">nome</span>
+<span class="w">             </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; | Contribuição: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">local</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">mensagem</span><span class="p">.</span><span class="n">str</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">flush</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Cada rank contribui. O resultado global fica no rank 0.</span>
+<span class="w">    </span><span class="n">MPI_Reduce</span><span class="p">(</span><span class="o">&amp;</span><span class="n">local</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">resultado</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_INT</span><span class="p">,</span>
+<span class="w">               </span><span class="n">MPI_SUM</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_COMM_WORLD</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rank</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Soma das contribuições = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">resultado</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">MPI_Finalize</span><span class="p">();</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>mpic++<span class="w"> </span>-std<span class="o">=</span>c++11<span class="w"> </span>-O2<span class="w"> </span>reduce.cpp<span class="w"> </span>-o<span class="w"> </span>reduce
+
+srun<span class="w"> </span>--partition<span class="o">=</span>merry_cpu<span class="w"> </span>--mpi<span class="o">=</span>pmix<span class="w"> </span>--mem<span class="o">=</span>1G<span class="w"> </span><span class="se">\</span>
+<span class="w">     </span>--nodes<span class="o">=</span><span class="m">4</span><span class="w"> </span>--ntasks<span class="o">=</span><span class="m">4</span><span class="w"> </span>--ntasks-per-node<span class="o">=</span><span class="m">2</span><span class="w"> </span><span class="se">\</span>
+<span class="w">     </span>--time<span class="o">=</span><span class="m">00</span>:05:00<span class="w"> </span>./reduce
+</code></pre></div>
+<p>Com quatro processos, o resultado é <code>10</code>, este exemplo muda as contribuições quando muda a quantidade de ranks. Na aplicação seguinte, manteremos o mesmo problema e alteraremos apenas sua distribuição.</p>
+<h3 id="tudo-junto-broadcast-computacao-local-e-reduce">Tudo junto: Broadcast, computação local e Reduce<a class="headerlink" href="#tudo-junto-broadcast-computacao-local-e-reduce" title="Permanent link">&para;</a></h3>
+<p>Vamos calcular a soma dos quadrados dos números de 1 a <code>N</code>.</p>
+<p>O rank 0 define <code>N</code> e compartilha esse valor. Cada processo calcula os limites de seu intervalo, executa a computação e contribui com uma soma parcial. Ao final, o rank 0 recebe a soma global.</p>
+<table>
+<thead>
+<tr>
+<th>Etapa</th>
+<th>Operação</th>
+<th>Quem participa?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Compartilhar <code>N</code></td>
+<td><code>MPI_Bcast</code></td>
+<td>Todos os processos</td>
+</tr>
+<tr>
+<td>Determinar o intervalo e calcular</td>
+<td>Computação local</td>
+<td>Todos, incluindo a raiz</td>
+</tr>
+<tr>
+<td>Combinar as somas parciais</td>
+<td><code>MPI_Reduce</code> com <code>MPI_SUM</code></td>
+<td>Todos os processos</td>
+</tr>
+<tr>
+<td>Mostrar o resultado global</td>
+<td>Impressão</td>
+<td>Apenas o raiz</td>
+</tr>
+</tbody>
+</table>
+<p>Aqui o rank 0 também calcula uma parte. <strong>Ser a raiz de uma comunicação coletiva não impede o processo de participar da computação.</strong></p>
+<p>Salve como <code>coletivas.cpp</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;mpi.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;sstream&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">**</span><span class="w"> </span><span class="n">argv</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">MPI_Init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">argv</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">rank</span><span class="p">,</span><span class="w"> </span><span class="n">total</span><span class="p">,</span><span class="w"> </span><span class="n">tamanho</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">nome</span><span class="p">[</span><span class="n">MPI_MAX_PROCESSOR_NAME</span><span class="p">];</span>
+
+<span class="w">    </span><span class="n">MPI_Comm_rank</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rank</span><span class="p">);</span>
+<span class="w">    </span><span class="n">MPI_Comm_size</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">total</span><span class="p">);</span>
+<span class="w">    </span><span class="n">MPI_Get_processor_name</span><span class="p">(</span><span class="n">nome</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">tamanho</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// A raiz define o tamanho do problema.</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rank</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">        </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Todos recebem o mesmo tamanho de problema.</span>
+<span class="w">    </span><span class="n">MPI_Bcast</span><span class="p">(</span><span class="o">&amp;</span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_INT</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_COMM_WORLD</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Cada processo determina sua própria parcela do trabalho.</span>
+<span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">inicio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mf">1L</span><span class="n">L</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">rank</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">N</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">fim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mf">1L</span><span class="n">L</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">rank</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">N</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">total</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Calcula a soma dos quadrados apenas do intervalo local.</span>
+<span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">parcial</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">numero</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">inicio</span><span class="p">;</span><span class="w"> </span><span class="n">numero</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">fim</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">numero</span><span class="p">)</span>
+<span class="w">        </span><span class="n">parcial</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">numero</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">numero</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Identifica o processo, o nó e a tarefa executada.</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">ostringstream</span><span class="w"> </span><span class="n">mensagem</span><span class="p">;</span>
+<span class="w">    </span><span class="n">mensagem</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Rank &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">rank</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; | Nó: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">nome</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">inicio</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">fim</span><span class="p">)</span>
+<span class="w">        </span><span class="n">mensagem</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; | Intervalo: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">inicio</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; a &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">fim</span><span class="p">;</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">        </span><span class="n">mensagem</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; | Intervalo vazio&quot;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">mensagem</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; | Soma parcial: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">parcial</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">mensagem</span><span class="p">.</span><span class="n">str</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">flush</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Combina todas as somas parciais no rank 0.</span>
+<span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">resultado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">MPI_Reduce</span><span class="p">(</span><span class="o">&amp;</span><span class="n">parcial</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">resultado</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_LONG_LONG_INT</span><span class="p">,</span>
+<span class="w">               </span><span class="n">MPI_SUM</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_COMM_WORLD</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Apenas a raiz utiliza o resultado global.</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rank</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Soma dos quadrados de 1 a &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">N</span>
+<span class="w">                  </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">resultado</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">MPI_Finalize</span><span class="p">();</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Observe que apenas a definição inicial de <code>N</code> e a impressão final ficam dentro de <code>if (rank == 0)</code>. As chamadas de broadcast e redução são executadas por todos.</p>
+<p>O broadcast compartilha <code>N</code>, mas não envia intervalos individuais. A distribuição das tarefas resulta do cálculo dos limites usando <code>rank</code>, <code>N</code> e <code>total</code>.</p>
+<p>Compilação e execução</p>
+<div class="highlight"><pre><span></span><code>mpic++<span class="w"> </span>-O2<span class="w"> </span>coletivas.cpp<span class="w"> </span>-o<span class="w"> </span>coletivas
+
+
+srun<span class="w"> </span>--partition<span class="o">=</span>merry_cpu<span class="w"> </span>--mpi<span class="o">=</span>pmix<span class="w"> </span>--mem<span class="o">=</span>1G<span class="w"> </span><span class="se">\</span>
+<span class="w">     </span>--nodes<span class="o">=</span><span class="m">4</span><span class="w"> </span>--ntasks<span class="o">=</span><span class="m">4</span><span class="w"> </span>--ntasks-per-node<span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="se">\</span>
+<span class="w">     </span>--time<span class="o">=</span><span class="m">00</span>:05:00<span class="w"> </span>./coletivas
+</code></pre></div>
+<p>Repita com dois processos:</p>
+<div class="highlight"><pre><span></span><code>srun<span class="w"> </span>--partition<span class="o">=</span>merry_cpu<span class="w"> </span>--mpi<span class="o">=</span>pmix<span class="w"> </span>--mem<span class="o">=</span>1G<span class="w"> </span><span class="se">\</span>
+<span class="w">     </span>--nodes<span class="o">=</span><span class="m">2</span><span class="w"> </span>--ntasks<span class="o">=</span><span class="m">2</span><span class="w"> </span>--ntasks-per-node<span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="se">\</span>
+<span class="w">     </span>--time<span class="o">=</span><span class="m">00</span>:05:00<span class="w"> </span>./coletivas
+</code></pre></div>
+<h2 id="para-entender-se-voce-entendeu">Para entender se você entendeu<a class="headerlink" href="#para-entender-se-voce-entendeu" title="Permanent link">&para;</a></h2>
+<p>Implemente um programa que calcule a soma dos quadrados de 1 a <code>N</code>.</p>
 <ul>
-<li>Processamento massivo de dados científicos;</li>
-<li>Execução de simulações paralelas e distribuídas;</li>
-<li>Acesso remoto via SSH para submissão de jobs com uso de SLURM.</li>
+<li>O rank 0 deve definir <code>N</code> e compartilhar os dados com <code>MPI_Bcast</code>.</li>
+<li>Cada processo deve calcular uma parcela, incluindo o rank 0.</li>
+<li>Cada processo deve imprimir rank, nó, intervalo e soma parcial.</li>
+<li>Use <code>MPI_Reduce</code> para obter o resultado no rank 0.</li>
+<li>Execute com dois e quatro processos, para <code>N = 3000</code> e <code>N = 6006</code>.</li>
 </ul>
-<p>As filas que você terá acesso tem essas características:</p>
-<p><img alt="Filas SDumont" src="image.png" /></p>
-<h2 id="fila-sequana_cpu_dev">Fila sequana_cpu_dev<a class="headerlink" href="#fila-sequana_cpu_dev" title="Permanent link">&para;</a></h2>
-<p>A fila sequana_cpu_dev pode ser usada para testes em CPU, permitindo a execução de apenas 1 job por vez,  utilizando até 4 nós e 192 CPUs por job, com tempo limite de 20 minutos. A infraestrutura disponível conta com 166 nós e 7968 CPUs no total, com 8 GB de memória por CPU, somando aproximadamente 62 TB de memória. </p>
-<h2 id="fila-sequana_gpu_dev">Fila sequana_gpu_dev<a class="headerlink" href="#fila-sequana_gpu_dev" title="Permanent link">&para;</a></h2>
-<p>A fila sequana_gpu_dev pode ser usada para testes com uso de GPU, também limitada a 1 job por vez, podendo utilizar até 4 nós e 192 CPUs por job, com tempo máximo de 20 minutos. Disponibiliza 61 nós, 2928 CPUs e 244 GPUs, com configuração padrão de 12 núcleos de CPUs por GPU e 94 GB de memória por GPU. A memória por CPU é de 8 GB. </p>
-<h2 id="fila-sequana_gpu">Fila sequana_gpu<a class="headerlink" href="#fila-sequana_gpu" title="Permanent link">&para;</a></h2>
-<p>A fila sequana_gpu é a principal fila utilizada para execução de jobs em GPU, permitindo até 4 jobs simultâneos e 24 submissões, com uso de até 24 nós e 1152 CPUs por job, e <strong>tempo máximo de execução de até 4 dias</strong>. Possui 87 nós, 4176 CPUs e 348 GPUs, mantendo a proporção padrão de 12 CPUs por GPU e 94 GB de memória por GPU. A memória por CPU é de 8 GB, totalizando aproximadamente 32 TB. </p>
-<h2 id="como-obter-acesso-ao-sdumont">Como obter acesso ao SDumont<a class="headerlink" href="#como-obter-acesso-ao-sdumont" title="Permanent link">&para;</a></h2>
-<p>Para utilizar o SDumont <strong>você deve preencher e assinar</strong> o formulário oficial fornecido pelo LNCC.</p>
+<details class="info">
+<summary>gabarito</summary>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;mpi.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;sstream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iomanip&gt;</span>
+
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">**</span><span class="w"> </span><span class="n">argv</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">MPI_Init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">argv</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">rank</span><span class="p">,</span><span class="w"> </span><span class="n">total</span><span class="p">,</span><span class="w"> </span><span class="n">tamanho</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">nome</span><span class="p">[</span><span class="n">MPI_MAX_PROCESSOR_NAME</span><span class="p">];</span>
+
+<span class="w">    </span><span class="n">MPI_Comm_rank</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rank</span><span class="p">);</span>
+<span class="w">    </span><span class="n">MPI_Comm_size</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">total</span><span class="p">);</span>
+<span class="w">    </span><span class="n">MPI_Get_processor_name</span><span class="p">(</span><span class="n">nome</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">tamanho</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dados</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rank</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">6006</span><span class="p">;</span>
+<span class="w">        </span><span class="n">dados</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">N</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// Prepara os números de 1 a N.</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">dados</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Primeiro, todos recebem o tamanho do vetor.</span>
+<span class="w">    </span><span class="n">MPI_Bcast</span><span class="p">(</span><span class="o">&amp;</span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_INT</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_COMM_WORLD</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Os demais processos reservam espaço para os dados.</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rank</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">dados</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">N</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Compartilha o vetor completo com todos.</span>
+<span class="w">    </span><span class="n">MPI_Bcast</span><span class="p">(</span><span class="n">dados</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_INT</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_COMM_WORLD</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Define quantos elementos cada processo irá calcular.</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">por_processo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">total</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">sobra</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">total</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">quantidade_local</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">por_processo</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rank</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">sobra</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">quantidade_local</span><span class="o">++</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Calcula a posição inicial da fatia no vetor.</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">inicio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rank</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">por_processo</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rank</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">sobra</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">inicio</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">rank</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">inicio</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">sobra</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// &quot;fim&quot; é a primeira posição depois da fatia.</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">fim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">inicio</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">quantidade_local</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Calcula somente sobre os elementos da fatia.</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">parcial</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">inicio</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">fim</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">valor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dados</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="w">        </span><span class="n">parcial</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">valor</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">valor</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Identifica a parcela calculada por cada processo.</span>
+<span class="w">    </span><span class="n">ostringstream</span><span class="w"> </span><span class="n">mensagem</span><span class="p">;</span>
+<span class="w">    </span><span class="n">mensagem</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">fixed</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">setprecision</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="w">    </span><span class="n">mensagem</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Rank &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">rank</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; | Nó: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">nome</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">quantidade_local</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">mensagem</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; | Valores: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">dados</span><span class="p">[</span><span class="n">inicio</span><span class="p">]</span>
+<span class="w">                </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; a &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">dados</span><span class="p">[</span><span class="n">fim</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">];</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">mensagem</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; | Fatia vazia&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">mensagem</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; | Soma parcial: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">parcial</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">mensagem</span><span class="p">.</span><span class="n">str</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">flush</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Reúne as somas parciais no rank 0.</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">resultado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">MPI_Reduce</span><span class="p">(</span><span class="o">&amp;</span><span class="n">parcial</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">resultado</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_DOUBLE</span><span class="p">,</span>
+<span class="w">            </span><span class="n">MPI_SUM</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_COMM_WORLD</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rank</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">fixed</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">setprecision</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="w">            </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Soma total = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">resultado</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">MPI_Finalize</span><span class="p">();</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+</details>
+<h3 id="alteracoes-para-explorar">Alterações para explorar<a class="headerlink" href="#alteracoes-para-explorar" title="Permanent link">&para;</a></h3>
 <ol>
-<li><strong>Preencha</strong> o formulário de acesso (disponível <a href="formulario_sdumont_usuario.docx">aqui</a>) e <strong>assine</strong> o formulário;</li>
+<li>Faça as alterações necessárias para calcular o <strong>maior quadrado</strong> dos dados.</li>
+<li>Faça as alterações necessárias para calcular a <strong>média dos quadrados</strong></li>
+<li>Faça as alterações necessárias para usar o rank 1 como raiz na computação.</li>
 </ol>
-<p>Preencha o documento conforme os exemplos abaixo:</p>
-<h3 id="dados-institucionais">Dados Institucionais<a class="headerlink" href="#dados-institucionais" title="Permanent link">&para;</a></h3>
-<ul>
-<li><strong>Instituição:</strong> Insper  </li>
-<li><strong>Telefone / Ramal:</strong> 4504-2400  </li>
-<li><strong>Departamento / Instituto:</strong> Laboratório de Redes e Supercomputação – Engenharia da Computação  </li>
-<li><strong>Cargo:</strong> Aluno</li>
-</ul>
-<h3 id="dados-do-projeto">Dados do Projeto<a class="headerlink" href="#dados-do-projeto" title="Permanent link">&para;</a></h3>
-<ul>
-<li><strong>Nome do Coordenador:</strong> Lícia Sales Costa Lima  </li>
-<li><strong>Título/Sigla do Projeto:</strong> Computação de Alto Desempenho: Um Modelo de Ensino Prático</li>
-</ul>
-<h2 id="assine-o-documento">Assine o documento<a class="headerlink" href="#assine-o-documento" title="Permanent link">&para;</a></h2>
-<p>Você pode optar por:</p>
-<ul>
-<li>
-<p><strong>Assinar digitalmente com sua conta Gov.br</strong> pelo site <a href="https://assinador.iti.br/">https://assinador.iti.br/</a>.</p>
-</li>
-<li>
-<p><strong>ou assinar à mão</strong>, imprimir e escanear o formulário;</p>
-</li>
-</ul>
-<h2 id="proximos-passos">Próximos passos<a class="headerlink" href="#proximos-passos" title="Permanent link">&para;</a></h2>
-<p>Anexe ao e-mail um documento de identificação oficial como RG ou CNH;</p>
-<p>Envie os documentos por e-mail para <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#108;&#105;&#99;&#105;&#97;&#115;&#99;&#108;&#64;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;">&#108;&#105;&#99;&#105;&#97;&#115;&#99;&#108;&#64;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;</a>.</p>
-<p><strong>Após o envio, os formulários devidamente preenchidos e assinados serão encaminhados para o LNCC para criação do acesso ao SDumont.</strong></p>
-<blockquote>
-<p><strong>Importante:</strong> O supercomputador SDumont é uma ferramenta poderosa para aprendizado e pesquisa. Use-o com responsabilidade.</p>
-</blockquote>
-<p>Site oficial do Santos Dumont <a href="https://sdumont.lncc.br/index.php">https://sdumont.lncc.br/index.php</a></p>
+<h3 id="perguntas-para-discutir">Perguntas para discutir<a class="headerlink" href="#perguntas-para-discutir" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Por que a raiz também precisa chamar as coletivas?</li>
+<li>Broadcast fornece o mesmo dado ou parcelas diferentes a cada processo?</li>
+<li>Quem recebe o resultado global de <code>MPI_Reduce</code>?</li>
+<li>Qual é a diferença entre guardar todos os blocos e reduzir somas parciais?</li>
+<li>Por que mudar o número de processos não muda a soma final quando <code>N</code> é mantido?</li>
+<li>O que acontece se um processo chamar Reduce enquanto os demais chamam Bcast na mesma posição da sequência?</li>
+</ol>
 
 
 
