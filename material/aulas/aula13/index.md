@@ -345,17 +345,19 @@ Assim, o nó raiz imprime:
 Vetor final: 1 4 9 16 25 36 49 64 81 100 121 144 169 196
 ```
 
-### Compilação e execução
+Para compilar:
 
 ```bash
 mpic++ -O2 scatter_gather.cpp -o scatter_gather
+```
 
+Para executar com `srun`:
 
+```bash
 srun --partition=merry_cpu --mpi=pmix --mem=1G \
      --nodes=4 --ntasks=4 --ntasks-per-node=1 \
      --time=00:05:00 ./scatter_gather
-
-
+```
 
 Submissão com `sbatch`
 
