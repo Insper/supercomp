@@ -11,6 +11,10 @@
         <link rel="canonical" href="https://insper.github.io/supercomp/aulas/aula13/">
       
       
+        <link rel="prev" href="../aula12/">
+      
+      
+        <link rel="next" href="guia_mpi_sdumont/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -18,7 +22,7 @@
     
     
       
-        <title>Uma Introdução a CUDA - SuperComputação - 2026/2</title>
+        <title>Comunicação Coletiva: Scatter e Gatter - SuperComputação - 2026/2</title>
       
     
     
@@ -80,7 +84,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#uma-introducao-a-cuda" class="md-skip">
+        <a href="#comunicacao-coletiva-mpi-scatter-e-gather" class="md-skip">
           Skip to content
         </a>
       
@@ -114,7 +118,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Uma Introdução a CUDA
+              Comunicação Coletiva: Scatter e Gatter
             
           </span>
         </div>
@@ -210,10 +214,12 @@
         
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
+      <li class="md-tabs__item md-tabs__item--active">
         <a href="../aula01/" class="md-tabs__link">
           
   
@@ -331,23 +337,28 @@
       
   
   
+    
   
   
+  
     
     
     
-      
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
             
   
   <span class="md-ellipsis">
@@ -359,7 +370,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             Aulas
@@ -598,6 +609,160 @@
   
   <span class="md-ellipsis">
     Comunicação Coletiva: Broadcast e Reduce
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Comunicação Coletiva: Scatter e Gatter
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Comunicação Coletiva: Scatter e Gatter
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#scatter-distribuir-uma-fatia-para-cada-processo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Scatter: distribuir uma fatia para cada processo
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gather-reunir-blocos-na-raiz" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gather: reunir blocos na raiz
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#leitura-da-chamada" class="md-nav__link">
+    <span class="md-ellipsis">
+      Leitura da chamada
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#broadcast-scatter-gather-e-reduce-qual-e-a-diferenca" class="md-nav__link">
+    <span class="md-ellipsis">
+      Broadcast, Scatter, Gather e Reduce: qual é a diferença?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Broadcast, Scatter, Gather e Reduce: qual é a diferença?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tudo-junto-distribuir-calcular-e-reunir" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tudo junto: distribuir, calcular e reunir
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compilacao-e-execucao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compilação e execução
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#para-entender-se-voce-entendeu" class="md-nav__link">
+    <span class="md-ellipsis">
+      Para entender se você entendeu
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="guia_mpi_sdumont/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Guia MPI Santos Dumont
     
   </span>
   
@@ -954,46 +1119,55 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#etapa-1-preparando-o-ambiente" class="md-nav__link">
+  <a href="#scatter-distribuir-uma-fatia-para-cada-processo" class="md-nav__link">
     <span class="md-ellipsis">
-      Etapa 1 — Preparando o ambiente
+      Scatter: distribuir uma fatia para cada processo
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#etapa-2-codigo-base-cpu" class="md-nav__link">
+  <a href="#gather-reunir-blocos-na-raiz" class="md-nav__link">
     <span class="md-ellipsis">
-      Etapa 2 — Código Base (CPU)
+      Gather: reunir blocos na raiz
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#etapa-3-migrando-para-gpu-cuda" class="md-nav__link">
+  <a href="#leitura-da-chamada" class="md-nav__link">
     <span class="md-ellipsis">
-      Etapa 3 — Migrando para GPU (CUDA)
+      Leitura da chamada
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#etapa-4-executando-no-no-gpu-com-slurm" class="md-nav__link">
+  <a href="#broadcast-scatter-gather-e-reduce-qual-e-a-diferenca" class="md-nav__link">
     <span class="md-ellipsis">
-      Etapa 4 — Executando no nó GPU com SLURM
+      Broadcast, Scatter, Gather e Reduce: qual é a diferença?
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Etapa 4 — Executando no nó GPU com SLURM">
+    <nav class="md-nav" aria-label="Broadcast, Scatter, Gather e Reduce: qual é a diferença?">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#natureza-do-problema" class="md-nav__link">
+  <a href="#tudo-junto-distribuir-calcular-e-reunir" class="md-nav__link">
     <span class="md-ellipsis">
-      Natureza do problema
+      Tudo junto: distribuir, calcular e reunir
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compilacao-e-execucao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compilação e execução
     </span>
   </a>
   
@@ -1005,27 +1179,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#desafio" class="md-nav__link">
+  <a href="#para-entender-se-voce-entendeu" class="md-nav__link">
     <span class="md-ellipsis">
-      DESAFIO
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#se-quiser-aprender-mais" class="md-nav__link">
-    <span class="md-ellipsis">
-      Se quiser aprender mais
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#esta-atividade-nao-tem-entrega-bom-final-de-semana" class="md-nav__link">
-    <span class="md-ellipsis">
-      Esta atividade não tem entrega, bom final de semana!
+      Para entender se você entendeu
     </span>
   </a>
   
@@ -1050,288 +1206,474 @@
   
 
 
-<h1 id="uma-introducao-a-cuda">Uma Introdução a CUDA<a class="headerlink" href="#uma-introducao-a-cuda" title="Permanent link">&para;</a></h1>
-<p>O <strong>CUDA (Compute Unified Device Architecture)</strong> é o modelo de programação paralela desenvolvido pela <strong>NVIDIA</strong>.
-Ele permite que desenvolvedores usem o poder das <strong>GPUs</strong> para acelerar aplicações de alto desempenho, executando milhares de threads simultaneamente.</p>
-<p>Em um <strong>sistema HPC com SLURM</strong>, como o Franky ou o SDumont, a execução de programas CUDA segue três etapas principais:</p>
-<ol>
-<li><strong>Carregar o módulo CUDA</strong> disponível no cluster.</li>
-<li><strong>Compilar o código</strong> com o compilador <code>nvcc</code>.</li>
-<li><strong>Executar o binário</strong> com o <code>srun</code> ou <code>sbatch</code>(solicitando uma GPU).</li>
-</ol>
-<hr />
-<h2 id="etapa-1-preparando-o-ambiente">Etapa 1 — Preparando o ambiente<a class="headerlink" href="#etapa-1-preparando-o-ambiente" title="Permanent link">&para;</a></h2>
-<p>Liste os módulos disponíveis e carregue o CUDA:</p>
-<div class="highlight"><pre><span></span><code>module<span class="w"> </span>avail<span class="w"> </span>cuda
-module<span class="w"> </span>load<span class="w"> </span>cuda/12.8.1
+<h1 id="comunicacao-coletiva-mpi-scatter-e-gather">Comunicação coletiva MPI: Scatter e Gather<a class="headerlink" href="#comunicacao-coletiva-mpi-scatter-e-gather" title="Permanent link">&para;</a></h1>
+<p>Na aula anterior, usamos <code>MPI_Bcast</code> para compartilhar os mesmos dados com todos os processos e <code>MPI_Reduce</code> para combinar resultados. Agora vamos mudar a organização: em vez de enviar uma cópia completa do vetor a todos, queremos <strong>entregar uma fatia diferente para cada processo</strong>. Depois da computação, queremos <strong>reunir as fatias calculadas</strong>, preservando seus elementos.</p>
+<p><strong>Scatter</strong> é uma operação coletiva que distribui os dados de um processo raiz em blocos, entregando uma parte a cada processo. Por exemplo, um vetor com 12 números pode ser dividido entre quatro processos, cada um recebendo três números.</p>
+<p><strong>Gather</strong> é uma operação coletiva que reúne os blocos fornecidos pelos processos em um único vetor na raiz, organizados pela ordem dos ranks. Ele preserva os elementos recebidos, sem somá-los ou combiná-los matematicamente.</p>
+<h3 id="scatter-distribuir-uma-fatia-para-cada-processo">Scatter: distribuir uma fatia para cada processo<a class="headerlink" href="#scatter-distribuir-uma-fatia-para-cada-processo" title="Permanent link">&para;</a></h3>
+<p>Considere o vetor abaixo, inicialmente disponível apenas no rank 0:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">}</span>
 </code></pre></div>
-<p>Verifique se o compilador CUDA está ativo:</p>
-<div class="highlight"><pre><span></span><code>nvcc<span class="w"> </span>--version
+<p>Com quatro processos e três elementos por bloco, o efeito do Scatter é:</p>
+<table>
+<thead>
+<tr>
+<th>Rank</th>
+<th>Posições no vetor da raiz</th>
+<th>Bloco recebido</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0 a 2</td>
+<td><code>{1, 2, 3}</code></td>
+</tr>
+<tr>
+<td>1</td>
+<td>3 a 5</td>
+<td><code>{4, 5, 6}</code></td>
+</tr>
+<tr>
+<td>2</td>
+<td>6 a 8</td>
+<td><code>{7, 8, 9}</code></td>
+</tr>
+<tr>
+<td>3</td>
+<td>9 a 11</td>
+<td><code>{10, 11, 12}</code></td>
+</tr>
+</tbody>
+</table>
+<p><div class="highlight"><pre><span></span><code><span class="n">MPI_Scatter</span><span class="p">(</span>
+<span class="w">    </span><span class="n">dados</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span><span class="w">     </span><span class="c1">// Vetor completo</span>
+<span class="w">    </span><span class="n">bloco</span><span class="p">,</span><span class="w">            </span><span class="c1">// Quantidade de elementos enviada A CADA processo.</span>
+<span class="w">    </span><span class="n">MPI_INT</span><span class="p">,</span><span class="w">          </span><span class="c1">// Tipo dos elementos enviados.</span>
+<span class="w">    </span><span class="n">local</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span><span class="w">     </span><span class="c1">// Buffer onde este processo recebe sua fatia.</span>
+<span class="w">    </span><span class="n">bloco</span><span class="p">,</span><span class="w">            </span><span class="c1">// Quantidade de elementos recebida por este processo.</span>
+<span class="w">    </span><span class="n">MPI_INT</span><span class="p">,</span><span class="w">          </span><span class="c1">// Tipo dos elementos recebidos.</span>
+<span class="w">    </span><span class="mi">0</span><span class="p">,</span><span class="w">                </span><span class="c1">// Rank da raiz que distribui os dados.</span>
+<span class="w">    </span><span class="n">MPI_COMM_WORLD</span><span class="w">    </span><span class="c1">// Comunicador participante.</span>
+<span class="p">);</span>
 </code></pre></div>
-<p>Deve aparecer algo como</p>
-<p><img alt="alt text" src="image.png" /></p>
-<h2 id="etapa-2-codigo-base-cpu">Etapa 2 — Código Base (CPU)<a class="headerlink" href="#etapa-2-codigo-base-cpu" title="Permanent link">&para;</a></h2>
-<p>Vamos começar com um programa simples em <strong>C++</strong> que soma os elementos de dois vetores na <strong>CPU</strong>.</p>
-<p>Crie o arquivo:</p>
-<div class="highlight"><pre><span></span><code>nano<span class="w"> </span>exemplo-cpu.cpp
-</code></pre></div>
-<p>Cole o código abaixo:</p>
-<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cmath&gt;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;chrono&gt;</span><span class="c1"> </span>
-
-<span class="c1">// Função que soma os elementos de dois vetores</span>
-<span class="kt">void</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">y</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
-<span class="w">      </span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-<span class="p">}</span>
-
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1&#39;000&#39;000&#39;000</span><span class="p">;</span><span class="w"> </span>
-<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">float</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>
-<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">float</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>
-
-<span class="w">  </span><span class="c1">// Inicializa os vetores</span>
-<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">;</span>
-<span class="w">    </span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.0f</span><span class="p">;</span>
-<span class="w">  </span><span class="p">}</span>
-
-<span class="w">  </span><span class="c1">// Início da medição de tempo</span>
-<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
-
-<span class="w">  </span><span class="c1">// Executa a soma</span>
-<span class="w">  </span><span class="n">add</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
-
-<span class="w">  </span><span class="c1">// Fim da medição</span>
-<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
-<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">duration</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">elapsed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start</span><span class="p">;</span>
-
-<span class="w">  </span><span class="c1">// Calcula erro e soma total</span>
-<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">maxError</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span>
-<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">somaTotal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
-
-<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">maxError</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fmax</span><span class="p">(</span><span class="n">maxError</span><span class="p">,</span><span class="w"> </span><span class="n">fabs</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">3.0f</span><span class="p">));</span>
-<span class="w">    </span><span class="n">somaTotal</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-<span class="w">  </span><span class="p">}</span>
-
-<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Erro: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">maxError</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;N: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Soma total: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">somaTotal</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Tempo de execução: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">elapsed</span><span class="p">.</span><span class="n">count</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; segundos&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-
-<span class="w">  </span><span class="k">delete</span><span class="w"> </span><span class="p">[]</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
-<span class="w">  </span><span class="k">delete</span><span class="w"> </span><span class="p">[]</span><span class="w"> </span><span class="n">y</span><span class="p">;</span>
-
-<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div>
-<p>Compile e execute localmente (sem GPU):</p>
-<div class="highlight"><pre><span></span><code><span class="w"> </span>srun<span class="w"> </span>--partition<span class="o">=</span>gpu<span class="w">  </span>--pty<span class="w"> </span>./ex-cpu
-</code></pre></div>
-<p>Saída esperada:</p>
-<div class="highlight"><pre><span></span><code>Erro: 0
-N: 1000000000
-Soma total: 3e+09
-Tempo de execução: 0.30549 segundos
-</code></pre></div>
-<h2 id="etapa-3-migrando-para-gpu-cuda">Etapa 3 — Migrando para GPU (CUDA)<a class="headerlink" href="#etapa-3-migrando-para-gpu-cuda" title="Permanent link">&para;</a></h2>
-<p>Agora, vamos reescrever o mesmo código para rodar <strong>na GPU</strong>.</p>
-<p>Crie o arquivo:</p>
-<div class="highlight"><pre><span></span><code>nano<span class="w"> </span>exemplo-gpu.cu
-</code></pre></div>
-<p>Analise o código abaixo:</p>
-<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cmath&gt;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;chrono&gt;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cuda_runtime.h&gt;</span>
+O MPI transfere os elementos do <code>vector</code>, não o objeto C++. Por isso, usamos <code>.data()</code> e reservamos espaço com o construtor ou <code>resize()</code> antes da chamada. Nos demais ranks, o buffer de envio do Scatter é ignorado. </p>
+<p><strong>Exemplo completo: receber e identificar uma fatia</strong></p>
+<p><code>scatter.cpp</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;mpi.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
 
 <span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
 
-<span class="c1">// Kernel CUDA (função que será executada na GPU)</span>
-<span class="n">__global__</span>
-<span class="kt">void</span><span class="w"> </span><span class="n">add</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">y</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="c1">// Calcula o índice global da thread</span>
-<span class="w">   </span><span class="c1">// cada thread obtém um índice único &#39;i&#39;</span>
-<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">blockIdx</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">blockDim</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">threadIdx</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">**</span><span class="w"> </span><span class="n">argv</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">MPI_Init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">argv</span><span class="p">);</span>
 
-<span class="w">  </span><span class="c1">// Garante que a thread só acesse posições válidas do vetor</span>
-<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">rank</span><span class="p">,</span><span class="w"> </span><span class="n">total</span><span class="p">,</span><span class="w"> </span><span class="n">tamanho</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">nome</span><span class="p">[</span><span class="n">MPI_MAX_PROCESSOR_NAME</span><span class="p">];</span>
 
-<span class="w">    </span><span class="c1">// Cada thread realiza a soma de UM elemento:</span>
-<span class="w">    </span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="n">MPI_Comm_rank</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rank</span><span class="p">);</span>
+<span class="w">    </span><span class="n">MPI_Comm_size</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">total</span><span class="p">);</span>
+<span class="w">    </span><span class="n">MPI_Get_processor_name</span><span class="p">(</span><span class="n">nome</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">tamanho</span><span class="p">);</span>
 
-<span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1&#39;000&#39;000&#39;000</span><span class="p">;</span>
-<span class="w">  </span><span class="kt">size_t</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// Cada processo receberá três números.</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">bloco</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
 
-<span class="w">  </span><span class="c1">// Cria os vetores na CPU</span>
-<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">float</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>
-<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">float</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>
+<span class="w">    </span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dados</span><span class="p">;</span>
+<span class="w">    </span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">local</span><span class="p">(</span><span class="n">bloco</span><span class="p">);</span>
 
-<span class="w">  </span><span class="c1">// Inicializa na CPU</span>
-<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">;</span>
-<span class="w">    </span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.0f</span><span class="p">;</span>
-<span class="w">  </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// Somente o rank 0 prepara o vetor completo.</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rank</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">quantidade</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">bloco</span><span class="p">;</span>
+<span class="w">        </span><span class="n">dados</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">quantidade</span><span class="p">);</span>
 
-<span class="w">  </span><span class="c1">// Cria os vetores para a GPU</span>
-<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">d_x</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">d_y</span><span class="p">;</span>
-<span class="w">  </span><span class="c1">// reserva o espaço para os vetores na GPU</span>
-<span class="w">  </span><span class="n">cudaMalloc</span><span class="p">(</span><span class="o">&amp;</span><span class="n">d_x</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">);</span>
-<span class="w">  </span><span class="n">cudaMalloc</span><span class="p">(</span><span class="o">&amp;</span><span class="n">d_y</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">);</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">quantidade</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">dados</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
 
-<span class="w">  </span><span class="c1">// início do tempo (incluindo transferência)</span>
-<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">// Distribui três números para cada processo.</span>
+<span class="w">    </span><span class="c1">// Todos chamam, inclusive o rank 0.</span>
+<span class="w">    </span><span class="n">MPI_Scatter</span><span class="p">(</span>
+<span class="w">        </span><span class="n">dados</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span><span class="w">     </span><span class="c1">// Vetor completo, utilizado apenas na raiz.</span>
+<span class="w">        </span><span class="n">bloco</span><span class="p">,</span><span class="w">            </span><span class="c1">// Elementos enviados para cada processo.</span>
+<span class="w">        </span><span class="n">MPI_INT</span><span class="p">,</span><span class="w">          </span><span class="c1">// Tipo dos elementos enviados.</span>
+<span class="w">        </span><span class="n">local</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span><span class="w">     </span><span class="c1">// Onde este processo recebe sua fatia.</span>
+<span class="w">        </span><span class="n">bloco</span><span class="p">,</span><span class="w">            </span><span class="c1">// Elementos recebidos por este processo.</span>
+<span class="w">        </span><span class="n">MPI_INT</span><span class="p">,</span><span class="w">          </span><span class="c1">// Tipo dos elementos recebidos.</span>
+<span class="w">        </span><span class="mi">0</span><span class="p">,</span><span class="w">                </span><span class="c1">// Rank da raiz.</span>
+<span class="w">        </span><span class="n">MPI_COMM_WORLD</span>
+<span class="w">    </span><span class="p">);</span>
 
-<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">dados_start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
-<span class="w">  </span><span class="c1">// Transferencia dos dados CPU → GPU</span>
-<span class="w">  </span><span class="n">cudaMemcpy</span><span class="p">(</span><span class="n">d_x</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="n">cudaMemcpyHostToDevice</span><span class="p">);</span>
-<span class="w">  </span><span class="n">cudaMemcpy</span><span class="p">(</span><span class="n">d_y</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="n">cudaMemcpyHostToDevice</span><span class="p">);</span>
-<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">dados_end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">// Mostra qual fatia foi recebida por este processo.</span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Rank &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">rank</span>
+<span class="w">         </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; | Nó: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">nome</span>
+<span class="w">         </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; | Fatia recebida: &quot;</span><span class="p">;</span>
 
-<span class="w">  </span><span class="c1">// Configurando o kernel</span>
-<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">blockSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">256</span><span class="p">;</span>
-<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">numBlocks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">N</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">blockSize</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">blockSize</span><span class="p">;</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">bloco</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">local</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">&#39; &#39;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 
-<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">start_comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
-<span class="w">  </span><span class="c1">// Computação na GPU</span>
-<span class="w">  </span><span class="n">add</span><span class="o">&lt;&lt;&lt;</span><span class="n">numBlocks</span><span class="p">,</span><span class="w"> </span><span class="n">blockSize</span><span class="o">&gt;&gt;&gt;</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">d_x</span><span class="p">,</span><span class="w"> </span><span class="n">d_y</span><span class="p">);</span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
 
-<span class="w">  </span><span class="c1">// Semáforo para aguardar o término da computação na GPU </span>
-<span class="w">  </span><span class="n">cudaDeviceSynchronize</span><span class="p">();</span>
-
-<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">end_comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
-
-
-<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">start_dados</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
-<span class="w">  </span><span class="c1">// Transferencia de dados GPU → CPU</span>
-<span class="w">  </span><span class="n">cudaMemcpy</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">d_y</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="n">cudaMemcpyDeviceToHost</span><span class="p">);</span>
-
-<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">end_dados</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
-
-<span class="w">  </span><span class="c1">// fim do tempo</span>
-<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
-<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">duration</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start</span><span class="p">;</span>
-
-<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">duration</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">end_comp</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start_comp</span><span class="p">;</span>
-<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">duration</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dados_crus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dados_end</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">dados_start</span><span class="p">;</span>
-<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">duration</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dados_comp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">end_dados</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start_dados</span><span class="p">;</span>
-
-
-<span class="w">  </span><span class="c1">// Criação dos das variaveis para exibir o output</span>
-<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">maxError</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span>
-<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">somaTotal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
-
-<span class="w">  </span><span class="c1">// Preparação dos dados para exibir</span>
-<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">maxError</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fmax</span><span class="p">(</span><span class="n">maxError</span><span class="p">,</span><span class="w"> </span><span class="n">fabs</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">3.0f</span><span class="p">));</span>
-<span class="w">    </span><span class="n">somaTotal</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-<span class="w">  </span><span class="p">}</span>
-
-<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">cudaGetLastError</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Erro: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">maxError</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;N: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Soma total: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">somaTotal</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-
-<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Tempo de transferência dos dados (CPU-&gt;GPU) &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">dados_crus</span><span class="p">.</span><span class="n">count</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; segundos&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Tempo de calculos na GPU &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">comp</span><span class="p">.</span><span class="n">count</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; segundos&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Tempo de transferência dos dados (CPU&lt;-GPU) &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">dados_comp</span><span class="p">.</span><span class="n">count</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; segundos&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Tempo total de tudo mesmo &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">total</span><span class="p">.</span><span class="n">count</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; segundos&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-
-<span class="w">  </span><span class="c1">// Libera memória</span>
-<span class="w">  </span><span class="n">cudaFree</span><span class="p">(</span><span class="n">d_x</span><span class="p">);</span>
-<span class="w">  </span><span class="n">cudaFree</span><span class="p">(</span><span class="n">d_y</span><span class="p">);</span>
-<span class="w">  </span><span class="k">delete</span><span class="p">[]</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
-<span class="w">  </span><span class="k">delete</span><span class="p">[]</span><span class="w"> </span><span class="n">y</span><span class="p">;</span>
-
-<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">MPI_Finalize</span><span class="p">();</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>Compile com o <code>nvcc</code>:</p>
-<div class="highlight"><pre><span></span><code>nvcc<span class="w"> </span>exemplo-gpu.cu<span class="w"> </span>-o<span class="w"> </span>ex-gpu
+<div class="highlight"><pre><span></span><code>mpic++<span class="w"> </span>-O2<span class="w"> </span>scatter.cpp<span class="w"> </span>-o<span class="w"> </span>scatter
+
+srun<span class="w"> </span>--partition<span class="o">=</span>merry_cpu<span class="w"> </span>--mpi<span class="o">=</span>pmix<span class="w"> </span>--mem<span class="o">=</span>1G<span class="w"> </span><span class="se">\</span>
+<span class="w">     </span>--nodes<span class="o">=</span><span class="m">2</span><span class="w"> </span>--ntasks<span class="o">=</span><span class="m">4</span><span class="w"> </span>--ntasks-per-node<span class="o">=</span><span class="m">2</span><span class="w"> </span><span class="se">\</span>
+<span class="w">     </span>--time<span class="o">=</span><span class="m">00</span>:05:00<span class="w"> </span>./scatter
 </code></pre></div>
-<h2 id="etapa-4-executando-no-no-gpu-com-slurm">Etapa 4 — Executando no nó GPU com SLURM<a class="headerlink" href="#etapa-4-executando-no-no-gpu-com-slurm" title="Permanent link">&para;</a></h2>
-<p>Agora, vamos executar o binário <strong>pedindo uma GPU</strong> via <code>srun</code>:</p>
-<p><div class="highlight"><pre><span></span><code>srun<span class="w"> </span>--partition<span class="o">=</span>gpu<span class="w"> </span>--gres<span class="o">=</span>gpu:1<span class="w"> </span>./ex-gpu
+<p>Com quatro processos, o vetor inicial tem 12 números. Com dois, tem seis: neste primeiro exemplo, mantemos três elementos por processo e adaptamos o tamanho do problema à quantidade de ranks. A ordem dos prints pode variar.</p>
+<h3 id="gather-reunir-blocos-na-raiz">Gather: reunir blocos na raiz<a class="headerlink" href="#gather-reunir-blocos-na-raiz" title="Permanent link">&para;</a></h3>
+<p>Depois da computação, cada processo pode ter um bloco de resultados. <code>MPI_Gather</code> reúne esses blocos em um vetor na raiz, organizados pela ordem dos ranks.</p>
+<p>Se cada processo elevar ao quadrado os valores do exemplo anterior:</p>
+<table>
+<thead>
+<tr>
+<th>Rank</th>
+<th>Bloco calculado</th>
+<th>Posições no vetor reunido</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td><code>{1, 4, 9}</code></td>
+<td>0 a 2</td>
+</tr>
+<tr>
+<td>1</td>
+<td><code>{16, 25, 36}</code></td>
+<td>3 a 5</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>{49, 64, 81}</code></td>
+<td>6 a 8</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>{100, 121, 144}</code></td>
+<td>9 a 11</td>
+</tr>
+</tbody>
+</table>
+<p>O resultado na raiz será:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span><span class="w"> </span><span class="mi">36</span><span class="p">,</span><span class="w"> </span><span class="mi">49</span><span class="p">,</span><span class="w"> </span><span class="mi">64</span><span class="p">,</span><span class="w"> </span><span class="mi">81</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">121</span><span class="p">,</span><span class="w"> </span><span class="mi">144</span><span class="p">}</span>
 </code></pre></div>
-Esse  <code>--gres=gpu:1</code> aloca 1 GPU  para executar o binário  <code>./ex1</code>  na fila gpu do Cluster Franky</p>
-<p>Saída esperada:</p>
-<div class="highlight"><pre><span></span><code>0
-Erro: 0
-N: 1000000000
-Soma total: 3e+09
-Tempo de transferência dos dados (CPU-&gt;GPU) 0.663264 segundos
-Tempo de calculos na GPU 0.0722021 segundos
-Tempo de transferência dos dados (CPU&lt;-GPU) 0.307847 segundos
-Tempo total de tudo mesmo 1.04331 segundos
+<p><strong>Gather preserva os elementos; não os soma nem calcula um máximo.</strong> Para combinar contribuições por uma operação matemática, usamos Reduce.</p>
+<h3 id="leitura-da-chamada">Leitura da chamada<a class="headerlink" href="#leitura-da-chamada" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">MPI_Gather</span><span class="p">(</span>
+<span class="w">    </span><span class="n">local</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span><span class="w">       </span><span class="c1">// Bloco que este processo envia.</span>
+<span class="w">    </span><span class="n">bloco</span><span class="p">,</span><span class="w">              </span><span class="c1">// Elementos enviados por este processo.</span>
+<span class="w">    </span><span class="n">MPI_INT</span><span class="p">,</span><span class="w">            </span><span class="c1">// Tipo dos elementos enviados.</span>
+<span class="w">    </span><span class="n">reunidos</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span><span class="w">    </span><span class="c1">// Vetor final: significativo apenas na raiz.</span>
+<span class="w">    </span><span class="n">bloco</span><span class="p">,</span><span class="w">              </span><span class="c1">// Elementos recebidos DE CADA processo.</span>
+<span class="w">    </span><span class="n">MPI_INT</span><span class="p">,</span><span class="w">            </span><span class="c1">// Tipo dos elementos recebidos.</span>
+<span class="w">    </span><span class="mi">0</span><span class="p">,</span><span class="w">                  </span><span class="c1">// Rank da raiz que reúne os dados.</span>
+<span class="w">    </span><span class="n">MPI_COMM_WORLD</span><span class="w">      </span><span class="c1">// Comunicador participante.</span>
+<span class="p">);</span>
 </code></pre></div>
-<h3 id="natureza-do-problema">Natureza do problema<a class="headerlink" href="#natureza-do-problema" title="Permanent link">&para;</a></h3>
-<p>A operação:</p>
-<div class="highlight"><pre><span></span><code><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<p>Para quatro ranks enviando três inteiros cada, a raiz reserva espaço para 12 elementos, mas informa <code>recvcount = 3</code>. <strong>Esse parâmetro não é a quantidade total reunida.</strong></p>
+<p>Somente a raiz precisa alocar o vetor final. Nos outros processos, o buffer de recebimento é ignorado e pode ser <code>nullptr</code>. Todos precisam fornecer seu bloco de envio.</p>
+<p>Os blocos ocupam posições determinadas pelo rank, mesmo que os processos terminem seus cálculos em momentos diferentes. A ordem das mensagens impressas na tela não altera a organização do vetor reunido.</p>
+<p><strong>Exemplo completo: reunir um valor de cada processo</strong></p>
+<p><code>gather.cpp</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;mpi.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;sstream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
+
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">**</span><span class="w"> </span><span class="n">argv</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">MPI_Init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">argv</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">rank</span><span class="p">,</span><span class="w"> </span><span class="n">total</span><span class="p">,</span><span class="w"> </span><span class="n">tamanho</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">nome</span><span class="p">[</span><span class="n">MPI_MAX_PROCESSOR_NAME</span><span class="p">];</span>
+<span class="w">    </span><span class="n">MPI_Comm_rank</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rank</span><span class="p">);</span>
+<span class="w">    </span><span class="n">MPI_Comm_size</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">total</span><span class="p">);</span>
+<span class="w">    </span><span class="n">MPI_Get_processor_name</span><span class="p">(</span><span class="n">nome</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">tamanho</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Cada rank calcula um valor diferente.</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">valor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">rank</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">rank</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="w">    </span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">reunidos</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rank</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">        </span><span class="n">reunidos</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">total</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">ostringstream</span><span class="w"> </span><span class="n">mensagem</span><span class="p">;</span>
+<span class="w">    </span><span class="n">mensagem</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Rank &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">rank</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; | Nó: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">nome</span>
+<span class="w">             </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; | Valor calculado: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">valor</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">mensagem</span><span class="p">.</span><span class="n">str</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">flush</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Um inteiro de cada rank ocupa uma posição na raiz.</span>
+<span class="w">    </span><span class="n">MPI_Gather</span><span class="p">(</span><span class="o">&amp;</span><span class="n">valor</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_INT</span><span class="p">,</span>
+<span class="w">               </span><span class="n">rank</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">reunidos</span><span class="p">.</span><span class="n">data</span><span class="p">()</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">nullptr</span><span class="p">,</span>
+<span class="w">               </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_INT</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_COMM_WORLD</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rank</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Valores reunidos por ordem de rank: &quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">item</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">reunidos</span><span class="p">)</span>
+<span class="w">            </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">item</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">&#39; &#39;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">MPI_Finalize</span><span class="p">();</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div>
-<p>tem as seguintes características:</p>
-<ul>
-<li>1 soma por elemento</li>
-<li>2 leituras de memória</li>
-<li>1 escrita de memória</li>
-</ul>
-<p>Isso significa que o custo é dominado por acesso à memória, não por cálculo.</p>
-<p>Esse tipo de problema é chamado de:</p>
-<blockquote>
-<p>memory-bound</p>
-</blockquote>
-<p>O que aconteceu:</p>
+<div class="highlight"><pre><span></span><code>mpic++<span class="w"> </span>-O2<span class="w"> </span>gather.cpp<span class="w"> </span>-o<span class="w"> </span>gather
+
+srun<span class="w"> </span>--partition<span class="o">=</span>merry_cpu<span class="w"> </span>--mpi<span class="o">=</span>pmix<span class="w"> </span>--mem<span class="o">=</span>1G<span class="w"> </span><span class="se">\</span>
+<span class="w">     </span>--nodes<span class="o">=</span><span class="m">2</span><span class="w"> </span>--ntasks<span class="o">=</span><span class="m">4</span><span class="w"> </span>--ntasks-per-node<span class="o">=</span><span class="m">2</span><span class="w"> </span><span class="se">\</span>
+<span class="w">     </span>--time<span class="o">=</span><span class="m">00</span>:05:00<span class="w"> </span>./gather
+</code></pre></div>
+<p>Com quatro processos, o vetor final contém <code>1 4 9 16</code>. O resultado global fica somente na raiz; os demais ranks mantêm seus valores locais.</p>
+<h2 id="broadcast-scatter-gather-e-reduce-qual-e-a-diferenca">Broadcast, Scatter, Gather e Reduce: qual é a diferença?<a class="headerlink" href="#broadcast-scatter-gather-e-reduce-qual-e-a-diferenca" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Operação</th>
+<th>O que acontece com os dados?</th>
+<th>Exemplo com quatro ranks</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Broadcast</td>
+<td>Todos recebem os mesmos elementos da raiz</td>
+<td>Todos recebem o vetor completo</td>
+</tr>
+<tr>
+<td>Scatter</td>
+<td>Cada rank recebe um bloco correspondente do vetor da raiz</td>
+<td>Cada um recebe três de 12 números</td>
+</tr>
+<tr>
+<td>Gather</td>
+<td>Blocos dos ranks ocupam faixas distintas no vetor da raiz</td>
+<td>Quatro blocos de três formam um vetor de 12</td>
+</tr>
+<tr>
+<td>Reduce</td>
+<td>Contribuições são combinadas por uma operação</td>
+<td>Quatro somas parciais produzem uma soma global</td>
+</tr>
+</tbody>
+</table>
+<p>Scatter e Gather lidam com blocos. Broadcast replica dados. Reduce combina contribuições. A escolha depende do que queremos obter ao final da comunicação.</p>
+<h3 id="tudo-junto-distribuir-calcular-e-reunir">Tudo junto: distribuir, calcular e reunir<a class="headerlink" href="#tudo-junto-distribuir-calcular-e-reunir" title="Permanent link">&para;</a></h3>
+<p>Vamos retomar o problema dos quadrados. Desta vez, o rank 0 cria os números de 1 a 12, cada processo recebe apenas uma fatia e a raiz reúne <strong>todos os quadrados</strong>, em vez de receber somente a soma.</p>
+<table>
+<thead>
+<tr>
+<th>Etapa</th>
+<th>Operação</th>
+<th>Resultado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Preparar o vetor</td>
+<td>Computação na raiz</td>
+<td>Números de 1 a 12</td>
+</tr>
+<tr>
+<td>Distribuir fatias</td>
+<td><code>MPI_Scatter</code></td>
+<td>Um bloco local por processo</td>
+</tr>
+<tr>
+<td>Calcular os quadrados</td>
+<td>Computação local</td>
+<td>Bloco local transformado</td>
+</tr>
+<tr>
+<td>Reunir blocos</td>
+<td><code>MPI_Gather</code></td>
+<td>Vetor dos quadrados na raiz</td>
+</tr>
+</tbody>
+</table>
+<p>O rank 0 recebe sua fatia e calcula como os demais. O vetor completo de entrada e o de saída ficam na raiz; os outros ranks precisam apenas de seus blocos locais.</p>
+<p><code>scatter_gather.cpp</code>:</p>
+<p><div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;mpi.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;sstream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
+
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">**</span><span class="w"> </span><span class="n">argv</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">MPI_Init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">argv</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">rank</span><span class="p">,</span><span class="w"> </span><span class="n">total</span><span class="p">,</span><span class="w"> </span><span class="n">tamanho</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">nome</span><span class="p">[</span><span class="n">MPI_MAX_PROCESSOR_NAME</span><span class="p">];</span>
+
+<span class="w">    </span><span class="n">MPI_Comm_rank</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rank</span><span class="p">);</span>
+<span class="w">    </span><span class="n">MPI_Comm_size</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">total</span><span class="p">);</span>
+<span class="w">    </span><span class="n">MPI_Get_processor_name</span><span class="p">(</span><span class="n">nome</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">tamanho</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">14</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">bloco</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">total</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">sobra</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">total</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Quantidade de elementos distribuídos pelo Scatter.</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">distribuidos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bloco</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">total</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dados</span><span class="p">;</span>
+<span class="w">    </span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">reunidos</span><span class="p">;</span>
+<span class="w">    </span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">local</span><span class="p">(</span><span class="n">bloco</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rank</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">dados</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">N</span><span class="p">);</span>
+<span class="w">        </span><span class="n">reunidos</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">N</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">dados</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Distribui apenas os blocos iguais.</span>
+<span class="w">    </span><span class="c1">// Os elementos restantes continuam no vetor da raiz.</span>
+<span class="w">    </span><span class="n">MPI_Scatter</span><span class="p">(</span><span class="n">dados</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span><span class="w"> </span><span class="n">bloco</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_INT</span><span class="p">,</span>
+<span class="w">                </span><span class="n">local</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span><span class="w"> </span><span class="n">bloco</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_INT</span><span class="p">,</span>
+<span class="w">                </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_COMM_WORLD</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">ostringstream</span><span class="w"> </span><span class="n">mensagem</span><span class="p">;</span>
+<span class="w">    </span><span class="n">mensagem</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Rank &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">rank</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; | Nó: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">nome</span>
+<span class="w">             </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; | Recebeu: &quot;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">bloco</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">mensagem</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">local</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">&#39; &#39;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Todos calculam o quadrado dos elementos de seu bloco.</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">bloco</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">local</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">local</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">local</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">mensagem</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;| Calculou: &quot;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">bloco</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">mensagem</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">local</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">&#39; &#39;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">mensagem</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">mensagem</span><span class="p">.</span><span class="n">str</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">flush</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Reúne os blocos nas primeiras posições do vetor final.</span>
+<span class="w">    </span><span class="n">MPI_Gather</span><span class="p">(</span><span class="n">local</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span><span class="w"> </span><span class="n">bloco</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_INT</span><span class="p">,</span>
+<span class="w">               </span><span class="n">reunidos</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span><span class="w"> </span><span class="n">bloco</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_INT</span><span class="p">,</span>
+<span class="w">               </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_COMM_WORLD</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rank</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Calcula os elementos que não foram distribuídos.</span>
+<span class="w">        </span><span class="c1">// Eles estão nas posições &quot;distribuidos&quot; até N - 1.</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">sobra</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Rank 0 | Nó: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">nome</span>
+<span class="w">                 </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; | Calculando as sobras: &quot;</span><span class="p">;</span>
+
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">distribuidos</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">reunidos</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dados</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">dados</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+
+<span class="w">                </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">dados</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;² = &quot;</span>
+<span class="w">                     </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">reunidos</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">&#39; &#39;</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+
+<span class="w">            </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Vetor final: &quot;</span><span class="p">;</span>
+
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">reunidos</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">&#39; &#39;</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">MPI_Finalize</span><span class="p">();</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+O rank 0 cria um vetor com os números de <strong>1 a 14</strong>. Com quatro processos, a divisão resulta em <strong>três elementos por processo e dois elementos restantes</strong>.</p>
+<p>O <code>MPI_Scatter</code> distribui os primeiros 12 números em blocos iguais. Cada processo, inclusive a raiz, calcula o quadrado dos três valores recebidos:</p>
+<table>
+<thead>
+<tr>
+<th>Processo</th>
+<th>Valores recebidos</th>
+<th>Quadrados calculados</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Rank 0</td>
+<td>1, 2, 3</td>
+<td>1, 4, 9</td>
+</tr>
+<tr>
+<td>Rank 1</td>
+<td>4, 5, 6</td>
+<td>16, 25, 36</td>
+</tr>
+<tr>
+<td>Rank 2</td>
+<td>7, 8, 9</td>
+<td>49, 64, 81</td>
+</tr>
+<tr>
+<td>Rank 3</td>
+<td>10, 11, 12</td>
+<td>100, 121, 144</td>
+</tr>
+</tbody>
+</table>
+<p>Depois, <code>MPI_Gather</code> reúne esses blocos nas primeiras 12 posições do vetor final, na ordem dos ranks. Os números <strong>13 e 14 não foram distribuídos</strong>: o rank 0 calcula seus quadrados e os coloca nas duas últimas posições.</p>
+<p>Assim, o nó raiz imprime:</p>
+<div class="highlight"><pre><span></span><code>Vetor final: 1 4 9 16 25 36 49 64 81 100 121 144 169 196
+</code></pre></div>
+<h3 id="compilacao-e-execucao">Compilação e execução<a class="headerlink" href="#compilacao-e-execucao" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>mpic++<span class="w"> </span>-O2<span class="w"> </span>scatter_gather.cpp<span class="w"> </span>-o<span class="w"> </span>scatter_gather
+
+
+srun<span class="w"> </span>--partition<span class="o">=</span>merry_cpu<span class="w"> </span>--mpi<span class="o">=</span>pmix<span class="w"> </span>--mem<span class="o">=</span>1G<span class="w"> </span><span class="se">\</span>
+<span class="w">     </span>--nodes<span class="o">=</span><span class="m">4</span><span class="w"> </span>--ntasks<span class="o">=</span><span class="m">4</span><span class="w"> </span>--ntasks-per-node<span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="se">\</span>
+<span class="w">     </span>--time<span class="o">=</span><span class="m">00</span>:05:00<span class="w"> </span>./scatter_gather
+
+
+
+Submissão<span class="w"> </span>com<span class="w"> </span><span class="sb">`</span>sbatch<span class="sb">`</span>
+
+<span class="sb">`</span>run.slurm<span class="sb">`</span>:
+
+<span class="sb">```</span>bash
+<span class="c1">#!/bin/bash</span>
+<span class="c1">#SBATCH --job-name=mpi-scatter-gather</span>
+<span class="c1">#SBATCH --partition=merry_cpu</span>
+<span class="c1">#SBATCH --nodes=4</span>
+<span class="c1">#SBATCH --ntasks=4</span>
+<span class="c1">#SBATCH --ntasks-per-node=1</span>
+<span class="c1">#SBATCH --mem=1G</span>
+<span class="c1">#SBATCH --time=00:05:00</span>
+<span class="c1">#SBATCH --output=scatter-gather-%j.out</span>
+
+srun<span class="w"> </span>--mpi<span class="o">=</span>pmix<span class="w"> </span>./scatter_gather
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>sbatch<span class="w"> </span>run.slurm
+</code></pre></div>
+<h2 id="para-entender-se-voce-entendeu">Para entender se você entendeu<a class="headerlink" href="#para-entender-se-voce-entendeu" title="Permanent link">&para;</a></h2>
 <ol>
-<li>A GPU executou o cálculo muito rapidamente (0.07 s)</li>
-<li>Mas o custo de movimentar os dados foi muito alto (~1 s)</li>
-<li>O tempo total ficou maior que o da CPU</li>
+<li>Substitua o quadrado pelo dobro de cada elemento.</li>
+<li>Use <code>double</code> e <code>MPI_DOUBLE</code> para trabalhar com valores decimais.</li>
+<li>Faça cada processo calcular uma soma parcial e use Gather com um elemento por rank para reunir essas somas. Depois, a raiz deve somar o vetor recebido e comparar com a solução que usa Reduce.</li>
+<li>Use o rank 1 como raiz de Scatter e Gather, em vez do rank 0, faça todos os ajustes necessários. </li>
 </ol>
-<p>Conclusão importante:</p>
-<blockquote>
-<p>A GPU não foi mais lenta em computação, mas o sistema como um todo foi mais lento devido à movimentação de dados.</p>
-</blockquote>
-<p>Na CPU </p>
-<ul>
-<li>Threads compartilham a mesma memória</li>
-<li>Não há cópia de dados</li>
-<li>O custo é apenas acesso à RAM</li>
-</ul>
-<p>Na GPU:</p>
-<ul>
-<li>Existe uma memória separada (device memory)</li>
-<li>É necessário copiar dados explicitamente</li>
-<li>O custo de comunicação é alto</li>
-</ul>
-<h2 id="desafio">DESAFIO<a class="headerlink" href="#desafio" title="Permanent link">&para;</a></h2>
-<p>Teste o código com diferentes configurações:</p>
-<div class="highlight"><pre><span></span><code><span class="n">numBlocks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="p">;</span>
-<span class="n">numBlocks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">128</span><span class="p">;</span>
-<span class="n">numBlocks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1024</span><span class="p">;</span>
-</code></pre></div>
-<p>Melhorou ou piorou o tempo?
-Como você faria a computação em GPU de uma matriz 2D?
-E de uma matriz 3D?
-Será que da pra melhorar o tempo de alocação dos dados?</p>
-<p>Veremos nos próximos capitulos...</p>
-<h2 id="se-quiser-aprender-mais">Se quiser aprender mais<a class="headerlink" href="#se-quiser-aprender-mais" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Explore a <a href="https://docs.nvidia.com/cuda/index.html">documentação do CUDA Toolkit</a>.
-   Veja o <a href="https://docs.nvidia.com/cuda/cuda-quick-start-guide/index.html">Guia Rápido de Instalação</a> e o <a href="https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html">Programming Guide</a>.</li>
-<li>Teste o uso de <code>printf()</code> dentro do kernel para imprimir <code>threadIdx.x</code> e <code>blockIdx.x</code>.</li>
-<li>Experimente <code>threadIdx.y</code>, <code>threadIdx.z</code> e <code>blockIdx.y</code>.
-   Descubra como definir grids e blocos em múltiplas dimensões.</li>
-<li>Leia sobre a <a href="https://developer.nvidia.com/blog/unified-memory-cuda-beginners/">Unified Memory no CUDA 8</a> e o mecanismo de migração de páginas da arquitetura Pascal.</li>
-</ol>
-<p>obs: Material adaptado do Deep Learning Institute NVIDIA e do NVIDIA Teaching kit - Accelerated Computing</p>
-<h2 id="esta-atividade-nao-tem-entrega-bom-final-de-semana">Esta atividade não tem entrega, bom final de semana!<a class="headerlink" href="#esta-atividade-nao-tem-entrega-bom-final-de-semana" title="Permanent link">&para;</a></h2>
-<p>```</p>
 
 
 
