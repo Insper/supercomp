@@ -701,15 +701,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#compilacao-e-execucao" class="md-nav__link">
-    <span class="md-ellipsis">
-      Compilação e execução
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#para-entender-se-voce-entendeu" class="md-nav__link">
     <span class="md-ellipsis">
       Para entender se você entendeu
@@ -1122,15 +1113,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#compilacao-e-execucao" class="md-nav__link">
-    <span class="md-ellipsis">
-      Compilação e execução
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#para-entender-se-voce-entendeu" class="md-nav__link">
     <span class="md-ellipsis">
       Para entender se você entendeu
@@ -1526,22 +1508,17 @@ O rank 0 cria um vetor com os números de <strong>1 a 14</strong>. Com quatro pr
 <p>Assim, o nó raiz imprime:</p>
 <div class="highlight"><pre><span></span><code>Vetor final: 1 4 9 16 25 36 49 64 81 100 121 144 169 196
 </code></pre></div>
-<h3 id="compilacao-e-execucao">Compilação e execução<a class="headerlink" href="#compilacao-e-execucao" title="Permanent link">&para;</a></h3>
+<p>Para compilar:</p>
 <div class="highlight"><pre><span></span><code>mpic++<span class="w"> </span>-O2<span class="w"> </span>scatter_gather.cpp<span class="w"> </span>-o<span class="w"> </span>scatter_gather
-
-
-srun<span class="w"> </span>--partition<span class="o">=</span>merry_cpu<span class="w"> </span>--mpi<span class="o">=</span>pmix<span class="w"> </span>--mem<span class="o">=</span>1G<span class="w"> </span><span class="se">\</span>
+</code></pre></div>
+<p>Para executar com <code>srun</code>:</p>
+<div class="highlight"><pre><span></span><code>srun<span class="w"> </span>--partition<span class="o">=</span>merry_cpu<span class="w"> </span>--mpi<span class="o">=</span>pmix<span class="w"> </span>--mem<span class="o">=</span>1G<span class="w"> </span><span class="se">\</span>
 <span class="w">     </span>--nodes<span class="o">=</span><span class="m">4</span><span class="w"> </span>--ntasks<span class="o">=</span><span class="m">4</span><span class="w"> </span>--ntasks-per-node<span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="se">\</span>
 <span class="w">     </span>--time<span class="o">=</span><span class="m">00</span>:05:00<span class="w"> </span>./scatter_gather
-
-
-
-Submissão<span class="w"> </span>com<span class="w"> </span><span class="sb">`</span>sbatch<span class="sb">`</span>
-
-<span class="sb">`</span>run.slurm<span class="sb">`</span>:
-
-<span class="sb">```</span>bash
-<span class="c1">#!/bin/bash</span>
+</code></pre></div>
+<p>Submissão com <code>sbatch</code></p>
+<p><code>run.slurm</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
 <span class="c1">#SBATCH --job-name=mpi-scatter-gather</span>
 <span class="c1">#SBATCH --partition=merry_cpu</span>
 <span class="c1">#SBATCH --nodes=4</span>
