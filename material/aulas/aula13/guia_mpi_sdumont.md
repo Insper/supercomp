@@ -118,7 +118,7 @@ Tarefa: calcular o quadrado de cada ID.
 Temos 2 nós.
 ```
 
-**Por que não adicionamos --mpi=pmix?**
+**Por que não usamos --mpi=pmix?**
 
 A forma de integração depende de como o módulo MPI e o Slurm foram configurados. MPICH pode usar diferentes interfaces de inicialização. Por isso os comandos no Santos Dumont e no Franky tem algumas diferenças.
 
