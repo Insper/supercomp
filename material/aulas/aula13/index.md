@@ -1,351 +1,410 @@
+# Comunicação coletiva MPI: Scatter e Gather
 
-# Uma Introdução a CUDA
+Na aula anterior, usamos `MPI_Bcast` para compartilhar os mesmos dados com todos os processos e `MPI_Reduce` para combinar resultados. Agora vamos mudar a organização: em vez de enviar uma cópia completa do vetor a todos, queremos **entregar uma fatia diferente para cada processo**. Depois da computação, queremos **reunir as fatias calculadas**, preservando seus elementos.
 
-O **CUDA (Compute Unified Device Architecture)** é o modelo de programação paralela desenvolvido pela **NVIDIA**.
-Ele permite que desenvolvedores usem o poder das **GPUs** para acelerar aplicações de alto desempenho, executando milhares de threads simultaneamente.
+**Scatter** é uma operação coletiva que distribui os dados de um processo raiz em blocos, entregando uma parte a cada processo. Por exemplo, um vetor com 12 números pode ser dividido entre quatro processos, cada um recebendo três números.
 
-Em um **sistema HPC com SLURM**, como o Franky ou o SDumont, a execução de programas CUDA segue três etapas principais:
-
-1. **Carregar o módulo CUDA** disponível no cluster.
-2. **Compilar o código** com o compilador `nvcc`.
-3. **Executar o binário** com o `srun` ou `sbatch`(solicitando uma GPU).
-
----
-
-## Etapa 1 — Preparando o ambiente
+**Gather** é uma operação coletiva que reúne os blocos fornecidos pelos processos em um único vetor na raiz, organizados pela ordem dos ranks. Ele preserva os elementos recebidos, sem somá-los ou combiná-los matematicamente.
 
 
-Liste os módulos disponíveis e carregue o CUDA:
+### Scatter: distribuir uma fatia para cada processo
 
-```bash
-module avail cuda
-module load cuda/12.8.1
-```
-
-Verifique se o compilador CUDA está ativo:
-
-```bash
-nvcc --version
-```
-
-Deve aparecer algo como
-
-![alt text](image.png)
-
-
-## Etapa 2 — Código Base (CPU)
-
-Vamos começar com um programa simples em **C++** que soma os elementos de dois vetores na **CPU**.
-
-Crie o arquivo:
-
-```bash
-nano exemplo-cpu.cpp
-```
-
-Cole o código abaixo:
+Considere o vetor abaixo, inicialmente disponível apenas no rank 0:
 
 ```cpp
-#include <iostream>
-#include <cmath>
-#include <chrono> 
-
-// Função que soma os elementos de dois vetores
-void add(int n, float *x, float *y)
-{
-  for (int i = 0; i < n; i++)
-      y[i] = x[i] + y[i];
-}
-
-int main(void)
-{
-  int N = 1'000'000'000; 
-  float *x = new float[N];
-  float *y = new float[N];
-
-  // Inicializa os vetores
-  for (int i = 0; i < N; i++) {
-    x[i] = 1.0f;
-    y[i] = 2.0f;
-  }
-
-  // Início da medição de tempo
-  auto start = std::chrono::high_resolution_clock::now();
-
-  // Executa a soma
-  add(N, x, y);
-
-  // Fim da medição
-  auto end = std::chrono::high_resolution_clock::now();
-  std::chrono::duration<double> elapsed = end - start;
-
-  // Calcula erro e soma total
-  float maxError = 0.0f;
-  double somaTotal = 0.0;
-
-  for (int i = 0; i < N; i++) {
-    maxError = fmax(maxError, fabs(y[i] - 3.0f));
-    somaTotal += y[i];
-  }
-
-  std::cout << "Erro: " << maxError << std::endl;
-  std::cout << "N: " << N << std::endl;
-  std::cout << "Soma total: " << somaTotal << std::endl;
-  std::cout << "Tempo de execução: " << elapsed.count() << " segundos" << std::endl;
-
-  delete [] x;
-  delete [] y;
-
-  return 0;
-}
-
+{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12}
 ```
 
-Compile e execute localmente (sem GPU):
+Com quatro processos e três elementos por bloco, o efeito do Scatter é:
 
-```bash
- srun --partition=gpu  --pty ./ex-cpu
-```
+| Rank | Posições no vetor da raiz | Bloco recebido |
+| --- | --- | --- |
+| 0 | 0 a 2 | `{1, 2, 3}` |
+| 1 | 3 a 5 | `{4, 5, 6}` |
+| 2 | 6 a 8 | `{7, 8, 9}` |
+| 3 | 9 a 11 | `{10, 11, 12}` |
 
-Saída esperada:
-
-```
-Erro: 0
-N: 1000000000
-Soma total: 3e+09
-Tempo de execução: 0.30549 segundos
-```
-
-
-## Etapa 3 — Migrando para GPU (CUDA)
-
-Agora, vamos reescrever o mesmo código para rodar **na GPU**.
-
-Crie o arquivo:
-
-```bash
-nano exemplo-gpu.cu
-```
-
-Analise o código abaixo:
 
 ```cpp
+MPI_Scatter(
+    dados.data(),     // Vetor completo
+    bloco,            // Quantidade de elementos enviada A CADA processo.
+    MPI_INT,          // Tipo dos elementos enviados.
+    local.data(),     // Buffer onde este processo recebe sua fatia.
+    bloco,            // Quantidade de elementos recebida por este processo.
+    MPI_INT,          // Tipo dos elementos recebidos.
+    0,                // Rank da raiz que distribui os dados.
+    MPI_COMM_WORLD    // Comunicador participante.
+);
+```
+O MPI transfere os elementos do `vector`, não o objeto C++. Por isso, usamos `.data()` e reservamos espaço com o construtor ou `resize()` antes da chamada. Nos demais ranks, o buffer de envio do Scatter é ignorado. 
+
+
+**Exemplo completo: receber e identificar uma fatia**
+
+`scatter.cpp`:
+
+```cpp
+#include <mpi.h>
 #include <iostream>
-#include <cmath>
-#include <chrono>
-#include <cuda_runtime.h>
+#include <vector>
 
 using namespace std;
 
-// Kernel CUDA (função que será executada na GPU)
-__global__
-void add(int n, float *x, float *y)
-{
-  // Calcula o índice global da thread
-   // cada thread obtém um índice único 'i'
-  int i = blockIdx.x * blockDim.x + threadIdx.x;
+int main(int argc, char** argv) {
+    MPI_Init(&argc, &argv);
 
-  // Garante que a thread só acesse posições válidas do vetor
-  if (i < n)
+    int rank, total, tamanho;
+    char nome[MPI_MAX_PROCESSOR_NAME];
 
-    // Cada thread realiza a soma de UM elemento:
-    y[i] = x[i] + y[i];
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+    MPI_Comm_size(MPI_COMM_WORLD, &total);
+    MPI_Get_processor_name(nome, &tamanho);
+
+    // Cada processo receberá três números.
+    int bloco = 3;
+
+    vector<int> dados;
+    vector<int> local(bloco);
+
+    // Somente o rank 0 prepara o vetor completo.
+    if (rank == 0) {
+        int quantidade = total * bloco;
+        dados.resize(quantidade);
+
+        for (int i = 0; i < quantidade; i++) {
+            dados[i] = i + 1;
+        }
+    }
+
+    // Distribui três números para cada processo.
+    // Todos chamam, inclusive o rank 0.
+    MPI_Scatter(
+        dados.data(),     // Vetor completo, utilizado apenas na raiz.
+        bloco,            // Elementos enviados para cada processo.
+        MPI_INT,          // Tipo dos elementos enviados.
+        local.data(),     // Onde este processo recebe sua fatia.
+        bloco,            // Elementos recebidos por este processo.
+        MPI_INT,          // Tipo dos elementos recebidos.
+        0,                // Rank da raiz.
+        MPI_COMM_WORLD
+    );
+
+    // Mostra qual fatia foi recebida por este processo.
+    cout << "Rank " << rank
+         << " | Nó: " << nome
+         << " | Fatia recebida: ";
+
+    for (int i = 0; i < bloco; i++) {
+        cout << local[i] << ' ';
+    }
+
+    cout << endl;
+
+    MPI_Finalize();
+    return 0;
 }
-
-int main(void)
-{
-  int N = 1'000'000'000;
-  size_t size = N * sizeof(float);
-
-  // Cria os vetores na CPU
-  float *x = new float[N];
-  float *y = new float[N];
-
-  // Inicializa na CPU
-  for (int i = 0; i < N; i++) {
-    x[i] = 1.0f;
-    y[i] = 2.0f;
-  }
-
-  // Cria os vetores para a GPU
-  float *d_x, *d_y;
-  // reserva o espaço para os vetores na GPU
-  cudaMalloc(&d_x, size);
-  cudaMalloc(&d_y, size);
-
-  // início do tempo (incluindo transferência)
-  auto start = std::chrono::high_resolution_clock::now();
-  
-  auto dados_start = std::chrono::high_resolution_clock::now();
-  // Transferencia dos dados CPU → GPU
-  cudaMemcpy(d_x, x, size, cudaMemcpyHostToDevice);
-  cudaMemcpy(d_y, y, size, cudaMemcpyHostToDevice);
-  auto dados_end = std::chrono::high_resolution_clock::now();
-  
-  // Configurando o kernel
-  int blockSize = 256;
-  int numBlocks = (N + blockSize - 1) / blockSize;
-
-  auto start_comp = chrono::high_resolution_clock::now();
-  // Computação na GPU
-  add<<<numBlocks, blockSize>>>(N, d_x, d_y);
-
-  // Semáforo para aguardar o término da computação na GPU 
-  cudaDeviceSynchronize();
-
-  auto end_comp = chrono::high_resolution_clock::now();
-
-  
-  auto start_dados = chrono::high_resolution_clock::now();
-  // Transferencia de dados GPU → CPU
-  cudaMemcpy(y, d_y, size, cudaMemcpyDeviceToHost);
-
-  auto end_dados = chrono::high_resolution_clock::now();
-
-  // fim do tempo
-  auto end = std::chrono::high_resolution_clock::now();
-  std::chrono::duration<double> total = end - start;
-
-  std::chrono::duration<double> comp = end_comp - start_comp;
-  std::chrono::duration<double> dados_crus = dados_end - dados_start;
-  std::chrono::duration<double> dados_comp = end_dados - start_dados;
-
-
-  // Criação dos das variaveis para exibir o output
-  float maxError = 0.0f;
-  double somaTotal = 0.0;
-
-  // Preparação dos dados para exibir
-  for (int i = 0; i < N; i++) {
-    maxError = fmax(maxError, fabs(y[i] - 3.0f));
-    somaTotal += y[i];
-  }
-
-  std::cout << cudaGetLastError() << std::endl;
-  std::cout << "Erro: " << maxError << std::endl;
-  std::cout << "N: " << N << std::endl;
-  std::cout << "Soma total: " << somaTotal << std::endl;
-
-  std::cout << "Tempo de transferência dos dados (CPU->GPU) " << dados_crus.count() << " segundos" << std::endl;
-  std::cout << "Tempo de calculos na GPU " << comp.count() << " segundos" << std::endl;
-  std::cout << "Tempo de transferência dos dados (CPU<-GPU) " << dados_comp.count() << " segundos" << std::endl;
-  std::cout << "Tempo total de tudo mesmo " << total.count() << " segundos" << std::endl;
-  
-  // Libera memória
-  cudaFree(d_x);
-  cudaFree(d_y);
-  delete[] x;
-  delete[] y;
-
-  return 0;
-}
-
 ```
-
-Compile com o `nvcc`:
 
 ```bash
-nvcc exemplo-gpu.cu -o ex-gpu
+mpic++ -O2 scatter.cpp -o scatter
+
+srun --partition=merry_cpu --mpi=pmix --mem=1G \
+     --nodes=2 --ntasks=4 --ntasks-per-node=2 \
+     --time=00:05:00 ./scatter
 ```
 
-## Etapa 4 — Executando no nó GPU com SLURM
+Com quatro processos, o vetor inicial tem 12 números. Com dois, tem seis: neste primeiro exemplo, mantemos três elementos por processo e adaptamos o tamanho do problema à quantidade de ranks. A ordem dos prints pode variar.
 
-Agora, vamos executar o binário **pedindo uma GPU** via `srun`:
+### Gather: reunir blocos na raiz
+
+Depois da computação, cada processo pode ter um bloco de resultados. `MPI_Gather` reúne esses blocos em um vetor na raiz, organizados pela ordem dos ranks.
+
+Se cada processo elevar ao quadrado os valores do exemplo anterior:
+
+| Rank | Bloco calculado | Posições no vetor reunido |
+| --- | --- | --- |
+| 0 | `{1, 4, 9}` | 0 a 2 |
+| 1 | `{16, 25, 36}` | 3 a 5 |
+| 2 | `{49, 64, 81}` | 6 a 8 |
+| 3 | `{100, 121, 144}` | 9 a 11 |
+
+O resultado na raiz será:
+
+```cpp
+{1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144}
+```
+
+**Gather preserva os elementos; não os soma nem calcula um máximo.** Para combinar contribuições por uma operação matemática, usamos Reduce.
+
+### Leitura da chamada
+
+```cpp
+MPI_Gather(
+    local.data(),       // Bloco que este processo envia.
+    bloco,              // Elementos enviados por este processo.
+    MPI_INT,            // Tipo dos elementos enviados.
+    reunidos.data(),    // Vetor final: significativo apenas na raiz.
+    bloco,              // Elementos recebidos DE CADA processo.
+    MPI_INT,            // Tipo dos elementos recebidos.
+    0,                  // Rank da raiz que reúne os dados.
+    MPI_COMM_WORLD      // Comunicador participante.
+);
+```
+
+Para quatro ranks enviando três inteiros cada, a raiz reserva espaço para 12 elementos, mas informa `recvcount = 3`. **Esse parâmetro não é a quantidade total reunida.**
+
+Somente a raiz precisa alocar o vetor final. Nos outros processos, o buffer de recebimento é ignorado e pode ser `nullptr`. Todos precisam fornecer seu bloco de envio.
+
+Os blocos ocupam posições determinadas pelo rank, mesmo que os processos terminem seus cálculos em momentos diferentes. A ordem das mensagens impressas na tela não altera a organização do vetor reunido.
+
+**Exemplo completo: reunir um valor de cada processo**
+
+`gather.cpp`:
+
+```cpp
+#include <mpi.h>
+#include <iostream>
+#include <sstream>
+#include <vector>
+
+using namespace std;
+
+int main(int argc, char** argv) {
+    MPI_Init(&argc, &argv);
+
+    int rank, total, tamanho;
+    char nome[MPI_MAX_PROCESSOR_NAME];
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+    MPI_Comm_size(MPI_COMM_WORLD, &total);
+    MPI_Get_processor_name(nome, &tamanho);
+
+    // Cada rank calcula um valor diferente.
+    int valor = (rank + 1) * (rank + 1);
+    vector<int> reunidos;
+    if (rank == 0)
+        reunidos.resize(total);
+
+    ostringstream mensagem;
+    mensagem << "Rank " << rank << " | Nó: " << nome
+             << " | Valor calculado: " << valor << '\n';
+    cout << mensagem.str() << flush;
+
+    // Um inteiro de cada rank ocupa uma posição na raiz.
+    MPI_Gather(&valor, 1, MPI_INT,
+               rank == 0 ? reunidos.data() : nullptr,
+               1, MPI_INT, 0, MPI_COMM_WORLD);
+
+    if (rank == 0) {
+        cout << "Valores reunidos por ordem de rank: ";
+        for (int item : reunidos)
+            cout << item << ' ';
+        cout << endl;
+    }
+
+    MPI_Finalize();
+    return 0;
+}
+```
 
 ```bash
-srun --partition=gpu --gres=gpu:1 ./ex-gpu
-```
-Esse  `--gres=gpu:1` aloca 1 GPU  para executar o binário  `./ex1`  na fila gpu do Cluster Franky
+mpic++ -O2 gather.cpp -o gather
 
-Saída esperada:
-
-```
-0
-Erro: 0
-N: 1000000000
-Soma total: 3e+09
-Tempo de transferência dos dados (CPU->GPU) 0.663264 segundos
-Tempo de calculos na GPU 0.0722021 segundos
-Tempo de transferência dos dados (CPU<-GPU) 0.307847 segundos
-Tempo total de tudo mesmo 1.04331 segundos
+srun --partition=merry_cpu --mpi=pmix --mem=1G \
+     --nodes=2 --ntasks=4 --ntasks-per-node=2 \
+     --time=00:05:00 ./gather
 ```
 
-### Natureza do problema
+Com quatro processos, o vetor final contém `1 4 9 16`. O resultado global fica somente na raiz; os demais ranks mantêm seus valores locais.
 
-A operação:
+## Broadcast, Scatter, Gather e Reduce: qual é a diferença?
+
+| Operação | O que acontece com os dados? | Exemplo com quatro ranks |
+| --- | --- | --- |
+| Broadcast | Todos recebem os mesmos elementos da raiz | Todos recebem o vetor completo |
+| Scatter | Cada rank recebe um bloco correspondente do vetor da raiz | Cada um recebe três de 12 números |
+| Gather | Blocos dos ranks ocupam faixas distintas no vetor da raiz | Quatro blocos de três formam um vetor de 12 |
+| Reduce | Contribuições são combinadas por uma operação | Quatro somas parciais produzem uma soma global |
+
+Scatter e Gather lidam com blocos. Broadcast replica dados. Reduce combina contribuições. A escolha depende do que queremos obter ao final da comunicação.
+
+### Tudo junto: distribuir, calcular e reunir
+
+Vamos retomar o problema dos quadrados. Desta vez, o rank 0 cria os números de 1 a 12, cada processo recebe apenas uma fatia e a raiz reúne **todos os quadrados**, em vez de receber somente a soma.
+
+| Etapa | Operação | Resultado |
+| --- | --- | --- |
+| Preparar o vetor | Computação na raiz | Números de 1 a 12 |
+| Distribuir fatias | `MPI_Scatter` | Um bloco local por processo |
+| Calcular os quadrados | Computação local | Bloco local transformado |
+| Reunir blocos | `MPI_Gather` | Vetor dos quadrados na raiz |
+
+O rank 0 recebe sua fatia e calcula como os demais. O vetor completo de entrada e o de saída ficam na raiz; os outros ranks precisam apenas de seus blocos locais.
+
+
+`scatter_gather.cpp`:
 
 ```cpp
-y[i] = x[i] + y[i];
+#include <mpi.h>
+#include <iostream>
+#include <sstream>
+#include <vector>
+
+using namespace std;
+
+int main(int argc, char** argv) {
+    MPI_Init(&argc, &argv);
+
+    int rank, total, tamanho;
+    char nome[MPI_MAX_PROCESSOR_NAME];
+
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+    MPI_Comm_size(MPI_COMM_WORLD, &total);
+    MPI_Get_processor_name(nome, &tamanho);
+
+    const int N = 14;
+
+    int bloco = N / total;
+    int sobra = N % total;
+
+    // Quantidade de elementos distribuídos pelo Scatter.
+    int distribuidos = bloco * total;
+
+    vector<int> dados;
+    vector<int> reunidos;
+    vector<int> local(bloco);
+
+    if (rank == 0) {
+        dados.resize(N);
+        reunidos.resize(N);
+
+        for (int i = 0; i < N; i++) {
+            dados[i] = i + 1;
+        }
+    }
+
+    // Distribui apenas os blocos iguais.
+    // Os elementos restantes continuam no vetor da raiz.
+    MPI_Scatter(dados.data(), bloco, MPI_INT,
+                local.data(), bloco, MPI_INT,
+                0, MPI_COMM_WORLD);
+
+    ostringstream mensagem;
+    mensagem << "Rank " << rank << " | Nó: " << nome
+             << " | Recebeu: ";
+
+    for (int i = 0; i < bloco; i++) {
+        mensagem << local[i] << ' ';
+    }
+
+    // Todos calculam o quadrado dos elementos de seu bloco.
+    for (int i = 0; i < bloco; i++) {
+        local[i] = local[i] * local[i];
+    }
+
+    mensagem << "| Calculou: ";
+
+    for (int i = 0; i < bloco; i++) {
+        mensagem << local[i] << ' ';
+    }
+
+    mensagem << '\n';
+    cout << mensagem.str() << flush;
+
+    // Reúne os blocos nas primeiras posições do vetor final.
+    MPI_Gather(local.data(), bloco, MPI_INT,
+               reunidos.data(), bloco, MPI_INT,
+               0, MPI_COMM_WORLD);
+
+    if (rank == 0) {
+        // Calcula os elementos que não foram distribuídos.
+        // Eles estão nas posições "distribuidos" até N - 1.
+        if (sobra > 0) {
+            cout << "Rank 0 | Nó: " << nome
+                 << " | Calculando as sobras: ";
+
+            for (int i = distribuidos; i < N; i++) {
+                reunidos[i] = dados[i] * dados[i];
+
+                cout << dados[i] << "² = "
+                     << reunidos[i] << ' ';
+            }
+
+            cout << endl;
+        }
+
+        cout << "Vetor final: ";
+
+        for (int i = 0; i < N; i++) {
+            cout << reunidos[i] << ' ';
+        }
+
+        cout << endl;
+    }
+
+    MPI_Finalize();
+    return 0;
+}
+```
+O rank 0 cria um vetor com os números de **1 a 14**. Com quatro processos, a divisão resulta em **três elementos por processo e dois elementos restantes**.
+
+O `MPI_Scatter` distribui os primeiros 12 números em blocos iguais. Cada processo, inclusive a raiz, calcula o quadrado dos três valores recebidos:
+
+| Processo | Valores recebidos | Quadrados calculados |
+| --- | --- | --- |
+| Rank 0 | 1, 2, 3 | 1, 4, 9 |
+| Rank 1 | 4, 5, 6 | 16, 25, 36 |
+| Rank 2 | 7, 8, 9 | 49, 64, 81 |
+| Rank 3 | 10, 11, 12 | 100, 121, 144 |
+
+Depois, `MPI_Gather` reúne esses blocos nas primeiras 12 posições do vetor final, na ordem dos ranks. Os números **13 e 14 não foram distribuídos**: o rank 0 calcula seus quadrados e os coloca nas duas últimas posições.
+
+Assim, o nó raiz imprime:
+
+```text
+Vetor final: 1 4 9 16 25 36 49 64 81 100 121 144 169 196
 ```
 
-tem as seguintes características:
+### Compilação e execução
 
-* 1 soma por elemento
-* 2 leituras de memória
-* 1 escrita de memória
-
-Isso significa que o custo é dominado por acesso à memória, não por cálculo.
-
-Esse tipo de problema é chamado de:
+```bash
+mpic++ -O2 scatter_gather.cpp -o scatter_gather
 
 
-> memory-bound
-
-
-O que aconteceu:
-
-1. A GPU executou o cálculo muito rapidamente (0.07 s)
-2. Mas o custo de movimentar os dados foi muito alto (~1 s)
-3. O tempo total ficou maior que o da CPU
-
-Conclusão importante:
-
-> A GPU não foi mais lenta em computação, mas o sistema como um todo foi mais lento devido à movimentação de dados.
-
-
-Na CPU 
-
-* Threads compartilham a mesma memória
-* Não há cópia de dados
-* O custo é apenas acesso à RAM
-
-Na GPU:
-
-* Existe uma memória separada (device memory)
-* É necessário copiar dados explicitamente
-* O custo de comunicação é alto
+srun --partition=merry_cpu --mpi=pmix --mem=1G \
+     --nodes=4 --ntasks=4 --ntasks-per-node=1 \
+     --time=00:05:00 ./scatter_gather
 
 
 
+Submissão com `sbatch`
 
-## DESAFIO
+`run.slurm`:
 
-Teste o código com diferentes configurações:
+```bash
+#!/bin/bash
+#SBATCH --job-name=mpi-scatter-gather
+#SBATCH --partition=merry_cpu
+#SBATCH --nodes=4
+#SBATCH --ntasks=4
+#SBATCH --ntasks-per-node=1
+#SBATCH --mem=1G
+#SBATCH --time=00:05:00
+#SBATCH --output=scatter-gather-%j.out
 
-```cpp
-numBlocks = 32;
-numBlocks = 128;
-numBlocks = 1024;
+srun --mpi=pmix ./scatter_gather
 ```
 
-Melhorou ou piorou o tempo?
-Como você faria a computação em GPU de uma matriz 2D?
-E de uma matriz 3D?
-Será que da pra melhorar o tempo de alocação dos dados?
-
-Veremos nos próximos capitulos...
-
-## Se quiser aprender mais
-
-1. Explore a [documentação do CUDA Toolkit](https://docs.nvidia.com/cuda/index.html).
-   Veja o [Guia Rápido de Instalação](https://docs.nvidia.com/cuda/cuda-quick-start-guide/index.html) e o [Programming Guide](https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html).
-2. Teste o uso de `printf()` dentro do kernel para imprimir `threadIdx.x` e `blockIdx.x`.
-3. Experimente `threadIdx.y`, `threadIdx.z` e `blockIdx.y`.
-   Descubra como definir grids e blocos em múltiplas dimensões.
-4. Leia sobre a [Unified Memory no CUDA 8](https://developer.nvidia.com/blog/unified-memory-cuda-beginners/) e o mecanismo de migração de páginas da arquitetura Pascal.
-
-
-
-obs: Material adaptado do Deep Learning Institute NVIDIA e do NVIDIA Teaching kit - Accelerated Computing
-## Esta atividade não tem entrega, bom final de semana!
+```bash
+sbatch run.slurm
 ```
+
+
+## Para entender se você entendeu
+
+1. Substitua o quadrado pelo dobro de cada elemento.
+2. Use `double` e `MPI_DOUBLE` para trabalhar com valores decimais.
+3. Faça cada processo calcular uma soma parcial e use Gather com um elemento por rank para reunir essas somas. Depois, a raiz deve somar o vetor recebido e comparar com a solução que usa Reduce.
+4. Use o rank 1 como raiz de Scatter e Gather, em vez do rank 0, faça todos os ajustes necessários. 
+
+

@@ -43,7 +43,8 @@ nav:
         - "Programação Distribuída com MPI": aulas/aula10/index.md
         - "Comunicação Bloqueante e Não Bloqueante": aulas/aula11/index.md
         - "Comunicação Coletiva: Broadcast e Reduce": aulas/aula12/index.md
-    
+        - "Comunicação Coletiva: Scatter e Gatter": aulas/aula13/index.md
+        - "Guia MPI Santos Dumont": aulas/aula13/guia_mpi_sdumont.md
     
        # - "Aula 12 - Acesso ao Supercomputador SDumont": aulas/aula12/index.md
       #  - "Aula 13 - Paralelismo em GPU com CUDA": aulas/aula13/index.md
