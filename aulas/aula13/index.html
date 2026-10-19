@@ -692,25 +692,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#leitura-da-chamada" class="md-nav__link">
-    <span class="md-ellipsis">
-      Leitura da chamada
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#broadcast-scatter-gather-e-reduce-qual-e-a-diferenca" class="md-nav__link">
-    <span class="md-ellipsis">
-      Broadcast, Scatter, Gather e Reduce: qual é a diferença?
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Broadcast, Scatter, Gather e Reduce: qual é a diferença?">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#tudo-junto-distribuir-calcular-e-reunir" class="md-nav__link">
     <span class="md-ellipsis">
       Tudo junto: distribuir, calcular e reunir
@@ -718,18 +699,13 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#compilacao-e-execucao" class="md-nav__link">
     <span class="md-ellipsis">
       Compilação e execução
     </span>
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -1137,25 +1113,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#leitura-da-chamada" class="md-nav__link">
-    <span class="md-ellipsis">
-      Leitura da chamada
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#broadcast-scatter-gather-e-reduce-qual-e-a-diferenca" class="md-nav__link">
-    <span class="md-ellipsis">
-      Broadcast, Scatter, Gather e Reduce: qual é a diferença?
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Broadcast, Scatter, Gather e Reduce: qual é a diferença?">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#tudo-junto-distribuir-calcular-e-reunir" class="md-nav__link">
     <span class="md-ellipsis">
       Tudo junto: distribuir, calcular e reunir
@@ -1163,18 +1120,13 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#compilacao-e-execucao" class="md-nav__link">
     <span class="md-ellipsis">
       Compilação e execução
     </span>
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -1320,52 +1272,22 @@ O MPI transfere os elementos do <code>vector</code>, não o objeto C++. Por isso
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>mpic++<span class="w"> </span>-O2<span class="w"> </span>scatter.cpp<span class="w"> </span>-o<span class="w"> </span>scatter
-
-srun<span class="w"> </span>--partition<span class="o">=</span>merry_cpu<span class="w"> </span>--mpi<span class="o">=</span>pmix<span class="w"> </span>--mem<span class="o">=</span>1G<span class="w"> </span><span class="se">\</span>
-<span class="w">     </span>--nodes<span class="o">=</span><span class="m">2</span><span class="w"> </span>--ntasks<span class="o">=</span><span class="m">4</span><span class="w"> </span>--ntasks-per-node<span class="o">=</span><span class="m">2</span><span class="w"> </span><span class="se">\</span>
+<p>Para compilar:</p>
+<p><div class="highlight"><pre><span></span><code>mpic++<span class="w"> </span>-O2<span class="w"> </span>scatter.cpp<span class="w"> </span>-o<span class="w"> </span>scatter
+</code></pre></div>
+Para testar com srun:</p>
+<p><div class="highlight"><pre><span></span><code>srun<span class="w"> </span>--partition<span class="o">=</span>merry_cpu<span class="w"> </span>--mpi<span class="o">=</span>pmix<span class="w"> </span>--mem<span class="o">=</span>1G<span class="w"> </span><span class="se">\</span>
+<span class="w">     </span>--nodes<span class="o">=</span><span class="m">2</span><span class="w"> </span>--ntasks<span class="o">=</span><span class="m">2</span><span class="w"> </span>--ntasks-per-node<span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="se">\</span>
 <span class="w">     </span>--time<span class="o">=</span><span class="m">00</span>:05:00<span class="w"> </span>./scatter
 </code></pre></div>
-<p>Com quatro processos, o vetor inicial tem 12 números. Com dois, tem seis: neste primeiro exemplo, mantemos três elementos por processo e adaptamos o tamanho do problema à quantidade de ranks. A ordem dos prints pode variar.</p>
+A resposta deve ser algo parecido com:</p>
+<div class="highlight"><pre><span></span><code>Rank 1 | Nó: sdumont6237 | Fatia recebida: 4 5 6
+Rank 0 | Nó: sdumont6238 | Fatia recebida: 1 2 3
+Rank 1 | Nó: sdumont6238 | Fatia recebida: 4 5 6
+Rank 0 | Nó: sdumont6237 | Fatia recebida: 1 2 3
+</code></pre></div>
 <h3 id="gather-reunir-blocos-na-raiz">Gather: reunir blocos na raiz<a class="headerlink" href="#gather-reunir-blocos-na-raiz" title="Permanent link">&para;</a></h3>
 <p>Depois da computação, cada processo pode ter um bloco de resultados. <code>MPI_Gather</code> reúne esses blocos em um vetor na raiz, organizados pela ordem dos ranks.</p>
-<p>Se cada processo elevar ao quadrado os valores do exemplo anterior:</p>
-<table>
-<thead>
-<tr>
-<th>Rank</th>
-<th>Bloco calculado</th>
-<th>Posições no vetor reunido</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0</td>
-<td><code>{1, 4, 9}</code></td>
-<td>0 a 2</td>
-</tr>
-<tr>
-<td>1</td>
-<td><code>{16, 25, 36}</code></td>
-<td>3 a 5</td>
-</tr>
-<tr>
-<td>2</td>
-<td><code>{49, 64, 81}</code></td>
-<td>6 a 8</td>
-</tr>
-<tr>
-<td>3</td>
-<td><code>{100, 121, 144}</code></td>
-<td>9 a 11</td>
-</tr>
-</tbody>
-</table>
-<p>O resultado na raiz será:</p>
-<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span><span class="w"> </span><span class="mi">36</span><span class="p">,</span><span class="w"> </span><span class="mi">49</span><span class="p">,</span><span class="w"> </span><span class="mi">64</span><span class="p">,</span><span class="w"> </span><span class="mi">81</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">121</span><span class="p">,</span><span class="w"> </span><span class="mi">144</span><span class="p">}</span>
-</code></pre></div>
-<p><strong>Gather preserva os elementos; não os soma nem calcula um máximo.</strong> Para combinar contribuições por uma operação matemática, usamos Reduce.</p>
-<h3 id="leitura-da-chamada">Leitura da chamada<a class="headerlink" href="#leitura-da-chamada" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="n">MPI_Gather</span><span class="p">(</span>
 <span class="w">    </span><span class="n">local</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span><span class="w">       </span><span class="c1">// Bloco que este processo envia.</span>
 <span class="w">    </span><span class="n">bloco</span><span class="p">,</span><span class="w">              </span><span class="c1">// Elementos enviados por este processo.</span>
@@ -1377,12 +1299,10 @@ srun<span class="w"> </span>--partition<span class="o">=</span>merry_cpu<span cl
 <span class="w">    </span><span class="n">MPI_COMM_WORLD</span><span class="w">      </span><span class="c1">// Comunicador participante.</span>
 <span class="p">);</span>
 </code></pre></div>
-<p>Para quatro ranks enviando três inteiros cada, a raiz reserva espaço para 12 elementos, mas informa <code>recvcount = 3</code>. <strong>Esse parâmetro não é a quantidade total reunida.</strong></p>
-<p>Somente a raiz precisa alocar o vetor final. Nos outros processos, o buffer de recebimento é ignorado e pode ser <code>nullptr</code>. Todos precisam fornecer seu bloco de envio.</p>
 <p>Os blocos ocupam posições determinadas pelo rank, mesmo que os processos terminem seus cálculos em momentos diferentes. A ordem das mensagens impressas na tela não altera a organização do vetor reunido.</p>
 <p><strong>Exemplo completo: reunir um valor de cada processo</strong></p>
 <p><code>gather.cpp</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;mpi.h&gt;</span>
+<p><div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;mpi.h&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;sstream&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
@@ -1425,46 +1345,14 @@ srun<span class="w"> </span>--partition<span class="o">=</span>merry_cpu<span cl
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>
+Para compilar
 <div class="highlight"><pre><span></span><code>mpic++<span class="w"> </span>-O2<span class="w"> </span>gather.cpp<span class="w"> </span>-o<span class="w"> </span>gather
-
-srun<span class="w"> </span>--partition<span class="o">=</span>merry_cpu<span class="w"> </span>--mpi<span class="o">=</span>pmix<span class="w"> </span>--mem<span class="o">=</span>1G<span class="w"> </span><span class="se">\</span>
-<span class="w">     </span>--nodes<span class="o">=</span><span class="m">2</span><span class="w"> </span>--ntasks<span class="o">=</span><span class="m">4</span><span class="w"> </span>--ntasks-per-node<span class="o">=</span><span class="m">2</span><span class="w"> </span><span class="se">\</span>
+</code></pre></div></p>
+<p>Para executar:
+<div class="highlight"><pre><span></span><code>srun<span class="w"> </span>--partition<span class="o">=</span>merry_cpu<span class="w"> </span>--mpi<span class="o">=</span>pmix<span class="w"> </span>--mem<span class="o">=</span>1G<span class="w"> </span><span class="se">\</span>
+<span class="w">     </span>--nodes<span class="o">=</span><span class="m">2</span><span class="w"> </span>--ntasks<span class="o">=</span><span class="m">2</span><span class="w"> </span>--ntasks-per-node<span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="se">\</span>
 <span class="w">     </span>--time<span class="o">=</span><span class="m">00</span>:05:00<span class="w"> </span>./gather
-</code></pre></div>
-<p>Com quatro processos, o vetor final contém <code>1 4 9 16</code>. O resultado global fica somente na raiz; os demais ranks mantêm seus valores locais.</p>
-<h2 id="broadcast-scatter-gather-e-reduce-qual-e-a-diferenca">Broadcast, Scatter, Gather e Reduce: qual é a diferença?<a class="headerlink" href="#broadcast-scatter-gather-e-reduce-qual-e-a-diferenca" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>Operação</th>
-<th>O que acontece com os dados?</th>
-<th>Exemplo com quatro ranks</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Broadcast</td>
-<td>Todos recebem os mesmos elementos da raiz</td>
-<td>Todos recebem o vetor completo</td>
-</tr>
-<tr>
-<td>Scatter</td>
-<td>Cada rank recebe um bloco correspondente do vetor da raiz</td>
-<td>Cada um recebe três de 12 números</td>
-</tr>
-<tr>
-<td>Gather</td>
-<td>Blocos dos ranks ocupam faixas distintas no vetor da raiz</td>
-<td>Quatro blocos de três formam um vetor de 12</td>
-</tr>
-<tr>
-<td>Reduce</td>
-<td>Contribuições são combinadas por uma operação</td>
-<td>Quatro somas parciais produzem uma soma global</td>
-</tr>
-</tbody>
-</table>
-<p>Scatter e Gather lidam com blocos. Broadcast replica dados. Reduce combina contribuições. A escolha depende do que queremos obter ao final da comunicação.</p>
+</code></pre></div></p>
 <h3 id="tudo-junto-distribuir-calcular-e-reunir">Tudo junto: distribuir, calcular e reunir<a class="headerlink" href="#tudo-junto-distribuir-calcular-e-reunir" title="Permanent link">&para;</a></h3>
 <p>Vamos retomar o problema dos quadrados. Desta vez, o rank 0 cria os números de 1 a 12, cada processo recebe apenas uma fatia e a raiz reúne <strong>todos os quadrados</strong>, em vez de receber somente a soma.</p>
 <table>
