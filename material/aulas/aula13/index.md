@@ -106,38 +106,31 @@ int main(int argc, char** argv) {
 }
 ```
 
+Para compilar:
+
 ```bash
 mpic++ -O2 scatter.cpp -o scatter
+```
+Para testar com srun:
 
+```bash
 srun --partition=merry_cpu --mpi=pmix --mem=1G \
-     --nodes=2 --ntasks=4 --ntasks-per-node=2 \
+     --nodes=2 --ntasks=2 --ntasks-per-node=1 \
      --time=00:05:00 ./scatter
 ```
+A resposta deve ser algo parecido com:
 
-Com quatro processos, o vetor inicial tem 12 números. Com dois, tem seis: neste primeiro exemplo, mantemos três elementos por processo e adaptamos o tamanho do problema à quantidade de ranks. A ordem dos prints pode variar.
+```
+Rank 1 | Nó: sdumont6237 | Fatia recebida: 4 5 6
+Rank 0 | Nó: sdumont6238 | Fatia recebida: 1 2 3
+Rank 1 | Nó: sdumont6238 | Fatia recebida: 4 5 6
+Rank 0 | Nó: sdumont6237 | Fatia recebida: 1 2 3
+```
 
 ### Gather: reunir blocos na raiz
 
 Depois da computação, cada processo pode ter um bloco de resultados. `MPI_Gather` reúne esses blocos em um vetor na raiz, organizados pela ordem dos ranks.
 
-Se cada processo elevar ao quadrado os valores do exemplo anterior:
-
-| Rank | Bloco calculado | Posições no vetor reunido |
-| --- | --- | --- |
-| 0 | `{1, 4, 9}` | 0 a 2 |
-| 1 | `{16, 25, 36}` | 3 a 5 |
-| 2 | `{49, 64, 81}` | 6 a 8 |
-| 3 | `{100, 121, 144}` | 9 a 11 |
-
-O resultado na raiz será:
-
-```cpp
-{1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144}
-```
-
-**Gather preserva os elementos; não os soma nem calcula um máximo.** Para combinar contribuições por uma operação matemática, usamos Reduce.
-
-### Leitura da chamada
 
 ```cpp
 MPI_Gather(
@@ -152,9 +145,6 @@ MPI_Gather(
 );
 ```
 
-Para quatro ranks enviando três inteiros cada, a raiz reserva espaço para 12 elementos, mas informa `recvcount = 3`. **Esse parâmetro não é a quantidade total reunida.**
-
-Somente a raiz precisa alocar o vetor final. Nos outros processos, o buffer de recebimento é ignorado e pode ser `nullptr`. Todos precisam fornecer seu bloco de envio.
 
 Os blocos ocupam posições determinadas pelo rank, mesmo que os processos terminem seus cálculos em momentos diferentes. A ordem das mensagens impressas na tela não altera a organização do vetor reunido.
 
@@ -206,27 +196,17 @@ int main(int argc, char** argv) {
     return 0;
 }
 ```
-
+Para compilar
 ```bash
 mpic++ -O2 gather.cpp -o gather
-
-srun --partition=merry_cpu --mpi=pmix --mem=1G \
-     --nodes=2 --ntasks=4 --ntasks-per-node=2 \
-     --time=00:05:00 ./gather
 ```
 
-Com quatro processos, o vetor final contém `1 4 9 16`. O resultado global fica somente na raiz; os demais ranks mantêm seus valores locais.
-
-## Broadcast, Scatter, Gather e Reduce: qual é a diferença?
-
-| Operação | O que acontece com os dados? | Exemplo com quatro ranks |
-| --- | --- | --- |
-| Broadcast | Todos recebem os mesmos elementos da raiz | Todos recebem o vetor completo |
-| Scatter | Cada rank recebe um bloco correspondente do vetor da raiz | Cada um recebe três de 12 números |
-| Gather | Blocos dos ranks ocupam faixas distintas no vetor da raiz | Quatro blocos de três formam um vetor de 12 |
-| Reduce | Contribuições são combinadas por uma operação | Quatro somas parciais produzem uma soma global |
-
-Scatter e Gather lidam com blocos. Broadcast replica dados. Reduce combina contribuições. A escolha depende do que queremos obter ao final da comunicação.
+Para executar:
+```bash
+srun --partition=merry_cpu --mpi=pmix --mem=1G \
+     --nodes=2 --ntasks=2 --ntasks-per-node=1 \
+     --time=00:05:00 ./gather
+```
 
 ### Tudo junto: distribuir, calcular e reunir
 
