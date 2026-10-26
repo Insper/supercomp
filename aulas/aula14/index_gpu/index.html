@@ -8,9 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://insper.github.io/supercomp/aulas/aula13/index_gpu/">
+        <link rel="canonical" href="https://insper.github.io/supercomp/aulas/aula14/index_gpu/">
       
       
+        <link rel="prev" href="../../aula13/">
+      
+      
+        <link rel="next" href="../../../teoria/slides/">
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
@@ -18,7 +22,7 @@
     
     
       
-        <title>Uma Introdução a CUDA - SuperComputação - 2026/2</title>
+        <title>Introdução a GPU - SuperComputação - 2026/2</title>
       
     
     
@@ -114,7 +118,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Uma Introdução a CUDA
+              Introdução a GPU
             
           </span>
         </div>
@@ -210,10 +214,12 @@
         
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
+      <li class="md-tabs__item md-tabs__item--active">
         <a href="../../aula01/" class="md-tabs__link">
           
   
@@ -331,23 +337,28 @@
       
   
   
+    
   
   
+  
     
     
     
-      
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
             
   
   <span class="md-ellipsis">
@@ -359,7 +370,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             Aulas
@@ -615,7 +626,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../../aula13/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -625,6 +636,132 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Introdução a GPU
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Introdução a GPU
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#preparando-o-ambiente" class="md-nav__link">
+    <span class="md-ellipsis">
+      Preparando o ambiente
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#codigo-base-cpu" class="md-nav__link">
+    <span class="md-ellipsis">
+      Código Base (CPU)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#migrando-para-gpu-cuda" class="md-nav__link">
+    <span class="md-ellipsis">
+      Migrando para GPU (CUDA)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#natureza-do-problema" class="md-nav__link">
+    <span class="md-ellipsis">
+      Natureza do problema
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#desafio" class="md-nav__link">
+    <span class="md-ellipsis">
+      DESAFIO
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#se-quiser-aprender-mais" class="md-nav__link">
+    <span class="md-ellipsis">
+      Se quiser aprender mais
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#esta-atividade-nao-tem-entrega-bom-final-de-semana" class="md-nav__link">
+    <span class="md-ellipsis">
+      Esta atividade não tem entrega, bom final de semana!
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -859,7 +996,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../guia_mpi_sdumont/" class="md-nav__link">
+      <a href="../../aula13/guia_mpi_sdumont/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -998,53 +1135,38 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#etapa-1-preparando-o-ambiente" class="md-nav__link">
+  <a href="#preparando-o-ambiente" class="md-nav__link">
     <span class="md-ellipsis">
-      Etapa 1 — Preparando o ambiente
+      Preparando o ambiente
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#etapa-2-codigo-base-cpu" class="md-nav__link">
+  <a href="#codigo-base-cpu" class="md-nav__link">
     <span class="md-ellipsis">
-      Etapa 2 — Código Base (CPU)
+      Código Base (CPU)
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#etapa-3-migrando-para-gpu-cuda" class="md-nav__link">
+  <a href="#migrando-para-gpu-cuda" class="md-nav__link">
     <span class="md-ellipsis">
-      Etapa 3 — Migrando para GPU (CUDA)
+      Migrando para GPU (CUDA)
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#etapa-4-executando-no-no-gpu-com-slurm" class="md-nav__link">
-    <span class="md-ellipsis">
-      Etapa 4 — Executando no nó GPU com SLURM
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Etapa 4 — Executando no nó GPU com SLURM">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#natureza-do-problema" class="md-nav__link">
     <span class="md-ellipsis">
       Natureza do problema
     </span>
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -1104,7 +1226,7 @@ Ele permite que desenvolvedores usem o poder das <strong>GPUs</strong> para acel
 <li><strong>Executar o binário</strong> com o <code>srun</code> ou <code>sbatch</code>(solicitando uma GPU).</li>
 </ol>
 <hr />
-<h2 id="etapa-1-preparando-o-ambiente">Etapa 1 — Preparando o ambiente<a class="headerlink" href="#etapa-1-preparando-o-ambiente" title="Permanent link">&para;</a></h2>
+<h3 id="preparando-o-ambiente">Preparando o ambiente<a class="headerlink" href="#preparando-o-ambiente" title="Permanent link">&para;</a></h3>
 <p>Liste os módulos disponíveis e carregue o CUDA:</p>
 <div class="highlight"><pre><span></span><code>module<span class="w"> </span>avail<span class="w"> </span>cuda
 module<span class="w"> </span>load<span class="w"> </span>cuda/12.8.1
@@ -1114,7 +1236,7 @@ module<span class="w"> </span>load<span class="w"> </span>cuda/12.8.1
 </code></pre></div>
 <p>Deve aparecer algo como</p>
 <p><img alt="alt text" src="../image.png" /></p>
-<h2 id="etapa-2-codigo-base-cpu">Etapa 2 — Código Base (CPU)<a class="headerlink" href="#etapa-2-codigo-base-cpu" title="Permanent link">&para;</a></h2>
+<h3 id="codigo-base-cpu">Código Base (CPU)<a class="headerlink" href="#codigo-base-cpu" title="Permanent link">&para;</a></h3>
 <p>Vamos começar com um programa simples em <strong>C++</strong> que soma os elementos de dois vetores na <strong>CPU</strong>.</p>
 <p>Crie o arquivo:</p>
 <div class="highlight"><pre><span></span><code>nano<span class="w"> </span>exemplo-cpu.cpp
@@ -1174,7 +1296,10 @@ module<span class="w"> </span>load<span class="w"> </span>cuda/12.8.1
 <span class="p">}</span>
 </code></pre></div>
 <p>Compile e execute localmente (sem GPU):</p>
-<div class="highlight"><pre><span></span><code><span class="w"> </span>srun<span class="w"> </span>--partition<span class="o">=</span>gpu<span class="w">  </span>--pty<span class="w"> </span>./ex-cpu
+<div class="highlight"><pre><span></span><code>g++<span class="w"> </span>-O3<span class="w"> </span>exemplo-cpu.cpp<span class="w"> </span>-o<span class="w"> </span>ex-cpu
+</code></pre></div>
+<p>Para executar:</p>
+<div class="highlight"><pre><span></span><code>srun<span class="w"> </span>--partition<span class="o">=</span>merry_gpu<span class="w"> </span>--mem<span class="o">=</span>1G<span class="w"> </span>./ex-cpu
 </code></pre></div>
 <p>Saída esperada:</p>
 <div class="highlight"><pre><span></span><code>Erro: 0
@@ -1182,7 +1307,7 @@ N: 1000000000
 Soma total: 3e+09
 Tempo de execução: 0.30549 segundos
 </code></pre></div>
-<h2 id="etapa-3-migrando-para-gpu-cuda">Etapa 3 — Migrando para GPU (CUDA)<a class="headerlink" href="#etapa-3-migrando-para-gpu-cuda" title="Permanent link">&para;</a></h2>
+<h3 id="migrando-para-gpu-cuda">Migrando para GPU (CUDA)<a class="headerlink" href="#migrando-para-gpu-cuda" title="Permanent link">&para;</a></h3>
 <p>Agora, vamos reescrever o mesmo código para rodar <strong>na GPU</strong>.</p>
 <p>Crie o arquivo:</p>
 <div class="highlight"><pre><span></span><code>nano<span class="w"> </span>exemplo-gpu.cu
@@ -1301,11 +1426,10 @@ Tempo de execução: 0.30549 segundos
 <p>Compile com o <code>nvcc</code>:</p>
 <div class="highlight"><pre><span></span><code>nvcc<span class="w"> </span>exemplo-gpu.cu<span class="w"> </span>-o<span class="w"> </span>ex-gpu
 </code></pre></div>
-<h2 id="etapa-4-executando-no-no-gpu-com-slurm">Etapa 4 — Executando no nó GPU com SLURM<a class="headerlink" href="#etapa-4-executando-no-no-gpu-com-slurm" title="Permanent link">&para;</a></h2>
 <p>Agora, vamos executar o binário <strong>pedindo uma GPU</strong> via <code>srun</code>:</p>
-<p><div class="highlight"><pre><span></span><code>srun<span class="w"> </span>--partition<span class="o">=</span>gpu<span class="w"> </span>--gres<span class="o">=</span>gpu:1<span class="w"> </span>./ex-gpu
+<p><div class="highlight"><pre><span></span><code>srun<span class="w"> </span>--partition<span class="o">=</span>merry_gpu<span class="w"> </span>--gres<span class="o">=</span>gpu:1<span class="w"> </span>--mem<span class="o">=</span>1G<span class="w"> </span>./ex-gpu
 </code></pre></div>
-Esse  <code>--gres=gpu:1</code> aloca 1 GPU  para executar o binário  <code>./ex1</code>  na fila gpu do Cluster Franky</p>
+Esse  <code>--gres=gpu:1</code> aloca 1 GPU  para executar o binário  <code>./ex-gpu</code>  na fila do Cluster Franky</p>
 <p>Saída esperada:</p>
 <div class="highlight"><pre><span></span><code>0
 Erro: 0
