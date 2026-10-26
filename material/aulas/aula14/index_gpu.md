@@ -28,10 +28,6 @@ Verifique se o compilador CUDA está ativo:
 nvcc --version
 ```
 
-Deve aparecer algo como
-
-![alt text](image.png)
-
 
 ### Código Base (CPU)
 
@@ -274,82 +270,28 @@ Tempo de transferência dos dados (CPU<-GPU) 0.307847 segundos
 Tempo total de tudo mesmo 1.04331 segundos
 ```
 
-### Natureza do problema
+### Por que a soma pode não acelerar a aplicação?
 
-A operação:
+Por elemento, a expressão `y[i] = x[i] + y[i]` realiza uma adição, lê dois valores e escreve um resultado. Para `float` de quatro bytes, isso corresponde a cerca de 12 bytes de tráfego lógico de memória por adição, sem contar efeitos de cache.
 
-```cpp
-y[i] = x[i] + y[i];
-```
+Há pouco cálculo para muitos dados movimentados. Para vetores grandes, esse padrão tende a ser **limitado pela largura de banda da memória**, ou *memory-bound*. O kernel ainda pode ser rápido na GPU; as cópias entre CPU e GPU podem dominar o intervalo completo medido.
 
-tem as seguintes características:
+A versão CPU também acessa memória e pode usar caches; a ausência de transferências explícitas para uma GPU não torna esses acessos gratuitos. Neste programa, não criamos múltiplas threads de CPU.
 
-* 1 soma por elemento
-* 2 leituras de memória
-* 1 escrita de memória
-
-Isso significa que o custo é dominado por acesso à memória, não por cálculo.
-
-Esse tipo de problema é chamado de:
+Uma estratégia comum é copiar os dados para a GPU, realizar várias operações e copiar apenas os resultados necessários ao final. Isso permite amortizar o custo das transferências.
 
 
-> memory-bound
+### Para entender se você entendeu
 
 
-O que aconteceu:
+**Varie as threads por bloco**
 
-1. A GPU executou o cálculo muito rapidamente (0.07 s)
-2. Mas o custo de movimentar os dados foi muito alto (~1 s)
-3. O tempo total ficou maior que o da CPU
+Teste `blockSize = 128`, `256` e `512`, mantendo o cálculo de `numBlocks` por arredondamento para cima. Verifique a correção e registre os tempos. Mais threads por bloco não garantem menor tempo.
 
-Conclusão importante:
+**Varie o número de blocos**
 
-> A GPU não foi mais lenta em computação, mas o sistema como um todo foi mais lento devido à movimentação de dados.
+**Não basta substituir `numBlocks` por 32, 128 ou 1024 no kernel original.** Como cada thread processa apenas um elemento, isso pode deixar grande parte do vetor sem calcular. Um tempo menor com resultado incorreto não é uma melhoria.
 
+Faça alterações no código para permitir que cada thread processe vários elementos.
 
-Na CPU 
-
-* Threads compartilham a mesma memória
-* Não há cópia de dados
-* O custo é apenas acesso à RAM
-
-Na GPU:
-
-* Existe uma memória separada (device memory)
-* É necessário copiar dados explicitamente
-* O custo de comunicação é alto
-
-
-
-
-## DESAFIO
-
-Teste o código com diferentes configurações:
-
-```cpp
-numBlocks = 32;
-numBlocks = 128;
-numBlocks = 1024;
-```
-
-Melhorou ou piorou o tempo?
-Como você faria a computação em GPU de uma matriz 2D?
-E de uma matriz 3D?
-Será que da pra melhorar o tempo de alocação dos dados?
-
-Veremos nos próximos capitulos...
-
-## Se quiser aprender mais
-
-1. Explore a [documentação do CUDA Toolkit](https://docs.nvidia.com/cuda/index.html).
-   Veja o [Guia Rápido de Instalação](https://docs.nvidia.com/cuda/cuda-quick-start-guide/index.html) e o [Programming Guide](https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html).
-2. Teste o uso de `printf()` dentro do kernel para imprimir `threadIdx.x` e `blockIdx.x`.
-3. Experimente `threadIdx.y`, `threadIdx.z` e `blockIdx.y`.
-   Descubra como definir grids e blocos em múltiplas dimensões.
-4. Leia sobre a [Unified Memory no CUDA 8](https://developer.nvidia.com/blog/unified-memory-cuda-beginners/) e o mecanismo de migração de páginas da arquitetura Pascal.
-
-
-
-obs: Material adaptado do Deep Learning Institute NVIDIA e do NVIDIA Teaching kit - Accelerated Computing
-## Esta atividade não tem entrega, bom final de semana!
-```
+Depois teste 32, 128 e 1024 blocos com 256 threads por bloco. A thread começa em seu índice global e avança pelo total de threads do grid, cobrindo outras posições do vetor. 
