@@ -12,7 +12,7 @@ Em um **sistema HPC com SLURM**, como o Franky ou o SDumont, a execução de pro
 
 ---
 
-## Etapa 1 — Preparando o ambiente
+### Preparando o ambiente
 
 
 Liste os módulos disponíveis e carregue o CUDA:
@@ -33,7 +33,7 @@ Deve aparecer algo como
 ![alt text](image.png)
 
 
-## Etapa 2 — Código Base (CPU)
+### Código Base (CPU)
 
 Vamos começar com um programa simples em **C++** que soma os elementos de dois vetores na **CPU**.
 
@@ -104,7 +104,13 @@ int main(void)
 Compile e execute localmente (sem GPU):
 
 ```bash
- srun --partition=gpu  --pty ./ex-cpu
+g++ -O3 exemplo-cpu.cpp -o ex-cpu
+```
+
+Para executar:
+
+```bash
+srun --partition=merry_gpu --mem=1G ./ex-cpu
 ```
 
 Saída esperada:
@@ -117,7 +123,7 @@ Tempo de execução: 0.30549 segundos
 ```
 
 
-## Etapa 3 — Migrando para GPU (CUDA)
+### Migrando para GPU (CUDA)
 
 Agora, vamos reescrever o mesmo código para rodar **na GPU**.
 
@@ -248,14 +254,12 @@ Compile com o `nvcc`:
 nvcc exemplo-gpu.cu -o ex-gpu
 ```
 
-## Etapa 4 — Executando no nó GPU com SLURM
-
 Agora, vamos executar o binário **pedindo uma GPU** via `srun`:
 
 ```bash
-srun --partition=gpu --gres=gpu:1 ./ex-gpu
+srun --partition=merry_gpu --gres=gpu:1 --mem=1G ./ex-gpu
 ```
-Esse  `--gres=gpu:1` aloca 1 GPU  para executar o binário  `./ex1`  na fila gpu do Cluster Franky
+Esse  `--gres=gpu:1` aloca 1 GPU  para executar o binário  `./ex-gpu`  na fila do Cluster Franky
 
 Saída esperada:
 
