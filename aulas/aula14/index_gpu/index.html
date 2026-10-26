@@ -723,36 +723,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#natureza-do-problema" class="md-nav__link">
+  <a href="#por-que-a-soma-pode-nao-acelerar-a-aplicacao" class="md-nav__link">
     <span class="md-ellipsis">
-      Natureza do problema
+      Por que a soma pode não acelerar a aplicação?
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#desafio" class="md-nav__link">
+  <a href="#para-entender-se-voce-entendeu" class="md-nav__link">
     <span class="md-ellipsis">
-      DESAFIO
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#se-quiser-aprender-mais" class="md-nav__link">
-    <span class="md-ellipsis">
-      Se quiser aprender mais
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#esta-atividade-nao-tem-entrega-bom-final-de-semana" class="md-nav__link">
-    <span class="md-ellipsis">
-      Esta atividade não tem entrega, bom final de semana!
+      Para entender se você entendeu
     </span>
   </a>
   
@@ -1162,36 +1144,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#natureza-do-problema" class="md-nav__link">
+  <a href="#por-que-a-soma-pode-nao-acelerar-a-aplicacao" class="md-nav__link">
     <span class="md-ellipsis">
-      Natureza do problema
+      Por que a soma pode não acelerar a aplicação?
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#desafio" class="md-nav__link">
+  <a href="#para-entender-se-voce-entendeu" class="md-nav__link">
     <span class="md-ellipsis">
-      DESAFIO
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#se-quiser-aprender-mais" class="md-nav__link">
-    <span class="md-ellipsis">
-      Se quiser aprender mais
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#esta-atividade-nao-tem-entrega-bom-final-de-semana" class="md-nav__link">
-    <span class="md-ellipsis">
-      Esta atividade não tem entrega, bom final de semana!
+      Para entender se você entendeu
     </span>
   </a>
   
@@ -1234,8 +1198,6 @@ module<span class="w"> </span>load<span class="w"> </span>cuda/12.8.1
 <p>Verifique se o compilador CUDA está ativo:</p>
 <div class="highlight"><pre><span></span><code>nvcc<span class="w"> </span>--version
 </code></pre></div>
-<p>Deve aparecer algo como</p>
-<p><img alt="alt text" src="../image.png" /></p>
 <h3 id="codigo-base-cpu">Código Base (CPU)<a class="headerlink" href="#codigo-base-cpu" title="Permanent link">&para;</a></h3>
 <p>Vamos começar com um programa simples em <strong>C++</strong> que soma os elementos de dois vetores na <strong>CPU</strong>.</p>
 <p>Crie o arquivo:</p>
@@ -1440,66 +1402,18 @@ Tempo de calculos na GPU 0.0722021 segundos
 Tempo de transferência dos dados (CPU&lt;-GPU) 0.307847 segundos
 Tempo total de tudo mesmo 1.04331 segundos
 </code></pre></div>
-<h3 id="natureza-do-problema">Natureza do problema<a class="headerlink" href="#natureza-do-problema" title="Permanent link">&para;</a></h3>
-<p>A operação:</p>
-<div class="highlight"><pre><span></span><code><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-</code></pre></div>
-<p>tem as seguintes características:</p>
-<ul>
-<li>1 soma por elemento</li>
-<li>2 leituras de memória</li>
-<li>1 escrita de memória</li>
-</ul>
-<p>Isso significa que o custo é dominado por acesso à memória, não por cálculo.</p>
-<p>Esse tipo de problema é chamado de:</p>
-<blockquote>
-<p>memory-bound</p>
-</blockquote>
-<p>O que aconteceu:</p>
-<ol>
-<li>A GPU executou o cálculo muito rapidamente (0.07 s)</li>
-<li>Mas o custo de movimentar os dados foi muito alto (~1 s)</li>
-<li>O tempo total ficou maior que o da CPU</li>
-</ol>
-<p>Conclusão importante:</p>
-<blockquote>
-<p>A GPU não foi mais lenta em computação, mas o sistema como um todo foi mais lento devido à movimentação de dados.</p>
-</blockquote>
-<p>Na CPU </p>
-<ul>
-<li>Threads compartilham a mesma memória</li>
-<li>Não há cópia de dados</li>
-<li>O custo é apenas acesso à RAM</li>
-</ul>
-<p>Na GPU:</p>
-<ul>
-<li>Existe uma memória separada (device memory)</li>
-<li>É necessário copiar dados explicitamente</li>
-<li>O custo de comunicação é alto</li>
-</ul>
-<h2 id="desafio">DESAFIO<a class="headerlink" href="#desafio" title="Permanent link">&para;</a></h2>
-<p>Teste o código com diferentes configurações:</p>
-<div class="highlight"><pre><span></span><code><span class="n">numBlocks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="p">;</span>
-<span class="n">numBlocks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">128</span><span class="p">;</span>
-<span class="n">numBlocks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1024</span><span class="p">;</span>
-</code></pre></div>
-<p>Melhorou ou piorou o tempo?
-Como você faria a computação em GPU de uma matriz 2D?
-E de uma matriz 3D?
-Será que da pra melhorar o tempo de alocação dos dados?</p>
-<p>Veremos nos próximos capitulos...</p>
-<h2 id="se-quiser-aprender-mais">Se quiser aprender mais<a class="headerlink" href="#se-quiser-aprender-mais" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Explore a <a href="https://docs.nvidia.com/cuda/index.html">documentação do CUDA Toolkit</a>.
-   Veja o <a href="https://docs.nvidia.com/cuda/cuda-quick-start-guide/index.html">Guia Rápido de Instalação</a> e o <a href="https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html">Programming Guide</a>.</li>
-<li>Teste o uso de <code>printf()</code> dentro do kernel para imprimir <code>threadIdx.x</code> e <code>blockIdx.x</code>.</li>
-<li>Experimente <code>threadIdx.y</code>, <code>threadIdx.z</code> e <code>blockIdx.y</code>.
-   Descubra como definir grids e blocos em múltiplas dimensões.</li>
-<li>Leia sobre a <a href="https://developer.nvidia.com/blog/unified-memory-cuda-beginners/">Unified Memory no CUDA 8</a> e o mecanismo de migração de páginas da arquitetura Pascal.</li>
-</ol>
-<p>obs: Material adaptado do Deep Learning Institute NVIDIA e do NVIDIA Teaching kit - Accelerated Computing</p>
-<h2 id="esta-atividade-nao-tem-entrega-bom-final-de-semana">Esta atividade não tem entrega, bom final de semana!<a class="headerlink" href="#esta-atividade-nao-tem-entrega-bom-final-de-semana" title="Permanent link">&para;</a></h2>
-<p>```</p>
+<h3 id="por-que-a-soma-pode-nao-acelerar-a-aplicacao">Por que a soma pode não acelerar a aplicação?<a class="headerlink" href="#por-que-a-soma-pode-nao-acelerar-a-aplicacao" title="Permanent link">&para;</a></h3>
+<p>Por elemento, a expressão <code>y[i] = x[i] + y[i]</code> realiza uma adição, lê dois valores e escreve um resultado. Para <code>float</code> de quatro bytes, isso corresponde a cerca de 12 bytes de tráfego lógico de memória por adição, sem contar efeitos de cache.</p>
+<p>Há pouco cálculo para muitos dados movimentados. Para vetores grandes, esse padrão tende a ser <strong>limitado pela largura de banda da memória</strong>, ou <em>memory-bound</em>. O kernel ainda pode ser rápido na GPU; as cópias entre CPU e GPU podem dominar o intervalo completo medido.</p>
+<p>A versão CPU também acessa memória e pode usar caches; a ausência de transferências explícitas para uma GPU não torna esses acessos gratuitos. Neste programa, não criamos múltiplas threads de CPU.</p>
+<p>Uma estratégia comum é copiar os dados para a GPU, realizar várias operações e copiar apenas os resultados necessários ao final. Isso permite amortizar o custo das transferências.</p>
+<h3 id="para-entender-se-voce-entendeu">Para entender se você entendeu<a class="headerlink" href="#para-entender-se-voce-entendeu" title="Permanent link">&para;</a></h3>
+<p><strong>Varie as threads por bloco</strong></p>
+<p>Teste <code>blockSize = 128</code>, <code>256</code> e <code>512</code>, mantendo o cálculo de <code>numBlocks</code> por arredondamento para cima. Verifique a correção e registre os tempos. Mais threads por bloco não garantem menor tempo.</p>
+<p><strong>Varie o número de blocos</strong></p>
+<p><strong>Não basta substituir <code>numBlocks</code> por 32, 128 ou 1024 no kernel original.</strong> Como cada thread processa apenas um elemento, isso pode deixar grande parte do vetor sem calcular. Um tempo menor com resultado incorreto não é uma melhoria.</p>
+<p>Faça alterações no código para permitir que cada thread processe vários elementos.</p>
+<p>Depois teste 32, 128 e 1024 blocos com 256 threads por bloco. A thread começa em seu índice global e avança pelo total de threads do grid, cobrindo outras posições do vetor. </p>
 
 
 
