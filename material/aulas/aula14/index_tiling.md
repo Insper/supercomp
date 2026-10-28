@@ -731,20 +731,19 @@ int main()
     delete[] gray;
 }
 ```
-### Desafio Extra
 
-Depois de terminar os exercícios:
+### Análise de desempenho
 
-1. Compare tempo CPU vs GPU;
+Após concluir os exercícios, realize os seguintes testes:
 
-2. Fala o teste com 
-   * 128 threads;
-   * 256 threads;
-   * 512 threads;
+1. **Compare o tempo de execução na CPU e na GPU.**
 
-3. descubra qual configuração é mais rápida.
+2. **Execute o teste na GPU utilizando diferentes configurações de threads por bloco:**
+    - 128 threads;
+    - 256 threads;
+    - 512 threads.
 
-
+3. **Compare os tempos obtidos** e determine qual configuração apresentou o melhor desempenho.
 
 Referência:
 https://developer.nvidia.com/blog/even-easier-introduction-cuda/
