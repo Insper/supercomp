@@ -45,6 +45,7 @@ nav:
         - "Comunicação Coletiva: Broadcast e Reduce": aulas/aula12/index.md
         - "Comunicação Coletiva: Scatter e Gatter": aulas/aula13/index.md
         - "Introdução a GPU": aulas/aula14/index_gpu.md
+        - "Otimização de memória em GPU": aulas/aula14/index_tiling.md
        # - "Aula 12 - Acesso ao Supercomputador SDumont": aulas/aula12/index.md
       #  - "Aula 13 - Paralelismo em GPU com CUDA": aulas/aula13/index.md
       #  - "Aula 14 - Otimização de memória em GPU": aulas/aula14/index.md
