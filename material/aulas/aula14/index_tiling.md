@@ -735,12 +735,13 @@ int main()
 
 Depois de terminar os exercícios:
 
-1. compare tempo CPU vs GPU;
-2. teste:
+1. Compare tempo CPU vs GPU;
 
+2. Fala o teste com 
    * 128 threads;
    * 256 threads;
    * 512 threads;
+
 3. descubra qual configuração é mais rápida.
 
 
