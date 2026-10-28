@@ -555,3 +555,195 @@ Já o bloco de 32×32 aparenta ter tempo “zero”, mas isso é um bug de medi�
 Na prática, blocos muito grandes consomem mais memória compartilhada e reduzem a **ocupação real da GPU**, resultando em menor eficiência, mesmo que o tempo aparente seja baixo.
 
 
+
+## Exercícios — Passando Código Sequencial da CPU para GPU com CUDA
+
+A ideia desses exercícios é praticar:
+
+* criação de kernels CUDA;
+* paralelismo com threads;
+* `cudaMalloc`;
+* `cudaMemcpy`;
+* configuração de grids e blocos;
+* execução de kernels.
+
+### Exercício 1 — Multiplicação de Vetores
+
+Passe a função `multiply` para um kernel CUDA, faça a alocação e a cópia dos dados para a GPU corretamente, e crie o lançador do kernel `multiply`: 
+
+Código base:
+```cpp
+#include <iostream>
+
+void multiply(int n, float *a, float *b, float *out)
+{
+    for(int i = 0; i < n; i++)
+        out[i] = a[i] * b[i];
+}
+
+int main()
+{
+    int N = 1'000'000;
+
+    float *a   = new float[N];
+    float *b   = new float[N];
+    float *out = new float[N];
+
+    for(int i = 0; i < N; i++) {
+        a[i] = 2.0f;
+        b[i] = 4.0f;
+    }
+
+    multiply(N, a, b, out);
+
+    std::cout << out[0] << std::endl;
+
+    delete[] a;
+    delete[] b;
+    delete[] out;
+}
+```
+### Exercício 2 — Soma de Matrizes
+
+Paralelize a soma de matrizes em GPU passando a função `matrixAdd` para um kernel Cuda, faça a alocação, a cópia dos dados para a GPU corretamente, e crie o lançador do kernel.
+
+```cpp 
+#include <iostream>
+
+void matrixAdd(int n, float *A, float *B, float *C)
+{
+    for(int i = 0; i < n*n; i++)
+        C[i] = A[i] + B[i];
+}
+
+int main()
+{
+    int N = 1024;
+
+    float *A = new float[N*N];
+    float *B = new float[N*N];
+    float *C = new float[N*N];
+
+    for(int i = 0; i < N*N; i++) {
+        A[i] = 1.0f;
+        B[i] = 2.0f;
+    }
+
+    matrixAdd(N, A, B, C);
+
+    std::cout << C[0] << std::endl;
+
+    delete[] A;
+    delete[] B;
+    delete[] C;
+}
+```
+
+### Exercício 3 — Threshold em Imagem
+
+Paralelize a operação `threshold` em GPU passando a função para um kernel Cuda, faça a alocação, a cópia dos dados para a GPU corretamente, e crie o lançador do kernel.
+
+```cpp 
+#include <iostream>
+
+void threshold(unsigned char *in,
+               unsigned char *out,
+               int n,
+               int T)
+{
+    for(int i = 0; i < n; i++)
+    {
+        out[i] =
+            (in[i] > T) ? 255 : 0;
+    }
+}
+
+int main()
+{
+    int N = 1920 * 1080;
+
+    unsigned char *img =
+        new unsigned char[N];
+
+    unsigned char *out =
+        new unsigned char[N];
+
+    for(int i = 0; i < N; i++)
+        img[i] = rand() % 256;
+
+    threshold(img, out, N, 128);
+
+    std::cout << (int)out[0]
+              << std::endl;
+
+    delete[] img;
+    delete[] out;
+}
+```
+
+### Exercício 4 — Conversão RGB para Escala de Cinza
+
+Paralelize a operação `rgb2gray` em GPU passando a função para um kernel cuda, faça a alocação, a cópia dos dados para a GPU corretamente, e crie o lançador do kernel.
+
+
+```cpp 
+#include <iostream>
+
+void rgb2gray(unsigned char *rgb,
+              unsigned char *gray,
+              int n)
+{
+    for(int i = 0; i < n; i++)
+    {
+        int idx = i * 3;
+
+        float r = rgb[idx];
+        float g = rgb[idx + 1];
+        float b = rgb[idx + 2];
+
+        gray[i] =
+            0.299f * r +
+            0.587f * g +
+            0.114f * b;
+    }
+}
+
+int main()
+{
+    int N = 1920 * 1080;
+
+    unsigned char *rgb =
+        new unsigned char[N * 3];
+
+    unsigned char *gray =
+        new unsigned char[N];
+
+    for(int i = 0; i < N*3; i++)
+        rgb[i] = rand() % 256;
+
+    rgb2gray(rgb, gray, N);
+
+    std::cout
+        << (int)gray[0]
+        << std::endl;
+
+    delete[] rgb;
+    delete[] gray;
+}
+```
+### Desafio Extra
+
+Depois de terminar os exercícios:
+
+1. compare tempo CPU vs GPU;
+2. teste:
+
+   * 128 threads;
+   * 256 threads;
+   * 512 threads;
+3. descubra qual configuração é mais rápida.
+
+
+
+Referência:
+https://developer.nvidia.com/blog/even-easier-introduction-cuda/
