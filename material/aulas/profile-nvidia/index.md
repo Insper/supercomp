@@ -628,7 +628,440 @@ Para testar a hipótese, compare **o número de operações, o tempo absoluto da
 
 Código com as algumas otimizações implementadas:
 ```cpp
+#include <cuda_runtime.h>
 
+#include <algorithm>
+#include <array>
+#include <chrono>
+#include <cmath>
+#include <filesystem>
+#include <fstream>
+#include <iomanip>
+#include <iostream>
+#include <random>
+#include <sstream>
+#include <stdexcept>
+#include <string>
+#include <string_view>
+#include <cctype>
+#include <utility>
+#include <vector>
+
+using namespace std;
+
+namespace Barenn {
+
+// Cada amostra contém os 64 pixels de uma imagem em escala de cinza de 8 por 8.
+constexpr int entradas = 64;
+constexpr string_view letras = "ABCDEILMNORSUVW";
+constexpr int classes = static_cast<int>(letras.size());
+
+constexpr int oculta1 = 32;
+constexpr int oculta2 = 16;
+
+// Buffers alocados na construção da rede e reutilizados até o fim.
+class BufferGpu {
+    float* ponteiro = nullptr;
+    size_t bytes;
+
+public:
+    explicit BufferGpu(size_t elementos) : bytes(elementos * sizeof(float)) {
+        if (bytes != 0) {
+            const auto erro = cudaMalloc(&ponteiro, bytes);
+            if (erro != cudaSuccess) throw runtime_error(cudaGetErrorString(erro));
+        }
+    }
+    ~BufferGpu() { if (ponteiro) cudaFree(ponteiro); }
+    BufferGpu(const BufferGpu&) = delete;
+    BufferGpu& operator=(const BufferGpu&) = delete;
+
+    float* data() const { return ponteiro; }
+
+    void enviar(const float* origem) const {
+        const auto erro = cudaMemcpy(ponteiro, origem, bytes, cudaMemcpyHostToDevice);
+        if (erro != cudaSuccess) throw runtime_error(cudaGetErrorString(erro));
+    }
+
+    void receber(float* destino) const {
+        const auto erro = cudaMemcpy(destino, ponteiro, bytes, cudaMemcpyDeviceToHost);
+        if (erro != cudaSuccess) throw runtime_error(cudaGetErrorString(erro));
+    }
+};
+
+constexpr int bloco = 128;
+int grade(int n) { return (n + bloco - 1) / bloco; }
+
+__global__ void camada_densa_gpu(const float* entrada, const float* pesos,
+                                const float* vies, int n_entradas, int n_saidas,
+                                bool relu, float* saida, float* z) {
+    int i = blockIdx.x * blockDim.x + threadIdx.x;
+    if (i >= n_saidas) return;
+    float soma = vies[i];
+    for (int j = 0; j < n_entradas; ++j) {
+        soma += entrada[j] * pesos[i * n_entradas + j];
+    }
+    if (z) z[i] = soma;
+    saida[i] = relu && soma < 0.0f ? 0.0f : soma;
+}
+
+__global__ void calcular_delta(const float* grad_saida, const float* z,
+                               bool relu, int n_saidas, float* delta) {
+    int i = blockIdx.x * blockDim.x + threadIdx.x;
+    if (i >= n_saidas) return;
+    delta[i] = relu ? grad_saida[i] * (z[i] > 0.0f ? 1.0f : 0.0f)
+                    : grad_saida[i];
+}
+
+__global__ void propagar_gradiente(const float* pesos, const float* delta,
+                                   int n_entradas, int n_saidas, float* grad_entrada) {
+    int j = blockIdx.x * blockDim.x + threadIdx.x;
+    if (j >= n_entradas) return;
+    float soma = 0.0f;
+    for (int i = 0; i < n_saidas; ++i) {
+        soma += delta[i] * pesos[i * n_entradas + j];
+    }
+    grad_entrada[j] = soma;
+}
+
+__global__ void atualizar_parametros(const float* entrada, const float* delta,
+                                     int n_entradas, int n_pesos, float taxa,
+                                     float* pesos, float* vies) {
+    int k = blockIdx.x * blockDim.x + threadIdx.x;
+    if (k >= n_pesos) return;
+    int i = k / n_entradas;
+    int j = k % n_entradas;
+    pesos[k] -= taxa * (delta[i] * entrada[j]);
+    if (j == 0) vies[i] -= taxa * delta[i];
+}
+
+class Camada {
+    int n_entradas;
+    int n_saidas;
+    bool relu;
+    BufferGpu d_pesos;
+    BufferGpu d_vies;
+    BufferGpu d_delta;
+
+public:
+    Camada(int entradas_camada, int saidas_camada, bool usar_relu)
+        : n_entradas(entradas_camada), n_saidas(saidas_camada), relu(usar_relu),
+          d_pesos(n_entradas * n_saidas), d_vies(n_saidas), d_delta(n_saidas) {
+        vector<float> pesos(n_entradas * n_saidas);
+        vector<float> vies(n_saidas, 0.0f);
+        mt19937 gerador(1337);
+        uniform_real_distribution<float> distribuicao(-0.05f, 0.05f);
+        for (float& peso : pesos) peso = distribuicao(gerador);
+        d_pesos.enviar(pesos.data());
+        d_vies.enviar(vies.data());
+    }
+
+    void forward(const float* entrada, float* saida, float* z = nullptr) const {
+        camada_densa_gpu<<<grade(n_saidas), bloco>>>(
+            entrada, d_pesos.data(), d_vies.data(), n_entradas,
+            n_saidas, relu, saida, z);
+        const auto erro = cudaGetLastError();
+        if (erro != cudaSuccess) throw runtime_error(cudaGetErrorString(erro));
+    }
+
+    // Todos os ponteiros recebidos apontam para memória da GPU.
+    void backward(const float* entrada, const float* z, const float* grad_saida,
+                  float* grad_entrada, float taxa) {
+        calcular_delta<<<grade(n_saidas), bloco>>>(
+            grad_saida, z, relu, n_saidas, d_delta.data());
+        auto erro = cudaGetLastError();
+        if (erro != cudaSuccess) throw runtime_error(cudaGetErrorString(erro));
+
+        // A mesma stream preserva a ordem: o gradiente de entrada usa
+        // os pesos antigos, antes que o próximo kernel os atualize.
+        if (grad_entrada) {
+            propagar_gradiente<<<grade(n_entradas), bloco>>>(
+                d_pesos.data(), d_delta.data(), n_entradas, n_saidas,
+                grad_entrada);
+            erro = cudaGetLastError();
+            if (erro != cudaSuccess) throw runtime_error(cudaGetErrorString(erro));
+        }
+        const int n_pesos = n_entradas * n_saidas;
+        atualizar_parametros<<<grade(n_pesos), bloco>>>(
+            entrada, d_delta.data(), n_entradas, n_pesos, taxa,
+            d_pesos.data(), d_vies.data());
+        erro = cudaGetLastError();
+        if (erro != cudaSuccess) throw runtime_error(cudaGetErrorString(erro));
+
+    }
+
+    void salvar(ostream& arquivo) const {
+        vector<float> pesos(n_entradas * n_saidas);
+        vector<float> vies(n_saidas);
+        d_pesos.receber(pesos.data());
+        d_vies.receber(vies.data());
+        for (int i = 0; i < n_saidas; ++i) {
+            for (int j = 0; j < n_entradas; ++j) {
+                arquivo << pesos[i * n_entradas + j] << ' ';
+            }
+            arquivo << vies[i] << '\n';
+        }
+    }
+};
+
+// A perda continua na CPU, como em A.
+struct Buffers {
+    array<float, classes> escores{}, grad_perda{};
+};
+
+class Rede {
+    Camada l1{entradas, oculta1, true};
+    Camada l2{oculta1, oculta2, true};
+    Camada l3{oculta2, classes, false};
+    BufferGpu entrada_gpu{entradas};
+    BufferGpu a1{oculta1}, z1{oculta1}, grad1{oculta1};
+    BufferGpu a2{oculta2}, z2{oculta2}, grad2{oculta2};
+    BufferGpu escores_gpu{classes}, grad_perda_gpu{classes};
+
+public:
+    void forward(const float* entrada, float* escores, bool treino = false) const {
+        entrada_gpu.enviar(entrada);
+        l1.forward(entrada_gpu.data(), a1.data(), treino ? z1.data() : nullptr);
+        l2.forward(a1.data(), a2.data(), treino ? z2.data() : nullptr);
+        l3.forward(a2.data(), escores_gpu.data());
+        escores_gpu.receber(escores);
+    }
+
+    void backward(const Buffers& b, float taxa) {
+        grad_perda_gpu.enviar(b.grad_perda.data());
+        l3.backward(a2.data(), nullptr, grad_perda_gpu.data(), grad2.data(), taxa);
+        l2.backward(a1.data(), z2.data(), grad2.data(), grad1.data(), taxa);
+        l1.backward(entrada_gpu.data(), z1.data(), grad1.data(), nullptr, taxa);
+    }
+
+    void salvar(ostream& arquivo) const {
+        l1.salvar(arquivo);
+        l2.salvar(arquivo);
+        l3.salvar(arquivo);
+    }
+};
+
+struct Amostra {
+    vector<float> atributos;
+    int letra;
+};
+
+vector<Amostra> ler_letra(const filesystem::path& pasta, int letra) {
+    const char nome = letras[letra];
+    auto caminho = pasta / (string(1, nome) + ".csv");
+    ifstream arquivo(caminho);
+    if (!arquivo) {
+        caminho = pasta / (string(1, static_cast<char>(tolower(nome))) + ".csv");
+        arquivo.open(caminho);
+    }
+    if (!arquivo) throw runtime_error("CSV ausente para a letra " + string(1, nome));
+
+    vector<Amostra> dados;
+    string linha;
+    size_t numero = 0;
+    while (getline(arquivo, linha)) {
+        ++numero;
+        if (linha.find_first_not_of(" \t\r") == string::npos) continue;
+
+        istringstream campos(linha);
+        Amostra amostra{vector<float>(entradas), letra};
+        bool valida = true;
+        for (int i = 0; i < entradas; ++i) {
+            float& valor = amostra.atributos[i];
+            if (!(campos >> valor) || !isfinite(valor)) {
+                valida = false;
+                break;
+            }
+            if (i < entradas - 1) {
+                char virgula;
+                if (!(campos >> virgula) || virgula != ',') {
+                    valida = false;
+                    break;
+                }
+            }
+        }
+        if (!valida || !(campos >> ws).eof()) {
+            throw runtime_error(caminho.string() + ":" + to_string(numero) +
+                                " — esperados 64 números separados por vírgula");
+        }
+        dados.push_back(move(amostra));
+    }
+    if (arquivo.bad() || dados.size() < 2) {
+        throw runtime_error("São necessárias ao menos duas amostras em " + caminho.string());
+    }
+    return dados;
+}
+
+struct Normalizacao {
+    array<double, entradas> media{};
+    array<double, entradas> escala{};
+
+    explicit Normalizacao(const vector<Amostra>& treino) {
+        // Ajusta a normalização somente com os dados de treino.
+        for (const auto& amostra : treino) {
+            for (int i = 0; i < entradas; ++i) media[i] += amostra.atributos[i];
+        }
+        for (double& valor : media) valor /= treino.size();
+        for (const auto& amostra : treino) {
+            for (int i = 0; i < entradas; ++i) {
+                const double desvio = amostra.atributos[i] - media[i];
+                escala[i] += desvio * desvio;
+            }
+        }
+        for (double& valor : escala) valor = max(1e-6, sqrt(valor / treino.size()));
+    }
+
+    void aplicar(vector<Amostra>& dados) const {
+        for (auto& amostra : dados) {
+            for (int i = 0; i < entradas; ++i) {
+                amostra.atributos[i] = static_cast<float>(
+                    (amostra.atributos[i] - media[i]) / escala[i]);
+            }
+        }
+    }
+};
+
+float perda(const float* escores, int letra, float* grad = nullptr) {
+    float total = 0;
+    for (int i = 0; i < classes; ++i) {
+        const float erro = escores[i] - (i == letra ? 1.0f : 0.0f);
+        total += 0.5f * erro * erro;
+        if (grad) grad[i] = erro;
+    }
+    return total;
+}
+
+} // namespace Barenn
+
+int main(int argc, char** argv) {
+    using namespace Barenn;
+    if (argc < 2 || argc > 4) {
+        cerr << "Uso: " << argv[0] << " pasta_dos_csvs [saida_gpu.txt|-] [epocas]\n";
+        return 1;
+    }
+
+    try {
+        mt19937 gerador(1337);
+        vector<Amostra> treino, teste;
+        for (int letra = 0; letra < classes; ++letra) {
+            auto dados = ler_letra(argv[1], letra);
+            shuffle(dados.begin(), dados.end(), gerador);
+            // Reserva cerca de 20% de cada letra, com pelo menos uma amostra.
+            const size_t n_teste = max<size_t>(1, dados.size() / 5);
+            for (size_t i = 0; i < dados.size(); ++i) {
+                auto& destino = i < n_teste ? teste : treino;
+                destino.push_back(move(dados[i]));
+            }
+        }
+        const Normalizacao normalizacao(treino);
+        normalizacao.aplicar(treino);
+        normalizacao.aplicar(teste);
+
+        size_t caracteres = 0;
+        const int epocas = argc == 4 ? stoi(argv[3], &caracteres) : 51;
+        if (epocas <= 0 || (argc == 4 && argv[3][caracteres] != '\0')) {
+            throw runtime_error("Informe um número inteiro positivo de épocas.");
+        }
+        constexpr float taxa = 0.02f;
+        Rede rede;
+        Buffers buffers;
+        vector<double> perdas(epocas);
+
+        const auto inicio_treino = chrono::steady_clock::now();
+        for (int epoca = 0; epoca < epocas; ++epoca) {
+            shuffle(treino.begin(), treino.end(), gerador);
+            for (const auto& amostra : treino) {
+                const float* entrada = amostra.atributos.data();
+                rede.forward(entrada, buffers.escores.data(), true);
+                perdas[epoca] += perda(buffers.escores.data(), amostra.letra,
+                                       buffers.grad_perda.data());
+                rede.backward(buffers, taxa);
+            }
+            perdas[epoca] /= treino.size();
+            if (!isfinite(perdas[epoca])) throw runtime_error("Treino divergiu.");
+        }
+        const auto erro_treino = cudaDeviceSynchronize();
+        if (erro_treino != cudaSuccess) throw runtime_error(cudaGetErrorString(erro_treino));
+        const chrono::duration<double> tempo_treino =
+            chrono::steady_clock::now() - inicio_treino;
+
+        // Lote contíguo: [amostra][atributo] na entrada e
+        // [amostra][classe] na saída. O empacotamento fica fora da medição.
+        vector<float> lote(teste.size() * entradas);
+        vector<float> resultados(teste.size() * classes);
+        for (size_t i = 0; i < teste.size(); ++i) {
+            copy(teste[i].atributos.begin(), teste[i].atributos.end(),
+                 lote.data() + i * entradas);
+        }
+
+        rede.forward(lote.data(), resultados.data()); // Aquecimento.
+        const auto inicio_inferencia = chrono::steady_clock::now();
+        for (size_t i = 0; i < teste.size(); ++i) {
+            rede.forward(lote.data() + i * entradas,
+                         resultados.data() + i * classes);
+        }
+        const chrono::duration<double, milli> tempo_inferencia =
+            chrono::steady_clock::now() - inicio_inferencia;
+
+        cout << fixed << setprecision(4) << "TREINO | " << treino.size() << " amostras\n";
+        for (int epoca = 0; epoca < epocas; ++epoca) {
+            if (epoca % 5 != 0 && epoca != epocas - 1) continue;
+            cout << "Epoca " << epoca + 1 << '/' << epocas
+                 << " | perda media " << perdas[epoca] << '\n';
+        }
+        cout << "Tempo de treino: " << tempo_treino.count() << " s\n";
+
+        size_t acertos = 0;
+        double perda_teste = 0;
+        vector<pair<int, int>> exemplos;
+        array<bool, classes> exibida{};
+        for (size_t i = 0; i < teste.size(); ++i) {
+            const float* escores = resultados.data() + i * classes;
+            const int esperado = teste[i].letra;
+            const int previsto = static_cast<int>(
+                max_element(escores, escores + classes) - escores);
+            const bool acertou = esperado == previsto;
+            acertos += acertou;
+            perda_teste += perda(escores, esperado);
+            // Exibe um exemplo por letra. As métricas usam o lote inteiro.
+            if (!exibida[esperado]) {
+                exemplos.emplace_back(esperado, previsto);
+                exibida[esperado] = true;
+            }
+        }
+        cout << "\nTESTE | " << acertos << '/' << teste.size()
+             << " acertos (" << setprecision(2) << 100.0 * acertos / teste.size() << "%)\n"
+             << "Perda media: " << setprecision(4) << perda_teste / teste.size() << '\n'
+             << "Tempo de inferencia do lote: " << tempo_inferencia.count() << " ms\n"
+             << "\nEsperado  Previsto\n";
+        for (const auto& [esperado, previsto] : exemplos) {
+            cout << setw(8) << letras[esperado] << "  "
+                 << setw(8) << letras[previsto] << '\n';
+        }
+
+        // Formato: assinatura; dimensões e número de amostras; camadas;
+        // depois, uma linha por amostra com rótulo, atributos e escores GPU.
+        if (argc >= 3 && string_view(argv[2]) != "-") {
+            ofstream referencia(argv[2]);
+            if (!referencia) throw runtime_error("Nao foi possivel criar a referencia.");
+            referencia << setprecision(9) << "LIBRAS_MENDELEY_GPU_V1\n"
+                       << entradas << ' ' << oculta1 << ' ' << oculta2 << ' ' << classes << ' ' << teste.size() << '\n';
+            rede.salvar(referencia);
+            for (size_t i = 0; i < teste.size(); ++i) {
+                referencia << teste[i].letra;
+                for (float valor : teste[i].atributos) referencia << ' ' << valor;
+                for (int classe = 0; classe < classes; ++classe) {
+                    referencia << ' ' << resultados[i * classes + classe];
+                }
+                referencia << '\n';
+            }
+            referencia.close();
+            if (!referencia) throw runtime_error("Falha ao gravar a referência.");
+        }
+    } catch (const exception& erro) {
+        cerr << "Erro: " << erro.what() << '\n';
+        return 1;
+    }
+}
 ```
 
 Nesta versão a rede mantém os dados intermediários na GPU e passa de uma camada para a próxima. O cálculo das camadas continua o mesmo.
@@ -677,6 +1110,12 @@ Para realizar o profiling nesta versão utilize:
 ```bash
 srun --partition=merry_gpu --gres=gpu:1 --ntasks=1 --mem=1G   nsys profile --trace=cuda --sample=none --output=perfil_gpu_b ./otimo /opt/ohpc/pub/libras/libras_csv - 1
 ```
+
+Para abrir o profile com a interface gráfica
+```bash
+nsys-ui perfil_gpu_b.nsys-rep
+```
+
 A saída deve ser algo parecido com isso:
 
 ![alt text](image-1.png)
@@ -1259,7 +1698,7 @@ int main(int argc, char** argv) {
 
 Para testar o código em GPU, não esqueça de gerar o binário primeiro, depois:
 
-```
+```bash
 srun --partition=merry_gpu --gres=gpu:1 --ntasks=1 --mem=1G  ./lote /opt/ohpc/pub/libras/libras_csv
 ```
 O resultado deve ser algo como:
@@ -1304,6 +1743,12 @@ Para gerar o profile desse código:
 ```bash
 srun --partition=merry_gpu --gres=gpu:1 --ntasks=1 --mem=1G   nsys profile --trace=cuda --sample=none --output=perfil_lote ./lote /opt/ohpc/pub/libras/libras_csv - 1
 ```
+
+Para abrir o profile com a interface gráfica
+```bash
+nsys-ui perfil_lote.nsys-rep
+```
+
 
 ![alt text](image-2.png)
 
