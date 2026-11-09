@@ -1213,6 +1213,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#exercicio-reducao-no-forward-de-uma-camada-densa" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercício Redução no forward de uma camada densa
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1719,173 +1728,19 @@ Passo 3 (stride = 4): soma final → 11 + 14 = 25
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>
-<div class="codehilite"><pre><span></span><code>??? Gabarito
-    ```cpp
-        #include &lt;iostream&gt;
-        #include &lt;vector&gt;
-        #include &lt;numeric&gt;
-        #include &lt;chrono&gt;
-
-        // Kernel 1: Redução
-        __global__ void kernel_reducao_soma(int* entrada, int* resultado, int N) {
-            // Vetor na memória compartilhada (visível a todas as threads do bloco)
-            extern __shared__ int soma_parcial[];
-
-            int tid = threadIdx.x;                   // Índice local da thread dentro do bloco
-            int i = blockIdx.x * blockDim.x + tid;   // Índice global no vetor de entrada
-
-            // Cada thread copia um valor da memória global para a memória compartilhada
-            if (i &lt; N)
-                soma_parcial[tid] = entrada[i];
-            else
-                soma_parcial[tid] = 0;
-
-            __syncthreads(); // Sincroniza todas as threads antes da soma
-
-            // Fase de redução binária: combina pares de elementos
-            int passo = blockDim.x / 2;
-            while (passo &gt; 0) {
-                if (tid &lt; passo)
-                    soma_parcial[tid] += soma_parcial[tid + passo];
-
-                __syncthreads(); // Garante que todas as somas de um passo terminaram
-                passo = passo / 2;
-            }
-
-            // Apenas a primeira thread escreve o resultado do bloco
-            if (tid == 0)
-                resultado[blockIdx.x] = soma_parcial[0];
-        }
-
-
-        // Kernel 2: Scan prefix sum
-        __global__ void kernel_scan_exclusivo(int* entrada, int* saida, int N) {
-            extern __shared__ int dados[];
-
-            int tid = threadIdx.x;
-
-            // Carrega os dados de entrada para memória compartilhada
-            if (tid &lt; N)
-                dados[tid] = entrada[tid];
-            else
-                dados[tid] = 0;
-
-            __syncthreads();
-
-            // Etapa 1: up-sweep (redução)
-            int passo = 1;
-            while (passo &lt; N) {
-                int idx = (tid + 1) * passo * 2 - 1;
-                if (idx &lt; N)
-                    dados[idx] += dados[idx - passo];
-                __syncthreads();
-                passo = passo * 2;
-            }
-
-            // Zera o último elemento (torna o scan exclusivo)
-            if (tid == 0)
-                dados[N - 1] = 0;
-
-            __syncthreads();
-
-            // Etapa 2: down-sweep (distribuição dos prefixos)
-            passo = N / 2;
-            while (passo &gt;= 1) {
-                int idx = (tid + 1) * passo * 2 - 1;
-                if (idx &lt; N) {
-                    int temp = dados[idx - passo];
-                    dados[idx - passo] = dados[idx];
-                    dados[idx] += temp;
-                }
-                __syncthreads();
-                passo = passo / 2;
-            }
-
-            // Copia o resultado final para a saída
-            if (tid &lt; N)
-                saida[tid] = dados[tid];
-        }
-
-
-        std::vector&lt;int&gt; gerar_dados(int N) {
-            std::vector&lt;int&gt; v(N);
-            std::iota(v.begin(), v.end(), 1); // preenche: [1, 2, 3, ..., N]
-            return v;
-        }
-
-
-        int main() {
-            const int N = 1234; // Tamanho do vetor
-
-            // --- Gera dados de entrada ---
-            std::vector&lt;int&gt; entrada = gerar_dados(N);
-
-            // --- Ponteiros para a GPU ---
-            int* d_entrada = nullptr;
-            int* d_saida   = nullptr;
-            int* d_blocos  = nullptr;
-
-            // --- Aloca memória na GPU ---
-            cudaMalloc(&amp;d_entrada, N * sizeof(int));
-            cudaMalloc(&amp;d_saida,   N * sizeof(int));
-            cudaMalloc(&amp;d_blocos,  sizeof(int)); // apenas 1 bloco neste exemplo
-
-            // --- Copia dados da CPU para a GPU ---
-            cudaMemcpy(d_entrada, entrada.data(), N * sizeof(int), cudaMemcpyHostToDevice);
-
-
-            // chamada para o kernel de redução
-            auto inicio_reducao = std::chrono::high_resolution_clock::now();
-
-            kernel_reducao_soma&lt;&lt;&lt;1, N, N * sizeof(int)&gt;&gt;&gt;(d_entrada, d_blocos, N);
-            cudaDeviceSynchronize();
-
-            auto fim_reducao = std::chrono::high_resolution_clock::now();
-
-            // Copia resultado para a CPU
-            int soma_total = 0;
-            cudaMemcpy(&amp;soma_total, d_blocos, sizeof(int), cudaMemcpyDeviceToHost);
-
-            std::chrono::duration&lt;double, std::milli&gt; tempo_reducao = fim_reducao - inicio_reducao;
-            std::cout &lt;&lt; &quot;[Tempo] Redução de soma: &quot; &lt;&lt; tempo_reducao.count() &lt;&lt; &quot; ms\n&quot;;
-            std::cout &lt;&lt; &quot;Resultado da soma: &quot; &lt;&lt; soma_total &lt;&lt; &quot;\n\n&quot;;
-
-            // chamada para o kernel scan
-            auto inicio_scan = std::chrono::high_resolution_clock::now();
-
-            kernel_scan_exclusivo&lt;&lt;&lt;1, N, N * sizeof(int)&gt;&gt;&gt;(d_entrada, d_saida, N);
-            cudaDeviceSynchronize();
-
-            auto fim_scan = std::chrono::high_resolution_clock::now();
-
-            // Copia resultado para a CPU
-            std::vector&lt;int&gt; prefixos(N);
-            cudaMemcpy(prefixos.data(), d_saida, N * sizeof(int), cudaMemcpyDeviceToHost);
-
-            std::chrono::duration&lt;double, std::milli&gt; tempo_scan = fim_scan - inicio_scan;
-            std::cout &lt;&lt; &quot;[Tempo] Scan (prefix sum): &quot; &lt;&lt; tempo_scan.count() &lt;&lt; &quot; ms\n&quot;;
-
-            // Mostra apenas os 20 primeiros valores
-            std::cout &lt;&lt; &quot;Primeiros 20 valores do scan:\n&quot;;
-            for (int i = 0; i &lt; 20; i++)
-                std::cout &lt;&lt; prefixos[i] &lt;&lt; &quot; &quot;;
-            std::cout &lt;&lt; &quot;...\n&quot;;
-
-            // Verifica soma final pelo último prefixo + último valor original
-            int soma_scan = prefixos[N - 1] + entrada[N - 1];
-            std::cout &lt;&lt; &quot;Soma total com Scan: &quot; &lt;&lt; soma_scan &lt;&lt; &quot;\n&quot;;
-
-            // Libera memória da GPU 
-            cudaFree(d_entrada);
-            cudaFree(d_saida);
-            cudaFree(d_blocos);
-
-            return 0;
-        }
-        ```
-
-## Este Exercício não tem entrega, bom final de semana!
+<h2 id="exercicio-reducao-no-forward-de-uma-camada-densa">Exercício  Redução no <code>forward</code> de uma camada densa<a class="headerlink" href="#exercicio-reducao-no-forward-de-uma-camada-densa" title="Permanent link">&para;</a></h2>
+<p>Considere o código que trabalhamos na aula passada, na primeira camada da rede de Libras, calcular cada saída com 32 threads cooperando é mais rápido do que calcular com uma única thread?</p>
+<p>No kernel <code>camada_densa_lote_gpu</code>, otimize o laço que calcula o produto escalar da primeira camada, com 64 entradas por neurônio:</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n_entradas</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">j</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">soma</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">entrada</span><span class="p">[</span><span class="n">amostra</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">n_entradas</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">j</span><span class="p">]</span>
+<span class="w">          </span><span class="o">*</span><span class="w"> </span><span class="n">pesos</span><span class="p">[</span><span class="n">neuronio</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">n_entradas</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">j</span><span class="p">];</span>
+<span class="p">}</span>
 </code></pre></div>
+<ol>
+<li><strong>Substitua o laço por uma redução em árvore.</strong> Use um bloco de 32 threads para cada par <code>(amostra, neurônio)</code>. A thread <code>t</code> calcula os produtos nas posições <code>t</code> e <code>t + 32</code> e guarda a soma parcial na memória compartilhada.</li>
+<li><strong>Reduza os 32 parciais</strong> nas etapas <code>16, 8, 4, 2, 1</code>, com uma barreira após a carga e após cada etapa. A thread 0 adiciona o viés, aplica a ReLU e grava a saída.</li>
+<li><strong>Comparem com o kernel original.</strong> Com os mesmos pesos e imagens, verifiquem as saídas da primeira camada nas duas versões.</li>
+</ol>
 
 
 
