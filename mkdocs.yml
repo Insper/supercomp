@@ -47,8 +47,8 @@ nav:
         - "Introdução a GPU": aulas/aula14/index_gpu.md
         - "Otimização de memória em GPU": aulas/aula14/index_tiling.md
         - "Estudo de caso e Profiling em GPU": aulas/profile-nvidia/index.md
-       # - "Detecção de Bordas em GPU": aulas/aula16/index.md
-       # - "Redução e Scan com CUDA": aulas/aula15/index.md
+        - "Redução e Scan com CUDA": aulas/aula15/index.md
+       # - "Detecção de Bordas em GPU": aulas/aula16/index.md 
        # - "Aula 12 - Acesso ao Supercomputador SDumont": aulas/aula12/index.md
       #  - "Aula 13 - Paralelismo em GPU com CUDA": aulas/aula13/index.md
       #  - "Aula 14 - Otimização de memória em GPU": aulas/aula14/index.md
