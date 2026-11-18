@@ -900,7 +900,7 @@ Maaaaaaaaaaaaaaaaaasss ainda existem pontos do código que podem ser melhorados,
 Otimize a convolução utilizando tiling e shared memory.
 
 
-### **Rubrica**
+**Rubrica**
 
 | Critério | Descrição | Peso |
 |---|---|---|
@@ -1220,7 +1220,7 @@ Otimize a convolução utilizando tiling e shared memory.
     ```
 
 
-## Exercício 2
+### Exercício 2 - prefix sum
 
 Implemente um programa que recebe um vetor de floats e realiza **duas etapas de processamento em GPU**:
 
@@ -1581,18 +1581,18 @@ Implemente um programa que recebe um vetor de floats e realiza **duas etapas de 
 
 
 
-## **Exercício 3 — Cálculo de PI com Monte Carlo**
+### **Exercício 3 — Cálculo de PI com Monte Carlo**
 
 O código abaixo implementa o cálculo de PI usando o método de Monte Carlo de forma **sequencial**. Seu objetivo é otimizar esse código para ser realizado de forma síncrona em GPU.
 
-### **Parte 1 - Paralelismo em GPU (1 ponto)**
+**Parte 1 - Paralelismo em GPU (1 ponto)**
 
 * **0 pontos** → O aluno **não paralelizou** o código, ou a versão apresentada **não compila/não executa**.
  
 * **1 ponto** → O aluno implementou corretamente o cálculo em GPU, utilizando sequências pseudoaleatórias distintas entre threads, combinando as contagens sem conflitos e sincronizando a execução antes de utilizar o resultado na CPU.
 
 
-### **Parte 2 - Distribuição com MPI (2 pontos)**
+**Parte 2 - Distribuição com MPI (2 pontos)**
 Você deve:
     - Distribuir o número total de pontos N entre os processos MPI
     - Cada processo deve calcular sua contagem local de pontos 
