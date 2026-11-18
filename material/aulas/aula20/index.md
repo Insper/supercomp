@@ -1586,7 +1586,7 @@ Implemente um programa que recebe um vetor de floats e realiza **duas etapas de 
 
 O código abaixo implementa o cálculo de PI usando o método de Monte Carlo de forma **sequencial**. Seu objetivo é otimizar esse código para ser realizado de forma síncrona em GPU.
 
-### **Parte 1 - Paralelismo com OpenMP (3 pontos)**
+### **Parte 1 - Paralelismo em GPU (1 ponto)**
 
 * **0 pontos** → O aluno **não paralelizou** o código, ou a versão apresentada **não compila/não executa**.
  
