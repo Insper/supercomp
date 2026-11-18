@@ -902,6 +902,39 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#exercicio-3-calculo-de-pi-com-monte-carlo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercício 3 — Cálculo de PI com Monte Carlo
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Exercício 3 — Cálculo de PI com Monte Carlo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parte-1-paralelismo-em-gpu-1-ponto" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parte 1 - Paralelismo em GPU (1 ponto)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parte-2-distribuicao-com-mpi-2-pontos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parte 2 - Distribuição com MPI (2 pontos)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1350,6 +1383,39 @@
       Exercício 2
     </span>
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercicio-3-calculo-de-pi-com-monte-carlo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercício 3 — Cálculo de PI com Monte Carlo
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Exercício 3 — Cálculo de PI com Monte Carlo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parte-1-paralelismo-em-gpu-1-ponto" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parte 1 - Paralelismo em GPU (1 ponto)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parte-2-distribuicao-com-mpi-2-pontos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parte 2 - Distribuição com MPI (2 pontos)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -2275,7 +2341,7 @@ Isso reduz o overhead de carregamento das máscaras.</p>
 <span class="w">    </span><span class="n">convolution</span><span class="p">(</span><span class="n">input</span><span class="p">,</span><span class="w"> </span><span class="n">output</span><span class="p">,</span><span class="w"> </span><span class="n">kernel</span><span class="p">,</span><span class="w"> </span><span class="n">W</span><span class="p">,</span><span class="w"> </span><span class="n">H</span><span class="p">);</span>
 
 <span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Convolucao concluida.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
-
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Resultado: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">output</span><span class="p">[</span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">W</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
 <span class="w">    </span><span class="k">delete</span><span class="p">[]</span><span class="w"> </span><span class="n">input</span><span class="p">;</span>
 <span class="w">    </span><span class="k">delete</span><span class="p">[]</span><span class="w"> </span><span class="n">output</span><span class="p">;</span>
 
@@ -2482,8 +2548,7 @@ Isso reduz o overhead de carregamento das máscaras.</p>
 <span class="w">    </span><span class="c1">// Como a entrada contém apenas 1 e o filtro calcula</span>
 <span class="w">    </span><span class="c1">// uma média, um pixel interior deve ficar próximo de 1.</span>
 <span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Convolucao concluida.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Pixel central: &quot;</span>
-<span class="w">        </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">output</span><span class="p">[(</span><span class="n">H</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">W</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">W</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Resultado: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">output</span><span class="p">[</span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">W</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
 <span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Tempo do kernel: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">tempo_ms</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; ms</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
 
 <span class="w">    </span><span class="c1">// ========================================================</span>
@@ -2554,51 +2619,51 @@ Isso reduz o overhead de carregamento das máscaras.</p>
 </table>
 <details class="note">
 <summary>Código base</summary>
-<p>```cpp</p>
-<h1 id="include">include <iostream><a class="headerlink" href="#include" title="Permanent link">&para;</a></h1>
-<h1 id="include_1">include <vector><a class="headerlink" href="#include_1" title="Permanent link">&para;</a></h1>
-<h1 id="include_2">include <chrono><a class="headerlink" href="#include_2" title="Permanent link">&para;</a></h1>
-<p>// SCAN + NORMALIZAÇÃO </p>
-<p>int main() {
-    const size_t N = 87654;
-    std::vector<float> v(N);
-    std::vector<float> prefix(N);</p>
-<div class="codehilite"><pre><span></span><code>auto inicio = std::chrono::high_resolution_clock::now();
+<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="w">    </span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
+<span class="w">    </span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;chrono&gt;</span>
 
-// Gera o vetor
-for (size_t i = 0; i &lt; N; ++i)
-    v[i] = static_cast&lt;float&gt;((i + 1) * 2);
+<span class="w">    </span><span class="c1">// SCAN + NORMALIZAÇÃO </span>
 
-// prefix sum
-prefix[0] = v[0];
-for (size_t i = 1; i &lt; N; ++i)
-    prefix[i] = prefix[i - 1] + v[i];
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">87654</span><span class="p">;</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="w"> </span><span class="n">v</span><span class="p">(</span><span class="n">N</span><span class="p">);</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="w"> </span><span class="n">prefix</span><span class="p">(</span><span class="n">N</span><span class="p">);</span>
 
-// Normalização
-float total = prefix.back();  // soma total
-for (size_t i = 0; i &lt; N; ++i)
-    prefix[i] /= total;
+<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">inicio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
 
-auto fim = std::chrono::high_resolution_clock::now();
-double tempo = std::chrono::duration&lt;double, std::milli&gt;(fim - inicio).count();
+<span class="w">        </span><span class="c1">// Gera o vetor</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span>
+<span class="w">            </span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">((</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
 
-// RESULTADOS
-std::cout &lt;&lt; &quot;\nÚltimos 10 valores do prefix sum:\n[ &quot;;
-for (size_t i = N - 10; i &lt; N; ++i)
-    std::cout &lt;&lt; prefix[i] * total &lt;&lt; &quot; &quot;;
-std::cout &lt;&lt; &quot;]\n&quot;;
+<span class="w">        </span><span class="c1">// prefix sum</span>
+<span class="w">        </span><span class="n">prefix</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span>
+<span class="w">            </span><span class="n">prefix</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">prefix</span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
 
-std::cout &lt;&lt; &quot;Últimos 10 valores normalizados:\n[ &quot;;
-for (size_t i = N - 10; i &lt; N; ++i)
-    std::cout &lt;&lt; prefix[i] &lt;&lt; &quot; &quot;;
-std::cout &lt;&lt; &quot;]\n&quot;;
+<span class="w">        </span><span class="c1">// Normalização</span>
+<span class="w">        </span><span class="kt">float</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">prefix</span><span class="p">.</span><span class="n">back</span><span class="p">();</span><span class="w">  </span><span class="c1">// soma total</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span>
+<span class="w">            </span><span class="n">prefix</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="n">total</span><span class="p">;</span>
 
-std::cout &lt;&lt; &quot;\nTempo CPU: &quot; &lt;&lt; tempo &lt;&lt; &quot; ms\n&quot;;
+<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">fim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+<span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">tempo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">duration</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">milli</span><span class="o">&gt;</span><span class="p">(</span><span class="n">fim</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">inicio</span><span class="p">).</span><span class="n">count</span><span class="p">();</span>
+
+<span class="w">        </span><span class="c1">// RESULTADOS</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">Últimos 10 valores do prefix sum:</span><span class="se">\n</span><span class="s">[ &quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span>
+<span class="w">            </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">prefix</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;]</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Últimos 10 valores normalizados:</span><span class="se">\n</span><span class="s">[ &quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span>
+<span class="w">            </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">prefix</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;]</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">Tempo CPU: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">tempo</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; ms</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 </code></pre></div>
-
-<p>}</p>
 </details>
-<p>```</p>
 <details class="note">
 <summary>Implementação Síncrona</summary>
 <div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
