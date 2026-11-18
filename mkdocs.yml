@@ -50,7 +50,7 @@ nav:
         - "Redução e Scan com CUDA": aulas/aula15/index.md
         - "Programação Assíncrona em GPU": aulas/aula18/index.md
         - "Estudo de caso: pipeline assíncrono CPU-GPU": aulas/aula18/estudo_caso.md
-       
+        - "Revisão - Estratégias de otimização em GPU" : aulas/aula20/index.md
        # - "Aula 16 - Detecção de Bordas em GPU": aulas/aula16/index.md
 
 

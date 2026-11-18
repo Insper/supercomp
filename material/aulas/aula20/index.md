@@ -1,4 +1,4 @@
-# Revisão II - Estratégias de otimização em GPU
+# Revisão - Estratégias de otimização em GPU
 
 Depois de portar um código da CPU para GPU, é importante analisar suas características para identificar qual é o principal gargalo da aplicação. A partir dessa análise, é possível decidir quais técnicas de otimização fazem mais sentido para melhorar o desempenho.
 
@@ -9,16 +9,13 @@ Existem funções com alto reaproveitamento de dados, em que diferentes threads 
 Outro possível gargalo é o **acesso irregular à memória**, que ocorre quando as threads acessam posições distantes entre si, prejudicando a **localidade espacial**. Estruturas como grafos e matrizes esparsas frequentemente apresentam esse problema. Nesses casos, vale reorganizar estruturas de dados para melhorar localidade espacial, utilizar formatos mais compactos e reduzir os acessos desalinhados.
 
 
-Em aplicações com muitos valores zero, chamadas de **dados esparsos**, ocorre desperdício de memória e processamento ao armazenar e processar elementos irrelevantes. Nesse cenário, técnicas de compressão como CSR (*Compressed Sparse Row*) permitem armazenar apenas os valores não nulos, reduzindo uso de memória e largura de banda.
-
-
 Por fim, um gargalo bastante comum é a **transferência excessiva entre CPU e GPU**. Em alguns casos, mover dados entre host e device pode custar mais caro do que a própria computação. Para reduzir esse impacto, é recomendado minimizar transferências, manter os dados na GPU pelo maior tempo possível, utilizar *pinned memory* e aplicar computação assíncrona com CUDA Streams, permitindo sobreposição entre transferência de dados e execução dos kernels.
 
 
 
-## Otimizando o código da atividade Trata Vídeo
+## Um novo estudo de caso do código Trata Vídeo
 
-O código base disponibilizado na atividade trata vídeo realiza, de forma geral, as seguintes etapas:
+O código base disponibilizado na aula passada realiza, de forma geral, as seguintes etapas:
 
 1. Conversão RGB → grayscale
 2. Aplicação do filtro de Sobel
@@ -74,16 +71,15 @@ Para resolver esse problema utilizamos a técnica chamada **tiling**.
 
 O conceito de *tiling* consiste em dividir a imagem em pequenos blocos chamados **tiles**. Cada bloco CUDA fica responsável por carregar uma pequena região da imagem para a Shared Memory. Assim, em vez de cada thread acessar repetidamente a memória global, o bloco inteiro carrega os dados apenas uma vez e depois todas as threads reutilizam esses pixels localmente através da Shared Memory.
 
-Neste exemplo, vamos utilizar blocos de $ 30 \times 30 $
+Neste exemplo, vamos utilizar blocos de $30 \times 30$
 
-Porém, o Sobel utiliza uma máscara de convolução $
-3 \times 3 $
+Porém, o Sobel utiliza uma máscara de convolução $3 \times 3$
 
 Isso significa que, para calcular um pixel, também precisamos acessar seus vizinhos, o tile não pode armazenar apenas os pixels centrais do bloco. Também precisamos carregar pixels extras ao redor da região principal para que as threads consigam acessar os vizinhos corretamente durante a convolução.
 
 Essas regiões extras recebem o nome de **Halo**.
 
-Como estamos usando um bloco de $ 30 \times 30 $
+Como estamos usando um bloco de $30 \times 30$
 
 e precisamos adicionar uma borda de 1 pixel em cada lado, o tamanho real do tile armazenado na Shared Memory passa a ser:
 
@@ -889,339 +885,1044 @@ Na execução com 200 frames, a implementação original levou aproximadamente `
 
 Com 1800 frames o código base levou `657.15s` e a versão com o sobel otimizando com tile e shared memory levou `306.89s`
 
-Maaaaaaaaaaaaaaaaaasss ainda existem pontos do código que podem ser melhorados, não mexemos nas outras funções e tem técnicas de otimização que podem ser aplicadas para ganhar ainda mais desempenho. Na próxima etapa iremos rever as outras técnias de otimização e aplicar elas nas funções restantes.
+Aplicamos desta vez apenas a técnica de **tiling com Shared Memory** que consiste em dividir os dados em pequenos blocos reutilizáveis dentro da GPU, reduzindo acessos repetidos à memória global e aumentando o reaproveitamento de dados entre as threads.
 
-### Conclusão 
-A técnica de **tiling com Shared Memory** consiste em dividir os dados em pequenos blocos reutilizáveis dentro da GPU, reduzindo acessos repetidos à memória global e aumentando o reaproveitamento de dados entre as threads.
-
-O processo pode ser resumido em poucos passos:
-
-1. identificar regiões com reutilização de dados;
-2. dividir o problema em tiles;
-3. carregar os tiles para Shared Memory;
-4. adicionar halos quando houver vizinhança;
-5. sincronizar as threads com `__syncthreads()`;
-6. escrever apenas o resultado final na memória global.
+Maaaaaaaaaaaaaaaaaasss ainda existem pontos do código que podem ser melhorados, não mexemos nas outras funções e tem técnicas de otimização que podem ser aplicadas para ganhar ainda mais desempenho. 
 
 
-## Exercícios
-Agora é sua vez, pratique a otimização com tiling e shared memory
 
-### Exercício 1 - Blur Gaussiano 
-
-Otimize o filtro Gaussiano utilizando tiling e shared memory.
-
-Código Base
-
-```cpp
-#include <iostream>
-#include <cmath>
-
-using namespace std;
-
-#define W 2048
-#define H 2048
-
-// ============================================================
-// GAUSSIAN BLUR
-// ============================================================
-
-void gaussianBlur(
-    unsigned char* input,
-    unsigned char* output,
-    int w,
-    int h)
-{
-    // Kernel Gaussiano 3x3
-    int kernel[3][3] = {
-        {1,2,1},
-        {2,4,2},
-        {1,2,1}
-    };
-
-    // Percorre imagem
-    for (int y = 1; y < h - 1; y++)
-    {
-        for (int x = 1; x < w - 1; x++)
-        {
-            int sum = 0;
-
-            // Convolução 3x3
-            for (int ky = -1; ky <= 1; ky++)
-            {
-                for (int kx = -1; kx <= 1; kx++)
-                {
-                    int pixel =
-                        input[(y + ky) * w + (x + kx)];
-
-                    sum +=
-                        pixel *
-                        kernel[ky + 1][kx + 1];
-                }
-            }
-
-            // Normalização
-            output[y * w + x] =
-                sum / 16;
-        }
-    }
-}
-
-// ============================================================
-// MAIN
-// ============================================================
-
-int main()
-{
-    unsigned char* input =
-        new unsigned char[W * H];
-
-    unsigned char* output =
-        new unsigned char[W * H];
-
-    // Inicializa uma imagem fake
-    for (int i = 0; i < W * H; i++)
-    {
-        input[i] = rand() % 256;
-    }
-
-    gaussianBlur(input, output, W, H);
-
-    cout << "Filtro concluido.\n";
-
-    delete[] input;
-    delete[] output;
-
-    return 0;
-}
-```
-
-### Exercício 2 — Multiplicação de Matrizes 
+## Lista de Exercícios para revisão
 
 
-Otimize a multiplicação de matrizes utilizando tiling e shared memory.
 
-
-Código Base 
-
-```cpp
-#include <iostream>
-
-using namespace std;
-
-#define N 1024
-
-// ============================================================
-// MULTIPLICAÇÃO DE MATRIZES
-// ============================================================
-
-void matmul(
-    float* A,
-    float* B,
-    float* C)
-{
-    // Percorre linhas de A
-    for (int i = 0; i < N; i++)
-    {
-        // Percorre colunas de B
-        for (int j = 0; j < N; j++)
-        {
-            float sum = 0.0f;
-
-            // Produto interno
-            for (int k = 0; k < N; k++)
-            {
-                sum +=
-                    A[i * N + k] *
-                    B[k * N + j];
-            }
-
-            // Resultado
-            C[i * N + j] = sum;
-        }
-    }
-}
-
-// ============================================================
-// MAIN
-// ============================================================
-
-int main()
-{
-    float* A = new float[N * N];
-    float* B = new float[N * N];
-    float* C = new float[N * N];
-
-    // Inicializa matrizes
-    for (int i = 0; i < N * N; i++)
-    {
-        A[i] = 1.0f;
-        B[i] = 1.0f;
-    }
-
-    matmul(A, B, C);
-
-    cout << "Multiplicacao concluida.\n";
-
-    delete[] A;
-    delete[] B;
-    delete[] C;
-
-    return 0;
-}
-```
-
-### Exercício 3 — Convolução 
+### Exercício 1 — Convolução 
 
 Otimize a convolução utilizando tiling e shared memory.
 
-Código Base 
-```cpp 
-#include <iostream>
 
-using namespace std;
+### **Rubrica**
 
-#define W 2048
-#define H 2048
-#define K 5
+| Critério | Descrição | Peso |
+|---|---|---|
+| **Paralelização em GPU** | Distribui corretamente o cálculo dos pixels entre threads em um grid 2D. | **0.35** |
+| **Tiling e shared memory** | Carrega cooperativamente o tile e o halo na memória compartilhada, reutilizando os dados no cálculo. | **0.65** |
+| **Total** | | **1.0** |
 
-// ============================================================
-// CONVOLUÇÃO 2D
-// ============================================================
 
-void convolution(
-    float* input,
-    float* output,
-    float kernel[K][K],
-    int w,
-    int h)
-{
-    int radius = K / 2;
+??? Note "Código base"
+    ```cpp 
+    #include <iostream>
 
-    for (int y = radius; y < h - radius; y++)
+    using namespace std;
+
+    #define W 2048
+    #define H 2048
+    #define K 5
+
+    // ============================================================
+    // CONVOLUÇÃO 2D
+    // ============================================================
+
+    void convolution(
+        float* input,
+        float* output,
+        float kernel[K][K],
+        int w,
+        int h)
     {
-        for (int x = radius; x < w - radius; x++)
+        int radius = K / 2;
+
+        for (int y = radius; y < h - radius; y++)
         {
-            float sum = 0.0f;
-
-            // Janela do kernel
-            for (int ky = -radius; ky <= radius; ky++)
+            for (int x = radius; x < w - radius; x++)
             {
-                for (int kx = -radius; kx <= radius; kx++)
+                float sum = 0.0f;
+
+                // Janela do kernel
+                for (int ky = -radius; ky <= radius; ky++)
                 {
-                    float pixel =
-                        input[(y + ky) * w + (x + kx)];
+                    for (int kx = -radius; kx <= radius; kx++)
+                    {
+                        float pixel =
+                            input[(y + ky) * w + (x + kx)];
 
-                    float weight =
-                        kernel[ky + radius][kx + radius];
+                        float weight =
+                            kernel[ky + radius][kx + radius];
 
-                    sum += pixel * weight;
+                        sum += pixel * weight;
+                    }
+                }
+
+                output[y * w + x] = sum;
+            }
+        }
+    }
+
+    // ============================================================
+    // MAIN
+    // ============================================================
+
+    int main()
+    {
+        float* input =
+            new float[W * H];
+
+        float* output =
+            new float[W * H];
+
+        float kernel[K][K];
+
+        // Inicializa imagem
+        for (int i = 0; i < W * H; i++)
+        {
+            input[i] = 1.0f;
+        }
+
+        // Inicializa kernel
+        for (int y = 0; y < K; y++)
+        {
+            for (int x = 0; x < K; x++)
+            {
+                kernel[y][x] = 1.0f / (K * K);
+            }
+        }
+
+        convolution(input, output, kernel, W, H);
+
+        cout << "Convolucao concluida.\n";
+
+        delete[] input;
+        delete[] output;
+
+        return 0;
+    }
+    ```
+
+??? Note "Gabarito"
+    ```cpp
+    #include <iostream>
+    #include <cuda_runtime.h>
+
+    using namespace std;
+
+    #define W 2048
+    #define H 2048
+    #define K 5
+
+    #define BLOCK_SIZE 16
+    #define RADIUS (K / 2)
+
+    // O tile inclui a região do bloco e os vizinhos necessários.
+    // Para bloco 16 x 16 e filtro 5 x 5: tile 20 x 20.
+    #define TILE_SIZE (BLOCK_SIZE + 2 * RADIUS)
+
+    // ============================================================
+    // CONVOLUÇÃO COM TILING E SHARED MEMORY
+    // ============================================================
+
+    __global__ void convolution_tiled(
+        const float* input,
+        float* output,
+        const float* kernel,
+        int w,
+        int h)
+    {
+        // Cada bloco possui seu próprio tile compartilhado.
+        __shared__ float tile[TILE_SIZE][TILE_SIZE];
+
+        int tx = threadIdx.x;
+        int ty = threadIdx.y;
+
+        // Coordenada inicial da região de saída deste bloco.
+        int block_x = blockIdx.x * BLOCK_SIZE;
+        int block_y = blockIdx.y * BLOCK_SIZE;
+
+        // ========================================================
+        // CARREGAMENTO COOPERATIVO DO TILE E DO HALO
+        // ========================================================
+
+        // Existem 256 threads e 400 posições no tile.
+        // Os laços permitem que alguns threads carreguem
+        // mais de uma posição, incluindo o halo.
+        for (int sy = ty; sy < TILE_SIZE; sy += BLOCK_SIZE) {
+            for (int sx = tx; sx < TILE_SIZE; sx += BLOCK_SIZE) {
+
+                // Deslocamento de RADIUS para incluir os vizinhos
+                // anteriores ao início da região de saída.
+                int gx = block_x + sx - RADIUS;
+                int gy = block_y + sy - RADIUS;
+
+                if (gx >= 0 && gx < w && gy >= 0 && gy < h) {
+                    tile[sy][sx] = input[gy * w + gx];
+                } else {
+                    tile[sy][sx] = 0.0f;
                 }
             }
-
-            output[y * w + x] = sum;
         }
-    }
-}
 
-// ============================================================
-// MAIN
-// ============================================================
+        // Todos precisam concluir o carregamento antes de usar
+        // pixels que podem ter sido carregados por outros threads.
+        __syncthreads();
 
-int main()
-{
-    float* input =
-        new float[W * H];
+        // ========================================================
+        // CÁLCULO DA CONVOLUÇÃO
+        // ========================================================
 
-    float* output =
-        new float[W * H];
+        // Cada thread calcula um pixel de saída.
+        int x = block_x + tx;
+        int y = block_y + ty;
 
-    float kernel[K][K];
+        // O retorno ocorre depois da sincronização.
+        if (x >= w || y >= h)
+            return;
 
-    // Inicializa imagem
-    for (int i = 0; i < W * H; i++)
-    {
-        input[i] = 1.0f;
-    }
-
-    // Inicializa kernel
-    for (int y = 0; y < K; y++)
-    {
-        for (int x = 0; x < K; x++)
-        {
-            kernel[y][x] = 1.0f / (K * K);
+        // Calculamos somente onde a janela cabe inteira,
+        // como no código base. A borda é definida como zero,
+        // pois no original ela ficava sem inicialização.
+        if (x < RADIUS || x >= w - RADIUS ||
+            y < RADIUS || y >= h - RADIUS) {
+            output[y * w + x] = 0.0f;
+            return;
         }
+
+        float sum = 0.0f;
+
+        // Os pixels da janela agora são lidos da shared memory.
+        // O centro está em tile[ty + RADIUS][tx + RADIUS],
+        // portanto a janela começa em tile[ty][tx].
+        for (int ky = 0; ky < K; ky++) {
+            for (int kx = 0; kx < K; kx++) {
+
+                float pixel = tile[ty + ky][tx + kx];
+                float weight = kernel[ky * K + kx];
+
+                sum += pixel * weight;
+            }
+        }
+
+        output[y * w + x] = sum;
     }
 
-    convolution(input, output, kernel, W, H);
+    // ============================================================
+    // MAIN
+    // ============================================================
 
-    cout << "Convolucao concluida.\n";
+    int main()
+    {
+        // ========================================================
+        // ALOCAÇÃO E INICIALIZAÇÃO NA CPU
+        // ========================================================
 
-    delete[] input;
-    delete[] output;
+        float* input = new float[W * H];
+        float* output = new float[W * H];
 
-    return 0;
-}
+        float kernel[K][K];
+
+        for (int i = 0; i < W * H; i++) {
+            input[i] = 1.0f;
+        }
+
+        for (int y = 0; y < K; y++) {
+            for (int x = 0; x < K; x++) {
+                kernel[y][x] = 1.0f / (K * K);
+            }
+        }
+
+        size_t bytes = size_t(W) * H * sizeof(float);
+
+        // ========================================================
+        // ALOCAÇÃO NA GPU
+        // ========================================================
+
+        float* d_input;
+        float* d_output;
+        float* d_kernel;
+
+        cudaMalloc(&d_input, bytes);
+        cudaMalloc(&d_output, bytes);
+        cudaMalloc(&d_kernel, K * K * sizeof(float));
+
+        // ========================================================
+        // TRANSFERÊNCIA CPU → GPU
+        // ========================================================
+
+        cudaMemcpy(
+            d_input, input, bytes,
+            cudaMemcpyHostToDevice);
+
+        cudaMemcpy(
+            d_kernel, kernel, K * K * sizeof(float),
+            cudaMemcpyHostToDevice);
+
+        // ========================================================
+        // CONFIGURAÇÃO DOS BLOCOS E DO GRID
+        // ========================================================
+
+        dim3 threads(BLOCK_SIZE, BLOCK_SIZE);
+
+        dim3 blocos(
+            (W + BLOCK_SIZE - 1) / BLOCK_SIZE,
+            (H + BLOCK_SIZE - 1) / BLOCK_SIZE);
+
+        // ========================================================
+        // MEDIÇÃO DO TEMPO DO KERNEL
+        // ========================================================
+
+        cudaEvent_t start, stop;
+
+        cudaEventCreate(&start);
+        cudaEventCreate(&stop);
+
+        cudaEventRecord(start);
+
+        convolution_tiled<<<blocos, threads>>>(
+            d_input, d_output, d_kernel, W, H);
+
+        cudaEventRecord(stop);
+
+        // Espera o kernel terminar antes de continuar.
+        cudaDeviceSynchronize();
+
+        float tempo_ms;
+        cudaEventElapsedTime(&tempo_ms, start, stop);
+
+        // ========================================================
+        // TRANSFERÊNCIA GPU → CPU
+        // ========================================================
+
+        cudaMemcpy(
+            output, d_output, bytes,
+            cudaMemcpyDeviceToHost);
+
+        // Como a entrada contém apenas 1 e o filtro calcula
+        // uma média, um pixel interior deve ficar próximo de 1.
+        cout << "Convolucao concluida.\n";
+        cout << "Pixel central: "
+            << output[(H / 2) * W + W / 2] << "\n";
+        cout << "Tempo do kernel: " << tempo_ms << " ms\n";
+
+        // ========================================================
+        // LIBERAÇÃO DOS RECURSOS
+        // ========================================================
+
+        cudaFree(d_input);
+        cudaFree(d_output);
+        cudaFree(d_kernel);
+
+        cudaEventDestroy(start);
+        cudaEventDestroy(stop);
+
+        delete[] input;
+        delete[] output;
+
+        return 0;
+    }
+
+    ```
+
+
+## Exercício 2
+
+Implemente um programa que recebe um vetor de floats e realiza **duas etapas de processamento em GPU**:
+
+1. Calcule o prefix sum (soma cumulativa) de todos os elementos.
+   Exemplo: `[2, 1, 3, 4] → [2, 3, 6, 10]`.
+
+2. Use o último elemento (a soma total) para normalizar todos os valores:
+   `[2, 3, 6, 10] → [0.2, 0.3, 0.6, 1.0]`.
+
+| Critério                                   | Descrição                                                                                                                                       | Peso     |
+| ------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| Compilação sem erros   | O código compila corretamente com `nvcc`.  | **0.2**  |
+| Implementação em GPU Síncrona         | Programação paralela em GPU de forma síncrona. | **+0.6** |
+| Implementação em GPU Assíncrona        | Utiliza streams, otimiza o uso de CPU e GPU   | **+0.9** |
+| Uso correto do Slurm no Cluster Franky |Configurou corretamente o ambiente HPC (via `srun` ou `sbatch`), com parâmetros adequados de GPU. | **+0.3** |
+| **Total**                                  |                                                                                                                                                 | **2.0**  |
+
+??? Note "Código base"
+    ```cpp
+    #include <iostream>
+    #include <vector>
+    #include <chrono>
+
+    // SCAN + NORMALIZAÇÃO 
+
+    int main() {
+        const size_t N = 87654;
+        std::vector<float> v(N);
+        std::vector<float> prefix(N);
+
+        auto inicio = std::chrono::high_resolution_clock::now();
+
+        // Gera o vetor
+        for (size_t i = 0; i < N; ++i)
+            v[i] = static_cast<float>((i + 1) * 2);
+
+        // prefix sum
+        prefix[0] = v[0];
+        for (size_t i = 1; i < N; ++i)
+            prefix[i] = prefix[i - 1] + v[i];
+
+        // Normalização
+        float total = prefix.back();  // soma total
+        for (size_t i = 0; i < N; ++i)
+            prefix[i] /= total;
+
+        auto fim = std::chrono::high_resolution_clock::now();
+        double tempo = std::chrono::duration<double, std::milli>(fim - inicio).count();
+
+        // RESULTADOS
+        std::cout << "\nÚltimos 10 valores do prefix sum:\n[ ";
+        for (size_t i = N - 10; i < N; ++i)
+            std::cout << prefix[i] * total << " ";
+        std::cout << "]\n";
+
+        std::cout << "Últimos 10 valores normalizados:\n[ ";
+        for (size_t i = N - 10; i < N; ++i)
+            std::cout << prefix[i] << " ";
+        std::cout << "]\n";
+
+        std::cout << "\nTempo CPU: " << tempo << " ms\n";
+    }
+
 ```
+??? Note "Implementação Síncrona"
+    ```cpp
+    #include <iostream>
+    #include <vector>
+    #include <chrono>
+    #include <cuda_runtime.h>
+    #define THREADS 1024
 
+    __global__ void scan(float *dados, float *somas_blocos, int N) {
+        __shared__ float temp[THREADS];
+        int tid = threadIdx.x;
+        int gid = blockIdx.x * blockDim.x + tid;
 
-### Exercício 4 — Transposição de Matriz 
+        if (gid < N)
+            temp[tid] = dados[gid];
+        else
+            temp[tid] = 0.0f;
+        __syncthreads();
 
-Otimize a transposição de matriz utilizando tiling e shared memory.
+        for (int offset = 1; offset < blockDim.x; offset *= 2) {
+            int idx = (tid + 1) * offset * 2 - 1;
+            if (idx < blockDim.x)
+                temp[idx] += temp[idx - offset];
+            __syncthreads();
+        }
 
-Código Base 
+        if (tid == blockDim.x - 1)
+            somas_blocos[blockIdx.x] = temp[tid];
 
-```cpp 
-#include <iostream>
+        if (tid == blockDim.x - 1)
+            temp[tid] = 0.0f;
+        __syncthreads();
 
-using namespace std;
+        for (int offset = blockDim.x / 2; offset > 0; offset /= 2) {
+            int idx = (tid + 1) * offset * 2 - 1;
+            if (idx < blockDim.x) {
+                float t = temp[idx - offset];
+                temp[idx - offset] = temp[idx];
+                temp[idx] += t;
+            }
+            __syncthreads();
+        }
 
-#define N 4096
+        if (gid < N)
+            dados[gid] = temp[tid];
+    }
 
-// ============================================================
-// TRANSPOSE
-// ============================================================
-
-void transpose(
-    float* input,
-    float* output)
-{
-    for (int y = 0; y < N; y++)
-    {
-        for (int x = 0; x < N; x++)
-        {
-            output[x * N + y] =
-                input[y * N + x];
+    __global__ void adicionar_offsets(float *dados, const float *somas_blocos, int N) {
+        int gid = blockIdx.x * blockDim.x + threadIdx.x;
+        int bloco = blockIdx.x;
+        if (gid < N && bloco > 0) {
+            float offset = somas_blocos[bloco - 1];
+            dados[gid] += offset;
         }
     }
-}
 
-// ============================================================
-// MAIN
-// ============================================================
-
-int main()
-{
-    float* input =
-        new float[N * N];
-
-    float* output =
-        new float[N * N];
-
-    // Inicializa matriz
-    for (int i = 0; i < N * N; i++)
-    {
-        input[i] = (float)i;
+    __global__ void normalizar(float *dados, float total, int N) {
+        int gid = blockIdx.x * blockDim.x + threadIdx.x;
+        if (gid < N && total != 0.0f)
+            dados[gid] /= total;
     }
 
-    transpose(input, output);
+    int main() {
+        const int N = 87654;
+        const int threads = 1024;
+        const int blocos = (N + threads - 1) / threads;
 
-    cout << "Transpose concluido.\n";
+        std::vector<float> h_v(N);
+        for (int i = 0; i < N; ++i)
+            h_v[i] = static_cast<float>((i + 1) * 2);
 
-    delete[] input;
-    delete[] output;
+        float *d_v, *d_somas_blocos;
+        cudaMalloc(&d_v, N * sizeof(float));
+        cudaMalloc(&d_somas_blocos, blocos * sizeof(float));
 
-    return 0;
-}
-```
+        cudaMemcpy(d_v, h_v.data(), N * sizeof(float), cudaMemcpyHostToDevice);
 
+        auto inicio = std::chrono::high_resolution_clock::now();
+
+        scan<<<blocos, threads, threads * sizeof(float)>>>(d_v, d_somas_blocos, N);
+        cudaDeviceSynchronize();
+
+        if (blocos > 1) {
+            scan<<<1, threads, threads * sizeof(float)>>>(d_somas_blocos, d_somas_blocos, blocos);
+            cudaDeviceSynchronize();
+            adicionar_offsets<<<blocos, threads>>>(d_v, d_somas_blocos, N);
+            cudaDeviceSynchronize();
+        }
+
+        float total = 0.0f;
+        cudaMemcpy(&total, &d_v[N - 1], sizeof(float), cudaMemcpyDeviceToHost);
+
+        normalizar<<<blocos, threads>>>(d_v, total, N);
+        cudaDeviceSynchronize();
+
+        std::vector<float> h_prefix(N);
+        cudaMemcpy(h_prefix.data(), d_v, N * sizeof(float), cudaMemcpyDeviceToHost);
+
+        auto fim = std::chrono::high_resolution_clock::now();
+        double tempo = std::chrono::duration<double, std::milli>(fim - inicio).count();
+
+        std::cout << "GPU Síncrono \n";
+        std::cout << "N = " << N << "\n\n";
+
+        std::cout << "Últimos 10 valores do prefix sum:\n[ ";
+        for (int i = N - 10; i < N; ++i)
+            std::cout << h_prefix[i] * total << " ";
+        std::cout << "]\n";
+
+        std::cout << "Últimos 10 valores normalizados:\n[ ";
+        for (int i = N - 10; i < N; ++i)
+            std::cout << h_prefix[i] << " ";
+        std::cout << "]\n";
+
+        std::cout << "\nSoma total: " << total << "\n";
+        std::cout << "Tempo total GPU síncrono: " << tempo << " ms\n";
+
+        cudaFree(d_v);
+        cudaFree(d_somas_blocos);
+    }
+    ```
+
+
+??? Note "Implementação Assíncrona"
+    ```cpp
+    #include <iostream>
+    #include <vector>
+    #include <cuda_runtime.h>
+
+    #define NSTREAMS 2
+    #define THREADS  1024
+
+    __global__ void scan(float *dados, float *somas_blocos, int N) {
+        __shared__ float temp[THREADS];
+        int tid = threadIdx.x;
+        int gid = blockIdx.x * blockDim.x + tid;
+
+        if (gid < N) temp[tid] = dados[gid];
+        else         temp[tid] = 0.0f;
+        __syncthreads();
+
+        for (int offset = 1; offset < blockDim.x; offset <<= 1) {
+            int idx = (tid + 1) * (offset << 1) - 1;
+            if (idx < blockDim.x) temp[idx] += temp[idx - offset];
+            __syncthreads();
+        }
+
+        if (tid == blockDim.x - 1) somas_blocos[blockIdx.x] = temp[tid];
+        if (tid == blockDim.x - 1) temp[tid] = 0.0f;
+        __syncthreads();
+
+        for (int offset = blockDim.x >> 1; offset > 0; offset >>= 1) {
+            int idx = (tid + 1) * (offset << 1) - 1;
+            if (idx < blockDim.x) {
+                float t = temp[idx - offset];
+                temp[idx - offset] = temp[idx];
+                temp[idx] += t;
+            }
+            __syncthreads();
+        }
+
+        if (gid < N) dados[gid] = temp[tid];
+    }
+
+    __global__ void adicionar_offsets(float *dados, const float *somas_blocos, int N) {
+        int gid = blockIdx.x * blockDim.x + threadIdx.x;
+        int bloco = blockIdx.x;
+        if (gid < N && bloco > 0) {
+            float offset = somas_blocos[bloco - 1];
+            dados[gid] += offset;
+        }
+    }
+
+    __global__ void add_offset_and_normalize(float *dados, float offset, float total, int N) {
+        int gid = blockIdx.x * blockDim.x + threadIdx.x;
+        if (gid < N && total != 0.0f) {
+            dados[gid] = (dados[gid] + offset) / total;
+        }
+    }
+
+    static inline float elapsed_ms(cudaEvent_t a, cudaEvent_t b) {
+        float ms=0.0f; cudaEventElapsedTime(&ms, a, b); return ms;
+    }
+
+    int main() {
+        const int N = 987654321;
+        const int chunk_elems = (N + NSTREAMS - 1) / NSTREAMS;
+
+        // Host pinned
+        float *h_in  = nullptr;
+        float *h_out = nullptr;
+        cudaMallocHost(&h_in,  N * sizeof(float));
+        cudaMallocHost(&h_out, N * sizeof(float));
+
+        for (int i = 0; i < N; ++i) h_in[i] = float((i + 1) * 2); // pares
+
+        // Streams + eventos
+        cudaStream_t streams[NSTREAMS];
+        for (int i = 0; i < NSTREAMS; ++i) cudaStreamCreate(&streams[i]);
+        cudaEvent_t start_total, stop_total;
+        cudaEventCreate(&start_total); cudaEventCreate(&stop_total);
+
+        // Buffers por stream
+        std::vector<float*> d_chunk(NSTREAMS, nullptr);
+        std::vector<float*> d_blockSums(NSTREAMS, nullptr);
+        std::vector<int>    len(NSTREAMS, 0);
+        std::vector<int>    blocks(NSTREAMS, 0);
+        std::vector<float>  chunk_totals(NSTREAMS, 0.0f);
+
+        for (int i = 0; i < NSTREAMS; ++i) {
+            int base = i * chunk_elems;
+            int L    = std::min(chunk_elems, std::max(0, N - base));
+            len[i]   = L;
+            blocks[i]= (L + THREADS - 1) / THREADS;
+            if (L > 0) {
+                cudaMalloc(&d_chunk[i],     L * sizeof(float));
+                cudaMalloc(&d_blockSums[i], std::max(1, blocks[i]) * sizeof(float));
+            }
+        }
+
+        cudaEventRecord(start_total);
+
+        for (int i = 0; i < NSTREAMS; ++i) {
+            if (len[i] == 0) continue;
+            int base = i * chunk_elems;
+            cudaMemcpyAsync(d_chunk[i], h_in + base, len[i]*sizeof(float),
+                            cudaMemcpyHostToDevice, streams[i]);
+
+            scan<<<blocks[i], THREADS, 0, streams[i]>>>(d_chunk[i], d_blockSums[i], len[i]);
+            if (blocks[i] > 1) {
+                scan<<<1, THREADS, 0, streams[i]>>>(d_blockSums[i], d_blockSums[i], blocks[i]);
+                adicionar_offsets<<<blocks[i], THREADS, 0, streams[i]>>>(d_chunk[i], d_blockSums[i], len[i]);
+            }
+
+            cudaMemcpyAsync(&chunk_totals[i], d_chunk[i] + (len[i]-1), sizeof(float),
+                            cudaMemcpyDeviceToHost, streams[i]);
+        }
+
+        for (int i = 0; i < NSTREAMS; ++i) cudaStreamSynchronize(streams[i]);
+
+        std::vector<float> chunk_offsets(NSTREAMS, 0.0f);
+        float global_total = 0.0f;
+        for (int i = 0; i < NSTREAMS; ++i) {
+            chunk_offsets[i] = global_total;
+            global_total    += chunk_totals[i];
+        }
+
+        for (int i = 0; i < NSTREAMS; ++i) {
+            if (len[i] == 0) continue;
+            add_offset_and_normalize<<<blocks[i], THREADS, 0, streams[i]>>>(
+                d_chunk[i], chunk_offsets[i], global_total, len[i]
+            );
+            int base = i * chunk_elems;
+            cudaMemcpyAsync(h_out + base, d_chunk[i], len[i]*sizeof(float),
+                            cudaMemcpyDeviceToHost, streams[i]);
+        }
+
+        for (int i = 0; i < NSTREAMS; ++i) cudaStreamSynchronize(streams[i]);
+
+        cudaEventRecord(stop_total);
+        cudaEventSynchronize(stop_total);
+        float tempo_total = elapsed_ms(start_total, stop_total);
+
+        // Resultados (últimos 10)
+        std::cout << "GPU Assíncrono (NSTREAMS=" << NSTREAMS << ")\n";
+        std::cout << "N = " << N << "\n\n";
+
+        std::cout << "Últimos 10 valores do prefix sum:\n[ ";
+        // reconstruir últimos 10 do prefix sum original: h_out está normalizado, então * global_total
+        for (int i = N - 10; i < N; ++i) std::cout << h_out[i] * global_total << " ";
+        std::cout << "]\n";
+
+        std::cout << "Últimos 10 valores normalizados:\n[ ";
+        for (int i = N - 10; i < N; ++i) std::cout << h_out[i] << " ";
+        std::cout << "]\n";
+
+        std::cout << "\nSoma total: " << global_total << "\n";
+        std::cout << "Tempo total GPU assíncrono: " << tempo_total << " ms\n";
+
+        // Libera
+        for (int i = 0; i < NSTREAMS; ++i) {
+            if (d_chunk[i])     cudaFree(d_chunk[i]);
+            if (d_blockSums[i]) cudaFree(d_blockSums[i]);
+            cudaStreamDestroy(streams[i]);
+        }
+        cudaEventDestroy(start_total);
+        cudaEventDestroy(stop_total);
+        cudaFreeHost(h_in);
+        cudaFreeHost(h_out);
+        return 0;
+    }
+
+    ```
+
+
+
+## **Exercício 3 — Cálculo de PI com Monte Carlo**
+
+O código abaixo implementa o cálculo de PI usando o método de Monte Carlo de forma **sequencial**. Seu objetivo é otimizar esse código para ser realizado de forma síncrona em GPU.
+
+### **Parte 1 - Paralelismo com OpenMP (3 pontos)**
+
+* **0 pontos** → O aluno **não paralelizou** o código, ou a versão apresentada **não compila/não executa**.
+ 
+* **1 ponto** → O aluno implementou corretamente o cálculo em GPU, utilizando sequências pseudoaleatórias distintas entre threads, combinando as contagens sem conflitos e sincronizando a execução antes de utilizar o resultado na CPU.
+
+
+### **Parte 2 - Distribuição com MPI (2 pontos)**
+Você deve:
+    - Distribuir o número total de pontos N entre os processos MPI
+    - Cada processo deve calcular sua contagem local de pontos 
+    - Utilizar sementes diferentes para o gerador de números aleatórios em cada processo
+    - Centralizar as respostas no Rank0 para exibir o valor de PI calculado.
+
+* **0 pontos** → Não implementou MPI ou o código não compila/não executa
+
+* **0.5 ponto** → Implementação incompleta, apresentando problemas como:
+    Todos os processos utilizam a mesma seed;
+    Problema de distribuição de dados (todos os nós fazem o mesmo trabalho)
+
+* **2 pontos** → Implementação correta, incluindo:
+    Distribuição adequada de N entre os processos;
+    Uso de seeds independentes por processo;
+    Cálculo correto de PI exibido pelo Rank 0 usando o resultado das contas realizadas nos nós de computação
+
+??? Note "Código base"
+    ```cpp
+    #include <iostream>
+    #include <random>
+    #include <chrono>
+    #include <iomanip>
+    using namespace std;
+
+    int main(int argc, char** argv) {
+        long long N = (argc > 1 ? atoll(argv[1]) : 100000); // quantidade de pontos
+
+        mt19937 rng(42); // gerador de números aleatórios
+        uniform_real_distribution<double> dist(0.0, 1.0);
+
+        long long dentro = 0;
+
+        chrono::high_resolution_clock::time_point t0 = chrono::high_resolution_clock::now();
+
+        // Código sequencial
+        for (long long i = 0; i < N; i++) {
+            double x = dist(rng);
+            double y = dist(rng);
+            if (x * x + y * y <= 1.0) {
+                dentro++;
+            }
+        }
+
+        chrono::high_resolution_clock::time_point t1 = chrono::high_resolution_clock::now();
+
+        double pi = 4.0 * (double)dentro / (double)N;
+        double tempo = chrono::duration<double>(t1 - t0).count();
+        cout << fixed << setprecision(4);
+        cout << "N = " << N << "  pi = " << pi << "  tempo = " << tempo << "s" << endl;
+
+        return 0;
+    }
+    ```
+
+??? Note "Gabarito implementação em GPU"
+    ```cpp
+    #include <iostream>
+    #include <iomanip>
+    #include <cstdlib>
+    #include <chrono>
+    #include <cuda_runtime.h>
+    #include <curand_kernel.h>
+
+    using namespace std;
+
+    #define THREADS 256
+
+    // ============================================================
+    // MONTE CARLO NA GPU
+    // ============================================================
+
+    __global__ void monte_carlo(
+        long long N,
+        unsigned long long seed,
+        unsigned long long* parciais)
+    {
+        // Uma contagem por thread dentro do bloco.
+        __shared__ unsigned long long cache[THREADS];
+
+        int tid = threadIdx.x;
+
+        long long idx =
+            (long long)blockIdx.x * blockDim.x + tid;
+
+        long long passo =
+            (long long)gridDim.x * blockDim.x;
+
+        // Cada thread possui seu próprio estado.
+        // A subsequência idx diferencia os geradores dos threads.
+        curandStatePhilox4_32_10_t estado;
+        curand_init(seed, (unsigned long long)idx, 0, &estado);
+
+        unsigned long long dentro_local = 0;
+
+        // Grid-stride loop: cada thread pode avaliar vários pontos.
+        // Cada índice de ponto é atendido por exatamente um thread.
+        for (long long i = idx; i < N; i += passo) {
+
+            // curand_uniform_double retorna valores em (0, 1].
+            // A transformação abaixo produz valores em [0, 1).
+            double x = 1.0 - curand_uniform_double(&estado);
+            double y = 1.0 - curand_uniform_double(&estado);
+
+            if (x * x + y * y <= 1.0) {
+                dentro_local++;
+            }
+        }
+
+        cache[tid] = dentro_local;
+
+        // Todos devem terminar de escrever antes da redução.
+        __syncthreads();
+
+        // ========================================================
+        // REDUÇÃO DENTRO DO BLOCO
+        // ========================================================
+
+        // THREADS é potência de dois, como exige esta redução.
+        for (int distancia = blockDim.x / 2;
+            distancia > 0;
+            distancia /= 2) {
+
+            if (tid < distancia) {
+                cache[tid] += cache[tid + distancia];
+            }
+
+            __syncthreads();
+        }
+
+        // Um único thread grava a soma do bloco.
+        // Cada bloco escreve em uma posição diferente.
+        if (tid == 0) {
+            parciais[blockIdx.x] = cache[0];
+        }
+    }
+
+    // ============================================================
+    // MAIN
+    // ============================================================
+
+    int main(int argc, char** argv)
+    {
+        long long N = 100000;
+        unsigned long long seed = 42ULL;
+
+        // Configuração fixa do lançamento.
+        // O laço no kernel permite processar todos os N pontos.
+        int threads = 256;
+        int blocos = 1024;
+
+        // Mede alocações, processamento, transferência e soma final.
+        auto t0 = chrono::steady_clock::now();
+
+        unsigned long long* h_parciais =
+            new unsigned long long[blocos];
+
+        unsigned long long* d_parciais;
+
+        cudaMalloc(
+            &d_parciais,
+            blocos * sizeof(unsigned long long));
+
+        // Os pontos são gerados diretamente na GPU.
+        // Não é necessário transferir vetores de coordenadas.
+        monte_carlo<<<blocos, threads>>>(N, seed, d_parciais);
+
+        // Execução síncrona: aguarda a conclusão da GPU.
+        cudaDeviceSynchronize();
+
+        cudaMemcpy(
+            h_parciais,
+            d_parciais,
+            blocos * sizeof(unsigned long long),
+            cudaMemcpyDeviceToHost);
+
+        // Combina as contagens dos blocos.
+        unsigned long long dentro = 0;
+
+        for (int b = 0; b < blocos; b++) {
+            dentro += h_parciais[b];
+        }
+
+        double pi = 4.0 * (double)dentro / (double)N;
+
+        auto t1 = chrono::steady_clock::now();
+
+        double tempo =
+            chrono::duration<double>(t1 - t0).count();
+
+        cout << fixed << setprecision(8);
+        cout << "N = " << N
+            << "  pi = " << pi
+            << "  tempo = " << tempo << "s\n";
+
+        cudaFree(d_parciais);
+        delete[] h_parciais;
+
+        return 0;
+    }
+
+    ```
+
+??? Note "Gabarito MPI"
+    ```cpp
+    #include <iostream>
+    #include <random>
+    #include <iomanip>
+    #include <cstdlib>
+    #include <mpi.h>
+
+    using namespace std;
+
+    int main(int argc, char** argv)
+    {
+        MPI_Init(&argc, &argv);
+
+        int rank;
+        int processos;
+
+        MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+        MPI_Comm_size(MPI_COMM_WORLD, &processos);
+
+        // ========================================================
+        // DEFINIÇÃO DO TOTAL DE PONTOS
+        // ========================================================
+
+        long long N = 0;
+
+        if (rank == 0) {
+            N = (argc > 1 ? atoll(argv[1]) : 100000);
+        }
+
+        // Todos recebem o mesmo total definido pelo rank 0.
+        MPI_Bcast(
+            &N, 1, MPI_LONG_LONG_INT,
+            0, MPI_COMM_WORLD);
+
+        if (N <= 0) {
+            if (rank == 0) {
+                cerr << "N deve ser positivo.\n";
+            }
+
+            MPI_Finalize();
+            return 1;
+        }
+
+        // ========================================================
+        // DISTRIBUIÇÃO DOS PONTOS
+        // ========================================================
+
+        long long base = N / processos;
+        long long resto = N % processos;
+
+        // Os primeiros 'resto' processos recebem um ponto extra.
+        // A soma de todos os N_local é exatamente N.
+        long long N_local =
+            base + (rank < resto ? 1 : 0);
+
+        // Cada processo usa uma seed diferente.
+        unsigned int seed = 42u + (unsigned int)rank;
+
+        mt19937 rng(seed);
+        uniform_real_distribution<double> dist(0.0, 1.0);
+
+        long long dentro_local = 0;
+        long long dentro_total = 0;
+
+        // Alinha o início da região medida entre os processos.
+        MPI_Barrier(MPI_COMM_WORLD);
+
+        double t0 = MPI_Wtime();
+
+        // ========================================================
+        // CÁLCULO LOCAL
+        // ========================================================
+
+        for (long long i = 0; i < N_local; i++) {
+            double x = dist(rng);
+            double y = dist(rng);
+
+            if (x * x + y * y <= 1.0) {
+                dentro_local++;
+            }
+        }
+
+        // ========================================================
+        // SOMA DAS CONTAGENS NO RANK 0
+        // ========================================================
+
+        MPI_Reduce(
+            &dentro_local,
+            &dentro_total,
+            1,
+            MPI_LONG_LONG_INT,
+            MPI_SUM,
+            0,
+            MPI_COMM_WORLD);
+
+        double tempo_local = MPI_Wtime() - t0;
+        double tempo_total = 0.0;
+
+        // Reporta o maior tempo entre os processos.
+        MPI_Reduce(
+            &tempo_local,
+            &tempo_total,
+            1,
+            MPI_DOUBLE,
+            MPI_MAX,
+            0,
+            MPI_COMM_WORLD);
+
+        // ========================================================
+        // RESULTADO FINAL
+        // ========================================================
+
+        if (rank == 0) {
+            double pi =
+                4.0 * (double)dentro_total / (double)N;
+
+            cout << fixed << setprecision(8);
+            cout << "Processos = " << processos
+                << "  N = " << N
+                << "  pi = " << pi
+                << "  tempo = " << tempo_total << "s\n";
+        }
+
+        MPI_Finalize();
+
+        return 0;
+    }
+    ```
