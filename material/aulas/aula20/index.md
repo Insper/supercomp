@@ -990,7 +990,7 @@ Otimize a convolução utilizando tiling e shared memory.
         convolution(input, output, kernel, W, H);
 
         cout << "Convolucao concluida.\n";
-
+        cout << "Resultado: " << output[2 * W + 2] << endl;
         delete[] input;
         delete[] output;
 
@@ -1197,8 +1197,7 @@ Otimize a convolução utilizando tiling e shared memory.
         // Como a entrada contém apenas 1 e o filtro calcula
         // uma média, um pixel interior deve ficar próximo de 1.
         cout << "Convolucao concluida.\n";
-        cout << "Pixel central: "
-            << output[(H / 2) * W + W / 2] << "\n";
+        cout << "Resultado: " << output[2 * W + 2] << endl;
         cout << "Tempo do kernel: " << tempo_ms << " ms\n";
 
         // ========================================================
@@ -1241,51 +1240,51 @@ Implemente um programa que recebe um vetor de floats e realiza **duas etapas de 
 
 ??? Note "Código base"
     ```cpp
-    #include <iostream>
-    #include <vector>
-    #include <chrono>
+        #include <iostream>
+        #include <vector>
+        #include <chrono>
 
-    // SCAN + NORMALIZAÇÃO 
+        // SCAN + NORMALIZAÇÃO 
 
-    int main() {
-        const size_t N = 87654;
-        std::vector<float> v(N);
-        std::vector<float> prefix(N);
+        int main() {
+            const size_t N = 87654;
+            std::vector<float> v(N);
+            std::vector<float> prefix(N);
 
-        auto inicio = std::chrono::high_resolution_clock::now();
+            auto inicio = std::chrono::high_resolution_clock::now();
 
-        // Gera o vetor
-        for (size_t i = 0; i < N; ++i)
-            v[i] = static_cast<float>((i + 1) * 2);
+            // Gera o vetor
+            for (size_t i = 0; i < N; ++i)
+                v[i] = static_cast<float>((i + 1) * 2);
 
-        // prefix sum
-        prefix[0] = v[0];
-        for (size_t i = 1; i < N; ++i)
-            prefix[i] = prefix[i - 1] + v[i];
+            // prefix sum
+            prefix[0] = v[0];
+            for (size_t i = 1; i < N; ++i)
+                prefix[i] = prefix[i - 1] + v[i];
 
-        // Normalização
-        float total = prefix.back();  // soma total
-        for (size_t i = 0; i < N; ++i)
-            prefix[i] /= total;
+            // Normalização
+            float total = prefix.back();  // soma total
+            for (size_t i = 0; i < N; ++i)
+                prefix[i] /= total;
 
-        auto fim = std::chrono::high_resolution_clock::now();
-        double tempo = std::chrono::duration<double, std::milli>(fim - inicio).count();
+            auto fim = std::chrono::high_resolution_clock::now();
+            double tempo = std::chrono::duration<double, std::milli>(fim - inicio).count();
 
-        // RESULTADOS
-        std::cout << "\nÚltimos 10 valores do prefix sum:\n[ ";
-        for (size_t i = N - 10; i < N; ++i)
-            std::cout << prefix[i] * total << " ";
-        std::cout << "]\n";
+            // RESULTADOS
+            std::cout << "\nÚltimos 10 valores do prefix sum:\n[ ";
+            for (size_t i = N - 10; i < N; ++i)
+                std::cout << prefix[i] * total << " ";
+            std::cout << "]\n";
 
-        std::cout << "Últimos 10 valores normalizados:\n[ ";
-        for (size_t i = N - 10; i < N; ++i)
-            std::cout << prefix[i] << " ";
-        std::cout << "]\n";
+            std::cout << "Últimos 10 valores normalizados:\n[ ";
+            for (size_t i = N - 10; i < N; ++i)
+                std::cout << prefix[i] << " ";
+            std::cout << "]\n";
 
-        std::cout << "\nTempo CPU: " << tempo << " ms\n";
-    }
+            std::cout << "\nTempo CPU: " << tempo << " ms\n";
+        }
 
-```
+    ```
 ??? Note "Implementação Síncrona"
     ```cpp
     #include <iostream>
