@@ -56,7 +56,7 @@ Implemente um programa que recebe um vetor de floats e realiza **duas etapas de 
 
 
 ??? Note "Código base"
-    '```cpp
+    ```cpp
     #include <iostream>
     #include <vector>
     #include <chrono>
